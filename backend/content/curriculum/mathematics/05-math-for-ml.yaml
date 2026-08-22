@@ -1,0 +1,342 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Curriculum V1 expanded with SE, backend, math, and ML foundations.
+  order: 0
+  levels:
+  - slug: domain-math
+    name: Math for ML
+    description: Math for ML
+    order: 5
+    subjects:
+    - slug: math-for-ml
+      name: Mathematics for Machine Learning
+      description: Mathematics for Machine Learning
+      order: 0
+      modules:
+      - slug: mod-math-ml
+        name: Math foundations
+        order: 0
+        topics:
+        - slug: math-vectors
+          name: Vectors intuition
+          description: Reason about vectors as lists of numbers with direction/magnitude.
+          order: 0
+          prerequisites: []
+          learning_objective: Reason about vectors as lists of numbers with direction/magnitude.
+          mastery_criteria:
+          - Explain Vectors intuition in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-vectors-core
+            title: Vectors intuition
+            description: Reason about vectors as lists of numbers with direction/magnitude.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-vectors-primary
+              title: 'Khan Academy: Vectors intuition'
+              type: documentation
+              url: https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces
+              provider: Khan Academy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Vectors intuition.
+            questions:
+            - slug: math-vectors-q1
+              prompt: What is the core idea of Vectors intuition?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Reason about vectors as lists of numbers with direction/magnitude.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Reason about vectors as lists of numbers with direction/magnitude.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-vectors-practice
+              title: 'Practice: Vectors intuition'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compute 3 dot products by hand. HOW MANY: 3. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: math-matrices
+          name: Matrices intuition
+          description: Multiply small matrices and interpret as linear maps.
+          order: 1
+          prerequisites:
+          - math-vectors
+          learning_objective: Multiply small matrices and interpret as linear maps.
+          mastery_criteria:
+          - Explain Matrices intuition in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-matrices-core
+            title: Matrices intuition
+            description: Multiply small matrices and interpret as linear maps.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-matrices-primary
+              title: 'Khan Academy: Matrices intuition'
+              type: documentation
+              url: https://www.khanacademy.org/math/linear-algebra/matrix-transformations
+              provider: Khan Academy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Matrices intuition.
+            questions:
+            - slug: math-matrices-q1
+              prompt: What is the core idea of Matrices intuition?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Multiply small matrices and interpret as linear maps.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Multiply small matrices and interpret as linear maps.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-matrices-practice
+              title: 'Practice: Matrices intuition'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Multiply two 2x2 matrices. HOW MANY: 2. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: math-probability
+          name: Probability basics
+          description: Use probability rules for independent events and simple conditionals.
+          order: 2
+          prerequisites: []
+          learning_objective: Use probability rules for independent events and simple
+            conditionals.
+          mastery_criteria:
+          - Explain Probability basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-probability-core
+            title: Probability basics
+            description: Use probability rules for independent events and simple conditionals.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-probability-primary
+              title: 'Khan Academy: Probability basics'
+              type: documentation
+              url: https://www.khanacademy.org/math/statistics-probability/probability-library
+              provider: Khan Academy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Probability basics.
+            questions:
+            - slug: math-probability-q1
+              prompt: What is the core idea of Probability basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Use probability rules for independent events and simple conditionals.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Use probability rules for independent events and simple conditionals.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-probability-practice
+              title: 'Practice: Probability basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Solve 5 probability drills. HOW MANY: 5. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: math-distributions
+          name: Distributions intuition
+          description: Describe Bernoulli/Normal distributions qualitatively.
+          order: 3
+          prerequisites:
+          - math-probability
+          learning_objective: Describe Bernoulli/Normal distributions qualitatively.
+          mastery_criteria:
+          - Explain Distributions intuition in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-distributions-core
+            title: Distributions intuition
+            description: Describe Bernoulli/Normal distributions qualitatively.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-distributions-primary
+              title: 'Seeing Theory: Distributions intuition'
+              type: documentation
+              url: https://seeing-theory.brown.edu/probability-distributions/index.html
+              provider: Seeing Theory
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Distributions intuition.
+            questions:
+            - slug: math-distributions-q1
+              prompt: What is the core idea of Distributions intuition?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Describe Bernoulli/Normal distributions qualitatively.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Describe Bernoulli/Normal distributions qualitatively.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-distributions-practice
+              title: 'Practice: Distributions intuition'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Sketch PDF/PMF for 2 distributions. HOW MANY: 2.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: math-stats-summary
+          name: Summary statistics
+          description: Compute mean/variance and interpret them.
+          order: 4
+          prerequisites:
+          - math-probability
+          learning_objective: Compute mean/variance and interpret them.
+          mastery_criteria:
+          - Explain Summary statistics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-stats-summary-core
+            title: Summary statistics
+            description: Compute mean/variance and interpret them.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-stats-summary-primary
+              title: 'Khan Academy: Summary statistics'
+              type: documentation
+              url: https://www.khanacademy.org/math/statistics-probability
+              provider: Khan Academy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Summary statistics.
+            questions:
+            - slug: math-stats-summary-q1
+              prompt: What is the core idea of Summary statistics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Compute mean/variance and interpret them.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Compute mean/variance and interpret them.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-stats-summary-practice
+              title: 'Practice: Summary statistics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compute mean/variance for a tiny dataset. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: math-gradient-intuition
+          name: Gradient intuition
+          description: Explain gradient as direction of steepest ascent for loss surfaces.
+          order: 5
+          prerequisites:
+          - math-vectors
+          learning_objective: Explain gradient as direction of steepest ascent for
+            loss surfaces.
+          mastery_criteria:
+          - Explain Gradient intuition in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mathematics
+          lessons:
+          - slug: math-gradient-intuition-core
+            title: Gradient intuition
+            description: Explain gradient as direction of steepest ascent for loss
+              surfaces.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: math-gradient-intuition-primary
+              title: 'Khan Academy: Gradient intuition'
+              type: documentation
+              url: https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives
+              provider: Khan Academy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Gradient intuition.
+            questions:
+            - slug: math-gradient-intuition-q1
+              prompt: What is the core idea of Gradient intuition?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Explain gradient as direction of steepest ascent for loss surfaces.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Explain gradient as direction of steepest ascent for loss surfaces.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: math-gradient-intuition-practice
+              title: 'Practice: Gradient intuition'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Sketch gradient arrows on a contour. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0

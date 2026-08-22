@@ -1,0 +1,4895 @@
+{
+  "created_at": "2026-08-22T09:56:35.888845+00:00",
+  "counts": {
+    "CurriculumTopic": 316,
+    "CurriculumResource": 660,
+    "UserProgress": 0,
+    "TopicMastery": 0,
+    "UserXP": 0,
+    "EngineeringProject": 16,
+    "spine_domains_cf_java_dsa": 222,
+    "prefix_cf_java_dsa": 222
+  },
+  "tracks": {
+    "CORE": 228,
+    "ALWAYS_ON": 35,
+    "OPTIONAL": 13,
+    "SPECIALIZATION": 40
+  },
+  "depths": {
+    "WORKING_KNOWLEDGE": 120,
+    "STRONG": 175,
+    "AWARENESS": 13,
+    "DEEP": 8
+  },
+  "domains": {
+    "foundations": 64,
+    "java": 52,
+    "dsa": 106,
+    "software-engineering": 10,
+    "backend": 12,
+    "mathematics": 6,
+    "ml": 8,
+    "deep-learning": 6,
+    "nlp": 2,
+    "genai": 6,
+    "ai-engineering": 2,
+    "devops": 8,
+    "system-design": 6,
+    "python": 5,
+    "web": 8,
+    "networking": 6,
+    "data-science": 5,
+    "mlops": 4
+  },
+  "dag": {
+    "ok": true,
+    "cycles": [],
+    "missing_prerequisites": [],
+    "topic_count": 316
+  },
+  "topics": [
+    {
+      "slug": "cf-bits-and-bytes",
+      "name": "Bits and bytes",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": "cf-binary",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-binary",
+      "name": "Binary",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-bits-and-bytes"
+      ],
+      "next_topic": "cf-hexadecimal",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-hexadecimal",
+      "name": "Hexadecimal",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-binary"
+      ],
+      "next_topic": "cf-cpu",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-cpu",
+      "name": "CPU",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-hexadecimal"
+      ],
+      "next_topic": "cf-alu",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-alu",
+      "name": "ALU",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-cpu"
+      ],
+      "next_topic": "cf-registers",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-registers",
+      "name": "Registers",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-alu"
+      ],
+      "next_topic": "cf-ram",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-ram",
+      "name": "RAM",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-registers"
+      ],
+      "next_topic": "cf-cache",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-cache",
+      "name": "Cache",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-ram"
+      ],
+      "next_topic": "cf-storage",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-storage",
+      "name": "Storage",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-cache"
+      ],
+      "next_topic": "cf-instruction-execution",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-instruction-execution",
+      "name": "Instruction execution",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-storage"
+      ],
+      "next_topic": "cf-machine-code",
+      "order_index": 9,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-machine-code",
+      "name": "Machine code",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-instruction-execution"
+      ],
+      "next_topic": "cf-compiler",
+      "order_index": 10,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-compiler",
+      "name": "Compiler",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-machine-code"
+      ],
+      "next_topic": "cf-interpreter",
+      "order_index": 11,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-interpreter",
+      "name": "Interpreter",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-compiler"
+      ],
+      "next_topic": "cf-program",
+      "order_index": 12,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-program",
+      "name": "Program",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-interpreter"
+      ],
+      "next_topic": "cf-process",
+      "order_index": 13,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-process",
+      "name": "Process",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-program"
+      ],
+      "next_topic": "cf-kernel",
+      "order_index": 14,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-kernel",
+      "name": "Kernel",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-process"
+      ],
+      "next_topic": "cf-os-processes",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-os-processes",
+      "name": "Processes",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-kernel"
+      ],
+      "next_topic": "cf-threads",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-threads",
+      "name": "Threads",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-os-processes"
+      ],
+      "next_topic": "cf-system-calls",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-system-calls",
+      "name": "System calls",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-threads"
+      ],
+      "next_topic": "cf-os-memory",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-os-memory",
+      "name": "Memory",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-system-calls"
+      ],
+      "next_topic": "cf-virtual-memory-basics",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-virtual-memory-basics",
+      "name": "Virtual memory basics",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-os-memory"
+      ],
+      "next_topic": "cf-filesystems",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-filesystems",
+      "name": "Filesystems",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-virtual-memory-basics"
+      ],
+      "next_topic": "cf-os-permissions",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-os-permissions",
+      "name": "Permissions",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-filesystems"
+      ],
+      "next_topic": "cf-os-environment-variables",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-os-environment-variables",
+      "name": "Environment variables",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-os-permissions"
+      ],
+      "next_topic": "cf-shell",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-shell",
+      "name": "Shell",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-os-environment-variables"
+      ],
+      "next_topic": "cf-command-line",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-command-line",
+      "name": "Command line",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-shell"
+      ],
+      "next_topic": "cf-filesystem-navigation",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-filesystem-navigation",
+      "name": "Filesystem navigation",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-command-line"
+      ],
+      "next_topic": "cf-linux-files",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-linux-files",
+      "name": "Files",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-filesystem-navigation"
+      ],
+      "next_topic": "cf-pipes",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-pipes",
+      "name": "Pipes",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-linux-files"
+      ],
+      "next_topic": "cf-redirection",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-redirection",
+      "name": "Redirection",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-pipes"
+      ],
+      "next_topic": "cf-grep",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-grep",
+      "name": "grep",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-redirection"
+      ],
+      "next_topic": "cf-find",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-find",
+      "name": "find",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-grep"
+      ],
+      "next_topic": "cf-linux-permissions",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-linux-permissions",
+      "name": "Permissions",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-find"
+      ],
+      "next_topic": "cf-linux-processes",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-linux-processes",
+      "name": "Processes",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-linux-permissions"
+      ],
+      "next_topic": "cf-package-management",
+      "order_index": 9,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-package-management",
+      "name": "Package management",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-linux-processes"
+      ],
+      "next_topic": "cf-linux-environment-variables",
+      "order_index": 10,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-linux-environment-variables",
+      "name": "Environment variables",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-package-management"
+      ],
+      "next_topic": "cf-repository",
+      "order_index": 11,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-repository",
+      "name": "Repository",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-linux-environment-variables"
+      ],
+      "next_topic": "cf-commits",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-commits",
+      "name": "Commits",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-repository"
+      ],
+      "next_topic": "cf-branches",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-branches",
+      "name": "Branches",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-commits"
+      ],
+      "next_topic": "cf-merge",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-merge",
+      "name": "Merge",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-branches"
+      ],
+      "next_topic": "cf-rebase",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-rebase",
+      "name": "Rebase",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-merge"
+      ],
+      "next_topic": "cf-remote",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-remote",
+      "name": "Remote",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-rebase"
+      ],
+      "next_topic": "cf-pull-push",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-pull-push",
+      "name": "Pull and push",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-remote"
+      ],
+      "next_topic": "cf-conflicts",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-conflicts",
+      "name": "Conflicts",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-pull-push"
+      ],
+      "next_topic": "cf-reset-revert",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-reset-revert",
+      "name": "Reset and revert",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-conflicts"
+      ],
+      "next_topic": "cf-cherry-pick",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-cherry-pick",
+      "name": "Cherry-pick",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-reset-revert"
+      ],
+      "next_topic": "cf-stash",
+      "order_index": 9,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-stash",
+      "name": "Stash",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-cherry-pick"
+      ],
+      "next_topic": "cf-github-workflow",
+      "order_index": 10,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-github-workflow",
+      "name": "GitHub workflow",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-stash"
+      ],
+      "next_topic": "cf-ide",
+      "order_index": 11,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-ide",
+      "name": "IDE",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-github-workflow",
+        "cf-compiler"
+      ],
+      "next_topic": "cf-dev-compiler",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-dev-compiler",
+      "name": "Compiler",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-ide"
+      ],
+      "next_topic": "cf-debugger",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-debugger",
+      "name": "Debugger",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-dev-compiler"
+      ],
+      "next_topic": "cf-formatter",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-formatter",
+      "name": "Formatter",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-debugger"
+      ],
+      "next_topic": "cf-linter",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-linter",
+      "name": "Linter",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-formatter"
+      ],
+      "next_topic": "cf-dev-package-manager",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-dev-package-manager",
+      "name": "Package manager",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-linter"
+      ],
+      "next_topic": "cf-build-system",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-build-system",
+      "name": "Build system",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-dev-package-manager"
+      ],
+      "next_topic": "cf-dependency-management",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-dependency-management",
+      "name": "Dependency management",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-build-system"
+      ],
+      "next_topic": "cf-problem-decomposition",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-problem-decomposition",
+      "name": "Problem decomposition",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-dependency-management"
+      ],
+      "next_topic": "cf-pseudocode",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-pseudocode",
+      "name": "Pseudocode",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-problem-decomposition"
+      ],
+      "next_topic": "cf-algorithms",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-algorithms",
+      "name": "Algorithms",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-pseudocode"
+      ],
+      "next_topic": "cf-dry-runs",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-dry-runs",
+      "name": "Dry runs",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-algorithms"
+      ],
+      "next_topic": "cf-edge-cases",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-edge-cases",
+      "name": "Edge cases",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-dry-runs"
+      ],
+      "next_topic": "cf-debugging-thinking",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-debugging-thinking",
+      "name": "Debugging",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "cf-edge-cases"
+      ],
+      "next_topic": "cf-time-complexity-intro",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-time-complexity-intro",
+      "name": "Time complexity introduction",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-debugging-thinking"
+      ],
+      "next_topic": "cf-space-complexity-intro",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "cf-space-complexity-intro",
+      "name": "Space complexity introduction",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-time-complexity-intro"
+      ],
+      "next_topic": null,
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-jdk-jre",
+      "name": "JDK and JRE",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-space-complexity-intro",
+        "cf-dependency-management"
+      ],
+      "next_topic": "java-first-program",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-first-program",
+      "name": "First program",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-jdk-jre"
+      ],
+      "next_topic": "java-compile-and-run",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-compile-and-run",
+      "name": "Compile and run",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-first-program"
+      ],
+      "next_topic": "java-primitives",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-primitives",
+      "name": "Primitives",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-compile-and-run"
+      ],
+      "next_topic": "java-type-conversion",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-type-conversion",
+      "name": "Type conversion",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-primitives"
+      ],
+      "next_topic": "java-console-io",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-console-io",
+      "name": "Console input and output",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-type-conversion"
+      ],
+      "next_topic": "java-operators",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-operators",
+      "name": "Operators",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-console-io"
+      ],
+      "next_topic": "java-if-else",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-if-else",
+      "name": "if/else",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-operators"
+      ],
+      "next_topic": "java-switch",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-switch",
+      "name": "switch",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-if-else"
+      ],
+      "next_topic": "java-loops",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-loops",
+      "name": "Loops",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-switch"
+      ],
+      "next_topic": "java-break-continue",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-break-continue",
+      "name": "break and continue",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-loops"
+      ],
+      "next_topic": "java-method-basics",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-method-basics",
+      "name": "Method basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-break-continue"
+      ],
+      "next_topic": "java-overloading",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-overloading",
+      "name": "Overloading",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-method-basics"
+      ],
+      "next_topic": "java-scope",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-scope",
+      "name": "Scope",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-overloading"
+      ],
+      "next_topic": "java-arrays",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-arrays",
+      "name": "Arrays",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-scope"
+      ],
+      "next_topic": "java-strings",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-strings",
+      "name": "Strings",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-arrays"
+      ],
+      "next_topic": "java-stringbuilder",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-stringbuilder",
+      "name": "StringBuilder",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-strings"
+      ],
+      "next_topic": "java-classes-objects",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-classes-objects",
+      "name": "Classes and objects",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-stringbuilder"
+      ],
+      "next_topic": "java-references",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-references",
+      "name": "References",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-classes-objects"
+      ],
+      "next_topic": "java-constructors",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-constructors",
+      "name": "Constructors",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-references"
+      ],
+      "next_topic": "java-encapsulation",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-encapsulation",
+      "name": "Encapsulation",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-constructors"
+      ],
+      "next_topic": "java-inheritance",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-inheritance",
+      "name": "Inheritance",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-encapsulation"
+      ],
+      "next_topic": "java-polymorphism",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-polymorphism",
+      "name": "Polymorphism",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-inheritance"
+      ],
+      "next_topic": "java-abstract-classes",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-abstract-classes",
+      "name": "Abstract classes",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-polymorphism"
+      ],
+      "next_topic": "java-interfaces",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-interfaces",
+      "name": "Interfaces",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-abstract-classes"
+      ],
+      "next_topic": "java-composition",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-composition",
+      "name": "Composition",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-interfaces"
+      ],
+      "next_topic": "java-try-catch",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-try-catch",
+      "name": "try/catch",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-composition"
+      ],
+      "next_topic": "java-checked-unchecked",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-checked-unchecked",
+      "name": "Checked and unchecked",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-try-catch"
+      ],
+      "next_topic": "java-custom-exceptions",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-custom-exceptions",
+      "name": "Custom exceptions",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-checked-unchecked"
+      ],
+      "next_topic": "java-list",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-list",
+      "name": "List",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-custom-exceptions"
+      ],
+      "next_topic": "java-set",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-set",
+      "name": "Set",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-list"
+      ],
+      "next_topic": "java-map",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-map",
+      "name": "Map",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-set"
+      ],
+      "next_topic": "java-iteration",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-iteration",
+      "name": "Iteration",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-map"
+      ],
+      "next_topic": "java-priority-queue",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-priority-queue",
+      "name": "PriorityQueue",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-iteration"
+      ],
+      "next_topic": "java-generic-types",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-generic-types",
+      "name": "Generic types",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-priority-queue"
+      ],
+      "next_topic": "java-generic-bounds",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-generic-bounds",
+      "name": "Bounds",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-generic-types"
+      ],
+      "next_topic": "java-comparable-comparator",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-comparable-comparator",
+      "name": "Comparable and Comparator",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-generic-bounds"
+      ],
+      "next_topic": "java-functional-interfaces",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-functional-interfaces",
+      "name": "Functional interfaces",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-comparable-comparator"
+      ],
+      "next_topic": "java-lambdas",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-lambdas",
+      "name": "Lambdas",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-functional-interfaces"
+      ],
+      "next_topic": "java-stream-pipeline",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-stream-pipeline",
+      "name": "Stream pipeline",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-lambdas"
+      ],
+      "next_topic": "java-stream-operations",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-stream-operations",
+      "name": "Common operations",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-stream-pipeline"
+      ],
+      "next_topic": "java-paths-files",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-paths-files",
+      "name": "Paths and files",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-stream-operations"
+      ],
+      "next_topic": "java-readers-writers",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-readers-writers",
+      "name": "Readers and writers",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-paths-files"
+      ],
+      "next_topic": "java-junit-basics",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-junit-basics",
+      "name": "JUnit basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-readers-writers"
+      ],
+      "next_topic": "java-assertions",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-assertions",
+      "name": "Assertions",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-junit-basics"
+      ],
+      "next_topic": "java-threads",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-threads",
+      "name": "Threads",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-assertions"
+      ],
+      "next_topic": "java-synchronization-basics",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-synchronization-basics",
+      "name": "Synchronization basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-threads"
+      ],
+      "next_topic": "java-bytecode",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-bytecode",
+      "name": "Bytecode",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-synchronization-basics"
+      ],
+      "next_topic": "java-memory-model-basics",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-memory-model-basics",
+      "name": "Memory model basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-bytecode"
+      ],
+      "next_topic": "java-gc-intro",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-gc-intro",
+      "name": "Garbage collection intro",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-memory-model-basics"
+      ],
+      "next_topic": "java-packages",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-packages",
+      "name": "Packages",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-gc-intro"
+      ],
+      "next_topic": "java-api-hygiene",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "java-api-hygiene",
+      "name": "API hygiene",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "java-packages"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-algorithmic-thinking",
+      "name": "Algorithmic thinking",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-time-complexity-intro",
+        "java-method-basics"
+      ],
+      "next_topic": "dsa-big-o",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-big-o",
+      "name": "Big-O notation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-algorithmic-thinking"
+      ],
+      "next_topic": "dsa-best-worst-average",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-best-worst-average",
+      "name": "Best, worst, average",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-big-o"
+      ],
+      "next_topic": "dsa-array-traversal",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-array-traversal",
+      "name": "Array traversal",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-best-worst-average",
+        "java-arrays"
+      ],
+      "next_topic": "dsa-array-insert-delete",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-array-insert-delete",
+      "name": "Insertion and deletion concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-array-traversal"
+      ],
+      "next_topic": "dsa-prefix-sums",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-prefix-sums",
+      "name": "Prefix sums",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-array-insert-delete"
+      ],
+      "next_topic": "dsa-array-frequency",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-array-frequency",
+      "name": "Frequency counting",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-prefix-sums"
+      ],
+      "next_topic": "dsa-array-patterns",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-array-patterns",
+      "name": "Array patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-array-frequency"
+      ],
+      "next_topic": "dsa-string-manipulation",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-string-manipulation",
+      "name": "String manipulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-array-patterns",
+        "java-strings"
+      ],
+      "next_topic": "dsa-string-frequency",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-string-frequency",
+      "name": "String frequency",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-string-manipulation"
+      ],
+      "next_topic": "dsa-character-processing",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-character-processing",
+      "name": "Character processing",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-string-frequency"
+      ],
+      "next_topic": "dsa-string-patterns",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-string-patterns",
+      "name": "String patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-character-processing"
+      ],
+      "next_topic": "dsa-hash-map",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-hash-map",
+      "name": "Hash map",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-string-patterns",
+        "java-map",
+        "java-set"
+      ],
+      "next_topic": "dsa-hash-set",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-hash-set",
+      "name": "Hash set",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-hash-map"
+      ],
+      "next_topic": "dsa-frequency-maps",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-frequency-maps",
+      "name": "Frequency maps",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-hash-set"
+      ],
+      "next_topic": "dsa-lookup-patterns",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-lookup-patterns",
+      "name": "Lookup patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-frequency-maps"
+      ],
+      "next_topic": "dsa-two-pointers-opposite",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-two-pointers-opposite",
+      "name": "Opposite-direction pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-lookup-patterns",
+        "java-arrays"
+      ],
+      "next_topic": "dsa-two-pointers-same",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-two-pointers-same",
+      "name": "Same-direction pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-two-pointers-opposite"
+      ],
+      "next_topic": "dsa-two-pointers-partition",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-two-pointers-partition",
+      "name": "Partition-style patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-two-pointers-same"
+      ],
+      "next_topic": "dsa-window-fixed",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-window-fixed",
+      "name": "Fixed window",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-two-pointers-partition",
+        "java-arrays",
+        "java-map"
+      ],
+      "next_topic": "dsa-window-variable",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-window-variable",
+      "name": "Variable window",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-window-fixed"
+      ],
+      "next_topic": "dsa-window-frequency",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-window-frequency",
+      "name": "Frequency window state",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-window-variable"
+      ],
+      "next_topic": "dsa-singly-linked-list",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-singly-linked-list",
+      "name": "Singly linked list",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-window-frequency",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-list-operations",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-list-operations",
+      "name": "List operations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-singly-linked-list"
+      ],
+      "next_topic": "dsa-list-reversal",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-list-reversal",
+      "name": "Reversal",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-list-operations"
+      ],
+      "next_topic": "dsa-fast-slow",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-fast-slow",
+      "name": "Fast and slow pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-list-reversal"
+      ],
+      "next_topic": "dsa-cycle-detection",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-cycle-detection",
+      "name": "Cycle detection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-fast-slow"
+      ],
+      "next_topic": "dsa-list-merge",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-list-merge",
+      "name": "Merge patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-cycle-detection"
+      ],
+      "next_topic": "dsa-stack-fundamentals",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-stack-fundamentals",
+      "name": "Stack fundamentals",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-list-merge",
+        "java-classes-objects",
+        "java-references",
+        "java-list"
+      ],
+      "next_topic": "dsa-monotonic-stack",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-monotonic-stack",
+      "name": "Monotonic stack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-stack-fundamentals"
+      ],
+      "next_topic": "dsa-queue-deque",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-queue-deque",
+      "name": "Queue and deque",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-monotonic-stack",
+        "java-classes-objects",
+        "java-references",
+        "java-list"
+      ],
+      "next_topic": "dsa-queue-bfs-relationship",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-queue-bfs-relationship",
+      "name": "BFS relationship",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-queue-deque"
+      ],
+      "next_topic": "dsa-recursion-model",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-recursion-model",
+      "name": "Recursion model",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-queue-bfs-relationship",
+        "java-method-basics"
+      ],
+      "next_topic": "dsa-call-stack",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-call-stack",
+      "name": "Call stack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-recursion-model"
+      ],
+      "next_topic": "dsa-recursive-trees",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-recursive-trees",
+      "name": "Recursive tree problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-call-stack"
+      ],
+      "next_topic": "dsa-recursion-to-iteration",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-recursion-to-iteration",
+      "name": "Recursion to iteration",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-recursive-trees"
+      ],
+      "next_topic": "dsa-subsets",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-subsets",
+      "name": "Subsets",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-recursion-to-iteration"
+      ],
+      "next_topic": "dsa-permutations",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-permutations",
+      "name": "Permutations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-subsets"
+      ],
+      "next_topic": "dsa-combinations",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-combinations",
+      "name": "Combinations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-permutations"
+      ],
+      "next_topic": "dsa-constraint-search",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-constraint-search",
+      "name": "Constraint search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-combinations"
+      ],
+      "next_topic": "dsa-bubble-sort",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bubble-sort",
+      "name": "Bubble sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-constraint-search",
+        "java-arrays"
+      ],
+      "next_topic": "dsa-selection-sort",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-selection-sort",
+      "name": "Selection sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bubble-sort"
+      ],
+      "next_topic": "dsa-insertion-sort",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-insertion-sort",
+      "name": "Insertion sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-selection-sort"
+      ],
+      "next_topic": "dsa-merge-sort",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-merge-sort",
+      "name": "Merge sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-insertion-sort"
+      ],
+      "next_topic": "dsa-quick-sort",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-quick-sort",
+      "name": "Quick sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-merge-sort"
+      ],
+      "next_topic": "dsa-heap-sort",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-heap-sort",
+      "name": "Heap sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-quick-sort"
+      ],
+      "next_topic": "dsa-counting-radix",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-counting-radix",
+      "name": "Counting and radix concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-heap-sort"
+      ],
+      "next_topic": "dsa-sort-stability",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-sort-stability",
+      "name": "Stability",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-counting-radix"
+      ],
+      "next_topic": "dsa-sort-complexity",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-sort-complexity",
+      "name": "Complexity comparison",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-sort-stability"
+      ],
+      "next_topic": "dsa-binary-search-classic",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-binary-search-classic",
+      "name": "Classic search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-sort-complexity",
+        "java-arrays"
+      ],
+      "next_topic": "dsa-binary-search-boundaries",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-binary-search-boundaries",
+      "name": "Boundaries",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-binary-search-classic"
+      ],
+      "next_topic": "dsa-first-last-occurrence",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-first-last-occurrence",
+      "name": "First and last occurrence",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-binary-search-boundaries"
+      ],
+      "next_topic": "dsa-search-on-answer",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-search-on-answer",
+      "name": "Search on the answer",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-first-last-occurrence"
+      ],
+      "next_topic": "dsa-rotated-arrays",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-rotated-arrays",
+      "name": "Rotated arrays",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-search-on-answer"
+      ],
+      "next_topic": "dsa-tree-terminology",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-terminology",
+      "name": "Tree terminology",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-rotated-arrays",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-binary-trees",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-binary-trees",
+      "name": "Binary trees",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-terminology"
+      ],
+      "next_topic": "dsa-tree-dfs",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-dfs",
+      "name": "DFS traversals",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-binary-trees"
+      ],
+      "next_topic": "dsa-tree-bfs",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-bfs",
+      "name": "BFS / level order",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-dfs"
+      ],
+      "next_topic": "dsa-tree-height",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-height",
+      "name": "Height and depth",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-bfs"
+      ],
+      "next_topic": "dsa-tree-paths",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-paths",
+      "name": "Path problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-height"
+      ],
+      "next_topic": "dsa-tree-construction",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tree-construction",
+      "name": "Construction",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-paths"
+      ],
+      "next_topic": "dsa-bst-search",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bst-search",
+      "name": "BST search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tree-construction",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-bst-insert",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bst-insert",
+      "name": "BST insertion",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bst-search"
+      ],
+      "next_topic": "dsa-bst-delete",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bst-delete",
+      "name": "BST deletion",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bst-insert"
+      ],
+      "next_topic": "dsa-bst-validate",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bst-validate",
+      "name": "BST validation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bst-delete"
+      ],
+      "next_topic": "dsa-bst-ordered-properties",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bst-ordered-properties",
+      "name": "Ordered properties",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bst-validate"
+      ],
+      "next_topic": "dsa-heap-structure",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-heap-structure",
+      "name": "Heap structure",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bst-ordered-properties",
+        "java-priority-queue",
+        "java-comparable-comparator"
+      ],
+      "next_topic": "dsa-priority-queue",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-priority-queue",
+      "name": "Priority queue",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-heap-structure"
+      ],
+      "next_topic": "dsa-heapify",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-heapify",
+      "name": "Heapify",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-priority-queue"
+      ],
+      "next_topic": "dsa-top-k",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-top-k",
+      "name": "Top-K",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-heapify"
+      ],
+      "next_topic": "dsa-heap-scheduling",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-heap-scheduling",
+      "name": "Scheduling patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-top-k"
+      ],
+      "next_topic": "dsa-graph-representations",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-graph-representations",
+      "name": "Graph representations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-heap-scheduling",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-graph-bfs",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-graph-bfs",
+      "name": "Graph BFS",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-graph-representations"
+      ],
+      "next_topic": "dsa-graph-dfs",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-graph-dfs",
+      "name": "Graph DFS",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-graph-bfs"
+      ],
+      "next_topic": "dsa-connected-components",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-connected-components",
+      "name": "Connected components",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-graph-dfs"
+      ],
+      "next_topic": "dsa-graph-cycle",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-graph-cycle",
+      "name": "Cycle detection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-connected-components"
+      ],
+      "next_topic": "dsa-bipartite",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bipartite",
+      "name": "Bipartite graphs",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-graph-cycle"
+      ],
+      "next_topic": "dsa-topological-sort",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-topological-sort",
+      "name": "Topological sorting",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bipartite",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-union-find",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-union-find",
+      "name": "Union-Find",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-topological-sort",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-unweighted-shortest",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-unweighted-shortest",
+      "name": "Unweighted shortest paths",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-union-find",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references",
+        "java-priority-queue"
+      ],
+      "next_topic": "dsa-dijkstra",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dijkstra",
+      "name": "Dijkstra",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-unweighted-shortest"
+      ],
+      "next_topic": "dsa-mst",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-mst",
+      "name": "MST",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dijkstra",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "next_topic": "dsa-greedy-reasoning",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-greedy-reasoning",
+      "name": "Greedy reasoning",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-mst"
+      ],
+      "next_topic": "dsa-greedy-exchange",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-greedy-exchange",
+      "name": "Exchange / intuitive proof",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-greedy-reasoning"
+      ],
+      "next_topic": "dsa-interval-problems",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-interval-problems",
+      "name": "Interval problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-greedy-exchange"
+      ],
+      "next_topic": "dsa-greedy-scheduling",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-greedy-scheduling",
+      "name": "Scheduling",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-interval-problems"
+      ],
+      "next_topic": "dsa-greedy-patterns",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-greedy-patterns",
+      "name": "Classic greedy patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-greedy-scheduling"
+      ],
+      "next_topic": "dsa-dp-mindset",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-mindset",
+      "name": "DP mindset",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-greedy-patterns"
+      ],
+      "next_topic": "dsa-memoization",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-memoization",
+      "name": "Memoization",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-mindset"
+      ],
+      "next_topic": "dsa-tabulation",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tabulation",
+      "name": "Tabulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-memoization"
+      ],
+      "next_topic": "dsa-dp-state",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-state",
+      "name": "State definition",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tabulation"
+      ],
+      "next_topic": "dsa-dp-transition",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-transition",
+      "name": "Transition",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-state"
+      ],
+      "next_topic": "dsa-dp-1d",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-1d",
+      "name": "1D DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-transition"
+      ],
+      "next_topic": "dsa-dp-2d",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-2d",
+      "name": "2D DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-1d"
+      ],
+      "next_topic": "dsa-subsequence-dp",
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-subsequence-dp",
+      "name": "Subsequence DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-2d"
+      ],
+      "next_topic": "dsa-knapsack",
+      "order_index": 7,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-knapsack",
+      "name": "Knapsack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-subsequence-dp"
+      ],
+      "next_topic": "dsa-grid-dp",
+      "order_index": 8,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-grid-dp",
+      "name": "Grid DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-knapsack"
+      ],
+      "next_topic": "dsa-interval-dp",
+      "order_index": 9,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-interval-dp",
+      "name": "Interval DP concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-grid-dp"
+      ],
+      "next_topic": "dsa-dp-optimization",
+      "order_index": 10,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-dp-optimization",
+      "name": "DP optimization",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-interval-dp"
+      ],
+      "next_topic": "dsa-tries",
+      "order_index": 11,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-tries",
+      "name": "Tries",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-dp-optimization"
+      ],
+      "next_topic": "dsa-bit-manipulation",
+      "order_index": 0,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-bit-manipulation",
+      "name": "Bit manipulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-tries"
+      ],
+      "next_topic": "dsa-segment-tree-concept",
+      "order_index": 1,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-segment-tree-concept",
+      "name": "Segment tree concept",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-bit-manipulation"
+      ],
+      "next_topic": "dsa-advanced-graphs",
+      "order_index": 2,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-advanced-graphs",
+      "name": "Advanced graph concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-segment-tree-concept"
+      ],
+      "next_topic": "dsa-advanced-dp",
+      "order_index": 3,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-advanced-dp",
+      "name": "Advanced DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-advanced-graphs"
+      ],
+      "next_topic": "dsa-pattern-selection",
+      "order_index": 4,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-pattern-selection",
+      "name": "Pattern selection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-advanced-dp"
+      ],
+      "next_topic": "dsa-interview-hygiene",
+      "order_index": 5,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "dsa-interview-hygiene",
+      "name": "Interview hygiene",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dsa-pattern-selection"
+      ],
+      "next_topic": null,
+      "order_index": 6,
+      "estimated_minutes": null
+    },
+    {
+      "slug": "se-sdlc",
+      "name": "SDLC overview",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-requirements",
+      "name": "Requirements & scope",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-versioning",
+      "name": "Semantic versioning",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-solid-srp",
+      "name": "SOLID \u2014 Single Responsibility",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-solid-ocp",
+      "name": "SOLID \u2014 Open/Closed",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-solid-srp"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-testing-pyramid",
+      "name": "Testing pyramid",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-unit-tests",
+      "name": "Unit testing basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-testing-pyramid"
+      ],
+      "next_topic": null,
+      "order_index": 6,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-api-design",
+      "name": "API design basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-requirements"
+      ],
+      "next_topic": null,
+      "order_index": 7,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-code-review",
+      "name": "Code review habits",
+      "domain_key": "software-engineering",
+      "learning_track": "ALWAYS_ON",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "se-unit-tests"
+      ],
+      "next_topic": null,
+      "order_index": 8,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "se-ci-basics",
+      "name": "CI basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-unit-tests"
+      ],
+      "next_topic": null,
+      "order_index": 9,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "db-sql-select",
+      "name": "SQL SELECT",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "db-sql-joins",
+      "name": "SQL JOINs",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "db-indexes",
+      "name": "Indexes & query plans",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "db-transactions",
+      "name": "Transactions",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "db-schema-design",
+      "name": "Schema design basics",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "db-sql-joins"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-http",
+      "name": "HTTP fundamentals",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-rest",
+      "name": "REST resources",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-http"
+      ],
+      "next_topic": null,
+      "order_index": 6,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-json",
+      "name": "JSON APIs",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-http"
+      ],
+      "next_topic": null,
+      "order_index": 7,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-fastapi-intro",
+      "name": "FastAPI intro",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-rest",
+        "be-json"
+      ],
+      "next_topic": null,
+      "order_index": 8,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-auth-basics",
+      "name": "Auth basics",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-fastapi-intro"
+      ],
+      "next_topic": null,
+      "order_index": 9,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-errors",
+      "name": "API error handling",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-fastapi-intro"
+      ],
+      "next_topic": null,
+      "order_index": 10,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "be-persistence",
+      "name": "API + SQL persistence",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-fastapi-intro",
+        "db-sql-select"
+      ],
+      "next_topic": null,
+      "order_index": 11,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-vectors",
+      "name": "Vectors intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-matrices",
+      "name": "Matrices intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-probability",
+      "name": "Probability basics",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-distributions",
+      "name": "Distributions intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-probability"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-stats-summary",
+      "name": "Summary statistics",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-probability"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "math-gradient-intuition",
+      "name": "Gradient intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-what-is-ml",
+      "name": "What is machine learning",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-probability"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-features-labels",
+      "name": "Features & labels",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-what-is-ml"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-train-test",
+      "name": "Train/test split",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-features-labels"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-linear-regression",
+      "name": "Linear regression",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-train-test",
+        "math-vectors"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-classification",
+      "name": "Classification basics",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-train-test"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-metrics",
+      "name": "ML metrics",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-classification"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-overfitting",
+      "name": "Overfitting & regularization",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-metrics"
+      ],
+      "next_topic": null,
+      "order_index": 6,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ml-sklearn-pipeline",
+      "name": "sklearn Pipeline",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-overfitting"
+      ],
+      "next_topic": null,
+      "order_index": 7,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "dl-awareness",
+      "name": "Deep Learning awareness",
+      "domain_key": "deep-learning",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "dl-path",
+      "name": "Deep Learning learning path",
+      "domain_key": "deep-learning",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dl-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "nlp-awareness",
+      "name": "NLP awareness",
+      "domain_key": "nlp",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "nlp-path",
+      "name": "NLP learning path",
+      "domain_key": "nlp",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "nlp-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "genai-awareness",
+      "name": "Generative AI awareness",
+      "domain_key": "genai",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "genai-path",
+      "name": "Generative AI learning path",
+      "domain_key": "genai",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "genai-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "ai-eng-awareness",
+      "name": "AI Engineering awareness",
+      "domain_key": "ai-engineering",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "ai-eng-path",
+      "name": "AI Engineering learning path",
+      "domain_key": "ai-engineering",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ai-eng-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "devops-awareness",
+      "name": "DevOps awareness",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "devops-path",
+      "name": "DevOps learning path",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "devops-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "sysdesign-awareness",
+      "name": "System Design awareness",
+      "domain_key": "system-design",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "sysdesign-path",
+      "name": "System Design learning path",
+      "domain_key": "system-design",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "sysdesign-awareness"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 20
+    },
+    {
+      "slug": "py-syntax",
+      "name": "Python syntax & tooling",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-command-line"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "py-data-structures",
+      "name": "Python data structures",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "py-syntax"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "py-functions-modules",
+      "name": "Functions & modules",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "py-data-structures"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "py-oop",
+      "name": "Python OOP",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "py-functions-modules"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "py-testing",
+      "name": "pytest for Python",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "py-functions-modules",
+        "se-unit-tests"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-html-basics",
+      "name": "HTML basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-css-basics",
+      "name": "CSS basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-html-basics"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-responsive",
+      "name": "Responsive design",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-css-basics"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-js-basics",
+      "name": "JavaScript basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-html-basics"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-ts-intro",
+      "name": "TypeScript intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-js-basics"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-react-intro",
+      "name": "React intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-js-basics"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-nextjs-intro",
+      "name": "Next.js intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-react-intro"
+      ],
+      "next_topic": null,
+      "order_index": 6,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "web-forms-a11y",
+      "name": "Forms & accessibility",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "web-html-basics",
+        "web-css-basics"
+      ],
+      "next_topic": null,
+      "order_index": 7,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-internet-basics",
+      "name": "Internet basics",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-dns",
+      "name": "DNS",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "net-internet-basics"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-tcp-udp",
+      "name": "TCP vs UDP",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "net-internet-basics"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-http",
+      "name": "HTTP deep dive",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "net-internet-basics",
+        "be-http"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-https-tls",
+      "name": "HTTPS & TLS",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "net-http"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "net-websockets",
+      "name": "WebSockets",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "net-http"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-docker-intro",
+      "name": "Docker intro",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-shell"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-compose",
+      "name": "Docker Compose",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ops-docker-intro"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-ci-github-actions",
+      "name": "GitHub Actions CI",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "se-ci-basics"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-linux-services",
+      "name": "Linux services basics",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "cf-linux-processes"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-k8s-awareness",
+      "name": "Kubernetes awareness",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "depth_target": "AWARENESS",
+      "parallel_eligible": true,
+      "prerequisites": [
+        "ops-docker-intro",
+        "ops-compose"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ops-observability",
+      "name": "Observability basics",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ops-docker-intro"
+      ],
+      "next_topic": null,
+      "order_index": 5,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ds-numpy",
+      "name": "NumPy foundations",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ds-pandas",
+      "name": "Pandas foundations",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ds-numpy"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ds-eda",
+      "name": "Exploratory data analysis",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ds-pandas",
+        "math-stats-summary"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ds-feature-eng",
+      "name": "Feature engineering",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ds-eda"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "ds-sql-analytics",
+      "name": "SQL for analytics",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "WORKING_KNOWLEDGE",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "db-sql-select",
+        "ds-pandas"
+      ],
+      "next_topic": null,
+      "order_index": 4,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "dl-nn-basics",
+      "name": "Neural network basics",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-sklearn-pipeline",
+        "math-gradient-intuition"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "dl-backprop",
+      "name": "Backpropagation intuition",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "dl-cnn",
+      "name": "CNN basics",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "dl-transformers-intro",
+      "name": "Transformers intro",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "genai-embeddings",
+      "name": "Embeddings & semantic search",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "dl-transformers-intro"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "genai-rag",
+      "name": "RAG systems",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "genai-embeddings",
+        "be-fastapi-intro"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "genai-agents",
+      "name": "Tool-using agents",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "genai-rag"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "genai-eval",
+      "name": "LLM evaluation",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "DEEP",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "genai-rag"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "mlops-tracking",
+      "name": "Experiment tracking",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ml-sklearn-pipeline"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "mlops-model-packaging",
+      "name": "Model packaging",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "mlops-tracking"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "mlops-serving",
+      "name": "Model serving APIs",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "mlops-model-packaging",
+        "be-fastapi-intro"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "mlops-monitoring",
+      "name": "Model monitoring basics",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "mlops-serving"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "sys-scalability",
+      "name": "Scalability basics",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "be-persistence",
+        "db-indexes"
+      ],
+      "next_topic": null,
+      "order_index": 0,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "sys-caching",
+      "name": "Caching strategies",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "sys-scalability"
+      ],
+      "next_topic": null,
+      "order_index": 1,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "sys-queues",
+      "name": "Message queues",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "sys-scalability"
+      ],
+      "next_topic": null,
+      "order_index": 2,
+      "estimated_minutes": 45
+    },
+    {
+      "slug": "sys-observability-design",
+      "name": "Observability in design",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "depth_target": "STRONG",
+      "parallel_eligible": false,
+      "prerequisites": [
+        "ops-observability",
+        "sys-scalability"
+      ],
+      "next_topic": null,
+      "order_index": 3,
+      "estimated_minutes": 45
+    }
+  ],
+  "spine_slugs": [
+    "cf-algorithms",
+    "cf-alu",
+    "cf-binary",
+    "cf-bits-and-bytes",
+    "cf-branches",
+    "cf-build-system",
+    "cf-cache",
+    "cf-cherry-pick",
+    "cf-command-line",
+    "cf-commits",
+    "cf-compiler",
+    "cf-conflicts",
+    "cf-cpu",
+    "cf-debugger",
+    "cf-debugging-thinking",
+    "cf-dependency-management",
+    "cf-dev-compiler",
+    "cf-dev-package-manager",
+    "cf-dry-runs",
+    "cf-edge-cases",
+    "cf-filesystem-navigation",
+    "cf-filesystems",
+    "cf-find",
+    "cf-formatter",
+    "cf-github-workflow",
+    "cf-grep",
+    "cf-hexadecimal",
+    "cf-ide",
+    "cf-instruction-execution",
+    "cf-interpreter",
+    "cf-kernel",
+    "cf-linter",
+    "cf-linux-environment-variables",
+    "cf-linux-files",
+    "cf-linux-permissions",
+    "cf-linux-processes",
+    "cf-machine-code",
+    "cf-merge",
+    "cf-os-environment-variables",
+    "cf-os-memory",
+    "cf-os-permissions",
+    "cf-os-processes",
+    "cf-package-management",
+    "cf-pipes",
+    "cf-problem-decomposition",
+    "cf-process",
+    "cf-program",
+    "cf-pseudocode",
+    "cf-pull-push",
+    "cf-ram",
+    "cf-rebase",
+    "cf-redirection",
+    "cf-registers",
+    "cf-remote",
+    "cf-repository",
+    "cf-reset-revert",
+    "cf-shell",
+    "cf-space-complexity-intro",
+    "cf-stash",
+    "cf-storage",
+    "cf-system-calls",
+    "cf-threads",
+    "cf-time-complexity-intro",
+    "cf-virtual-memory-basics",
+    "dsa-advanced-dp",
+    "dsa-advanced-graphs",
+    "dsa-algorithmic-thinking",
+    "dsa-array-frequency",
+    "dsa-array-insert-delete",
+    "dsa-array-patterns",
+    "dsa-array-traversal",
+    "dsa-best-worst-average",
+    "dsa-big-o",
+    "dsa-binary-search-boundaries",
+    "dsa-binary-search-classic",
+    "dsa-binary-trees",
+    "dsa-bipartite",
+    "dsa-bit-manipulation",
+    "dsa-bst-delete",
+    "dsa-bst-insert",
+    "dsa-bst-ordered-properties",
+    "dsa-bst-search",
+    "dsa-bst-validate",
+    "dsa-bubble-sort",
+    "dsa-call-stack",
+    "dsa-character-processing",
+    "dsa-combinations",
+    "dsa-connected-components",
+    "dsa-constraint-search",
+    "dsa-counting-radix",
+    "dsa-cycle-detection",
+    "dsa-dijkstra",
+    "dsa-dp-1d",
+    "dsa-dp-2d",
+    "dsa-dp-mindset",
+    "dsa-dp-optimization",
+    "dsa-dp-state",
+    "dsa-dp-transition",
+    "dsa-fast-slow",
+    "dsa-first-last-occurrence",
+    "dsa-frequency-maps",
+    "dsa-graph-bfs",
+    "dsa-graph-cycle",
+    "dsa-graph-dfs",
+    "dsa-graph-representations",
+    "dsa-greedy-exchange",
+    "dsa-greedy-patterns",
+    "dsa-greedy-reasoning",
+    "dsa-greedy-scheduling",
+    "dsa-grid-dp",
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "dsa-heap-scheduling",
+    "dsa-heap-sort",
+    "dsa-heap-structure",
+    "dsa-heapify",
+    "dsa-insertion-sort",
+    "dsa-interval-dp",
+    "dsa-interval-problems",
+    "dsa-interview-hygiene",
+    "dsa-knapsack",
+    "dsa-list-merge",
+    "dsa-list-operations",
+    "dsa-list-reversal",
+    "dsa-lookup-patterns",
+    "dsa-memoization",
+    "dsa-merge-sort",
+    "dsa-monotonic-stack",
+    "dsa-mst",
+    "dsa-pattern-selection",
+    "dsa-permutations",
+    "dsa-prefix-sums",
+    "dsa-priority-queue",
+    "dsa-queue-bfs-relationship",
+    "dsa-queue-deque",
+    "dsa-quick-sort",
+    "dsa-recursion-model",
+    "dsa-recursion-to-iteration",
+    "dsa-recursive-trees",
+    "dsa-rotated-arrays",
+    "dsa-search-on-answer",
+    "dsa-segment-tree-concept",
+    "dsa-selection-sort",
+    "dsa-singly-linked-list",
+    "dsa-sort-complexity",
+    "dsa-sort-stability",
+    "dsa-stack-fundamentals",
+    "dsa-string-frequency",
+    "dsa-string-manipulation",
+    "dsa-string-patterns",
+    "dsa-subsequence-dp",
+    "dsa-subsets",
+    "dsa-tabulation",
+    "dsa-top-k",
+    "dsa-topological-sort",
+    "dsa-tree-bfs",
+    "dsa-tree-construction",
+    "dsa-tree-dfs",
+    "dsa-tree-height",
+    "dsa-tree-paths",
+    "dsa-tree-terminology",
+    "dsa-tries",
+    "dsa-two-pointers-opposite",
+    "dsa-two-pointers-partition",
+    "dsa-two-pointers-same",
+    "dsa-union-find",
+    "dsa-unweighted-shortest",
+    "dsa-window-fixed",
+    "dsa-window-frequency",
+    "dsa-window-variable",
+    "java-abstract-classes",
+    "java-api-hygiene",
+    "java-arrays",
+    "java-assertions",
+    "java-break-continue",
+    "java-bytecode",
+    "java-checked-unchecked",
+    "java-classes-objects",
+    "java-comparable-comparator",
+    "java-compile-and-run",
+    "java-composition",
+    "java-console-io",
+    "java-constructors",
+    "java-custom-exceptions",
+    "java-encapsulation",
+    "java-first-program",
+    "java-functional-interfaces",
+    "java-gc-intro",
+    "java-generic-bounds",
+    "java-generic-types",
+    "java-if-else",
+    "java-inheritance",
+    "java-interfaces",
+    "java-iteration",
+    "java-jdk-jre",
+    "java-junit-basics",
+    "java-lambdas",
+    "java-list",
+    "java-loops",
+    "java-map",
+    "java-memory-model-basics",
+    "java-method-basics",
+    "java-operators",
+    "java-overloading",
+    "java-packages",
+    "java-paths-files",
+    "java-polymorphism",
+    "java-primitives",
+    "java-priority-queue",
+    "java-readers-writers",
+    "java-references",
+    "java-scope",
+    "java-set",
+    "java-stream-operations",
+    "java-stream-pipeline",
+    "java-stringbuilder",
+    "java-strings",
+    "java-switch",
+    "java-synchronization-basics",
+    "java-threads",
+    "java-try-catch",
+    "java-type-conversion"
+  ],
+  "projects": [
+    {
+      "slug": "cli-calculator",
+      "name": "CLI Calculator",
+      "level": 1,
+      "order_index": 10,
+      "prerequisites": [
+        "cf-shell",
+        "cf-command-line"
+      ]
+    },
+    {
+      "slug": "file-organizer",
+      "name": "File Organizer",
+      "level": 1,
+      "order_index": 20,
+      "prerequisites": [
+        "cf-filesystem-navigation",
+        "cf-shell"
+      ]
+    },
+    {
+      "slug": "java-dsa-lib",
+      "name": "DSA Implementation Library",
+      "level": 2,
+      "order_index": 35,
+      "prerequisites": [
+        "java-methods",
+        "dsa-arrays"
+      ]
+    },
+    {
+      "slug": "simple-rest-api",
+      "name": "Simple REST API",
+      "level": 1,
+      "order_index": 40,
+      "prerequisites": [
+        "java-methods",
+        "cf-command-line"
+      ]
+    },
+    {
+      "slug": "sql-crud-app",
+      "name": "SQL CRUD App",
+      "level": 1,
+      "order_index": 45,
+      "prerequisites": [
+        "db-sql-select"
+      ]
+    },
+    {
+      "slug": "auth-service",
+      "name": "Auth Service",
+      "level": 2,
+      "order_index": 50,
+      "prerequisites": [
+        "simple-rest-api",
+        "sql-crud-app"
+      ]
+    },
+    {
+      "slug": "fullstack-todo",
+      "name": "Fullstack Todo",
+      "level": 2,
+      "order_index": 60,
+      "prerequisites": [
+        "simple-rest-api",
+        "web-react-intro"
+      ]
+    },
+    {
+      "slug": "dockerized-service",
+      "name": "Dockerized Service",
+      "level": 2,
+      "order_index": 65,
+      "prerequisites": [
+        "ops-docker-intro",
+        "simple-rest-api"
+      ]
+    },
+    {
+      "slug": "data-analysis-project",
+      "name": "Data Analysis Project",
+      "level": 2,
+      "order_index": 70,
+      "prerequisites": [
+        "ds-eda"
+      ]
+    },
+    {
+      "slug": "ml-prediction-stub",
+      "name": "Classical ML Project",
+      "level": 3,
+      "order_index": 80,
+      "prerequisites": [
+        "ml-sklearn-pipeline",
+        "be-fastapi-intro"
+      ]
+    },
+    {
+      "slug": "ml-deploy-project",
+      "name": "ML Deployment Project",
+      "level": 3,
+      "order_index": 85,
+      "prerequisites": [
+        "mlops-serving",
+        "ops-docker-intro"
+      ]
+    },
+    {
+      "slug": "sklearn-pipeline",
+      "name": "End-to-End sklearn Pipeline",
+      "level": 3,
+      "order_index": 90,
+      "prerequisites": [
+        "ml-prediction-stub"
+      ]
+    },
+    {
+      "slug": "dl-vision-or-text",
+      "name": "Deep Learning Mini-Project",
+      "level": 3,
+      "order_index": 90,
+      "prerequisites": [
+        "dl-nn-basics"
+      ]
+    },
+    {
+      "slug": "rag-mini-app",
+      "name": "RAG Application",
+      "level": 4,
+      "order_index": 100,
+      "prerequisites": [
+        "genai-rag",
+        "fullstack-todo"
+      ]
+    },
+    {
+      "slug": "ai-agent-system",
+      "name": "AI Agent System",
+      "level": 4,
+      "order_index": 110,
+      "prerequisites": [
+        "genai-agents",
+        "genai-eval"
+      ]
+    },
+    {
+      "slug": "ai-backend-portfolio",
+      "name": "AI Engineering Capstone",
+      "level": 4,
+      "order_index": 120,
+      "prerequisites": [
+        "rag-mini-app",
+        "ml-deploy-project",
+        "auth-service"
+      ]
+    }
+  ],
+  "primary_resource_count": 321
+}

@@ -1,0 +1,676 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Curriculum V1 expanded with SE, backend, math, and ML foundations.
+  order: 0
+  levels:
+  - slug: domain-backend
+    name: Databases & Backend
+    description: Databases & Backend
+    order: 4
+    subjects:
+    - slug: databases-backend
+      name: Databases and Backend Foundations
+      description: Databases and Backend Foundations
+      order: 0
+      modules:
+      - slug: mod-db-sql
+        name: SQL & data
+        order: 0
+        topics:
+        - slug: db-sql-select
+          name: SQL SELECT
+          description: Query rows with SELECT, WHERE, ORDER BY.
+          order: 0
+          prerequisites: []
+          learning_objective: Query rows with SELECT, WHERE, ORDER BY.
+          mastery_criteria:
+          - Explain SQL SELECT in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: db-sql-select-core
+            title: SQL SELECT
+            description: Query rows with SELECT, WHERE, ORDER BY.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: db-sql-select-primary
+              title: 'SQLite: SQL SELECT'
+              type: documentation
+              url: https://www.sqlite.org/lang_select.html
+              provider: SQLite
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for SQL SELECT.
+            questions:
+            - slug: db-sql-select-q1
+              prompt: What is the core idea of SQL SELECT?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Query rows with SELECT, WHERE, ORDER BY.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Query rows with SELECT, WHERE, ORDER BY.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: db-sql-select-practice
+              title: 'Practice: SQL SELECT'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write 5 SELECT queries on a sample table. HOW MANY:
+                5. WHERE: SQLite.'
+              difficulty: beginner
+              order: 0
+        - slug: db-sql-joins
+          name: SQL JOINs
+          description: Combine tables with INNER/LEFT joins correctly.
+          order: 1
+          prerequisites:
+          - db-sql-select
+          learning_objective: Combine tables with INNER/LEFT joins correctly.
+          mastery_criteria:
+          - Explain SQL JOINs in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: db-sql-joins-core
+            title: SQL JOINs
+            description: Combine tables with INNER/LEFT joins correctly.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: db-sql-joins-primary
+              title: 'SQLite: SQL JOINs'
+              type: documentation
+              url: https://www.sqlite.org/lang_select.html
+              provider: SQLite
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for SQL JOINs.
+            questions:
+            - slug: db-sql-joins-q1
+              prompt: What is the core idea of SQL JOINs?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Combine tables with INNER/LEFT joins correctly.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Combine tables with INNER/LEFT joins correctly.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: db-sql-joins-practice
+              title: 'Practice: SQL JOINs'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write 3 JOIN queries. HOW MANY: 3. WHERE: SQLite.'
+              difficulty: beginner
+              order: 0
+        - slug: db-indexes
+          name: Indexes & query plans
+          description: Explain when an index helps and when it hurts.
+          order: 2
+          prerequisites:
+          - db-sql-select
+          learning_objective: Explain when an index helps and when it hurts.
+          mastery_criteria:
+          - Explain Indexes & query plans in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: db-indexes-core
+            title: Indexes & query plans
+            description: Explain when an index helps and when it hurts.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: db-indexes-primary
+              title: 'SQLite: Indexes & query plans'
+              type: documentation
+              url: https://www.sqlite.org/queryplanner.html
+              provider: SQLite
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Indexes & query plans.
+            questions:
+            - slug: db-indexes-q1
+              prompt: What is the core idea of Indexes & query plans?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Explain when an index helps and when it hurts.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Explain when an index helps and when it hurts.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: db-indexes-practice
+              title: 'Practice: Indexes & query plans'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compare EXPLAIN QUERY PLAN with/without index.
+                HOW MANY: 2. WHERE: SQLite.'
+              difficulty: beginner
+              order: 0
+        - slug: db-transactions
+          name: Transactions
+          description: Use BEGIN/COMMIT/ROLLBACK for atomic updates.
+          order: 3
+          prerequisites:
+          - db-sql-select
+          learning_objective: Use BEGIN/COMMIT/ROLLBACK for atomic updates.
+          mastery_criteria:
+          - Explain Transactions in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: db-transactions-core
+            title: Transactions
+            description: Use BEGIN/COMMIT/ROLLBACK for atomic updates.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: db-transactions-primary
+              title: 'SQLite: Transactions'
+              type: documentation
+              url: https://www.sqlite.org/lang_transaction.html
+              provider: SQLite
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Transactions.
+            questions:
+            - slug: db-transactions-q1
+              prompt: What is the core idea of Transactions?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Use BEGIN/COMMIT/ROLLBACK for atomic updates.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Use BEGIN/COMMIT/ROLLBACK for atomic updates.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: db-transactions-practice
+              title: 'Practice: Transactions'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Script a transfer with rollback on failure. HOW
+                MANY: 1. WHERE: SQLite.'
+              difficulty: beginner
+              order: 0
+        - slug: db-schema-design
+          name: Schema design basics
+          description: Model entities, keys, and relationships without premature complexity.
+          order: 4
+          prerequisites:
+          - db-sql-joins
+          learning_objective: Model entities, keys, and relationships without premature
+            complexity.
+          mastery_criteria:
+          - Explain Schema design basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: db-schema-design-core
+            title: Schema design basics
+            description: Model entities, keys, and relationships without premature
+              complexity.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: db-schema-design-primary
+              title: 'PostgreSQL: Schema design basics'
+              type: documentation
+              url: https://www.postgresql.org/docs/current/ddl.html
+              provider: PostgreSQL
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Schema design basics.
+            questions:
+            - slug: db-schema-design-q1
+              prompt: What is the core idea of Schema design basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Model entities, keys, and relationships without premature complexity.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Model entities, keys, and relationships without premature complexity.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: db-schema-design-practice
+              title: 'Practice: Schema design basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Design schema for a notes app. HOW MANY: 1 ER sketch.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0
+      - slug: mod-be-http
+        name: HTTP & APIs
+        order: 1
+        topics:
+        - slug: be-http
+          name: HTTP fundamentals
+          description: Explain methods, status codes, headers, and idempotency.
+          order: 5
+          prerequisites: []
+          learning_objective: Explain methods, status codes, headers, and idempotency.
+          mastery_criteria:
+          - Explain HTTP fundamentals in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-http-core
+            title: HTTP fundamentals
+            description: Explain methods, status codes, headers, and idempotency.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-http-primary
+              title: 'MDN: HTTP fundamentals'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for HTTP fundamentals.
+            questions:
+            - slug: be-http-q1
+              prompt: What is the core idea of HTTP fundamentals?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Explain methods, status codes, headers, and idempotency.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Explain methods, status codes, headers, and idempotency.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-http-practice
+              title: 'Practice: HTTP fundamentals'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Map 8 status codes to scenarios. HOW MANY: 8. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: be-rest
+          name: REST resources
+          description: Model collections/items with consistent URLs and verbs.
+          order: 6
+          prerequisites:
+          - be-http
+          learning_objective: Model collections/items with consistent URLs and verbs.
+          mastery_criteria:
+          - Explain REST resources in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-rest-core
+            title: REST resources
+            description: Model collections/items with consistent URLs and verbs.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-rest-primary
+              title: 'restfulapi.net: REST resources'
+              type: documentation
+              url: https://restfulapi.net/rest-architectural-constraints/
+              provider: restfulapi.net
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for REST resources.
+            questions:
+            - slug: be-rest-q1
+              prompt: What is the core idea of REST resources?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Model collections/items with consistent URLs and verbs.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Model collections/items with consistent URLs and verbs.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-rest-practice
+              title: 'Practice: REST resources'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Design REST resources for bookstore. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: be-json
+          name: JSON APIs
+          description: Serialize request/response bodies and validate shapes.
+          order: 7
+          prerequisites:
+          - be-http
+          learning_objective: Serialize request/response bodies and validate shapes.
+          mastery_criteria:
+          - Explain JSON APIs in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-json-core
+            title: JSON APIs
+            description: Serialize request/response bodies and validate shapes.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-json-primary
+              title: 'json.org: JSON APIs'
+              type: documentation
+              url: https://www.json.org/json-en.html
+              provider: json.org
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for JSON APIs.
+            questions:
+            - slug: be-json-q1
+              prompt: What is the core idea of JSON APIs?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Serialize request/response bodies and validate shapes.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Serialize request/response bodies and validate shapes.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-json-practice
+              title: 'Practice: JSON APIs'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Design 3 request/response JSON samples. HOW MANY:
+                3. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: be-fastapi-intro
+          name: FastAPI intro
+          description: Build a tiny FastAPI app with typed routes.
+          order: 8
+          prerequisites:
+          - be-rest
+          - be-json
+          learning_objective: Build a tiny FastAPI app with typed routes.
+          mastery_criteria:
+          - Explain FastAPI intro in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-fastapi-intro-core
+            title: FastAPI intro
+            description: Build a tiny FastAPI app with typed routes.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-fastapi-intro-primary
+              title: 'FastAPI: FastAPI intro'
+              type: documentation
+              url: https://fastapi.tiangolo.com/tutorial/first-steps/
+              provider: FastAPI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for FastAPI intro.
+            questions:
+            - slug: be-fastapi-intro-q1
+              prompt: What is the core idea of FastAPI intro?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Build a tiny FastAPI app with typed routes.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Build a tiny FastAPI app with typed routes.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-fastapi-intro-practice
+              title: 'Practice: FastAPI intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Create GET/POST hello endpoints. HOW MANY: 2 routes.
+                WHERE: local repo.'
+              difficulty: beginner
+              order: 0
+            - slug: be-fastapi-intro-build
+              title: 'Build: FastAPI intro'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for FastAPI intro.'
+              difficulty: intermediate
+              order: 1
+        - slug: be-auth-basics
+          name: Auth basics
+          description: Distinguish authentication vs authorization; hash passwords.
+          order: 9
+          prerequisites:
+          - be-fastapi-intro
+          learning_objective: Distinguish authentication vs authorization; hash passwords.
+          mastery_criteria:
+          - Explain Auth basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-auth-basics-core
+            title: Auth basics
+            description: Distinguish authentication vs authorization; hash passwords.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-auth-basics-primary
+              title: 'FastAPI: Auth basics'
+              type: documentation
+              url: https://fastapi.tiangolo.com/tutorial/security/
+              provider: FastAPI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Auth basics.
+            questions:
+            - slug: be-auth-basics-q1
+              prompt: What is the core idea of Auth basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Distinguish authentication vs authorization; hash passwords.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Distinguish authentication vs authorization; hash passwords.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-auth-basics-practice
+              title: 'Practice: Auth basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Outline register/login flow. HOW MANY: 1. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: be-errors
+          name: API error handling
+          description: Return structured errors without leaking internals.
+          order: 10
+          prerequisites:
+          - be-fastapi-intro
+          learning_objective: Return structured errors without leaking internals.
+          mastery_criteria:
+          - Explain API error handling in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-errors-core
+            title: API error handling
+            description: Return structured errors without leaking internals.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-errors-primary
+              title: 'FastAPI: API error handling'
+              type: documentation
+              url: https://fastapi.tiangolo.com/tutorial/handling-errors/
+              provider: FastAPI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for API error handling.
+            questions:
+            - slug: be-errors-q1
+              prompt: What is the core idea of API error handling?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Return structured errors without leaking internals.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Return structured errors without leaking internals.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-errors-practice
+              title: 'Practice: API error handling'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Define error envelope for 4 failure modes. HOW
+                MANY: 4. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: be-persistence
+          name: API + SQL persistence
+          description: Wire a FastAPI route to SQL CRUD.
+          order: 11
+          prerequisites:
+          - be-fastapi-intro
+          - db-sql-select
+          learning_objective: Wire a FastAPI route to SQL CRUD.
+          mastery_criteria:
+          - Explain API + SQL persistence in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: backend
+          lessons:
+          - slug: be-persistence-core
+            title: API + SQL persistence
+            description: Wire a FastAPI route to SQL CRUD.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: be-persistence-primary
+              title: 'FastAPI: API + SQL persistence'
+              type: documentation
+              url: https://fastapi.tiangolo.com/tutorial/sql-databases/
+              provider: FastAPI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for API + SQL persistence.
+            questions:
+            - slug: be-persistence-q1
+              prompt: What is the core idea of API + SQL persistence?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Wire a FastAPI route to SQL CRUD.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Wire a FastAPI route to SQL CRUD.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: be-persistence-practice
+              title: 'Practice: API + SQL persistence'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Persist one resource with SQLAlchemy/SQLite. HOW
+                MANY: 1 resource. WHERE: local repo.'
+              difficulty: beginner
+              order: 0
+            - slug: be-persistence-build
+              title: 'Build: API + SQL persistence'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for API + SQL persistence.'
+              difficulty: intermediate
+              order: 1

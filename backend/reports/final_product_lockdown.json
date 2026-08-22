@@ -1,0 +1,173 @@
+{
+  "generated_at": "2026-08-22T11:25:10.690913+00:00",
+  "total_topics": 316,
+  "readiness": {
+    "READY": 316
+  },
+  "by_domain": {
+    "ai-engineering": {
+      "READY": 2
+    },
+    "backend": {
+      "READY": 12
+    },
+    "data-science": {
+      "READY": 5
+    },
+    "deep-learning": {
+      "READY": 6
+    },
+    "devops": {
+      "READY": 8
+    },
+    "dsa": {
+      "READY": 106
+    },
+    "foundations": {
+      "READY": 64
+    },
+    "genai": {
+      "READY": 6
+    },
+    "java": {
+      "READY": 52
+    },
+    "mathematics": {
+      "READY": 6
+    },
+    "ml": {
+      "READY": 8
+    },
+    "mlops": {
+      "READY": 4
+    },
+    "networking": {
+      "READY": 6
+    },
+    "nlp": {
+      "READY": 2
+    },
+    "python": {
+      "READY": 5
+    },
+    "software-engineering": {
+      "READY": 10
+    },
+    "system-design": {
+      "READY": 6
+    },
+    "web": {
+      "READY": 8
+    }
+  },
+  "unresolved_count": 0,
+  "unresolved": [],
+  "graph": {
+    "dag_ok": true,
+    "cycles": [],
+    "missing_prerequisites": [],
+    "spine_222_intact": true,
+    "prereq_intact": true,
+    "next_topic_intact": true
+  },
+  "progress": {
+    "unchanged": true,
+    "UserProgress": 0,
+    "TopicMastery": 0,
+    "UserXP": 0
+  },
+  "topic_count_ok": true,
+  "truth": {
+    "critical_count": 0,
+    "warnings": null
+  },
+  "practice": {
+    "by_status": {
+      "NO_PRACTICE_REQUIRED": 120,
+      "PRACTICE_VERIFIED": 196
+    },
+    "gaps": [],
+    "verified_count": 196,
+    "no_practice_required": 120
+  },
+  "time": {
+    "by_confidence": {
+      "HIGH": 3,
+      "MEDIUM": 309,
+      "LOW": 4
+    },
+    "ready_by_confidence": {
+      "HIGH": 3,
+      "MEDIUM": 309,
+      "LOW": 4
+    },
+    "low_confidence_ready": [
+      {
+        "topic": "cf-problem-decomposition",
+        "minutes": 45,
+        "method": "SECTION_LENGTH_ESTIMATE"
+      },
+      {
+        "topic": "cf-pseudocode",
+        "minutes": 36,
+        "method": "SECTION_LENGTH_ESTIMATE"
+      },
+      {
+        "topic": "cf-algorithms",
+        "minutes": 36,
+        "method": "SECTION_LENGTH_ESTIMATE"
+      },
+      {
+        "topic": "cf-debugging-thinking",
+        "minutes": 45,
+        "method": "SECTION_LENGTH_ESTIMATE"
+      }
+    ]
+  },
+  "learner_simulation": {
+    "beginner_java_dsa": {
+      "ready_sessions": 7,
+      "total": 7,
+      "violations": 5,
+      "no_gap_recommended_as_normal": true
+    },
+    "beginner_python_ml": {
+      "ready_sessions": 4,
+      "total": 4,
+      "violations": 3,
+      "no_gap_recommended_as_normal": true
+    },
+    "backend_engineer": {
+      "ready_sessions": 5,
+      "total": 5,
+      "violations": 4,
+      "no_gap_recommended_as_normal": true
+    },
+    "ml_engineer": {
+      "ready_sessions": 4,
+      "total": 4,
+      "violations": 3,
+      "no_gap_recommended_as_normal": true
+    },
+    "ai_engineer": {
+      "ready_sessions": 4,
+      "total": 4,
+      "violations": 3,
+      "no_gap_recommended_as_normal": true
+    }
+  },
+  "tests": {
+    "exit": 0,
+    "passed": 173,
+    "failed": 0
+  },
+  "lint": {
+    "exit": 0,
+    "pass": true
+  },
+  "build": {
+    "exit": 0,
+    "pass": true
+  },
+  "lockable": true
+}

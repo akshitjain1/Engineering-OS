@@ -1,0 +1,437 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-networking
+    name: Networking
+    description: Networking
+    order: 9
+    subjects:
+    - slug: networking
+      name: Networking Foundations
+      order: 0
+      modules:
+      - slug: mod-net-core
+        name: Network fundamentals
+        order: 0
+        topics:
+        - slug: net-internet-basics
+          name: Internet basics
+          description: Explain how clients reach servers over the internet.
+          order: 0
+          prerequisites: []
+          learning_objective: Explain how clients reach servers over the internet.
+          mastery_criteria:
+          - Explain Internet basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-internet-basics-core
+            title: Internet basics
+            description: 'WHY NOW: Explain how clients reach servers over the internet.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/How_does_the_Internet_work
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-internet-basics-primary
+              title: 'MDN: Internet basics'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/How_does_the_Internet_work
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Internet basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-internet-basics-q1
+              prompt: Core idea of Internet basics?
+              options:
+              - A vague buzzword
+              - Explain how clients reach servers over the internet.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explain how clients reach servers over the internet.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-internet-basics-practice
+              title: 'Practice: Internet basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: net-dns
+          name: DNS
+          description: Resolve hostnames to IP addresses.
+          order: 1
+          prerequisites:
+          - net-internet-basics
+          learning_objective: Resolve hostnames to IP addresses.
+          mastery_criteria:
+          - Explain DNS.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-dns-core
+            title: DNS
+            description: 'WHY NOW: Resolve hostnames to IP addresses.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Glossary/DNS
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Run dig/nslookup for 3 hosts. HOW MANY: 3. WHERE: terminal.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-dns-primary
+              title: 'MDN: DNS'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Glossary/DNS
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for DNS. Content inspection pending
+                upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-dns-q1
+              prompt: Core idea of DNS?
+              options:
+              - A vague buzzword
+              - Resolve hostnames to IP addresses.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Resolve hostnames to IP addresses.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-dns-practice
+              title: 'Practice: DNS'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Run dig/nslookup for 3 hosts. HOW MANY: 3. WHERE:
+                terminal.'
+              difficulty: beginner
+              order: 0
+        - slug: net-tcp-udp
+          name: TCP vs UDP
+          description: Contrast reliable streams vs datagrams.
+          order: 2
+          prerequisites:
+          - net-internet-basics
+          learning_objective: Contrast reliable streams vs datagrams.
+          mastery_criteria:
+          - Explain TCP vs UDP.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-tcp-udp-core
+            title: TCP vs UDP
+            description: 'WHY NOW: Contrast reliable streams vs datagrams.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Glossary/TCP
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-tcp-udp-primary
+              title: 'MDN: TCP vs UDP'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Glossary/TCP
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for TCP vs UDP. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-tcp-udp-q1
+              prompt: Core idea of TCP vs UDP?
+              options:
+              - A vague buzzword
+              - Contrast reliable streams vs datagrams.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Contrast reliable streams vs datagrams.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-tcp-udp-practice
+              title: 'Practice: TCP vs UDP'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+        - slug: net-http
+          name: HTTP deep dive
+          description: Use methods, headers, status codes, and caching headers correctly.
+          order: 3
+          prerequisites:
+          - net-internet-basics
+          - be-http
+          learning_objective: Use methods, headers, status codes, and caching headers
+            correctly.
+          mastery_criteria:
+          - Explain HTTP deep dive.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-http-core
+            title: HTTP deep dive
+            description: 'WHY NOW: Use methods, headers, status codes, and caching
+              headers correctly.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Web/HTTP
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Capture 5 requests in DevTools and label method/status.
+              HOW MANY: 5. WHERE: browser.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-http-primary
+              title: 'MDN: HTTP deep dive'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Web/HTTP
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for HTTP deep dive. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-http-q1
+              prompt: Core idea of HTTP deep dive?
+              options:
+              - A vague buzzword
+              - Use methods, headers, status codes, and caching headers correctly.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Use methods, headers, status codes, and caching headers correctly.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-http-practice
+              title: 'Practice: HTTP deep dive'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Capture 5 requests in DevTools and label method/status.
+                HOW MANY: 5. WHERE: browser.'
+              difficulty: beginner
+              order: 0
+        - slug: net-https-tls
+          name: HTTPS & TLS
+          description: Explain certificates and encrypted transport.
+          order: 4
+          prerequisites:
+          - net-http
+          learning_objective: Explain certificates and encrypted transport.
+          mastery_criteria:
+          - Explain HTTPS & TLS.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-https-tls-core
+            title: HTTPS & TLS
+            description: 'WHY NOW: Explain certificates and encrypted transport.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Glossary/TLS
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE:
+              browser.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-https-tls-primary
+              title: 'MDN: HTTPS & TLS'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Glossary/TLS
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for HTTPS & TLS. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-https-tls-q1
+              prompt: Core idea of HTTPS & TLS?
+              options:
+              - A vague buzzword
+              - Explain certificates and encrypted transport.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explain certificates and encrypted transport.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-https-tls-practice
+              title: 'Practice: HTTPS & TLS'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE:
+                browser.'
+              difficulty: beginner
+              order: 0
+        - slug: net-websockets
+          name: WebSockets
+          description: Use persistent bidirectional channels when needed.
+          order: 5
+          prerequisites:
+          - net-http
+          learning_objective: Use persistent bidirectional channels when needed.
+          mastery_criteria:
+          - Explain WebSockets.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: networking
+          lessons:
+          - slug: net-websockets-core
+            title: WebSockets
+            description: 'WHY NOW: Use persistent bidirectional channels when needed.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Sketch WS handshake vs HTTP polling. HOW MANY: 1. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: net-websockets-primary
+              title: 'MDN: WebSockets'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for WebSockets. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: net-websockets-q1
+              prompt: Core idea of WebSockets?
+              options:
+              - A vague buzzword
+              - Use persistent bidirectional channels when needed.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Use persistent bidirectional channels when needed.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: net-websockets-practice
+              title: 'Practice: WebSockets'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Sketch WS handshake vs HTTP polling. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0

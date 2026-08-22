@@ -1,0 +1,480 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Curriculum V1 expanded with SE, backend, math, and ML foundations.
+  order: 0
+  levels:
+  - slug: domain-ml
+    name: Machine Learning Foundations
+    description: Machine Learning Foundations
+    order: 6
+    subjects:
+    - slug: ml-foundations
+      name: Machine Learning Foundations
+      description: Machine Learning Foundations
+      order: 0
+      modules:
+      - slug: mod-ml-core
+        name: Supervised learning path
+        order: 0
+        topics:
+        - slug: ml-what-is-ml
+          name: What is machine learning
+          description: Distinguish supervised/unsupervised learning and typical tasks.
+          order: 0
+          prerequisites:
+          - math-probability
+          learning_objective: Distinguish supervised/unsupervised learning and typical
+            tasks.
+          mastery_criteria:
+          - Explain What is machine learning in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-what-is-ml-core
+            title: What is machine learning
+            description: Distinguish supervised/unsupervised learning and typical
+              tasks.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-what-is-ml-primary
+              title: 'scikit-learn: What is machine learning'
+              type: documentation
+              url: https://scikit-learn.org/stable/tutorial/basic/tutorial.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for What is machine learning.
+            questions:
+            - slug: ml-what-is-ml-q1
+              prompt: What is the core idea of What is machine learning?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Distinguish supervised/unsupervised learning and typical tasks.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Distinguish supervised/unsupervised learning and typical tasks.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-what-is-ml-practice
+              title: 'Practice: What is machine learning'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Label 6 problems as supervised/unsupervised. HOW
+                MANY: 6. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: ml-features-labels
+          name: Features & labels
+          description: Frame tabular problems with features X and label y.
+          order: 1
+          prerequisites:
+          - ml-what-is-ml
+          learning_objective: Frame tabular problems with features X and label y.
+          mastery_criteria:
+          - Explain Features & labels in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-features-labels-core
+            title: Features & labels
+            description: Frame tabular problems with features X and label y.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-features-labels-primary
+              title: 'scikit-learn: Features & labels'
+              type: documentation
+              url: https://scikit-learn.org/stable/getting_started.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Features & labels.
+            questions:
+            - slug: ml-features-labels-q1
+              prompt: What is the core idea of Features & labels?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Frame tabular problems with features X and label y.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Frame tabular problems with features X and label y.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-features-labels-practice
+              title: 'Practice: Features & labels'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Define features/labels for 2 datasets. HOW MANY:
+                2. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: ml-train-test
+          name: Train/test split
+          description: Split data to estimate generalization, avoid leakage.
+          order: 2
+          prerequisites:
+          - ml-features-labels
+          learning_objective: Split data to estimate generalization, avoid leakage.
+          mastery_criteria:
+          - Explain Train/test split in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-train-test-core
+            title: Train/test split
+            description: Split data to estimate generalization, avoid leakage.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-train-test-primary
+              title: 'scikit-learn: Train/test split'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/cross_validation.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Train/test split.
+            questions:
+            - slug: ml-train-test-q1
+              prompt: What is the core idea of Train/test split?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Split data to estimate generalization, avoid leakage.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Split data to estimate generalization, avoid leakage.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-train-test-practice
+              title: 'Practice: Train/test split'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Split a toy dataset 80/20. HOW MANY: 1. WHERE:
+                notebook.'
+              difficulty: beginner
+              order: 0
+        - slug: ml-linear-regression
+          name: Linear regression
+          description: Fit and interpret a linear regressor.
+          order: 3
+          prerequisites:
+          - ml-train-test
+          - math-vectors
+          learning_objective: Fit and interpret a linear regressor.
+          mastery_criteria:
+          - Explain Linear regression in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-linear-regression-core
+            title: Linear regression
+            description: Fit and interpret a linear regressor.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-linear-regression-primary
+              title: 'scikit-learn: Linear regression'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/linear_model.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Linear regression.
+            questions:
+            - slug: ml-linear-regression-q1
+              prompt: What is the core idea of Linear regression?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Fit and interpret a linear regressor.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Fit and interpret a linear regressor.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-linear-regression-practice
+              title: 'Practice: Linear regression'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Fit LinearRegression on a toy set. HOW MANY: 1.
+                WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ml-linear-regression-build
+              title: 'Build: Linear regression'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook cell for Linear regression.'
+              difficulty: intermediate
+              order: 1
+        - slug: ml-classification
+          name: Classification basics
+          description: Train a classifier and read a confusion matrix.
+          order: 4
+          prerequisites:
+          - ml-train-test
+          learning_objective: Train a classifier and read a confusion matrix.
+          mastery_criteria:
+          - Explain Classification basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-classification-core
+            title: Classification basics
+            description: Train a classifier and read a confusion matrix.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-classification-primary
+              title: 'scikit-learn: Classification basics'
+              type: documentation
+              url: https://scikit-learn.org/stable/supervised_learning.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Classification basics.
+            questions:
+            - slug: ml-classification-q1
+              prompt: What is the core idea of Classification basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Train a classifier and read a confusion matrix.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Train a classifier and read a confusion matrix.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-classification-practice
+              title: 'Practice: Classification basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Train LogisticRegression; print confusion matrix.
+                HOW MANY: 1. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ml-classification-build
+              title: 'Build: Classification basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook cell for Classification basics.'
+              difficulty: intermediate
+              order: 1
+        - slug: ml-metrics
+          name: ML metrics
+          description: Choose accuracy/precision/recall/F1 appropriately.
+          order: 5
+          prerequisites:
+          - ml-classification
+          learning_objective: Choose accuracy/precision/recall/F1 appropriately.
+          mastery_criteria:
+          - Explain ML metrics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-metrics-core
+            title: ML metrics
+            description: Choose accuracy/precision/recall/F1 appropriately.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-metrics-primary
+              title: 'scikit-learn: ML metrics'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/model_evaluation.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for ML metrics.
+            questions:
+            - slug: ml-metrics-q1
+              prompt: What is the core idea of ML metrics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Choose accuracy/precision/recall/F1 appropriately.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Choose accuracy/precision/recall/F1 appropriately.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-metrics-practice
+              title: 'Practice: ML metrics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compute precision/recall on a toy prediction set.
+                HOW MANY: 1. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ml-metrics-build
+              title: 'Build: ML metrics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook cell for ML metrics.'
+              difficulty: intermediate
+              order: 1
+        - slug: ml-overfitting
+          name: Overfitting & regularization
+          description: Detect overfitting and apply simple regularization.
+          order: 6
+          prerequisites:
+          - ml-metrics
+          learning_objective: Detect overfitting and apply simple regularization.
+          mastery_criteria:
+          - Explain Overfitting & regularization in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-overfitting-core
+            title: Overfitting & regularization
+            description: Detect overfitting and apply simple regularization.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-overfitting-primary
+              title: 'scikit-learn: Overfitting & regularization'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Overfitting & regularization.
+            questions:
+            - slug: ml-overfitting-q1
+              prompt: What is the core idea of Overfitting & regularization?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Detect overfitting and apply simple regularization.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Detect overfitting and apply simple regularization.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-overfitting-practice
+              title: 'Practice: Overfitting & regularization'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compare train vs test error under complexity. HOW
+                MANY: 1 experiment. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ml-overfitting-build
+              title: 'Build: Overfitting & regularization'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook cell for Overfitting & regularization.'
+              difficulty: intermediate
+              order: 1
+        - slug: ml-sklearn-pipeline
+          name: sklearn Pipeline
+          description: Compose preprocessing + model in a Pipeline.
+          order: 7
+          prerequisites:
+          - ml-overfitting
+          learning_objective: Compose preprocessing + model in a Pipeline.
+          mastery_criteria:
+          - Explain sklearn Pipeline in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ml-sklearn-pipeline-core
+            title: sklearn Pipeline
+            description: Compose preprocessing + model in a Pipeline.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ml-sklearn-pipeline-primary
+              title: 'scikit-learn: sklearn Pipeline'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/compose.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for sklearn Pipeline.
+            questions:
+            - slug: ml-sklearn-pipeline-q1
+              prompt: What is the core idea of sklearn Pipeline?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Compose preprocessing + model in a Pipeline.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Compose preprocessing + model in a Pipeline.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ml-sklearn-pipeline-practice
+              title: 'Practice: sklearn Pipeline'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build Pipeline with scaler + model. HOW MANY: 1.
+                WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ml-sklearn-pipeline-build
+              title: 'Build: sklearn Pipeline'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook cell for sklearn Pipeline.'
+              difficulty: intermediate
+              order: 1

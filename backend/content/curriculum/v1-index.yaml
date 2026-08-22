@@ -1,0 +1,18 @@
+schema_version: 1
+kind: curriculum_index
+origin: official
+files:
+- foundation/00-computer-developer-foundations.yaml
+- programming/01-java-programming.yaml
+- dsa/02-data-structures-algorithms.yaml
+- software-engineering/03-software-engineering-core.yaml
+- backend/04-databases-and-backend.yaml
+- mathematics/05-math-for-ml.yaml
+- ml/06-machine-learning-foundations.yaml
+- shells/07-career-path-shells.yaml
+- python/08-python-core.yaml
+- web/09-web-development.yaml
+- networking/10-networking.yaml
+- devops/11-devops-platform.yaml
+- data-science/12-data-science.yaml
+- ai-systems/13-ai-systems-design.yaml

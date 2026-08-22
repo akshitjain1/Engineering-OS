@@ -1,0 +1,72 @@
+{
+  "total_topics": 316,
+  "readiness": {
+    "READY": 64,
+    "NEEDS_REVIEW": 252
+  },
+  "tracks": {
+    "CORE": 228,
+    "ALWAYS_ON": 35,
+    "OPTIONAL": 13,
+    "SPECIALIZATION": 40
+  },
+  "depths": {
+    "WORKING_KNOWLEDGE": 120,
+    "STRONG": 175,
+    "AWARENESS": 13,
+    "DEEP": 8
+  },
+  "domain0": {
+    "count": 64,
+    "readiness": {
+      "READY": 64
+    }
+  },
+  "java": {
+    "count": 52,
+    "readiness": {
+      "NEEDS_REVIEW": 52
+    }
+  },
+  "dsa": {
+    "count": 106,
+    "readiness": {
+      "NEEDS_REVIEW": 106
+    }
+  },
+  "broken_primary_urls": [],
+  "resource_gap_topics": [],
+  "ready_topics_sample": [
+    "cf-bits-and-bytes",
+    "cf-binary",
+    "cf-hexadecimal",
+    "cf-cpu",
+    "cf-alu",
+    "cf-registers",
+    "cf-ram",
+    "cf-cache",
+    "cf-storage",
+    "cf-instruction-execution",
+    "cf-machine-code",
+    "cf-compiler",
+    "cf-interpreter",
+    "cf-program",
+    "cf-process",
+    "cf-kernel",
+    "cf-os-processes",
+    "cf-threads",
+    "cf-system-calls",
+    "cf-os-memory",
+    "cf-virtual-memory-basics",
+    "cf-filesystems",
+    "cf-os-permissions",
+    "cf-os-environment-variables",
+    "cf-shell",
+    "cf-command-line",
+    "cf-filesystem-navigation",
+    "cf-linux-files",
+    "cf-pipes",
+    "cf-redirection"
+  ],
+  "notes": "READY requires inspected resource-specific coverage filling required concepts; URL alone is never enough."
+}

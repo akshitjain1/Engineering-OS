@@ -1,0 +1,1207 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ai-systems
+    name: AI Systems & Design
+    description: AI Systems & Design
+    order: 12
+    subjects:
+    - slug: ai-systems-design
+      name: Deep Learning, GenAI, MLOps, System Design
+      order: 0
+      modules:
+      - slug: mod-dl
+        name: Deep Learning
+        order: 0
+        topics:
+        - slug: dl-nn-basics
+          name: Neural network basics
+          description: Explain layers, activations, and forward pass.
+          order: 0
+          prerequisites:
+          - ml-sklearn-pipeline
+          - math-gradient-intuition
+          learning_objective: Explain layers, activations, and forward pass.
+          mastery_criteria:
+          - Explain Neural network basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: deep-learning
+          lessons:
+          - slug: dl-nn-basics-core
+            title: Neural network basics
+            description: 'WHY NOW: Explain layers, activations, and forward pass.
+
+
+              LEARN: PyTorch — https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build a tiny MLP in PyTorch. HOW MANY: 1 model. WHERE:
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: dl-nn-basics-primary
+              title: 'PyTorch: Neural network basics'
+              type: documentation
+              url: https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html
+              provider: PyTorch
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Neural network basics. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: dl-nn-basics-q1
+              prompt: Core idea of Neural network basics?
+              options:
+              - A vague buzzword
+              - Explain layers, activations, and forward pass.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explain layers, activations, and forward pass.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: dl-nn-basics-practice
+              title: 'Practice: Neural network basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build a tiny MLP in PyTorch. HOW MANY: 1 model.
+                WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: dl-nn-basics-build
+              title: 'Build: Neural network basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: dl-backprop
+          name: Backpropagation intuition
+          description: Relate loss gradients to parameter updates.
+          order: 1
+          prerequisites:
+          - dl-nn-basics
+          learning_objective: Relate loss gradients to parameter updates.
+          mastery_criteria:
+          - Explain Backpropagation intuition.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: deep-learning
+          lessons:
+          - slug: dl-backprop-core
+            title: Backpropagation intuition
+            description: 'WHY NOW: Relate loss gradients to parameter updates.
+
+
+              LEARN: PyTorch — https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Print grads for 3 parameters. HOW MANY: 3. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: dl-backprop-primary
+              title: 'PyTorch: Backpropagation intuition'
+              type: documentation
+              url: https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+              provider: PyTorch
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Backpropagation intuition. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: dl-backprop-q1
+              prompt: Core idea of Backpropagation intuition?
+              options:
+              - A vague buzzword
+              - Relate loss gradients to parameter updates.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Relate loss gradients to parameter updates.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: dl-backprop-practice
+              title: 'Practice: Backpropagation intuition'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Print grads for 3 parameters. HOW MANY: 3. WHERE:
+                notebook.'
+              difficulty: beginner
+              order: 0
+        - slug: dl-cnn
+          name: CNN basics
+          description: Use convolutions for spatial data.
+          order: 2
+          prerequisites:
+          - dl-nn-basics
+          learning_objective: Use convolutions for spatial data.
+          mastery_criteria:
+          - Explain CNN basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: deep-learning
+          lessons:
+          - slug: dl-cnn-core
+            title: CNN basics
+            description: 'WHY NOW: Use convolutions for spatial data.
+
+
+              LEARN: PyTorch — https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Train CNN for 1 epoch on toy images. HOW MANY: 1. WHERE:
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: dl-cnn-primary
+              title: 'PyTorch: CNN basics'
+              type: documentation
+              url: https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+              provider: PyTorch
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for CNN basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: dl-cnn-q1
+              prompt: Core idea of CNN basics?
+              options:
+              - A vague buzzword
+              - Use convolutions for spatial data.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Use convolutions for spatial data.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: dl-cnn-practice
+              title: 'Practice: CNN basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Train CNN for 1 epoch on toy images. HOW MANY:
+                1. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: dl-cnn-build
+              title: 'Build: CNN basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: dl-transformers-intro
+          name: Transformers intro
+          description: Explain attention and transformer blocks at working level.
+          order: 3
+          prerequisites:
+          - dl-nn-basics
+          learning_objective: Explain attention and transformer blocks at working
+            level.
+          mastery_criteria:
+          - Explain Transformers intro.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: deep-learning
+          lessons:
+          - slug: dl-transformers-intro-core
+            title: Transformers intro
+            description: 'WHY NOW: Explain attention and transformer blocks at working
+              level.
+
+
+              LEARN: Hugging Face — https://huggingface.co/learn/nlp-course/chapter1/4
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Summarize attention in 8 bullets. HOW MANY: 1. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: dl-transformers-intro-primary
+              title: 'Hugging Face: Transformers intro'
+              type: documentation
+              url: https://huggingface.co/learn/nlp-course/chapter1/4
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Transformers intro. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: dl-transformers-intro-q1
+              prompt: Core idea of Transformers intro?
+              options:
+              - A vague buzzword
+              - Explain attention and transformer blocks at working level.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explain attention and transformer blocks at working level.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: dl-transformers-intro-practice
+              title: 'Practice: Transformers intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Summarize attention in 8 bullets. HOW MANY: 1.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0
+      - slug: mod-genai
+        name: Generative AI / LLM Engineering
+        order: 1
+        topics:
+        - slug: genai-embeddings
+          name: Embeddings & semantic search
+          description: Embed text and retrieve similar chunks.
+          order: 0
+          prerequisites:
+          - dl-transformers-intro
+          learning_objective: Embed text and retrieve similar chunks.
+          mastery_criteria:
+          - Explain Embeddings & semantic search.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: genai
+          lessons:
+          - slug: genai-embeddings-core
+            title: Embeddings & semantic search
+            description: 'WHY NOW: Embed text and retrieve similar chunks.
+
+
+              LEARN: OpenAI — https://platform.openai.com/docs/guides/embeddings
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Embed 10 docs and retrieve top-3 for a query. HOW MANY:
+              1 demo. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: genai-embeddings-primary
+              title: 'OpenAI: Embeddings & semantic search'
+              type: documentation
+              url: https://platform.openai.com/docs/guides/embeddings
+              provider: OpenAI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Embeddings & semantic search.
+                Content inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: genai-embeddings-q1
+              prompt: Core idea of Embeddings & semantic search?
+              options:
+              - A vague buzzword
+              - Embed text and retrieve similar chunks.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Embed text and retrieve similar chunks.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: genai-embeddings-practice
+              title: 'Practice: Embeddings & semantic search'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Embed 10 docs and retrieve top-3 for a query. HOW
+                MANY: 1 demo. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: genai-embeddings-build
+              title: 'Build: Embeddings & semantic search'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: genai-rag
+          name: RAG systems
+          description: Retrieve context and ground LLM answers.
+          order: 1
+          prerequisites:
+          - genai-embeddings
+          - be-fastapi-intro
+          learning_objective: Retrieve context and ground LLM answers.
+          mastery_criteria:
+          - Explain RAG systems.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: genai
+          lessons:
+          - slug: genai-rag-core
+            title: RAG systems
+            description: 'WHY NOW: Retrieve context and ground LLM answers.
+
+
+              LEARN: DeepLearning.AI — https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build a mini RAG over 5 documents. HOW MANY: 1. WHERE:
+              local repo.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: genai-rag-primary
+              title: 'DeepLearning.AI: RAG systems'
+              type: documentation
+              url: https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/
+              provider: DeepLearning.AI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for RAG systems. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: genai-rag-q1
+              prompt: Core idea of RAG systems?
+              options:
+              - A vague buzzword
+              - Retrieve context and ground LLM answers.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Retrieve context and ground LLM answers.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: genai-rag-practice
+              title: 'Practice: RAG systems'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build a mini RAG over 5 documents. HOW MANY: 1.
+                WHERE: local repo.'
+              difficulty: beginner
+              order: 0
+        - slug: genai-agents
+          name: Tool-using agents
+          description: Orchestrate tools with guarded agent loops.
+          order: 2
+          prerequisites:
+          - genai-rag
+          learning_objective: Orchestrate tools with guarded agent loops.
+          mastery_criteria:
+          - Explain Tool-using agents.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: genai
+          lessons:
+          - slug: genai-agents-core
+            title: Tool-using agents
+            description: 'WHY NOW: Orchestrate tools with guarded agent loops.
+
+
+              LEARN: OpenAI — https://platform.openai.com/docs/guides/function-calling
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Implement 2 tools + agent loop. HOW MANY: 1. WHERE:
+              local repo.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: genai-agents-primary
+              title: 'OpenAI: Tool-using agents'
+              type: documentation
+              url: https://platform.openai.com/docs/guides/function-calling
+              provider: OpenAI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Tool-using agents. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: genai-agents-q1
+              prompt: Core idea of Tool-using agents?
+              options:
+              - A vague buzzword
+              - Orchestrate tools with guarded agent loops.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Orchestrate tools with guarded agent loops.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: genai-agents-practice
+              title: 'Practice: Tool-using agents'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Implement 2 tools + agent loop. HOW MANY: 1. WHERE:
+                local repo.'
+              difficulty: beginner
+              order: 0
+            - slug: genai-agents-build
+              title: 'Build: Tool-using agents'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: genai-eval
+          name: LLM evaluation
+          description: Evaluate answer quality with explicit rubrics.
+          order: 3
+          prerequisites:
+          - genai-rag
+          learning_objective: Evaluate answer quality with explicit rubrics.
+          mastery_criteria:
+          - Explain LLM evaluation.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: genai
+          lessons:
+          - slug: genai-eval-core
+            title: LLM evaluation
+            description: 'WHY NOW: Evaluate answer quality with explicit rubrics.
+
+
+              LEARN: OpenAI — https://platform.openai.com/docs/guides/evaluation
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Score 10 answers with a rubric. HOW MANY: 10. WHERE:
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: genai-eval-primary
+              title: 'OpenAI: LLM evaluation'
+              type: documentation
+              url: https://platform.openai.com/docs/guides/evaluation
+              provider: OpenAI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for LLM evaluation. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: genai-eval-q1
+              prompt: Core idea of LLM evaluation?
+              options:
+              - A vague buzzword
+              - Evaluate answer quality with explicit rubrics.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Evaluate answer quality with explicit rubrics.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: genai-eval-practice
+              title: 'Practice: LLM evaluation'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Score 10 answers with a rubric. HOW MANY: 10. WHERE:
+                notebook.'
+              difficulty: beginner
+              order: 0
+      - slug: mod-mlops
+        name: MLOps / AI Engineering
+        order: 2
+        topics:
+        - slug: mlops-tracking
+          name: Experiment tracking
+          description: Track params/metrics/artifacts for experiments.
+          order: 0
+          prerequisites:
+          - ml-sklearn-pipeline
+          learning_objective: Track params/metrics/artifacts for experiments.
+          mastery_criteria:
+          - Explain Experiment tracking.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mlops
+          lessons:
+          - slug: mlops-tracking-core
+            title: Experiment tracking
+            description: 'WHY NOW: Track params/metrics/artifacts for experiments.
+
+
+              LEARN: MLflow — https://mlflow.org/docs/latest/tracking.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Log 3 runs with params+metrics. HOW MANY: 3. WHERE:
+              local MLflow.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: mlops-tracking-primary
+              title: 'MLflow: Experiment tracking'
+              type: documentation
+              url: https://mlflow.org/docs/latest/tracking.html
+              provider: MLflow
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Experiment tracking. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: mlops-tracking-q1
+              prompt: Core idea of Experiment tracking?
+              options:
+              - A vague buzzword
+              - Track params/metrics/artifacts for experiments.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Track params/metrics/artifacts for experiments.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: mlops-tracking-practice
+              title: 'Practice: Experiment tracking'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Log 3 runs with params+metrics. HOW MANY: 3. WHERE:
+                local MLflow.'
+              difficulty: beginner
+              order: 0
+            - slug: mlops-tracking-build
+              title: 'Build: Experiment tracking'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: mlops-model-packaging
+          name: Model packaging
+          description: Package models for reproducible serving.
+          order: 1
+          prerequisites:
+          - mlops-tracking
+          learning_objective: Package models for reproducible serving.
+          mastery_criteria:
+          - Explain Model packaging.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mlops
+          lessons:
+          - slug: mlops-model-packaging-core
+            title: Model packaging
+            description: 'WHY NOW: Package models for reproducible serving.
+
+
+              LEARN: MLflow — https://mlflow.org/docs/latest/model.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Save/load one model flavor. HOW MANY: 1. WHERE: local.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: mlops-model-packaging-primary
+              title: 'MLflow: Model packaging'
+              type: documentation
+              url: https://mlflow.org/docs/latest/model.html
+              provider: MLflow
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Model packaging. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: mlops-model-packaging-q1
+              prompt: Core idea of Model packaging?
+              options:
+              - A vague buzzword
+              - Package models for reproducible serving.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Package models for reproducible serving.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: mlops-model-packaging-practice
+              title: 'Practice: Model packaging'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Save/load one model flavor. HOW MANY: 1. WHERE:
+                local.'
+              difficulty: beginner
+              order: 0
+        - slug: mlops-serving
+          name: Model serving APIs
+          description: Serve predictions behind an HTTP API.
+          order: 2
+          prerequisites:
+          - mlops-model-packaging
+          - be-fastapi-intro
+          learning_objective: Serve predictions behind an HTTP API.
+          mastery_criteria:
+          - Explain Model serving APIs.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mlops
+          lessons:
+          - slug: mlops-serving-core
+            title: Model serving APIs
+            description: 'WHY NOW: Serve predictions behind an HTTP API.
+
+
+              LEARN: FastAPI — https://fastapi.tiangolo.com/tutorial/first-steps/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Serve /predict for a saved model. HOW MANY: 1 API. WHERE:
+              local repo.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: mlops-serving-primary
+              title: 'FastAPI: Model serving APIs'
+              type: documentation
+              url: https://fastapi.tiangolo.com/tutorial/first-steps/
+              provider: FastAPI
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Model serving APIs. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: mlops-serving-q1
+              prompt: Core idea of Model serving APIs?
+              options:
+              - A vague buzzword
+              - Serve predictions behind an HTTP API.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Serve predictions behind an HTTP API.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: mlops-serving-practice
+              title: 'Practice: Model serving APIs'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Serve /predict for a saved model. HOW MANY: 1 API.
+                WHERE: local repo.'
+              difficulty: beginner
+              order: 0
+            - slug: mlops-serving-build
+              title: 'Build: Model serving APIs'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: mlops-monitoring
+          name: Model monitoring basics
+          description: Watch for drift and quality regressions.
+          order: 3
+          prerequisites:
+          - mlops-serving
+          learning_objective: Watch for drift and quality regressions.
+          mastery_criteria:
+          - Explain Model monitoring basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mlops
+          lessons:
+          - slug: mlops-monitoring-core
+            title: Model monitoring basics
+            description: 'WHY NOW: Watch for drift and quality regressions.
+
+
+              LEARN: Evidently — https://www.evidentlyai.com/blog/ml-monitoring
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: List 5 monitoring signals for a model. HOW MANY: 1 checklist.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: mlops-monitoring-primary
+              title: 'Evidently: Model monitoring basics'
+              type: documentation
+              url: https://www.evidentlyai.com/blog/ml-monitoring
+              provider: Evidently
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Model monitoring basics. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: mlops-monitoring-q1
+              prompt: Core idea of Model monitoring basics?
+              options:
+              - A vague buzzword
+              - Watch for drift and quality regressions.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Watch for drift and quality regressions.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: mlops-monitoring-practice
+              title: 'Practice: Model monitoring basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: List 5 monitoring signals for a model. HOW MANY:
+                1 checklist. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+      - slug: mod-sysdesign
+        name: System Design
+        order: 3
+        topics:
+        - slug: sys-scalability
+          name: Scalability basics
+          description: Scale reads/writes with caching and partitioning ideas.
+          order: 0
+          prerequisites:
+          - be-persistence
+          - db-indexes
+          learning_objective: Scale reads/writes with caching and partitioning ideas.
+          mastery_criteria:
+          - Explain Scalability basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: system-design
+          lessons:
+          - slug: sys-scalability-core
+            title: Scalability basics
+            description: 'WHY NOW: Scale reads/writes with caching and partitioning
+              ideas.
+
+
+              LEARN: System Design Primer — https://github.com/donnemartin/system-design-primer#performance-vs-scalability
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Design scale plan for a read-heavy API. HOW MANY: 1.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: sys-scalability-primary
+              title: 'System Design Primer: Scalability basics'
+              type: documentation
+              url: https://github.com/donnemartin/system-design-primer#performance-vs-scalability
+              provider: System Design Primer
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Scalability basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: sys-scalability-q1
+              prompt: Core idea of Scalability basics?
+              options:
+              - A vague buzzword
+              - Scale reads/writes with caching and partitioning ideas.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Scale reads/writes with caching and partitioning ideas.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: sys-scalability-practice
+              title: 'Practice: Scalability basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Design scale plan for a read-heavy API. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+            - slug: sys-scalability-build
+              title: 'Build: Scalability basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: sys-caching
+          name: Caching strategies
+          description: Choose cache placement and invalidation.
+          order: 1
+          prerequisites:
+          - sys-scalability
+          learning_objective: Choose cache placement and invalidation.
+          mastery_criteria:
+          - Explain Caching strategies.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: system-design
+          lessons:
+          - slug: sys-caching-core
+            title: Caching strategies
+            description: 'WHY NOW: Choose cache placement and invalidation.
+
+
+              LEARN: System Design Primer — https://github.com/donnemartin/system-design-primer#cache
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Compare CDN vs app cache vs DB cache. HOW MANY: 1 write-up.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: sys-caching-primary
+              title: 'System Design Primer: Caching strategies'
+              type: documentation
+              url: https://github.com/donnemartin/system-design-primer#cache
+              provider: System Design Primer
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Caching strategies. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: sys-caching-q1
+              prompt: Core idea of Caching strategies?
+              options:
+              - A vague buzzword
+              - Choose cache placement and invalidation.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Choose cache placement and invalidation.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: sys-caching-practice
+              title: 'Practice: Caching strategies'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compare CDN vs app cache vs DB cache. HOW MANY:
+                1 write-up. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: sys-queues
+          name: Message queues
+          description: Decouple producers/consumers with queues.
+          order: 2
+          prerequisites:
+          - sys-scalability
+          learning_objective: Decouple producers/consumers with queues.
+          mastery_criteria:
+          - Explain Message queues.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: system-design
+          lessons:
+          - slug: sys-queues-core
+            title: Message queues
+            description: 'WHY NOW: Decouple producers/consumers with queues.
+
+
+              LEARN: System Design Primer — https://github.com/donnemartin/system-design-primer#asynchronous-processing-with-message-queues
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Sketch queue for email jobs. HOW MANY: 1. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: runnable demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: sys-queues-primary
+              title: 'System Design Primer: Message queues'
+              type: documentation
+              url: https://github.com/donnemartin/system-design-primer#asynchronous-processing-with-message-queues
+              provider: System Design Primer
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Message queues. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: sys-queues-q1
+              prompt: Core idea of Message queues?
+              options:
+              - A vague buzzword
+              - Decouple producers/consumers with queues.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Decouple producers/consumers with queues.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: sys-queues-practice
+              title: 'Practice: Message queues'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Sketch queue for email jobs. HOW MANY: 1. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+            - slug: sys-queues-build
+              title: 'Build: Message queues'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: runnable demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: sys-observability-design
+          name: Observability in design
+          description: Design for debuggability at scale.
+          order: 3
+          prerequisites:
+          - ops-observability
+          - sys-scalability
+          learning_objective: Design for debuggability at scale.
+          mastery_criteria:
+          - Explain Observability in design.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: system-design
+          lessons:
+          - slug: sys-observability-design-core
+            title: Observability in design
+            description: 'WHY NOW: Design for debuggability at scale.
+
+
+              LEARN: Google SRE — https://sre.google/sre-book/monitoring-distributed-systems/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Define SLIs/SLOs for an API. HOW MANY: 3 SLIs. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: sys-observability-design-primary
+              title: 'Google SRE: Observability in design'
+              type: documentation
+              url: https://sre.google/sre-book/monitoring-distributed-systems/
+              provider: Google SRE
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Observability in design. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: sys-observability-design-q1
+              prompt: Core idea of Observability in design?
+              options:
+              - A vague buzzword
+              - Design for debuggability at scale.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Design for debuggability at scale.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: sys-observability-design-practice
+              title: 'Practice: Observability in design'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Define SLIs/SLOs for an API. HOW MANY: 3 SLIs.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0

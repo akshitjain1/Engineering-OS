@@ -1,0 +1,76 @@
+{
+  "total_topics": 270,
+  "readiness": {
+    "NEEDS_REVIEW": 209,
+    "RESOURCE_GAP": 4,
+    "READY": 57
+  },
+  "tracks": {
+    "CORE": 236,
+    "ALWAYS_ON": 34
+  },
+  "depths": {
+    "WORKING_KNOWLEDGE": 112,
+    "STRONG": 158
+  },
+  "domain0": {
+    "count": 64,
+    "readiness": {
+      "NEEDS_REVIEW": 3,
+      "RESOURCE_GAP": 4,
+      "READY": 57
+    }
+  },
+  "java": {
+    "count": 52,
+    "readiness": {
+      "NEEDS_REVIEW": 52
+    }
+  },
+  "dsa": {
+    "count": 106,
+    "readiness": {
+      "NEEDS_REVIEW": 106
+    }
+  },
+  "broken_primary_urls": [],
+  "resource_gap_topics": [
+    "cf-cpu",
+    "cf-alu",
+    "cf-cache",
+    "cf-instruction-execution"
+  ],
+  "ready_topics_sample": [
+    "cf-registers",
+    "cf-ram",
+    "cf-storage",
+    "cf-machine-code",
+    "cf-compiler",
+    "cf-interpreter",
+    "cf-program",
+    "cf-process",
+    "cf-kernel",
+    "cf-os-processes",
+    "cf-threads",
+    "cf-system-calls",
+    "cf-os-memory",
+    "cf-virtual-memory-basics",
+    "cf-filesystems",
+    "cf-os-permissions",
+    "cf-os-environment-variables",
+    "cf-shell",
+    "cf-command-line",
+    "cf-filesystem-navigation",
+    "cf-linux-files",
+    "cf-pipes",
+    "cf-redirection",
+    "cf-grep",
+    "cf-find",
+    "cf-linux-permissions",
+    "cf-linux-processes",
+    "cf-package-management",
+    "cf-linux-environment-variables",
+    "cf-repository"
+  ],
+  "notes": "READY requires inspected resource-specific coverage filling required concepts; URL alone is never enough."
+}

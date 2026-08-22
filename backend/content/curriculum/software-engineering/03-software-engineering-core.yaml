@@ -1,0 +1,591 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Curriculum V1 expanded with SE, backend, math, and ML foundations.
+  order: 0
+  levels:
+  - slug: domain-se
+    name: Software Engineering
+    description: Software Engineering
+    order: 3
+    subjects:
+    - slug: software-engineering
+      name: Software Engineering Core
+      description: Software Engineering Core
+      order: 0
+      modules:
+      - slug: mod-se-core
+        name: Engineering practice
+        order: 0
+        topics:
+        - slug: se-sdlc
+          name: SDLC overview
+          description: Describe the software development lifecycle phases and why
+            they exist.
+          order: 0
+          prerequisites: []
+          learning_objective: Describe the software development lifecycle phases and
+            why they exist.
+          mastery_criteria:
+          - Explain SDLC overview in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-sdlc-core
+            title: SDLC overview
+            description: Describe the software development lifecycle phases and why
+              they exist.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-sdlc-primary
+              title: 'Wikipedia: SDLC overview'
+              type: documentation
+              url: https://en.wikipedia.org/wiki/Software_development_process
+              provider: Wikipedia
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for SDLC overview.
+            questions:
+            - slug: se-sdlc-q1
+              prompt: What is the core idea of SDLC overview?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Describe the software development lifecycle phases and why they exist.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Describe the software development lifecycle phases and why they
+                exist.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-sdlc-practice
+              title: 'Practice: SDLC overview'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: List phases of a simple SDLC for a CLI tool. HOW
+                MANY: 1 write-up. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: se-requirements
+          name: Requirements & scope
+          description: Turn a vague ask into testable requirements and out-of-scope
+            notes.
+          order: 1
+          prerequisites:
+          - se-sdlc
+          learning_objective: Turn a vague ask into testable requirements and out-of-scope
+            notes.
+          mastery_criteria:
+          - Explain Requirements & scope in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-requirements-core
+            title: Requirements & scope
+            description: Turn a vague ask into testable requirements and out-of-scope
+              notes.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-requirements-primary
+              title: 'IBM: Requirements & scope'
+              type: documentation
+              url: https://www.ibm.com/think/topics/software-development-life-cycle
+              provider: IBM
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Requirements & scope.
+            questions:
+            - slug: se-requirements-q1
+              prompt: What is the core idea of Requirements & scope?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Turn a vague ask into testable requirements and out-of-scope notes.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Turn a vague ask into testable requirements and out-of-scope
+                notes.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-requirements-practice
+              title: 'Practice: Requirements & scope'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write 5 acceptance criteria for a todo API. HOW
+                MANY: 5. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: se-versioning
+          name: Semantic versioning
+          description: Apply SemVer to library changes without breaking consumers
+            accidentally.
+          order: 2
+          prerequisites:
+          - se-sdlc
+          learning_objective: Apply SemVer to library changes without breaking consumers
+            accidentally.
+          mastery_criteria:
+          - Explain Semantic versioning in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-versioning-core
+            title: Semantic versioning
+            description: Apply SemVer to library changes without breaking consumers
+              accidentally.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-versioning-primary
+              title: 'SemVer: Semantic versioning'
+              type: documentation
+              url: https://semver.org/
+              provider: SemVer
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Semantic versioning.
+            questions:
+            - slug: se-versioning-q1
+              prompt: What is the core idea of Semantic versioning?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Apply SemVer to library changes without breaking consumers accidentally.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Apply SemVer to library changes without breaking consumers accidentally.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-versioning-practice
+              title: 'Practice: Semantic versioning'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Label 5 change scenarios as major/minor/patch.
+                HOW MANY: 5. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+            - slug: se-versioning-build
+              title: 'Build: Semantic versioning'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: tiny demo related to Semantic versioning.'
+              difficulty: intermediate
+              order: 1
+        - slug: se-solid-srp
+          name: SOLID — Single Responsibility
+          description: Keep modules focused on one reason to change.
+          order: 3
+          prerequisites:
+          - se-sdlc
+          learning_objective: Keep modules focused on one reason to change.
+          mastery_criteria:
+          - Explain SOLID — Single Responsibility in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-solid-srp-core
+            title: SOLID — Single Responsibility
+            description: Keep modules focused on one reason to change.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-solid-srp-primary
+              title: 'Wikipedia: SOLID — Single Responsibility'
+              type: documentation
+              url: https://en.wikipedia.org/wiki/SOLID
+              provider: Wikipedia
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for SOLID — Single Responsibility.
+            questions:
+            - slug: se-solid-srp-q1
+              prompt: What is the core idea of SOLID — Single Responsibility?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Keep modules focused on one reason to change.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Keep modules focused on one reason to change.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-solid-srp-practice
+              title: 'Practice: SOLID — Single Responsibility'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Refactor a god-class sketch into SRP modules on
+                paper. HOW MANY: 1. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: se-solid-ocp
+          name: SOLID — Open/Closed
+          description: Extend behavior without rewriting stable cores.
+          order: 4
+          prerequisites:
+          - se-solid-srp
+          learning_objective: Extend behavior without rewriting stable cores.
+          mastery_criteria:
+          - Explain SOLID — Open/Closed in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-solid-ocp-core
+            title: SOLID — Open/Closed
+            description: Extend behavior without rewriting stable cores.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-solid-ocp-primary
+              title: 'Wikipedia: SOLID — Open/Closed'
+              type: documentation
+              url: https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle
+              provider: Wikipedia
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for SOLID — Open/Closed.
+            questions:
+            - slug: se-solid-ocp-q1
+              prompt: What is the core idea of SOLID — Open/Closed?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Extend behavior without rewriting stable cores.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Extend behavior without rewriting stable cores.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-solid-ocp-practice
+              title: 'Practice: SOLID — Open/Closed'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Design a plugin hook instead of an if-ladder. HOW
+                MANY: 1 sketch. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: se-testing-pyramid
+          name: Testing pyramid
+          description: Choose unit vs integration vs E2E tests with cost/confidence
+            tradeoffs.
+          order: 5
+          prerequisites:
+          - se-sdlc
+          learning_objective: Choose unit vs integration vs E2E tests with cost/confidence
+            tradeoffs.
+          mastery_criteria:
+          - Explain Testing pyramid in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-testing-pyramid-core
+            title: Testing pyramid
+            description: Choose unit vs integration vs E2E tests with cost/confidence
+              tradeoffs.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-testing-pyramid-primary
+              title: 'Martin Fowler: Testing pyramid'
+              type: documentation
+              url: https://martinfowler.com/articles/practical-test-pyramid.html
+              provider: Martin Fowler
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Testing pyramid.
+            questions:
+            - slug: se-testing-pyramid-q1
+              prompt: What is the core idea of Testing pyramid?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Choose unit vs integration vs E2E tests with cost/confidence tradeoffs.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Choose unit vs integration vs E2E tests with cost/confidence
+                tradeoffs.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-testing-pyramid-practice
+              title: 'Practice: Testing pyramid'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Map 6 checks onto pyramid layers. HOW MANY: 6.
+                WHERE: notes.'
+              difficulty: beginner
+              order: 0
+            - slug: se-testing-pyramid-build
+              title: 'Build: Testing pyramid'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: tiny demo related to Testing pyramid.'
+              difficulty: intermediate
+              order: 1
+        - slug: se-unit-tests
+          name: Unit testing basics
+          description: Write focused unit tests for pure functions and edge cases.
+          order: 6
+          prerequisites:
+          - se-testing-pyramid
+          learning_objective: Write focused unit tests for pure functions and edge
+            cases.
+          mastery_criteria:
+          - Explain Unit testing basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-unit-tests-core
+            title: Unit testing basics
+            description: Write focused unit tests for pure functions and edge cases.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-unit-tests-primary
+              title: 'pytest: Unit testing basics'
+              type: documentation
+              url: https://docs.pytest.org/en/stable/
+              provider: pytest
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Unit testing basics.
+            questions:
+            - slug: se-unit-tests-q1
+              prompt: What is the core idea of Unit testing basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Write focused unit tests for pure functions and edge cases.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Write focused unit tests for pure functions and edge cases.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-unit-tests-practice
+              title: 'Practice: Unit testing basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write 3 unit tests for a pure function. HOW MANY:
+                3. WHERE: local repo.'
+              difficulty: beginner
+              order: 0
+        - slug: se-api-design
+          name: API design basics
+          description: Design resource-oriented HTTP APIs with clear errors.
+          order: 7
+          prerequisites:
+          - se-requirements
+          learning_objective: Design resource-oriented HTTP APIs with clear errors.
+          mastery_criteria:
+          - Explain API design basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-api-design-core
+            title: API design basics
+            description: Design resource-oriented HTTP APIs with clear errors.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-api-design-primary
+              title: 'restfulapi.net: API design basics'
+              type: documentation
+              url: https://restfulapi.net/
+              provider: restfulapi.net
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for API design basics.
+            questions:
+            - slug: se-api-design-q1
+              prompt: What is the core idea of API design basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Design resource-oriented HTTP APIs with clear errors.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Design resource-oriented HTTP APIs with clear errors.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-api-design-practice
+              title: 'Practice: API design basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Sketch endpoints for a notes service. HOW MANY:
+                1 sketch. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: se-code-review
+          name: Code review habits
+          description: Review diffs for correctness, clarity, and risk — not style
+            nitpicks only.
+          order: 8
+          prerequisites:
+          - se-unit-tests
+          learning_objective: Review diffs for correctness, clarity, and risk — not
+            style nitpicks only.
+          mastery_criteria:
+          - Explain Code review habits in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: ALWAYS_ON
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: true
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-code-review-core
+            title: Code review habits
+            description: Review diffs for correctness, clarity, and risk — not style
+              nitpicks only.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-code-review-primary
+              title: 'Google: Code review habits'
+              type: documentation
+              url: https://google.github.io/eng-practices/review/
+              provider: Google
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for Code review habits.
+            questions:
+            - slug: se-code-review-q1
+              prompt: What is the core idea of Code review habits?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Review diffs for correctness, clarity, and risk — not style nitpicks
+                only.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Review diffs for correctness, clarity, and risk — not style
+                nitpicks only.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-code-review-practice
+              title: 'Practice: Code review habits'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Review a sample PR checklist. HOW MANY: 1. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0
+            - slug: se-code-review-build
+              title: 'Build: Code review habits'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: tiny demo related to Code review habits.'
+              difficulty: intermediate
+              order: 1
+        - slug: se-ci-basics
+          name: CI basics
+          description: Run tests automatically on every push.
+          order: 9
+          prerequisites:
+          - se-unit-tests
+          learning_objective: Run tests automatically on every push.
+          mastery_criteria:
+          - Explain CI basics in your own words.
+          - Complete the mapped practice checklist.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: software-engineering
+          lessons:
+          - slug: se-ci-basics-core
+            title: CI basics
+            description: Run tests automatically on every push.
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: se-ci-basics-primary
+              title: 'GitHub Docs: CI basics'
+              type: documentation
+              url: https://docs.github.com/en/actions/get-started/understand-github-actions
+              provider: GitHub Docs
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED official/docs source for CI basics.
+            questions:
+            - slug: se-ci-basics-q1
+              prompt: What is the core idea of CI basics?
+              options:
+              - A vague buzzword with no engineering meaning
+              - Run tests automatically on every push.
+              - Only relevant for interviews, not real systems
+              - Replaces the need for prerequisites
+              answer: Run tests automatically on every push.
+              explanation: Focus on the stated learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: se-ci-basics-practice
+              title: 'Practice: CI basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Describe a minimal CI workflow. HOW MANY: 1. WHERE:
+                notes.'
+              difficulty: beginner
+              order: 0

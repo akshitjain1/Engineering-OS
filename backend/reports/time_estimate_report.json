@@ -1,0 +1,34 @@
+{
+  "by_confidence": {
+    "HIGH": 3,
+    "MEDIUM": 309,
+    "LOW": 4
+  },
+  "ready_by_confidence": {
+    "HIGH": 3,
+    "MEDIUM": 309,
+    "LOW": 4
+  },
+  "low_confidence_ready": [
+    {
+      "topic": "cf-problem-decomposition",
+      "minutes": 45,
+      "method": "SECTION_LENGTH_ESTIMATE"
+    },
+    {
+      "topic": "cf-pseudocode",
+      "minutes": 36,
+      "method": "SECTION_LENGTH_ESTIMATE"
+    },
+    {
+      "topic": "cf-algorithms",
+      "minutes": 36,
+      "method": "SECTION_LENGTH_ESTIMATE"
+    },
+    {
+      "topic": "cf-debugging-thinking",
+      "minutes": 45,
+      "method": "SECTION_LENGTH_ESTIMATE"
+    }
+  ]
+}

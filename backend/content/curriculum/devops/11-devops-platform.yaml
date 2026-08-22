@@ -1,0 +1,447 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-devops
+    name: DevOps & Platform
+    description: DevOps & Platform
+    order: 10
+    subjects:
+    - slug: devops-platform
+      name: DevOps and Platform Engineering
+      order: 0
+      modules:
+      - slug: mod-ops-core
+        name: Containers and delivery
+        order: 0
+        topics:
+        - slug: ops-docker-intro
+          name: Docker intro
+          description: Build and run containers from Dockerfiles.
+          order: 0
+          prerequisites:
+          - cf-shell
+          learning_objective: Build and run containers from Dockerfiles.
+          mastery_criteria:
+          - Explain Docker intro.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-docker-intro-core
+            title: Docker intro
+            description: 'WHY NOW: Build and run containers from Dockerfiles.
+
+
+              LEARN: Docker — https://docs.docker.com/get-started/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build and run 1 image from a Dockerfile. HOW MANY: 1.
+              WHERE: local Docker.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: Docker intro demo.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-docker-intro-primary
+              title: 'Docker: Docker intro'
+              type: documentation
+              url: https://docs.docker.com/get-started/
+              provider: Docker
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Docker intro. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-docker-intro-q1
+              prompt: Core idea of Docker intro?
+              options:
+              - A vague buzzword
+              - Build and run containers from Dockerfiles.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Build and run containers from Dockerfiles.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-docker-intro-practice
+              title: 'Practice: Docker intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build and run 1 image from a Dockerfile. HOW MANY:
+                1. WHERE: local Docker.'
+              difficulty: beginner
+              order: 0
+            - slug: ops-docker-intro-build
+              title: 'Build: Docker intro'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: Docker intro demo.'
+              difficulty: intermediate
+              order: 1
+        - slug: ops-compose
+          name: Docker Compose
+          description: Orchestrate multi-service local stacks.
+          order: 1
+          prerequisites:
+          - ops-docker-intro
+          learning_objective: Orchestrate multi-service local stacks.
+          mastery_criteria:
+          - Explain Docker Compose.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-compose-core
+            title: Docker Compose
+            description: 'WHY NOW: Orchestrate multi-service local stacks.
+
+
+              LEARN: Docker — https://docs.docker.com/compose/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Compose app + DB services. HOW MANY: 1 compose file.
+              WHERE: local Docker.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-compose-primary
+              title: 'Docker: Docker Compose'
+              type: documentation
+              url: https://docs.docker.com/compose/
+              provider: Docker
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Docker Compose. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-compose-q1
+              prompt: Core idea of Docker Compose?
+              options:
+              - A vague buzzword
+              - Orchestrate multi-service local stacks.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Orchestrate multi-service local stacks.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-compose-practice
+              title: 'Practice: Docker Compose'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Compose app + DB services. HOW MANY: 1 compose
+                file. WHERE: local Docker.'
+              difficulty: beginner
+              order: 0
+        - slug: ops-ci-github-actions
+          name: GitHub Actions CI
+          description: Automate test/build on push.
+          order: 2
+          prerequisites:
+          - se-ci-basics
+          learning_objective: Automate test/build on push.
+          mastery_criteria:
+          - Explain GitHub Actions CI.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-ci-github-actions-core
+            title: GitHub Actions CI
+            description: 'WHY NOW: Automate test/build on push.
+
+
+              LEARN: GitHub — https://docs.github.com/en/actions
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Write a workflow that runs tests. HOW MANY: 1 workflow.
+              WHERE: GitHub.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-ci-github-actions-primary
+              title: 'GitHub: GitHub Actions CI'
+              type: documentation
+              url: https://docs.github.com/en/actions
+              provider: GitHub
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for GitHub Actions CI. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-ci-github-actions-q1
+              prompt: Core idea of GitHub Actions CI?
+              options:
+              - A vague buzzword
+              - Automate test/build on push.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Automate test/build on push.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-ci-github-actions-practice
+              title: 'Practice: GitHub Actions CI'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write a workflow that runs tests. HOW MANY: 1 workflow.
+                WHERE: GitHub.'
+              difficulty: beginner
+              order: 0
+        - slug: ops-linux-services
+          name: Linux services basics
+          description: Manage long-running services and logs.
+          order: 3
+          prerequisites:
+          - cf-linux-processes
+          learning_objective: Manage long-running services and logs.
+          mastery_criteria:
+          - Explain Linux services basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-linux-services-core
+            title: Linux services basics
+            description: 'WHY NOW: Manage long-running services and logs.
+
+
+              LEARN: man7 — https://man7.org/linux/man-pages/man1/systemctl.1.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Inspect status/logs for 2 services. HOW MANY: 2. WHERE:
+              Linux/WSL.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-linux-services-primary
+              title: 'man7: Linux services basics'
+              type: documentation
+              url: https://man7.org/linux/man-pages/man1/systemctl.1.html
+              provider: man7
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Linux services basics. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-linux-services-q1
+              prompt: Core idea of Linux services basics?
+              options:
+              - A vague buzzword
+              - Manage long-running services and logs.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Manage long-running services and logs.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-linux-services-practice
+              title: 'Practice: Linux services basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Inspect status/logs for 2 services. HOW MANY: 2.
+                WHERE: Linux/WSL.'
+              difficulty: beginner
+              order: 0
+        - slug: ops-k8s-awareness
+          name: Kubernetes awareness
+          description: Explain pods, services, and deployments at awareness level.
+          order: 4
+          prerequisites:
+          - ops-docker-intro
+          - ops-compose
+          learning_objective: Explain pods, services, and deployments at awareness
+            level.
+          mastery_criteria:
+          - Explain Kubernetes awareness.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: OPTIONAL
+          depth_target: AWARENESS
+          parallel_eligible: true
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-k8s-awareness-core
+            title: Kubernetes awareness
+            description: 'WHY NOW: Explain pods, services, and deployments at awareness
+              level.
+
+
+              LEARN: Kubernetes — https://kubernetes.io/docs/concepts/overview/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Define pod vs deployment in 5 bullets. HOW MANY: 1.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-k8s-awareness-primary
+              title: 'Kubernetes: Kubernetes awareness'
+              type: documentation
+              url: https://kubernetes.io/docs/concepts/overview/
+              provider: Kubernetes
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Kubernetes awareness. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-k8s-awareness-q1
+              prompt: Core idea of Kubernetes awareness?
+              options:
+              - A vague buzzword
+              - Explain pods, services, and deployments at awareness level.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explain pods, services, and deployments at awareness level.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-k8s-awareness-practice
+              title: 'Practice: Kubernetes awareness'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Define pod vs deployment in 5 bullets. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0
+        - slug: ops-observability
+          name: Observability basics
+          description: Use logs, metrics, and traces for runtime insight.
+          order: 5
+          prerequisites:
+          - ops-docker-intro
+          learning_objective: Use logs, metrics, and traces for runtime insight.
+          mastery_criteria:
+          - Explain Observability basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: devops
+          lessons:
+          - slug: ops-observability-core
+            title: Observability basics
+            description: 'WHY NOW: Use logs, metrics, and traces for runtime insight.
+
+
+              LEARN: OpenTelemetry — https://opentelemetry.io/docs/concepts/observability-primer/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Map logs/metrics/traces to a sample API. HOW MANY: 1.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ops-observability-primary
+              title: 'OpenTelemetry: Observability basics'
+              type: documentation
+              url: https://opentelemetry.io/docs/concepts/observability-primer/
+              provider: OpenTelemetry
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Observability basics. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ops-observability-q1
+              prompt: Core idea of Observability basics?
+              options:
+              - A vague buzzword
+              - Use logs, metrics, and traces for runtime insight.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Use logs, metrics, and traces for runtime insight.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ops-observability-practice
+              title: 'Practice: Observability basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Map logs/metrics/traces to a sample API. HOW MANY:
+                1. WHERE: notes.'
+              difficulty: beginner
+              order: 0

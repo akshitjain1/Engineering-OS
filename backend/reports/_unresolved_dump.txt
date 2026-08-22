@@ -1,0 +1,385 @@
+﻿count 64
+PARTIAL_COVERAGE   ai-engineering     ai-eng-awareness
+  missing: ['ai-eng-awareness-ai-engineering-awareness', 'ai-eng-awareness-ai-engineering-ships-reliable-llm-featur']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: NO_PRACTICE_REQUIRED None
+  notes: Missing required concepts: ['ai-eng-awareness-ai-engineering-awareness', 'ai-eng-awareness-ai-engineering-ships-reliable-llm-featur']
+  P ai-eng-awareness-primary VERIFIED_COVERAGE EXACT covered= ['ai-eng-awareness-ai-engineering-ships-reliable-llm-features-with', 'ai-eng-awareness-ai-engineering-awareness-in-your-own-words'] url= https://www.deeplearning.ai/short-courses/
+PARTIAL_COVERAGE   ai-engineering     ai-eng-path
+  missing: ['ai-eng-path-ai-engineering-learning-path', 'ai-eng-path-sketch-a-personal-learning-path-into-ai']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: NO_PRACTICE_REQUIRED None
+  notes: Missing required concepts: ['ai-eng-path-ai-engineering-learning-path', 'ai-eng-path-sketch-a-personal-learning-path-into-ai']
+  P ai-eng-path-primary VERIFIED_COVERAGE EXACT covered= ['ai-eng-path-sketch-a-personal-learning-path-into-ai-engineer', 'ai-eng-path-ai-engineering-learning-path-in-your-own-words'] url= https://www.deeplearning.ai/short-courses/
+NEEDS_REVIEW       backend            be-json
+  missing: ['be-json-json-apis', 'be-json-serialize-request-response-bodies-and-va']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P be-json-primary NEEDS_REVIEW EXACT covered= [] url= https://www.json.org/json-en.html
+NEEDS_REVIEW       backend            be-persistence
+  missing: ['be-persistence-api-sql-persistence', 'be-persistence-wire-a-fastapi-route-to-sql-crud']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P be-persistence-primary NEEDS_REVIEW EXACT covered= [] url= https://fastapi.tiangolo.com/tutorial/sql-databases/
+NEEDS_REVIEW       data-science       ds-eda
+  missing: ['ds-eda-exploratory-data-analysis', 'ds-eda-explore-distributions-and-relationships']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P ds-eda-primary NEEDS_REVIEW EXACT covered= [] url= https://pandas.pydata.org/docs/user_guide/10min.html
+NEEDS_REVIEW       data-science       ds-sql-analytics
+  missing: ['ds-sql-analytics-answer-analytical-questions-with-sql-agg', 'ds-sql-analytics-sql-for-analytics']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P ds-sql-analytics-primary NEEDS_REVIEW EXACT covered= [] url= https://www.postgresql.org/docs/current/tutorial-agg.html
+NEEDS_REVIEW       deep-learning      dl-backprop
+  missing: ['dl-backprop-backpropagation-intuition', 'dl-backprop-relate-loss-gradients-to-parameter-updat']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dl-backprop-primary NEEDS_REVIEW EXACT covered= [] url= https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+NEEDS_REVIEW       deep-learning      dl-cnn
+  missing: ['dl-cnn-cnn-basics', 'dl-cnn-convolutions-for-spatial-data']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dl-cnn-primary NEEDS_REVIEW EXACT covered= [] url= https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+NEEDS_REVIEW       deep-learning      dl-nn-basics
+  missing: ['dl-nn-basics-layers-activations-and-forward-pass', 'dl-nn-basics-neural-network-basics']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dl-nn-basics-primary NEEDS_REVIEW EXACT covered= [] url= https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html
+NEEDS_REVIEW       devops             devops-path
+  missing: ['devops-path-devops-learning-path', 'devops-path-sketch-a-personal-learning-path-into-dev']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P devops-path-primary NEEDS_REVIEW EXACT covered= [] url= https://12factor.net/
+NEEDS_REVIEW       dsa                dsa-advanced-dp
+  missing: ['dsa-advanced-dp-advanced-dp', 'dsa-advanced-dp-recognize-digit-dp-tree-dp-bitmask-dp-by']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-advanced-dp-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-bst-insert
+  missing: ['dsa-bst-insert-bst-insertion', 'dsa-bst-insert-insert-into-a-bst-while-preserving-order']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-bst-insert-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+NEEDS_REVIEW       dsa                dsa-bst-validate
+  missing: ['dsa-bst-validate-bst-validation', 'dsa-bst-validate-validate-bst-property-with-global-min-ma']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-bst-validate-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
+NEEDS_REVIEW       dsa                dsa-counting-radix
+  missing: ['dsa-counting-radix-counting-and-radix-concepts', 'dsa-counting-radix-non-comparison-sorts-at-v1-depth']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-counting-radix-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/data-structures/
+NEEDS_REVIEW       dsa                dsa-dp-1d
+  missing: ['dsa-dp-1d-1d-dp', 'dsa-dp-1d-solve-linear-1d-dp-families-in-java']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-1d-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algo
+NEEDS_REVIEW       dsa                dsa-dp-2d
+  missing: ['dsa-dp-2d-2d-dp', 'dsa-dp-2d-fill-dp-tables-over-two-indices']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-2d-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-dp-mindset
+  missing: ['dsa-dp-mindset-dp-mindset', 'dsa-dp-mindset-recognize-overlapping-subproblems-and-op']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-mindset-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-dp-optimization
+  missing: ['dsa-dp-optimization-dp-optimization', 'dsa-dp-optimization-name-space-time-dp-optimizations-at-v1-d']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-optimization-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-dp-state
+  missing: ['dsa-dp-state-choose-a-dp-state-that-uniquely-describe', 'dsa-dp-state-state-definition']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-state-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-dp-transition
+  missing: ['dsa-dp-transition-transition', 'dsa-dp-transition-write-recurrence-transitions-between-dp']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-dp-transition-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-hash-map
+  missing: ['dsa-hash-map-hash-map', 'dsa-hash-map-hashmap-for-expected-o-1-keyed-lookup-an']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-hash-map-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/hashing-data-structure/
+NEEDS_REVIEW       dsa                dsa-hash-set
+  missing: ['dsa-hash-set-hash-set', 'dsa-hash-set-hashset-for-o-1-expected-membership-test']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-hash-set-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/hashing-data-structure/
+NEEDS_REVIEW       dsa                dsa-heap-sort
+  missing: ['dsa-heap-sort-heap-sort', 'dsa-heap-sort-heapsort-at-a-conceptual-level']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-heap-sort-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/heap-sort/
+NEEDS_REVIEW       dsa                dsa-interval-dp
+  missing: ['dsa-interval-dp-dp-on-intervals-at-a-conceptual-level', 'dsa-interval-dp-interval-dp-concepts']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-interval-dp-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       dsa                dsa-interview-hygiene
+  missing: ['dsa-interview-hygiene-interview-hygiene', 'dsa-interview-hygiene-present-java-solutions-with-complexity-e']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-interview-hygiene-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/data-structures/
+NEEDS_REVIEW       dsa                dsa-lookup-patterns
+  missing: ['dsa-lookup-patterns-complement-lookup-seen-set-and-index-map', 'dsa-lookup-patterns-lookup-patterns']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-lookup-patterns-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/data-structures/
+NEEDS_REVIEW       dsa                dsa-permutations
+  missing: ['dsa-permutations-generate-permutations-by-swapping-or-use', 'dsa-permutations-permutations']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-permutations-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/data-structures/
+NEEDS_REVIEW       dsa                dsa-segment-tree-concept
+  missing: ['dsa-segment-tree-concept-segment-tree-concept', 'dsa-segment-tree-concept-segment-tree-range-queries-implement-via']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-segment-tree-concept-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/binary-tree-data-structure/
+NEEDS_REVIEW       dsa                dsa-sort-complexity
+  missing: ['dsa-sort-complexity-compare-common-sorts-by-time-space-and-s', 'dsa-sort-complexity-complexity-comparison']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-sort-complexity-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/sorting-algorithms/
+NEEDS_REVIEW       dsa                dsa-subsequence-dp
+  missing: ['dsa-subsequence-dp-handle-lcs-lis-style-subsequence-dp-stat', 'dsa-subsequence-dp-subsequence-dp']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P dsa-subsequence-dp-learn-exact NEEDS_REVIEW EXACT covered= [] url= https://www.geeksforgeeks.org/dynamic-programming/
+NEEDS_REVIEW       genai              genai-path
+  missing: ['genai-path-generative-ai-learning-path', 'genai-path-sketch-a-personal-learning-path-into-gen']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P genai-path-primary NEEDS_REVIEW EXACT covered= [] url= https://platform.openai.com/docs/guides/text
+NEEDS_REVIEW       genai              genai-rag
+  missing: ['genai-rag-rag-systems', 'genai-rag-retrieve-context-and-ground-llm-answers']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P genai-rag-primary NEEDS_REVIEW EXACT covered= [] url= https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/
+NEEDS_REVIEW       java               java-api-hygiene
+  missing: ['java-api-hygiene-api-hygiene', 'java-api-hygiene-ship-a-small-tidy-java-project-packages']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-api-hygiene-reference NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/classes-objects/design-best-practices/
+NEEDS_REVIEW       java               java-composition
+  missing: ['java-composition-composition', 'java-composition-model-has-a-relationships-with-compositi']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-composition-reference NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/classes-objects/design-best-practices/
+NEEDS_REVIEW       java               java-encapsulation
+  missing: ['java-encapsulation-encapsulation', 'java-encapsulation-hide-representation-protect-invariants-a']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-encapsulation-reference NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/classes-objects/more-on-classes/
+NEEDS_REVIEW       java               java-map
+  missing: ['java-map-hashmap-for-lookups-frequency-and-groupi', 'java-map-map']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-map-reference NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/api/collections-framework/maps/
+NEEDS_REVIEW       java               java-set
+  missing: ['java-set-hashset-for-uniqueness-and-membership-te', 'java-set-set']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-set-primary NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/api/collections-framework/sets/
+NEEDS_REVIEW       java               java-type-conversion
+  missing: ['java-type-conversion-type-conversion', 'java-type-conversion-widening-and-narrowing-conversions-and-e']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P java-type-conversion-reference NEEDS_REVIEW EXACT covered= [] url= https://dev.java/learn/language-basics/primitive-types/
+NEEDS_REVIEW       mathematics        math-gradient-intuition
+  missing: ['math-gradient-intuition-gradient-as-direction-of-steepest-ascent', 'math-gradient-intuition-gradient-intuition']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P math-gradient-intuition-primary NEEDS_REVIEW EXACT covered= [] url= https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient
+NEEDS_REVIEW       mathematics        math-matrices
+  missing: ['math-matrices-matrices-intuition', 'math-matrices-multiply-small-matrices-and-interpret-as']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P math-matrices-primary NEEDS_REVIEW EXACT covered= [] url= https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:
+NEEDS_REVIEW       mathematics        math-probability
+  missing: ['math-probability-probability-basics', 'math-probability-probability-rules-for-independent-events']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P math-probability-primary NEEDS_REVIEW EXACT covered= [] url= https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoreti
+NEEDS_REVIEW       mathematics        math-stats-summary
+  missing: ['math-stats-summary-compute-mean-variance-and-interpret-them', 'math-stats-summary-summary-statistics']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P math-stats-summary-primary NEEDS_REVIEW EXACT covered= [] url= https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean
+NEEDS_REVIEW       mathematics        math-vectors
+  missing: ['math-vectors-reason-about-vectors-as-lists-of-numbers', 'math-vectors-vectors-intuition']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P math-vectors-primary NEEDS_REVIEW EXACT covered= [] url= https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/vectors/a/vectors-intro
+NEEDS_REVIEW       ml                 ml-classification
+  missing: ['ml-classification-classification-basics', 'ml-classification-train-a-classifier-and-read-a-confusion']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P ml-classification-primary NEEDS_REVIEW EXACT covered= [] url= https://scikit-learn.org/stable/supervised_learning.html
+NEEDS_REVIEW       ml                 ml-features-labels
+  missing: ['ml-features-labels-features-labels', 'ml-features-labels-frame-tabular-problems-with-features-x-a']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: PRACTICE_VERIFIED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P ml-features-labels-primary NEEDS_REVIEW EXACT covered= [] url= https://scikit-learn.org/stable/getting_started.html
+NEEDS_REVIEW       mlops              mlops-serving
+  missing: ['mlops-serving-model-serving-apis', 'mlops-serving-serve-predictions-behind-an-http-api']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P mlops-serving-primary NEEDS_REVIEW EXACT covered= [] url= https://fastapi.tiangolo.com/tutorial/first-steps/
+NEEDS_REVIEW       networking         net-dns
+  missing: ['net-dns-dns', 'net-dns-resolve-hostnames-to-ip-addresses']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P net-dns-primary NEEDS_REVIEW EXACT covered= [] url= https://developer.mozilla.org/en-US/docs/Glossary/DNS
+NEEDS_REVIEW       networking         net-tcp-udp
+  missing: ['net-tcp-udp-contrast-reliable-streams-vs-datagrams', 'net-tcp-udp-tcp-vs-udp']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P net-tcp-udp-primary NEEDS_REVIEW EXACT covered= [] url= https://developer.mozilla.org/en-US/docs/Glossary/TCP
+NEEDS_REVIEW       nlp                nlp-awareness
+  missing: ['nlp-awareness-nlp-awareness', 'nlp-awareness-nlp-turns-text-into-tokens-and-models-me']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P nlp-awareness-primary NEEDS_REVIEW EXACT covered= [] url= https://huggingface.co/learn/nlp-course/chapter1/1
+PARTIAL_COVERAGE   python             py-data-structures
+  missing: ['py-data-structures-lists-dicts-sets-and-comprehensions-flue']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['py-data-structures-lists-dicts-sets-and-comprehensions-flue']
+  P py-data-structures-primary VERIFIED_COVERAGE EXACT covered= ['py-data-structures-use-lists-dicts-sets-and-comprehensions-fluently', 'py-data-structures-python-data-structures'] url= https://docs.python.org/3/tutorial/datastructures.html
+PARTIAL_COVERAGE   python             py-functions-modules
+  missing: ['py-functions-modules-organize-code-into-functions-and-importa']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['py-functions-modules-organize-code-into-functions-and-importa']
+  P py-functions-modules-primary VERIFIED_COVERAGE EXACT covered= ['py-functions-modules-organize-code-into-functions-and-importable-modu', 'py-functions-modules-functions-modules'] url= https://docs.python.org/3/tutorial/modules.html
+PARTIAL_COVERAGE   python             py-oop
+  missing: ['py-oop-model-problems-with-classes-and-composit']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['py-oop-model-problems-with-classes-and-composit']
+  P py-oop-primary VERIFIED_COVERAGE EXACT covered= ['py-oop-model-problems-with-classes-and-composition', 'py-oop-python-oop'] url= https://docs.python.org/3/tutorial/classes.html
+PARTIAL_COVERAGE   python             py-syntax
+  missing: ['py-syntax-write-and-run-python-scripts-with-venv-a']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['py-syntax-write-and-run-python-scripts-with-venv-a']
+  P py-syntax-primary VERIFIED_COVERAGE EXACT covered= ['py-syntax-write-and-run-python-scripts-with-venv-and-pip', 'py-syntax-python-syntax-tooling'] url= https://docs.python.org/3/tutorial/index.html
+NEEDS_REVIEW       software-engineering se-requirements
+  missing: ['se-requirements-requirements-scope', 'se-requirements-turn-a-vague-ask-into-testable-requireme']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P se-requirements-primary NEEDS_REVIEW EXACT covered= [] url= https://www.ibm.com/think/topics/software-development-life-cycle
+NEEDS_REVIEW       software-engineering se-solid-ocp
+  missing: ['se-solid-ocp-extend-behavior-without-rewriting-stable', 'se-solid-ocp-solid-open-closed']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P se-solid-ocp-primary NEEDS_REVIEW EXACT covered= [] url= https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-princi
+NEEDS_REVIEW       software-engineering se-solid-srp
+  missing: ['se-solid-srp-keep-modules-focused-on-one-reason-to-ch', 'se-solid-srp-solid-single-responsibility']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P se-solid-srp-primary NEEDS_REVIEW EXACT covered= [] url= https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-princi
+NEEDS_REVIEW       system-design      sys-observability-design
+  missing: ['sys-observability-design-design-for-debuggability-at-scale', 'sys-observability-design-observability-in-design']
+  status/exactness: NEEDS_REVIEW COLLECTION
+  practice: NO_PRACTICE_REQUIRED None
+  notes: PRIMARY not content-verified for learner trust (statuses=['NEEDS_REVIEW']).
+  P sys-observability-design-primary NEEDS_REVIEW EXACT covered= [] url= https://sre.google/sre-book/monitoring-distributed-systems/
+PARTIAL_COVERAGE   web                web-css-basics
+  missing: ['web-css-basics-style-layouts-with-css-selectors-box-mod']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-css-basics-style-layouts-with-css-selectors-box-mod']
+  P web-css-basics-primary VERIFIED_COVERAGE EXACT covered= ['web-css-basics-style-layouts-with-css-selectors-box-model-and-f', 'web-css-basics-css-basics'] url= https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics
+PARTIAL_COVERAGE   web                web-forms-a11y
+  missing: ['web-forms-a11y-accessible-forms-with-labels-and-keyboar']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-forms-a11y-accessible-forms-with-labels-and-keyboar']
+  P web-forms-a11y-primary VERIFIED_COVERAGE EXACT covered= ['web-forms-a11y-build-accessible-forms-with-labels-and-keyboard', 'web-forms-a11y-forms-accessibility'] url= https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms
+PARTIAL_COVERAGE   web                web-html-basics
+  missing: ['web-html-basics-structure-documents-with-semantic-html-e']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-html-basics-structure-documents-with-semantic-html-e']
+  P web-html-basics-primary VERIFIED_COVERAGE EXACT covered= ['web-html-basics-structure-documents-with-semantic-html-elements', 'web-html-basics-html-basics'] url= https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content
+PARTIAL_COVERAGE   web                web-js-basics
+  missing: ['web-js-basics-js-variables-functions-dom-events-for-in']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-js-basics-js-variables-functions-dom-events-for-in']
+  P web-js-basics-primary VERIFIED_COVERAGE EXACT covered= ['web-js-basics-use-js-variables-functions-dom-events-for-intera', 'web-js-basics-javascript-basics'] url= https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting
+PARTIAL_COVERAGE   web                web-nextjs-intro
+  missing: ['web-nextjs-intro-a-next-js-app-with-routing-and-data-fetc']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-nextjs-intro-a-next-js-app-with-routing-and-data-fetc']
+  P web-nextjs-intro-primary VERIFIED_COVERAGE EXACT covered= ['web-nextjs-intro-create-a-next-js-app-with-routing-and-data-fetch', 'web-nextjs-intro-next-js-intro'] url= https://nextjs.org/docs/app/getting-started
+PARTIAL_COVERAGE   web                web-react-intro
+  missing: ['web-react-intro-ui-with-components-props-and-state']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-react-intro-ui-with-components-props-and-state']
+  P web-react-intro-primary VERIFIED_COVERAGE EXACT covered= ['web-react-intro-build-ui-with-components-props-and-state', 'web-react-intro-react-intro'] url= https://react.dev/learn
+PARTIAL_COVERAGE   web                web-responsive
+  missing: ['web-responsive-make-layouts-adapt-across-viewports-with']
+  status/exactness: VERIFIED_COVERAGE EXACT
+  practice: PRACTICE_VERIFIED None
+  notes: Missing required concepts: ['web-responsive-make-layouts-adapt-across-viewports-with']
+  P web-responsive-primary VERIFIED_COVERAGE EXACT covered= ['web-responsive-make-layouts-adapt-across-viewports-with-media-q', 'web-responsive-responsive-design'] url= https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_

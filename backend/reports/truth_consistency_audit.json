@@ -1,0 +1,1821 @@
+{
+  "created_at": "2026-08-22T11:29:54.306910+00:00",
+  "topic_count": 316,
+  "finding_count": 181,
+  "critical_count": 0,
+  "readiness": {
+    "READY": 316
+  },
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-bits-and-bytes",
+      "topic_name": "Bits and bytes",
+      "resource_slug": "cf-bits-and-bytes-lecture0",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-binary",
+      "topic_name": "Binary",
+      "resource_slug": "cf-binary-lecture0",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-hexadecimal",
+      "topic_name": "Hexadecimal",
+      "resource_slug": "cf-hexadecimal-lecture0",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-registers",
+      "topic_name": "Registers",
+      "resource_slug": "cf-registers-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-ram",
+      "topic_name": "RAM",
+      "resource_slug": "cf-ram-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-storage",
+      "topic_name": "Storage",
+      "resource_slug": "cf-storage-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-machine-code",
+      "topic_name": "Machine code",
+      "resource_slug": "cf-machine-code-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-compiler",
+      "topic_name": "Compiler",
+      "resource_slug": "cf-compiler-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-interpreter",
+      "topic_name": "Interpreter",
+      "resource_slug": "cf-interpreter-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-process",
+      "topic_name": "Process",
+      "resource_slug": "cf-process-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-filesystems",
+      "topic_name": "Filesystems",
+      "resource_slug": "cf-filesystems-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-linux-files",
+      "topic_name": "Files",
+      "resource_slug": "cf-linux-files-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-commits",
+      "topic_name": "Commits",
+      "resource_slug": "cf-commits-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-pull-push",
+      "topic_name": "Pull and push",
+      "resource_slug": "cf-pull-push-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-conflicts",
+      "topic_name": "Conflicts",
+      "resource_slug": "cf-conflicts-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-reset-revert",
+      "topic_name": "Reset and revert",
+      "resource_slug": "cf-reset-revert-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "MEDIUM",
+      "topic_slug": "cf-time-complexity-intro",
+      "topic_name": "Time complexity introduction",
+      "resource_slug": "cf-time-complexity-intro-primary",
+      "current_state": "coverage equals topic required exactly",
+      "expected_state": "resource-specific evidence",
+      "exact_reason": "Possible mechanical copy of topic requirements into resource coverage",
+      "recommended_repair": "Confirm evidence snippets per concept"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-jdk-jre",
+      "topic_name": "JDK and JRE",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-first-program",
+      "topic_name": "First program",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-compile-and-run",
+      "topic_name": "Compile and run",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-console-io",
+      "topic_name": "Console input and output",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-switch",
+      "topic_name": "switch",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-loops",
+      "topic_name": "Loops",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-break-continue",
+      "topic_name": "break and continue",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-arrays",
+      "topic_name": "Arrays",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-stringbuilder",
+      "topic_name": "StringBuilder",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-constructors",
+      "topic_name": "Constructors",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-abstract-classes",
+      "topic_name": "Abstract classes",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-composition",
+      "topic_name": "Composition",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-checked-unchecked",
+      "topic_name": "Checked and unchecked",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-custom-exceptions",
+      "topic_name": "Custom exceptions",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-set",
+      "topic_name": "Set",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-map",
+      "topic_name": "Map",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-iteration",
+      "topic_name": "Iteration",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-generic-bounds",
+      "topic_name": "Bounds",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-functional-interfaces",
+      "topic_name": "Functional interfaces",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-lambdas",
+      "topic_name": "Lambdas",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-stream-operations",
+      "topic_name": "Common operations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-paths-files",
+      "topic_name": "Paths and files",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-readers-writers",
+      "topic_name": "Readers and writers",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "java-assertions",
+      "topic_name": "Assertions",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-traversal",
+      "topic_name": "Array traversal",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-traversal",
+      "topic_name": "Array traversal",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-traversal",
+      "topic_name": "Array traversal",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-insert-delete",
+      "topic_name": "Insertion and deletion concepts",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-insert-delete",
+      "topic_name": "Insertion and deletion concepts",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-prefix-sums",
+      "topic_name": "Prefix sums",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-frequency",
+      "topic_name": "Frequency counting",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-patterns",
+      "topic_name": "Array patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-array-patterns",
+      "topic_name": "Array patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-string-manipulation",
+      "topic_name": "String manipulation",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-string-manipulation",
+      "topic_name": "String manipulation",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-string-frequency",
+      "topic_name": "String frequency",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-character-processing",
+      "topic_name": "Character processing",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-string-patterns",
+      "topic_name": "String patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-hash-map",
+      "topic_name": "Hash map",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-hash-map",
+      "topic_name": "Hash map",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-hash-map",
+      "topic_name": "Hash map",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-hash-set",
+      "topic_name": "Hash set",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-frequency-maps",
+      "topic_name": "Frequency maps",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-lookup-patterns",
+      "topic_name": "Lookup patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-two-pointers-opposite",
+      "topic_name": "Opposite-direction pointers",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-two-pointers-same",
+      "topic_name": "Same-direction pointers",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-two-pointers-partition",
+      "topic_name": "Partition-style patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-window-fixed",
+      "topic_name": "Fixed window",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-window-variable",
+      "topic_name": "Variable window",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-window-frequency",
+      "topic_name": "Frequency window state",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-singly-linked-list",
+      "topic_name": "Singly linked list",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-singly-linked-list",
+      "topic_name": "Singly linked list",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-singly-linked-list",
+      "topic_name": "Singly linked list",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-list-operations",
+      "topic_name": "List operations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-list-reversal",
+      "topic_name": "Reversal",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-fast-slow",
+      "topic_name": "Fast and slow pointers",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-cycle-detection",
+      "topic_name": "Cycle detection",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-list-merge",
+      "topic_name": "Merge patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-stack-fundamentals",
+      "topic_name": "Stack fundamentals",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-stack-fundamentals",
+      "topic_name": "Stack fundamentals",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-monotonic-stack",
+      "topic_name": "Monotonic stack",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-queue-deque",
+      "topic_name": "Queue and deque",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-queue-deque",
+      "topic_name": "Queue and deque",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-queue-bfs-relationship",
+      "topic_name": "BFS relationship",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-recursion-model",
+      "topic_name": "Recursion model",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-subsets",
+      "topic_name": "Subsets",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-permutations",
+      "topic_name": "Permutations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-combinations",
+      "topic_name": "Combinations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-constraint-search",
+      "topic_name": "Constraint search",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-insertion-sort",
+      "topic_name": "Insertion sort",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-merge-sort",
+      "topic_name": "Merge sort",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-quick-sort",
+      "topic_name": "Quick sort",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-search-classic",
+      "topic_name": "Classic search",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-search-classic",
+      "topic_name": "Classic search",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-search-boundaries",
+      "topic_name": "Boundaries",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-search-boundaries",
+      "topic_name": "Boundaries",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-first-last-occurrence",
+      "topic_name": "First and last occurrence",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-search-on-answer",
+      "topic_name": "Search on the answer",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-rotated-arrays",
+      "topic_name": "Rotated arrays",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-terminology",
+      "topic_name": "Tree terminology",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-trees",
+      "topic_name": "Binary trees",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-binary-trees",
+      "topic_name": "Binary trees",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-dfs",
+      "topic_name": "DFS traversals",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-bfs",
+      "topic_name": "BFS / level order",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-height",
+      "topic_name": "Height and depth",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-paths",
+      "topic_name": "Path problems",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tree-construction",
+      "topic_name": "Construction",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-search",
+      "topic_name": "BST search",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-search",
+      "topic_name": "BST search",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-insert",
+      "topic_name": "BST insertion",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-insert",
+      "topic_name": "BST insertion",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-delete",
+      "topic_name": "BST deletion",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-validate",
+      "topic_name": "BST validation",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bst-ordered-properties",
+      "topic_name": "Ordered properties",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-heap-structure",
+      "topic_name": "Heap structure",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-heap-structure",
+      "topic_name": "Heap structure",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-priority-queue",
+      "topic_name": "Priority queue",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-heapify",
+      "topic_name": "Heapify",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-heapify",
+      "topic_name": "Heapify",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-top-k",
+      "topic_name": "Top-K",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-heap-scheduling",
+      "topic_name": "Scheduling patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-representations",
+      "topic_name": "Graph representations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-representations",
+      "topic_name": "Graph representations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-bfs",
+      "topic_name": "Graph BFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-bfs",
+      "topic_name": "Graph BFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-bfs",
+      "topic_name": "Graph BFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-dfs",
+      "topic_name": "Graph DFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-dfs",
+      "topic_name": "Graph DFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-dfs",
+      "topic_name": "Graph DFS",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-connected-components",
+      "topic_name": "Connected components",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-graph-cycle",
+      "topic_name": "Cycle detection",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bipartite",
+      "topic_name": "Bipartite graphs",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-topological-sort",
+      "topic_name": "Topological sorting",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-topological-sort",
+      "topic_name": "Topological sorting",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-union-find",
+      "topic_name": "Union-Find",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-union-find",
+      "topic_name": "Union-Find",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-unweighted-shortest",
+      "topic_name": "Unweighted shortest paths",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dijkstra",
+      "topic_name": "Dijkstra",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dijkstra",
+      "topic_name": "Dijkstra",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-mst",
+      "topic_name": "MST",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-mst",
+      "topic_name": "MST",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-greedy-reasoning",
+      "topic_name": "Greedy reasoning",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-greedy-exchange",
+      "topic_name": "Exchange / intuitive proof",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-interval-problems",
+      "topic_name": "Interval problems",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-greedy-scheduling",
+      "topic_name": "Scheduling",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-greedy-patterns",
+      "topic_name": "Classic greedy patterns",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-mindset",
+      "topic_name": "DP mindset",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-memoization",
+      "topic_name": "Memoization",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tabulation",
+      "topic_name": "Tabulation",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-state",
+      "topic_name": "State definition",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-transition",
+      "topic_name": "Transition",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-1d",
+      "topic_name": "1D DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-1d",
+      "topic_name": "1D DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-2d",
+      "topic_name": "2D DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-2d",
+      "topic_name": "2D DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-subsequence-dp",
+      "topic_name": "Subsequence DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-knapsack",
+      "topic_name": "Knapsack",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-knapsack",
+      "topic_name": "Knapsack",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-grid-dp",
+      "topic_name": "Grid DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-interval-dp",
+      "topic_name": "Interval DP concepts",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-dp-optimization",
+      "topic_name": "DP optimization",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-tries",
+      "topic_name": "Tries",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-bit-manipulation",
+      "topic_name": "Bit manipulation",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-segment-tree-concept",
+      "topic_name": "Segment tree concept",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-advanced-graphs",
+      "topic_name": "Advanced graph concepts",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-advanced-dp",
+      "topic_name": "Advanced DP",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-pattern-selection",
+      "topic_name": "Pattern selection",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "dsa-interview-hygiene",
+      "topic_name": "Interview hygiene",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "be-fastapi-intro",
+      "topic_name": "FastAPI intro",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "be-persistence",
+      "topic_name": "API + SQL persistence",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ml-linear-regression",
+      "topic_name": "Linear regression",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ml-classification",
+      "topic_name": "Classification basics",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ml-metrics",
+      "topic_name": "ML metrics",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ml-overfitting",
+      "topic_name": "Overfitting & regularization",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ml-sklearn-pipeline",
+      "topic_name": "sklearn Pipeline",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "py-testing",
+      "topic_name": "pytest for Python",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "web-css-basics",
+      "topic_name": "CSS basics",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "web-js-basics",
+      "topic_name": "JavaScript basics",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "web-react-intro",
+      "topic_name": "React intro",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "web-forms-a11y",
+      "topic_name": "Forms & accessibility",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ds-pandas",
+      "topic_name": "Pandas foundations",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ds-eda",
+      "topic_name": "Exploratory data analysis",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ds-feature-eng",
+      "topic_name": "Feature engineering",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    },
+    {
+      "severity": "HIGH",
+      "topic_slug": "ds-sql-analytics",
+      "topic_name": "SQL for analytics",
+      "resource_slug": null,
+      "current_state": "PRACTICE_VERIFIED without destination/quantity",
+      "expected_state": "PRACTICE_UNVERIFIED",
+      "exact_reason": "Practice marked verified with incomplete contract",
+      "recommended_repair": "Add destination_type and quantity"
+    }
+  ]
+}

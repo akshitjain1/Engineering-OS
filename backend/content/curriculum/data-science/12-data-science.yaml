@@ -1,0 +1,400 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-datascience
+    name: Data Science
+    description: Data Science
+    order: 11
+    subjects:
+    - slug: data-science
+      name: Data Science Path
+      order: 0
+      modules:
+      - slug: mod-ds-core
+        name: Scientific Python path
+        order: 0
+        topics:
+        - slug: ds-numpy
+          name: NumPy foundations
+          description: Manipulate arrays with NumPy.
+          order: 0
+          prerequisites:
+          - math-vectors
+          learning_objective: Manipulate arrays with NumPy.
+          mastery_criteria:
+          - Explain NumPy foundations.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: data-science
+          lessons:
+          - slug: ds-numpy-core
+            title: NumPy foundations
+            description: 'WHY NOW: Manipulate arrays with NumPy.
+
+
+              LEARN: NumPy — https://numpy.org/doc/stable/user/absolute_beginners.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Create arrays and compute mean/std for 2 datasets. HOW
+              MANY: 2. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ds-numpy-primary
+              title: 'NumPy: NumPy foundations'
+              type: documentation
+              url: https://numpy.org/doc/stable/user/absolute_beginners.html
+              provider: NumPy
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for NumPy foundations. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ds-numpy-q1
+              prompt: Core idea of NumPy foundations?
+              options:
+              - A vague buzzword
+              - Manipulate arrays with NumPy.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Manipulate arrays with NumPy.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ds-numpy-practice
+              title: 'Practice: NumPy foundations'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Create arrays and compute mean/std for 2 datasets.
+                HOW MANY: 2. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+        - slug: ds-pandas
+          name: Pandas foundations
+          description: Load and transform tabular data with Pandas.
+          order: 1
+          prerequisites:
+          - ds-numpy
+          learning_objective: Load and transform tabular data with Pandas.
+          mastery_criteria:
+          - Explain Pandas foundations.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: data-science
+          lessons:
+          - slug: ds-pandas-core
+            title: Pandas foundations
+            description: 'WHY NOW: Load and transform tabular data with Pandas.
+
+
+              LEARN: Pandas — https://pandas.pydata.org/docs/getting_started/intro_tutorials/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Load CSV, filter, groupby. HOW MANY: 3 ops. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: notebook section.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ds-pandas-primary
+              title: 'Pandas: Pandas foundations'
+              type: documentation
+              url: https://pandas.pydata.org/docs/getting_started/intro_tutorials/
+              provider: Pandas
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Pandas foundations. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ds-pandas-q1
+              prompt: Core idea of Pandas foundations?
+              options:
+              - A vague buzzword
+              - Load and transform tabular data with Pandas.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Load and transform tabular data with Pandas.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ds-pandas-practice
+              title: 'Practice: Pandas foundations'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Load CSV, filter, groupby. HOW MANY: 3 ops. WHERE:
+                notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ds-pandas-build
+              title: 'Build: Pandas foundations'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook section.'
+              difficulty: intermediate
+              order: 1
+        - slug: ds-eda
+          name: Exploratory data analysis
+          description: Explore distributions and relationships before modeling.
+          order: 2
+          prerequisites:
+          - ds-pandas
+          - math-stats-summary
+          learning_objective: Explore distributions and relationships before modeling.
+          mastery_criteria:
+          - Explain Exploratory data analysis.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: data-science
+          lessons:
+          - slug: ds-eda-core
+            title: Exploratory data analysis
+            description: 'WHY NOW: Explore distributions and relationships before
+              modeling.
+
+
+              LEARN: Pandas — https://pandas.pydata.org/docs/user_guide/visualization.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Produce 3 EDA plots + written findings. HOW MANY: 3.
+              WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: notebook section.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ds-eda-primary
+              title: 'Pandas: Exploratory data analysis'
+              type: documentation
+              url: https://pandas.pydata.org/docs/user_guide/visualization.html
+              provider: Pandas
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Exploratory data analysis. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ds-eda-q1
+              prompt: Core idea of Exploratory data analysis?
+              options:
+              - A vague buzzword
+              - Explore distributions and relationships before modeling.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Explore distributions and relationships before modeling.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ds-eda-practice
+              title: 'Practice: Exploratory data analysis'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Produce 3 EDA plots + written findings. HOW MANY:
+                3. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ds-eda-build
+              title: 'Build: Exploratory data analysis'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook section.'
+              difficulty: intermediate
+              order: 1
+        - slug: ds-feature-eng
+          name: Feature engineering
+          description: Create usable features without leakage.
+          order: 3
+          prerequisites:
+          - ds-eda
+          learning_objective: Create usable features without leakage.
+          mastery_criteria:
+          - Explain Feature engineering.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: data-science
+          lessons:
+          - slug: ds-feature-eng-core
+            title: Feature engineering
+            description: 'WHY NOW: Create usable features without leakage.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/modules/preprocessing.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build 3 feature transforms in a Pipeline. HOW MANY:
+              3. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: notebook section.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ds-feature-eng-primary
+              title: 'scikit-learn: Feature engineering'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/preprocessing.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Feature engineering. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ds-feature-eng-q1
+              prompt: Core idea of Feature engineering?
+              options:
+              - A vague buzzword
+              - Create usable features without leakage.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Create usable features without leakage.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ds-feature-eng-practice
+              title: 'Practice: Feature engineering'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build 3 feature transforms in a Pipeline. HOW MANY:
+                3. WHERE: notebook.'
+              difficulty: beginner
+              order: 0
+            - slug: ds-feature-eng-build
+              title: 'Build: Feature engineering'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook section.'
+              difficulty: intermediate
+              order: 1
+        - slug: ds-sql-analytics
+          name: SQL for analytics
+          description: Answer analytical questions with SQL aggregations.
+          order: 4
+          prerequisites:
+          - db-sql-select
+          - ds-pandas
+          learning_objective: Answer analytical questions with SQL aggregations.
+          mastery_criteria:
+          - Explain SQL for analytics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: data-science
+          lessons:
+          - slug: ds-sql-analytics-core
+            title: SQL for analytics
+            description: 'WHY NOW: Answer analytical questions with SQL aggregations.
+
+
+              LEARN: PostgreSQL — https://www.postgresql.org/docs/current/tutorial-agg.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Write 5 aggregate queries. HOW MANY: 5. WHERE: SQL.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: notebook section.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ds-sql-analytics-primary
+              title: 'PostgreSQL: SQL for analytics'
+              type: documentation
+              url: https://www.postgresql.org/docs/current/tutorial-agg.html
+              provider: PostgreSQL
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for SQL for analytics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: ds-sql-analytics-q1
+              prompt: Core idea of SQL for analytics?
+              options:
+              - A vague buzzword
+              - Answer analytical questions with SQL aggregations.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Answer analytical questions with SQL aggregations.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: ds-sql-analytics-practice
+              title: 'Practice: SQL for analytics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Write 5 aggregate queries. HOW MANY: 5. WHERE:
+                SQL.'
+              difficulty: beginner
+              order: 0
+            - slug: ds-sql-analytics-build
+              title: 'Build: SQL for analytics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: notebook section.'
+              difficulty: intermediate
+              order: 1

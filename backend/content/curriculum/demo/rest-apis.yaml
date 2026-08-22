@@ -1,0 +1,118 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: demo
+
+# DEMO CURRICULUM — fixture for local development only.
+# Not the real Engineering OS curriculum.
+
+track:
+  slug: software-engineering
+  name: Software Engineering
+  description: Software engineering curriculum from fundamentals to backend engineering
+  order: 0
+  levels:
+    - slug: fundamentals
+      name: "Level 1: Fundamentals"
+      description: Core fundamentals required for everything downstream
+      order: 0
+      subjects:
+        - slug: backend-development
+          name: Backend Development
+          description: Backend engineering fundamentals
+          order: 0
+          modules:
+            - slug: rest-apis
+              name: REST APIs
+              description: Designing and building REST APIs
+              order: 0
+              topics:
+                - slug: http-fundamentals
+                  name: HTTP Fundamentals
+                  description: "HTTP protocol basics: methods, status codes, headers, URLs"
+                  order: 0
+                  prerequisites: []
+                  lessons:
+                    - slug: http-methods
+                      title: HTTP Methods
+                      description: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS and their semantics
+                      order: 0
+                      hours_estimated: 1.5
+                      resources:
+                        - slug: http-crash-course
+                          title: HTTP Crash Course
+                          type: youtube_video
+                          url: https://www.youtube.com/watch?v=iYM2zFP3Zn0
+                          provider: YouTube
+                          duration: 1.0
+                          difficulty: beginner
+                          description: Fast-paced overview of HTTP
+                          official: false
+                          order: 0
+                        - slug: mdn-http-overview
+                          title: MDN HTTP Overview
+                          type: documentation
+                          url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+                          provider: MDN
+                          difficulty: beginner
+                          description: Official Mozilla HTTP documentation
+                          official: true
+                          order: 1
+                      questions:
+                        - slug: idempotent-safe-method
+                          prompt: Which HTTP method is idempotent and safe?
+                          options: [GET, POST, PATCH, CONNECT]
+                          answer: GET
+                          explanation: GET fetches a resource without modifying state; repeated calls return the same result.
+                          difficulty: easy
+                          mastery_requirement: true
+                        - slug: put-vs-patch
+                          prompt: What is the difference between PUT and PATCH?
+                          options:
+                            - PUT replaces the entire resource; PATCH applies a partial update.
+                            - PUT and PATCH are identical.
+                            - PATCH replaces the entire resource; PUT applies a partial update.
+                            - Neither method may modify a resource.
+                          answer: PUT replaces the entire resource; PATCH applies a partial update.
+                          explanation: PUT is idempotent and full replacement; PATCH is for partial modifications.
+                          difficulty: medium
+                          mastery_requirement: true
+                      exercises:
+                        - slug: list-status-codes
+                          title: List common HTTP status codes
+                          instructions: Write 1xx-5xx status code categories with examples.
+                          difficulty: beginner
+                        - slug: design-rest-endpoint
+                          title: Design a REST endpoint
+                          instructions: "Design endpoints for a blog API: CRUD for posts with pagination."
+                          difficulty: intermediate
+                - slug: rest-principles
+                  name: REST Principles
+                  description: "REST architecture: resources, representations, statelessness"
+                  order: 1
+                  prerequisites: [http-fundamentals]
+                  lessons:
+                    - slug: rest-constraints
+                      title: REST constraints
+                      description: Resources, representations, and statelessness — the constraints that make an API RESTful.
+                      order: 0
+                      hours_estimated: 1.0
+                - slug: rest-api-implementation
+                  name: REST API Implementation
+                  description: "Building a real REST API: CRUD, validation, pagination"
+                  order: 2
+                  prerequisites: [rest-principles]
+                  lessons:
+                    - slug: crud-endpoints
+                      title: CRUD endpoints
+                      description: Designing create/read/update/delete routes, validation, and pagination.
+                      order: 0
+                - slug: authentication
+                  name: Authentication
+                  description: "AuthN/AuthZ: sessions, JWT, OAuth flows"
+                  order: 3
+                  prerequisites: [rest-api-implementation]
+                  lessons:
+                    - slug: sessions-and-tokens
+                      title: Sessions and tokens
+                      description: How session cookies and JWTs differ, and when each is appropriate.
+                      order: 0

@@ -1,0 +1,611 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-web
+    name: Web Development
+    description: Web Development
+    order: 8
+    subjects:
+    - slug: web-development
+      name: Web Development
+      order: 0
+      modules:
+      - slug: mod-web-core
+        name: Full-stack web foundations
+        order: 0
+        topics:
+        - slug: web-html-basics
+          name: HTML basics
+          description: Structure documents with semantic HTML elements.
+          order: 0
+          prerequisites: []
+          learning_objective: Structure documents with semantic HTML elements.
+          mastery_criteria:
+          - Explain HTML basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-html-basics-core
+            title: HTML basics
+            description: 'WHY NOW: Structure documents with semantic HTML elements.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build a 1-page semantic HTML outline (header/nav/main/footer).
+              HOW MANY: 1 page. WHERE: local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-html-basics-primary
+              title: 'MDN: HTML basics'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for HTML basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-html-basics-q1
+              prompt: Core idea of HTML basics?
+              options:
+              - A vague buzzword
+              - Structure documents with semantic HTML elements.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Structure documents with semantic HTML elements.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-html-basics-practice
+              title: 'Practice: HTML basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build a 1-page semantic HTML outline (header/nav/main/footer).
+                HOW MANY: 1 page. WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+        - slug: web-css-basics
+          name: CSS basics
+          description: Style layouts with CSS selectors, box model, and flexbox.
+          order: 1
+          prerequisites:
+          - web-html-basics
+          learning_objective: Style layouts with CSS selectors, box model, and flexbox.
+          mastery_criteria:
+          - Explain CSS basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-css-basics-core
+            title: CSS basics
+            description: 'WHY NOW: Style layouts with CSS selectors, box model, and
+              flexbox.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Style the HTML page with flexbox layout. HOW MANY: 1
+              stylesheet. WHERE: local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: small demo for CSS basics.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-css-basics-primary
+              title: 'MDN: CSS basics'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for CSS basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-css-basics-q1
+              prompt: Core idea of CSS basics?
+              options:
+              - A vague buzzword
+              - Style layouts with CSS selectors, box model, and flexbox.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Style layouts with CSS selectors, box model, and flexbox.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-css-basics-practice
+              title: 'Practice: CSS basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Style the HTML page with flexbox layout. HOW MANY:
+                1 stylesheet. WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+            - slug: web-css-basics-build
+              title: 'Build: CSS basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for CSS basics.'
+              difficulty: intermediate
+              order: 1
+        - slug: web-responsive
+          name: Responsive design
+          description: Make layouts adapt across viewports with media queries.
+          order: 2
+          prerequisites:
+          - web-css-basics
+          learning_objective: Make layouts adapt across viewports with media queries.
+          mastery_criteria:
+          - Explain Responsive design.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-responsive-core
+            title: Responsive design
+            description: 'WHY NOW: Make layouts adapt across viewports with media
+              queries.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Add 2 breakpoints to your page. HOW MANY: 2. WHERE:
+              local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-responsive-primary
+              title: 'MDN: Responsive design'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Responsive design. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-responsive-q1
+              prompt: Core idea of Responsive design?
+              options:
+              - A vague buzzword
+              - Make layouts adapt across viewports with media queries.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Make layouts adapt across viewports with media queries.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-responsive-practice
+              title: 'Practice: Responsive design'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Add 2 breakpoints to your page. HOW MANY: 2. WHERE:
+                local IDE.'
+              difficulty: beginner
+              order: 0
+        - slug: web-js-basics
+          name: JavaScript basics
+          description: Use JS variables, functions, DOM events for interactive pages.
+          order: 3
+          prerequisites:
+          - web-html-basics
+          learning_objective: Use JS variables, functions, DOM events for interactive
+            pages.
+          mastery_criteria:
+          - Explain JavaScript basics.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-js-basics-core
+            title: JavaScript basics
+            description: 'WHY NOW: Use JS variables, functions, DOM events for interactive
+              pages.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Add 3 DOM event handlers. HOW MANY: 3. WHERE: local
+              IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: small demo for JavaScript basics.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-js-basics-primary
+              title: 'MDN: JavaScript basics'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for JavaScript basics. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-js-basics-q1
+              prompt: Core idea of JavaScript basics?
+              options:
+              - A vague buzzword
+              - Use JS variables, functions, DOM events for interactive pages.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Use JS variables, functions, DOM events for interactive pages.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-js-basics-practice
+              title: 'Practice: JavaScript basics'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Add 3 DOM event handlers. HOW MANY: 3. WHERE: local
+                IDE.'
+              difficulty: beginner
+              order: 0
+            - slug: web-js-basics-build
+              title: 'Build: JavaScript basics'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for JavaScript basics.'
+              difficulty: intermediate
+              order: 1
+        - slug: web-ts-intro
+          name: TypeScript intro
+          description: Add static types to JavaScript modules.
+          order: 4
+          prerequisites:
+          - web-js-basics
+          learning_objective: Add static types to JavaScript modules.
+          mastery_criteria:
+          - Explain TypeScript intro.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-ts-intro-core
+            title: TypeScript intro
+            description: 'WHY NOW: Add static types to JavaScript modules.
+
+
+              LEARN: TypeScript — https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Convert 1 JS module to TS with types. HOW MANY: 1. WHERE:
+              local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-ts-intro-primary
+              title: 'TypeScript: TypeScript intro'
+              type: documentation
+              url: https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html
+              provider: TypeScript
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for TypeScript intro. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-ts-intro-q1
+              prompt: Core idea of TypeScript intro?
+              options:
+              - A vague buzzword
+              - Add static types to JavaScript modules.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Add static types to JavaScript modules.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-ts-intro-practice
+              title: 'Practice: TypeScript intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Convert 1 JS module to TS with types. HOW MANY:
+                1. WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+        - slug: web-react-intro
+          name: React intro
+          description: Build UI with components, props, and state.
+          order: 5
+          prerequisites:
+          - web-js-basics
+          learning_objective: Build UI with components, props, and state.
+          mastery_criteria:
+          - Explain React intro.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-react-intro-core
+            title: React intro
+            description: 'WHY NOW: Build UI with components, props, and state.
+
+
+              LEARN: React — https://react.dev/learn
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build a counter + list component. HOW MANY: 2 components.
+              WHERE: local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: small demo for React intro.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-react-intro-primary
+              title: 'React: React intro'
+              type: documentation
+              url: https://react.dev/learn
+              provider: React
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for React intro. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-react-intro-q1
+              prompt: Core idea of React intro?
+              options:
+              - A vague buzzword
+              - Build UI with components, props, and state.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Build UI with components, props, and state.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-react-intro-practice
+              title: 'Practice: React intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build a counter + list component. HOW MANY: 2 components.
+                WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+            - slug: web-react-intro-build
+              title: 'Build: React intro'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for React intro.'
+              difficulty: intermediate
+              order: 1
+        - slug: web-nextjs-intro
+          name: Next.js intro
+          description: Create a Next.js app with routing and data fetching.
+          order: 6
+          prerequisites:
+          - web-react-intro
+          learning_objective: Create a Next.js app with routing and data fetching.
+          mastery_criteria:
+          - Explain Next.js intro.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-nextjs-intro-core
+            title: Next.js intro
+            description: 'WHY NOW: Create a Next.js app with routing and data fetching.
+
+
+              LEARN: Next.js — https://nextjs.org/docs/app/getting-started
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Create app router page + fetch. HOW MANY: 1 app. WHERE:
+              local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-nextjs-intro-primary
+              title: 'Next.js: Next.js intro'
+              type: documentation
+              url: https://nextjs.org/docs/app/getting-started
+              provider: Next.js
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Next.js intro. Content inspection
+                pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-nextjs-intro-q1
+              prompt: Core idea of Next.js intro?
+              options:
+              - A vague buzzword
+              - Create a Next.js app with routing and data fetching.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Create a Next.js app with routing and data fetching.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-nextjs-intro-practice
+              title: 'Practice: Next.js intro'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Create app router page + fetch. HOW MANY: 1 app.
+                WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+        - slug: web-forms-a11y
+          name: Forms & accessibility
+          description: Build accessible forms with labels and keyboard support.
+          order: 7
+          prerequisites:
+          - web-html-basics
+          - web-css-basics
+          learning_objective: Build accessible forms with labels and keyboard support.
+          mastery_criteria:
+          - Explain Forms & accessibility.
+          - Complete mapped practice with stated quantity.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: web
+          lessons:
+          - slug: web-forms-a11y-core
+            title: Forms & accessibility
+            description: 'WHY NOW: Build accessible forms with labels and keyboard
+              support.
+
+
+              LEARN: MDN — https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: Build a form with 4 labeled fields + validation. HOW
+              MANY: 1. WHERE: local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: small demo for Forms & accessibility.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish
+              the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: web-forms-a11y-primary
+              title: 'MDN: Forms & accessibility'
+              type: documentation
+              url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms
+              provider: MDN
+              role: PRIMARY
+              verification_status: TRUSTED
+              official: true
+              order: 0
+              description: TRUSTED primary docs for Forms & accessibility. Content
+                inspection pending upgrade to VERIFIED_COVERAGE.
+            questions:
+            - slug: web-forms-a11y-q1
+              prompt: Core idea of Forms & accessibility?
+              options:
+              - A vague buzzword
+              - Build accessible forms with labels and keyboard support.
+              - Irrelevant outside interviews
+              - Replaces prerequisites
+              answer: Build accessible forms with labels and keyboard support.
+              explanation: Match the learning objective.
+              difficulty: easy
+              mastery_requirement: true
+            exercises:
+            - slug: web-forms-a11y-practice
+              title: 'Practice: Forms & accessibility'
+              type: ACTION_CHECKLIST
+              instructions: 'WHAT: Build a form with 4 labeled fields + validation.
+                HOW MANY: 1. WHERE: local IDE.'
+              difficulty: beginner
+              order: 0
+            - slug: web-forms-a11y-build
+              title: 'Build: Forms & accessibility'
+              type: SELF_REFLECTION
+              instructions: 'IMPLEMENT: small demo for Forms & accessibility.'
+              difficulty: intermediate
+              order: 1
