@@ -174,6 +174,9 @@ class CurriculumResource(Base):
     estimate_method: Mapped[Optional[str]] = Column(String(40), nullable=True)
     verification_evidence: Mapped[Optional[str]] = Column(Text, nullable=True)  # JSON string
     last_verified_at: Mapped[Optional[str]] = Column(String(40), nullable=True)
+    # Learner UX visibility (additive). Audit/readiness ignore these fields.
+    learner_visible: Mapped[Optional[bool]] = Column(Boolean, default=True, nullable=True)
+    visibility_class: Mapped[Optional[str]] = Column(String(40), nullable=True)
 
     lesson: Mapped["CurriculumLesson"] = relationship("CurriculumLesson", back_populates="resources")
 

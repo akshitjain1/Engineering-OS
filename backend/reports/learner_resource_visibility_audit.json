@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-08-23T07:15:20.510563+00:00",
+  "total_resources": 766,
+  "learner_visible_resources": 609,
+  "hidden_verification_resources": 157,
+  "by_visibility_class": {
+    "VERIFICATION_ONLY": 144,
+    "LEARNER": 609,
+    "LEGACY_DUPLICATE": 9,
+    "COVERAGE_SUPPLEMENT": 4
+  },
+  "duplicates_removed_from_learner_display": 8,
+  "unmapped_visible_sources_remaining": 0,
+  "unmapped_visible_sources": [],
+  "topics_with_more_than_1_PRIMARY_learner_resource": 0,
+  "topics_with_more_than_2_learner_visible_learning_resources": 17,
+  "cf_cpu_before": [
+    {
+      "slug": "cf-cpu-reference",
+      "role": "REFERENCE",
+      "title": "CS50x 2026 Week 1 (source to machine code)",
+      "url": "https://cs50.harvard.edu/x/weeks/1/"
+    },
+    {
+      "slug": "cf-cpu-primary",
+      "role": "PRIMARY",
+      "title": "GFG \u2014 Central Processing Unit (CPU)",
+      "url": "https://www.geeksforgeeks.org/central-processing-unit-cpu/"
+    },
+    {
+      "slug": "cf-cpu-ref-cs50",
+      "role": "REFERENCE",
+      "title": "CS50x \u2014 Source to machine code (reference)",
+      "url": "https://cs50.harvard.edu/x/weeks/1/"
+    },
+    {
+      "slug": "cf-cpu-pc-supplement",
+      "role": "PRIMARY",
+      "title": "Wikipedia \u2014 Program counter",
+      "url": "https://en.wikipedia.org/wiki/Program_counter"
+    },
+    {
+      "slug": "cf-cpu-n2t",
+      "role": "DEEP_DIVE",
+      "title": "Nand2Tetris Project 5 \u2014 Computer Architecture (optional build)",
+      "url": "https://www.nand2tetris.org/project05"
+    }
+  ],
+  "cf_cpu_after_learner": [
+    {
+      "slug": "cf-cpu-primary",
+      "role": "PRIMARY",
+      "title": "GFG \u2014 Central Processing Unit (CPU)",
+      "url": "https://www.geeksforgeeks.org/central-processing-unit-cpu/",
+      "visibility_class": "LEARNER"
+    },
+    {
+      "slug": "cf-cpu-n2t",
+      "role": "DEEP_DIVE",
+      "title": "Nand2Tetris Project 5 \u2014 Computer Architecture (optional build)",
+      "url": "https://www.nand2tetris.org/project05",
+      "visibility_class": "LEARNER"
+    }
+  ],
+  "readiness_before": {
+    "READY": 316
+  },
+  "readiness_after": {
+    "READY": 316
+  },
+  "restore": {
+    "restored_verified_coverage": 0,
+    "partial_upgraded": 0
+  },
+  "visibility_apply": {
+    "topics": 316,
+    "hidden_coverage_supplement": 4,
+    "hidden_legacy_duplicate": 10,
+    "hidden_verification_only": 146,
+    "visible": 609,
+    "duplicates_collapsed": 8
+  },
+  "progress": {
+    "UserProgress": 3,
+    "TopicMastery": 0,
+    "UserXP": 1,
+    "CurriculumTopic": 316
+  },
+  "curriculum_progress_integrity": {
+    "topic_count_316": true,
+    "readiness_316_ready": true,
+    "unmapped_zero": true
+  },
+  "tests": {
+    "exit": 0,
+    "passed": 0
+  },
+  "lint": {
+    "exit": 0,
+    "pass": true
+  },
+  "build": {
+    "exit": 0,
+    "pass": true
+  }
+}

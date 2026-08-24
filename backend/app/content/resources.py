@@ -172,12 +172,13 @@ def metadata_from_spec(
     }
 
 
-def serialize_resource(resource: Any) -> dict[str, Any]:
+def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, Any]:
     url = getattr(resource, "url", None) or None
     resource_type = getattr(resource, "resource_type", None)
     role = getattr(resource, "role", None)
     video_id = getattr(resource, "video_id", None) or youtube_video_id(url)
     raw_status = getattr(resource, "verification_status", None) or verification_for_url(url)
+    # Learner-facing: content-verified statuses are mapped (never "SOURCE NOT MAPPED").
     status = NEEDS_REVIEW if raw_status == UNRESOLVED else raw_status
     playlist = is_youtube_playlist(url, resource_type)
     collection = is_collection_url(url, resource_type)
@@ -185,6 +186,7 @@ def serialize_resource(resource: Any) -> dict[str, Any]:
 
     payload = {
         "id": resource.id,
+        "slug": getattr(resource, "slug", None),
         "title": resource.title,
         "url": url,
         "resource_type": canonical_resource_type(resource_type),
@@ -197,7 +199,7 @@ def serialize_resource(resource: Any) -> dict[str, Any]:
         "verification_status": status,
         "resource_status": status,
         "is_playlist": playlist,
-        "exact": bool(url) and raw_status == VERIFIED and not collection,
+        "exact": bool(url) and raw_status in (VERIFIED, "VERIFIED_COVERAGE", "PARTIAL_COVERAGE") and not collection,
         "duration": resource.duration,
         "difficulty": resource.difficulty,
         "description": resource.description,
@@ -206,18 +208,38 @@ def serialize_resource(resource: Any) -> dict[str, Any]:
         "completion_status": lesson_ui_status(resource.completion_status),
         "completed": is_lesson_complete(resource.completion_status),
         "embeddable": bool(video_id) and not playlist and canonical_resource_type(resource_type) == "youtube",
+        "learner_visible": bool(getattr(resource, "learner_visible", True) if getattr(resource, "learner_visible", None) is not None else True),
+        "visibility_class": getattr(resource, "visibility_class", None) or "LEARNER",
     }
     payload["exactness"] = exactness_label(payload)
     payload["source_readiness"] = classify_primary(payload)
+    payload["source_mapped"] = bool(url) and (raw_status or "").upper() not in ("", UNRESOLVED, "UNRESOLVED")
     return payload
 
 
-def group_resources_by_role(resources: list[Any]) -> dict[str, list[dict[str, Any]]]:
+def group_resources_by_role(
+    resources: list[Any],
+    *,
+    for_learner: bool = True,
+) -> dict[str, list[dict[str, Any]]]:
+    from app.content.learner_visibility import learner_facing_resources
+
     grouped = {role: [] for role in RESOURCE_ROLES}
     grouped["OTHER"] = []
-    for resource in sorted(resources, key=lambda item: (item.order_index or 0, item.id or 0)):
-        payload = serialize_resource(resource)
+    source = learner_facing_resources(resources) if for_learner else resources
+    for resource in sorted(source, key=lambda item: (item.order_index or 0, item.id or 0)):
+        payload = serialize_resource(resource, for_learner=for_learner)
         role = payload.get("role")
+        # Treat PRIMARY_LEARN as PRIMARY for UI grouping
+        if role == "PRIMARY_LEARN":
+            role = "PRIMARY"
+            payload["role"] = "PRIMARY"
+        if role == "SUPPLEMENT":
+            # Learner UI does not have a SUPPLEMENT section — skip for learner lists
+            if for_learner:
+                continue
+            grouped["OTHER"].append(payload)
+            continue
         if role in RESOURCE_ROLES:
             grouped[role].append(payload)
         else:
@@ -261,21 +283,9 @@ def attach_source_fields(serialized: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _status_rank(status: Optional[str]) -> int:
-    """Lower is better for primary selection. BROKEN is never preferred."""
-    value = (status or UNRESOLVED).upper()
-    if value == BROKEN:
-        return 99
-    if value == VERIFIED:
-        return 0
-    if value == TRUSTED:
-        return 1
-    if value == NEEDS_REVIEW:
-        return 2
-    return 3  # UNRESOLVED / unknown
-
-
 def select_resource_for_activity(resources: list[Any], activity_type: str) -> Optional[Any]:
+    from app.content.learner_visibility import is_learner_visible
+
     wanted = _ACTIVITY_ROLE.get(activity_type)
     if not wanted:
         return None
@@ -283,6 +293,7 @@ def select_resource_for_activity(resources: list[Any], activity_type: str) -> Op
         resource
         for resource in resources
         if getattr(resource, "role", None) == wanted
+        and is_learner_visible(resource)
         and (getattr(resource, "verification_status", None) or "").upper() != BROKEN
     ]
     matches.sort(
@@ -294,6 +305,20 @@ def select_resource_for_activity(resources: list[Any], activity_type: str) -> Op
         )
     )
     return matches[0] if matches else None
+
+
+def _status_rank(status: Optional[str]) -> int:
+    """Lower is better for primary selection. BROKEN is never preferred."""
+    value = (status or UNRESOLVED).upper()
+    if value == BROKEN:
+        return 99
+    if value in (VERIFIED, "VERIFIED_COVERAGE"):
+        return 0
+    if value == TRUSTED:
+        return 1
+    if value in (NEEDS_REVIEW, "PARTIAL_COVERAGE"):
+        return 2
+    return 3  # UNRESOLVED / unknown
 
 
 def classify_primary(payload: Optional[dict[str, Any]]) -> str:

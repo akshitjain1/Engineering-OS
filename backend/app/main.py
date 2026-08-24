@@ -63,6 +63,10 @@ with SessionLocal() as _db:
     from .content.backfill_tracks import backfill_topic_tracks
     from .content.domain0_repair import apply_domain0_repairs
     from .learning.projects import seed_projects
+    from .content.learner_visibility import (
+        apply_learner_visibility,
+        restore_content_verification_statuses,
+    )
 
     backfill_topic_tracks(_db)
     apply_domain0_repairs(_db)
@@ -70,6 +74,9 @@ with SessionLocal() as _db:
 
     enrich_dsa_practice(_db)
     seed_projects(_db)
+    # After repairs: restore content-verification statuses, then hide internal resources.
+    restore_content_verification_statuses(_db)
+    apply_learner_visibility(_db)
     _db.commit()
 
 app = FastAPI(
@@ -600,8 +607,11 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
     payload["implement"] = implement
     payload["transfer"] = transfer
     resources = [resource for lesson in lessons for resource in (lesson.resources or [])]
-    payload["resources"] = [_serialize_resource(resource) for resource in resources]
-    payload["resources_by_role"] = group_resources_by_role(resources)
+    from app.content.learner_visibility import learner_facing_resources
+
+    learner_resources = learner_facing_resources(resources)
+    payload["resources"] = [_serialize_resource(resource) for resource in learner_resources]
+    payload["resources_by_role"] = group_resources_by_role(resources, for_learner=True)
     primaries = payload["resources_by_role"].get("PRIMARY") or []
     payload["source_readiness"] = (primaries[0].get("source_readiness") if primaries else "UNRESOLVED")
     mastery_row = (

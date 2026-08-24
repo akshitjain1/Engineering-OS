@@ -44,6 +44,8 @@ RESOURCE_EXTRA_COLUMNS = {
     "estimate_method": "VARCHAR(40)",
     "verification_evidence": "TEXT",
     "last_verified_at": "VARCHAR(40)",
+    "learner_visible": "BOOLEAN DEFAULT 1",
+    "visibility_class": "VARCHAR(40)",
 }
 
 TABLE_SLUGS = [
@@ -290,11 +292,27 @@ def _backfill_resource_metadata(engine: Engine) -> None:
             if row.role != meta["role"] and meta["role"]:
                 row.role = meta["role"]
                 changed = True
-            if row.verification_status != meta["verification_status"]:
-                row.verification_status = meta["verification_status"]
-                changed = True
+            # Never clobber content-verification statuses with URL-only VERIFIED.
+            content_statuses = {
+                "VERIFIED_COVERAGE",
+                "PARTIAL_COVERAGE",
+                "COLLECTION_ONLY",
+                "BROKEN",
+                "NEEDS_REVIEW",
+            }
+            current_status = (row.verification_status or "").upper()
+            if current_status not in content_statuses:
+                if row.verification_status != meta["verification_status"]:
+                    row.verification_status = meta["verification_status"]
+                    changed = True
             if (row.video_id or None) != (meta["video_id"] or None):
                 row.video_id = meta["video_id"]
+                changed = True
+            if getattr(row, "learner_visible", None) is None:
+                row.learner_visible = True
+                changed = True
+            if not getattr(row, "visibility_class", None):
+                row.visibility_class = "LEARNER"
                 changed = True
         if changed:
             session.commit()

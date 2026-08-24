@@ -577,8 +577,11 @@ function SourceLabel({ resource }: { resource: ResourcePublic }) {
 }
 
 function sourceLabel(resource: ResourcePublic): string {
-  const verified = resource.verification_status === "VERIFIED" || resource.resource_status === "VERIFIED";
-  if (!resource.url || !verified) return "SOURCE NOT MAPPED YET";
+  const status = (resource.verification_status || resource.resource_status || "").toUpperCase();
+  const mapped =
+    Boolean(resource.url) &&
+    !["", "UNRESOLVED", "UNVERIFIED", "BROKEN"].includes(status);
+  if (!resource.url || !mapped) return "SOURCE NOT MAPPED YET";
   if (resource.is_playlist) return "PLAYLIST";
   if (resource.embeddable && resource.exact) return "EXACT LECTURE";
   if (resource.resource_type === "lecture") return "EXACT LECTURE";
