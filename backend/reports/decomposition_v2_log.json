@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-08-25T11:34:59.016131+00:00",
+  "created_count": 24,
+  "created_topics": [
+    "cv-sift-orb-awareness",
+    "dl-pytorch-autograd",
+    "dl-pytorch-build-model",
+    "dl-pytorch-data",
+    "dl-pytorch-save-load",
+    "dl-pytorch-tensors",
+    "dl-pytorch-training-loop",
+    "genai-lora-peft",
+    "genai-production-serving",
+    "math-chain-rule",
+    "math-covariance-correlation",
+    "math-dot-product-norms",
+    "ml-anomaly-awareness",
+    "ml-feature-importance",
+    "ml-gradient-boosting",
+    "ml-grid-search",
+    "ml-hierarchical-dbscan",
+    "ml-kmeans",
+    "ml-pca",
+    "ml-regression-metrics",
+    "ml-ridge-lasso",
+    "ml-roc-auc",
+    "mlops-drift-quality",
+    "mlops-experiment-lifecycle"
+  ]
+}

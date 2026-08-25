@@ -1,0 +1,261 @@
+{
+  "generated_at": "2026-08-25T12:01:08.630906+00:00",
+  "created": 22,
+  "by_type": {
+    "TRACE": 22
+  },
+  "skipped_count": 139,
+  "detail": [
+    {
+      "slug": "ml-ridge-lasso",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "ml-roc-auc",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-regression-metrics",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-grid-search",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-kmeans",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-hierarchical-dbscan",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-pca",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "ml-anomaly-awareness",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "ml-gradient-boosting",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "ml-feature-importance",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "dl-pytorch-tensors",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "dl-pytorch-data",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "dl-pytorch-build-model",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "dl-pytorch-autograd",
+      "type": "TRACE",
+      "minutes_estimate": 12
+    },
+    {
+      "slug": "dl-pytorch-training-loop",
+      "type": "TRACE",
+      "minutes_estimate": 14
+    },
+    {
+      "slug": "dl-pytorch-save-load",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "cv-sift-orb-awareness",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "genai-lora-peft",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "genai-production-serving",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "math-dot-product-norms",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "math-chain-rule",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    },
+    {
+      "slug": "math-covariance-correlation",
+      "type": "TRACE",
+      "minutes_estimate": 10
+    }
+  ],
+  "skipped": [
+    "math-vectors::has-exercises",
+    "math-matrices::has-exercises",
+    "math-probability::has-exercises",
+    "math-distributions::has-exercises",
+    "math-stats-summary::has-exercises",
+    "math-gradient-intuition::has-exercises",
+    "ml-what-is-ml::has-exercises",
+    "ml-features-labels::has-exercises",
+    "ml-train-test::has-exercises",
+    "ml-linear-regression::has-exercises",
+    "ml-classification::has-exercises",
+    "ml-metrics::has-exercises",
+    "ml-overfitting::has-exercises",
+    "ml-sklearn-pipeline::has-exercises",
+    "dl-awareness::has-exercises",
+    "dl-path::has-exercises",
+    "nlp-awareness::has-exercises",
+    "nlp-path::has-exercises",
+    "genai-awareness::has-exercises",
+    "genai-path::has-exercises",
+    "ai-eng-awareness::has-exercises",
+    "ai-eng-path::has-exercises",
+    "dl-nn-basics::has-exercises",
+    "dl-backprop::has-exercises",
+    "dl-cnn::has-exercises",
+    "dl-transformers-intro::has-exercises",
+    "genai-embeddings::has-exercises",
+    "genai-rag::has-exercises",
+    "genai-agents::has-exercises",
+    "genai-eval::has-exercises",
+    "math-functions::has-exercises",
+    "math-derivatives::has-exercises",
+    "math-partial-derivatives::has-exercises",
+    "math-conditional-probability::has-exercises",
+    "math-bayes-theorem::has-exercises",
+    "math-expectation-variance::has-exercises",
+    "ml-types-of-ml::has-exercises",
+    "ml-validation-split::has-exercises",
+    "ml-loss-intuition::has-exercises",
+    "ml-gradient-descent-intuition::has-exercises",
+    "ml-logistic-regression::has-exercises",
+    "ml-decision-trees::has-exercises",
+    "ml-random-forests::has-exercises",
+    "ml-knn::has-exercises",
+    "ml-naive-bayes::has-exercises",
+    "ml-svm::has-exercises",
+    "ml-confusion-matrix::has-exercises",
+    "ml-bias-variance::has-exercises",
+    "ml-cross-validation::has-exercises",
+    "ml-feature-scaling::has-exercises",
+    "ml-encoding-categorical::has-exercises",
+    "ml-ensemble-learning::has-exercises",
+    "ml-end-to-end-workflow::has-exercises",
+    "dl-why-deep-learning::has-exercises",
+    "dl-neuron-intuition::has-exercises",
+    "dl-perceptron::has-exercises",
+    "dl-activation-functions::has-exercises",
+    "dl-forward-propagation::has-exercises",
+    "dl-loss-functions-nn::has-exercises",
+    "dl-backprop-intuition::has-exercises",
+    "dl-computational-graphs::has-exercises",
+    "dl-gradient-descent-nn::has-exercises",
+    "dl-mlp::has-exercises",
+    "dl-vanishing-gradients::has-exercises",
+    "dl-initialization::has-exercises",
+    "dl-normalization::has-exercises",
+    "dl-dropout::has-exercises",
+    "dl-optimizers-sgd::has-exercises",
+    "dl-optimizers-adam::has-exercises",
+    "dl-batch-epoch-lr::has-exercises",
+    "dl-cnn-foundations::has-exercises",
+    "dl-convolution-op::has-exercises",
+    "dl-padding-stride::has-exercises",
+    "dl-pooling::has-exercises",
+    "dl-feature-maps::has-exercises",
+    "dl-rnn-awareness::has-exercises",
+    "dl-lstm-gru::has-exercises",
+    "dl-attention-intuition::has-exercises",
+    "dl-transformers-foundations::has-exercises",
+    "cv-what-is-an-image::has-exercises",
+    "cv-pixels-channels::has-exercises",
+    "cv-color-spaces::has-exercises",
+    "cv-image-tensors::has-exercises",
+    "cv-transformations::has-exercises",
+    "cv-normalization-cv::has-exercises",
+    "cv-augmentation::has-exercises",
+    "cv-traditional-filters::has-exercises",
+    "cv-convolution-in-cv::has-exercises",
+    "cv-classification-workflow::has-exercises",
+    "cv-classic-architectures::has-exercises",
+    "cv-resnet::has-exercises",
+    "cv-efficientnet-awareness::has-exercises",
+    "cv-transfer-learning-cv::has-exercises",
+    "cv-object-detection-overview::has-exercises",
+    "cv-bounding-boxes-iou::has-exercises",
+    "cv-nms::has-exercises",
+    "cv-two-stage-vs-one-stage::has-exercises",
+    "cv-yolo-concept::has-exercises",
+    "cv-semantic-segmentation::has-exercises",
+    "cv-u-net::has-exercises",
+    "cv-instance-segmentation::has-exercises",
+    "cv-evaluation-metrics-cv::has-exercises",
+    "cv-vision-transformers-awareness::has-exercises",
+    "cv-end-to-end-project::has-exercises",
+    "nlp-what-is-nlp::has-exercises",
+    "nlp-text-preprocessing::has-exercises",
+    "nlp-tokenization-nlp::has-exercises",
+    "nlp-vocabulary-bow::has-exercises",
+    "nlp-tf-idf::has-exercises",
+    "nlp-word-embeddings::has-exercises",
+    "nlp-word2vec::has-exercises",
+    "nlp-sequence-modeling::has-exercises",
+    "nlp-rnn-lstm::has-exercises",
+    "nlp-attention-nlp::has-exercises",
+    "nlp-transformers-nlp::has-exercises",
+    "nlp-bert::has-exercises",
+    "nlp-encoder-vs-decoder::has-exercises",
+    "nlp-generative-models::has-exercises",
+    "nlp-fine-tuning-nlp::has-exercises",
+    "nlp-evaluation-nlp::has-exercises",
+    "genai-what-is-lm::has-exercises",
+    "genai-next-token-prediction::has-exercises",
+    "genai-tokenization-llm::has-exercises",
+    "genai-pretraining-finetuning::has-exercises",
+    "genai-instruction-tuning-rlhf::has-exercises",
+    "genai-inference-parameters::has-exercises",
+    "genai-context-windows::has-exercises",
+    "genai-prompt-engineering::has-exercises",
+    "genai-vector-databases::has-exercises",
+    "genai-chunking-retrieval::has-exercises",
+    "genai-hallucinations-guardrails::has-exercises",
+    "ai-eng-structured-output::has-exercises",
+    "ai-eng-tool-calling::has-exercises",
+    "ai-eng-function-calling::has-exercises",
+    "ai-eng-agent-loops::has-exercises",
+    "ai-eng-planning-memory::has-exercises",
+    "ai-eng-multi-agent-awareness::has-exercises",
+    "ai-eng-observability-security::has-exercises",
+    "ai-eng-production-deployment::has-exercises"
+  ]
+}

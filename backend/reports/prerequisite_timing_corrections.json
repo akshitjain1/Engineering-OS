@@ -1,0 +1,32 @@
+{
+  "justification": "Spec PART O / Phase 2: DSA early unlock required removing two over-strict edges that forced full CS-foundations completion before Java/DSA entry.",
+  "changes": [
+    {
+      "topic": "cf-time-complexity-intro",
+      "old": [
+        "cf-debugging-thinking"
+      ],
+      "new": [
+        "cf-problem-decomposition"
+      ]
+    },
+    {
+      "topic": "java-jdk-jre",
+      "old": [
+        "cf-space-complexity-intro",
+        "cf-dependency-management"
+      ],
+      "new": [
+        "cf-space-complexity-intro"
+      ]
+    },
+    {
+      "topic": "cf-problem-decomposition",
+      "old": [
+        "cf-dependency-management"
+      ],
+      "new": [],
+      "reason": "Week-0 thinking skill wrongly gated on late tooling; blocked DSA gate by ~30 unrelated topics"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "domains": {
+    "DSA & Algorithms": {
+      "READY": 106
+    },
+    "CS Foundations": {
+      "READY": 64
+    },
+    "Java": {
+      "READY": 52
+    },
+    "Deep Learning": {
+      "READY": 38
+    },
+    "Machine Learning": {
+      "READY": 35
+    },
+    "Computer Vision": {
+      "READY": 26
+    },
+    "Generative AI / LLMs": {
+      "READY": 19
+    },
+    "NLP": {
+      "READY": 18
+    },
+    "Mathematics for ML": {
+      "READY": 13,
+      "RESOURCE_GAP": 2
+    },
+    "Backend": {
+      "READY": 12
+    },
+    "Software Engineering": {
+      "READY": 10
+    },
+    "AI Engineering / Agents": {
+      "READY": 10
+    },
+    "Web": {
+      "READY": 8
+    },
+    "Networking": {
+      "READY": 6
+    },
+    "DevOps": {
+      "READY": 6
+    },
+    "MLOps": {
+      "READY": 5,
+      "PARTIAL": 1
+    },
+    "Python": {
+      "READY": 5
+    },
+    "Data Science": {
+      "READY": 5
+    },
+    "Other": {
+      "READY": 4
+    },
+    "System Design": {
+      "READY": 4
+    }
+  },
+  "boundary_audit": {
+    "learner_visible_resources_total": 734,
+    "visible_with_exactness_none": 0,
+    "visible_with_minutes_none": 0,
+    "entire_books_exposed": 0,
+    "entire_playlists_exposed": 0,
+    "collection_primarys": 0
+  }
+}

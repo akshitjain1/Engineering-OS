@@ -1,0 +1,20 @@
+{
+  "cv-what-is-an-image": ["https://scikit-image.org/docs/stable/user_guide/numpy_images.html", "https://scikit-image.org/docs/stable/user_guide/getting_started.html"],
+  "cv-pixels-channels": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md"],
+  "cv-image-tensors": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md"],
+  "cv-normalization-cv": ["https://cs231n.github.io/linear-classify/"],
+  "cv-traditional-filters": ["https://docs.opencv.org/4.x/d4/d13/tutorial_js_filtering.html", "https://docs.opencv.org/3.4/d4/d13/tutorial_js_filtering.html", "https://scikit-image.org/docs/stable/auto_examples/filters/plot_blur.html"],
+  "cv-nms": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md", "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/anchor.md"],
+  "cv-instance-segmentation": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/rcnn.md"],
+  "cv-u-net": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/fcn.md"],
+  "cv-evaluation-metrics-cv": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md", "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md"],
+  "nlp-tokenization-nlp": ["https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter6/1.mdx", "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter2/2.mdx"],
+  "nlp-text-preprocessing": ["https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter6/1.mdx", "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter2/2.mdx"],
+  "nlp-transformers-nlp": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md"],
+  "nlp-encoder-vs-decoder": ["https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-modern/encoder-decoder.md", "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter3/1.mdx"],
+  "nlp-generative-models": ["https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter7/6.mdx"],
+  "nlp-evaluation-nlp": ["https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter7/6.mdx"],
+  "genai-inference-parameters": ["https://docs.cohere.com/docs/temperature-and-top-p", "https://www.promptingguide.ai/introduction/settings"],
+  "genai-context-windows": ["https://docs.cohere.com/docs/context-windows", "https://www.promptingguide.ai/introduction/settings"],
+  "genai-hallucinations-guardrails": ["https://www.promptingguide.ai/risks/hallucination", "https://www.promptingguide.ai/risks"]
+}

@@ -1,0 +1,3566 @@
+{
+  "contracts": {
+    "math-functions": {
+      "required": [
+        {
+          "slug": "function-input-output",
+          "description": "functions map inputs to outputs",
+          "evidence_terms": [
+            "function",
+            "input",
+            "output"
+          ]
+        },
+        {
+          "slug": "evaluate-function",
+          "description": "evaluating a function at a value",
+          "evidence_terms": [
+            "f(x)",
+            "function value",
+            "input value"
+          ]
+        },
+        {
+          "slug": "graph-of-function",
+          "description": "reading a graph of a function",
+          "evidence_terms": [
+            "graph",
+            "plot",
+            "axis"
+          ]
+        }
+      ]
+    },
+    "math-derivatives": {
+      "required": [
+        {
+          "slug": "rate-of-change",
+          "description": "derivative as rate of change",
+          "evidence_terms": [
+            "rate of change",
+            "slope"
+          ]
+        },
+        {
+          "slug": "limit-definition",
+          "description": "limit definition of derivative",
+          "evidence_terms": [
+            "limit",
+            "secant",
+            "tangent"
+          ]
+        },
+        {
+          "slug": "power-rule",
+          "description": "basic differentiation rules",
+          "evidence_terms": [
+            "power rule",
+            "polynomial"
+          ]
+        }
+      ]
+    },
+    "math-partial-derivatives": {
+      "required": [
+        {
+          "slug": "multivariable-function",
+          "description": "functions of several variables",
+          "evidence_terms": [
+            "several variables",
+            "multivariable",
+            "two variables"
+          ]
+        },
+        {
+          "slug": "partial-derivative-def",
+          "description": "holding other variables constant",
+          "evidence_terms": [
+            "partial derivative",
+            "hold",
+            "constant"
+          ]
+        },
+        {
+          "slug": "gradient-vector",
+          "description": "collecting partials into a gradient",
+          "evidence_terms": [
+            "gradient",
+            "vector"
+          ]
+        }
+      ]
+    },
+    "math-conditional-probability": {
+      "required": [
+        {
+          "slug": "conditional-prob-def",
+          "description": "P(A|B) definition and intuition",
+          "evidence_terms": [
+            "conditional probability",
+            "given that",
+            "P(A|B)"
+          ]
+        },
+        {
+          "slug": "independence-test",
+          "description": "independence vs dependence",
+          "evidence_terms": [
+            "independen"
+          ]
+        },
+        {
+          "slug": "restrict-sample-space",
+          "description": "conditioning shrinks sample space",
+          "evidence_terms": [
+            "sample space",
+            "reduce",
+            "subset"
+          ]
+        }
+      ]
+    },
+    "math-bayes-theorem": {
+      "required": [
+        {
+          "slug": "bayes-formula",
+          "description": "Bayes theorem statement",
+          "evidence_terms": [
+            "bayes",
+            "posterior",
+            "prior"
+          ]
+        },
+        {
+          "slug": "flip-conditioning",
+          "description": "reversing conditioning direction",
+          "evidence_terms": [
+            "given",
+            "conditional probabilit"
+          ]
+        },
+        {
+          "slug": "base-rate-example",
+          "description": "applied example with priors",
+          "evidence_terms": [
+            "test",
+            "disease",
+            "example",
+            "population"
+          ]
+        }
+      ]
+    },
+    "math-expectation-variance": {
+      "required": [
+        {
+          "slug": "expected-value",
+          "description": "long-run average of random variable",
+          "evidence_terms": [
+            "expected value",
+            "expectation",
+            "mean"
+          ]
+        },
+        {
+          "slug": "variance-spread",
+          "description": "variance measures spread",
+          "evidence_terms": [
+            "variance",
+            "spread",
+            "standard deviation"
+          ]
+        },
+        {
+          "slug": "compute-discrete",
+          "description": "computing E and Var for discrete RV",
+          "evidence_terms": [
+            "sum",
+            "probability",
+            "weight"
+          ]
+        }
+      ]
+    },
+    "ml-types-of-ml": {
+      "required": [
+        {
+          "slug": "supervised-vs-unsupervised",
+          "description": "supervised vs unsupervised distinction",
+          "evidence_terms": [
+            "supervised",
+            "unsupervised",
+            "label"
+          ]
+        },
+        {
+          "slug": "reinforcement-awareness",
+          "description": "reinforcement setting exists",
+          "evidence_terms": [
+            "reinforcement",
+            "reward"
+          ]
+        },
+        {
+          "slug": "task-examples",
+          "description": "concrete task examples per type",
+          "evidence_terms": [
+            "classification",
+            "clustering",
+            "example"
+          ]
+        }
+      ]
+    },
+    "ml-validation-split": {
+      "required": [
+        {
+          "slug": "why-validation",
+          "description": "validation set purpose beyond train/test",
+          "evidence_terms": [
+            "validation set",
+            "hyperparameter",
+            "tun"
+          ]
+        },
+        {
+          "slug": "split-ratios",
+          "description": "typical split proportions",
+          "evidence_terms": [
+            "split",
+            "percent",
+            "hold out"
+          ]
+        },
+        {
+          "slug": "leakage-warning",
+          "description": "selection using test set is leakage",
+          "evidence_terms": [
+            "overfit",
+            "test set",
+            "select"
+          ]
+        }
+      ]
+    },
+    "ml-loss-intuition": {
+      "required": [
+        {
+          "slug": "loss-measures-error",
+          "description": "loss quantifies prediction error",
+          "evidence_terms": [
+            "loss",
+            "cost function",
+            "error"
+          ]
+        },
+        {
+          "slug": "squared-error",
+          "description": "squared error punishes large misses",
+          "evidence_terms": [
+            "squared",
+            "least squares",
+            "residual"
+          ]
+        },
+        {
+          "slug": "minimize-loss-goal",
+          "description": "training = minimizing loss",
+          "evidence_terms": [
+            "minimiz",
+            "optimiz",
+            "fit"
+          ]
+        }
+      ]
+    },
+    "ml-gradient-descent-intuition": {
+      "required": [
+        {
+          "slug": "descent-analogy",
+          "description": "descending loss surface stepwise",
+          "evidence_terms": [
+            "step",
+            "downhill",
+            "iterative"
+          ]
+        },
+        {
+          "slug": "learning-rate-role",
+          "description": "learning rate sets step size",
+          "evidence_terms": [
+            "learning rate",
+            "step size"
+          ]
+        },
+        {
+          "slug": "gradient-direction",
+          "description": "move against gradient",
+          "evidence_terms": [
+            "gradient",
+            "direction",
+            "negative"
+          ]
+        }
+      ]
+    },
+    "ml-logistic-regression": {
+      "required": [
+        {
+          "slug": "sigmoid-mapping",
+          "description": "sigmoid squashes scores to probabilities",
+          "evidence_terms": [
+            "sigmoid",
+            "logistic function",
+            "probability"
+          ]
+        },
+        {
+          "slug": "decision-threshold",
+          "description": "choosing classification threshold",
+          "evidence_terms": [
+            "threshold",
+            "0.5",
+            "decision boundary"
+          ]
+        },
+        {
+          "slug": "log-loss-fit",
+          "description": "trained via log-loss / MLE",
+          "evidence_terms": [
+            "log loss",
+            "maximum likelihood",
+            "logistic loss"
+          ]
+        }
+      ]
+    },
+    "ml-decision-trees": {
+      "required": [
+        {
+          "slug": "recursive-splits",
+          "description": "trees split data recursively",
+          "evidence_terms": [
+            "split",
+            "node",
+            "leaf",
+            "branch"
+          ]
+        },
+        {
+          "slug": "gini-entropy",
+          "description": "impurity criteria choose splits",
+          "evidence_terms": [
+            "gini",
+            "entropy",
+            "information gain"
+          ]
+        },
+        {
+          "slug": "tree-overfits-deep",
+          "description": "deep trees overfit; prune or limit depth",
+          "evidence_terms": [
+            "overfit",
+            "pruning",
+            "max depth"
+          ]
+        }
+      ]
+    },
+    "ml-random-forests": {
+      "required": [
+        {
+          "slug": "bootstrap-aggregation",
+          "description": "bagging many trees reduces variance",
+          "evidence_terms": [
+            "bootstrap",
+            "bagging",
+            "aggregate"
+          ]
+        },
+        {
+          "slug": "feature-bagging",
+          "description": "random feature subsets decorrelate trees",
+          "evidence_terms": [
+            "random subset",
+            "feature",
+            "decorrelat"
+          ]
+        },
+        {
+          "slug": "oob-estimate",
+          "description": "out-of-bag error estimate",
+          "evidence_terms": [
+            "out-of-bag",
+            "oob"
+          ]
+        }
+      ]
+    },
+    "ml-knn": {
+      "required": [
+        {
+          "slug": "distance-vote",
+          "description": "classify by nearest neighbor vote",
+          "evidence_terms": [
+            "nearest",
+            "distance",
+            "vote",
+            "neighbor"
+          ]
+        },
+        {
+          "slug": "k-choice",
+          "description": "k controls bias/variance",
+          "evidence_terms": [
+            "n_neighbors",
+            "numbers of neighbors",
+            "nearest neighbors"
+          ]
+        },
+        {
+          "slug": "scaling-sensitivity",
+          "description": "features must be scaled",
+          "evidence_terms": [
+            "scale",
+            "normalize",
+            "standardiz"
+          ]
+        }
+      ]
+    },
+    "ml-naive-bayes": {
+      "required": [
+        {
+          "slug": "bayes-classifier",
+          "description": "applies Bayes rule to classify",
+          "evidence_terms": [
+            "bayes",
+            "posterior",
+            "class"
+          ]
+        },
+        {
+          "slug": "conditional-independence",
+          "description": "naive independence assumption",
+          "evidence_terms": [
+            "conditional independence",
+            "naive",
+            "independent given"
+          ]
+        },
+        {
+          "slug": "text-spam-use",
+          "description": "classic text classification baseline",
+          "evidence_terms": [
+            "text",
+            "spam",
+            "word count",
+            "document"
+          ]
+        }
+      ]
+    },
+    "ml-svm": {
+      "required": [
+        {
+          "slug": "max-margin",
+          "description": "largest separating margin",
+          "evidence_terms": [
+            "margin",
+            "maximum margin",
+            "hyperplane"
+          ]
+        },
+        {
+          "slug": "support-vectors",
+          "description": "boundary points define the separator",
+          "evidence_terms": [
+            "support vector"
+          ]
+        },
+        {
+          "slug": "kernel-trick",
+          "description": "kernels handle non-linear data",
+          "evidence_terms": [
+            "kernel",
+            "non-linear",
+            "feature space"
+          ]
+        }
+      ]
+    },
+    "ml-confusion-matrix": {
+      "required": [
+        {
+          "slug": "tp-fp-fn-tn",
+          "description": "confusion matrix cells",
+          "evidence_terms": [
+            "true positive",
+            "false positive",
+            "false negative",
+            "true negative"
+          ]
+        },
+        {
+          "slug": "precision-recall-f1",
+          "description": "precision/recall/F1 definitions",
+          "evidence_terms": [
+            "precision",
+            "recall",
+            "f1"
+          ]
+        },
+        {
+          "slug": "imbalance-choice",
+          "description": "metric choice under class imbalance",
+          "evidence_terms": [
+            "imbalanc",
+            "accuracy misleading",
+            "rare"
+          ]
+        }
+      ]
+    },
+    "ml-bias-variance": {
+      "required": [
+        {
+          "slug": "bias-underfit",
+          "description": "high bias means underfitting",
+          "evidence_terms": [
+            "bias",
+            "underfit"
+          ]
+        },
+        {
+          "slug": "variance-overfit",
+          "description": "high variance means overfitting",
+          "evidence_terms": [
+            "variance",
+            "overfit"
+          ]
+        },
+        {
+          "slug": "tradeoff-diagnosis",
+          "description": "train/validation gap diagnosis",
+          "evidence_terms": [
+            "tradeoff",
+            "gap",
+            "diagnos"
+          ]
+        }
+      ]
+    },
+    "ml-cross-validation": {
+      "required": [
+        {
+          "slug": "kfold-rotation",
+          "description": "rotate held-out fold across K splits",
+          "evidence_terms": [
+            "k-fold",
+            "fold",
+            "rotation"
+          ]
+        },
+        {
+          "slug": "robust-small-data",
+          "description": "better estimates on small datasets",
+          "evidence_terms": [
+            "small dataset",
+            "variance of estimate",
+            "reliabl"
+          ]
+        },
+        {
+          "slug": "stratification",
+          "description": "stratify folds for classification",
+          "evidence_terms": [
+            "stratif",
+            "class proportion"
+          ]
+        }
+      ]
+    },
+    "ml-feature-scaling": {
+      "required": [
+        {
+          "slug": "standardize-mean-std",
+          "description": "zero mean unit variance scaling",
+          "evidence_terms": [
+            "standardiz",
+            "mean",
+            "standard deviation",
+            "unit variance"
+          ]
+        },
+        {
+          "slug": "minmax-range",
+          "description": "min-max range scaling",
+          "evidence_terms": [
+            "min-max",
+            "range",
+            "0 and 1"
+          ]
+        },
+        {
+          "slug": "distance-methods-need-it",
+          "description": "needed for distance/gradient methods",
+          "evidence_terms": [
+            "knn",
+            "svm",
+            "gradient descent",
+            "distance"
+          ]
+        }
+      ]
+    },
+    "ml-encoding-categorical": {
+      "required": [
+        {
+          "slug": "one-hot",
+          "description": "one-hot encoding categories",
+          "evidence_terms": [
+            "one-hot",
+            "onehot",
+            "binary column"
+          ]
+        },
+        {
+          "slug": "ordinal-label",
+          "description": "ordinal/label encodings and risks",
+          "evidence_terms": [
+            "ordinal",
+            "label encode",
+            "order"
+          ]
+        },
+        {
+          "slug": "target-leakage",
+          "description": "target encoding leakage risk",
+          "evidence_terms": [
+            "target encode",
+            "leakage",
+            "cross-fold"
+          ]
+        }
+      ]
+    },
+    "ml-ensemble-learning": {
+      "required": [
+        {
+          "slug": "bagging-vs-boosting",
+          "description": "variance vs bias reduction strategies",
+          "evidence_terms": [
+            "bagging",
+            "boosting",
+            "sequential"
+          ]
+        },
+        {
+          "slug": "stacking-blend",
+          "description": "stacked meta-learners",
+          "evidence_terms": [
+            "stack",
+            "meta learner",
+            "blend"
+          ]
+        },
+        {
+          "slug": "diversity-source",
+          "description": "errors must be diverse to cancel",
+          "evidence_terms": [
+            "divers",
+            "uncorrelat",
+            "error"
+          ]
+        }
+      ]
+    },
+    "ml-end-to-end-workflow": {
+      "required": [
+        {
+          "slug": "frame-problem",
+          "description": "define objective and metric first",
+          "evidence_terms": [
+            "problem",
+            "objective",
+            "metric"
+          ]
+        },
+        {
+          "slug": "production-monitoring-awareness",
+          "description": "production monitoring/reliability concerns after deployment",
+          "evidence_terms": [
+            "monitoring",
+            "drift",
+            "reliability"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "iterate-loop",
+          "description": "data->features->model->validate loop",
+          "evidence_terms": [
+            "iterat",
+            "loop",
+            "workflow"
+          ]
+        },
+        {
+          "slug": "checklist-hygiene",
+          "description": "checklist prevents leakage/bugs",
+          "evidence_terms": [
+            "checklist",
+            "pitfall",
+            "best practice"
+          ]
+        }
+      ]
+    },
+    "dl-why-deep-learning": {
+      "required": [
+        {
+          "slug": "handcrafted-limits",
+          "description": "handcrafted features plateau",
+          "evidence_terms": [
+            "feature engineering",
+            "hand-design",
+            "domain knowledge"
+          ]
+        },
+        {
+          "slug": "representation-learning",
+          "description": "layers learn representations",
+          "evidence_terms": [
+            "representat",
+            "learn features",
+            "hierarchical"
+          ]
+        },
+        {
+          "slug": "data-compute-scale",
+          "description": "scales with data and compute",
+          "evidence_terms": [
+            "large data",
+            "scale",
+            "gpu",
+            "compute"
+          ]
+        }
+      ]
+    },
+    "dl-neuron-intuition": {
+      "required": [
+        {
+          "slug": "weighted-sum-unit",
+          "description": "neuron computes weighted sum + nonlinearity",
+          "evidence_terms": [
+            "weighted sum",
+            "weights",
+            "activation"
+          ]
+        },
+        {
+          "slug": "biological-analogy",
+          "description": "loose biological inspiration",
+          "evidence_terms": [
+            "neuron",
+            "brain",
+            "synapse"
+          ]
+        },
+        {
+          "slug": "linear-model-link",
+          "description": "single neuron relates to linear/logistic model",
+          "evidence_terms": [
+            "linear",
+            "logistic regression",
+            "perceptron"
+          ]
+        }
+      ]
+    },
+    "dl-perceptron": {
+      "required": [
+        {
+          "slug": "perceptron-rule",
+          "description": "error-driven weight update rule",
+          "evidence_terms": [
+            "update",
+            "weight",
+            "learn"
+          ]
+        },
+        {
+          "slug": "linear-separability",
+          "description": "only solves linearly separable data",
+          "evidence_terms": [
+            "linearly separable",
+            "xor",
+            "limitation"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "convergence-guarantee",
+          "description": "converges when separable",
+          "evidence_terms": [
+            "converg"
+          ]
+        }
+      ]
+    },
+    "dl-activation-functions": {
+      "required": [
+        {
+          "slug": "nonlinearity-required",
+          "description": "without nonlinearity nets collapse to linear",
+          "evidence_terms": [
+            "non-linear",
+            "nonlinear"
+          ]
+        },
+        {
+          "slug": "relu-family",
+          "description": "ReLU and variants properties",
+          "evidence_terms": [
+            "relu",
+            "dying",
+            "leaky"
+          ]
+        },
+        {
+          "slug": "sigmoid-tanh-saturation",
+          "description": "saturation problems of sigmoids",
+          "evidence_terms": [
+            "sigmoid",
+            "tanh",
+            "saturate",
+            "vanish"
+          ]
+        }
+      ]
+    },
+    "dl-forward-propagation": {
+      "required": [
+        {
+          "slug": "layer-by-layer-flow",
+          "description": "inputs flow layer by layer",
+          "evidence_terms": [
+            "forward",
+            "layer",
+            "propagate"
+          ]
+        },
+        {
+          "slug": "shape-bookkeeping",
+          "description": "matrix shapes through layers",
+          "evidence_terms": [
+            "shape",
+            "dimension",
+            "matrix multiply"
+          ]
+        },
+        {
+          "slug": "output-layer-role",
+          "description": "final layer produces predictions",
+          "evidence_terms": [
+            "output layer",
+            "prediction",
+            "logit"
+          ]
+        }
+      ]
+    },
+    "dl-loss-functions-nn": {
+      "required": [
+        {
+          "slug": "mse-regression",
+          "description": "MSE pairs with regression outputs",
+          "evidence_terms": [
+            "mean squared",
+            "regression",
+            "mse"
+          ]
+        },
+        {
+          "slug": "crossentropy-classification",
+          "description": "cross-entropy pairs with softmax/sigmoid",
+          "evidence_terms": [
+            "cross entropy",
+            "softmax",
+            "classification"
+          ]
+        },
+        {
+          "slug": "pairing-principle",
+          "description": "output activation determines loss choice",
+          "evidence_terms": [
+            "pair",
+            "choose",
+            "match"
+          ]
+        }
+      ]
+    },
+    "dl-backprop-intuition": {
+      "required": [
+        {
+          "slug": "chain-rule-backward",
+          "description": "apply chain rule backward through layers",
+          "evidence_terms": [
+            "chain rule",
+            "backward",
+            "derive"
+          ]
+        },
+        {
+          "slug": "credit-assignment",
+          "description": "attribute blame to earlier weights",
+          "evidence_terms": [
+            "chain rule",
+            "derivative",
+            "backward"
+          ]
+        },
+        {
+          "slug": "two-layer-handwork",
+          "description": "trace on a small network",
+          "evidence_terms": [
+            "symbol",
+            "expression",
+            "compute"
+          ]
+        }
+      ]
+    },
+    "dl-computational-graphs": {
+      "required": [
+        {
+          "slug": "nodes-as-ops",
+          "description": "operations form a directed graph",
+          "evidence_terms": [
+            "graph",
+            "node",
+            "operation"
+          ]
+        },
+        {
+          "slug": "local-gradients",
+          "description": "each node knows local derivative",
+          "evidence_terms": [
+            "local derivative",
+            "chain rule"
+          ]
+        },
+        {
+          "slug": "autodiff-generalizes",
+          "description": "autodiff generalizes backprop",
+          "evidence_terms": [
+            "automatic differenti",
+            "autodiff",
+            "framework"
+          ]
+        }
+      ]
+    },
+    "dl-gradient-descent-nn": {
+      "required": [
+        {
+          "slug": "end-to-end-update",
+          "description": "update every weight from gradients",
+          "evidence_terms": [
+            "update",
+            "parameter",
+            "weight"
+          ]
+        },
+        {
+          "slug": "lr-stability",
+          "description": "too-large LR diverges",
+          "evidence_terms": [
+            "learning rate",
+            "diverge",
+            "stability"
+          ]
+        },
+        {
+          "slug": "epoch-loop",
+          "description": "repeat over dataset passes",
+          "evidence_terms": [
+            "epoch",
+            "iterate",
+            "pass over"
+          ]
+        }
+      ]
+    },
+    "dl-mlp": {
+      "required": [
+        {
+          "slug": "hidden-width-depth",
+          "description": "hidden sizes and depth choices",
+          "evidence_terms": [
+            "hidden layer",
+            "width",
+            "depth"
+          ]
+        },
+        {
+          "slug": "param-counting",
+          "description": "count parameters by shapes",
+          "evidence_terms": [
+            "parameter",
+            "count",
+            "number of"
+          ]
+        },
+        {
+          "slug": "train-from-scratch",
+          "description": "full training loop assembly",
+          "evidence_terms": [
+            "training loop",
+            "from scratch",
+            "implement"
+          ]
+        }
+      ]
+    },
+    "dl-vanishing-gradients": {
+      "required": [
+        {
+          "slug": "saturation-shrink",
+          "description": "gradients shrink through saturated layers",
+          "evidence_terms": [
+            "vanish",
+            "shrink",
+            "saturat"
+          ]
+        },
+        {
+          "slug": "explode-instability",
+          "description": "gradients can explode too",
+          "evidence_terms": [
+            "explod",
+            "unstable",
+            "overflow"
+          ]
+        },
+        {
+          "slug": "mitigations",
+          "description": "ReLU/residual/norm mitigations",
+          "evidence_terms": [
+            "relu",
+            "residual",
+            "normaliz"
+          ]
+        }
+      ]
+    },
+    "dl-initialization": {
+      "required": [
+        {
+          "slug": "variance-preservation",
+          "description": "keep activation variance stable",
+          "evidence_terms": [
+            "variance",
+            "preserve",
+            "stable"
+          ]
+        },
+        {
+          "slug": "xavier-he",
+          "description": "Xavier/Glorot and He schemes",
+          "evidence_terms": [
+            "xavier",
+            "glorot",
+            "he initialization"
+          ]
+        },
+        {
+          "slug": "not-zero-init",
+          "description": "symmetry breaking requirement",
+          "evidence_terms": [
+            "zero init",
+            "symmetry",
+            "random"
+          ]
+        }
+      ]
+    },
+    "dl-normalization": {
+      "required": [
+        {
+          "slug": "batchnorm-statistics",
+          "description": "normalize using batch statistics",
+          "evidence_terms": [
+            "batch norm",
+            "mean and variance",
+            "statistics"
+          ]
+        },
+        {
+          "slug": "train-inference-diff",
+          "description": "running stats at inference",
+          "evidence_terms": [
+            "inference",
+            "moving average",
+            "running"
+          ]
+        },
+        {
+          "slug": "layernorm-transformers",
+          "description": "LayerNorm used in transformers",
+          "evidence_terms": [
+            "layer norm",
+            "transformer"
+          ]
+        }
+      ]
+    },
+    "dl-dropout": {
+      "required": [
+        {
+          "slug": "random-deactivate",
+          "description": "drop units during training only",
+          "evidence_terms": [
+            "drop",
+            "randomly",
+            "training"
+          ]
+        },
+        {
+          "slug": "ensemble-view",
+          "description": "implicit ensembling interpretation",
+          "evidence_terms": [
+            "ensemble",
+            "regulariz"
+          ]
+        },
+        {
+          "slug": "scaling-inference",
+          "description": "rescale at inference",
+          "evidence_terms": [
+            "inference",
+            "scaling",
+            "deploy"
+          ]
+        }
+      ]
+    },
+    "dl-optimizers-sgd": {
+      "required": [
+        {
+          "slug": "sgd-noise",
+          "description": "minibatch noise regularizes",
+          "evidence_terms": [
+            "stochastic",
+            "noise",
+            "mini-batch"
+          ]
+        },
+        {
+          "slug": "momentum-velocity",
+          "description": "momentum accumulates velocity",
+          "evidence_terms": [
+            "velocity",
+            "momentum"
+          ]
+        }
+      ]
+    },
+    "dl-optimizers-adam": {
+      "required": [
+        {
+          "slug": "adaptive-per-param",
+          "description": "per-parameter adaptive rates",
+          "evidence_terms": [
+            "adaptive",
+            "learning rate"
+          ]
+        },
+        {
+          "slug": "rmsprop-root",
+          "description": "RMSProp scales by recent magnitude",
+          "evidence_terms": [
+            "rmsprop",
+            "root mean square"
+          ]
+        },
+        {
+          "slug": "adam-defaults-tradeoff",
+          "description": "Adam defaults vs SGD generalization",
+          "evidence_terms": [
+            "adam",
+            "beta",
+            "generalization"
+          ]
+        }
+      ]
+    },
+    "dl-batch-epoch-lr": {
+      "required": [
+        {
+          "slug": "batch-size-tradeoff",
+          "description": "noise vs throughput tradeoff",
+          "evidence_terms": [
+            "batch size",
+            "minibatch"
+          ]
+        },
+        {
+          "slug": "epoch-definition",
+          "description": "epoch = full pass over data",
+          "evidence_terms": [
+            "epoch",
+            "pass over"
+          ]
+        },
+        {
+          "slug": "lr-schedules",
+          "description": "decay/cosine scheduling",
+          "evidence_terms": [
+            "schedule",
+            "decay",
+            "cosine",
+            "warm"
+          ]
+        }
+      ]
+    },
+    "dl-cnn-foundations": {
+      "required": [
+        {
+          "slug": "locality-structure",
+          "description": "images have local structure",
+          "evidence_terms": [
+            "local",
+            "spatial",
+            "nearby pixel"
+          ]
+        },
+        {
+          "slug": "weight-sharing",
+          "description": "shared kernels exploit translation structure",
+          "evidence_terms": [
+            "share weights",
+            "translation",
+            "parameter"
+          ]
+        },
+        {
+          "slug": "dense-inefficient",
+          "description": "dense nets waste parameters on images",
+          "evidence_terms": [
+            "fully connected",
+            "inefficien",
+            "parameters"
+          ]
+        }
+      ]
+    },
+    "dl-convolution-op": {
+      "required": [
+        {
+          "slug": "kernel-slide",
+          "description": "sliding cross-correlation operation",
+          "evidence_terms": [
+            "kernel",
+            "slide",
+            "cross-correlation",
+            "filter"
+          ]
+        },
+        {
+          "slug": "output-size-formula",
+          "description": "compute output spatial size",
+          "evidence_terms": [
+            "output size",
+            "formula",
+            "shape"
+          ]
+        },
+        {
+          "slug": "channels-in-out",
+          "description": "input/output channel volumes",
+          "evidence_terms": [
+            "channel",
+            "input output",
+            "depth"
+          ]
+        }
+      ]
+    },
+    "dl-padding-stride": {
+      "required": [
+        {
+          "slug": "padding-effect",
+          "description": "padding preserves spatial size",
+          "evidence_terms": [
+            "padding",
+            "border",
+            "same"
+          ]
+        },
+        {
+          "slug": "stride-downsample",
+          "description": "stride shrinks output",
+          "evidence_terms": [
+            "stride",
+            "reduce"
+          ]
+        },
+        {
+          "slug": "same-valid",
+          "description": "SAME vs VALID modes",
+          "evidence_terms": [
+            "same",
+            "valid"
+          ]
+        }
+      ]
+    },
+    "dl-pooling": {
+      "required": [
+        {
+          "slug": "max-avg-pool",
+          "description": "max/average pooling semantics",
+          "evidence_terms": [
+            "pooling",
+            "maximum",
+            "average"
+          ]
+        },
+        {
+          "slug": "invariance-property",
+          "description": "small translation invariance",
+          "evidence_terms": [
+            "invariance",
+            "shift",
+            "robust"
+          ]
+        },
+        {
+          "slug": "info-loss-cost",
+          "description": "loses precise location info",
+          "evidence_terms": [
+            "lose information",
+            "coarse",
+            "location"
+          ]
+        }
+      ]
+    },
+    "dl-feature-maps": {
+      "required": [
+        {
+          "slug": "conv-output-volume",
+          "description": "stack maps into channel volumes",
+          "evidence_terms": [
+            "feature map",
+            "volume",
+            "stack"
+          ]
+        },
+        {
+          "slug": "lenet-trace",
+          "description": "trace LeNet shape flow end-to-end",
+          "evidence_terms": [
+            "lenet",
+            "architecture trace",
+            "shape"
+          ]
+        }
+      ]
+    },
+    "dl-rnn-awareness": {
+      "required": [
+        {
+          "slug": "sequence-dependence",
+          "description": "outputs depend on prior tokens",
+          "evidence_terms": [
+            "sequence",
+            "previous",
+            "context"
+          ]
+        },
+        {
+          "slug": "recurrent-state",
+          "description": "hidden state carried forward",
+          "evidence_terms": [
+            "hidden state",
+            "state",
+            "recurren"
+          ]
+        },
+        {
+          "slug": "memory-limitation",
+          "description": "long dependencies fade",
+          "evidence_terms": [
+            "long-term",
+            "dependenc",
+            "capture"
+          ]
+        }
+      ]
+    },
+    "dl-lstm-gru": {
+      "required": [
+        {
+          "slug": "gates-control",
+          "description": "input/forget/output gates regulate memory",
+          "evidence_terms": [
+            "gate",
+            "forget",
+            "input gate",
+            "output gate"
+          ]
+        },
+        {
+          "slug": "cell-state-highway",
+          "description": "cell state preserves gradients",
+          "evidence_terms": [
+            "cell state",
+            "memory cell"
+          ]
+        },
+        {
+          "slug": "gru-streamlined",
+          "description": "GRU merges gates efficiently",
+          "evidence_terms": [
+            "gru",
+            "fewer"
+          ]
+        }
+      ]
+    },
+    "dl-attention-intuition": {
+      "required": [
+        {
+          "slug": "query-key-value",
+          "description": "QKV retrieval framing",
+          "evidence_terms": [
+            "query",
+            "key",
+            "value"
+          ]
+        },
+        {
+          "slug": "soft-alignment",
+          "description": "attention weights align softly",
+          "evidence_terms": [
+            "weight",
+            "align",
+            "pooling"
+          ]
+        },
+        {
+          "slug": "fixes-bottleneck",
+          "description": "removes fixed-size context bottleneck",
+          "evidence_terms": [
+            "differentiable",
+            "queries"
+          ]
+        }
+      ]
+    },
+    "dl-transformers-foundations": {
+      "required": [
+        {
+          "slug": "self-attention-block",
+          "description": "self-attention core block",
+          "evidence_terms": [
+            "self-attention",
+            "multi-head"
+          ]
+        },
+        {
+          "slug": "positional-encoding",
+          "description": "position info injected",
+          "evidence_terms": [
+            "positional",
+            "position encod"
+          ]
+        },
+        {
+          "slug": "residual-norm-stack",
+          "description": "residual + norm stacking recipe",
+          "evidence_terms": [
+            "residual",
+            "layer norm",
+            "stack block"
+          ]
+        }
+      ]
+    },
+    "cv-what-is-an-image": {
+      "required": [
+        {
+          "slug": "image-as-grid",
+          "description": "images are intensity grids",
+          "evidence_terms": [
+            "grid",
+            "matrix of",
+            "pixel grid"
+          ]
+        },
+        {
+          "slug": "resolution-effects",
+          "description": "resolution/aspect tradeoffs",
+          "evidence_terms": [
+            "resolution",
+            "width height",
+            "aspect"
+          ]
+        }
+      ]
+    },
+    "cv-pixels-channels": {
+      "required": [
+        {
+          "slug": "pixel-index",
+          "description": "index pixels by row/col",
+          "evidence_terms": [
+            "index",
+            "row",
+            "column",
+            "array"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "hwc-chw-layout",
+          "description": "HWC vs CHW tensor layouts",
+          "evidence_terms": [
+            "hwc",
+            "chw",
+            "layout",
+            "reshape"
+          ]
+        }
+      ]
+    },
+    "cv-color-spaces": {
+      "required": [
+        {
+          "slug": "rgb-mixing",
+          "description": "RGB channel composition",
+          "evidence_terms": [
+            "rgb",
+            "channel mix",
+            "color"
+          ]
+        },
+        {
+          "slug": "grayscale-convert",
+          "description": "luminance conversion to gray",
+          "evidence_terms": [
+            "grayscale",
+            "grey",
+            "luminance",
+            "convert"
+          ]
+        }
+      ]
+    },
+    "cv-image-tensors": {
+      "required": [
+        {
+          "slug": "batch-dim",
+          "description": "NCHW batch tensors",
+          "evidence_terms": [
+            "batch",
+            "nchw",
+            "stack images"
+          ]
+        },
+        {
+          "slug": "dtype-normalize",
+          "description": "uint8 vs float ranges",
+          "evidence_terms": [
+            "uint8",
+            "float",
+            "0-255",
+            "0-1"
+          ]
+        }
+      ]
+    },
+    "cv-transformations": {
+      "required": [
+        {
+          "slug": "resize-interp",
+          "description": "resizing and interpolation artifacts",
+          "evidence_terms": [
+            "resize",
+            "interpolation",
+            "scale"
+          ]
+        },
+        {
+          "slug": "crop-flip-geom",
+          "description": "geometric transforms preserve labels",
+          "evidence_terms": [
+            "RandomHorizontalFlip",
+            "RandomCrop",
+            "flip"
+          ]
+        }
+      ]
+    },
+    "cv-normalization-cv": {
+      "required": [
+        {
+          "slug": "per-channel-stats",
+          "description": "subtract per-channel mean/std",
+          "evidence_terms": [
+            "mean subtraction",
+            "mean",
+            "subtract"
+          ]
+        },
+        {
+          "slug": "pretrained-match",
+          "description": "match backbone training stats",
+          "evidence_terms": [
+            "data preprocessing",
+            "preprocessing",
+            "scale inputs"
+          ]
+        }
+      ]
+    },
+    "cv-augmentation": {
+      "required": [
+        {
+          "slug": "label-preserving",
+          "description": "augmentations must keep labels valid",
+          "evidence_terms": [
+            "flip",
+            "crop",
+            "augmentation"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "over-augment-risk",
+          "description": "excess augmentation hurts",
+          "evidence_terms": [
+            "too much",
+            "degrade",
+            "destroy signal"
+          ]
+        }
+      ]
+    },
+    "cv-traditional-filters": {
+      "required": [
+        {
+          "slug": "edge-blur-kernels",
+          "description": "classical edge/blur kernels",
+          "evidence_terms": [
+            "edge detection",
+            "blur",
+            "kernel",
+            "sobel"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "pre-deep-era",
+          "description": "handcrafted CV before DL",
+          "evidence_terms": [
+            "traditional",
+            "handcraft",
+            "classical"
+          ]
+        }
+      ]
+    },
+    "cv-convolution-in-cv": {
+      "required": [
+        {
+          "slug": "conv-on-images",
+          "description": "apply conv mechanics to image grids",
+          "evidence_terms": [
+            "convolution",
+            "image",
+            "feature detect"
+          ]
+        },
+        {
+          "slug": "stride-padding-vis",
+          "description": "visual effect of stride/padding",
+          "evidence_terms": [
+            "stride",
+            "padding",
+            "output size"
+          ]
+        }
+      ]
+    },
+    "cv-classification-workflow": {
+      "required": [
+        {
+          "slug": "pipeline-assembly",
+          "description": "data->augment->model->metrics loop",
+          "evidence_terms": [
+            "pipeline",
+            "data",
+            "augment",
+            "metric"
+          ]
+        },
+        {
+          "slug": "softmax-output",
+          "description": "softmax class probabilities",
+          "evidence_terms": [
+            "softmax",
+            "probability",
+            "class score"
+          ]
+        },
+        {
+          "slug": "loss-optimizer-loop",
+          "description": "train loop components",
+          "evidence_terms": [
+            "loss",
+            "optimizer",
+            "epoch"
+          ]
+        }
+      ]
+    },
+    "cv-classic-architectures": {
+      "required": [
+        {
+          "slug": "lenet-alexnet-vgg-arc",
+          "description": "depth/history arc of early CNNs",
+          "evidence_terms": [
+            "lenet",
+            "alexnet",
+            "vgg"
+          ]
+        },
+        {
+          "slug": "what-each-added",
+          "description": "contribution of each generation",
+          "evidence_terms": [
+            "deeper",
+            "contribution",
+            "introduc"
+          ]
+        }
+      ]
+    },
+    "cv-resnet": {
+      "required": [
+        {
+          "slug": "identity-shortcut",
+          "description": "skip connections carry identity",
+          "evidence_terms": [
+            "shortcut",
+            "skip connection",
+            "identity"
+          ]
+        },
+        {
+          "slug": "degradation-fix",
+          "description": "fixes deep-net degradation",
+          "evidence_terms": [
+            "residual",
+            "identity"
+          ]
+        }
+      ]
+    },
+    "cv-efficientnet-awareness": {
+      "required": [],
+      "optional": [
+        {
+          "slug": "compound-scaling",
+          "description": "depth/width/resolution co-scaling",
+          "evidence_terms": [
+            "compound scaling",
+            "efficientnet",
+            "depth width resolution"
+          ]
+        }
+      ]
+    },
+    "cv-transfer-learning-cv": {
+      "required": [
+        {
+          "slug": "freeze-finetune",
+          "description": "freeze backbone then fine-tune head",
+          "evidence_terms": [
+            "fine-tuning",
+            "pretrain",
+            "warm"
+          ]
+        },
+        {
+          "slug": "small-data-win",
+          "description": "pretraining wins on small datasets",
+          "evidence_terms": [
+            "small dataset",
+            "transfer",
+            "pretrain benefit"
+          ]
+        }
+      ]
+    },
+    "cv-object-detection-overview": {
+      "required": [
+        {
+          "slug": "classify-plus-localize",
+          "description": "joint boxes+classes output space",
+          "evidence_terms": [
+            "bounding box",
+            "localiz",
+            "class"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "vs-classification",
+          "description": "difference from pure classification",
+          "evidence_terms": [
+            "where",
+            "location",
+            "multiple object"
+          ]
+        }
+      ]
+    },
+    "cv-bounding-boxes-iou": {
+      "required": [
+        {
+          "slug": "box-formats",
+          "description": "corner vs center box formats",
+          "evidence_terms": [
+            "corner",
+            "center",
+            "format",
+            "x y w h"
+          ]
+        },
+        {
+          "slug": "iou-compute",
+          "description": "intersection-over-union by hand",
+          "evidence_terms": [
+            "iou"
+          ]
+        }
+      ]
+    },
+    "cv-nms": {
+      "required": [
+        {
+          "slug": "greedy-suppression",
+          "description": "score-order greedy NMS algorithm",
+          "evidence_terms": [
+            "non-maximum suppression",
+            "nms",
+            "suppression"
+          ]
+        },
+        {
+          "slug": "duplicate-removal",
+          "description": "dedupe overlapping detections",
+          "evidence_terms": [
+            "suppress",
+            "non-maximum"
+          ]
+        }
+      ]
+    },
+    "cv-two-stage-vs-one-stage": {
+      "required": [
+        {
+          "slug": "region-proposals",
+          "description": "two-stage proposal then refine",
+          "evidence_terms": [
+            "proposal",
+            "regional"
+          ]
+        },
+        {
+          "slug": "direct-single-shot",
+          "description": "one-stage direct dense prediction",
+          "evidence_terms": [
+            "one-stage",
+            "single shot",
+            "yolo",
+            "ssd"
+          ]
+        },
+        {
+          "slug": "speed-accuracy-tradeoff",
+          "description": "tradeoffs between families",
+          "evidence_terms": [
+            "faster",
+            "trade-off",
+            "speed"
+          ]
+        }
+      ]
+    },
+    "cv-yolo-concept": {
+      "required": [
+        {
+          "slug": "grid-predictions",
+          "description": "grid-cell direct predictions",
+          "evidence_terms": [
+            "grid cell",
+            "predict",
+            "yolo"
+          ]
+        },
+        {
+          "slug": "ssd-single-shot",
+          "description": "single-shot detection predicts boxes directly on a grid",
+          "evidence_terms": [
+            "single shot",
+            "ssd",
+            "directly"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "family-positioning",
+          "description": "YOLO versions positioning",
+          "evidence_terms": [
+            "yolo",
+            "real-time"
+          ]
+        }
+      ]
+    },
+    "cv-semantic-segmentation": {
+      "required": [
+        {
+          "slug": "per-pixel-class",
+          "description": "classify every pixel",
+          "evidence_terms": [
+            "pixel",
+            "label"
+          ]
+        },
+        {
+          "slug": "encoder-decoder-recover",
+          "description": "recover spatial resolution",
+          "evidence_terms": [
+            "encoder decoder",
+            "upsample",
+            "transposed conv"
+          ]
+        }
+      ]
+    },
+    "cv-u-net": {
+      "required": [
+        {
+          "slug": "fcn-dense-prediction",
+          "description": "fully convolutional pixel-wise prediction",
+          "evidence_terms": [
+            "pixel",
+            "prediction",
+            "convolutional",
+            "dense"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "skip-fusion",
+          "description": "U-Net skip connections fuse scales",
+          "evidence_terms": [
+            "u-net",
+            "skip",
+            "concatenate",
+            "fuse"
+          ]
+        },
+        {
+          "slug": "biomedical-origin",
+          "description": "origin and data-efficiency story",
+          "evidence_terms": [
+            "biomedical",
+            "segmentation",
+            "small data"
+          ]
+        }
+      ]
+    },
+    "cv-instance-segmentation": {
+      "required": [
+        {
+          "slug": "instance-vs-semantic",
+          "description": "separate overlapping instances",
+          "evidence_terms": [
+            "mask r-cnn"
+          ]
+        },
+        {
+          "slug": "mask-rcnn-branch",
+          "description": "mask branch atop detection",
+          "evidence_terms": [
+            "mask r-cnn",
+            "mask",
+            "roipooling",
+            "instance"
+          ]
+        }
+      ]
+    },
+    "cv-evaluation-metrics-cv": {
+      "required": [
+        {
+          "slug": "map-construction",
+          "description": "mAP averaging procedure",
+          "evidence_terms": [
+            "map",
+            "average precision",
+            "precision"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "seg-iou-dice",
+          "description": "IoU/Dice for segmentation",
+          "evidence_terms": [
+            "iou",
+            "dice",
+            "segmentation metric"
+          ]
+        }
+      ]
+    },
+    "cv-vision-transformers-awareness": {
+      "required": [
+        {
+          "slug": "patch-embedding",
+          "description": "images become patch sequences",
+          "evidence_terms": [
+            "patch",
+            "embed",
+            "sequence"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "data-appetite-contrast",
+          "description": "ViT needs more data than CNN",
+          "evidence_terms": [
+            "large-scale",
+            "data hungry",
+            "inductive bias"
+          ]
+        }
+      ]
+    },
+    "cv-end-to-end-project": {
+      "required": [
+        {
+          "slug": "full-project-loop",
+          "description": "dataset prep through submission",
+          "evidence_terms": [
+            "dataset",
+            "prepare",
+            "submit",
+            "end-to-end"
+          ]
+        },
+        {
+          "slug": "honest-eval",
+          "description": "validation discipline in project",
+          "evidence_terms": [
+            "accuracy",
+            "validation"
+          ]
+        }
+      ]
+    },
+    "nlp-what-is-nlp": {
+      "required": [
+        {
+          "slug": "language-task-map",
+          "description": "breadth of language tasks",
+          "evidence_terms": [
+            "task",
+            "classification",
+            "translation",
+            "summariz"
+          ]
+        },
+        {
+          "slug": "task-landscape",
+          "description": "breadth of practical language tasks",
+          "evidence_terms": [
+            "classification",
+            "translation",
+            "summar",
+            "question answering"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "ambiguity-core",
+          "description": "ambiguity as central difficulty",
+          "evidence_terms": [
+            "ambigu",
+            "context"
+          ]
+        }
+      ]
+    },
+    "nlp-text-preprocessing": {
+      "required": [
+        {
+          "slug": "cleaning-steps",
+          "description": "case/punct/whitespace pipelines",
+          "evidence_terms": [
+            "lowercase",
+            "lower case",
+            "normalizer",
+            "strip accents",
+            "punctuation"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "over-cleaning-risk",
+          "description": "aggressive cleaning can hurt models",
+          "evidence_terms": [
+            "careful",
+            "hurt",
+            "information loss"
+          ]
+        }
+      ]
+    },
+    "nlp-tokenization-nlp": {
+      "required": [
+        {
+          "slug": "word-subword-char",
+          "description": "token granularity spectrum",
+          "evidence_terms": [
+            "word-based",
+            "subword",
+            "character"
+          ]
+        },
+        {
+          "slug": "bpe-algorithm",
+          "description": "byte pair encoding mechanics",
+          "evidence_terms": [
+            "byte pair encoding",
+            "bpe"
+          ]
+        },
+        {
+          "slug": "oov-vocab-tradeoff",
+          "description": "vocab size vs OOV handling",
+          "evidence_terms": [
+            "[UNK]",
+            "unknown",
+            "vocabulary size",
+            "vocab"
+          ]
+        }
+      ]
+    },
+    "nlp-vocabulary-bow": {
+      "required": [
+        {
+          "slug": "count-vectors",
+          "description": "documents as count vectors",
+          "evidence_terms": [
+            "count",
+            "vectorize",
+            "bag of words"
+          ]
+        },
+        {
+          "slug": "order-lost",
+          "description": "word order information discarded",
+          "evidence_terms": [
+            "order",
+            "grammar",
+            "structure"
+          ]
+        },
+        {
+          "slug": "sparsity-issue",
+          "description": "sparse high-dimensional vectors",
+          "evidence_terms": [
+            "sparse",
+            "high-dimensional",
+            "zero"
+          ]
+        }
+      ]
+    },
+    "nlp-tf-idf": {
+      "required": [
+        {
+          "slug": "term-frequency-part",
+          "description": "within-document frequency term",
+          "evidence_terms": [
+            "term frequency",
+            "tf"
+          ]
+        },
+        {
+          "slug": "inverse-doc-frequency",
+          "description": "rarity weighting across docs",
+          "evidence_terms": [
+            "inverse document frequency",
+            "idf",
+            "rare word"
+          ]
+        },
+        {
+          "slug": "similarity-baseline",
+          "description": "use for search/similarity baseline",
+          "evidence_terms": [
+            "similarity",
+            "search",
+            "cosine"
+          ]
+        }
+      ]
+    },
+    "nlp-word-embeddings": {
+      "required": [
+        {
+          "slug": "dense-semantics",
+          "description": "dense vectors encode similarity",
+          "evidence_terms": [
+            "dense vector",
+            "similar",
+            "semantic"
+          ]
+        },
+        {
+          "slug": "geometry-of-meaning",
+          "description": "directions relate to relations",
+          "evidence_terms": [
+            "analogy",
+            "arithmetic",
+            "king"
+          ]
+        }
+      ]
+    },
+    "nlp-word2vec": {
+      "required": [
+        {
+          "slug": "skipgram-cbow",
+          "description": "prediction-window training objectives",
+          "evidence_terms": [
+            "skip-gram",
+            "cbow",
+            "window"
+          ]
+        },
+        {
+          "slug": "negative-sampling",
+          "description": "efficient negative sampling",
+          "evidence_terms": [
+            "negative sampling"
+          ]
+        }
+      ]
+    },
+    "nlp-sequence-modeling": {
+      "required": [
+        {
+          "slug": "lm-objective",
+          "description": "predict next token framing",
+          "evidence_terms": [
+            "language model",
+            "predict next",
+            "objective"
+          ]
+        },
+        {
+          "slug": "order-matters",
+          "description": "sequences require order modeling",
+          "evidence_terms": [
+            "order",
+            "sequence",
+            "context"
+          ]
+        }
+      ]
+    },
+    "nlp-rnn-lstm": {
+      "required": [
+        {
+          "slug": "text-recurrence",
+          "description": "RNN/LSTM applied token-by-token",
+          "evidence_terms": [
+            "recurren",
+            "token",
+            "time step"
+          ]
+        },
+        {
+          "slug": "lstm-counters-vanish",
+          "description": "gating counters vanishing memory",
+          "evidence_terms": [
+            "gate",
+            "vanish",
+            "memory"
+          ]
+        }
+      ]
+    },
+    "nlp-attention-nlp": {
+      "required": [
+        {
+          "slug": "alignment-weights",
+          "description": "soft alignment over tokens",
+          "evidence_terms": [
+            "align",
+            "attention weight",
+            "focus"
+          ]
+        },
+        {
+          "slug": "replaces-bottleneck",
+          "description": "direct access to all states",
+          "evidence_terms": [
+            "align",
+            "fixed length",
+            "bottleneck"
+          ]
+        }
+      ]
+    },
+    "nlp-transformers-nlp": {
+      "required": [
+        {
+          "slug": "parallel-self-attn",
+          "description": "parallel processing via self-attention",
+          "evidence_terms": [
+            "self-attention",
+            "parallel",
+            "sequence"
+          ]
+        },
+        {
+          "slug": "positional-info",
+          "description": "positional encodings restore order",
+          "evidence_terms": [
+            "positional",
+            "position"
+          ]
+        }
+      ]
+    },
+    "nlp-bert": {
+      "required": [
+        {
+          "slug": "masked-lm-pretraining",
+          "description": "MLM pretraining objective",
+          "evidence_terms": [
+            "masked language",
+            "mask token",
+            "cloze"
+          ]
+        },
+        {
+          "slug": "bidirectional-context",
+          "description": "both-side context understanding",
+          "evidence_terms": [
+            "bidirectional",
+            "both directions",
+            "context"
+          ]
+        },
+        {
+          "slug": "mlm-pretraining-task",
+          "description": "masked language modeling pretraining objective",
+          "evidence_terms": [
+            "masked language model",
+            "mask",
+            "pretrain"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "bert-family-variants",
+          "description": "RoBERTa/DistilBERT family roles",
+          "evidence_terms": [
+            "roberta",
+            "distilbert",
+            "variant"
+          ]
+        }
+      ]
+    },
+    "nlp-encoder-vs-decoder": {
+      "required": [
+        {
+          "slug": "understanding-vs-generation",
+          "description": "task fit of encoder vs decoder",
+          "evidence_terms": [
+            "encoder",
+            "decoder",
+            "generation",
+            "understanding"
+          ]
+        },
+        {
+          "slug": "seq2seq-bridge",
+          "description": "encoder-decoder for transduction",
+          "evidence_terms": [
+            "seq2seq",
+            "translation",
+            "summariz"
+          ]
+        }
+      ]
+    },
+    "nlp-generative-models": {
+      "required": [
+        {
+          "slug": "autoregressive-decode",
+          "description": "left-to-right token decoding",
+          "evidence_terms": [
+            "causal",
+            "autoregressive",
+            "next token"
+          ]
+        },
+        {
+          "slug": "gpt-lineage",
+          "description": "GPT family overview",
+          "evidence_terms": [
+            "gpt",
+            "decoder-only",
+            "from scratch"
+          ]
+        }
+      ]
+    },
+    "nlp-fine-tuning-nlp": {
+      "required": [
+        {
+          "slug": "head-swap",
+          "description": "replace head for target task",
+          "evidence_terms": [
+            "head",
+            "classification layer",
+            "num_labels"
+          ]
+        },
+        {
+          "slug": "light-tuning-recipe",
+          "description": "low LR few epochs recipe",
+          "evidence_terms": [
+            "learning rate",
+            "epochs",
+            "catastrophic forget"
+          ]
+        }
+      ]
+    },
+    "nlp-evaluation-nlp": {
+      "required": [
+        {
+          "slug": "perplexity-lm",
+          "description": "perplexity for LMs",
+          "evidence_terms": [
+            "perplexity"
+          ]
+        },
+        {
+          "slug": "bleu-rouge-limits",
+          "description": "n-gram metric limitations",
+          "evidence_terms": [
+            "rouge",
+            "metric"
+          ]
+        },
+        {
+          "slug": "human-eval-need",
+          "description": "human judgment necessity",
+          "evidence_terms": [
+            "human",
+            "judgment",
+            "evaluat"
+          ]
+        }
+      ]
+    },
+    "genai-what-is-lm": {
+      "required": [
+        {
+          "slug": "next-token-dist",
+          "description": "LM = distribution over next tokens",
+          "evidence_terms": [
+            "probability distribution",
+            "next token",
+            "predict"
+          ]
+        },
+        {
+          "slug": "sampling-generates",
+          "description": "sampling turns model generative",
+          "evidence_terms": [
+            "sampling",
+            "generate",
+            "sample"
+          ]
+        }
+      ]
+    },
+    "genai-next-token-prediction": {
+      "required": [],
+      "optional": [
+        {
+          "slug": "emergent-capability",
+          "description": "capabilities emerge from scale",
+          "evidence_terms": [
+            "emergen",
+            "scale",
+            "capability"
+          ]
+        },
+        {
+          "slug": "pretraining-objective",
+          "description": "mask/predict training at scale",
+          "evidence_terms": [
+            "pretrain",
+            "objective",
+            "self-supervised"
+          ]
+        }
+      ]
+    },
+    "genai-tokenization-llm": {
+      "required": [
+        {
+          "slug": "bpe-production",
+          "description": "BPE subwords in production LLMs",
+          "evidence_terms": [
+            "bpe",
+            "subword",
+            "tokenizer"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "token-economics",
+          "description": "tokens drive cost/context math",
+          "evidence_terms": [
+            "cost",
+            "pricing",
+            "context length",
+            "count tokens"
+          ]
+        }
+      ]
+    },
+    "genai-pretraining-finetuning": {
+      "required": [
+        {
+          "slug": "stage-pipeline",
+          "description": "base -> SFT -> preference stages",
+          "evidence_terms": [
+            "pretrain",
+            "fine-tune",
+            "stage"
+          ]
+        },
+        {
+          "slug": "data-mixes",
+          "description": "dataset composition per stage",
+          "evidence_terms": [
+            "dataset",
+            "preference",
+            "comparison"
+          ]
+        }
+      ]
+    },
+    "genai-instruction-tuning-rlhf": {
+      "required": [
+        {
+          "slug": "sft-on-instructions",
+          "description": "supervised instruction following",
+          "evidence_terms": [
+            "instruction",
+            "supervised fine-tun",
+            "demonstration"
+          ]
+        },
+        {
+          "slug": "rlhf-dpo-overview",
+          "description": "preference optimization overview",
+          "evidence_terms": [
+            "rlhf",
+            "preference",
+            "reward model",
+            "dpo"
+          ]
+        },
+        {
+          "slug": "alignment-vs-capability",
+          "description": "alignment distinct from ability",
+          "evidence_terms": [
+            "alignment",
+            "helpful",
+            "safe"
+          ]
+        }
+      ]
+    },
+    "genai-inference-parameters": {
+      "required": [
+        {
+          "slug": "temperature-steering",
+          "description": "temperature reshapes distribution",
+          "evidence_terms": [
+            "temperature",
+            "randomness"
+          ]
+        },
+        {
+          "slug": "top-k-top-p",
+          "description": "truncated sampling strategies",
+          "evidence_terms": [
+            "top-k",
+            "top-p",
+            "top_k",
+            "top_p"
+          ]
+        },
+        {
+          "slug": "determinism-dial",
+          "description": "seed/temperature determinism effects",
+          "evidence_terms": [
+            "temperature",
+            "determinis",
+            "greedy"
+          ]
+        }
+      ]
+    },
+    "genai-context-windows": {
+      "required": [
+        {
+          "slug": "finite-span",
+          "description": "models attend within finite window",
+          "evidence_terms": [
+            "context window",
+            "maximum",
+            "token limit"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "truncation-strategies",
+          "description": "handling overflow deliberately",
+          "evidence_terms": [
+            "truncat",
+            "summariz",
+            "exceed"
+          ]
+        }
+      ]
+    },
+    "genai-prompt-engineering": {
+      "required": [
+        {
+          "slug": "role-format-examples",
+          "description": "core prompt structuring patterns",
+          "evidence_terms": [
+            "system prompt",
+            "few-shot",
+            "example",
+            "format"
+          ]
+        },
+        {
+          "slug": "iteration-eval",
+          "description": "measure prompt changes",
+          "evidence_terms": [
+            "evaluat",
+            "iteration",
+            "benchmark prompt"
+          ]
+        },
+        {
+          "slug": "clear-instructions",
+          "description": "specificity beats cleverness",
+          "evidence_terms": [
+            "clear instruction",
+            "specific",
+            "be explicit"
+          ]
+        }
+      ]
+    },
+    "genai-vector-databases": {
+      "required": [
+        {
+          "slug": "ann-indexes",
+          "description": "approximate nearest neighbor indexes",
+          "evidence_terms": [
+            "nearest neighbor",
+            "index",
+            "hnsw",
+            "faiss"
+          ]
+        },
+        {
+          "slug": "recall-latency-tradeoff",
+          "description": "accuracy vs speed knobs",
+          "evidence_terms": [
+            "recall",
+            "latency",
+            "tradeoff"
+          ]
+        },
+        {
+          "slug": "metadata-filter",
+          "description": "filtered vector search basics",
+          "evidence_terms": [
+            "metadata",
+            "filter",
+            "namespace"
+          ]
+        }
+      ]
+    },
+    "genai-chunking-retrieval": {
+      "required": [
+        {
+          "slug": "semantic-chunking",
+          "description": "split documents preserving meaning",
+          "evidence_terms": [
+            "chunk",
+            "overlap",
+            "section split"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "rank-rerank",
+          "description": "retrieve candidates then rerank",
+          "evidence_terms": [
+            "rerank",
+            "rank",
+            "top-k"
+          ]
+        }
+      ]
+    },
+    "genai-hallucinations-guardrails": {
+      "required": [
+        {
+          "slug": "fluent-unfactual",
+          "description": "fluency does not imply truth",
+          "evidence_terms": [
+            "hallucinat",
+            "fabricat",
+            "made up",
+            "false"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "grounding-techniques",
+          "description": "ground responses in sources",
+          "evidence_terms": [
+            "retriev",
+            "ground",
+            "knowledg"
+          ]
+        },
+        {
+          "slug": "validation-refusal",
+          "description": "validate outputs; allow refusal",
+          "evidence_terms": [
+            "evaluat",
+            "test",
+            "check"
+          ]
+        }
+      ]
+    },
+    "ai-eng-structured-output": {
+      "required": [
+        {
+          "slug": "schema-constraint",
+          "description": "JSON schema constrained generation",
+          "evidence_terms": [
+            "json schema",
+            "structured output",
+            "constrain format"
+          ]
+        },
+        {
+          "slug": "validation-retry",
+          "description": "validate and repair loops",
+          "evidence_terms": [
+            "validate",
+            "retry",
+            "parse error"
+          ]
+        }
+      ]
+    },
+    "ai-eng-tool-calling": {
+      "required": [
+        {
+          "slug": "tool-decision",
+          "description": "model decides tool invocation",
+          "evidence_terms": [
+            "tool call",
+            "decide",
+            "invoke"
+          ]
+        },
+        {
+          "slug": "contract-design",
+          "description": "request/response schema design",
+          "evidence_terms": [
+            "schema",
+            "arguments",
+            "response format"
+          ]
+        }
+      ]
+    },
+    "ai-eng-function-calling": {
+      "required": [
+        {
+          "slug": "typed-signatures",
+          "description": "typed function signatures for models",
+          "evidence_terms": [
+            "schema",
+            "input_schema",
+            "parameter"
+          ]
+        },
+        {
+          "slug": "error-idempotency",
+          "description": "surfacing errors safely",
+          "evidence_terms": [
+            "is_error",
+            "error",
+            "tool_result"
+          ]
+        }
+      ]
+    },
+    "ai-eng-agent-loops": {
+      "required": [
+        {
+          "slug": "observe-think-act",
+          "description": "agent cycle structure",
+          "evidence_terms": [
+            "loop",
+            "act",
+            "observe",
+            "reason step"
+          ]
+        },
+        {
+          "slug": "termination-guards",
+          "description": "stop conditions and cost caps",
+          "evidence_terms": [
+            "stop",
+            "iterations",
+            "terminat"
+          ]
+        }
+      ]
+    },
+    "ai-eng-planning-memory": {
+      "required": [
+        {
+          "slug": "task-decomposition",
+          "description": "planning decomposes goals",
+          "evidence_terms": [
+            "plan",
+            "decompos",
+            "subgoal"
+          ]
+        },
+        {
+          "slug": "scratchpad-longterm",
+          "description": "short vs long term memory stores",
+          "evidence_terms": [
+            "memory",
+            "state",
+            "scratchpad"
+          ]
+        }
+      ]
+    },
+    "ai-eng-multi-agent-awareness": {
+      "required": [
+        {
+          "slug": "role-specialization",
+          "description": "agents with specialized roles hand off",
+          "evidence_terms": [
+            "multi-agent",
+            "role",
+            "hand off",
+            "orchestrat"
+          ]
+        },
+        {
+          "slug": "coordination-overhead",
+          "description": "honest cost/complexity tradeoffs",
+          "evidence_terms": [
+            "overhead",
+            "complexity",
+            "when not to"
+          ]
+        }
+      ]
+    },
+    "ai-eng-observability-security": {
+      "required": [
+        {
+          "slug": "trace-prompts-costs",
+          "description": "log prompts, costs, latency",
+          "evidence_terms": [
+            "log",
+            "monitor",
+            "latency",
+            "cost tracking"
+          ]
+        },
+        {
+          "slug": "injection-threats",
+          "description": "prompt injection attack surface",
+          "evidence_terms": [
+            "prompt injection",
+            "llm01"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "permission-scoping",
+          "description": "least privilege for tools",
+          "evidence_terms": [
+            "security",
+            "scope"
+          ]
+        }
+      ]
+    },
+    "ai-eng-production-deployment": {
+      "required": [
+        {
+          "slug": "versioned-prompts",
+          "description": "prompt/version management discipline",
+          "evidence_terms": [
+            "version",
+            "rollback",
+            "change management"
+          ]
+        },
+        {
+          "slug": "ci-eval-gates",
+          "description": "evaluation gates in CI",
+          "evidence_terms": [
+            "ci",
+            "evaluation gate",
+            "regression test"
+          ]
+        },
+        {
+          "slug": "usage-monitoring",
+          "description": "production usage telemetry",
+          "evidence_terms": [
+            "monitoring",
+            "metrics",
+            "monitor"
+          ]
+        }
+      ]
+    },
+    "ml-ridge-lasso": {
+      "required": [
+        {
+          "slug": "ridge-l2",
+          "description": "Ridge L2 shrinkage",
+          "evidence_terms": [
+            "ridge",
+            "l2"
+          ]
+        },
+        {
+          "slug": "lasso-l1",
+          "description": "Lasso L1 sparsity",
+          "evidence_terms": [
+            "lasso",
+            "l1"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "elasticnet-blend",
+          "description": "ElasticNet awareness",
+          "evidence_terms": [
+            "elastic net"
+          ]
+        }
+      ]
+    },
+    "ml-roc-auc": {
+      "required": [
+        {
+          "slug": "roc-curve",
+          "description": "TPR/FPR across thresholds",
+          "evidence_terms": [
+            "roc",
+            "true positive rate"
+          ]
+        },
+        {
+          "slug": "auc-score",
+          "description": "Area under ROC meaning",
+          "evidence_terms": [
+            "auc",
+            "area under"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "pr-curve",
+          "description": "Precision-recall curve",
+          "evidence_terms": [
+            "precision recall"
+          ]
+        }
+      ]
+    },
+    "ml-regression-metrics": {
+      "required": [
+        {
+          "slug": "mae-mse-rmse",
+          "description": "Absolute vs squared error metrics",
+          "evidence_terms": [
+            "mean absolute error",
+            "mean squared error",
+            "rmse"
+          ]
+        },
+        {
+          "slug": "r2-score",
+          "description": "Coefficient of determination",
+          "evidence_terms": [
+            "r2 score",
+            "coefficient of determination"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-grid-search": {
+      "required": [
+        {
+          "slug": "grid-search",
+          "description": "Exhaustive parameter grid with CV",
+          "evidence_terms": [
+            "gridsearchcv",
+            "grid search"
+          ]
+        },
+        {
+          "slug": "randomized-search",
+          "description": "Sampled search efficiency",
+          "evidence_terms": [
+            "randomizedsearchcv",
+            "randomized"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-kmeans": {
+      "required": [
+        {
+          "slug": "centroid-iteration",
+          "description": "Assign\u2192update centroid loop",
+          "evidence_terms": [
+            "centroid",
+            "cluster center"
+          ]
+        },
+        {
+          "slug": "inertia-elbow",
+          "description": "Inertia & elbow choice of k",
+          "evidence_terms": [
+            "inertia",
+            "elbow"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-hierarchical-dbscan": {
+      "required": [
+        {
+          "slug": "agglomerative-linkage",
+          "description": "Dendrograms via linkage",
+          "evidence_terms": [
+            "agglomerative",
+            "linkage",
+            "dendrogram"
+          ]
+        },
+        {
+          "slug": "dbscan-density",
+          "description": "Core samples & eps reachability",
+          "evidence_terms": [
+            "dbscan",
+            "core sample",
+            "eps"
+          ]
+        },
+        {
+          "slug": "silhouette",
+          "description": "Silhouette coefficient",
+          "evidence_terms": [
+            "silhouette"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-pca": {
+      "required": [
+        {
+          "slug": "variance-directions",
+          "description": "Principal components maximize variance",
+          "evidence_terms": [
+            "principal component",
+            "explained variance"
+          ]
+        },
+        {
+          "slug": "projection-reconstruction",
+          "description": "Project & reconstruct data",
+          "evidence_terms": [
+            "project",
+            "inverse transform",
+            "components_"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-anomaly-awareness": {
+      "required": [
+        {
+          "slug": "novelty-outlier",
+          "description": "Novelty vs outlier detection modes",
+          "evidence_terms": [
+            "novelty",
+            "outlier detection"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-gradient-boosting": {
+      "required": [
+        {
+          "slug": "stagewise-residuals",
+          "description": "Fit trees to residual gradients",
+          "evidence_terms": [
+            "gradient boosting",
+            "residual",
+            "stage"
+          ]
+        },
+        {
+          "slug": "shallow-lr-tuning",
+          "description": "Depth/learning-rate interplay",
+          "evidence_terms": [
+            "learning rate",
+            "max_depth",
+            "shallow"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ml-feature-importance": {
+      "required": [
+        {
+          "slug": "impurity-importance",
+          "description": "Tree feature_importances_",
+          "evidence_terms": [
+            "feature_importances",
+            "impurity"
+          ]
+        },
+        {
+          "slug": "permutation-importance",
+          "description": "Model-agnostic permutation",
+          "evidence_terms": [
+            "permutation importance",
+            "permutation"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-tensors": {
+      "required": [
+        {
+          "slug": "create-manipulate",
+          "description": "torch.tensor creation & ops",
+          "evidence_terms": [
+            "torch.tensor",
+            "reshape",
+            "view"
+          ]
+        },
+        {
+          "slug": "dtype-device",
+          "description": "Dtypes and cuda devices",
+          "evidence_terms": [
+            "dtype",
+            "device",
+            "cuda"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-data": {
+      "required": [
+        {
+          "slug": "dataset-dataloader",
+          "description": "Dataset + DataLoader batching",
+          "evidence_terms": [
+            "Dataset",
+            "DataLoader"
+          ]
+        },
+        {
+          "slug": "transform-compose",
+          "description": "Transform pipelines",
+          "evidence_terms": [
+            "transforms",
+            "Compose",
+            "ToTensor"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-build-model": {
+      "required": [
+        {
+          "slug": "nn-module-layer",
+          "description": "Subclass nn.Module",
+          "evidence_terms": [
+            "nn.Module",
+            "__init__"
+          ]
+        },
+        {
+          "slug": "forward-method",
+          "description": "Define forward()",
+          "evidence_terms": [
+            "forward"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-autograd": {
+      "required": [
+        {
+          "slug": "requires-grad-backward",
+          "description": "requires_grad + backward()",
+          "evidence_terms": [
+            "requires_grad",
+            "backward"
+          ]
+        },
+        {
+          "slug": "grad-bookkeeping",
+          "description": ".grad accumulation & graph",
+          "evidence_terms": [
+            ".grad",
+            "grad_fn",
+            "zero_grad"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-training-loop": {
+      "required": [
+        {
+          "slug": "optimizer-step-pattern",
+          "description": "loss.backward\u2192step\u2192zero_grad",
+          "evidence_terms": [
+            "optimizer.step",
+            "loss.backward",
+            "zero_grad"
+          ]
+        },
+        {
+          "slug": "epoch-validation-loop",
+          "description": "Epochs + validation pass",
+          "evidence_terms": [
+            "epoch",
+            "validation",
+            "model.eval"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-pytorch-save-load": {
+      "required": [
+        {
+          "slug": "state-dict",
+          "description": "state_dict persistence",
+          "evidence_terms": [
+            "state_dict"
+          ]
+        },
+        {
+          "slug": "checkpoint-resume",
+          "description": "Save/resume checkpoints",
+          "evidence_terms": [
+            "checkpoint",
+            "load_state_dict",
+            "resume"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cv-sift-orb-awareness": {
+      "required": [
+        {
+          "slug": "sift-keypoints",
+          "description": "SIFT detection & descriptors",
+          "evidence_terms": [
+            "sift",
+            "keypoint",
+            "descriptor"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "orb-binary",
+          "description": "ORB fast binary alternative",
+          "evidence_terms": [
+            "orb",
+            "brief"
+          ]
+        }
+      ]
+    },
+    "genai-lora-peft": {
+      "required": [
+        {
+          "slug": "low-rank-adapters",
+          "description": "LoRA low-rank weight deltas",
+          "evidence_terms": [
+            "low-rank",
+            "lora",
+            "adapter"
+          ]
+        },
+        {
+          "slug": "memory-tradeoffs",
+          "description": "Frozen base + small trains",
+          "evidence_terms": [
+            "freeze",
+            "memory",
+            "quantiz"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "genai-production-serving": {
+      "required": [
+        {
+          "slug": "throughput-latency",
+          "description": "Serving throughput vs latency",
+          "evidence_terms": [
+            "latency",
+            "throughput"
+          ]
+        },
+        {
+          "slug": "cost-cache",
+          "description": "Cost levers & caching/batching",
+          "evidence_terms": [
+            "cost",
+            "cache",
+            "batching"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlops-experiment-lifecycle": {
+      "required": [
+        {
+          "slug": "track-params-metrics",
+          "description": "Log params/metrics/artifacts",
+          "evidence_terms": [
+            "log_param",
+            "log_metric",
+            "artifact",
+            "tracking",
+            "parameter"
+          ]
+        },
+        {
+          "slug": "reproduce-run",
+          "description": "Reproduce any historical run",
+          "evidence_terms": [
+            "reproduc",
+            "run",
+            "source"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlops-drift-quality": {
+      "required": [
+        {
+          "slug": "skew-drift",
+          "description": "Training/serving skew & drift",
+          "evidence_terms": [
+            "drift",
+            "skew",
+            "training data"
+          ]
+        },
+        {
+          "slug": "data-quality-gates",
+          "description": "Validation gates on inputs",
+          "evidence_terms": [
+            "quality",
+            "validation",
+            "schema"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "math-dot-product-norms": {
+      "required": [
+        {
+          "slug": "dot-product",
+          "description": "Dot product & similarity",
+          "evidence_terms": [
+            "dot product",
+            "inner product"
+          ]
+        },
+        {
+          "slug": "norm-length",
+          "description": "Norms measure length",
+          "evidence_terms": [
+            "norm",
+            "length",
+            "magnitude"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "math-chain-rule": {
+      "required": [
+        {
+          "slug": "compose-derivatives",
+          "description": "Differentiate compositions",
+          "evidence_terms": [
+            "chain rule",
+            "compos"
+          ]
+        },
+        {
+          "slug": "backprop-engine",
+          "description": "Why backprop uses it",
+          "evidence_terms": [
+            "neural network",
+            "training",
+            "gradient"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "math-covariance-correlation": {
+      "required": [
+        {
+          "slug": "correlation-normalized",
+          "description": "Correlation normalizes to [-1,1]",
+          "evidence_terms": [
+            "correlation",
+            "normaliz",
+            "-1"
+          ]
+        },
+        {
+          "slug": "correlation-direction",
+          "description": "positive/negative relationship strength between variables",
+          "evidence_terms": [
+            "relationship",
+            "positive",
+            "negative",
+            "correlation"
+          ]
+        }
+      ],
+      "optional": [
+        {
+          "slug": "covariance-joint",
+          "description": "Covariance of two variables",
+          "evidence_terms": [
+            "covariance",
+            "joint"
+          ]
+        }
+      ]
+    }
+  },
+  "topic_count": 133
+}

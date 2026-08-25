@@ -1,0 +1,2887 @@
+{
+  "generated_at": "2026-08-25T12:31:07.731759+00:00",
+  "scope": "AI/ML specialization content closure",
+  "new_topics_added": 24,
+  "inspection_distribution_133": {
+    "VERIFIED_COVERAGE": 130,
+    "NEEDS_REVIEW": 2,
+    "PARTIAL_COVERAGE": 1
+  },
+  "repaired_topic_count": 104,
+  "domain_summary_after": {
+    "AI Engineering": {
+      "READY": 10
+    },
+    "CV": {
+      "READY": 26
+    },
+    "DL": {
+      "READY": 38
+    },
+    "Data Science": {
+      "READY": 5
+    },
+    "GenAI": {
+      "READY": 19
+    },
+    "Math": {
+      "READY": 13,
+      "NEEDS_REVIEW": 2
+    },
+    "ML": {
+      "READY": 35
+    },
+    "MLOps": {
+      "PARTIAL": 1,
+      "READY": 5
+    },
+    "NLP": {
+      "READY": 18
+    }
+  },
+  "repaired_topics": [
+    {
+      "topic_slug": "ai-eng-agent-loops",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "slug": "ai-eng-agent-loops-primary"
+      },
+      "new_resource": {
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "slug": "ai-eng-agent-loops-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "observe-think-act",
+        "termination-guards"
+      ],
+      "concepts_covered_after": [
+        "observe-think-act",
+        "termination-guards"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ai-eng-awareness",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/evals",
+        "slug": "ai-eng-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 42,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "ai-eng-awareness-ai-engineering-awareness",
+        "ai-eng-awareness-ai-engineering-ships-reliable-llm-featur"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ai-eng-observability-security",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails",
+        "slug": "ai-eng-observability-security-primary"
+      },
+      "new_resource": {
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "slug": "ai-eng-observability-security-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "trace-prompts-costs",
+        "injection-threats"
+      ],
+      "concepts_covered_after": [
+        "injection-threats",
+        "trace-prompts-costs"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ai-eng-path",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/prompt-engineering",
+        "slug": "ai-eng-path-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 42,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "ai-eng-path-ai-engineering-learning-path",
+        "ai-eng-path-sketch-a-personal-learning-path-into-ai"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ai-eng-planning-memory",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "slug": "ai-eng-planning-memory-primary"
+      },
+      "new_resource": {
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "slug": "ai-eng-planning-memory-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "task-decomposition",
+        "scratchpad-longterm"
+      ],
+      "concepts_covered_after": [
+        "scratchpad-longterm",
+        "task-decomposition"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ai-eng-production-deployment",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://platform.openai.com/docs/guides/production-best-practices",
+        "slug": "ai-eng-production-deployment-primary"
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/production-best-practices",
+        "slug": "ai-eng-production-deployment-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "versioned-prompts",
+        "ci-eval-gates",
+        "usage-monitoring"
+      ],
+      "concepts_covered_after": [
+        "ci-eval-gates",
+        "usage-monitoring",
+        "versioned-prompts"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-bounding-boxes-iou",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "slug": "cv-bounding-boxes-iou-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "slug": "cv-bounding-boxes-iou-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "box-formats",
+        "iou-compute"
+      ],
+      "concepts_covered_after": [
+        "box-formats",
+        "iou-compute"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-end-to-end-project",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-end-to-end-project-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-end-to-end-project-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 60,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "full-project-loop",
+        "honest-eval"
+      ],
+      "concepts_covered_after": [
+        "full-project-loop",
+        "honest-eval"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-evaluation-metrics-cv",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "slug": "cv-evaluation-metrics-cv-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md",
+        "slug": "cv-evaluation-metrics-cv-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "map-construction"
+      ],
+      "concepts_covered_after": [
+        "map-construction"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-image-tensors",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-image-tensors-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-image-tensors-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "batch-dim",
+        "dtype-normalize"
+      ],
+      "concepts_covered_after": [
+        "batch-dim",
+        "dtype-normalize"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-instance-segmentation",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/rcnn.md",
+        "slug": "cv-instance-segmentation-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/rcnn.md",
+        "slug": "cv-instance-segmentation-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "instance-vs-semantic",
+        "mask-rcnn-branch"
+      ],
+      "concepts_covered_after": [
+        "instance-vs-semantic",
+        "mask-rcnn-branch"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-nms",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md",
+        "slug": "cv-nms-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md",
+        "slug": "cv-nms-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "greedy-suppression",
+        "duplicate-removal"
+      ],
+      "concepts_covered_after": [
+        "duplicate-removal",
+        "greedy-suppression"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-object-detection-overview",
+      "readiness_before": "READY",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "slug": "cv-object-detection-overview-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "slug": "cv-object-detection-overview-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "classify-plus-localize"
+      ],
+      "concepts_covered_after": [
+        "classify-plus-localize"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-pixels-channels",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-pixels-channels-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "slug": "cv-pixels-channels-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "pixel-index"
+      ],
+      "concepts_covered_after": [
+        "pixel-index"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-resnet",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://cs231n.github.io/convolutional-networks/",
+        "slug": "cv-resnet-primary"
+      },
+      "new_resource": {
+        "url": "https://cs231n.github.io/convolutional-networks/",
+        "slug": "cv-resnet-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "identity-shortcut",
+        "degradation-fix"
+      ],
+      "concepts_covered_after": [
+        "degradation-fix",
+        "identity-shortcut"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-semantic-segmentation",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/transposed-conv.md",
+        "slug": "cv-semantic-segmentation-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/transposed-conv.md",
+        "slug": "cv-semantic-segmentation-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "per-pixel-class",
+        "encoder-decoder-recover"
+      ],
+      "concepts_covered_after": [
+        "encoder-decoder-recover",
+        "per-pixel-class"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-sift-orb-awareness",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://docs.opencv.org/4.x/da/df5/tutorial_py_sift_intro.html",
+        "slug": "cv-sift-orb-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "sift-keypoints"
+      ],
+      "concepts_covered_after": [
+        "sift-keypoints"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-traditional-filters",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://docs.opencv.org/4.x/d4/dbd/tutorial_filter_2d.html",
+        "slug": "cv-traditional-filters-primary"
+      },
+      "new_resource": {
+        "url": "https://docs.opencv.org/4.x/d4/dbd/tutorial_filter_2d.html",
+        "slug": "cv-traditional-filters-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "edge-blur-kernels"
+      ],
+      "concepts_covered_after": [
+        "edge-blur-kernels"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-transfer-learning-cv",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/fine-tuning.md",
+        "slug": "cv-transfer-learning-cv-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/fine-tuning.md",
+        "slug": "cv-transfer-learning-cv-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "freeze-finetune",
+        "small-data-win"
+      ],
+      "concepts_covered_after": [
+        "freeze-finetune",
+        "small-data-win"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-transformations",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/preprocessing.html",
+        "slug": "cv-transformations-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/image-augmentation.md",
+        "slug": "cv-transformations-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "resize-interp",
+        "crop-flip-geom"
+      ],
+      "concepts_covered_after": [
+        "crop-flip-geom",
+        "resize-interp"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-two-stage-vs-one-stage",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/rcnn.md",
+        "slug": "cv-two-stage-vs-one-stage-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/rcnn.md",
+        "slug": "cv-two-stage-vs-one-stage-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "region-proposals",
+        "direct-single-shot",
+        "speed-accuracy-tradeoff"
+      ],
+      "concepts_covered_after": [
+        "direct-single-shot",
+        "region-proposals",
+        "speed-accuracy-tradeoff"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-vision-transformers-awareness",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.d2l.ai/chapter_vision-transformer",
+        "slug": "cv-vision-transformers-awareness-primary"
+      },
+      "new_resource": {
+        "url": "https://www.d2l.ai/chapter_vision-transformer",
+        "slug": "cv-vision-transformers-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "patch-embedding"
+      ],
+      "concepts_covered_after": [
+        "patch-embedding"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-what-is-an-image",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-image.org/docs/stable/user_guide/numpy_images.html",
+        "slug": "cv-what-is-an-image-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-image.org/docs/stable/user_guide/numpy_images.html",
+        "slug": "cv-what-is-an-image-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "image-as-grid",
+        "resolution-effects"
+      ],
+      "concepts_covered_after": [
+        "image-as-grid",
+        "resolution-effects"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "cv-yolo-concept",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md",
+        "slug": "cv-yolo-concept-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/ssd.md",
+        "slug": "cv-yolo-concept-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "grid-predictions",
+        "ssd-single-shot"
+      ],
+      "concepts_covered_after": [
+        "grid-predictions",
+        "ssd-single-shot"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-activation-functions",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "slug": "dl-activation-functions-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "slug": "dl-activation-functions-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "nonlinearity-required",
+        "relu-family",
+        "sigmoid-tanh-saturation"
+      ],
+      "concepts_covered_after": [
+        "nonlinearity-required",
+        "relu-family",
+        "sigmoid-tanh-saturation"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-attention-intuition",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md",
+        "slug": "dl-attention-intuition-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md",
+        "slug": "dl-attention-intuition-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "query-key-value",
+        "soft-alignment",
+        "fixes-bottleneck"
+      ],
+      "concepts_covered_after": [
+        "fixes-bottleneck",
+        "query-key-value",
+        "soft-alignment"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-awareness",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://www.deeplearningbook.org/",
+        "slug": "dl-awareness-primary",
+        "exactness": "COLLECTION",
+        "estimated_minutes": 60,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "dl-awareness-deep-learning-awareness",
+        "dl-awareness-neural-nets-stack-differentiable-layers"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-backprop-intuition",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "slug": "dl-backprop-intuition-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "slug": "dl-backprop-intuition-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "chain-rule-backward",
+        "credit-assignment",
+        "two-layer-handwork"
+      ],
+      "concepts_covered_after": [
+        "chain-rule-backward",
+        "credit-assignment",
+        "two-layer-handwork"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-batch-epoch-lr",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/lr-scheduler.md",
+        "slug": "dl-batch-epoch-lr-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/lr-scheduler.md",
+        "slug": "dl-batch-epoch-lr-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "batch-size-tradeoff",
+        "epoch-definition",
+        "lr-schedules"
+      ],
+      "concepts_covered_after": [
+        "batch-size-tradeoff",
+        "epoch-definition",
+        "lr-schedules"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-computational-graphs",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "slug": "dl-computational-graphs-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "slug": "dl-computational-graphs-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "nodes-as-ops",
+        "local-gradients",
+        "autodiff-generalizes"
+      ],
+      "concepts_covered_after": [
+        "autodiff-generalizes",
+        "local-gradients",
+        "nodes-as-ops"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-convolution-op",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "slug": "dl-convolution-op-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "slug": "dl-convolution-op-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "kernel-slide",
+        "output-size-formula",
+        "channels-in-out"
+      ],
+      "concepts_covered_after": [
+        "channels-in-out",
+        "kernel-slide",
+        "output-size-formula"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-dropout",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/dropout.md",
+        "slug": "dl-dropout-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/dropout.md",
+        "slug": "dl-dropout-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "random-deactivate",
+        "ensemble-view",
+        "scaling-inference"
+      ],
+      "concepts_covered_after": [
+        "ensemble-view",
+        "random-deactivate",
+        "scaling-inference"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-loss-functions-nn",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_linear-regression/linear-regression.md",
+        "slug": "dl-loss-functions-nn-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_linear-regression/linear-regression.md",
+        "slug": "dl-loss-functions-nn-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "mse-regression",
+        "crossentropy-classification",
+        "pairing-principle"
+      ],
+      "concepts_covered_after": [
+        "crossentropy-classification",
+        "mse-regression",
+        "pairing-principle"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-lstm-gru",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-modern/lstm.md",
+        "slug": "dl-lstm-gru-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-modern/lstm.md",
+        "slug": "dl-lstm-gru-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "gates-control",
+        "cell-state-highway",
+        "gru-streamlined"
+      ],
+      "concepts_covered_after": [
+        "cell-state-highway",
+        "gates-control",
+        "gru-streamlined"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-normalization",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-modern/batch-norm.md",
+        "slug": "dl-normalization-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-modern/batch-norm.md",
+        "slug": "dl-normalization-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "batchnorm-statistics",
+        "train-inference-diff",
+        "layernorm-transformers"
+      ],
+      "concepts_covered_after": [
+        "batchnorm-statistics",
+        "layernorm-transformers",
+        "train-inference-diff"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-optimizers-adam",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/adam.md",
+        "slug": "dl-optimizers-adam-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/adam.md",
+        "slug": "dl-optimizers-adam-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "adaptive-per-param",
+        "rmsprop-root",
+        "adam-defaults-tradeoff"
+      ],
+      "concepts_covered_after": [
+        "adam-defaults-tradeoff",
+        "adaptive-per-param",
+        "rmsprop-root"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-optimizers-sgd",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/sgd.md",
+        "slug": "dl-optimizers-sgd-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_optimization/momentum.md",
+        "slug": "dl-optimizers-sgd-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "sgd-noise",
+        "momentum-velocity"
+      ],
+      "concepts_covered_after": [
+        "momentum-velocity",
+        "sgd-noise"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-padding-stride",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "slug": "dl-padding-stride-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "slug": "dl-padding-stride-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "padding-effect",
+        "stride-downsample",
+        "same-valid"
+      ],
+      "concepts_covered_after": [
+        "padding-effect",
+        "same-valid",
+        "stride-downsample"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-path",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://www.deeplearningbook.org/",
+        "slug": "dl-path-primary",
+        "exactness": "COLLECTION",
+        "estimated_minutes": 60,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "dl-path-deep-learning-learning-path",
+        "dl-path-sketch-a-personal-learning-path-into-dee"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-perceptron",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "slug": "dl-perceptron-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "slug": "dl-perceptron-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "perceptron-rule",
+        "linear-separability"
+      ],
+      "concepts_covered_after": [
+        "linear-separability",
+        "perceptron-rule"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-autograd",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/autogradqs_tutorial.py",
+        "slug": "dl-pytorch-autograd-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "requires-grad-backward",
+        "grad-bookkeeping"
+      ],
+      "concepts_covered_after": [
+        "grad-bookkeeping",
+        "requires-grad-backward"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-build-model",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/buildmodel_tutorial.py",
+        "slug": "dl-pytorch-build-model-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "nn-module-layer",
+        "forward-method"
+      ],
+      "concepts_covered_after": [
+        "forward-method",
+        "nn-module-layer"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-data",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/data_tutorial.py",
+        "slug": "dl-pytorch-data-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "dataset-dataloader",
+        "transform-compose"
+      ],
+      "concepts_covered_after": [
+        "dataset-dataloader",
+        "transform-compose"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-save-load",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/saveloadrun_tutorial.py",
+        "slug": "dl-pytorch-save-load-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "state-dict",
+        "checkpoint-resume"
+      ],
+      "concepts_covered_after": [
+        "checkpoint-resume",
+        "state-dict"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-tensors",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/tensorqs_tutorial.py",
+        "slug": "dl-pytorch-tensors-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "create-manipulate",
+        "dtype-device"
+      ],
+      "concepts_covered_after": [
+        "create-manipulate",
+        "dtype-device"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-pytorch-training-loop",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/pytorch/tutorials/main/beginner_source/basics/optimization_tutorial.py",
+        "slug": "dl-pytorch-training-loop-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 35,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "optimizer-step-pattern",
+        "epoch-validation-loop"
+      ],
+      "concepts_covered_after": [
+        "epoch-validation-loop",
+        "optimizer-step-pattern"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-rnn-awareness",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/sequence.md",
+        "slug": "dl-rnn-awareness-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/sequence.md",
+        "slug": "dl-rnn-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "sequence-dependence",
+        "recurrent-state",
+        "memory-limitation"
+      ],
+      "concepts_covered_after": [
+        "memory-limitation",
+        "recurrent-state",
+        "sequence-dependence"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-transformers-foundations",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "slug": "dl-transformers-foundations-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "slug": "dl-transformers-foundations-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "self-attention-block",
+        "positional-encoding",
+        "residual-norm-stack"
+      ],
+      "concepts_covered_after": [
+        "positional-encoding",
+        "residual-norm-stack",
+        "self-attention-block"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-vanishing-gradients",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "slug": "dl-vanishing-gradients-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "slug": "dl-vanishing-gradients-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "saturation-shrink",
+        "explode-instability",
+        "mitigations"
+      ],
+      "concepts_covered_after": [
+        "explode-instability",
+        "mitigations",
+        "saturation-shrink"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "dl-why-deep-learning",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_introduction/index.md",
+        "slug": "dl-why-deep-learning-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_introduction/index.md",
+        "slug": "dl-why-deep-learning-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "handcrafted-limits",
+        "representation-learning",
+        "data-compute-scale"
+      ],
+      "concepts_covered_after": [
+        "data-compute-scale",
+        "handcrafted-limits",
+        "representation-learning"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-awareness",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/text",
+        "slug": "genai-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 24,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "genai-awareness-generative-ai-awareness",
+        "genai-awareness-generative-models-produce-text-images-fr"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-chunking-retrieval",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://python.langchain.com/docs/tutorials/rag/",
+        "slug": "genai-chunking-retrieval-primary"
+      },
+      "new_resource": {
+        "url": "https://python.langchain.com/docs/tutorials/rag/",
+        "slug": "genai-chunking-retrieval-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "semantic-chunking"
+      ],
+      "concepts_covered_after": [
+        "semantic-chunking"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-context-windows",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.promptingguide.ai/introduction/settings",
+        "slug": "genai-context-windows-primary"
+      },
+      "new_resource": {
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/context-windows",
+        "slug": "genai-context-windows-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "finite-span"
+      ],
+      "concepts_covered_after": [
+        "finite-span"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-hallucinations-guardrails",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.promptingguide.ai/risks",
+        "slug": "genai-hallucinations-guardrails-primary"
+      },
+      "new_resource": {
+        "url": "https://www.promptingguide.ai/risks",
+        "slug": "genai-hallucinations-guardrails-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "fluent-unfactual"
+      ],
+      "concepts_covered_after": [
+        "fluent-unfactual"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-inference-parameters",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.promptingguide.ai/introduction/settings",
+        "slug": "genai-inference-parameters-primary"
+      },
+      "new_resource": {
+        "url": "https://www.promptingguide.ai/introduction/settings",
+        "slug": "genai-inference-parameters-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "temperature-steering",
+        "top-k-top-p",
+        "determinism-dial"
+      ],
+      "concepts_covered_after": [
+        "determinism-dial",
+        "temperature-steering",
+        "top-k-top-p"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-instruction-tuning-rlhf",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/blog/main/rlhf.md",
+        "slug": "genai-instruction-tuning-rlhf-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/blog/main/rlhf.md",
+        "slug": "genai-instruction-tuning-rlhf-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "sft-on-instructions",
+        "rlhf-dpo-overview",
+        "alignment-vs-capability"
+      ],
+      "concepts_covered_after": [
+        "alignment-vs-capability",
+        "rlhf-dpo-overview",
+        "sft-on-instructions"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-lora-peft",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://huggingface.co/docs/peft/index",
+        "slug": "genai-lora-peft-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "low-rank-adapters",
+        "memory-tradeoffs"
+      ],
+      "concepts_covered_after": [
+        "low-rank-adapters",
+        "memory-tradeoffs"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-path",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/text",
+        "slug": "genai-path-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 24,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "genai-path-generative-ai-learning-path",
+        "genai-path-sketch-a-personal-learning-path-into-gen"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-pretraining-finetuning",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/blog/main/rlhf.md",
+        "slug": "genai-pretraining-finetuning-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/blog/main/rlhf.md",
+        "slug": "genai-pretraining-finetuning-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "stage-pipeline",
+        "data-mixes"
+      ],
+      "concepts_covered_after": [
+        "data-mixes",
+        "stage-pipeline"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-production-serving",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://docs.vllm.ai/en/latest/",
+        "slug": "genai-production-serving-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "throughput-latency",
+        "cost-cache"
+      ],
+      "concepts_covered_after": [
+        "cost-cache",
+        "throughput-latency"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-vector-databases",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://platform.openai.com/docs/guides/embeddings",
+        "slug": "genai-vector-databases-primary"
+      },
+      "new_resource": {
+        "url": "https://platform.openai.com/docs/guides/embeddings",
+        "slug": "genai-vector-databases-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "ann-indexes",
+        "recall-latency-tradeoff",
+        "metadata-filter"
+      ],
+      "concepts_covered_after": [
+        "ann-indexes",
+        "metadata-filter",
+        "recall-latency-tradeoff"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "genai-what-is-lm",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md",
+        "slug": "genai-what-is-lm-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md",
+        "slug": "genai-what-is-lm-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "next-token-dist",
+        "sampling-generates"
+      ],
+      "concepts_covered_after": [
+        "next-token-dist",
+        "sampling-generates"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-bayes-theorem",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://onlinestatbook.com/2/probability/bayes.html",
+        "slug": "math-bayes-theorem-primary"
+      },
+      "new_resource": {
+        "url": "https://onlinestatbook.com/2/probability/bayes.html",
+        "slug": "math-bayes-theorem-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "bayes-formula",
+        "flip-conditioning",
+        "base-rate-example"
+      ],
+      "concepts_covered_after": [
+        "base-rate-example",
+        "bayes-formula",
+        "flip-conditioning"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-chain-rule",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.md",
+        "slug": "math-chain-rule-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "compose-derivatives",
+        "backprop-engine"
+      ],
+      "concepts_covered_after": [
+        "backprop-engine",
+        "compose-derivatives"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-conditional-probability",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "NEEDS_REVIEW",
+      "old_resource": {
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/conditional-probability-independence/a/conditional-probability-and-independence",
+        "slug": "math-conditional-probability-primary"
+      },
+      "new_resource": {
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/conditional-probability-independence/a/conditional-probability-and-independence",
+        "slug": "math-conditional-probability-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "NEEDS_REVIEW"
+      },
+      "concepts_required": [
+        "conditional-prob-def",
+        "independence-test",
+        "restrict-sample-space"
+      ],
+      "concepts_covered_after": [],
+      "still_missing": [
+        "conditional-prob-def",
+        "independence-test",
+        "restrict-sample-space"
+      ],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-covariance-correlation",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/statistics.md",
+        "slug": "math-covariance-correlation-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "correlation-normalized",
+        "correlation-direction"
+      ],
+      "concepts_covered_after": [
+        "correlation-direction",
+        "correlation-normalized"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-derivatives",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDerivative.aspx",
+        "slug": "math-derivatives-primary"
+      },
+      "new_resource": {
+        "url": "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDerivative.aspx",
+        "slug": "math-derivatives-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "rate-of-change",
+        "limit-definition",
+        "power-rule"
+      ],
+      "concepts_covered_after": [
+        "limit-definition",
+        "power-rule",
+        "rate-of-change"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-dot-product-norms",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.md",
+        "slug": "math-dot-product-norms-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "dot-product",
+        "norm-length"
+      ],
+      "concepts_covered_after": [
+        "dot-product",
+        "norm-length"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-expectation-variance",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "NEEDS_REVIEW",
+      "old_resource": {
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/expected-value-lib/v/expected-value-of-a-random-variable",
+        "slug": "math-expectation-variance-primary"
+      },
+      "new_resource": {
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/expected-value-lib/v/expected-value-of-a-random-variable",
+        "slug": "math-expectation-variance-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "NEEDS_REVIEW"
+      },
+      "concepts_required": [
+        "expected-value",
+        "variance-spread",
+        "compute-discrete"
+      ],
+      "concepts_covered_after": [],
+      "still_missing": [
+        "expected-value",
+        "variance-spread",
+        "compute-discrete"
+      ],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-functions",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://www.mathsisfun.com/sets/function.html",
+        "slug": "math-functions-primary"
+      },
+      "new_resource": {
+        "url": "https://www.mathsisfun.com/sets/function.html",
+        "slug": "math-functions-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "function-input-output",
+        "evaluate-function",
+        "graph-of-function"
+      ],
+      "concepts_covered_after": [
+        "evaluate-function",
+        "function-input-output",
+        "graph-of-function"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "math-partial-derivatives",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://tutorial.math.lamar.edu/Classes/CalcIII/PartialDerivatives.aspx",
+        "slug": "math-partial-derivatives-primary"
+      },
+      "new_resource": {
+        "url": "https://tutorial.math.lamar.edu/Classes/CalcIII/PartialDerivatives.aspx",
+        "slug": "math-partial-derivatives-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "multivariable-function",
+        "partial-derivative-def",
+        "gradient-vector"
+      ],
+      "concepts_covered_after": [
+        "gradient-vector",
+        "multivariable-function",
+        "partial-derivative-def"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-anomaly-awareness",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/neighbors.html",
+        "slug": "ml-anomaly-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "novelty-outlier"
+      ],
+      "concepts_covered_after": [
+        "novelty-outlier"
+      ],
+      "still_missing": [],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-bias-variance",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#underfitting-vs-overfitting",
+        "slug": "ml-bias-variance-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#underfitting-vs-overfitting",
+        "slug": "ml-bias-variance-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "bias-underfit",
+        "variance-overfit",
+        "tradeoff-diagnosis"
+      ],
+      "concepts_covered_after": [
+        "bias-underfit",
+        "tradeoff-diagnosis",
+        "variance-overfit"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-confusion-matrix",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix",
+        "slug": "ml-confusion-matrix-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix",
+        "slug": "ml-confusion-matrix-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "tp-fp-fn-tn",
+        "precision-recall-f1",
+        "imbalance-choice"
+      ],
+      "concepts_covered_after": [
+        "imbalance-choice",
+        "precision-recall-f1",
+        "tp-fp-fn-tn"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-end-to-end-workflow",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems",
+        "slug": "ml-end-to-end-workflow-primary"
+      },
+      "new_resource": {
+        "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems",
+        "slug": "ml-end-to-end-workflow-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 35,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "frame-problem",
+        "production-monitoring-awareness"
+      ],
+      "concepts_covered_after": [
+        "frame-problem",
+        "production-monitoring-awareness"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-ensemble-learning",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html",
+        "slug": "ml-ensemble-learning-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html",
+        "slug": "ml-ensemble-learning-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "bagging-vs-boosting",
+        "stacking-blend",
+        "diversity-source"
+      ],
+      "concepts_covered_after": [
+        "bagging-vs-boosting",
+        "diversity-source",
+        "stacking-blend"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-feature-importance",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/permutation_importance.html",
+        "slug": "ml-feature-importance-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "impurity-importance",
+        "permutation-importance"
+      ],
+      "concepts_covered_after": [
+        "impurity-importance",
+        "permutation-importance"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-gradient-boosting",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html",
+        "slug": "ml-gradient-boosting-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "stagewise-residuals",
+        "shallow-lr-tuning"
+      ],
+      "concepts_covered_after": [
+        "shallow-lr-tuning",
+        "stagewise-residuals"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-gradient-descent-intuition",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent",
+        "slug": "ml-gradient-descent-intuition-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent",
+        "slug": "ml-gradient-descent-intuition-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "descent-analogy",
+        "learning-rate-role",
+        "gradient-direction"
+      ],
+      "concepts_covered_after": [
+        "descent-analogy",
+        "gradient-direction",
+        "learning-rate-role"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-grid-search",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/grid_search.html",
+        "slug": "ml-grid-search-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "grid-search",
+        "randomized-search"
+      ],
+      "concepts_covered_after": [
+        "grid-search",
+        "randomized-search"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-hierarchical-dbscan",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/clustering.html",
+        "slug": "ml-hierarchical-dbscan-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "agglomerative-linkage",
+        "dbscan-density",
+        "silhouette"
+      ],
+      "concepts_covered_after": [
+        "agglomerative-linkage",
+        "dbscan-density",
+        "silhouette"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-kmeans",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/clustering.html",
+        "slug": "ml-kmeans-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "centroid-iteration",
+        "inertia-elbow"
+      ],
+      "concepts_covered_after": [
+        "centroid-iteration",
+        "inertia-elbow"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-knn",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/neighbors.html",
+        "slug": "ml-knn-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/neighbors.html",
+        "slug": "ml-knn-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "distance-vote",
+        "k-choice",
+        "scaling-sensitivity"
+      ],
+      "concepts_covered_after": [
+        "distance-vote",
+        "k-choice",
+        "scaling-sensitivity"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-logistic-regression",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression",
+        "slug": "ml-logistic-regression-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression",
+        "slug": "ml-logistic-regression-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "sigmoid-mapping",
+        "decision-threshold",
+        "log-loss-fit"
+      ],
+      "concepts_covered_after": [
+        "decision-threshold",
+        "log-loss-fit",
+        "sigmoid-mapping"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-naive-bayes",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/naive_bayes.html",
+        "slug": "ml-naive-bayes-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/naive_bayes.html",
+        "slug": "ml-naive-bayes-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "bayes-classifier",
+        "conditional-independence",
+        "text-spam-use"
+      ],
+      "concepts_covered_after": [
+        "bayes-classifier",
+        "conditional-independence",
+        "text-spam-use"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-pca",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/decomposition.html",
+        "slug": "ml-pca-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "variance-directions",
+        "projection-reconstruction"
+      ],
+      "concepts_covered_after": [
+        "projection-reconstruction",
+        "variance-directions"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-regression-metrics",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "slug": "ml-regression-metrics-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "mae-mse-rmse",
+        "r2-score"
+      ],
+      "concepts_covered_after": [
+        "mae-mse-rmse",
+        "r2-score"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-ridge-lasso",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+        "slug": "ml-ridge-lasso-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "ridge-l2",
+        "lasso-l1"
+      ],
+      "concepts_covered_after": [
+        "lasso-l1",
+        "ridge-l2"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "ml-roc-auc",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "slug": "ml-roc-auc-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "roc-curve",
+        "auc-score"
+      ],
+      "concepts_covered_after": [
+        "auc-score",
+        "roc-curve"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "mlops-drift-quality",
+      "readiness_before": "NEW",
+      "readiness_after": "PARTIAL",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/evaluation/index.mdx",
+        "slug": "mlops-drift-quality-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "PARTIAL_COVERAGE"
+      },
+      "concepts_required": [
+        "skew-drift",
+        "data-quality-gates"
+      ],
+      "concepts_covered_after": [
+        "data-quality-gates"
+      ],
+      "still_missing": [
+        "skew-drift"
+      ],
+      "evidence_count": 1,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "mlops-experiment-lifecycle",
+      "readiness_before": "NEW",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/tracking/index.mdx",
+        "slug": "mlops-experiment-lifecycle-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "track-params-metrics",
+        "reproduce-run"
+      ],
+      "concepts_covered_after": [
+        "reproduce-run",
+        "track-params-metrics"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-attention-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/bahdanau-attention.md",
+        "slug": "nlp-attention-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/bahdanau-attention.md",
+        "slug": "nlp-attention-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "alignment-weights",
+        "replaces-bottleneck"
+      ],
+      "concepts_covered_after": [
+        "alignment-weights",
+        "replaces-bottleneck"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-awareness",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://huggingface.co/learn/nlp-course/chapter1/1",
+        "slug": "nlp-awareness-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "nlp-awareness-nlp-awareness",
+        "nlp-awareness-nlp-turns-text-into-tokens-and-models-me"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-bert",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_natural-language-processing-pretraining/bert.md",
+        "slug": "nlp-bert-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_natural-language-processing-pretraining/bert.md",
+        "slug": "nlp-bert-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "masked-lm-pretraining",
+        "bidirectional-context",
+        "mlm-pretraining-task"
+      ],
+      "concepts_covered_after": [
+        "bidirectional-context",
+        "masked-lm-pretraining",
+        "mlm-pretraining-task"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-encoder-vs-decoder",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter3/1.mdx",
+        "slug": "nlp-encoder-vs-decoder-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-modern/encoder-decoder.md",
+        "slug": "nlp-encoder-vs-decoder-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "understanding-vs-generation",
+        "seq2seq-bridge"
+      ],
+      "concepts_covered_after": [
+        "seq2seq-bridge",
+        "understanding-vs-generation"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-evaluation-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter7/6.mdx",
+        "slug": "nlp-evaluation-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter7/6.mdx",
+        "slug": "nlp-evaluation-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "perplexity-lm",
+        "bleu-rouge-limits",
+        "human-eval-need"
+      ],
+      "concepts_covered_after": [
+        "bleu-rouge-limits",
+        "human-eval-need",
+        "perplexity-lm"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-fine-tuning-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter3/3.mdx",
+        "slug": "nlp-fine-tuning-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter3/3.mdx",
+        "slug": "nlp-fine-tuning-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "head-swap",
+        "light-tuning-recipe"
+      ],
+      "concepts_covered_after": [
+        "head-swap",
+        "light-tuning-recipe"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-path",
+      "readiness_before": "RESOURCE_GAP",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": null,
+        "slug": null
+      },
+      "new_resource": {
+        "url": "https://huggingface.co/learn/nlp-course/chapter1/1",
+        "slug": "nlp-path-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [],
+      "concepts_covered_after": [
+        "nlp-path-nlp-learning-path",
+        "nlp-path-sketch-a-personal-learning-path-into-nlp"
+      ],
+      "still_missing": [],
+      "evidence_count": 0,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-sequence-modeling",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/sequence.md",
+        "slug": "nlp-sequence-modeling-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/sequence.md",
+        "slug": "nlp-sequence-modeling-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "lm-objective",
+        "order-matters"
+      ],
+      "concepts_covered_after": [
+        "lm-objective",
+        "order-matters"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-tokenization-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter2/4.mdx",
+        "slug": "nlp-tokenization-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter2/4.mdx",
+        "slug": "nlp-tokenization-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "word-subword-char",
+        "bpe-algorithm",
+        "oov-vocab-tradeoff"
+      ],
+      "concepts_covered_after": [
+        "bpe-algorithm",
+        "oov-vocab-tradeoff",
+        "word-subword-char"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-transformers-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "slug": "nlp-transformers-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "slug": "nlp-transformers-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 30,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "parallel-self-attn",
+        "positional-info"
+      ],
+      "concepts_covered_after": [
+        "parallel-self-attn",
+        "positional-info"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-vocabulary-bow",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "slug": "nlp-vocabulary-bow-primary"
+      },
+      "new_resource": {
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "slug": "nlp-vocabulary-bow-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 20,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "count-vectors",
+        "order-lost",
+        "sparsity-issue"
+      ],
+      "concepts_covered_after": [
+        "count-vectors",
+        "order-lost",
+        "sparsity-issue"
+      ],
+      "still_missing": [],
+      "evidence_count": 3,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-what-is-nlp",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter1/1.mdx",
+        "slug": "nlp-what-is-nlp-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/huggingface/course/main/chapters/en/chapter1/1.mdx",
+        "slug": "nlp-what-is-nlp-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 15,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "language-task-map",
+        "task-landscape"
+      ],
+      "concepts_covered_after": [
+        "language-task-map",
+        "task-landscape"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    },
+    {
+      "topic_slug": "nlp-word-embeddings",
+      "readiness_before": "PARTIAL",
+      "readiness_after": "READY",
+      "old_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_natural-language-processing-pretraining/word2vec.md",
+        "slug": "nlp-word-embeddings-primary"
+      },
+      "new_resource": {
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_natural-language-processing-pretraining/word2vec.md",
+        "slug": "nlp-word-embeddings-primary",
+        "exactness": "EXACT",
+        "estimated_minutes": 25,
+        "verification_status": "VERIFIED_COVERAGE"
+      },
+      "concepts_required": [
+        "dense-semantics",
+        "geometry-of-meaning"
+      ],
+      "concepts_covered_after": [
+        "dense-semantics",
+        "geometry-of-meaning"
+      ],
+      "still_missing": [],
+      "evidence_count": 2,
+      "practice_present": true
+    }
+  ]
+}

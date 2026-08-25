@@ -1,0 +1,6127 @@
+{
+  "generated_at": "2026-08-24T00:00:00",
+  "total_topics": 316,
+  "topics": [
+    {
+      "id": 1,
+      "slug": "cf-bits-and-bytes",
+      "name": "Bits and bytes",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 1
+    },
+    {
+      "id": 2,
+      "slug": "cf-binary",
+      "name": "Binary",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-bits-and-bytes"
+      ],
+      "order_index": 1,
+      "module_id": 1
+    },
+    {
+      "id": 3,
+      "slug": "cf-hexadecimal",
+      "name": "Hexadecimal",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-binary"
+      ],
+      "order_index": 2,
+      "module_id": 1
+    },
+    {
+      "id": 4,
+      "slug": "cf-cpu",
+      "name": "CPU",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-hexadecimal"
+      ],
+      "order_index": 3,
+      "module_id": 1
+    },
+    {
+      "id": 5,
+      "slug": "cf-alu",
+      "name": "ALU",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-cpu"
+      ],
+      "order_index": 4,
+      "module_id": 1
+    },
+    {
+      "id": 6,
+      "slug": "cf-registers",
+      "name": "Registers",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-alu"
+      ],
+      "order_index": 5,
+      "module_id": 1
+    },
+    {
+      "id": 7,
+      "slug": "cf-ram",
+      "name": "RAM",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-registers"
+      ],
+      "order_index": 6,
+      "module_id": 1
+    },
+    {
+      "id": 8,
+      "slug": "cf-cache",
+      "name": "Cache",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-ram"
+      ],
+      "order_index": 7,
+      "module_id": 1
+    },
+    {
+      "id": 9,
+      "slug": "cf-storage",
+      "name": "Storage",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-cache"
+      ],
+      "order_index": 8,
+      "module_id": 1
+    },
+    {
+      "id": 10,
+      "slug": "cf-instruction-execution",
+      "name": "Instruction execution",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-storage"
+      ],
+      "order_index": 9,
+      "module_id": 1
+    },
+    {
+      "id": 11,
+      "slug": "cf-machine-code",
+      "name": "Machine code",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-instruction-execution"
+      ],
+      "order_index": 10,
+      "module_id": 1
+    },
+    {
+      "id": 12,
+      "slug": "cf-compiler",
+      "name": "Compiler",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-machine-code"
+      ],
+      "order_index": 11,
+      "module_id": 1
+    },
+    {
+      "id": 13,
+      "slug": "cf-interpreter",
+      "name": "Interpreter",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-compiler"
+      ],
+      "order_index": 12,
+      "module_id": 1
+    },
+    {
+      "id": 14,
+      "slug": "cf-program",
+      "name": "Program",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-interpreter"
+      ],
+      "order_index": 13,
+      "module_id": 1
+    },
+    {
+      "id": 15,
+      "slug": "cf-process",
+      "name": "Process",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-program"
+      ],
+      "order_index": 14,
+      "module_id": 1
+    },
+    {
+      "id": 16,
+      "slug": "cf-kernel",
+      "name": "Kernel",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-process"
+      ],
+      "order_index": 0,
+      "module_id": 2
+    },
+    {
+      "id": 17,
+      "slug": "cf-os-processes",
+      "name": "Processes",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-kernel"
+      ],
+      "order_index": 1,
+      "module_id": 2
+    },
+    {
+      "id": 18,
+      "slug": "cf-threads",
+      "name": "Threads",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-os-processes"
+      ],
+      "order_index": 2,
+      "module_id": 2
+    },
+    {
+      "id": 19,
+      "slug": "cf-system-calls",
+      "name": "System calls",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-threads"
+      ],
+      "order_index": 3,
+      "module_id": 2
+    },
+    {
+      "id": 20,
+      "slug": "cf-os-memory",
+      "name": "Memory",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-system-calls"
+      ],
+      "order_index": 4,
+      "module_id": 2
+    },
+    {
+      "id": 21,
+      "slug": "cf-virtual-memory-basics",
+      "name": "Virtual memory basics",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-os-memory"
+      ],
+      "order_index": 5,
+      "module_id": 2
+    },
+    {
+      "id": 22,
+      "slug": "cf-filesystems",
+      "name": "Filesystems",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-virtual-memory-basics"
+      ],
+      "order_index": 6,
+      "module_id": 2
+    },
+    {
+      "id": 23,
+      "slug": "cf-os-permissions",
+      "name": "Permissions",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-filesystems"
+      ],
+      "order_index": 7,
+      "module_id": 2
+    },
+    {
+      "id": 24,
+      "slug": "cf-os-environment-variables",
+      "name": "Environment variables",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-os-permissions"
+      ],
+      "order_index": 8,
+      "module_id": 2
+    },
+    {
+      "id": 25,
+      "slug": "cf-shell",
+      "name": "Shell",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-os-environment-variables"
+      ],
+      "order_index": 0,
+      "module_id": 3
+    },
+    {
+      "id": 26,
+      "slug": "cf-command-line",
+      "name": "Command line",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-shell"
+      ],
+      "order_index": 1,
+      "module_id": 3
+    },
+    {
+      "id": 27,
+      "slug": "cf-filesystem-navigation",
+      "name": "Filesystem navigation",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-command-line"
+      ],
+      "order_index": 2,
+      "module_id": 3
+    },
+    {
+      "id": 28,
+      "slug": "cf-linux-files",
+      "name": "Files",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-filesystem-navigation"
+      ],
+      "order_index": 3,
+      "module_id": 3
+    },
+    {
+      "id": 29,
+      "slug": "cf-pipes",
+      "name": "Pipes",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linux-files"
+      ],
+      "order_index": 4,
+      "module_id": 3
+    },
+    {
+      "id": 30,
+      "slug": "cf-redirection",
+      "name": "Redirection",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-pipes"
+      ],
+      "order_index": 5,
+      "module_id": 3
+    },
+    {
+      "id": 31,
+      "slug": "cf-grep",
+      "name": "grep",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-redirection"
+      ],
+      "order_index": 6,
+      "module_id": 3
+    },
+    {
+      "id": 32,
+      "slug": "cf-find",
+      "name": "find",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-grep"
+      ],
+      "order_index": 7,
+      "module_id": 3
+    },
+    {
+      "id": 33,
+      "slug": "cf-linux-permissions",
+      "name": "Permissions",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-find"
+      ],
+      "order_index": 8,
+      "module_id": 3
+    },
+    {
+      "id": 34,
+      "slug": "cf-linux-processes",
+      "name": "Processes",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linux-permissions"
+      ],
+      "order_index": 9,
+      "module_id": 3
+    },
+    {
+      "id": 35,
+      "slug": "cf-package-management",
+      "name": "Package management",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linux-processes"
+      ],
+      "order_index": 10,
+      "module_id": 3
+    },
+    {
+      "id": 36,
+      "slug": "cf-linux-environment-variables",
+      "name": "Environment variables",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-package-management"
+      ],
+      "order_index": 11,
+      "module_id": 3
+    },
+    {
+      "id": 37,
+      "slug": "cf-repository",
+      "name": "Repository",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linux-environment-variables"
+      ],
+      "order_index": 0,
+      "module_id": 4
+    },
+    {
+      "id": 38,
+      "slug": "cf-commits",
+      "name": "Commits",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-repository"
+      ],
+      "order_index": 1,
+      "module_id": 4
+    },
+    {
+      "id": 39,
+      "slug": "cf-branches",
+      "name": "Branches",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-commits"
+      ],
+      "order_index": 2,
+      "module_id": 4
+    },
+    {
+      "id": 40,
+      "slug": "cf-merge",
+      "name": "Merge",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-branches"
+      ],
+      "order_index": 3,
+      "module_id": 4
+    },
+    {
+      "id": 41,
+      "slug": "cf-rebase",
+      "name": "Rebase",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-merge"
+      ],
+      "order_index": 4,
+      "module_id": 4
+    },
+    {
+      "id": 42,
+      "slug": "cf-remote",
+      "name": "Remote",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-rebase"
+      ],
+      "order_index": 5,
+      "module_id": 4
+    },
+    {
+      "id": 43,
+      "slug": "cf-pull-push",
+      "name": "Pull and push",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-remote"
+      ],
+      "order_index": 6,
+      "module_id": 4
+    },
+    {
+      "id": 44,
+      "slug": "cf-conflicts",
+      "name": "Conflicts",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-pull-push"
+      ],
+      "order_index": 7,
+      "module_id": 4
+    },
+    {
+      "id": 45,
+      "slug": "cf-reset-revert",
+      "name": "Reset and revert",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-conflicts"
+      ],
+      "order_index": 8,
+      "module_id": 4
+    },
+    {
+      "id": 46,
+      "slug": "cf-cherry-pick",
+      "name": "Cherry-pick",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-reset-revert"
+      ],
+      "order_index": 9,
+      "module_id": 4
+    },
+    {
+      "id": 47,
+      "slug": "cf-stash",
+      "name": "Stash",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-cherry-pick"
+      ],
+      "order_index": 10,
+      "module_id": 4
+    },
+    {
+      "id": 48,
+      "slug": "cf-github-workflow",
+      "name": "GitHub workflow",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-stash"
+      ],
+      "order_index": 11,
+      "module_id": 4
+    },
+    {
+      "id": 49,
+      "slug": "cf-ide",
+      "name": "IDE",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-github-workflow",
+        "cf-compiler"
+      ],
+      "order_index": 0,
+      "module_id": 5
+    },
+    {
+      "id": 50,
+      "slug": "cf-dev-compiler",
+      "name": "Compiler",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-ide"
+      ],
+      "order_index": 1,
+      "module_id": 5
+    },
+    {
+      "id": 51,
+      "slug": "cf-debugger",
+      "name": "Debugger",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-dev-compiler"
+      ],
+      "order_index": 2,
+      "module_id": 5
+    },
+    {
+      "id": 52,
+      "slug": "cf-formatter",
+      "name": "Formatter",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-debugger"
+      ],
+      "order_index": 3,
+      "module_id": 5
+    },
+    {
+      "id": 53,
+      "slug": "cf-linter",
+      "name": "Linter",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-formatter"
+      ],
+      "order_index": 4,
+      "module_id": 5
+    },
+    {
+      "id": 54,
+      "slug": "cf-dev-package-manager",
+      "name": "Package manager",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linter"
+      ],
+      "order_index": 5,
+      "module_id": 5
+    },
+    {
+      "id": 55,
+      "slug": "cf-build-system",
+      "name": "Build system",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-dev-package-manager"
+      ],
+      "order_index": 6,
+      "module_id": 5
+    },
+    {
+      "id": 56,
+      "slug": "cf-dependency-management",
+      "name": "Dependency management",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-build-system"
+      ],
+      "order_index": 7,
+      "module_id": 5
+    },
+    {
+      "id": 57,
+      "slug": "cf-problem-decomposition",
+      "name": "Problem decomposition",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-dependency-management"
+      ],
+      "order_index": 0,
+      "module_id": 6
+    },
+    {
+      "id": 58,
+      "slug": "cf-pseudocode",
+      "name": "Pseudocode",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-problem-decomposition"
+      ],
+      "order_index": 1,
+      "module_id": 6
+    },
+    {
+      "id": 59,
+      "slug": "cf-algorithms",
+      "name": "Algorithms",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-pseudocode"
+      ],
+      "order_index": 2,
+      "module_id": 6
+    },
+    {
+      "id": 60,
+      "slug": "cf-dry-runs",
+      "name": "Dry runs",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-algorithms"
+      ],
+      "order_index": 3,
+      "module_id": 6
+    },
+    {
+      "id": 61,
+      "slug": "cf-edge-cases",
+      "name": "Edge cases",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-dry-runs"
+      ],
+      "order_index": 4,
+      "module_id": 6
+    },
+    {
+      "id": 62,
+      "slug": "cf-debugging-thinking",
+      "name": "Debugging",
+      "domain_key": "foundations",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-edge-cases"
+      ],
+      "order_index": 5,
+      "module_id": 6
+    },
+    {
+      "id": 63,
+      "slug": "cf-time-complexity-intro",
+      "name": "Time complexity introduction",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-debugging-thinking"
+      ],
+      "order_index": 6,
+      "module_id": 6
+    },
+    {
+      "id": 64,
+      "slug": "cf-space-complexity-intro",
+      "name": "Space complexity introduction",
+      "domain_key": "foundations",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-time-complexity-intro"
+      ],
+      "order_index": 7,
+      "module_id": 6
+    },
+    {
+      "id": 65,
+      "slug": "java-jdk-jre",
+      "name": "JDK and JRE",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "cf-space-complexity-intro",
+        "cf-dependency-management"
+      ],
+      "order_index": 0,
+      "module_id": 7
+    },
+    {
+      "id": 66,
+      "slug": "java-first-program",
+      "name": "First program",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-jdk-jre"
+      ],
+      "order_index": 1,
+      "module_id": 7
+    },
+    {
+      "id": 67,
+      "slug": "java-compile-and-run",
+      "name": "Compile and run",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-first-program"
+      ],
+      "order_index": 2,
+      "module_id": 7
+    },
+    {
+      "id": 68,
+      "slug": "java-primitives",
+      "name": "Primitives",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-compile-and-run"
+      ],
+      "order_index": 0,
+      "module_id": 8
+    },
+    {
+      "id": 69,
+      "slug": "java-type-conversion",
+      "name": "Type conversion",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-primitives"
+      ],
+      "order_index": 1,
+      "module_id": 8
+    },
+    {
+      "id": 70,
+      "slug": "java-console-io",
+      "name": "Console input and output",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-type-conversion"
+      ],
+      "order_index": 0,
+      "module_id": 9
+    },
+    {
+      "id": 71,
+      "slug": "java-operators",
+      "name": "Operators",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-console-io"
+      ],
+      "order_index": 0,
+      "module_id": 10
+    },
+    {
+      "id": 72,
+      "slug": "java-if-else",
+      "name": "if/else",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-operators"
+      ],
+      "order_index": 0,
+      "module_id": 11
+    },
+    {
+      "id": 73,
+      "slug": "java-switch",
+      "name": "switch",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-if-else"
+      ],
+      "order_index": 1,
+      "module_id": 11
+    },
+    {
+      "id": 74,
+      "slug": "java-loops",
+      "name": "Loops",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-switch"
+      ],
+      "order_index": 2,
+      "module_id": 11
+    },
+    {
+      "id": 75,
+      "slug": "java-break-continue",
+      "name": "break and continue",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-loops"
+      ],
+      "order_index": 3,
+      "module_id": 11
+    },
+    {
+      "id": 76,
+      "slug": "java-method-basics",
+      "name": "Method basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-break-continue"
+      ],
+      "order_index": 0,
+      "module_id": 12
+    },
+    {
+      "id": 77,
+      "slug": "java-overloading",
+      "name": "Overloading",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-method-basics"
+      ],
+      "order_index": 1,
+      "module_id": 12
+    },
+    {
+      "id": 78,
+      "slug": "java-scope",
+      "name": "Scope",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-overloading"
+      ],
+      "order_index": 2,
+      "module_id": 12
+    },
+    {
+      "id": 79,
+      "slug": "java-arrays",
+      "name": "Arrays",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-scope"
+      ],
+      "order_index": 0,
+      "module_id": 13
+    },
+    {
+      "id": 80,
+      "slug": "java-strings",
+      "name": "Strings",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-arrays"
+      ],
+      "order_index": 0,
+      "module_id": 14
+    },
+    {
+      "id": 81,
+      "slug": "java-stringbuilder",
+      "name": "StringBuilder",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-strings"
+      ],
+      "order_index": 1,
+      "module_id": 14
+    },
+    {
+      "id": 82,
+      "slug": "java-classes-objects",
+      "name": "Classes and objects",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-stringbuilder"
+      ],
+      "order_index": 0,
+      "module_id": 15
+    },
+    {
+      "id": 83,
+      "slug": "java-references",
+      "name": "References",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-classes-objects"
+      ],
+      "order_index": 1,
+      "module_id": 15
+    },
+    {
+      "id": 84,
+      "slug": "java-constructors",
+      "name": "Constructors",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-references"
+      ],
+      "order_index": 2,
+      "module_id": 15
+    },
+    {
+      "id": 85,
+      "slug": "java-encapsulation",
+      "name": "Encapsulation",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-constructors"
+      ],
+      "order_index": 3,
+      "module_id": 15
+    },
+    {
+      "id": 86,
+      "slug": "java-inheritance",
+      "name": "Inheritance",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-encapsulation"
+      ],
+      "order_index": 4,
+      "module_id": 15
+    },
+    {
+      "id": 87,
+      "slug": "java-polymorphism",
+      "name": "Polymorphism",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-inheritance"
+      ],
+      "order_index": 5,
+      "module_id": 15
+    },
+    {
+      "id": 88,
+      "slug": "java-abstract-classes",
+      "name": "Abstract classes",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-polymorphism"
+      ],
+      "order_index": 0,
+      "module_id": 16
+    },
+    {
+      "id": 89,
+      "slug": "java-interfaces",
+      "name": "Interfaces",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-abstract-classes"
+      ],
+      "order_index": 1,
+      "module_id": 16
+    },
+    {
+      "id": 90,
+      "slug": "java-composition",
+      "name": "Composition",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-interfaces"
+      ],
+      "order_index": 2,
+      "module_id": 16
+    },
+    {
+      "id": 91,
+      "slug": "java-try-catch",
+      "name": "try/catch",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-composition"
+      ],
+      "order_index": 0,
+      "module_id": 17
+    },
+    {
+      "id": 92,
+      "slug": "java-checked-unchecked",
+      "name": "Checked and unchecked",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-try-catch"
+      ],
+      "order_index": 1,
+      "module_id": 17
+    },
+    {
+      "id": 93,
+      "slug": "java-custom-exceptions",
+      "name": "Custom exceptions",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-checked-unchecked"
+      ],
+      "order_index": 2,
+      "module_id": 17
+    },
+    {
+      "id": 94,
+      "slug": "java-list",
+      "name": "List",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-custom-exceptions"
+      ],
+      "order_index": 0,
+      "module_id": 18
+    },
+    {
+      "id": 95,
+      "slug": "java-set",
+      "name": "Set",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-list"
+      ],
+      "order_index": 1,
+      "module_id": 18
+    },
+    {
+      "id": 96,
+      "slug": "java-map",
+      "name": "Map",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-set"
+      ],
+      "order_index": 2,
+      "module_id": 18
+    },
+    {
+      "id": 97,
+      "slug": "java-iteration",
+      "name": "Iteration",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-map"
+      ],
+      "order_index": 3,
+      "module_id": 18
+    },
+    {
+      "id": 98,
+      "slug": "java-priority-queue",
+      "name": "PriorityQueue",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-iteration"
+      ],
+      "order_index": 4,
+      "module_id": 18
+    },
+    {
+      "id": 99,
+      "slug": "java-generic-types",
+      "name": "Generic types",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-priority-queue"
+      ],
+      "order_index": 0,
+      "module_id": 19
+    },
+    {
+      "id": 100,
+      "slug": "java-generic-bounds",
+      "name": "Bounds",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-generic-types"
+      ],
+      "order_index": 1,
+      "module_id": 19
+    },
+    {
+      "id": 101,
+      "slug": "java-comparable-comparator",
+      "name": "Comparable and Comparator",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-generic-bounds"
+      ],
+      "order_index": 0,
+      "module_id": 20
+    },
+    {
+      "id": 102,
+      "slug": "java-functional-interfaces",
+      "name": "Functional interfaces",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-comparable-comparator"
+      ],
+      "order_index": 0,
+      "module_id": 21
+    },
+    {
+      "id": 103,
+      "slug": "java-lambdas",
+      "name": "Lambdas",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-functional-interfaces"
+      ],
+      "order_index": 1,
+      "module_id": 21
+    },
+    {
+      "id": 104,
+      "slug": "java-stream-pipeline",
+      "name": "Stream pipeline",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-lambdas"
+      ],
+      "order_index": 0,
+      "module_id": 22
+    },
+    {
+      "id": 105,
+      "slug": "java-stream-operations",
+      "name": "Common operations",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-stream-pipeline"
+      ],
+      "order_index": 1,
+      "module_id": 22
+    },
+    {
+      "id": 106,
+      "slug": "java-paths-files",
+      "name": "Paths and files",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-stream-operations"
+      ],
+      "order_index": 0,
+      "module_id": 23
+    },
+    {
+      "id": 107,
+      "slug": "java-readers-writers",
+      "name": "Readers and writers",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-paths-files"
+      ],
+      "order_index": 1,
+      "module_id": 23
+    },
+    {
+      "id": 108,
+      "slug": "java-junit-basics",
+      "name": "JUnit basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-readers-writers"
+      ],
+      "order_index": 0,
+      "module_id": 24
+    },
+    {
+      "id": 109,
+      "slug": "java-assertions",
+      "name": "Assertions",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-junit-basics"
+      ],
+      "order_index": 1,
+      "module_id": 24
+    },
+    {
+      "id": 110,
+      "slug": "java-threads",
+      "name": "Threads",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-assertions"
+      ],
+      "order_index": 0,
+      "module_id": 25
+    },
+    {
+      "id": 111,
+      "slug": "java-synchronization-basics",
+      "name": "Synchronization basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-threads"
+      ],
+      "order_index": 1,
+      "module_id": 25
+    },
+    {
+      "id": 112,
+      "slug": "java-bytecode",
+      "name": "Bytecode",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-synchronization-basics"
+      ],
+      "order_index": 0,
+      "module_id": 26
+    },
+    {
+      "id": 113,
+      "slug": "java-memory-model-basics",
+      "name": "Memory model basics",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-bytecode"
+      ],
+      "order_index": 1,
+      "module_id": 26
+    },
+    {
+      "id": 114,
+      "slug": "java-gc-intro",
+      "name": "Garbage collection intro",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-memory-model-basics"
+      ],
+      "order_index": 2,
+      "module_id": 26
+    },
+    {
+      "id": 115,
+      "slug": "java-packages",
+      "name": "Packages",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-gc-intro"
+      ],
+      "order_index": 0,
+      "module_id": 27
+    },
+    {
+      "id": 116,
+      "slug": "java-api-hygiene",
+      "name": "API hygiene",
+      "domain_key": "java",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "java-packages"
+      ],
+      "order_index": 1,
+      "module_id": 27
+    },
+    {
+      "id": 117,
+      "slug": "dsa-algorithmic-thinking",
+      "name": "Algorithmic thinking",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "cf-time-complexity-intro",
+        "java-method-basics"
+      ],
+      "order_index": 0,
+      "module_id": 28
+    },
+    {
+      "id": 118,
+      "slug": "dsa-big-o",
+      "name": "Big-O notation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-algorithmic-thinking"
+      ],
+      "order_index": 0,
+      "module_id": 29
+    },
+    {
+      "id": 119,
+      "slug": "dsa-best-worst-average",
+      "name": "Best, worst, average",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-big-o"
+      ],
+      "order_index": 1,
+      "module_id": 29
+    },
+    {
+      "id": 120,
+      "slug": "dsa-array-traversal",
+      "name": "Array traversal",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-best-worst-average",
+        "java-arrays"
+      ],
+      "order_index": 0,
+      "module_id": 30
+    },
+    {
+      "id": 121,
+      "slug": "dsa-array-insert-delete",
+      "name": "Insertion and deletion concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-array-traversal"
+      ],
+      "order_index": 1,
+      "module_id": 30
+    },
+    {
+      "id": 122,
+      "slug": "dsa-prefix-sums",
+      "name": "Prefix sums",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-array-insert-delete"
+      ],
+      "order_index": 2,
+      "module_id": 30
+    },
+    {
+      "id": 123,
+      "slug": "dsa-array-frequency",
+      "name": "Frequency counting",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-prefix-sums"
+      ],
+      "order_index": 3,
+      "module_id": 30
+    },
+    {
+      "id": 124,
+      "slug": "dsa-array-patterns",
+      "name": "Array patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-array-frequency"
+      ],
+      "order_index": 4,
+      "module_id": 30
+    },
+    {
+      "id": 125,
+      "slug": "dsa-string-manipulation",
+      "name": "String manipulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-array-patterns",
+        "java-strings"
+      ],
+      "order_index": 0,
+      "module_id": 31
+    },
+    {
+      "id": 126,
+      "slug": "dsa-string-frequency",
+      "name": "String frequency",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-string-manipulation"
+      ],
+      "order_index": 1,
+      "module_id": 31
+    },
+    {
+      "id": 127,
+      "slug": "dsa-character-processing",
+      "name": "Character processing",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-string-frequency"
+      ],
+      "order_index": 2,
+      "module_id": 31
+    },
+    {
+      "id": 128,
+      "slug": "dsa-string-patterns",
+      "name": "String patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-character-processing"
+      ],
+      "order_index": 3,
+      "module_id": 31
+    },
+    {
+      "id": 129,
+      "slug": "dsa-hash-map",
+      "name": "Hash map",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-string-patterns",
+        "java-map",
+        "java-set"
+      ],
+      "order_index": 0,
+      "module_id": 32
+    },
+    {
+      "id": 130,
+      "slug": "dsa-hash-set",
+      "name": "Hash set",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-hash-map"
+      ],
+      "order_index": 1,
+      "module_id": 32
+    },
+    {
+      "id": 131,
+      "slug": "dsa-frequency-maps",
+      "name": "Frequency maps",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-hash-set"
+      ],
+      "order_index": 2,
+      "module_id": 32
+    },
+    {
+      "id": 132,
+      "slug": "dsa-lookup-patterns",
+      "name": "Lookup patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-frequency-maps"
+      ],
+      "order_index": 3,
+      "module_id": 32
+    },
+    {
+      "id": 133,
+      "slug": "dsa-two-pointers-opposite",
+      "name": "Opposite-direction pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-lookup-patterns",
+        "java-arrays"
+      ],
+      "order_index": 0,
+      "module_id": 33
+    },
+    {
+      "id": 134,
+      "slug": "dsa-two-pointers-same",
+      "name": "Same-direction pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-two-pointers-opposite"
+      ],
+      "order_index": 1,
+      "module_id": 33
+    },
+    {
+      "id": 135,
+      "slug": "dsa-two-pointers-partition",
+      "name": "Partition-style patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-two-pointers-same"
+      ],
+      "order_index": 2,
+      "module_id": 33
+    },
+    {
+      "id": 136,
+      "slug": "dsa-window-fixed",
+      "name": "Fixed window",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-two-pointers-partition",
+        "java-arrays",
+        "java-map"
+      ],
+      "order_index": 0,
+      "module_id": 34
+    },
+    {
+      "id": 137,
+      "slug": "dsa-window-variable",
+      "name": "Variable window",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-window-fixed"
+      ],
+      "order_index": 1,
+      "module_id": 34
+    },
+    {
+      "id": 138,
+      "slug": "dsa-window-frequency",
+      "name": "Frequency window state",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-window-variable"
+      ],
+      "order_index": 2,
+      "module_id": 34
+    },
+    {
+      "id": 139,
+      "slug": "dsa-singly-linked-list",
+      "name": "Singly linked list",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-window-frequency",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 35
+    },
+    {
+      "id": 140,
+      "slug": "dsa-list-operations",
+      "name": "List operations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-singly-linked-list"
+      ],
+      "order_index": 1,
+      "module_id": 35
+    },
+    {
+      "id": 141,
+      "slug": "dsa-list-reversal",
+      "name": "Reversal",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-list-operations"
+      ],
+      "order_index": 2,
+      "module_id": 35
+    },
+    {
+      "id": 142,
+      "slug": "dsa-fast-slow",
+      "name": "Fast and slow pointers",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-list-reversal"
+      ],
+      "order_index": 3,
+      "module_id": 35
+    },
+    {
+      "id": 143,
+      "slug": "dsa-cycle-detection",
+      "name": "Cycle detection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-fast-slow"
+      ],
+      "order_index": 4,
+      "module_id": 35
+    },
+    {
+      "id": 144,
+      "slug": "dsa-list-merge",
+      "name": "Merge patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-cycle-detection"
+      ],
+      "order_index": 5,
+      "module_id": 35
+    },
+    {
+      "id": 145,
+      "slug": "dsa-stack-fundamentals",
+      "name": "Stack fundamentals",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-list-merge",
+        "java-classes-objects",
+        "java-references",
+        "java-list"
+      ],
+      "order_index": 0,
+      "module_id": 36
+    },
+    {
+      "id": 146,
+      "slug": "dsa-monotonic-stack",
+      "name": "Monotonic stack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-stack-fundamentals"
+      ],
+      "order_index": 1,
+      "module_id": 36
+    },
+    {
+      "id": 147,
+      "slug": "dsa-queue-deque",
+      "name": "Queue and deque",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-monotonic-stack",
+        "java-classes-objects",
+        "java-references",
+        "java-list"
+      ],
+      "order_index": 0,
+      "module_id": 37
+    },
+    {
+      "id": 148,
+      "slug": "dsa-queue-bfs-relationship",
+      "name": "BFS relationship",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-queue-deque"
+      ],
+      "order_index": 1,
+      "module_id": 37
+    },
+    {
+      "id": 149,
+      "slug": "dsa-recursion-model",
+      "name": "Recursion model",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-queue-bfs-relationship",
+        "java-method-basics"
+      ],
+      "order_index": 0,
+      "module_id": 38
+    },
+    {
+      "id": 150,
+      "slug": "dsa-call-stack",
+      "name": "Call stack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-recursion-model"
+      ],
+      "order_index": 1,
+      "module_id": 38
+    },
+    {
+      "id": 151,
+      "slug": "dsa-recursive-trees",
+      "name": "Recursive tree problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-call-stack"
+      ],
+      "order_index": 2,
+      "module_id": 38
+    },
+    {
+      "id": 152,
+      "slug": "dsa-recursion-to-iteration",
+      "name": "Recursion to iteration",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-recursive-trees"
+      ],
+      "order_index": 3,
+      "module_id": 38
+    },
+    {
+      "id": 153,
+      "slug": "dsa-subsets",
+      "name": "Subsets",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-recursion-to-iteration"
+      ],
+      "order_index": 0,
+      "module_id": 39
+    },
+    {
+      "id": 154,
+      "slug": "dsa-permutations",
+      "name": "Permutations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-subsets"
+      ],
+      "order_index": 1,
+      "module_id": 39
+    },
+    {
+      "id": 155,
+      "slug": "dsa-combinations",
+      "name": "Combinations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-permutations"
+      ],
+      "order_index": 2,
+      "module_id": 39
+    },
+    {
+      "id": 156,
+      "slug": "dsa-constraint-search",
+      "name": "Constraint search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-combinations"
+      ],
+      "order_index": 3,
+      "module_id": 39
+    },
+    {
+      "id": 157,
+      "slug": "dsa-bubble-sort",
+      "name": "Bubble sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-constraint-search",
+        "java-arrays"
+      ],
+      "order_index": 0,
+      "module_id": 40
+    },
+    {
+      "id": 158,
+      "slug": "dsa-selection-sort",
+      "name": "Selection sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bubble-sort"
+      ],
+      "order_index": 1,
+      "module_id": 40
+    },
+    {
+      "id": 159,
+      "slug": "dsa-insertion-sort",
+      "name": "Insertion sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-selection-sort"
+      ],
+      "order_index": 2,
+      "module_id": 40
+    },
+    {
+      "id": 160,
+      "slug": "dsa-merge-sort",
+      "name": "Merge sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-insertion-sort"
+      ],
+      "order_index": 3,
+      "module_id": 40
+    },
+    {
+      "id": 161,
+      "slug": "dsa-quick-sort",
+      "name": "Quick sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-merge-sort"
+      ],
+      "order_index": 4,
+      "module_id": 40
+    },
+    {
+      "id": 162,
+      "slug": "dsa-heap-sort",
+      "name": "Heap sort",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-quick-sort"
+      ],
+      "order_index": 5,
+      "module_id": 40
+    },
+    {
+      "id": 163,
+      "slug": "dsa-counting-radix",
+      "name": "Counting and radix concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-heap-sort"
+      ],
+      "order_index": 6,
+      "module_id": 40
+    },
+    {
+      "id": 164,
+      "slug": "dsa-sort-stability",
+      "name": "Stability",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-counting-radix"
+      ],
+      "order_index": 7,
+      "module_id": 40
+    },
+    {
+      "id": 165,
+      "slug": "dsa-sort-complexity",
+      "name": "Complexity comparison",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-sort-stability"
+      ],
+      "order_index": 8,
+      "module_id": 40
+    },
+    {
+      "id": 166,
+      "slug": "dsa-binary-search-classic",
+      "name": "Classic search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-sort-complexity",
+        "java-arrays"
+      ],
+      "order_index": 0,
+      "module_id": 41
+    },
+    {
+      "id": 167,
+      "slug": "dsa-binary-search-boundaries",
+      "name": "Boundaries",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-binary-search-classic"
+      ],
+      "order_index": 1,
+      "module_id": 41
+    },
+    {
+      "id": 168,
+      "slug": "dsa-first-last-occurrence",
+      "name": "First and last occurrence",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-binary-search-boundaries"
+      ],
+      "order_index": 2,
+      "module_id": 41
+    },
+    {
+      "id": 169,
+      "slug": "dsa-search-on-answer",
+      "name": "Search on the answer",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-first-last-occurrence"
+      ],
+      "order_index": 3,
+      "module_id": 41
+    },
+    {
+      "id": 170,
+      "slug": "dsa-rotated-arrays",
+      "name": "Rotated arrays",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-search-on-answer"
+      ],
+      "order_index": 4,
+      "module_id": 41
+    },
+    {
+      "id": 171,
+      "slug": "dsa-tree-terminology",
+      "name": "Tree terminology",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-rotated-arrays",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 42
+    },
+    {
+      "id": 172,
+      "slug": "dsa-binary-trees",
+      "name": "Binary trees",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-terminology"
+      ],
+      "order_index": 1,
+      "module_id": 42
+    },
+    {
+      "id": 173,
+      "slug": "dsa-tree-dfs",
+      "name": "DFS traversals",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-binary-trees"
+      ],
+      "order_index": 2,
+      "module_id": 42
+    },
+    {
+      "id": 174,
+      "slug": "dsa-tree-bfs",
+      "name": "BFS / level order",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-dfs"
+      ],
+      "order_index": 3,
+      "module_id": 42
+    },
+    {
+      "id": 175,
+      "slug": "dsa-tree-height",
+      "name": "Height and depth",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-bfs"
+      ],
+      "order_index": 4,
+      "module_id": 42
+    },
+    {
+      "id": 176,
+      "slug": "dsa-tree-paths",
+      "name": "Path problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-height"
+      ],
+      "order_index": 5,
+      "module_id": 42
+    },
+    {
+      "id": 177,
+      "slug": "dsa-tree-construction",
+      "name": "Construction",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-paths"
+      ],
+      "order_index": 6,
+      "module_id": 42
+    },
+    {
+      "id": 178,
+      "slug": "dsa-bst-search",
+      "name": "BST search",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tree-construction",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 43
+    },
+    {
+      "id": 179,
+      "slug": "dsa-bst-insert",
+      "name": "BST insertion",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bst-search"
+      ],
+      "order_index": 1,
+      "module_id": 43
+    },
+    {
+      "id": 180,
+      "slug": "dsa-bst-delete",
+      "name": "BST deletion",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bst-insert"
+      ],
+      "order_index": 2,
+      "module_id": 43
+    },
+    {
+      "id": 181,
+      "slug": "dsa-bst-validate",
+      "name": "BST validation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bst-delete"
+      ],
+      "order_index": 3,
+      "module_id": 43
+    },
+    {
+      "id": 182,
+      "slug": "dsa-bst-ordered-properties",
+      "name": "Ordered properties",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bst-validate"
+      ],
+      "order_index": 4,
+      "module_id": 43
+    },
+    {
+      "id": 183,
+      "slug": "dsa-heap-structure",
+      "name": "Heap structure",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bst-ordered-properties",
+        "java-priority-queue",
+        "java-comparable-comparator"
+      ],
+      "order_index": 0,
+      "module_id": 44
+    },
+    {
+      "id": 184,
+      "slug": "dsa-priority-queue",
+      "name": "Priority queue",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-heap-structure"
+      ],
+      "order_index": 1,
+      "module_id": 44
+    },
+    {
+      "id": 185,
+      "slug": "dsa-heapify",
+      "name": "Heapify",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-priority-queue"
+      ],
+      "order_index": 2,
+      "module_id": 44
+    },
+    {
+      "id": 186,
+      "slug": "dsa-top-k",
+      "name": "Top-K",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-heapify"
+      ],
+      "order_index": 3,
+      "module_id": 44
+    },
+    {
+      "id": 187,
+      "slug": "dsa-heap-scheduling",
+      "name": "Scheduling patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-top-k"
+      ],
+      "order_index": 4,
+      "module_id": 44
+    },
+    {
+      "id": 188,
+      "slug": "dsa-graph-representations",
+      "name": "Graph representations",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-heap-scheduling",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 45
+    },
+    {
+      "id": 189,
+      "slug": "dsa-graph-bfs",
+      "name": "Graph BFS",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-graph-representations"
+      ],
+      "order_index": 1,
+      "module_id": 45
+    },
+    {
+      "id": 190,
+      "slug": "dsa-graph-dfs",
+      "name": "Graph DFS",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-graph-bfs"
+      ],
+      "order_index": 2,
+      "module_id": 45
+    },
+    {
+      "id": 191,
+      "slug": "dsa-connected-components",
+      "name": "Connected components",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-graph-dfs"
+      ],
+      "order_index": 3,
+      "module_id": 45
+    },
+    {
+      "id": 192,
+      "slug": "dsa-graph-cycle",
+      "name": "Cycle detection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-connected-components"
+      ],
+      "order_index": 4,
+      "module_id": 45
+    },
+    {
+      "id": 193,
+      "slug": "dsa-bipartite",
+      "name": "Bipartite graphs",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-graph-cycle"
+      ],
+      "order_index": 5,
+      "module_id": 45
+    },
+    {
+      "id": 194,
+      "slug": "dsa-topological-sort",
+      "name": "Topological sorting",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bipartite",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 46
+    },
+    {
+      "id": 195,
+      "slug": "dsa-union-find",
+      "name": "Union-Find",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-topological-sort",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 47
+    },
+    {
+      "id": 196,
+      "slug": "dsa-unweighted-shortest",
+      "name": "Unweighted shortest paths",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-union-find",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references",
+        "java-priority-queue"
+      ],
+      "order_index": 0,
+      "module_id": 48
+    },
+    {
+      "id": 197,
+      "slug": "dsa-dijkstra",
+      "name": "Dijkstra",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-unweighted-shortest"
+      ],
+      "order_index": 1,
+      "module_id": 48
+    },
+    {
+      "id": 198,
+      "slug": "dsa-mst",
+      "name": "MST",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dijkstra",
+        "java-list",
+        "java-map",
+        "java-classes-objects",
+        "java-references"
+      ],
+      "order_index": 0,
+      "module_id": 49
+    },
+    {
+      "id": 199,
+      "slug": "dsa-greedy-reasoning",
+      "name": "Greedy reasoning",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-mst"
+      ],
+      "order_index": 0,
+      "module_id": 50
+    },
+    {
+      "id": 200,
+      "slug": "dsa-greedy-exchange",
+      "name": "Exchange / intuitive proof",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-greedy-reasoning"
+      ],
+      "order_index": 1,
+      "module_id": 50
+    },
+    {
+      "id": 201,
+      "slug": "dsa-interval-problems",
+      "name": "Interval problems",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-greedy-exchange"
+      ],
+      "order_index": 2,
+      "module_id": 50
+    },
+    {
+      "id": 202,
+      "slug": "dsa-greedy-scheduling",
+      "name": "Scheduling",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-interval-problems"
+      ],
+      "order_index": 3,
+      "module_id": 50
+    },
+    {
+      "id": 203,
+      "slug": "dsa-greedy-patterns",
+      "name": "Classic greedy patterns",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-greedy-scheduling"
+      ],
+      "order_index": 4,
+      "module_id": 50
+    },
+    {
+      "id": 204,
+      "slug": "dsa-dp-mindset",
+      "name": "DP mindset",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-greedy-patterns"
+      ],
+      "order_index": 0,
+      "module_id": 51
+    },
+    {
+      "id": 205,
+      "slug": "dsa-memoization",
+      "name": "Memoization",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-mindset"
+      ],
+      "order_index": 1,
+      "module_id": 51
+    },
+    {
+      "id": 206,
+      "slug": "dsa-tabulation",
+      "name": "Tabulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-memoization"
+      ],
+      "order_index": 2,
+      "module_id": 51
+    },
+    {
+      "id": 207,
+      "slug": "dsa-dp-state",
+      "name": "State definition",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tabulation"
+      ],
+      "order_index": 3,
+      "module_id": 51
+    },
+    {
+      "id": 208,
+      "slug": "dsa-dp-transition",
+      "name": "Transition",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-state"
+      ],
+      "order_index": 4,
+      "module_id": 51
+    },
+    {
+      "id": 209,
+      "slug": "dsa-dp-1d",
+      "name": "1D DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-transition"
+      ],
+      "order_index": 5,
+      "module_id": 51
+    },
+    {
+      "id": 210,
+      "slug": "dsa-dp-2d",
+      "name": "2D DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-1d"
+      ],
+      "order_index": 6,
+      "module_id": 51
+    },
+    {
+      "id": 211,
+      "slug": "dsa-subsequence-dp",
+      "name": "Subsequence DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-2d"
+      ],
+      "order_index": 7,
+      "module_id": 51
+    },
+    {
+      "id": 212,
+      "slug": "dsa-knapsack",
+      "name": "Knapsack",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-subsequence-dp"
+      ],
+      "order_index": 8,
+      "module_id": 51
+    },
+    {
+      "id": 213,
+      "slug": "dsa-grid-dp",
+      "name": "Grid DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-knapsack"
+      ],
+      "order_index": 9,
+      "module_id": 51
+    },
+    {
+      "id": 214,
+      "slug": "dsa-interval-dp",
+      "name": "Interval DP concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-grid-dp"
+      ],
+      "order_index": 10,
+      "module_id": 51
+    },
+    {
+      "id": 215,
+      "slug": "dsa-dp-optimization",
+      "name": "DP optimization",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-interval-dp"
+      ],
+      "order_index": 11,
+      "module_id": 51
+    },
+    {
+      "id": 216,
+      "slug": "dsa-tries",
+      "name": "Tries",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-dp-optimization"
+      ],
+      "order_index": 0,
+      "module_id": 52
+    },
+    {
+      "id": 217,
+      "slug": "dsa-bit-manipulation",
+      "name": "Bit manipulation",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-tries"
+      ],
+      "order_index": 1,
+      "module_id": 52
+    },
+    {
+      "id": 218,
+      "slug": "dsa-segment-tree-concept",
+      "name": "Segment tree concept",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-bit-manipulation"
+      ],
+      "order_index": 2,
+      "module_id": 52
+    },
+    {
+      "id": 219,
+      "slug": "dsa-advanced-graphs",
+      "name": "Advanced graph concepts",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-segment-tree-concept"
+      ],
+      "order_index": 3,
+      "module_id": 52
+    },
+    {
+      "id": 220,
+      "slug": "dsa-advanced-dp",
+      "name": "Advanced DP",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-advanced-graphs"
+      ],
+      "order_index": 4,
+      "module_id": 52
+    },
+    {
+      "id": 221,
+      "slug": "dsa-pattern-selection",
+      "name": "Pattern selection",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-advanced-dp"
+      ],
+      "order_index": 5,
+      "module_id": 52
+    },
+    {
+      "id": 222,
+      "slug": "dsa-interview-hygiene",
+      "name": "Interview hygiene",
+      "domain_key": "dsa",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "dsa-pattern-selection"
+      ],
+      "order_index": 6,
+      "module_id": 52
+    },
+    {
+      "id": 223,
+      "slug": "se-sdlc",
+      "name": "SDLC overview",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 53
+    },
+    {
+      "id": 224,
+      "slug": "se-requirements",
+      "name": "Requirements & scope",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "order_index": 1,
+      "module_id": 53
+    },
+    {
+      "id": 225,
+      "slug": "se-versioning",
+      "name": "Semantic versioning",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "order_index": 2,
+      "module_id": 53
+    },
+    {
+      "id": 226,
+      "slug": "se-solid-srp",
+      "name": "SOLID \u2014 Single Responsibility",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "order_index": 3,
+      "module_id": 53
+    },
+    {
+      "id": 227,
+      "slug": "se-solid-ocp",
+      "name": "SOLID \u2014 Open/Closed",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-solid-srp"
+      ],
+      "order_index": 4,
+      "module_id": 53
+    },
+    {
+      "id": 228,
+      "slug": "se-testing-pyramid",
+      "name": "Testing pyramid",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-sdlc"
+      ],
+      "order_index": 5,
+      "module_id": 53
+    },
+    {
+      "id": 229,
+      "slug": "se-unit-tests",
+      "name": "Unit testing basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-testing-pyramid"
+      ],
+      "order_index": 6,
+      "module_id": 53
+    },
+    {
+      "id": 230,
+      "slug": "se-api-design",
+      "name": "API design basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-requirements"
+      ],
+      "order_index": 7,
+      "module_id": 53
+    },
+    {
+      "id": 231,
+      "slug": "se-code-review",
+      "name": "Code review habits",
+      "domain_key": "software-engineering",
+      "learning_track": "ALWAYS_ON",
+      "parallel_eligible": true,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-unit-tests"
+      ],
+      "order_index": 8,
+      "module_id": 53
+    },
+    {
+      "id": 232,
+      "slug": "se-ci-basics",
+      "name": "CI basics",
+      "domain_key": "software-engineering",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-unit-tests"
+      ],
+      "order_index": 9,
+      "module_id": 53
+    },
+    {
+      "id": 233,
+      "slug": "db-sql-select",
+      "name": "SQL SELECT",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 54
+    },
+    {
+      "id": 234,
+      "slug": "db-sql-joins",
+      "name": "SQL JOINs",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "order_index": 1,
+      "module_id": 54
+    },
+    {
+      "id": 235,
+      "slug": "db-indexes",
+      "name": "Indexes & query plans",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "order_index": 2,
+      "module_id": 54
+    },
+    {
+      "id": 236,
+      "slug": "db-transactions",
+      "name": "Transactions",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "db-sql-select"
+      ],
+      "order_index": 3,
+      "module_id": 54
+    },
+    {
+      "id": 237,
+      "slug": "db-schema-design",
+      "name": "Schema design basics",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "db-sql-joins"
+      ],
+      "order_index": 4,
+      "module_id": 54
+    },
+    {
+      "id": 238,
+      "slug": "be-http",
+      "name": "HTTP fundamentals",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 5,
+      "module_id": 55
+    },
+    {
+      "id": 239,
+      "slug": "be-rest",
+      "name": "REST resources",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-http"
+      ],
+      "order_index": 6,
+      "module_id": 55
+    },
+    {
+      "id": 240,
+      "slug": "be-json",
+      "name": "JSON APIs",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-http"
+      ],
+      "order_index": 7,
+      "module_id": 55
+    },
+    {
+      "id": 241,
+      "slug": "be-fastapi-intro",
+      "name": "FastAPI intro",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-rest",
+        "be-json"
+      ],
+      "order_index": 8,
+      "module_id": 55
+    },
+    {
+      "id": 242,
+      "slug": "be-auth-basics",
+      "name": "Auth basics",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-fastapi-intro"
+      ],
+      "order_index": 9,
+      "module_id": 55
+    },
+    {
+      "id": 243,
+      "slug": "be-errors",
+      "name": "API error handling",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-fastapi-intro"
+      ],
+      "order_index": 10,
+      "module_id": 55
+    },
+    {
+      "id": 244,
+      "slug": "be-persistence",
+      "name": "API + SQL persistence",
+      "domain_key": "backend",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "be-fastapi-intro",
+        "db-sql-select"
+      ],
+      "order_index": 11,
+      "module_id": 55
+    },
+    {
+      "id": 245,
+      "slug": "math-vectors",
+      "name": "Vectors intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 56
+    },
+    {
+      "id": 246,
+      "slug": "math-matrices",
+      "name": "Matrices intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "order_index": 1,
+      "module_id": 56
+    },
+    {
+      "id": 247,
+      "slug": "math-probability",
+      "name": "Probability basics",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 2,
+      "module_id": 56
+    },
+    {
+      "id": 248,
+      "slug": "math-distributions",
+      "name": "Distributions intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-probability"
+      ],
+      "order_index": 3,
+      "module_id": 56
+    },
+    {
+      "id": 249,
+      "slug": "math-stats-summary",
+      "name": "Summary statistics",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-probability"
+      ],
+      "order_index": 4,
+      "module_id": 56
+    },
+    {
+      "id": 250,
+      "slug": "math-gradient-intuition",
+      "name": "Gradient intuition",
+      "domain_key": "mathematics",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "order_index": 5,
+      "module_id": 56
+    },
+    {
+      "id": 251,
+      "slug": "ml-what-is-ml",
+      "name": "What is machine learning",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-probability"
+      ],
+      "order_index": 0,
+      "module_id": 57
+    },
+    {
+      "id": 252,
+      "slug": "ml-features-labels",
+      "name": "Features & labels",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ml-what-is-ml"
+      ],
+      "order_index": 1,
+      "module_id": 57
+    },
+    {
+      "id": 253,
+      "slug": "ml-train-test",
+      "name": "Train/test split",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ml-features-labels"
+      ],
+      "order_index": 2,
+      "module_id": 57
+    },
+    {
+      "id": 254,
+      "slug": "ml-linear-regression",
+      "name": "Linear regression",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ml-train-test",
+        "math-vectors"
+      ],
+      "order_index": 3,
+      "module_id": 57
+    },
+    {
+      "id": 255,
+      "slug": "ml-classification",
+      "name": "Classification basics",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ml-train-test"
+      ],
+      "order_index": 4,
+      "module_id": 57
+    },
+    {
+      "id": 256,
+      "slug": "ml-metrics",
+      "name": "ML metrics",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ml-classification"
+      ],
+      "order_index": 5,
+      "module_id": 57
+    },
+    {
+      "id": 257,
+      "slug": "ml-overfitting",
+      "name": "Overfitting & regularization",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ml-metrics"
+      ],
+      "order_index": 6,
+      "module_id": 57
+    },
+    {
+      "id": 258,
+      "slug": "ml-sklearn-pipeline",
+      "name": "sklearn Pipeline",
+      "domain_key": "ml",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ml-overfitting"
+      ],
+      "order_index": 7,
+      "module_id": 57
+    },
+    {
+      "id": 259,
+      "slug": "dl-awareness",
+      "name": "Deep Learning awareness",
+      "domain_key": "deep-learning",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 58
+    },
+    {
+      "id": 260,
+      "slug": "dl-path",
+      "name": "Deep Learning learning path",
+      "domain_key": "deep-learning",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "dl-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 58
+    },
+    {
+      "id": 261,
+      "slug": "nlp-awareness",
+      "name": "NLP awareness",
+      "domain_key": "nlp",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 59
+    },
+    {
+      "id": 262,
+      "slug": "nlp-path",
+      "name": "NLP learning path",
+      "domain_key": "nlp",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "nlp-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 59
+    },
+    {
+      "id": 263,
+      "slug": "genai-awareness",
+      "name": "Generative AI awareness",
+      "domain_key": "genai",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 60
+    },
+    {
+      "id": 264,
+      "slug": "genai-path",
+      "name": "Generative AI learning path",
+      "domain_key": "genai",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "genai-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 60
+    },
+    {
+      "id": 265,
+      "slug": "ai-eng-awareness",
+      "name": "AI Engineering awareness",
+      "domain_key": "ai-engineering",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 61
+    },
+    {
+      "id": 266,
+      "slug": "ai-eng-path",
+      "name": "AI Engineering learning path",
+      "domain_key": "ai-engineering",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "ai-eng-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 61
+    },
+    {
+      "id": 267,
+      "slug": "devops-awareness",
+      "name": "DevOps awareness",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 62
+    },
+    {
+      "id": 268,
+      "slug": "devops-path",
+      "name": "DevOps learning path",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "devops-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 62
+    },
+    {
+      "id": 269,
+      "slug": "sysdesign-awareness",
+      "name": "System Design awareness",
+      "domain_key": "system-design",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 63
+    },
+    {
+      "id": 270,
+      "slug": "sysdesign-path",
+      "name": "System Design learning path",
+      "domain_key": "system-design",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": false,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "sysdesign-awareness"
+      ],
+      "order_index": 1,
+      "module_id": 63
+    },
+    {
+      "id": 271,
+      "slug": "py-syntax",
+      "name": "Python syntax & tooling",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "cf-command-line"
+      ],
+      "order_index": 0,
+      "module_id": 64
+    },
+    {
+      "id": 272,
+      "slug": "py-data-structures",
+      "name": "Python data structures",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "py-syntax"
+      ],
+      "order_index": 1,
+      "module_id": 64
+    },
+    {
+      "id": 273,
+      "slug": "py-functions-modules",
+      "name": "Functions & modules",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "py-data-structures"
+      ],
+      "order_index": 2,
+      "module_id": 64
+    },
+    {
+      "id": 274,
+      "slug": "py-oop",
+      "name": "Python OOP",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "py-functions-modules"
+      ],
+      "order_index": 3,
+      "module_id": 64
+    },
+    {
+      "id": 275,
+      "slug": "py-testing",
+      "name": "pytest for Python",
+      "domain_key": "python",
+      "learning_track": "CORE",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "py-functions-modules",
+        "se-unit-tests"
+      ],
+      "order_index": 4,
+      "module_id": 64
+    },
+    {
+      "id": 276,
+      "slug": "web-html-basics",
+      "name": "HTML basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 65
+    },
+    {
+      "id": 277,
+      "slug": "web-css-basics",
+      "name": "CSS basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-html-basics"
+      ],
+      "order_index": 1,
+      "module_id": 65
+    },
+    {
+      "id": 278,
+      "slug": "web-responsive",
+      "name": "Responsive design",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-css-basics"
+      ],
+      "order_index": 2,
+      "module_id": 65
+    },
+    {
+      "id": 279,
+      "slug": "web-js-basics",
+      "name": "JavaScript basics",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-html-basics"
+      ],
+      "order_index": 3,
+      "module_id": 65
+    },
+    {
+      "id": 280,
+      "slug": "web-ts-intro",
+      "name": "TypeScript intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-js-basics"
+      ],
+      "order_index": 4,
+      "module_id": 65
+    },
+    {
+      "id": 281,
+      "slug": "web-react-intro",
+      "name": "React intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-js-basics"
+      ],
+      "order_index": 5,
+      "module_id": 65
+    },
+    {
+      "id": 282,
+      "slug": "web-nextjs-intro",
+      "name": "Next.js intro",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-react-intro"
+      ],
+      "order_index": 6,
+      "module_id": 65
+    },
+    {
+      "id": 283,
+      "slug": "web-forms-a11y",
+      "name": "Forms & accessibility",
+      "domain_key": "web",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "web-html-basics",
+        "web-css-basics"
+      ],
+      "order_index": 7,
+      "module_id": 65
+    },
+    {
+      "id": 284,
+      "slug": "net-internet-basics",
+      "name": "Internet basics",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [],
+      "order_index": 0,
+      "module_id": 66
+    },
+    {
+      "id": 285,
+      "slug": "net-dns",
+      "name": "DNS",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "net-internet-basics"
+      ],
+      "order_index": 1,
+      "module_id": 66
+    },
+    {
+      "id": 286,
+      "slug": "net-tcp-udp",
+      "name": "TCP vs UDP",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "net-internet-basics"
+      ],
+      "order_index": 2,
+      "module_id": 66
+    },
+    {
+      "id": 287,
+      "slug": "net-http",
+      "name": "HTTP deep dive",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "net-internet-basics",
+        "be-http"
+      ],
+      "order_index": 3,
+      "module_id": 66
+    },
+    {
+      "id": 288,
+      "slug": "net-https-tls",
+      "name": "HTTPS & TLS",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "net-http"
+      ],
+      "order_index": 4,
+      "module_id": 66
+    },
+    {
+      "id": 289,
+      "slug": "net-websockets",
+      "name": "WebSockets",
+      "domain_key": "networking",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "net-http"
+      ],
+      "order_index": 5,
+      "module_id": 66
+    },
+    {
+      "id": 290,
+      "slug": "ops-docker-intro",
+      "name": "Docker intro",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-shell"
+      ],
+      "order_index": 0,
+      "module_id": 67
+    },
+    {
+      "id": 291,
+      "slug": "ops-compose",
+      "name": "Docker Compose",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ops-docker-intro"
+      ],
+      "order_index": 1,
+      "module_id": 67
+    },
+    {
+      "id": 292,
+      "slug": "ops-ci-github-actions",
+      "name": "GitHub Actions CI",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "se-ci-basics"
+      ],
+      "order_index": 2,
+      "module_id": 67
+    },
+    {
+      "id": 293,
+      "slug": "ops-linux-services",
+      "name": "Linux services basics",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "cf-linux-processes"
+      ],
+      "order_index": 3,
+      "module_id": 67
+    },
+    {
+      "id": 294,
+      "slug": "ops-k8s-awareness",
+      "name": "Kubernetes awareness",
+      "domain_key": "devops",
+      "learning_track": "OPTIONAL",
+      "parallel_eligible": true,
+      "depth_target": "AWARENESS",
+      "prerequisites": [
+        "ops-docker-intro",
+        "ops-compose"
+      ],
+      "order_index": 4,
+      "module_id": 67
+    },
+    {
+      "id": 295,
+      "slug": "ops-observability",
+      "name": "Observability basics",
+      "domain_key": "devops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ops-docker-intro"
+      ],
+      "order_index": 5,
+      "module_id": 67
+    },
+    {
+      "id": 296,
+      "slug": "ds-numpy",
+      "name": "NumPy foundations",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "math-vectors"
+      ],
+      "order_index": 0,
+      "module_id": 68
+    },
+    {
+      "id": 297,
+      "slug": "ds-pandas",
+      "name": "Pandas foundations",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ds-numpy"
+      ],
+      "order_index": 1,
+      "module_id": 68
+    },
+    {
+      "id": 298,
+      "slug": "ds-eda",
+      "name": "Exploratory data analysis",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ds-pandas",
+        "math-stats-summary"
+      ],
+      "order_index": 2,
+      "module_id": 68
+    },
+    {
+      "id": 299,
+      "slug": "ds-feature-eng",
+      "name": "Feature engineering",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "ds-eda"
+      ],
+      "order_index": 3,
+      "module_id": 68
+    },
+    {
+      "id": 300,
+      "slug": "ds-sql-analytics",
+      "name": "SQL for analytics",
+      "domain_key": "data-science",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "WORKING_KNOWLEDGE",
+      "prerequisites": [
+        "db-sql-select",
+        "ds-pandas"
+      ],
+      "order_index": 4,
+      "module_id": 68
+    },
+    {
+      "id": 301,
+      "slug": "dl-nn-basics",
+      "name": "Neural network basics",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "ml-sklearn-pipeline",
+        "math-gradient-intuition"
+      ],
+      "order_index": 0,
+      "module_id": 69
+    },
+    {
+      "id": 302,
+      "slug": "dl-backprop",
+      "name": "Backpropagation intuition",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "order_index": 1,
+      "module_id": 69
+    },
+    {
+      "id": 303,
+      "slug": "dl-cnn",
+      "name": "CNN basics",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "order_index": 2,
+      "module_id": 69
+    },
+    {
+      "id": 304,
+      "slug": "dl-transformers-intro",
+      "name": "Transformers intro",
+      "domain_key": "deep-learning",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "dl-nn-basics"
+      ],
+      "order_index": 3,
+      "module_id": 69
+    },
+    {
+      "id": 305,
+      "slug": "genai-embeddings",
+      "name": "Embeddings & semantic search",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "dl-transformers-intro"
+      ],
+      "order_index": 0,
+      "module_id": 70
+    },
+    {
+      "id": 306,
+      "slug": "genai-rag",
+      "name": "RAG systems",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "genai-embeddings",
+        "be-fastapi-intro"
+      ],
+      "order_index": 1,
+      "module_id": 70
+    },
+    {
+      "id": 307,
+      "slug": "genai-agents",
+      "name": "Tool-using agents",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "genai-rag"
+      ],
+      "order_index": 2,
+      "module_id": 70
+    },
+    {
+      "id": 308,
+      "slug": "genai-eval",
+      "name": "LLM evaluation",
+      "domain_key": "genai",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "DEEP",
+      "prerequisites": [
+        "genai-rag"
+      ],
+      "order_index": 3,
+      "module_id": 70
+    },
+    {
+      "id": 309,
+      "slug": "mlops-tracking",
+      "name": "Experiment tracking",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ml-sklearn-pipeline"
+      ],
+      "order_index": 0,
+      "module_id": 71
+    },
+    {
+      "id": 310,
+      "slug": "mlops-model-packaging",
+      "name": "Model packaging",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "mlops-tracking"
+      ],
+      "order_index": 1,
+      "module_id": 71
+    },
+    {
+      "id": 311,
+      "slug": "mlops-serving",
+      "name": "Model serving APIs",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "mlops-model-packaging",
+        "be-fastapi-intro"
+      ],
+      "order_index": 2,
+      "module_id": 71
+    },
+    {
+      "id": 312,
+      "slug": "mlops-monitoring",
+      "name": "Model monitoring basics",
+      "domain_key": "mlops",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "mlops-serving"
+      ],
+      "order_index": 3,
+      "module_id": 71
+    },
+    {
+      "id": 313,
+      "slug": "sys-scalability",
+      "name": "Scalability basics",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "be-persistence",
+        "db-indexes"
+      ],
+      "order_index": 0,
+      "module_id": 72
+    },
+    {
+      "id": 314,
+      "slug": "sys-caching",
+      "name": "Caching strategies",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "sys-scalability"
+      ],
+      "order_index": 1,
+      "module_id": 72
+    },
+    {
+      "id": 315,
+      "slug": "sys-queues",
+      "name": "Message queues",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "sys-scalability"
+      ],
+      "order_index": 2,
+      "module_id": 72
+    },
+    {
+      "id": 316,
+      "slug": "sys-observability-design",
+      "name": "Observability in design",
+      "domain_key": "system-design",
+      "learning_track": "SPECIALIZATION",
+      "parallel_eligible": false,
+      "depth_target": "STRONG",
+      "prerequisites": [
+        "ops-observability",
+        "sys-scalability"
+      ],
+      "order_index": 3,
+      "module_id": 72
+    }
+  ],
+  "total_resources": 766,
+  "total_lessons": 316,
+  "resource_exactness": {
+    "null": 295,
+    "COLLECTION": 133,
+    "EXACT": 333,
+    "MULTI_TOPIC": 5
+  },
+  "resource_estimated_minutes": {
+    "NULL": 296,
+    "8": 101,
+    "10": 75,
+    "11": 18,
+    "12": 9,
+    "13": 7,
+    "14": 10,
+    "15": 17,
+    "16": 9,
+    "17": 8,
+    "18": 40,
+    "19": 7,
+    "20": 35,
+    "21": 6,
+    "22": 10,
+    "23": 6,
+    "24": 5,
+    "25": 18,
+    "26": 11,
+    "27": 4,
+    "28": 2,
+    "29": 3,
+    "30": 15,
+    "31": 3,
+    "32": 3,
+    "33": 3,
+    "34": 1,
+    "35": 3,
+    "36": 4,
+    "37": 1,
+    "38": 2,
+    "39": 1,
+    "40": 1,
+    "42": 4,
+    "45": 2,
+    "46": 1,
+    "49": 2,
+    "52": 1,
+    "53": 2,
+    "56": 1,
+    "57": 1,
+    "58": 1,
+    "60": 2,
+    "63": 2,
+    "67": 5,
+    "68": 1,
+    "75": 7
+  },
+  "visibility_distribution": {
+    "COVERAGE_SUPPLEMENT": 4,
+    "LEARNER": 609,
+    "LEGACY_DUPLICATE": 9,
+    "VERIFICATION_ONLY": 144
+  },
+  "role_distribution": {
+    "DEEP_DIVE": 98,
+    "PRACTICE": 136,
+    "PRIMARY": 320,
+    "REFERENCE": 79,
+    "SUPPLEMENT": 133
+  },
+  "prerequisite_stats": {
+    "topics_with_prereqs": 316,
+    "total_topics": 316
+  },
+  "parallel_eligible_count": 36,
+  "learning_track_dist": {
+    "ALWAYS_ON": 35,
+    "CORE": 228,
+    "OPTIONAL": 13,
+    "SPECIALIZATION": 40
+  },
+  "resources_per_topic": {
+    "1": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "2": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "3": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "4": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "5": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "6": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "7": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "8": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "9": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "10": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "11": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "12": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "13": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "14": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "15": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "16": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "17": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "18": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "19": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "20": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "21": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "22": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "23": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "24": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "25": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "26": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "27": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "28": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "29": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "30": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "31": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "32": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "33": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "34": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "35": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "36": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "37": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "38": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "39": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "40": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "41": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "42": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "43": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "44": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "45": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "46": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "47": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "48": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "49": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "50": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "51": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "52": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "53": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "54": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "55": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "56": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "57": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "58": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "59": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "60": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "61": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "62": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "63": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "64": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "65": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "66": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "67": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "68": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "69": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "70": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "71": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "72": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "73": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "74": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "75": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "76": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "77": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "78": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "79": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "80": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "81": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "82": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "83": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "84": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "85": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "86": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "87": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "88": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "89": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "90": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "91": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "92": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "93": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "94": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "95": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "96": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "97": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "98": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "99": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "100": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "101": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "102": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "103": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "104": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "105": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "106": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "107": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "108": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "109": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "110": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "111": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "112": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "113": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "114": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "115": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "116": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "117": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "118": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "119": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "120": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "121": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "122": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "123": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "124": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "125": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "126": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "127": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "128": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "129": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "130": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "131": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "132": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "133": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "134": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "135": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "136": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "137": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "138": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "139": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "140": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "141": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "142": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "143": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "144": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "145": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "146": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "147": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "148": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "149": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "150": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "151": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "152": {
+      "min": 2,
+      "max": 2,
+      "avg": 2.0
+    },
+    "153": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "154": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "155": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "156": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "157": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "158": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "159": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "160": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "161": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "162": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "163": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "164": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "165": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "166": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "167": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "168": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "169": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "170": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "171": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "172": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "173": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "174": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "175": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "176": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "177": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "178": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "179": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "180": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "181": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "182": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "183": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "184": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "185": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "186": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "187": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "188": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "189": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "190": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "191": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "192": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "193": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "194": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "195": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "196": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "197": {
+      "min": 7,
+      "max": 7,
+      "avg": 7.0
+    },
+    "198": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "199": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "200": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "201": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "202": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "203": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "204": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "205": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "206": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "207": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "208": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "209": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "210": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "211": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "212": {
+      "min": 5,
+      "max": 5,
+      "avg": 5.0
+    },
+    "213": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "214": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "215": {
+      "min": 4,
+      "max": 4,
+      "avg": 4.0
+    },
+    "216": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "217": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "218": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "219": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "220": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "221": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "222": {
+      "min": 3,
+      "max": 3,
+      "avg": 3.0
+    },
+    "223": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "224": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "225": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "226": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "227": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "228": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "229": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "230": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "231": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "232": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "233": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "234": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "235": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "236": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "237": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "238": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "239": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "240": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "241": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "242": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "243": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "244": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "245": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "246": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "247": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "248": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "249": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "250": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "251": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "252": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "253": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "254": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "255": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "256": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "257": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "258": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "259": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "260": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "261": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "262": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "263": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "264": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "265": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "266": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "267": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "268": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "269": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "270": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "271": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "272": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "273": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "274": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "275": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "276": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "277": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "278": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "279": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "280": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "281": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "282": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "283": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "284": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "285": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "286": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "287": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "288": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "289": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "290": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "291": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "292": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "293": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "294": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "295": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "296": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "297": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "298": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "299": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "300": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "301": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "302": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "303": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "304": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "305": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "306": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "307": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "308": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "309": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "310": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "311": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "312": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "313": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "314": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "315": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    },
+    "316": {
+      "min": 1,
+      "max": 1,
+      "avg": 1.0
+    }
+  }
+}

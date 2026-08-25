@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-08-25T16:45:14.751770+00:00",
+  "tests": [
+    {
+      "test": "T1_beginner_no_prereq_jump",
+      "pass": true,
+      "detail": "cf-bits-and-bytes prereqs=[]"
+    },
+    {
+      "test": "T2_dsa_parallel_gate",
+      "pass": true,
+      "detail": "gate=['cf-time-complexity-intro', 'java-method-basics']"
+    },
+    {
+      "test": "T3_ml_chain_awareness_math_algorithms",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "test": "T4_dl_no_math_skip",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "test": "T5_cv_bridges_present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "test": "T6_revision_adaptive",
+      "pass": true,
+      "detail": "fail->1d then success->30d"
+    },
+    {
+      "test": "T7_no_unbounded_primary",
+      "pass": true,
+      "detail": "all bounded"
+    },
+    {
+      "test": "T8_practice_concepts_match",
+      "pass": true,
+      "detail": "133 contracts checked"
+    },
+    {
+      "test": "T9_broken_not_ready",
+      "pass": true,
+      "detail": "cf-machine-code: readiness with broken primary = BROKEN"
+    },
+    {
+      "test": "T10_missing_prereq_bridge_blocks",
+      "pass": true,
+      "detail": "bridge=17 items / 605 min"
+    }
+  ],
+  "overall_pass": true
+}

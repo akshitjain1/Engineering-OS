@@ -1,0 +1,127 @@
+{
+  "chapter_introduction": [
+    "index.md"
+  ],
+  "chapter_linear-regression": [
+    "generalization.md",
+    "index.md",
+    "linear-regression-concise.md",
+    "linear-regression-scratch.md",
+    "linear-regression.md",
+    "oo-design.md",
+    "synthetic-regression-data.md",
+    "weight-decay.md"
+  ],
+  "chapter_multilayer-perceptrons": [
+    "backprop.md",
+    "dropout.md",
+    "generalization-deep.md",
+    "index.md",
+    "kaggle-house-price.md",
+    "mlp-implementation.md",
+    "mlp.md",
+    "numerical-stability-and-init.md"
+  ],
+  "chapter_optimization": [
+    "adadelta.md",
+    "adagrad.md",
+    "adam.md",
+    "convexity.md",
+    "gd.md",
+    "index.md",
+    "lr-scheduler.md",
+    "minibatch-sgd.md",
+    "momentum.md",
+    "optimization-intro.md",
+    "rmsprop.md",
+    "sgd.md"
+  ],
+  "chapter_convolutional-neural-networks": [
+    "channels.md",
+    "conv-layer.md",
+    "index.md",
+    "lenet.md",
+    "padding-and-strides.md",
+    "pooling.md",
+    "why-conv.md"
+  ],
+  "chapter_convolutional-modern": [
+    "alexnet.md",
+    "batch-norm.md",
+    "cnn-design.md",
+    "densenet.md",
+    "googlenet.md",
+    "index.md",
+    "nin.md",
+    "resnet.md",
+    "vgg.md"
+  ],
+  "chapter_recurrent-neural-networks": [
+    "bptt.md",
+    "index.md",
+    "language-model.md",
+    "rnn-concise.md",
+    "rnn-scratch.md",
+    "rnn.md",
+    "sequence.md",
+    "text-sequence.md"
+  ],
+  "chapter_recurrent-modern": [
+    "beam-search.md",
+    "bi-rnn.md",
+    "deep-rnn.md",
+    "encoder-decoder.md",
+    "gru.md",
+    "index.md",
+    "lstm.md",
+    "machine-translation-and-dataset.md",
+    "seq2seq.md"
+  ],
+  "chapter_computer-vision": [
+    "anchor.md",
+    "bounding-box.md",
+    "fcn.md",
+    "fine-tuning.md",
+    "image-augmentation.md",
+    "index.md",
+    "kaggle-cifar10.md",
+    "kaggle-dog.md",
+    "multiscale-object-detection.md",
+    "neural-style.md",
+    "object-detection-dataset.md",
+    "rcnn.md",
+    "semantic-segmentation-and-dataset.md",
+    "ssd.md",
+    "transposed-conv.md"
+  ],
+  "chapter_natural-language-processing-pretraining": [
+    "approx-training.md",
+    "bert-dataset.md",
+    "bert-pretraining.md",
+    "bert.md",
+    "glove.md",
+    "index.md",
+    "similarity-analogy.md",
+    "subword-embedding.md",
+    "word-embedding-dataset.md",
+    "word2vec-pretraining.md",
+    "word2vec.md"
+  ],
+  "hf_chapters_en": [
+    "_toctree.yml",
+    "chapter0",
+    "chapter1",
+    "chapter10",
+    "chapter11",
+    "chapter12",
+    "chapter2",
+    "chapter3",
+    "chapter4",
+    "chapter5",
+    "chapter6",
+    "chapter7",
+    "chapter8",
+    "chapter9",
+    "events"
+  ]
+}

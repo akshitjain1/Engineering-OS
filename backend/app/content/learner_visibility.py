@@ -56,6 +56,21 @@ KNOWN_LEGACY_REFERENCE_SLUGS = frozenset(
     }
 )
 
+# Awareness/path shell "primaries" pointing at whole-book/collection hubs.
+# Real domain chains exist; shells stay internal-only (spec PART D).
+KNOWN_HIDDEN_SHELL_PRIMARYS = frozenset(
+    {
+        "dl-awareness-primary",
+        "dl-path-primary",
+        "nlp-awareness-primary",
+        "nlp-path-primary",
+        "genai-awareness-primary",
+        "genai-path-primary",
+        "ai-eng-awareness-primary",
+        "ai-eng-path-primary",
+    }
+)
+
 
 def normalize_destination_url(url: Optional[str]) -> str:
     """Canonicalize URL for duplicate detection (ignore fragments, utm, trailing slash)."""
@@ -235,10 +250,14 @@ def apply_learner_visibility(db: Session) -> dict[str, Any]:
                 r.learner_visible = False
                 r.visibility_class = VIS_COVERAGE_SUPPLEMENT
                 stats["hidden_coverage_supplement"] += 1
-            if slug in KNOWN_LEGACY_REFERENCE_SLUGS:
+            if slug in KNOWN_LEGACY_REFERENCE_SLUGS or slug in KNOWN_HIDDEN_SHELL_PRIMARYS:
                 r.learner_visible = False
-                r.visibility_class = VIS_LEGACY_DUPLICATE
-                stats["hidden_legacy_duplicate"] += 1
+                if slug in KNOWN_HIDDEN_SHELL_PRIMARYS:
+                    r.visibility_class = VIS_VERIFICATION_ONLY
+                    stats["hidden_verification_only"] += 1
+                else:
+                    r.visibility_class = VIS_LEGACY_DUPLICATE
+                    stats["hidden_legacy_duplicate"] += 1
 
         # Collection SUPPLEMENT hubs — internal only
         for r in resources:
@@ -299,6 +318,9 @@ def apply_learner_visibility(db: Session) -> dict[str, Any]:
             if slug in KNOWN_LEGACY_REFERENCE_SLUGS:
                 r.learner_visible = False
                 r.visibility_class = VIS_LEGACY_DUPLICATE
+            if slug in KNOWN_HIDDEN_SHELL_PRIMARYS:
+                r.learner_visible = False
+                r.visibility_class = VIS_VERIFICATION_ONLY
 
     stats["visible"] = sum(
         1 for rows in by_topic.values() for r in rows if is_learner_visible(r)

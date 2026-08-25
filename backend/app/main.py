@@ -45,6 +45,7 @@ from .db.models import (
 )
 from .learning.api import router as learning_router
 from .learning import service as learning_service
+from .learning import revision_engine
 from .learning.planner import domain_from_slug
 from .learning.streak import get_or_create_streak
 from .learning.xp import award_xp, get_or_create_xp
@@ -565,6 +566,50 @@ def list_topics(module_id: int, db: Session = Depends(get_db)):
     topics_by_name = _topics_index(db)
     completion_lookup = learning_service.topic_completion_index(db)
     return [_topic_payload(t, topics_by_name, completion_lookup) for t in topics]
+
+
+@app.get("/api/prerequisite-bridge/{topic_slug}", tags=["Curriculum"])
+def get_prerequisite_bridge(topic_slug: str, db: Session = Depends(get_db)):
+    """Just-in-time prerequisite bridge: minimal missing REQUIRED prereqs."""
+    from .learning.bridges import prerequisite_bridge as compute_bridge
+
+    topic = db.query(CurriculumTopic).filter(CurriculumTopic.slug == topic_slug).first()
+    if not topic:
+        raise HTTPException(status_code=404, detail="Topic not found")
+    all_topics = (
+        db.query(CurriculumTopic)
+        .options(selectinload(CurriculumTopic.lessons))
+        .all()
+    )
+    completion_lookup = learning_service.topic_completion_index(db)
+
+    def lessons_complete(t: CurriculumTopic) -> bool:
+        return bool(
+            t.lessons
+            and all(
+                (l.completion_status or "").lower() in ("complete", "completed", "done")
+                for l in t.lessons
+            )
+        )
+
+    completed = {
+        t.slug
+        for t in all_topics
+        if t.slug and (completion_lookup.get(t.slug) or lessons_complete(t))
+    }
+    topics_map = {
+        t.slug: {
+            "slug": t.slug,
+            "name": t.name,
+            "prerequisites": t.prerequisites or [],
+            "estimated_minutes": t.estimated_minutes,
+        }
+        for t in all_topics
+        if t.slug
+    }
+    result = compute_bridge(topic_slug, topics_map, completed)
+    result["topic_name"] = topic.name
+    return result
 
 
 @app.get("/api/topic/{topic_id}", tags=["Curriculum"])
@@ -1245,8 +1290,6 @@ def schedule_revision(
         raise HTTPException(status_code=400, detail="confidence must be between 0 and 100")
 
     now = datetime.now(timezone.utc)
-    interval_days = _revision_interval(confidence)
-    next_review = now + timedelta(days=interval_days)
 
     existing = (
         db.query(RevisionSchedule)
@@ -1258,23 +1301,21 @@ def schedule_revision(
         .first()
     )
 
-    if existing:
-        existing.confidence = confidence
-        existing.last_reviewed = now
-        existing.review_interval = interval_days
-        existing.next_review = next_review
-    else:
+    if not existing:
+        # Seed with the initial ladder step (+1 day) before applying the attempt.
         existing = RevisionSchedule(
             user_id=DEFAULT_USER,
             item_id=item_id,
             item_type=item_type,
             confidence=confidence,
             last_reviewed=now,
-            next_review=next_review,
-            review_interval=interval_days,
+            next_review=now + timedelta(days=_revision_interval(confidence)),
+            review_interval=_revision_interval(confidence),
         )
         db.add(existing)
+        db.flush()
 
+    revision_engine.schedule_update(existing, confidence, now=now)
     db.commit()
     db.refresh(existing)
     return {
@@ -1285,6 +1326,9 @@ def schedule_revision(
         "review_interval": existing.review_interval,
         "next_review": _iso(existing.next_review),
         "last_reviewed": _iso(existing.last_reviewed),
+        "ease": round(float(existing.ease), 2),
+        "retrieval_success_count": existing.retrieval_success_count,
+        "retrieval_fail_count": existing.retrieval_fail_count,
     }
 
 

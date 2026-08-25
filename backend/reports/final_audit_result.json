@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-08-25T16:45:10.737452+00:00",
+  "checks": [
+    {
+      "check": "1_visible_primary_bounded",
+      "status": "PASS",
+      "detail": "all visible PRIMARYs carry boundaries"
+    },
+    {
+      "check": "2_visible_have_time",
+      "status": "PASS",
+      "detail": "all visible PRIMARYs have estimated_minutes>0"
+    },
+    {
+      "check": "3_primary_evidence",
+      "status": "PASS",
+      "detail": "evidence present"
+    },
+    {
+      "check": "4_no_collection_primary",
+      "status": "PASS",
+      "detail": "none"
+    },
+    {
+      "check": "5_no_broken_visible",
+      "status": "PASS",
+      "detail": "none"
+    },
+    {
+      "check": "6_no_duplicate_canonical",
+      "status": "PASS",
+      "detail": "no same-topic canonical dupes"
+    },
+    {
+      "check": "7_substantive_topics_have_practice",
+      "status": "PASS",
+      "detail": "100% coverage (0 without)"
+    },
+    {
+      "check": "8_practice_concepts_align",
+      "status": "PASS",
+      "detail": "concept tags reference their topics"
+    },
+    {
+      "check": "9_prereq_targets_exist",
+      "status": "PASS",
+      "detail": "all resolve"
+    },
+    {
+      "check": "10_graph_acyclic",
+      "status": "PASS",
+      "detail": "acyclic"
+    },
+    {
+      "check": "11_parallel_tracks_safe",
+      "status": "PASS",
+      "detail": "planner gates every parallel item via unlock_status (tested)"
+    },
+    {
+      "check": "12_revision_engine_operational",
+      "status": "PASS",
+      "detail": "adaptive columns present; 0 schedule rows"
+    },
+    {
+      "check": "13_dsa_starts_before_deep_java",
+      "status": "PASS",
+      "detail": "dsa@21 < deep_java@46"
+    },
+    {
+      "check": "14_mldlcv_ordering_valid",
+      "status": "PASS",
+      "detail": "DL/CV/ML-gate prerequisite chains verified"
+    },
+    {
+      "check": "15_simulations_pass",
+      "status": "PASS",
+      "detail": "7 checks pass"
+    },
+    {
+      "check": "16_user_progress_intact",
+      "status": "PASS",
+      "detail": "rows before=6 after=6"
+    },
+    {
+      "check": "17_spine_preserved",
+      "status": "PASS",
+      "detail": "316 preserved"
+    },
+    {
+      "check": "18_no_internal_resources_visible",
+      "status": "PASS",
+      "detail": "visible => LEARNER holds"
+    }
+  ],
+  "overall": "PASS",
+  "locked": true
+}

@@ -1,0 +1,2913 @@
+{
+  "horizon_days": 60,
+  "topics_completed": 216,
+  "total_topics": 449,
+  "first_dsa_day_index": 21,
+  "first_ml_day_index": 16,
+  "first_dl_day_index": null,
+  "first_cv_day_index": null,
+  "first_deep_java_day_index": 46,
+  "serious_ml_day_index": null,
+  "first_nlp_day_index": 2,
+  "first_genai_day_index": 3,
+  "capacity_violations": 0,
+  "daily_history": [
+    {
+      "date": "2026-08-24",
+      "budget": 220,
+      "planned_minutes": 195,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-sdlc",
+          "title": "SDLC overview",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-sdlc",
+          "title": "Practice SDLC overview",
+          "minutes": 20
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-bits-and-bytes",
+          "title": "Bits and bytes",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-problem-decomposition",
+          "title": "Problem decomposition",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dl-awareness",
+          "title": "Deep Learning awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "db-sql-select",
+          "title": "SQL SELECT",
+          "minutes": 35
+        }
+      ],
+      "checkpoint": {
+        "day": 1,
+        "completed_total": 5,
+        "lanes_today": [
+          "cf",
+          "db",
+          "dl",
+          "se"
+        ],
+        "domain_progress": {
+          "ai": {
+            "open": 1,
+            "locked": 9
+          },
+          "be": {
+            "open": 1,
+            "locked": 6
+          },
+          "cf": {
+            "done": 2,
+            "open": 3,
+            "locked": 59
+          },
+          "cv": {
+            "open": 1,
+            "locked": 25
+          },
+          "db": {
+            "done": 1,
+            "open": 3,
+            "locked": 1
+          },
+          "devops": {
+            "open": 1,
+            "locked": 1
+          },
+          "dl": {
+            "done": 1,
+            "open": 2,
+            "locked": 35
+          },
+          "ds": {
+            "locked": 5
+          },
+          "dsa": {
+            "locked": 106
+          },
+          "genai": {
+            "open": 1,
+            "locked": 18
+          },
+          "java": {
+            "locked": 52
+          },
+          "math": {
+            "open": 2,
+            "locked": 13
+          },
+          "ml": {
+            "locked": 35
+          },
+          "mlops": {
+            "locked": 6
+          },
+          "net": {
+            "open": 1,
+            "locked": 5
+          },
+          "nlp": {
+            "open": 2,
+            "locked": 16
+          },
+          "ops": {
+            "locked": 6
+          },
+          "py": {
+            "locked": 5
+          },
+          "se": {
+            "done": 1,
+            "open": 4,
+            "locked": 5
+          },
+          "sys": {
+            "locked": 4
+          },
+          "sysdesign": {
+            "open": 1,
+            "locked": 1
+          },
+          "web": {
+            "open": 1,
+            "locked": 7
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-08-25",
+      "budget": 220,
+      "planned_minutes": 220,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-requirements",
+          "title": "Requirements & scope",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-requirements",
+          "title": "Practice Requirements & scope",
+          "minutes": 20
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-binary",
+          "title": "Binary",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-pseudocode",
+          "title": "Pseudocode",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-time-complexity-intro",
+          "title": "Time complexity introduction",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dl-path",
+          "title": "Deep Learning learning path",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "se-versioning",
+          "title": "Semantic versioning",
+          "minutes": 25
+        }
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "budget": 220,
+      "planned_minutes": 220,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-solid-srp",
+          "title": "SOLID \u2014 Single Responsibility",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-solid-srp",
+          "title": "Practice SOLID \u2014 Single Responsibility",
+          "minutes": 20
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-hexadecimal",
+          "title": "Hexadecimal",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-algorithms",
+          "title": "Algorithms",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-space-complexity-intro",
+          "title": "Space complexity introduction",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "nlp-awareness",
+          "title": "NLP awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "se-testing-pyramid",
+          "title": "Testing pyramid",
+          "minutes": 25
+        }
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "budget": 220,
+      "planned_minutes": 220,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-solid-ocp",
+          "title": "SOLID \u2014 Open/Closed",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-solid-ocp",
+          "title": "Practice SOLID \u2014 Open/Closed",
+          "minutes": 20
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-cpu",
+          "title": "CPU",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-dry-runs",
+          "title": "Dry runs",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-jdk-jre",
+          "title": "JDK and JRE",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "genai-awareness",
+          "title": "Generative AI awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "se-unit-tests",
+          "title": "Unit testing basics",
+          "minutes": 25
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-api-design",
+          "title": "API design basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-api-design",
+          "title": "Practice API design basics",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-alu",
+          "title": "ALU",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-edge-cases",
+          "title": "Edge cases",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-first-program",
+          "title": "First program",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "genai-path",
+          "title": "Generative AI learning path",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-08-29",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "se-ci-basics",
+          "title": "CI basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "se-ci-basics",
+          "title": "Practice CI basics",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "db-sql-joins",
+          "title": "SQL JOINs",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "db-sql-joins",
+          "title": "Practice SQL JOINs",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ],
+      "checkpoint": {
+        "day": 7,
+        "completed_total": 30,
+        "lanes_today": [
+          "db"
+        ],
+        "domain_progress": {
+          "ai": {
+            "open": 1,
+            "locked": 9
+          },
+          "be": {
+            "open": 1,
+            "locked": 6
+          },
+          "cf": {
+            "done": 12,
+            "open": 2,
+            "locked": 50
+          },
+          "cv": {
+            "open": 1,
+            "locked": 25
+          },
+          "db": {
+            "done": 2,
+            "open": 3
+          },
+          "devops": {
+            "open": 1,
+            "locked": 1
+          },
+          "dl": {
+            "done": 2,
+            "locked": 35,
+            "open": 1
+          },
+          "ds": {
+            "locked": 5
+          },
+          "dsa": {
+            "locked": 106
+          },
+          "genai": {
+            "done": 2,
+            "locked": 17
+          },
+          "java": {
+            "done": 2,
+            "open": 1,
+            "locked": 49
+          },
+          "math": {
+            "open": 2,
+            "locked": 13
+          },
+          "ml": {
+            "locked": 35
+          },
+          "mlops": {
+            "locked": 6
+          },
+          "net": {
+            "open": 1,
+            "locked": 5
+          },
+          "nlp": {
+            "done": 1,
+            "locked": 16,
+            "open": 1
+          },
+          "ops": {
+            "locked": 5,
+            "open": 1
+          },
+          "py": {
+            "locked": 5
+          },
+          "se": {
+            "done": 9,
+            "open": 1
+          },
+          "sys": {
+            "locked": 4
+          },
+          "sysdesign": {
+            "open": 1,
+            "locked": 1
+          },
+          "web": {
+            "open": 1,
+            "locked": 7
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "db-indexes",
+          "title": "Indexes & query plans",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "db-indexes",
+          "title": "Practice Indexes & query plans",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-registers",
+          "title": "Registers",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-debugging-thinking",
+          "title": "Debugging",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-compile-and-run",
+          "title": "Compile and run",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ai-eng-awareness",
+          "title": "AI Engineering awareness",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "db-transactions",
+          "title": "Transactions",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "db-transactions",
+          "title": "Practice Transactions",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-ram",
+          "title": "RAM",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-primitives",
+          "title": "Primitives",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ai-eng-path",
+          "title": "AI Engineering learning path",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "db-schema-design",
+          "title": "Schema design basics",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-02",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-http",
+          "title": "HTTP fundamentals",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-http",
+          "title": "Practice HTTP fundamentals",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-cache",
+          "title": "Cache",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-type-conversion",
+          "title": "Type conversion",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "devops-awareness",
+          "title": "DevOps awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-vectors",
+          "title": "Vectors intuition",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-rest",
+          "title": "REST resources",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-rest",
+          "title": "Practice REST resources",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-storage",
+          "title": "Storage",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-console-io",
+          "title": "Console input and output",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "devops-path",
+          "title": "DevOps learning path",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "be-json",
+          "title": "JSON APIs",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-fastapi-intro",
+          "title": "FastAPI intro",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-fastapi-intro",
+          "title": "Practice FastAPI intro",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-instruction-execution",
+          "title": "Instruction execution",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-operators",
+          "title": "Operators",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sysdesign-awareness",
+          "title": "System Design awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-matrices",
+          "title": "Matrices intuition",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-05",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-auth-basics",
+          "title": "Auth basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-auth-basics",
+          "title": "Practice Auth basics",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-06",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-errors",
+          "title": "API error handling",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-errors",
+          "title": "Practice API error handling",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ],
+      "checkpoint": {
+        "day": 14,
+        "completed_total": 57,
+        "lanes_today": [
+          "be"
+        ],
+        "domain_progress": {
+          "ai": {
+            "done": 2,
+            "locked": 8
+          },
+          "be": {
+            "done": 6,
+            "open": 1
+          },
+          "cf": {
+            "done": 18,
+            "open": 1,
+            "locked": 45
+          },
+          "cv": {
+            "open": 1,
+            "locked": 25
+          },
+          "db": {
+            "done": 5
+          },
+          "devops": {
+            "done": 2
+          },
+          "dl": {
+            "done": 2,
+            "locked": 35,
+            "open": 1
+          },
+          "ds": {
+            "open": 1,
+            "locked": 4
+          },
+          "dsa": {
+            "locked": 106
+          },
+          "genai": {
+            "done": 2,
+            "locked": 17
+          },
+          "java": {
+            "done": 7,
+            "open": 1,
+            "locked": 44
+          },
+          "math": {
+            "done": 2,
+            "open": 3,
+            "locked": 10
+          },
+          "ml": {
+            "locked": 35
+          },
+          "mlops": {
+            "locked": 6
+          },
+          "net": {
+            "open": 1,
+            "locked": 5
+          },
+          "nlp": {
+            "done": 1,
+            "locked": 16,
+            "open": 1
+          },
+          "ops": {
+            "locked": 5,
+            "open": 1
+          },
+          "py": {
+            "locked": 5
+          },
+          "se": {
+            "done": 9,
+            "open": 1
+          },
+          "sys": {
+            "locked": 4
+          },
+          "sysdesign": {
+            "done": 1,
+            "open": 1
+          },
+          "web": {
+            "open": 1,
+            "locked": 7
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-09-07",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "be-persistence",
+          "title": "API + SQL persistence",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "be-persistence",
+          "title": "Practice API + SQL persistence",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-machine-code",
+          "title": "Machine code",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-if-else",
+          "title": "if/else",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sysdesign-path",
+          "title": "System Design learning path",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-probability",
+          "title": "Probability basics",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "math-distributions",
+          "title": "Distributions intuition",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "math-distributions",
+          "title": "Practice Distributions intuition",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-compiler",
+          "title": "Compiler",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-switch",
+          "title": "switch",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-html-basics",
+          "title": "HTML basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-stats-summary",
+          "title": "Summary statistics",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "math-gradient-intuition",
+          "title": "Gradient intuition",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "math-gradient-intuition",
+          "title": "Practice Gradient intuition",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-interpreter",
+          "title": "Interpreter",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-loops",
+          "title": "Loops",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-css-basics",
+          "title": "CSS basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-what-is-ml",
+          "title": "What is machine learning",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "ml-features-labels",
+          "title": "Features & labels",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "ml-features-labels",
+          "title": "Practice Features & labels",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-program",
+          "title": "Program",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-break-continue",
+          "title": "break and continue",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-responsive",
+          "title": "Responsive design",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-functions",
+          "title": "Functions intuition",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "ml-train-test",
+          "title": "Train/test split",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "ml-train-test",
+          "title": "Practice Train/test split",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-process",
+          "title": "Process",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "java-method-basics",
+          "title": "Method basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-js-basics",
+          "title": "JavaScript basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-derivatives",
+          "title": "Derivatives intuition",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-overloading",
+          "title": "Overloading",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-overloading",
+          "title": "Practice Overloading",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-scope",
+          "title": "Scope",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-scope",
+          "title": "Practice Scope",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-arrays",
+          "title": "Arrays",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-arrays",
+          "title": "Practice Arrays",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-kernel",
+          "title": "Kernel",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-algorithmic-thinking",
+          "title": "Algorithmic thinking",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-ts-intro",
+          "title": "TypeScript intro",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-linear-regression",
+          "title": "Linear regression",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-strings",
+          "title": "Strings",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-strings",
+          "title": "Practice Strings",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-os-processes",
+          "title": "Processes",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-big-o",
+          "title": "Big-O notation",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-react-intro",
+          "title": "React intro",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-classification",
+          "title": "Classification basics",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-stringbuilder",
+          "title": "StringBuilder",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-stringbuilder",
+          "title": "Practice StringBuilder",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-threads",
+          "title": "Threads",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-best-worst-average",
+          "title": "Best, worst, average",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-nextjs-intro",
+          "title": "Next.js intro",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-metrics",
+          "title": "ML metrics",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-classes-objects",
+          "title": "Classes and objects",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-classes-objects",
+          "title": "Practice Classes and objects",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-system-calls",
+          "title": "System calls",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-array-traversal",
+          "title": "Array traversal",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "web-forms-a11y",
+          "title": "Forms & accessibility",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-overfitting",
+          "title": "Overfitting & regularization",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-references",
+          "title": "References",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-references",
+          "title": "Practice References",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-os-memory",
+          "title": "Memory",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-array-insert-delete",
+          "title": "Insertion and deletion concepts",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-internet-basics",
+          "title": "Internet basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ml-sklearn-pipeline",
+          "title": "sklearn Pipeline",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-constructors",
+          "title": "Constructors",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-constructors",
+          "title": "Practice Constructors",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-encapsulation",
+          "title": "Encapsulation",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-encapsulation",
+          "title": "Practice Encapsulation",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-inheritance",
+          "title": "Inheritance",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-inheritance",
+          "title": "Practice Inheritance",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-virtual-memory-basics",
+          "title": "Virtual memory basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-dns",
+          "title": "DNS",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-prefix-sums",
+          "title": "Prefix sums",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-polymorphism",
+          "title": "Polymorphism",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-polymorphism",
+          "title": "Practice Polymorphism",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-filesystems",
+          "title": "Filesystems",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-tcp-udp",
+          "title": "TCP vs UDP",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-array-frequency",
+          "title": "Frequency counting",
+          "minutes": 35
+        }
+      ],
+      "checkpoint": {
+        "day": 30,
+        "completed_total": 119,
+        "lanes_today": [
+          "cf",
+          "dsa",
+          "java",
+          "net"
+        ],
+        "domain_progress": {
+          "ai": {
+            "done": 2,
+            "locked": 8
+          },
+          "be": {
+            "done": 7
+          },
+          "cf": {
+            "done": 30,
+            "open": 1,
+            "locked": 33
+          },
+          "cv": {
+            "open": 1,
+            "locked": 25
+          },
+          "db": {
+            "done": 5
+          },
+          "devops": {
+            "done": 2
+          },
+          "dl": {
+            "done": 2,
+            "locked": 35,
+            "open": 1
+          },
+          "ds": {
+            "open": 1,
+            "locked": 4
+          },
+          "dsa": {
+            "done": 7,
+            "open": 1,
+            "locked": 98
+          },
+          "genai": {
+            "done": 2,
+            "locked": 17
+          },
+          "java": {
+            "done": 23,
+            "open": 1,
+            "locked": 28
+          },
+          "math": {
+            "done": 8,
+            "open": 5,
+            "locked": 2
+          },
+          "ml": {
+            "done": 8,
+            "open": 10,
+            "locked": 17
+          },
+          "mlops": {
+            "open": 1,
+            "locked": 5
+          },
+          "net": {
+            "done": 3,
+            "open": 1,
+            "locked": 2
+          },
+          "nlp": {
+            "done": 1,
+            "locked": 16,
+            "open": 1
+          },
+          "ops": {
+            "locked": 5,
+            "open": 1
+          },
+          "py": {
+            "locked": 5
+          },
+          "se": {
+            "done": 9,
+            "open": 1
+          },
+          "sys": {
+            "open": 1,
+            "locked": 3
+          },
+          "sysdesign": {
+            "done": 2
+          },
+          "web": {
+            "done": 8
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "budget": 220,
+      "planned_minutes": 210,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-abstract-classes",
+          "title": "Abstract classes",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-abstract-classes",
+          "title": "Practice Abstract classes",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-os-permissions",
+          "title": "Permissions",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-array-patterns",
+          "title": "Array patterns",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-http",
+          "title": "HTTP deep dive",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "math-partial-derivatives",
+          "title": "Partial derivatives",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-interfaces",
+          "title": "Interfaces",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-interfaces",
+          "title": "Practice Interfaces",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-os-environment-variables",
+          "title": "Environment variables",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-https-tls",
+          "title": "HTTPS & TLS",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-string-manipulation",
+          "title": "String manipulation",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-composition",
+          "title": "Composition",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-composition",
+          "title": "Practice Composition",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-shell",
+          "title": "Shell",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "net-websockets",
+          "title": "WebSockets",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-string-frequency",
+          "title": "String frequency",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-try-catch",
+          "title": "try/catch",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-try-catch",
+          "title": "Practice try/catch",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-checked-unchecked",
+          "title": "Checked and unchecked",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-checked-unchecked",
+          "title": "Practice Checked and unchecked",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-custom-exceptions",
+          "title": "Custom exceptions",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-custom-exceptions",
+          "title": "Practice Custom exceptions",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-command-line",
+          "title": "Command line",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-docker-intro",
+          "title": "Docker intro",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-character-processing",
+          "title": "Character processing",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-list",
+          "title": "List",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-list",
+          "title": "Practice List",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-filesystem-navigation",
+          "title": "Filesystem navigation",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-compose",
+          "title": "Docker Compose",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-string-patterns",
+          "title": "String patterns",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-set",
+          "title": "Set",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-set",
+          "title": "Practice Set",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-linux-files",
+          "title": "Files",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-ci-github-actions",
+          "title": "GitHub Actions CI",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "py-syntax",
+          "title": "Python syntax & tooling",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-map",
+          "title": "Map",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-map",
+          "title": "Practice Map",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-pipes",
+          "title": "Pipes",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-k8s-awareness",
+          "title": "Kubernetes awareness",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "py-data-structures",
+          "title": "Python data structures",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-iteration",
+          "title": "Iteration",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-iteration",
+          "title": "Practice Iteration",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-redirection",
+          "title": "Redirection",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-observability",
+          "title": "Observability basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-hash-map",
+          "title": "Hash map",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-03",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-priority-queue",
+          "title": "PriorityQueue",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-priority-queue",
+          "title": "Practice PriorityQueue",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-generic-types",
+          "title": "Generic types",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-generic-types",
+          "title": "Practice Generic types",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-generic-bounds",
+          "title": "Bounds",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-generic-bounds",
+          "title": "Practice Bounds",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-grep",
+          "title": "grep",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ds-numpy",
+          "title": "NumPy foundations",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-hash-set",
+          "title": "Hash set",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-comparable-comparator",
+          "title": "Comparable and Comparator",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-comparable-comparator",
+          "title": "Practice Comparable and Comparator",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-find",
+          "title": "find",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ds-pandas",
+          "title": "Pandas foundations",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-frequency-maps",
+          "title": "Frequency maps",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-07",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-functional-interfaces",
+          "title": "Functional interfaces",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-functional-interfaces",
+          "title": "Practice Functional interfaces",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-linux-permissions",
+          "title": "Permissions",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ds-eda",
+          "title": "Exploratory data analysis",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-lookup-patterns",
+          "title": "Lookup patterns",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-lambdas",
+          "title": "Lambdas",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-lambdas",
+          "title": "Practice Lambdas",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-linux-processes",
+          "title": "Processes",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ds-feature-eng",
+          "title": "Feature engineering",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-two-pointers-opposite",
+          "title": "Opposite-direction pointers",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-stream-pipeline",
+          "title": "Stream pipeline",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-stream-pipeline",
+          "title": "Practice Stream pipeline",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-package-management",
+          "title": "Package management",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ops-linux-services",
+          "title": "Linux services basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-two-pointers-same",
+          "title": "Same-direction pointers",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-stream-operations",
+          "title": "Common operations",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-stream-operations",
+          "title": "Practice Common operations",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-paths-files",
+          "title": "Paths and files",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-paths-files",
+          "title": "Practice Paths and files",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-readers-writers",
+          "title": "Readers and writers",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-readers-writers",
+          "title": "Practice Readers and writers",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-linux-environment-variables",
+          "title": "Environment variables",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "ds-sql-analytics",
+          "title": "SQL for analytics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-two-pointers-partition",
+          "title": "Partition-style patterns",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-junit-basics",
+          "title": "JUnit basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-junit-basics",
+          "title": "Practice JUnit basics",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-repository",
+          "title": "Repository",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "mlops-tracking",
+          "title": "Experiment tracking",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-window-fixed",
+          "title": "Fixed window",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-assertions",
+          "title": "Assertions",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-assertions",
+          "title": "Practice Assertions",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-commits",
+          "title": "Commits",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "mlops-model-packaging",
+          "title": "Model packaging",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-window-variable",
+          "title": "Variable window",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-threads",
+          "title": "Threads",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-threads",
+          "title": "Practice Threads",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-branches",
+          "title": "Branches",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "mlops-serving",
+          "title": "Model serving APIs",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-window-frequency",
+          "title": "Frequency window state",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-synchronization-basics",
+          "title": "Synchronization basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-synchronization-basics",
+          "title": "Practice Synchronization basics",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-merge",
+          "title": "Merge",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "mlops-monitoring",
+          "title": "Model monitoring basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-singly-linked-list",
+          "title": "Singly linked list",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-bytecode",
+          "title": "Bytecode",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-bytecode",
+          "title": "Practice Bytecode",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "budget": 300,
+      "planned_minutes": 80,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-memory-model-basics",
+          "title": "Memory model basics",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-memory-model-basics",
+          "title": "Practice Memory model basics",
+          "minutes": 30
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-gc-intro",
+          "title": "Garbage collection intro",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-gc-intro",
+          "title": "Practice Garbage collection intro",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-rebase",
+          "title": "Rebase",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sys-scalability",
+          "title": "Scalability basics",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-list-operations",
+          "title": "List operations",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-packages",
+          "title": "Packages",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-packages",
+          "title": "Practice Packages",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-remote",
+          "title": "Remote",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sys-caching",
+          "title": "Caching strategies",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-list-reversal",
+          "title": "Reversal",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "java-api-hygiene",
+          "title": "API hygiene",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "java-api-hygiene",
+          "title": "Practice API hygiene",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-pull-push",
+          "title": "Pull and push",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sys-queues",
+          "title": "Message queues",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "dsa-fast-slow",
+          "title": "Fast and slow pointers",
+          "minutes": 35
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "budget": 220,
+      "planned_minutes": 175,
+      "items": [
+        {
+          "type": "LEARN",
+          "slug": "dsa-cycle-detection",
+          "title": "Cycle detection",
+          "minutes": 35
+        },
+        {
+          "type": "PRACTICE",
+          "slug": "dsa-cycle-detection",
+          "title": "Practice Cycle detection",
+          "minutes": 20
+        },
+        {
+          "type": "ALWAYS_ON",
+          "slug": "se-code-review",
+          "title": "Always-on: Code review habits",
+          "minutes": 15
+        },
+        {
+          "type": "LEARN",
+          "slug": "cf-conflicts",
+          "title": "Conflicts",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "sys-observability-design",
+          "title": "Observability in design",
+          "minutes": 35
+        },
+        {
+          "type": "LEARN",
+          "slug": "py-functions-modules",
+          "title": "Functions & modules",
+          "minutes": 35
+        }
+      ],
+      "checkpoint": {
+        "day": 60,
+        "completed_total": 216,
+        "lanes_today": [
+          "cf",
+          "dsa",
+          "py",
+          "sys"
+        ],
+        "domain_progress": {
+          "ai": {
+            "done": 2,
+            "locked": 8
+          },
+          "be": {
+            "done": 7
+          },
+          "cf": {
+            "done": 52,
+            "open": 1,
+            "locked": 11
+          },
+          "cv": {
+            "open": 1,
+            "locked": 25
+          },
+          "db": {
+            "done": 5
+          },
+          "devops": {
+            "done": 2
+          },
+          "dl": {
+            "done": 2,
+            "locked": 35,
+            "open": 1
+          },
+          "ds": {
+            "done": 5
+          },
+          "dsa": {
+            "done": 27,
+            "open": 1,
+            "locked": 78
+          },
+          "genai": {
+            "done": 2,
+            "locked": 17
+          },
+          "java": {
+            "done": 52
+          },
+          "math": {
+            "done": 9,
+            "open": 4,
+            "locked": 2
+          },
+          "ml": {
+            "done": 8,
+            "open": 12,
+            "locked": 15
+          },
+          "mlops": {
+            "done": 4,
+            "locked": 1,
+            "open": 1
+          },
+          "net": {
+            "done": 6
+          },
+          "nlp": {
+            "done": 1,
+            "locked": 16,
+            "open": 1
+          },
+          "ops": {
+            "done": 6
+          },
+          "py": {
+            "done": 3,
+            "open": 2
+          },
+          "se": {
+            "done": 9,
+            "open": 1
+          },
+          "sys": {
+            "done": 4
+          },
+          "sysdesign": {
+            "done": 2
+          },
+          "web": {
+            "done": 8
+          }
+        }
+      }
+    }
+  ]
+}

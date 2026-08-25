@@ -297,7 +297,12 @@ def audit_topic(db: Session, topic_slug: str) -> Optional[AuditResult]:
         for c in pi.concepts_required:
             practice_concepts.add(c)
 
-    prereq_slugs = set(topic.prerequisites or [])
+    # Prereq refs may be legacy strings or enhanced {"slug","type"} dicts.
+    prereq_slugs = {
+        p if isinstance(p, str) else (p.get("slug") or p.get("topic"))
+        for p in (topic.prerequisites or [])
+    }
+    prereq_slugs.discard(None)
     prereq_concepts: set[str] = set()
     for ps in prereq_slugs:
         rc = get_required_concepts(ps)

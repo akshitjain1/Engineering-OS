@@ -1,9 +1,19 @@
 {
-  "by_status": {
-    "NO_PRACTICE_REQUIRED": 120,
-    "PRACTICE_VERIFIED": 196
-  },
-  "gaps": [],
-  "verified_count": 196,
-  "no_practice_required": 120
+  "generated_at": "2026-08-25T16:45:12.364495+00:00",
+  "substantive_topics": 449,
+  "with_contracts": 449,
+  "coverage_percent": 100,
+  "topics_missing_practice": [],
+  "total_exercise_contracts": 461,
+  "by_type": {
+    "SELF_REFLECTION": 219,
+    "ACTION_CHECKLIST": 109,
+    "EXPLAIN": 13,
+    "TRACE": 90,
+    "RECALL": 16,
+    "SOLVE": 6,
+    "PREDICT_OUTPUT": 5,
+    "IMPLEMENT": 2,
+    "PROJECT": 1
+  }
 }

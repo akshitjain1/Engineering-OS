@@ -1,34 +1,10 @@
 {
-  "by_confidence": {
-    "HIGH": 3,
-    "MEDIUM": 309,
-    "LOW": 4
+  "visible_primaries": 441,
+  "with_estimated_minutes_gt0": 441,
+  "confidence_distribution": {
+    "MEDIUM": 424,
+    "LOW": 14,
+    "HIGH": 3
   },
-  "ready_by_confidence": {
-    "HIGH": 3,
-    "MEDIUM": 309,
-    "LOW": 4
-  },
-  "low_confidence_ready": [
-    {
-      "topic": "cf-problem-decomposition",
-      "minutes": 45,
-      "method": "SECTION_LENGTH_ESTIMATE"
-    },
-    {
-      "topic": "cf-pseudocode",
-      "minutes": 36,
-      "method": "SECTION_LENGTH_ESTIMATE"
-    },
-    {
-      "topic": "cf-algorithms",
-      "minutes": 36,
-      "method": "SECTION_LENGTH_ESTIMATE"
-    },
-    {
-      "topic": "cf-debugging-thinking",
-      "minutes": 45,
-      "method": "SECTION_LENGTH_ESTIMATE"
-    }
-  ]
+  "note": "UNSET confidence on legacy Domain-0 resources is treated LOW; decomposition resources carry MEDIUM (calculated from bounded content)."
 }

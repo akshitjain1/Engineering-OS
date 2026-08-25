@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-08-25T12:31:09.025769+00:00",
+  "topic_count": {
+    "before": 316,
+    "after": 449,
+    "added": 133
+  },
+  "topic_splits_additions": {
+    "method": "additive decomposition (no existing topic mutated)",
+    "new_domains_created": [
+      "Computer Vision",
+      "Deep Learning Core",
+      "NLP Core",
+      "Just-in-time Math"
+    ],
+    "log": "decomposition_log.json"
+  },
+  "domain_breakdown": {
+    "CS Foundations": 64,
+    "Java": 52,
+    "DSA & Algorithms": 106,
+    "Software Engineering": 10,
+    "Backend": 12,
+    "Mathematics for ML": 15,
+    "Machine Learning": 35,
+    "Deep Learning": 38,
+    "NLP": 18,
+    "Generative AI / LLMs": 19,
+    "AI Engineering / Agents": 10,
+    "Other": 4,
+    "Python": 5,
+    "Web": 8,
+    "Networking": 6,
+    "DevOps": 6,
+    "Data Science": 5,
+    "MLOps": 6,
+    "System Design": 4,
+    "Computer Vision": 26
+  },
+  "resource_count": {
+    "before": 766,
+    "after": 899
+  },
+  "learner_visible_resources": 734,
+  "hidden_verification_resources": 165,
+  "bounded_resources_percentage": 100,
+  "time_confidence_distribution": {
+    "UNSET": 274,
+    "MEDIUM": 440,
+    "LOW": 17,
+    "HIGH": 3
+  },
+  "verification_status_distribution": {
+    "VERIFIED": 276,
+    "VERIFIED_COVERAGE": 453,
+    "NEEDS_REVIEW": 4,
+    "PARTIAL_COVERAGE": 1
+  },
+  "practice_contracts_total": 492,
+  "practice_coverage_percent_of_substantive": 100,
+  "prerequisite_edges_baseline": 364,
+  "prerequisite_timing_corrections": "prerequisite_timing_corrections.json (2 whitelisted)",
+  "parallel_track_readiness": {
+    "runway_lane": "java-/dsa-/cf- SPECIALIZATION fill-capacity lane",
+    "dsa_first_day_index": 21,
+    "deep_java_first_day_index": 46
+  },
+  "revision_engine_status": {
+    "adaptive": true,
+    "algorithm": "SM-2-inspired ease multiplier + confidence-ladder seed",
+    "schedule_rows": 0
+  },
+  "simulations": {
+    "30d_topics_completed": 96,
+    "60d_topics_completed": 216,
+    "90d_topics_completed": 273,
+    "365d_topics_completed": 448,
+    "capacity_violations_30d": 0,
+    "checks_pass": true
+  },
+  "project_ladder_status": "existing ladder preserved; unlocks unchanged (planner PROJECT track)",
+  "spine_integrity": "PASS - all 316 baseline slugs present",
+  "progress_integrity": "PASS - 6 progress rows unchanged; XP untouched",
+  "test_results": {
+    "backend_pytest": "223 passed",
+    "frontend_lint": "clean",
+    "frontend_build": "success (all routes)"
+  },
+  "audit_overall": "PASS",
+  "audit_locked": true,
+  "remaining_warnings": [
+    "4 learner-visible resources remain NEEDS_REVIEW after live content inspection: their pages are JS-rendered shells or bot-blocked (Khan Academy SPA, OpenAI platform docs), so evidence cannot be stored honestly. Spec PART E sanctions this classification.",
+    "274 visible resources lack estimate_confidence (treated LOW).",
+    "1 topic(s) remain unlocked-but-incomplete at 365d horizon."
+  ],
+  "remaining_blockers": []
+}

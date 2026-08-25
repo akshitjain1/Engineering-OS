@@ -58,7 +58,8 @@ class TopicView:
     lessons_complete: bool
     domain: str
     track: str = TRACK_PRIMARY  # P, S, A, or PJ
-    prerequisite_slugs: list[str] = field(default_factory=list)
+    # Refs may be legacy strings or enhanced {"slug","type"} dicts (both supported).
+    prerequisite_slugs: list[Any] = field(default_factory=list)
     unfinished_exercises: int = 0
     practice_pending: int = 0
     project_embedding: bool = False
@@ -67,6 +68,7 @@ class TopicView:
     depth_target: str = "WORKING_KNOWLEDGE"
     estimated_minutes: Optional[int] = None
     content_readiness: Optional[str] = None  # READY | NEEDS_REVIEW | ...
+    topic_type: str = "LEARNABLE"  # LEARNABLE | NON_LEARNABLE_CONTAINER
 
 
 @dataclass
@@ -80,6 +82,10 @@ class RevisionView:
 
 
 TRACK_ORDER = [TRACK_PRIMARY, TRACK_SECONDARY, TRACK_ALWAYS_ON, TRACK_PROJECT]
+
+
+def _is_container(topic: TopicView) -> bool:
+    return (getattr(topic, "topic_type", "LEARNABLE") or "LEARNABLE") == "NON_LEARNABLE_CONTAINER"
 
 
 def track_code_from_learning_track(learning_track: Optional[str]) -> str:
@@ -155,6 +161,8 @@ def current_cursor(topics: list[TopicView]) -> Optional[TopicView]:
     soft: Optional[TopicView] = None
     last_resort: Optional[TopicView] = None
     for topic in topics:
+        if _is_container(topic):
+            continue
         if topic.track != TRACK_PRIMARY:
             continue
         if topic.locked or topic.lessons_complete:
@@ -176,6 +184,8 @@ def current_cursor(topics: list[TopicView]) -> Optional[TopicView]:
     if last_resort is not None:
         return last_resort
     for topic in topics:
+        if _is_container(topic):
+            continue
         if topic.track == TRACK_ALWAYS_ON:
             continue
         if topic.locked or topic.lessons_complete:
@@ -184,15 +194,50 @@ def current_cursor(topics: list[TopicView]) -> Optional[TopicView]:
     return None
 
 
+def _prerequisite_type(ref: Any) -> str:
+    """Extract the type from a prerequisite reference.
+
+    Supports two formats (both accepted for backward compatibility):
+    - String: treated as REQUIRED (existing format, backward compatible)
+    - Dict with 'slug' and 'type' keys: type determines classification
+    """
+    if isinstance(ref, str):
+        return "REQUIRED"
+    if isinstance(ref, dict):
+        return ref.get("type", "REQUIRED")
+    return "REQUIRED"
+
+
 def prerequisites_locked(topic: TopicView, all_topics: list[TopicView]) -> bool:
-    for prereq_slug in topic.prerequisite_slugs or []:
+    for prereq_ref in topic.prerequisite_slugs or []:
+        # Determine type from the reference format
+        prereq_type = _prerequisite_type(prereq_ref).upper()
+
+        # Extract the slug (handle both string and dict formats)
+        if isinstance(prereq_ref, str):
+            prereq_slug = prereq_ref
+        elif isinstance(prereq_ref, dict):
+            prereq_slug = prereq_ref.get("slug", prereq_ref.get("topic", ""))
+        else:
+            prereq_slug = str(prereq_ref)
+
         prereq = next((t for t in all_topics if t.slug == prereq_slug), None)
         if prereq is None:
-            return True
+            # Unknown prerequisite: only REQUIREMENT blocks on unknowns.
+            # Advisory refs pointing at absent topics are ignored so optional
+            # enrichment never deadlocks scheduling.
+            if prereq_type == "REQUIRED":
+                return True
+            continue
+        # Only REQUIRED prerequisites gate scheduling (spec PART G:
+        # RECOMMENDED / AWARENESS_SAFE inform UI ordering but never block).
+        if prereq_type != "REQUIRED":
+            continue
         if prereq.locked:
             return True
-        if prereq.prerequisite_slugs and prerequisites_locked(prereq, all_topics):
-            return True
+        if prereq.prerequisite_slugs:
+            if prerequisites_locked(prereq, all_topics):
+                return True
     return False
 
 
@@ -203,7 +248,7 @@ def unlock_status(topic: TopicView, all_topics: list[TopicView]) -> bool:
 
 
 def sequential_unlocked(topics: list[TopicView]) -> list[TopicView]:
-    return [t for t in topics if not t.locked]
+    return [t for t in topics if not t.locked and not _is_container(t)]
 
 
 def _track_priority(track: str) -> int:
@@ -222,7 +267,7 @@ def _always_on_items(
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     candidates = [
-        t for t in all_topics if t.track == TRACK_ALWAYS_ON and unlock_status(t, all_topics)
+        t for t in all_topics if t.track == TRACK_ALWAYS_ON and not _is_container(t) and unlock_status(t, all_topics)
     ]
     candidates.sort(key=lambda t: (0 if not t.lessons_complete else 1, t.id))
     for topic in candidates:
@@ -276,6 +321,8 @@ def _project_items(
                 return items
 
     for topic in topics:
+        if _is_container(topic):
+            continue
         if not topic.project_embedding and topic.track != TRACK_PROJECT:
             continue
         if topic.locked or topic.lessons_complete:
@@ -463,34 +510,54 @@ def build_daily_plan(
                 if not add(proj):
                     break
 
-        secondary_candidates = sorted(
+        def _is_runway(t: TopicView) -> bool:
+            # Programming→DSA runway gets lane priority so DSA starts early
+            # (spec Phase 2) instead of trickling behind awareness shells.
+            # Includes the CS-foundations gate chain feeding DSA entry.
+            s = t.slug or ""
+            return s.startswith(("java-", "dsa-", "cf-"))
+
+        secondary_all = sorted(
             [
                 t
                 for t in topics
                 if t.track == TRACK_SECONDARY
+                and not _is_container(t)
                 and t.slug not in used_slugs
                 and not t.lessons_complete
             ],
             key=_track_sort_key,
         )
-        for sec_topic in secondary_candidates:
-            if not unlock_status(sec_topic, topics):
-                continue
-            if remaining < LEARN_MINUTES:
-                break
-            add(
-                _item(
-                    item_type="LEARN",
-                    title=sec_topic.name,
-                    minutes=LEARN_MINUTES,
-                    why="Specialization / optional track progress.",
-                    topic_id=sec_topic.id,
-                    topic_slug=sec_topic.slug,
-                    domain=sec_topic.domain,
-                    group="parallel",
+        runway_candidates = [t for t in secondary_all if _is_runway(t)]
+        other_candidates = [t for t in secondary_all if not _is_runway(t)]
+
+        def _emit_parallel(candidate_list, unlimited: bool) -> None:
+            emitted = 0
+            for sec_topic in candidate_list:
+                if not unlimited and emitted >= 1:
+                    break
+                if not unlock_status(sec_topic, topics):
+                    continue
+                if remaining < LEARN_MINUTES:
+                    break
+                add(
+                    _item(
+                        item_type="LEARN",
+                        title=sec_topic.name,
+                        minutes=LEARN_MINUTES,
+                        why="Specialization / optional track progress.",
+                        topic_id=sec_topic.id,
+                        topic_slug=sec_topic.slug,
+                        domain=sec_topic.domain,
+                        group="parallel",
+                    )
                 )
-            )
-            break
+                emitted += 1
+
+        # Runway fills remaining capacity (prerequisite-gated per topic);
+        # other specialization topics keep the legacy one-item trickle.
+        _emit_parallel(runway_candidates, unlimited=True)
+        _emit_parallel(other_candidates, unlimited=False)
 
         if remaining >= MIN_TAIL_MINUTES and cursor:
             follow_candidates = sorted(

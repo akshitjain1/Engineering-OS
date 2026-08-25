@@ -1,0 +1,15 @@
+{
+  "horizon_days": 365,
+  "topics_completed": 448,
+  "total_topics": 449,
+  "first_dsa_day_index": 21,
+  "first_ml_day_index": 16,
+  "first_dl_day_index": 92,
+  "first_cv_day_index": 121,
+  "first_deep_java_day_index": 46,
+  "serious_ml_day_index": 72,
+  "first_nlp_day_index": 2,
+  "first_genai_day_index": 3,
+  "capacity_violations": 0,
+  "remaining_unlocked_incomplete": 1
+}

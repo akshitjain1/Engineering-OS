@@ -1,0 +1,15 @@
+{
+  "ready_without_primary": [],
+  "shell_no_primary": [
+    "dl-awareness",
+    "dl-path",
+    "nlp-awareness",
+    "nlp-path",
+    "genai-awareness",
+    "genai-path",
+    "ai-eng-awareness",
+    "ai-eng-path"
+  ],
+  "substantive_no_primary": [],
+  "all_no_primary_count": 8
+}

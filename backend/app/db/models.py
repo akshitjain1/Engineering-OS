@@ -116,6 +116,14 @@ class CurriculumTopic(Base):
     parallel_eligible: Mapped[bool] = Column(Boolean, default=False, nullable=False)
     estimated_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
     domain_key: Mapped[Optional[str]] = Column(String(60), nullable=True)
+    # Learner-unit time breakdown (additive, explicit per spec)
+    learning_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    practice_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    implementation_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    revision_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    total_training_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    # Container/navigation-only marker (additive)
+    topic_type: Mapped[str] = Column(String(30), default="LEARNABLE", nullable=False)
 
     module: Mapped["CurriculumModule"] = relationship("CurriculumModule", back_populates="topics")
     lessons = relationship("CurriculumLesson", back_populates="topic", cascade="all, delete-orphan")
@@ -177,6 +185,12 @@ class CurriculumResource(Base):
     # Learner UX visibility (additive). Audit/readiness ignore these fields.
     learner_visible: Mapped[Optional[bool]] = Column(Boolean, default=True, nullable=True)
     visibility_class: Mapped[Optional[str]] = Column(String(40), nullable=True)
+    # Explicit boundary fields (additive, per spec)
+    boundary_type: Mapped[Optional[str]] = Column(String(40), nullable=True)
+    start_boundary: Mapped[Optional[str]] = Column(String(200), nullable=True)
+    end_boundary: Mapped[Optional[str]] = Column(String(200), nullable=True)
+    start_timestamp: Mapped[Optional[str]] = Column(String(20), nullable=True)
+    end_timestamp: Mapped[Optional[str]] = Column(String(20), nullable=True)
 
     lesson: Mapped["CurriculumLesson"] = relationship("CurriculumLesson", back_populates="resources")
 
@@ -299,6 +313,11 @@ class RevisionSchedule(Base):
     last_reviewed: Mapped[datetime] = Column(DateTime, nullable=True)
     next_review: Mapped[datetime] = Column(DateTime, nullable=False)
     review_interval: Mapped[int] = Column(Integer, default=1, nullable=False)
+    # Adaptive spaced-repetition extension (additive, backward-compatible).
+    retrieval_success_count: Mapped[int] = Column(Integer, default=0, nullable=False)
+    retrieval_fail_count: Mapped[int] = Column(Integer, default=0, nullable=False)
+    ease: Mapped[float] = Column(Float, default=2.5, nullable=False)
+    importance: Mapped[float] = Column(Float, default=1.0, nullable=False)
 
     __table_args__ = (
         Index("ix_revision_schedules_next_review", "next_review"),

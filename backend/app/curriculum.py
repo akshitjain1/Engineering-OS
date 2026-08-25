@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Iterable
+from typing import Any, Iterable, Optional
 
 COMPLETED_LESSON_STATES = frozenset({"completed", "mastered", "fast_tracked"})
 IN_PROGRESS_LESSON_STATES = frozenset({"in_progress", "learning", "practicing", "needs_revision"})
@@ -30,8 +30,28 @@ def is_lesson_complete(status: str | None) -> bool:
     return normalize_lesson_state(status or "not_started") == "completed"
 
 
-def lesson_ui_status(status: str | None) -> str:
-    normalized = normalize_lesson_state(status or "not_started")
+def lesson_ui_status(status_or_lock: Any, progress: Any = None) -> Any:
+    """Unified lesson UI status — accepts every historical call signature safely.
+
+    Contract 1 (string): lesson_ui_status("completed") -> "completed"
+        Normalizes DB states via STATE_ALIASES into UI_LESSON_STATES.
+    Contract 2 (lock dict, optional progress dict):
+        lesson_ui_status({"locked": True, "items": [...], "total": n}) ->
+            {"locked", "progress_percent", "message"}
+    """
+    # Legacy planner-lock form (two args, first a dict)
+    if isinstance(status_or_lock, dict):
+        lock = status_or_lock
+        percent = module_progress(lock.get("items", []), int(lock.get("total", 0) or 0)).get(
+            "percentage", 0
+        )
+        return {
+            "locked": bool(lock.get("locked", False)),
+            "progress_percent": percent,
+            "message": lock.get("message"),
+        }
+    # String completion-status form
+    normalized = normalize_lesson_state(status_or_lock or "not_started")
     if normalized in UI_LESSON_STATES:
         return normalized
     return "not_started"
@@ -78,6 +98,20 @@ def _prereq_complete(topic: Any, completion_lookup: dict[str, bool] | None) -> b
     return is_topic_complete(getattr(topic, "lessons", []) or [])
 
 
+def _extract_slug_from_ref(ref: Any) -> str:
+    """Extract the slug from a prerequisite reference.
+
+    Supports two formats:
+    - String: the slug itself (backward compatible)
+    - Dict with 'slug' key: extract the slug
+    """
+    if isinstance(ref, str):
+        return ref
+    if isinstance(ref, dict):
+        return ref.get("slug", str(ref))
+    return str(ref)
+
+
 def evaluate_prerequisites(
     prerequisite_refs: list[str] | None,
     topics_index: dict[str, Any],
@@ -87,7 +121,8 @@ def evaluate_prerequisites(
     items = []
     missing = []
     for ref in refs:
-        topic = topics_index.get(ref)
+        slug = _extract_slug_from_ref(ref)
+        topic = topics_index.get(slug)
         if topic is None:
             complete = False
             found = False
@@ -95,8 +130,8 @@ def evaluate_prerequisites(
         else:
             complete = _prereq_complete(topic, completion_lookup)
             found = True
-            display = getattr(topic, "name", None) or ref
-        items.append({"name": display, "slug": ref, "complete": complete, "found": found})
+            display = getattr(topic, 'name', None) or slug
+        items.append({'name': display, 'slug': slug, 'complete': complete, 'found': found})
         if not complete:
             missing.append(display)
 
@@ -105,31 +140,45 @@ def evaluate_prerequisites(
         message = None
     elif locked:
         if len(missing) == 1:
-            message = f"Complete {missing[0]} to unlock this topic."
+            message = f'Complete {missing[0]} to unlock this topic.'
         else:
-            message = "Complete these topics to unlock: " + ", ".join(missing) + "."
+            message = 'Complete these topics to unlock: ' + ', '.join(missing) + '.'
     else:
         message = None
 
-    return {
-        "locked": locked,
-        "items": items,
-        "missing": missing,
-        "message": message,
-    }
-
+    return {'locked': locked, 'message': message, 'items': items, 'missing': missing}
 
 def compose_topic_status(locked: bool, lesson_progress: dict[str, Any]) -> str:
     if locked:
-        return "locked"
-    return lesson_progress["status"]
+        return 'locked'
+    # HEAD contract: trust topic_lesson_progress tri-state (not_started /
+    # in_progress / completed) instead of a percentage heuristic.
+    return lesson_progress.get('status', 'not_started')
 
 
-def module_progress(topics: list[dict[str, Any]]) -> dict[str, Any]:
-    complete = sum(1 for topic in topics if topic.get("status") == "completed")
-    return ratio(complete, len(topics))
+def module_progress(items: list[dict[str, Any]], total: Optional[int] = None) -> dict[str, Any]:
+    """Dual-signature compatibility.
+
+    Legacy single-arg: module_progress(topic_nodes) — counts nodes with
+    status == "completed" and returns ratio().
+    Two-arg form: module_progress(items, total) — counts truthy 'complete'.
+    """
+    if total is None:
+        complete = sum(1 for topic in items if topic.get("status") == "completed")
+        return ratio(complete, len(items))
+    completed = sum(1 for i in items if i.get('complete', False))
+    return {"completed": completed, "total": total, "percentage": round(completed / total * 100, 1) if total > 0 else 0}
 
 
-def subject_progress(modules: list[dict[str, Any]]) -> dict[str, Any]:
-    complete = sum(1 for module in modules if module["progress"]["total"] and module["progress"]["completed"] == module["progress"]["total"])
-    return ratio(complete, len(modules))
+def subject_progress(items: list[dict[str, Any]], total: Optional[int] = None) -> dict[str, Any]:
+    """Dual-signature compatibility (mirrors module_progress)."""
+    if total is None:
+        complete = sum(
+            1
+            for module in items
+            if module.get("progress", {}).get("total")
+            and module["progress"]["completed"] == module["progress"]["total"]
+        )
+        return ratio(complete, len(items))
+    completed = sum(1 for i in items if i.get('complete', False))
+    return {'completed': completed, 'total': total, 'percentage': round(completed / total * 100, 1) if total > 0 else 0}

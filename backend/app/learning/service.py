@@ -1030,10 +1030,15 @@ def _finished_assessment_payload(db: Session, session: AssessmentSession) -> dic
 
 
 def _practice_pending_count(topic: CurriculumTopic) -> int:
+    """Pending practice load: PRACTICE-role resources + explicit exercise
+    contracts (PART H) that are still incomplete."""
     count = 0
     for lesson in topic.lessons or []:
         for resource in lesson.resources or []:
             if getattr(resource, "role", None) == "PRACTICE" and not is_lesson_complete(resource.completion_status):
+                count += 1
+        for exercise in lesson.exercises or []:
+            if not is_lesson_complete(exercise.completion_status):
                 count += 1
     return count
 
@@ -1068,7 +1073,11 @@ def build_topic_views(db: Session, user_id: str = DEFAULT_USER) -> list[TopicVie
                 lessons_complete=bool(completion.get(slug)),
                 domain=domain,
                 track=track_code_from_learning_track(learning_track),
-                prerequisite_slugs=[str(ref) for ref in (topic.prerequisites or [])],
+                # Pass prerequisite refs through verbatim: planner supports both
+                # legacy string slugs and enhanced {"slug","type"} dicts. Never
+                # stringify here — str() would break dict-ref slug resolution
+                # and permanently lock enhanced-format topics.
+                prerequisite_slugs=list(topic.prerequisites or []),
                 unfinished_exercises=_unfinished_exercise_count(topic),
                 practice_pending=_practice_pending_count(topic),
                 project_embedding=learning_track.upper() == "BUILD",
@@ -1077,6 +1086,7 @@ def build_topic_views(db: Session, user_id: str = DEFAULT_USER) -> list[TopicVie
                 depth_target=getattr(topic, "depth_target", None) or "WORKING_KNOWLEDGE",
                 estimated_minutes=getattr(topic, "estimated_minutes", None),
                 content_readiness=readiness,
+                topic_type=getattr(topic, "topic_type", None) or "LEARNABLE",
             )
         )
     return views

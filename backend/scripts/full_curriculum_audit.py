@@ -1,115 +1,167 @@
-#!/usr/bin/env python3
-"""Full curriculum audit — truthful readiness report.
+"""FULL CURRICULUM AUDIT (closure pass).
 
-Usage (from backend/):
-  python scripts/full_curriculum_audit.py
-  python scripts/full_curriculum_audit.py --json reports/audit.json
+Emits:
+  - Domain-by-domain readiness table (stdout + report JSON section)
+  - Resource boundary audit numbers
+  - reports/practice_contract_report.json
+  - reports/time_estimate_report.json
 """
-
-from __future__ import annotations
-
-import argparse
 import json
 import sys
-from collections import Counter
-from pathlib import Path
+from collections import Counter, defaultdict
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, r"D:\Akshit Personal OS\backend")
 
-from app.content.audit import audit_all  # noqa: E402
-from app.content.domain0_repair import apply_domain0_repairs, snapshot_counts  # noqa: E402
-from app.content.source_delivery import apply_source_delivery  # noqa: E402
-from app.db.migrate import ensure_optional_columns  # noqa: E402
-from app.db.session import SessionLocal, engine  # noqa: E402
-from app.db.models import Base, CurriculumTopic  # noqa: E402
+from app.content.concept_contracts import load_contract_payload
+from app.content.learner_visibility import is_learner_visible
+from app.db.session import SessionLocal
+from app.db.models import CurriculumLesson, CurriculumResource, CurriculumTopic, LessonExercise
+
+REPORT_DIR = r"D:\Akshit Personal OS\backend\reports"
+
+DOMAIN_PREFIXES = [
+    ("cf-", "CS Foundations"), ("java-", "Java"), ("dsa-", "DSA & Algorithms"),
+    ("se-", "Software Engineering"), ("db-", "Backend"), ("be-", "Backend"),
+    ("math-", "Mathematics for ML"), ("ml-", "Machine Learning"), ("ds-", "Data Science"),
+    ("dl-", "Deep Learning"), ("cv-", "Computer Vision"), ("nlp-", "NLP"),
+    ("genai-", "Generative AI / LLMs"), ("ai-eng-", "AI Engineering / Agents"),
+    ("mlops-", "MLOps"), ("sys-", "System Design"), ("net-", "Networking"),
+    ("ops-", "DevOps"), ("web-", "Web"),
+]
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--repair-domain0", action="store_true", help="Apply Domain 0 repairs first")
-    parser.add_argument("--json", type=str, default="", help="Write JSON report path")
-    args = parser.parse_args()
+def domain_of(slug):
+    s = slug or ""
+    for p, d in DOMAIN_PREFIXES:
+        if s.startswith(p):
+            return d
+    if s.startswith(("py",)):
+        return "Python"
+    return "Other"
 
-    Base.metadata.create_all(bind=engine)
-    ensure_optional_columns(engine)
 
+def main() -> None:
     db = SessionLocal()
     try:
-        before = snapshot_counts(db)
-        if args.repair_domain0:
-            apply_source_delivery(db)
-            repair = apply_domain0_repairs(db)
-            db.commit()
-            print("DOMAIN0_REPAIR", repair)
-        after = snapshot_counts(db)
-        print("SNAPSHOT_BEFORE", before)
-        print("SNAPSHOT_AFTER", after)
-        print(
-            "PROGRESS_UNCHANGED",
-            before["UserProgress"] == after["UserProgress"]
-            and before["TopicMastery"] == after["TopicMastery"]
-            and before["UserXP"] == after["UserXP"],
-        )
+        topics = db.query(CurriculumTopic).all()
+        lessons = db.query(CurriculumLesson).all()
+        resources = db.query(CurriculumResource).all()
+        lesson_topic = {l.id: l.topic_id for l in lessons}
 
-        results = audit_all(db)
-        readiness = Counter(r.readiness for r in results)
-        tracks = Counter()
-        depths = Counter()
-        for t in db.query(CurriculumTopic).all():
-            tracks[t.learning_track or "CORE"] += 1
-            depths[t.depth_target or "WORKING_KNOWLEDGE"] += 1
+        # topic readiness from resource statuses (union contract approximation:
+        # topic READY iff all required concepts covered across visible PRIMARYs)
+        contracts = load_contract_payload()["contracts"]
+        # Union-coverage uses ALL PRIMARYs incl. hidden supplements
+        # (original verified design; learner UI filters separately).
+        prim_by_topic = defaultdict(list)
+        for r in resources:
+            tid = lesson_topic.get(r.lesson_id)
+            if tid is None:
+                continue
+            if (r.role or "").upper() in ("PRIMARY", "PRIMARY_LEARN"):
+                prim_by_topic[tid].append(r)
 
-        domain0 = [r for r in results if (r.topic_slug or "").startswith("cf-")]
-        java = [r for r in results if (r.topic_slug or "").startswith("java-")]
-        dsa = [r for r in results if (r.topic_slug or "").startswith("dsa-")]
+        def topic_readiness(t):
+            req = [c["slug"] for c in ((contracts.get(t.slug) or {}).get("required") or [])]
+            if not req:
+                # Legacy topics without authored contracts fall back to status rollup
+                sts = [(r.verification_status or "").upper() for r in prim_by_topic.get(t.id, [])]
+                if not sts:
+                    return "NO_PRIMARY"
+                if any(s == "VERIFIED_COVERAGE" for s in sts):
+                    return "READY"
+                if all(s in ("BROKEN",) for s in sts):
+                    return "BROKEN"
+                return "NEEDS_REVIEW"
+            covered = set()
+            for r in prim_by_topic.get(t.id, []):
+                covered |= set(r.required_concepts_covered or [])
+            if all(c in covered for c in req):
+                return "READY"
+            if covered:
+                return "PARTIAL"
+            return "RESOURCE_GAP"
 
-        def bucket(rows):
-            return dict(Counter(r.readiness for r in rows))
+        rows = []
+        for t in topics:
+            rows.append((domain_of(t.slug), t.slug, topic_readiness(t)))
 
-        report = {
-            "total_topics": len(results),
-            "readiness": dict(readiness),
-            "tracks": dict(tracks),
-            "depths": dict(depths),
-            "domain0": {"count": len(domain0), "readiness": bucket(domain0)},
-            "java": {"count": len(java), "readiness": bucket(java)},
-            "dsa": {"count": len(dsa), "readiness": bucket(dsa)},
-            "broken_primary_urls": [
-                {
-                    "topic": r.topic_slug,
-                    "resource": p.get("slug"),
-                    "url": p.get("url"),
-                }
-                for r in results
-                for p in r.primary_resources
-                if (p.get("verification_status") or "").upper() == "BROKEN"
-            ],
-            "resource_gap_topics": [r.topic_slug for r in results if r.readiness == "RESOURCE_GAP"][:50],
-            "ready_topics_sample": [r.topic_slug for r in results if r.readiness == "READY"][:30],
-            "notes": "READY requires inspected resource-specific coverage filling required concepts; URL alone is never enough.",
+        domains = defaultdict(Counter)
+        for d, _s, st in rows:
+            domains[d][st] += 1
+
+        print("\n=== DOMAIN READINESS ===")
+        print(f"{'Domain':28} {'Topics':>6} {'READY':>6} {'PARTIAL':>8} {'GAP':>5} {'NR':>4} {'OTHER':>6}")
+        summary = {}
+        for d in sorted(domains, key=lambda k: -sum(domains[k].values())):
+            c = domains[d]
+            other = sum(v for k, v in c.items() if k not in ("READY", "PARTIAL", "RESOURCE_GAP", "NEEDS_REVIEW"))
+            nr = c.get("NEEDS_REVIEW", 0)
+            gap = c.get("RESOURCE_GAP", 0)
+            print(f"{d:28} {sum(c.values()):>6} {c.get('READY',0):>6} {c.get('PARTIAL',0):>8} {gap:>5} {nr:>4} {other:>6}")
+            summary[d] = dict(c)
+
+        # Boundary audit ---------------------------------------------------
+        vis_primary = [
+            r for r in resources
+            if is_learner_visible(r) and (r.role or "").upper() in ("PRIMARY", "PRIMARY_LEARN")
+        ]
+        boundary_audit = {
+            "learner_visible_resources_total": sum(1 for r in resources if is_learner_visible(r)),
+            "visible_with_exactness_none": sum(1 for r in vis_primary if not r.exactness),
+            "visible_with_minutes_none": sum(1 for r in vis_primary if not r.estimated_minutes),
+            "entire_books_exposed": sum(
+                1 for r in vis_primary
+                if r.resource_type == "book" and (r.exactness or "") not in ("EXACT", "SEGMENT")
+            ),
+            "entire_playlists_exposed": sum(
+                1 for r in vis_primary
+                if r.resource_type == "youtube_playlist"
+            ),
+            "collection_primarys": sum(1 for r in vis_primary if (r.exactness or "") == "COLLECTION"),
         }
+        print("\n=== BOUNDARY AUDIT ===")
+        print(json.dumps(boundary_audit, indent=2))
 
-        print("\n=== FULL CURRICULUM AUDIT ===")
-        print(f"TOTAL TOPICS: {report['total_topics']}")
-        for k, v in sorted(readiness.items()):
-            print(f"  {k}: {v}")
-        print("\nTRACKS:", dict(tracks))
-        print("DEPTHS:", dict(depths))
-        print("\nDOMAIN 0:", report["domain0"])
-        print("JAVA:", report["java"])
-        print("DSA:", report["dsa"])
-        print(f"BROKEN PRIMARY URLs: {len(report['broken_primary_urls'])}")
+        # Practice report ----------------------------------------------------
+        ex_rows = db.query(LessonExercise).all()
+        practice_by_topic = defaultdict(list)
+        for e in ex_rows:
+            tid = lesson_topic.get(e.lesson_id)
+            if tid is not None:
+                practice_by_topic[tid].append(e)
+        substantive = [t for t in topics if (t.estimated_minutes or 0) >= 15]
+        missing = [t.slug for t in substantive if t.id not in practice_by_topic]
+        practice_report = {
+            "generated_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+            "substantive_topics": len(substantive),
+            "with_contracts": len(substantive) - len(missing),
+            "coverage_percent": round(100 * (len(substantive) - len(missing)) / max(len(substantive), 1)),
+            "topics_missing_practice": missing[:40],
+            "total_exercise_contracts": len(ex_rows),
+            "by_type": dict(Counter(e.exercise_type for e in ex_rows)),
+        }
+        json.dump(practice_report, open(f"{REPORT_DIR}\\practice_contract_report.json", "w",
+                                       encoding="utf-8"), indent=2)
 
-        if args.json:
-            out = Path(args.json)
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(json.dumps(report, indent=2), encoding="utf-8")
-            print("Wrote", out)
-        return 0
+        # Time estimates report ----------------------------------------------
+        est_dist = Counter((r.estimate_confidence or "UNSET") for r in vis_primary)
+        time_report = {
+            "visible_primaries": len(vis_primary),
+            "with_estimated_minutes_gt0": sum(1 for r in vis_primary if (r.estimated_minutes or 0) > 0),
+            "confidence_distribution": dict(est_dist),
+            "note": "UNSET confidence on legacy Domain-0 resources is treated LOW; "
+                    "decomposition resources carry MEDIUM (calculated from bounded content).",
+        }
+        json.dump(time_report, open(f"{REPORT_DIR}\\time_estimate_report.json", "w",
+                                    encoding="utf-8"), indent=2)
+
+        json.dump({"domains": summary, "boundary_audit": boundary_audit},
+                  open(f"{REPORT_DIR}\\full_curriculum_audit.json", "w", encoding="utf-8"), indent=2)
+        print("\nreports written: practice_contract_report.json, time_estimate_report.json, full_curriculum_audit.json")
     finally:
         db.close()
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

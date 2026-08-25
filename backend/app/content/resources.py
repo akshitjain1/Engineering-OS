@@ -362,3 +362,14 @@ def orientation_from_description(description: Optional[str]) -> Optional[str]:
     if 1 <= len(words) <= 40:
         return first
     return None
+
+
+def lesson_ui_status(completion_status, progress=None):
+    """Delegate to the canonical implementation in app.curriculum.
+
+    Kept for backward compatibility with callers importing this name from
+    here. Accepts both string and planner-lock-dict call signatures.
+    """
+    from app.curriculum import lesson_ui_status as _canonical
+
+    return _canonical(completion_status, progress)

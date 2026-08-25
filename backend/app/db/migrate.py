@@ -60,6 +60,13 @@ TABLE_SLUGS = [
     "lesson_exercises",
 ]
 
+REVISION_COLUMNS = {
+    "retrieval_success_count": "INTEGER DEFAULT 0 NOT NULL",
+    "retrieval_fail_count": "INTEGER DEFAULT 0 NOT NULL",
+    "ease": "FLOAT DEFAULT 2.5 NOT NULL",
+    "importance": "FLOAT DEFAULT 1.0 NOT NULL",
+}
+
 
 def _columns(conn, table: str) -> set[str]:
     dialect = conn.dialect.name
@@ -206,6 +213,15 @@ def ensure_optional_columns(engine: Engine) -> None:
                 text("CREATE INDEX IF NOT EXISTS ix_user_project_progress_user_id "
                      "ON user_project_progress (user_id)")
             )
+
+        if "revision_schedules" in tables:
+            existing = _columns(conn, "revision_schedules")
+            for name, ddl in REVISION_COLUMNS.items():
+                if name not in existing:
+                    conn.execute(
+                        text(f"ALTER TABLE revision_schedules ADD COLUMN {name} {ddl}")
+                    )
+                    existing.add(name)
 
         for table in TABLE_SLUGS:
             if table not in tables:

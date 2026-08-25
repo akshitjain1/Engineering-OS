@@ -109,16 +109,46 @@ def _resource_urls(manifest: CurriculumManifest) -> list[str]:
     return errors
 
 
+def _prerequisite_type(ref: Any) -> str:
+    """Extract the type from a prerequisite reference.
+
+    Supports two formats:
+    - String: treated as REQUIRED (backward compatible)
+    - Dict with 'slug' and 'type' keys: type determines classification
+    """
+    if isinstance(ref, str):
+        return "REQUIRED"
+    if isinstance(ref, dict):
+        return ref.get("type", "REQUIRED")
+    return "REQUIRED"
+
+
 def _prerequisites(manifest: CurriculumManifest, existing_topic_slugs: set[str]) -> list[str]:
     errors: list[str] = []
     topic_slugs = {topic.slug for _module, topic in manifest.walk_topics()}
     known = topic_slugs | existing_topic_slugs
     graph: dict[str, list[str]] = {}
     for _module, topic in manifest.walk_topics():
-        graph[topic.slug] = list(topic.prerequisites)
-        for ref in topic.prerequisites:
-            if ref not in known:
-                errors.append(f"missing prerequisite '{ref}' on topic '{topic.slug}'")
+        # Store prerequisites with their types for the graph
+        prereqs = topic.prerequisites or []
+        typed_prereqs = []
+        for ref in prereqs:
+            rtype = _prerequisite_type(ref)
+            typed_prereqs.append(ref)
+            # Also track the type alongside the slug
+            # We store type info by pairing slug:type
+            if isinstance(ref, str):
+                # String format: treated as REQUIRED
+                pass
+            elif isinstance(ref, dict):
+                # Dict format: use the type
+                pass
+        graph[topic.slug] = typed_prereqs
+        for ref in prereqs:
+            # Extract just the slug for the known-check
+            slug = ref if isinstance(ref, str) else ref.get("slug", "")
+            if slug and slug not in known:
+                errors.append(f"missing prerequisite '{slug}' on topic '{topic.slug}'")
 
     def visit(node: str, stack: list[str]) -> None:
         if node in stack:
@@ -126,8 +156,10 @@ def _prerequisites(manifest: CurriculumManifest, existing_topic_slugs: set[str])
             errors.append("circular prerequisites: " + " -> ".join(cycle))
             return
         for nxt in graph.get(node, []):
-            if nxt in graph:
-                visit(nxt, stack + [node])
+            # For visitation, we just need the slug for traversal
+            slug = nxt if isinstance(nxt, str) else nxt.get("slug", nxt)
+            if slug in graph:
+                visit(slug, stack + [node])
 
     for slug in graph:
         visit(slug, [])
