@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-26T12:55:31.943544+00:00",
+  "generated_at": "2026-08-26T13:13:29.329766+00:00",
   "summary": {
     "total_domains": 20,
     "total_topics": 449,
     "total_learning_units": 449,
-    "total_learner_visible_resources": 750,
+    "total_learner_visible_resources": 755,
     "total_practice_units": 461,
     "total_projects": 16,
     "revision_enabled_units": 449,
@@ -12426,7 +12426,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -12446,13 +12446,39 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 917,
+          "slug": "java-operators-brocode-004500",
+          "title": "Bro Code Java 2025 — Operators",
+          "provider": "Bro Code",
+          "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:45:00",
+          "end_boundary": "01:15:00",
+          "section": null,
+          "estimated_minutes": 30,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "java-operators"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 110,
           "slug": "java-operators-primary",
           "title": "Using operators",
           "provider": "Dev.java",
           "url": "https://dev.java/learn/language-basics/using-operators/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -12488,9 +12514,7 @@
             }
           ],
           "why_selected": "Authoritative operator tutorial."
-        }
-      ],
-      "resources_supplementary_learner": [
+        },
         {
           "resource_id": 111,
           "slug": "java-operators-reference",
@@ -12599,7 +12623,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 30,
-      "readiness": "READY"
+      "readiness": "PARTIAL"
     },
     {
       "domain": "Java",
@@ -12628,7 +12652,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -12648,13 +12672,39 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 918,
+          "slug": "java-if-else-brocode-011500",
+          "title": "Bro Code Java 2025 — if/else",
+          "provider": "Bro Code",
+          "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "01:15:00",
+          "end_boundary": "01:45:00",
+          "section": null,
+          "estimated_minutes": 30,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "java-if-else"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 114,
           "slug": "java-if-else-reference",
           "title": "Control flow statements",
           "provider": "Dev.java",
           "url": "https://dev.java/learn/language-basics/controlling-flow/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -12699,7 +12749,6 @@
           "why_selected": "Decision, loop, and branch statements. Use the if/else portions."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [
         {
           "resource_id": 113,
@@ -12788,7 +12837,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 30,
-      "readiness": "READY"
+      "readiness": "PARTIAL"
     },
     {
       "domain": "Java",
@@ -12817,7 +12866,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -12837,13 +12886,39 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 919,
+          "slug": "java-switch-brocode-014500",
+          "title": "Bro Code Java 2025 — switch",
+          "provider": "Bro Code",
+          "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "01:45:00",
+          "end_boundary": "02:00:00",
+          "section": null,
+          "estimated_minutes": 15,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "java-switch"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 115,
           "slug": "java-switch-primary",
           "title": "Branching with switch statements",
           "provider": "Dev.java",
           "url": "https://dev.java/learn/language-basics/switch-statement/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -12881,9 +12956,7 @@
             }
           ],
           "why_selected": "Classic switch. Note break and fall-through."
-        }
-      ],
-      "resources_supplementary_learner": [
+        },
         {
           "resource_id": 116,
           "slug": "java-switch-reference",
@@ -12993,7 +13066,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 30,
-      "readiness": "READY"
+      "readiness": "PARTIAL"
     },
     {
       "domain": "Java",
@@ -13022,7 +13095,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -13042,13 +13115,39 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 920,
+          "slug": "java-loops-brocode-020000",
+          "title": "Bro Code Java 2025 — Loops",
+          "provider": "Bro Code",
+          "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "02:00:00",
+          "end_boundary": "02:45:00",
+          "section": null,
+          "estimated_minutes": 45,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "java-loops"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 119,
           "slug": "java-loops-reference",
           "title": "Control flow statements",
           "provider": "Dev.java",
           "url": "https://dev.java/learn/language-basics/controlling-flow/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -13084,9 +13183,7 @@
             }
           ],
           "why_selected": "Looping statements in modern Java."
-        }
-      ],
-      "resources_supplementary_learner": [
+        },
         {
           "resource_id": 120,
           "slug": "java-loops-practice",
@@ -13197,7 +13294,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 30,
-      "readiness": "READY"
+      "readiness": "PARTIAL"
     },
     {
       "domain": "Java",
@@ -13226,7 +13323,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -13246,13 +13343,39 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 921,
+          "slug": "java-break-continue-brocode-024500",
+          "title": "Bro Code Java 2025 — break and continue",
+          "provider": "Bro Code",
+          "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "02:45:00",
+          "end_boundary": "03:00:00",
+          "section": null,
+          "estimated_minutes": 15,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "java-break-continue"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 121,
           "slug": "java-break-continue-primary",
           "title": "Control flow statements",
           "provider": "Dev.java",
           "url": "https://dev.java/learn/language-basics/controlling-flow/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -13288,9 +13411,7 @@
             }
           ],
           "why_selected": "Branching statements including break and continue."
-        }
-      ],
-      "resources_supplementary_learner": [
+        },
         {
           "resource_id": 122,
           "slug": "java-break-continue-practice",
@@ -13353,7 +13474,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 30,
-      "readiness": "READY"
+      "readiness": "PARTIAL"
     },
     {
       "domain": "Java",

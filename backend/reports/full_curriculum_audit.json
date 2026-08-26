@@ -7,7 +7,8 @@
       "READY": 64
     },
     "Java": {
-      "READY": 52
+      "READY": 47,
+      "PARTIAL": 5
     },
     "Deep Learning": {
       "READY": 38
@@ -63,7 +64,7 @@
     }
   },
   "boundary_audit": {
-    "learner_visible_resources_total": 750,
+    "learner_visible_resources_total": 755,
     "visible_with_exactness_none": 0,
     "visible_with_minutes_none": 0,
     "entire_books_exposed": 0,

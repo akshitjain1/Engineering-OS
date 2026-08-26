@@ -4262,7 +4262,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Java
 
-Topics: 52 · Units: 52 · READY 52 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 52 · Units: 52 · READY 47 · PARTIAL 5 · GAP 0 · NR 0 · NO_PRIMARY 0
 
 ## JDK and JRE
 
@@ -4676,7 +4676,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 71
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -4703,19 +4703,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-operators-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `java-operators-operators`, `java-operators-predict-arithmetic-comparison-logical-as`
 
 #### Primary Resource(s)
 
-- **Using operators** (Dev.java)
-  - ID: 110 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/language-basics/using-operators/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: using-operators
-  - SECTION END: using-operators
-  - Minutes: 14 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code Java 2025 — Operators** (Bro Code)
+  - ID: 917 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=xTtL8E4LzTQ
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:45:00
+  - SECTION END: 01:15:00
+  - Minutes: 30 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -4741,7 +4741,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 72
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -4768,19 +4768,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-if-else-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `java-if-else-if-else`, `java-if-else-branch-with-if-else-including-nested-con`
 
 #### Primary Resource(s)
 
-- **Control flow statements** (Dev.java)
-  - ID: 114 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/language-basics/controlling-flow/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Control flow statements
-  - SECTION END: Control flow statements
-  - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code Java 2025 — if/else** (Bro Code)
+  - ID: 918 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=xTtL8E4LzTQ
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 01:15:00
+  - SECTION END: 01:45:00
+  - Minutes: 30 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4810,7 +4810,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 73
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -4837,19 +4837,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-switch-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `java-switch-switch`, `java-switch-switch-statements-and-modern-switch-expr`
 
 #### Primary Resource(s)
 
-- **Branching with switch statements** (Dev.java)
-  - ID: 115 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/language-basics/switch-statement/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: switch-statement
-  - SECTION END: switch-statement
-  - Minutes: 10 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code Java 2025 — switch** (Bro Code)
+  - ID: 919 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=xTtL8E4LzTQ
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 01:45:00
+  - SECTION END: 02:00:00
+  - Minutes: 15 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -4875,7 +4875,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 74
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -4902,19 +4902,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-loops-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `java-loops-loops`, `java-loops-choose-for-while-and-do-while-write-vali`
 
 #### Primary Resource(s)
 
-- **Control flow statements** (Dev.java)
-  - ID: 119 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/language-basics/controlling-flow/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Control flow statements
-  - SECTION END: Control flow statements
-  - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code Java 2025 — Loops** (Bro Code)
+  - ID: 920 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=xTtL8E4LzTQ
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 02:00:00
+  - SECTION END: 02:45:00
+  - Minutes: 45 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4944,7 +4944,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 75
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -4971,19 +4971,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-break-continue-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `java-break-continue-break-and-continue`, `java-break-continue-break-and-continue-deliberately-avoid-us`
 
 #### Primary Resource(s)
 
-- **Control flow statements** (Dev.java)
-  - ID: 121 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/language-basics/controlling-flow/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: controlling-flow
-  - SECTION END: controlling-flow
-  - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code Java 2025 — break and continue** (Bro Code)
+  - ID: 921 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=xTtL8E4LzTQ
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 02:45:00
+  - SECTION END: 03:00:00
+  - Minutes: 15 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice

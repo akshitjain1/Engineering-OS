@@ -1,0 +1,593 @@
+{
+  "changed_units": [
+    {
+      "topic": "dl-neuron-intuition",
+      "learning_unit": "dl-neuron-intuition-lesson",
+      "old_primary": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "provider": "D2L.ai"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 1 - Neural Network from Scratch: Coding Neurons and Layers",
+        "url": "https://www.youtube.com/watch?v=zrKpz9-AZ_E",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=zrKpz9-AZ_E",
+      "video_id": "zrKpz9-AZ_E",
+      "start": "00:00",
+      "end": "28:37",
+      "duration": 33,
+      "why_changed": "Vizuara PRIMARY: Vizuara builds intuition by coding the primitive \u2014 better than API docs for intuition. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-activation-functions",
+      "learning_unit": "dl-activation-functions-lesson",
+      "old_primary": {
+        "title": "Activation Functions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "provider": "D2L.ai"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 6 - Coding Neural Network Activation Functions from scratch",
+        "url": "https://www.youtube.com/watch?v=SP372QpruDg",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=SP372QpruDg",
+      "video_id": "SP372QpruDg",
+      "start": "00:00",
+      "end": "43:16",
+      "duration": 43,
+      "why_changed": "Vizuara PRIMARY: Pure implementation teaching \u2014 Vizuara shows the math as code. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "Activation Functions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-perceptron",
+      "learning_unit": "dl-perceptron-lesson",
+      "old_primary": {
+        "title": "The Perceptron",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
+        "provider": "D2L.ai"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 2 - The beauty of numpy and dot product in coding neurons",
+        "url": "https://www.youtube.com/watch?v=mK_PfqM88OY",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=mK_PfqM88OY",
+      "video_id": "mK_PfqM88OY",
+      "start": "00:00",
+      "end": "40:21",
+      "duration": 40,
+      "why_changed": "Vizuara PRIMARY: NumPy mechanics taught via implementation. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "The Perceptron",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-attention-intuition",
+      "learning_unit": "dl-attention-intuition-lesson",
+      "old_primary": {
+        "title": "Attention Cues",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md",
+        "provider": "D2L.ai"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Attention Simplified!",
+        "url": "https://www.youtube.com/watch?v=CLQJ9M5LZao",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=CLQJ9M5LZao",
+      "video_id": "CLQJ9M5LZao",
+      "start": "00:00",
+      "end": "43:55",
+      "duration": 44,
+      "why_changed": "Vizuara PRIMARY: Visual explanation \u2014 better than text for attention. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": {
+        "title": "Attention Cues",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-transformers-foundations",
+      "learning_unit": "dl-transformers-foundations-lesson",
+      "old_primary": {
+        "title": "Transformer architecture",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "provider": "D2L.ai"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Build a Transformer End-to-End!",
+        "url": "https://www.youtube.com/watch?v=l0mAJ54xey0",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=l0mAJ54xey0",
+      "video_id": "l0mAJ54xey0",
+      "start": "00:00",
+      "end": "72:35",
+      "duration": 73,
+      "why_changed": "Vizuara PRIMARY: End-to-end construction \u2014 ideal for mechanics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": {
+        "title": "Transformer architecture",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "nlp-transformers-nlp",
+      "learning_unit": "nlp-transformers-nlp-lesson",
+      "old_primary": {
+        "title": "Main architectures: transformers",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
+        "provider": "Hugging Face"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Overview",
+        "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+      "video_id": "FVcUKMu_M5Q",
+      "start": "00:00",
+      "end": "19:48",
+      "duration": 20,
+      "why_changed": "Vizuara PRIMARY: High-level orientation before mechanics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": {
+        "title": "Main architectures: transformers",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "ml-gradient-descent-intuition",
+      "learning_unit": "ml-gradient-descent-intuition-lesson",
+      "old_primary": {
+        "title": "Gradient descent",
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent",
+        "provider": "scikit-learn"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+        "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+      "video_id": "rcXcGS1M77g",
+      "start": "00:00",
+      "end": "26:14",
+      "duration": 26,
+      "why_changed": "Vizuara PRIMARY: Practical ML workflow \u2014 Vizuara's teach-by-doing is more guided than sklearn docs for intuition. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSi-nLQ4XV2Mds8Z7bihK68L",
+      "reference_resource": {
+        "title": "Gradient descent",
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cv-what-is-an-image",
+      "learning_unit": "cv-what-is-an-image-lesson",
+      "old_primary": {
+        "title": "None",
+        "url": "",
+        "provider": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Computer Vision from Scratch | New course launch",
+        "url": "https://www.youtube.com/watch?v=Tu11SMJGGIA",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=Tu11SMJGGIA",
+      "video_id": "Tu11SMJGGIA",
+      "start": "00:00",
+      "end": "28:43",
+      "duration": 29,
+      "why_changed": "Vizuara PRIMARY: Foundational CV orientation - Vizuara's from-scratch approach is more beginner-friendly than CS231n's dense notes for this entry unit. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSgmWYoSpY_2EJzPJjkke4Az",
+      "reference_resource": null,
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cv-image-tensors",
+      "learning_unit": "cv-image-tensors-lesson",
+      "old_primary": {
+        "title": "Input volumes as tensors",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+        "provider": "Stanford CS231n"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Introduction to Computer Vision | Lecture 1",
+        "url": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+      "video_id": "lgbKpn7q40M",
+      "start": "00:00",
+      "end": "25:00",
+      "duration": 25,
+      "why_changed": "Vizuara PRIMARY: Visual introduction to image tensors - better than raw docs for first exposure. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSgmWYoSpY_2EJzPJjkke4Az",
+      "reference_resource": {
+        "title": "Input volumes as tensors",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cv-convolution-in-cv",
+      "learning_unit": "cv-convolution-in-cv-lesson",
+      "old_primary": {
+        "title": "Convolutional layers",
+        "url": "https://cs231n.github.io/convolutional-networks/",
+        "provider": "Stanford CS231n"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "U-Net Evolution and Modern Applications",
+        "url": "https://www.youtube.com/watch?v=9KvngtchNww",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=9KvngtchNww",
+      "video_id": "9KvngtchNww",
+      "start": "00:00",
+      "end": "20:00",
+      "duration": 20,
+      "why_changed": "Vizuara PRIMARY: U-Net evolution covers convolution mechanics in context. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSgmWYoSpY_2EJzPJjkke4Az",
+      "reference_resource": {
+        "title": "Convolutional layers",
+        "url": "https://cs231n.github.io/convolutional-networks/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "ml-what-is-ml",
+      "learning_unit": "ml-what-is-ml-core",
+      "old_primary": {
+        "title": "Getting Started \u2014 scikit-learn",
+        "url": "https://scikit-learn.org/stable/getting_started.html",
+        "provider": "scikit-learn"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing - Introduction",
+        "url": "https://www.youtube.com/watch?v=ngiICHD5dVc",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=ngiICHD5dVc",
+      "video_id": "ngiICHD5dVc",
+      "start": "00:00",
+      "end": "26:14",
+      "duration": 26,
+      "why_changed": "Vizuara PRIMARY: Vizuara's practical intro is more engaging than scikit-learn's API-heavy getting_started for orientation. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSi-nLQ4XV2Mds8Z7bihK68L",
+      "reference_resource": {
+        "title": "Getting Started \u2014 scikit-learn",
+        "url": "https://scikit-learn.org/stable/getting_started.html"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "ml-ridge-lasso",
+      "learning_unit": "ml-ridge-lasso-lesson",
+      "old_primary": {
+        "title": "Linear Models \u2014 Ridge/Lasso",
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+        "provider": "scikit-learn"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+        "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+      "video_id": "rcXcGS1M77g",
+      "start": "10:00",
+      "end": "26:14",
+      "duration": 16,
+      "why_changed": "Vizuara PRIMARY: Segment of linear classifiers lecture covers regularization intuition. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSi-nLQ4XV2Mds8Z7bihK68L",
+      "reference_resource": {
+        "title": "Linear Models \u2014 Ridge/Lasso",
+        "url": "https://scikit-learn.org/stable/modules/linear_model.html"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-convolution-op",
+      "learning_unit": "dl-convolution-op-lesson",
+      "old_primary": {
+        "title": "None",
+        "url": "",
+        "provider": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 4 - Implementing the Dense Layer Class",
+        "url": "https://www.youtube.com/watch?v=qFMpq46hEjE",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=qFMpq46hEjE",
+      "video_id": "qFMpq46hEjE",
+      "start": "00:00",
+      "end": "25:24",
+      "duration": 25,
+      "why_changed": "Vizuara PRIMARY: Dense layer implementation bridges to convolution mechanics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": null,
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "dl-pooling",
+      "learning_unit": "dl-pooling-lesson",
+      "old_primary": {
+        "title": "None",
+        "url": "",
+        "provider": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 5 - Broadcasting and array summation",
+        "url": "https://www.youtube.com/watch?v=rtFpq608aEo",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=rtFpq608aEo",
+      "video_id": "rtFpq608aEo",
+      "start": "00:00",
+      "end": "25:28",
+      "duration": 25,
+      "why_changed": "Vizuara PRIMARY: Broadcasting intuition supports pooling mechanics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": null,
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "genai-what-is-lm",
+      "learning_unit": "genai-what-is-lm-lesson",
+      "old_primary": {
+        "title": "None",
+        "url": "",
+        "provider": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Overview",
+        "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+      "video_id": "FVcUKMu_M5Q",
+      "start": "00:00",
+      "end": "19:48",
+      "duration": 20,
+      "why_changed": "Vizuara PRIMARY: Transformer overview anchors LLM basics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": null,
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "genai-tokenization-llm",
+      "learning_unit": "genai-tokenization-llm-lesson",
+      "old_primary": {
+        "title": "None",
+        "url": "",
+        "provider": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Positional Encoding",
+        "url": "https://www.youtube.com/watch?v=7CNElr-TAQw",
+        "provider": "Vizuara"
+      },
+      "new_url": "https://www.youtube.com/watch?v=7CNElr-TAQw",
+      "video_id": "7CNElr-TAQw",
+      "start": "00:00",
+      "end": "13:57",
+      "duration": 14,
+      "why_changed": "Vizuara PRIMARY: Positional encoding lecture covers tokenization context. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": null,
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "java-operators",
+      "learning_unit": "java-operators-core",
+      "old_primary": {
+        "title": "Using operators",
+        "url": "https://dev.java/learn/language-basics/using-operators/",
+        "provider": "Dev.java"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 Operators",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code"
+      },
+      "new_url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+      "video_id": "xTtL8E4LzTQ",
+      "start": "00:45:00",
+      "end": "01:15:00",
+      "duration": 30,
+      "why_changed": "Bro Code Java 2025 chapter for Operators; segment 00:45:00\u219201:15:00",
+      "reference_resource": {
+        "title": "Using operators",
+        "url": "https://dev.java/learn/language-basics/using-operators/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "java-if-else",
+      "learning_unit": "java-if-else-core",
+      "old_primary": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/",
+        "provider": "Dev.java"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 if/else",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code"
+      },
+      "new_url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+      "video_id": "xTtL8E4LzTQ",
+      "start": "01:15:00",
+      "end": "01:45:00",
+      "duration": 30,
+      "why_changed": "Bro Code Java 2025 chapter for if/else; segment 01:15:00\u219201:45:00",
+      "reference_resource": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "java-switch",
+      "learning_unit": "java-switch-core",
+      "old_primary": {
+        "title": "Branching with switch statements",
+        "url": "https://dev.java/learn/language-basics/switch-statement/",
+        "provider": "Dev.java"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 switch",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code"
+      },
+      "new_url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+      "video_id": "xTtL8E4LzTQ",
+      "start": "01:45:00",
+      "end": "02:00:00",
+      "duration": 15,
+      "why_changed": "Bro Code Java 2025 chapter for switch; segment 01:45:00\u219202:00:00",
+      "reference_resource": {
+        "title": "Branching with switch statements",
+        "url": "https://dev.java/learn/language-basics/switch-statement/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "java-loops",
+      "learning_unit": "java-loops-core",
+      "old_primary": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/",
+        "provider": "Dev.java"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 Loops",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code"
+      },
+      "new_url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+      "video_id": "xTtL8E4LzTQ",
+      "start": "02:00:00",
+      "end": "02:45:00",
+      "duration": 45,
+      "why_changed": "Bro Code Java 2025 chapter for Loops; segment 02:00:00\u219202:45:00",
+      "reference_resource": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "java-break-continue",
+      "learning_unit": "java-break-continue-core",
+      "old_primary": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/",
+        "provider": "Dev.java"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 break and continue",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code"
+      },
+      "new_url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+      "video_id": "xTtL8E4LzTQ",
+      "start": "02:45:00",
+      "end": "03:00:00",
+      "duration": 15,
+      "why_changed": "Bro Code Java 2025 chapter for break and continue; segment 02:45:00\u219203:00:00",
+      "reference_resource": {
+        "title": "Control flow statements",
+        "url": "https://dev.java/learn/language-basics/controlling-flow/"
+      },
+      "practice": "Implement and practice per unit",
+      "confidence": "HIGH"
+    }
+  ],
+  "summary": {
+    "java": {
+      "neso": 0,
+      "bro_code": 5,
+      "coding_with_john": 0,
+      "dev_java": 41
+    },
+    "ml": {
+      "vizuara": 3,
+      "other_video": 0,
+      "documentation": 34
+    },
+    "dl": {
+      "vizuara": 7,
+      "pytorch": 10,
+      "cs231n": 6
+    },
+    "cv": {
+      "vizuara": 3,
+      "cs231n": 6,
+      "pytorch": 1
+    },
+    "nlp": {
+      "vizuara": 1,
+      "huggingface": 21
+    },
+    "llm": {
+      "vizuara": 2,
+      "huggingface": 0,
+      "provider_docs": 0
+    },
+    "total_videos_mapped": 24,
+    "total_replacements": 21,
+    "total_supplements": 0,
+    "total_demotions": 21,
+    "remaining_unresolved": 2
+  }
+}
