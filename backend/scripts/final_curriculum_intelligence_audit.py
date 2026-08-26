@@ -60,7 +60,12 @@ def main() -> int:
             has_boundary = bool(
                 getattr(r, "section", None)
                 or getattr(r, "lecture", None)
+                or getattr(r, "video_id", None)
+                or getattr(r, "boundary_type", None)
+                or getattr(r, "start_boundary", None)
+                or getattr(r, "start_timestamp", None)
                 or (r.notes or "").startswith("OFFICIAL_DOC_MAPPING")
+                or (r.notes or "").startswith("Vizuara")
             )
             if not has_boundary:
                 unbounded.append(r.slug)

@@ -1,10 +1,10 @@
 {
-  "visible_primaries": 441,
-  "with_estimated_minutes_gt0": 441,
+  "visible_primaries": 446,
+  "with_estimated_minutes_gt0": 446,
   "confidence_distribution": {
-    "MEDIUM": 424,
+    "MEDIUM": 413,
     "LOW": 14,
-    "HIGH": 3
+    "HIGH": 19
   },
   "note": "UNSET confidence on legacy Domain-0 resources is treated LOW; decomposition resources carry MEDIUM (calculated from bounded content)."
 }

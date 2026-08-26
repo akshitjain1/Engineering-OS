@@ -459,7 +459,7 @@
 - `mlops-serving` — Model serving APIs [READY]
 - `mlops-monitoring` — Model monitoring basics [READY]
 - `mlops-experiment-lifecycle` — ML lifecycle & reproducibility [READY]
-- `mlops-drift-quality` — Drift & data quality [PARTIAL]
+- `mlops-drift-quality` — Drift & data quality [READY]
 
 ## System Design (4 topics)
 - `sys-scalability` — Scalability basics [READY]

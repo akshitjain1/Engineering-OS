@@ -47,8 +47,7 @@
       "READY": 6
     },
     "MLOps": {
-      "READY": 5,
-      "PARTIAL": 1
+      "READY": 6
     },
     "Python": {
       "READY": 5
@@ -64,7 +63,7 @@
     }
   },
   "boundary_audit": {
-    "learner_visible_resources_total": 734,
+    "learner_visible_resources_total": 750,
     "visible_with_exactness_none": 0,
     "visible_with_minutes_none": 0,
     "entire_books_exposed": 0,

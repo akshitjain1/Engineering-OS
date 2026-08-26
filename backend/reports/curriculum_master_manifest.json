@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-25T16:36:46.154824+00:00",
+  "generated_at": "2026-08-26T12:55:31.943544+00:00",
   "summary": {
     "total_domains": 20,
     "total_topics": 449,
     "total_learning_units": 449,
-    "total_learner_visible_resources": 734,
+    "total_learner_visible_resources": 750,
     "total_practice_units": 461,
     "total_projects": 16,
     "revision_enabled_units": 449,
@@ -978,8 +978,8 @@
       "title": "Bits and bytes",
       "module": "Computer Fundamentals",
       "sequential_order": 1,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-bits-and-bytes-core",
@@ -1152,8 +1152,8 @@
       "title": "Binary",
       "module": "Computer Fundamentals",
       "sequential_order": 2,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-binary-core",
@@ -1333,8 +1333,8 @@
       "title": "Hexadecimal",
       "module": "Computer Fundamentals",
       "sequential_order": 3,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-hexadecimal-core",
@@ -1514,8 +1514,8 @@
       "title": "CPU",
       "module": "Computer Fundamentals",
       "sequential_order": 4,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-cpu-core",
@@ -1579,6 +1579,7 @@
             "cpu-role",
             "alu",
             "registers",
+            "program-counter",
             "fetch-decode-execute",
             "ram-interaction"
           ],
@@ -1765,8 +1766,8 @@
       "title": "ALU",
       "module": "Computer Fundamentals",
       "sequential_order": 5,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-alu-core",
@@ -1825,7 +1826,8 @@
           "verification_status": "VERIFIED_COVERAGE",
           "covered_concepts": [
             "alu-role",
-            "alu-ops"
+            "alu-ops",
+            "expression-to-alu"
           ],
           "verification_evidence": [
             {
@@ -1948,8 +1950,8 @@
       "title": "Registers",
       "module": "Computer Fundamentals",
       "sequential_order": 6,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-registers-core",
@@ -2106,8 +2108,8 @@
       "title": "RAM",
       "module": "Computer Fundamentals",
       "sequential_order": 7,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-ram-core",
@@ -2287,8 +2289,8 @@
       "title": "Cache",
       "module": "Computer Fundamentals",
       "sequential_order": 8,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-cache-core",
@@ -2345,7 +2347,8 @@
           "estimate_confidence": "MEDIUM",
           "verification_status": "VERIFIED_COVERAGE",
           "covered_concepts": [
-            "cache-role"
+            "cache-role",
+            "cache-locality"
           ],
           "verification_evidence": [
             {
@@ -2439,8 +2442,8 @@
       "title": "Storage",
       "module": "Computer Fundamentals",
       "sequential_order": 9,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-storage-core",
@@ -2574,8 +2577,8 @@
       "title": "Instruction execution",
       "module": "Computer Fundamentals",
       "sequential_order": 10,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-instruction-execution-core",
@@ -2636,7 +2639,8 @@
           "verification_status": "VERIFIED_COVERAGE",
           "covered_concepts": [
             "fetch-decode-execute-loop",
-            "assignment-to-instructions"
+            "assignment-to-instructions",
+            "pc-increment"
           ],
           "verification_evidence": [
             {
@@ -2758,8 +2762,8 @@
       "title": "Machine code",
       "module": "Computer Fundamentals",
       "sequential_order": 11,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-machine-code-core",
@@ -2938,8 +2942,8 @@
       "title": "Compiler",
       "module": "Computer Fundamentals",
       "sequential_order": 12,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-compiler-core",
@@ -3119,8 +3123,8 @@
       "title": "Interpreter",
       "module": "Computer Fundamentals",
       "sequential_order": 13,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-interpreter-core",
@@ -3300,8 +3304,8 @@
       "title": "Program",
       "module": "Computer Fundamentals",
       "sequential_order": 14,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-program-core",
@@ -3450,8 +3454,8 @@
       "title": "Process",
       "module": "Computer Fundamentals",
       "sequential_order": 15,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-process-core",
@@ -3631,8 +3635,8 @@
       "title": "Kernel",
       "module": "Operating System Fundamentals",
       "sequential_order": 16,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-kernel-core",
@@ -3803,8 +3807,8 @@
       "title": "Processes",
       "module": "Operating System Fundamentals",
       "sequential_order": 17,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-os-processes-core",
@@ -3930,8 +3934,8 @@
       "title": "Threads",
       "module": "Operating System Fundamentals",
       "sequential_order": 18,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-threads-core",
@@ -4103,8 +4107,8 @@
       "title": "System calls",
       "module": "Operating System Fundamentals",
       "sequential_order": 19,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-system-calls-core",
@@ -4275,8 +4279,8 @@
       "title": "Memory",
       "module": "Operating System Fundamentals",
       "sequential_order": 20,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-os-memory-core",
@@ -4425,8 +4429,8 @@
       "title": "Virtual memory basics",
       "module": "Operating System Fundamentals",
       "sequential_order": 21,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-virtual-memory-basics-core",
@@ -4575,8 +4579,8 @@
       "title": "Filesystems",
       "module": "Operating System Fundamentals",
       "sequential_order": 22,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-filesystems-core",
@@ -4710,8 +4714,8 @@
       "title": "Permissions",
       "module": "Operating System Fundamentals",
       "sequential_order": 23,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-os-permissions-core",
@@ -4860,8 +4864,8 @@
       "title": "Environment variables",
       "module": "Operating System Fundamentals",
       "sequential_order": 24,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-os-environment-variables-core",
@@ -5032,8 +5036,8 @@
       "title": "Shell",
       "module": "Terminal & Linux",
       "sequential_order": 25,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-shell-core",
@@ -5183,8 +5187,8 @@
       "title": "Command line",
       "module": "Terminal & Linux",
       "sequential_order": 26,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-command-line-core",
@@ -5334,8 +5338,8 @@
       "title": "Filesystem navigation",
       "module": "Terminal & Linux",
       "sequential_order": 27,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-filesystem-navigation-core",
@@ -5461,8 +5465,8 @@
       "title": "Files",
       "module": "Terminal & Linux",
       "sequential_order": 28,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-linux-files-core",
@@ -5596,8 +5600,8 @@
       "title": "Pipes",
       "module": "Terminal & Linux",
       "sequential_order": 29,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-pipes-core",
@@ -5746,8 +5750,8 @@
       "title": "Redirection",
       "module": "Terminal & Linux",
       "sequential_order": 30,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-redirection-core",
@@ -5896,8 +5900,8 @@
       "title": "grep",
       "module": "Terminal & Linux",
       "sequential_order": 31,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-grep-core",
@@ -6046,8 +6050,8 @@
       "title": "find",
       "module": "Terminal & Linux",
       "sequential_order": 32,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-find-core",
@@ -6196,8 +6200,8 @@
       "title": "Permissions",
       "module": "Terminal & Linux",
       "sequential_order": 33,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-linux-permissions-core",
@@ -6346,8 +6350,8 @@
       "title": "Processes",
       "module": "Terminal & Linux",
       "sequential_order": 34,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-linux-processes-core",
@@ -6497,8 +6501,8 @@
       "title": "Package management",
       "module": "Terminal & Linux",
       "sequential_order": 35,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-package-management-core",
@@ -6647,8 +6651,8 @@
       "title": "Environment variables",
       "module": "Terminal & Linux",
       "sequential_order": 36,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-linux-environment-variables-core",
@@ -6797,8 +6801,8 @@
       "title": "Repository",
       "module": "Git & Version Control",
       "sequential_order": 37,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-repository-core",
@@ -6947,8 +6951,8 @@
       "title": "Commits",
       "module": "Git & Version Control",
       "sequential_order": 38,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-commits-core",
@@ -7127,8 +7131,8 @@
       "title": "Branches",
       "module": "Git & Version Control",
       "sequential_order": 39,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-branches-core",
@@ -7277,8 +7281,8 @@
       "title": "Merge",
       "module": "Git & Version Control",
       "sequential_order": 40,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-merge-core",
@@ -7404,8 +7408,8 @@
       "title": "Rebase",
       "module": "Git & Version Control",
       "sequential_order": 41,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-rebase-core",
@@ -7554,8 +7558,8 @@
       "title": "Remote",
       "module": "Git & Version Control",
       "sequential_order": 42,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-remote-core",
@@ -7681,8 +7685,8 @@
       "title": "Pull and push",
       "module": "Git & Version Control",
       "sequential_order": 43,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-pull-push-core",
@@ -7839,8 +7843,8 @@
       "title": "Conflicts",
       "module": "Git & Version Control",
       "sequential_order": 44,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-conflicts-core",
@@ -7974,8 +7978,8 @@
       "title": "Reset and revert",
       "module": "Git & Version Control",
       "sequential_order": 45,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-reset-revert-core",
@@ -8132,8 +8136,8 @@
       "title": "Cherry-pick",
       "module": "Git & Version Control",
       "sequential_order": 46,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-cherry-pick-core",
@@ -8282,8 +8286,8 @@
       "title": "Stash",
       "module": "Git & Version Control",
       "sequential_order": 47,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-stash-core",
@@ -8432,8 +8436,8 @@
       "title": "GitHub workflow",
       "module": "Git & Version Control",
       "sequential_order": 48,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-github-workflow-core",
@@ -8604,8 +8608,8 @@
       "title": "IDE",
       "module": "Development Environment",
       "sequential_order": 49,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-ide-core",
@@ -8805,8 +8809,8 @@
       "title": "Compiler",
       "module": "Development Environment",
       "sequential_order": 50,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-dev-compiler-core",
@@ -8978,8 +8982,8 @@
       "title": "Debugger",
       "module": "Development Environment",
       "sequential_order": 51,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-debugger-core",
@@ -9173,8 +9177,8 @@
       "title": "Formatter",
       "module": "Development Environment",
       "sequential_order": 52,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-formatter-core",
@@ -9338,8 +9342,8 @@
       "title": "Linter",
       "module": "Development Environment",
       "sequential_order": 53,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-linter-core",
@@ -9503,8 +9507,8 @@
       "title": "Package manager",
       "module": "Development Environment",
       "sequential_order": 54,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-dev-package-manager-core",
@@ -9675,8 +9679,8 @@
       "title": "Build system",
       "module": "Development Environment",
       "sequential_order": 55,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-build-system-core",
@@ -9862,8 +9866,8 @@
       "title": "Dependency management",
       "module": "Development Environment",
       "sequential_order": 56,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-dependency-management-core",
@@ -10025,8 +10029,8 @@
       "title": "Problem decomposition",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 57,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-problem-decomposition-core",
@@ -10169,8 +10173,8 @@
       "title": "Pseudocode",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 58,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-pseudocode-core",
@@ -10319,8 +10323,8 @@
       "title": "Algorithms",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 59,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-algorithms-core",
@@ -10446,8 +10450,8 @@
       "title": "Dry runs",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 60,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-dry-runs-core",
@@ -10619,8 +10623,8 @@
       "title": "Edge cases",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 61,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-edge-cases-core",
@@ -10769,8 +10773,8 @@
       "title": "Debugging",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 62,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "ALWAYS_ON",
+      "parallel_lane": "ALWAYS_ON",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-debugging-thinking-core",
@@ -10917,8 +10921,8 @@
       "title": "Time complexity introduction",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 63,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-time-complexity-intro-core",
@@ -11053,8 +11057,8 @@
       "title": "Space complexity introduction",
       "module": "Programming & Problem-Solving Fundamentals",
       "sequential_order": 64,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "WORKING_KNOWLEDGE",
       "learning_unit": {
         "unit_id": "cf-space-complexity-intro-core",
@@ -11199,8 +11203,8 @@
       "title": "JDK and JRE",
       "module": "Getting Started",
       "sequential_order": 65,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-jdk-jre-core",
@@ -11409,8 +11413,8 @@
       "title": "First program",
       "module": "Getting Started",
       "sequential_order": 66,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-first-program-core",
@@ -11620,8 +11624,8 @@
       "title": "Compile and run",
       "module": "Getting Started",
       "sequential_order": 67,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-compile-and-run-core",
@@ -11820,8 +11824,8 @@
       "title": "Primitives",
       "module": "Variables & Types",
       "sequential_order": 68,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-primitives-core",
@@ -12038,8 +12042,8 @@
       "title": "Type conversion",
       "module": "Variables & Types",
       "sequential_order": 69,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-type-conversion-core",
@@ -12244,8 +12248,8 @@
       "title": "Console input and output",
       "module": "Input & Output",
       "sequential_order": 70,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-console-io-core",
@@ -12402,8 +12406,8 @@
       "title": "Operators",
       "module": "Operators",
       "sequential_order": 71,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-operators-core",
@@ -12604,8 +12608,8 @@
       "title": "if/else",
       "module": "Control Flow",
       "sequential_order": 72,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-if-else-core",
@@ -12793,8 +12797,8 @@
       "title": "switch",
       "module": "Control Flow",
       "sequential_order": 73,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-switch-core",
@@ -12998,8 +13002,8 @@
       "title": "Loops",
       "module": "Control Flow",
       "sequential_order": 74,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-loops-core",
@@ -13202,8 +13206,8 @@
       "title": "break and continue",
       "module": "Control Flow",
       "sequential_order": 75,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-break-continue-core",
@@ -13358,8 +13362,8 @@
       "title": "Method basics",
       "module": "Methods",
       "sequential_order": 76,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "java-method-basics-core",
@@ -21211,8 +21215,8 @@
       "title": "Algorithmic thinking",
       "module": "Algorithmic Thinking",
       "sequential_order": 117,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-algorithmic-thinking-core",
@@ -21405,8 +21409,8 @@
       "title": "Big-O notation",
       "module": "Complexity Analysis",
       "sequential_order": 118,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-big-o-core",
@@ -21608,8 +21612,8 @@
       "title": "Best, worst, average",
       "module": "Complexity Analysis",
       "sequential_order": 119,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-best-worst-average-core",
@@ -21793,8 +21797,8 @@
       "title": "Array traversal",
       "module": "Arrays",
       "sequential_order": 120,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-array-traversal-core",
@@ -22022,8 +22026,8 @@
       "title": "Insertion and deletion concepts",
       "module": "Arrays",
       "sequential_order": 121,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-array-insert-delete-core",
@@ -22653,8 +22657,8 @@
       "title": "Array patterns",
       "module": "Arrays",
       "sequential_order": 124,
-      "learning_track_raw": "SPECIALIZATION",
-      "parallel_lane": "PARALLEL (Specialization / Runway)",
+      "learning_track_raw": "CORE",
+      "parallel_lane": "CORE",
       "depth": "STRONG",
       "learning_unit": {
         "unit_id": "dsa-array-patterns-core",
@@ -46334,7 +46338,7 @@
         "implementation_minutes": 6,
         "revision_minutes": 8,
         "total_training_minutes": 45,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -46355,13 +46359,40 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 911,
+          "slug": "ml-what-is-ml-vizuara-ngiICH-v2",
+          "title": "ML Teach by Doing - Introduction",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=ngiICHD5dVc",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "26:14",
+          "section": null,
+          "estimated_minutes": 26,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "ml-what-is-ml-what-is-machine-learning",
+            "ml-what-is-ml-distinguish-supervised-unsupervised-lear"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 591,
           "slug": "ml-what-is-ml-primary",
           "title": "Getting Started — scikit-learn",
           "provider": "scikit-learn",
           "url": "https://scikit-learn.org/stable/getting_started.html",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -46411,7 +46442,6 @@
           "why_selected": "TRUSTED official/docs source for What is machine learning."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -47861,7 +47891,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 27,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -47891,13 +47921,41 @@
       "next_unlocked": [],
       "resources_primary": [
         {
+          "resource_id": 906,
+          "slug": "ml-gradient-descent-intuition-vizuara-rcXcGS",
+          "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "26:14",
+          "section": null,
+          "estimated_minutes": 26,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "descent-analogy",
+            "learning-rate-role",
+            "gradient-direction"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 776,
           "slug": "ml-gradient-descent-intuition-primary",
           "title": "Gradient descent",
           "provider": "scikit-learn",
           "url": "https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -47941,7 +47999,6 @@
           "why_selected": "Learner unit: Gradient Descent through Stochastic Gradient Descent section end. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -49852,7 +49909,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -49870,13 +49927,40 @@
       "next_unlocked": [],
       "resources_primary": [
         {
+          "resource_id": 912,
+          "slug": "ml-ridge-lasso-vizuara-rcXcGS-v2",
+          "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "10:00",
+          "end_boundary": "26:14",
+          "section": null,
+          "estimated_minutes": 16,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "ridge-l2",
+            "lasso-l1"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 896,
           "slug": "ml-ridge-lasso-primary",
           "title": "Linear Models — Ridge/Lasso",
           "provider": "scikit-learn",
           "url": "https://scikit-learn.org/stable/modules/linear_model.html",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -49910,7 +49994,6 @@
           "why_selected": "Learner unit bounded to the official section above; content inspection pending."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -57999,6 +58082,31 @@
             }
           ],
           "why_selected": "Learner unit: How LLMs generate text through Limitations note. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
+        },
+        {
+          "resource_id": 915,
+          "slug": "genai-what-is-lm-vizuara-FVcUKM-v2",
+          "title": "Transformers Explained: Overview",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "19:48",
+          "section": null,
+          "estimated_minutes": 20,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "next-token-dist",
+            "sampling-generates"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
         }
       ],
       "resources_supplementary_learner": [],
@@ -58243,6 +58351,31 @@
             }
           ],
           "why_selected": "Learner unit: BPE in practice through Context window economics end. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
+        },
+        {
+          "resource_id": 916,
+          "slug": "genai-tokenization-llm-vizuara-7CNElr-v2",
+          "title": "Transformers Explained: Positional Encoding",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=7CNElr-TAQw",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "13:57",
+          "section": null,
+          "estimated_minutes": 14,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "bpe-production",
+            "token-economics"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
         }
       ],
       "resources_supplementary_learner": [],
@@ -61460,8 +61593,9 @@
           "section": "above; content inspection pending",
           "estimated_minutes": 25,
           "estimate_confidence": "MEDIUM",
-          "verification_status": "PARTIAL_COVERAGE",
+          "verification_status": "VERIFIED_COVERAGE",
           "covered_concepts": [
+            "skew-drift",
             "data-quality-gates"
           ],
           "verification_evidence": [
@@ -61477,7 +61611,32 @@
         }
       ],
       "resources_supplementary_learner": [],
-      "resources_internal_hidden": [],
+      "resources_internal_hidden": [
+        {
+          "resource_id": 907,
+          "slug": "mlops-drift-quality-skew-supplement",
+          "title": "Training-Serving Skew - Google ML Crash Course",
+          "provider": "Google",
+          "url": "https://developers.google.com/machine-learning/crash-course/training-serving-skew",
+          "resource_type": "documentation",
+          "role": "PRIMARY",
+          "visibility": "COVERAGE_SUPPLEMENT",
+          "learner_visible": false,
+          "exactness": "EXACT",
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "What is Training-Serving Skew?",
+          "end_boundary": "Mitigating Skew",
+          "section": "Training-Serving Skew",
+          "estimated_minutes": 15,
+          "estimate_confidence": "MEDIUM",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "skew-drift"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
       "practice": [
         {
           "practice_id": 492,
@@ -61518,7 +61677,7 @@
       },
       "project_links": [],
       "estimated_minutes_total": 25,
-      "readiness": "PARTIAL"
+      "readiness": "READY"
     },
     {
       "domain": "System Design",
@@ -63456,7 +63615,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 25,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -63483,13 +63642,41 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 900,
+          "slug": "dl-neuron-intuition-vizuara-zrKpz9",
+          "title": "Lecture 1 - Neural Network from Scratch: Coding Neurons and Layers",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=zrKpz9-AZ_E",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "28:37",
+          "section": null,
+          "estimated_minutes": 33,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "weighted-sum-unit",
+            "biological-analogy",
+            "linear-model-link"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 791,
           "slug": "dl-neuron-intuition-primary",
           "title": "Multilayer Perceptrons",
           "provider": "D2L.ai",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -63532,7 +63719,6 @@
           "why_selected": "Learner unit: Hidden Layers through Activation Functions intro. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -63605,7 +63791,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 25,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -63625,13 +63811,40 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 902,
+          "slug": "dl-perceptron-vizuara-mK_Pfq",
+          "title": "Lecture 2 - The beauty of numpy and dot product in coding neurons",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=mK_PfqM88OY",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "40:21",
+          "section": null,
+          "estimated_minutes": 40,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "perceptron-rule",
+            "linear-separability"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 792,
           "slug": "dl-perceptron-primary",
           "title": "The Perceptron",
           "provider": "D2L.ai",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -63666,7 +63879,6 @@
           "why_selected": "Learner unit: Definition through The XOR problem ends. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -63738,7 +63950,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 25,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -63758,13 +63970,41 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 901,
+          "slug": "dl-activation-functions-vizuara-SP372Q",
+          "title": "Lecture 6 - Coding Neural Network Activation Functions from scratch",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=SP372QpruDg",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "43:16",
+          "section": null,
+          "estimated_minutes": 43,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "nonlinearity-required",
+            "relu-family",
+            "sigmoid-tanh-saturation"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 793,
           "slug": "dl-activation-functions-primary",
           "title": "Activation Functions",
           "provider": "D2L.ai",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -63806,7 +64046,6 @@
           "why_selected": "Learner unit: Activation Functions through Summary begins. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -65935,6 +66174,31 @@
             }
           ],
           "why_selected": "Learner unit: The Cross-Correlation Operation through Multiple Input and Output Channels begins. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
+        },
+        {
+          "resource_id": 913,
+          "slug": "dl-convolution-op-vizuara-qFMpq4-v2",
+          "title": "Lecture 4 - Implementing the Dense Layer Class",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=qFMpq46hEjE",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "25:24",
+          "section": null,
+          "estimated_minutes": 25,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "kernel-slide",
+            "channels-in-out"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
         }
       ],
       "resources_supplementary_learner": [],
@@ -66220,6 +66484,31 @@
             }
           ],
           "why_selected": "Learner unit: Maximum Pooling and Average Pooling through Summary. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
+        },
+        {
+          "resource_id": 914,
+          "slug": "dl-pooling-vizuara-rtFpq6-v2",
+          "title": "Lecture 5 - Broadcasting and array summation",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=rtFpq608aEo",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "25:28",
+          "section": null,
+          "estimated_minutes": 25,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "max-avg-pool",
+            "invariance-property"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
         }
       ],
       "resources_supplementary_learner": [],
@@ -66710,7 +66999,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 27,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -66731,13 +67020,41 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 903,
+          "slug": "dl-attention-intuition-vizuara-CLQJ9M",
+          "title": "Transformers Explained: Attention Simplified!",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=CLQJ9M5LZao",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "43:55",
+          "section": null,
+          "estimated_minutes": 44,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "query-key-value",
+            "soft-alignment",
+            "fixes-bottleneck"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 814,
           "slug": "dl-attention-intuition-primary",
           "title": "Attention Cues",
           "provider": "D2L.ai",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -66780,7 +67097,6 @@
           "why_selected": "Learner unit: Attention Cues in Humans through Queries Keys Values ends. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -66852,7 +67168,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -66874,13 +67190,41 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 904,
+          "slug": "dl-transformers-foundations-vizuara-l0mAJ5",
+          "title": "Transformers Explained: Build a Transformer End-to-End!",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=l0mAJ54xey0",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "72:35",
+          "section": null,
+          "estimated_minutes": 73,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "self-attention-block",
+            "positional-encoding",
+            "residual-norm-stack"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 815,
           "slug": "dl-transformers-foundations-primary",
           "title": "Transformer architecture",
           "provider": "D2L.ai",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -66924,7 +67268,6 @@
           "why_selected": "Learner unit: Model architecture overview through Training section begins. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -67834,6 +68177,31 @@
             }
           ],
           "why_selected": "Learner unit: Image representations intro through Broadcasting sections follow. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
+        },
+        {
+          "resource_id": 908,
+          "slug": "cv-what-is-an-image-vizuara-Tu11SM-v2",
+          "title": "Computer Vision from Scratch | New course launch",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=Tu11SMJGGIA",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "28:43",
+          "section": null,
+          "estimated_minutes": 29,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "image-as-grid",
+            "resolution-effects"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
         }
       ],
       "resources_supplementary_learner": [],
@@ -68164,7 +68532,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 25,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -68184,13 +68552,40 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 909,
+          "slug": "cv-image-tensors-vizuara-lgbKpn-v2",
+          "title": "Introduction to Computer Vision | Lecture 1",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "25:00",
+          "section": null,
+          "estimated_minutes": 25,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "batch-dim",
+            "dtype-normalize"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 819,
           "slug": "cv-image-tensors-primary",
           "title": "Input volumes as tensors",
           "provider": "Stanford CS231n",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -68226,7 +68621,6 @@
           "why_selected": "Learner unit: Building blocks conv layer dims through Spatial arrangement ends. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -68809,7 +69203,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 27,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -68835,13 +69229,40 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 910,
+          "slug": "cv-convolution-in-cv-vizuara-9Kvngt-v2",
+          "title": "U-Net Evolution and Modern Applications",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=9KvngtchNww",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "20:00",
+          "section": null,
+          "estimated_minutes": 20,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "conv-on-images",
+            "stride-padding-vis"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 824,
           "slug": "cv-convolution-in-cv-primary",
           "title": "Convolutional layers",
           "provider": "Stanford CS231n",
           "url": "https://cs231n.github.io/convolutional-networks/",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -68876,7 +69297,6 @@
           "why_selected": "Learner unit: Conv Layer computation through Pooling layer begins. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {
@@ -72532,7 +72952,7 @@
         "implementation_minutes": 5,
         "revision_minutes": 5,
         "total_training_minutes": 31,
-        "time_confidence": "MEDIUM",
+        "time_confidence": "HIGH",
         "completion_criteria": "Explain without notes; work one concrete example; complete practice contract.",
         "lesson_completion_status": "not_started"
       },
@@ -72558,13 +72978,40 @@
       ],
       "resources_primary": [
         {
+          "resource_id": 905,
+          "slug": "nlp-transformers-nlp-vizuara-FVcUKM",
+          "title": "Transformers Explained: Overview",
+          "provider": "Vizuara",
+          "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+          "resource_type": "youtube",
+          "role": "PRIMARY",
+          "visibility": "LEARNER",
+          "learner_visible": true,
+          "exactness": "EXACT",
+          "boundary_type": "VIDEO_TIMESTAMP",
+          "start_boundary": "00:00",
+          "end_boundary": "19:48",
+          "section": null,
+          "estimated_minutes": 20,
+          "estimate_confidence": "HIGH",
+          "verification_status": "VERIFIED_COVERAGE",
+          "covered_concepts": [
+            "parallel-self-attn",
+            "positional-info"
+          ],
+          "verification_evidence": null,
+          "why_selected": ""
+        }
+      ],
+      "resources_supplementary_learner": [
+        {
           "resource_id": 851,
           "slug": "nlp-transformers-nlp-primary",
           "title": "Main architectures: transformers",
           "provider": "Hugging Face",
           "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md",
           "resource_type": "documentation",
-          "role": "PRIMARY",
+          "role": "REFERENCE",
           "visibility": "LEARNER",
           "learner_visible": true,
           "exactness": "EXACT",
@@ -72599,7 +73046,6 @@
           "why_selected": "Learner unit: Transformers architecture groupings through Summary. Official source mapped with explicit boundaries; content inspection pending (NEEDS_REVIEW)."
         }
       ],
-      "resources_supplementary_learner": [],
       "resources_internal_hidden": [],
       "practice": [
         {

@@ -11,7 +11,7 @@ Topics: 64 · Units: 64 · READY 64 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Slug: `cf-bits-and-bytes`
 - Topic ID: 1
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 1
 - Readiness: **READY**
@@ -80,7 +80,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-binary`
 - Topic ID: 2
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 2
 - Readiness: **READY**
@@ -149,7 +149,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-hexadecimal`
 - Topic ID: 3
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 3
 - Readiness: **READY**
@@ -218,7 +218,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-cpu`
 - Topic ID: 4
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 4
 - Readiness: **READY**
@@ -260,7 +260,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: central-processing-unit-cpu
   - SECTION END: central-processing-unit-cpu
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 5
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 6
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -289,7 +289,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-alu`
 - Topic ID: 5
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 5
 - Readiness: **READY**
@@ -331,7 +331,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: ALU; Arithmetic and logical operations
   - SECTION END: ALU; Arithmetic and logical operations
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -358,7 +358,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-registers`
 - Topic ID: 6
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 6
 - Readiness: **READY**
@@ -423,7 +423,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-ram`
 - Topic ID: 7
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 7
 - Readiness: **READY**
@@ -492,7 +492,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-cache`
 - Topic ID: 8
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 8
 - Readiness: **READY**
@@ -534,7 +534,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: cache-memory-in-computer-organization
   - SECTION END: cache-memory-in-computer-organization
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -561,7 +561,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-storage`
 - Topic ID: 9
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 9
 - Readiness: **READY**
@@ -626,7 +626,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-instruction-execution`
 - Topic ID: 10
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 10
 - Readiness: **READY**
@@ -668,7 +668,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: Fetch, decode, execute cycles
   - SECTION END: Fetch, decode, execute cycles
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -696,7 +696,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-machine-code`
 - Topic ID: 11
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 11
 - Readiness: **READY**
@@ -761,7 +761,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-compiler`
 - Topic ID: 12
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 12
 - Readiness: **READY**
@@ -826,7 +826,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-interpreter`
 - Topic ID: 13
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 13
 - Readiness: **READY**
@@ -895,7 +895,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-program`
 - Topic ID: 14
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 14
 - Readiness: **READY**
@@ -960,7 +960,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-process`
 - Topic ID: 15
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 15
 - Readiness: **READY**
@@ -1029,7 +1029,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-kernel`
 - Topic ID: 16
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 16
 - Readiness: **READY**
@@ -1094,7 +1094,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-os-processes`
 - Topic ID: 17
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 17
 - Readiness: **READY**
@@ -1159,7 +1159,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-threads`
 - Topic ID: 18
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 18
 - Readiness: **READY**
@@ -1228,7 +1228,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-system-calls`
 - Topic ID: 19
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 19
 - Readiness: **READY**
@@ -1293,7 +1293,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-os-memory`
 - Topic ID: 20
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 20
 - Readiness: **READY**
@@ -1358,7 +1358,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-virtual-memory-basics`
 - Topic ID: 21
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 21
 - Readiness: **READY**
@@ -1427,7 +1427,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-filesystems`
 - Topic ID: 22
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 22
 - Readiness: **READY**
@@ -1492,7 +1492,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-os-permissions`
 - Topic ID: 23
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 23
 - Readiness: **READY**
@@ -1557,7 +1557,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-os-environment-variables`
 - Topic ID: 24
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 24
 - Readiness: **READY**
@@ -1622,7 +1622,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-shell`
 - Topic ID: 25
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 25
 - Readiness: **READY**
@@ -1687,7 +1687,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-command-line`
 - Topic ID: 26
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 26
 - Readiness: **READY**
@@ -1752,7 +1752,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-filesystem-navigation`
 - Topic ID: 27
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 27
 - Readiness: **READY**
@@ -1817,7 +1817,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-linux-files`
 - Topic ID: 28
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 28
 - Readiness: **READY**
@@ -1882,7 +1882,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-pipes`
 - Topic ID: 29
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 29
 - Readiness: **READY**
@@ -1947,7 +1947,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-redirection`
 - Topic ID: 30
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 30
 - Readiness: **READY**
@@ -2012,7 +2012,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-grep`
 - Topic ID: 31
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 31
 - Readiness: **READY**
@@ -2077,7 +2077,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-find`
 - Topic ID: 32
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 32
 - Readiness: **READY**
@@ -2142,7 +2142,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-linux-permissions`
 - Topic ID: 33
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 33
 - Readiness: **READY**
@@ -2207,7 +2207,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-linux-processes`
 - Topic ID: 34
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 34
 - Readiness: **READY**
@@ -2272,7 +2272,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-package-management`
 - Topic ID: 35
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 35
 - Readiness: **READY**
@@ -2337,7 +2337,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-linux-environment-variables`
 - Topic ID: 36
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 36
 - Readiness: **READY**
@@ -2402,7 +2402,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-repository`
 - Topic ID: 37
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 37
 - Readiness: **READY**
@@ -2467,7 +2467,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-commits`
 - Topic ID: 38
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 38
 - Readiness: **READY**
@@ -2532,7 +2532,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-branches`
 - Topic ID: 39
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 39
 - Readiness: **READY**
@@ -2597,7 +2597,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-merge`
 - Topic ID: 40
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 40
 - Readiness: **READY**
@@ -2662,7 +2662,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-rebase`
 - Topic ID: 41
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 41
 - Readiness: **READY**
@@ -2727,7 +2727,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-remote`
 - Topic ID: 42
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 42
 - Readiness: **READY**
@@ -2792,7 +2792,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-pull-push`
 - Topic ID: 43
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 43
 - Readiness: **READY**
@@ -2857,7 +2857,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-conflicts`
 - Topic ID: 44
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 44
 - Readiness: **READY**
@@ -2922,7 +2922,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-reset-revert`
 - Topic ID: 45
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 45
 - Readiness: **READY**
@@ -2987,7 +2987,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-cherry-pick`
 - Topic ID: 46
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 46
 - Readiness: **READY**
@@ -3052,7 +3052,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-stash`
 - Topic ID: 47
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 47
 - Readiness: **READY**
@@ -3117,7 +3117,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-github-workflow`
 - Topic ID: 48
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 48
 - Readiness: **READY**
@@ -3182,7 +3182,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-ide`
 - Topic ID: 49
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 49
 - Readiness: **READY**
@@ -3252,7 +3252,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-dev-compiler`
 - Topic ID: 50
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 50
 - Readiness: **READY**
@@ -3321,7 +3321,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-debugger`
 - Topic ID: 51
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 51
 - Readiness: **READY**
@@ -3390,7 +3390,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-formatter`
 - Topic ID: 52
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 52
 - Readiness: **READY**
@@ -3459,7 +3459,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-linter`
 - Topic ID: 53
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 53
 - Readiness: **READY**
@@ -3528,7 +3528,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-dev-package-manager`
 - Topic ID: 54
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 54
 - Readiness: **READY**
@@ -3593,7 +3593,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-build-system`
 - Topic ID: 55
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 55
 - Readiness: **READY**
@@ -3662,7 +3662,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-dependency-management`
 - Topic ID: 56
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 56
 - Readiness: **READY**
@@ -3731,7 +3731,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-problem-decomposition`
 - Topic ID: 57
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 57
 - Readiness: **READY**
@@ -3796,7 +3796,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-pseudocode`
 - Topic ID: 58
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 58
 - Readiness: **READY**
@@ -3861,7 +3861,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-algorithms`
 - Topic ID: 59
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 59
 - Readiness: **READY**
@@ -3926,7 +3926,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-dry-runs`
 - Topic ID: 60
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 60
 - Readiness: **READY**
@@ -3995,7 +3995,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-edge-cases`
 - Topic ID: 61
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 61
 - Readiness: **READY**
@@ -4064,7 +4064,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-debugging-thinking`
 - Topic ID: 62
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: ALWAYS_ON (ALWAYS_ON)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 62
 - Readiness: **READY**
@@ -4133,7 +4133,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-time-complexity-intro`
 - Topic ID: 63
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 63
 - Readiness: **READY**
@@ -4198,7 +4198,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `cf-space-complexity-intro`
 - Topic ID: 64
 - Domain: CS Foundations
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 64
 - Readiness: **READY**
@@ -4271,7 +4271,7 @@ Topics: 52 · Units: 52 · READY 52 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Slug: `java-jdk-jre`
 - Topic ID: 65
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 65
 - Readiness: **READY**
@@ -4336,7 +4336,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-first-program`
 - Topic ID: 66
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 66
 - Readiness: **READY**
@@ -4405,7 +4405,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-compile-and-run`
 - Topic ID: 67
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 67
 - Readiness: **READY**
@@ -4470,7 +4470,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-primitives`
 - Topic ID: 68
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 68
 - Readiness: **READY**
@@ -4539,7 +4539,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-type-conversion`
 - Topic ID: 69
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 69
 - Readiness: **READY**
@@ -4608,7 +4608,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-console-io`
 - Topic ID: 70
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 70
 - Readiness: **READY**
@@ -4673,7 +4673,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-operators`
 - Topic ID: 71
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 71
 - Readiness: **READY**
@@ -4738,7 +4738,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-if-else`
 - Topic ID: 72
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 72
 - Readiness: **READY**
@@ -4807,7 +4807,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-switch`
 - Topic ID: 73
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 73
 - Readiness: **READY**
@@ -4872,7 +4872,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-loops`
 - Topic ID: 74
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 74
 - Readiness: **READY**
@@ -4941,7 +4941,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-break-continue`
 - Topic ID: 75
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 75
 - Readiness: **READY**
@@ -5006,7 +5006,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `java-method-basics`
 - Topic ID: 76
 - Domain: Java
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 76
 - Readiness: **READY**
@@ -7755,7 +7755,7 @@ Topics: 106 · Units: 106 · READY 106 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMA
 - Slug: `dsa-algorithmic-thinking`
 - Topic ID: 117
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 117
 - Readiness: **READY**
@@ -7825,7 +7825,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `dsa-big-o`
 - Topic ID: 118
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 118
 - Readiness: **READY**
@@ -7894,7 +7894,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `dsa-best-worst-average`
 - Topic ID: 119
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 119
 - Readiness: **READY**
@@ -7963,7 +7963,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `dsa-array-traversal`
 - Topic ID: 120
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 120
 - Readiness: **READY**
@@ -8033,7 +8033,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `dsa-array-insert-delete`
 - Topic ID: 121
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 121
 - Readiness: **READY**
@@ -8240,7 +8240,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Slug: `dsa-array-patterns`
 - Topic ID: 124
 - Domain: DSA & Algorithms
-- Lane/Track: PARALLEL (Specialization / Runway) (SPECIALIZATION)
+- Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 124
 - Readiness: **READY**
@@ -18764,18 +18764,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-what-is-ml-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 45 (confidence: MEDIUM)
+- Estimated minutes: 45 (confidence: HIGH)
 - Required concepts: `ml-what-is-ml-what-is-machine-learning`, `ml-what-is-ml-distinguish-supervised-unsupervised-lear`
 
 #### Primary Resource(s)
 
-- **Getting Started — scikit-learn** (scikit-learn)
-  - ID: 591 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/getting_started.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Getting Started
-  - SECTION END: Getting Started
-  - Minutes: 14 · Confidence: MEDIUM
+- **ML Teach by Doing - Introduction** (Vizuara)
+  - ID: 911 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=ngiICHD5dVc
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 26:14
+  - Minutes: 26 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -19482,18 +19482,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-gradient-descent-intuition-lesson`
 - Role: FOUNDATION · Difficulty: beginner
-- Estimated minutes: 25 (confidence: MEDIUM)
+- Estimated minutes: 25 (confidence: HIGH)
 - Required concepts: `descent-analogy`, `learning-rate-role`, `gradient-direction`
 
 #### Primary Resource(s)
 
-- **Gradient descent** (scikit-learn)
-  - ID: 776 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/linear_model.html#gradient-descent
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: end
-  - SECTION END: end
-  - Minutes: 25 · Confidence: MEDIUM
+- **ML Teach by Doing Day 6: Linear Classifiers Part 1** (Vizuara)
+  - ID: 906 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=rcXcGS1M77g
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 26:14
+  - Minutes: 26 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -20394,18 +20394,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-ridge-lasso-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `ridge-l2`, `lasso-l1`
 
 #### Primary Resource(s)
 
-- **Linear Models — Ridge/Lasso** (scikit-learn)
-  - ID: 896 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/linear_model.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 30 · Confidence: MEDIUM
+- **ML Teach by Doing Day 6: Linear Classifiers Part 1** (Vizuara)
+  - ID: 912 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=rcXcGS1M77g
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 10:00
+  - SECTION END: 26:14
+  - Minutes: 16 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -21506,18 +21506,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dl-neuron-intuition-lesson`
 - Role: FOUNDATION · Difficulty: beginner
-- Estimated minutes: 20 (confidence: MEDIUM)
+- Estimated minutes: 20 (confidence: HIGH)
 - Required concepts: `weighted-sum-unit`, `biological-analogy`, `linear-model-link`
 
 #### Primary Resource(s)
 
-- **Multilayer Perceptrons** (D2L.ai)
-  - ID: 791 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+- **Lecture 1 - Neural Network from Scratch: Coding Neurons and Layers** (Vizuara)
+  - ID: 900 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=zrKpz9-AZ_E
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 28:37
+  - Minutes: 33 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -21571,18 +21571,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dl-perceptron-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 20 (confidence: MEDIUM)
+- Estimated minutes: 20 (confidence: HIGH)
 - Required concepts: `perceptron-rule`, `linear-separability`
 
 #### Primary Resource(s)
 
-- **The Perceptron** (D2L.ai)
-  - ID: 792 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+- **Lecture 2 - The beauty of numpy and dot product in coding neurons** (Vizuara)
+  - ID: 902 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=mK_PfqM88OY
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 40:21
+  - Minutes: 40 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -21636,18 +21636,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dl-activation-functions-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 20 (confidence: MEDIUM)
+- Estimated minutes: 20 (confidence: HIGH)
 - Required concepts: `nonlinearity-required`, `relu-family`, `sigmoid-tanh-saturation`
 
 #### Primary Resource(s)
 
-- **Activation Functions** (D2L.ai)
-  - ID: 793 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+- **Lecture 6 - Coding Neural Network Activation Functions from scratch** (Vizuara)
+  - ID: 901 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=SP372QpruDg
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 43:16
+  - Minutes: 43 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -22628,6 +22628,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Minutes: 25 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
+- **Lecture 4 - Implementing the Dense Layer Class** (Vizuara)
+  - ID: 913 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=qFMpq46hEjE
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 25:24
+  - Minutes: 25 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Visibility: LEARNER
 
 ### Practice
 
@@ -22757,6 +22766,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Visibility: LEARNER
+- **Lecture 5 - Broadcasting and array summation** (Vizuara)
+  - ID: 914 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=rtFpq608aEo
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 25:28
+  - Minutes: 25 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23004,18 +23022,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dl-attention-intuition-lesson`
 - Role: FOUNDATION · Difficulty: beginner
-- Estimated minutes: 25 (confidence: MEDIUM)
+- Estimated minutes: 25 (confidence: HIGH)
 - Required concepts: `query-key-value`, `soft-alignment`, `fixes-bottleneck`
 
 #### Primary Resource(s)
 
-- **Attention Cues** (D2L.ai)
-  - ID: 814 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+- **Transformers Explained: Attention Simplified!** (Vizuara)
+  - ID: 903 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=CLQJ9M5LZao
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 43:55
+  - Minutes: 44 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -23069,18 +23087,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dl-transformers-foundations-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `self-attention-block`, `positional-encoding`, `residual-norm-stack`
 
 #### Primary Resource(s)
 
-- **Transformer architecture** (D2L.ai)
-  - ID: 815 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: begins
-  - SECTION END: begins
-  - Minutes: 30 · Confidence: MEDIUM
+- **Transformers Explained: Build a Transformer End-to-End!** (Vizuara)
+  - ID: 904 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=l0mAJ54xey0
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 72:35
+  - Minutes: 73 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -23543,6 +23561,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
+- **Computer Vision from Scratch | New course launch** (Vizuara)
+  - ID: 908 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=Tu11SMJGGIA
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 28:43
+  - Minutes: 29 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Visibility: LEARNER
 
 ### Practice
 
@@ -23724,18 +23751,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cv-image-tensors-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 20 (confidence: MEDIUM)
+- Estimated minutes: 20 (confidence: HIGH)
 - Required concepts: `batch-dim`, `dtype-normalize`
 
 #### Primary Resource(s)
 
-- **Input volumes as tensors** (Stanford CS231n)
-  - ID: 819 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+- **Introduction to Computer Vision | Lecture 1** (Vizuara)
+  - ID: 909 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=lgbKpn7q40M
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 25:00
+  - Minutes: 25 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -24050,18 +24077,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cv-convolution-in-cv-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 25 (confidence: MEDIUM)
+- Estimated minutes: 25 (confidence: HIGH)
 - Required concepts: `conv-on-images`, `stride-padding-vis`
 
 #### Primary Resource(s)
 
-- **Convolutional layers** (Stanford CS231n)
-  - ID: 824 · type=documentation · role=PRIMARY
-  - URL: https://cs231n.github.io/convolutional-networks/
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+- **U-Net Evolution and Modern Applications** (Vizuara)
+  - ID: 910 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=9KvngtchNww
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 20:00
+  - Minutes: 20 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26003,18 +26030,18 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `nlp-transformers-nlp-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `parallel-self-attn`, `positional-info`
 
 #### Primary Resource(s)
 
-- **Main architectures: transformers** (Hugging Face)
-  - ID: 851 · type=documentation · role=PRIMARY
-  - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
-  - SECTION START: FULL_SINGLE_PAGE
-  - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 30 · Confidence: MEDIUM
+- **Transformers Explained: Overview** (Vizuara)
+  - ID: 905 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=FVcUKMu_M5Q
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 19:48
+  - Minutes: 20 · Confidence: HIGH
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26800,6 +26827,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
+- **Transformers Explained: Overview** (Vizuara)
+  - ID: 915 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=FVcUKMu_M5Q
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 19:48
+  - Minutes: 20 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Visibility: LEARNER
 
 ### Practice
 
@@ -26930,6 +26966,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Visibility: LEARNER
+- **Transformers Explained: Positional Encoding** (Vizuara)
+  - ID: 916 · type=youtube · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=7CNElr-TAQw
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 00:00
+  - SECTION END: 13:57
+  - Minutes: 14 · Confidence: HIGH
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28243,7 +28288,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: MLOps
 
-Topics: 6 · Units: 6 · READY 5 · PARTIAL 1 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 6 · Units: 6 · READY 6 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
 
 ## Experiment tracking
 
@@ -28587,7 +28632,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 371
-- Readiness: **PARTIAL**
+- Readiness: **READY**
 - Spine: expansion
 
 ### Learning Objective
@@ -28626,8 +28671,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: PARTIAL_COVERAGE · Concepts covered: 1
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
+
+#### Internal / verification resources (NOT shown to learners)
+
+- Training-Serving Skew - Google ML Crash Course — COVERAGE_SUPPLEMENT — https://developers.google.com/machine-learning/crash-course/training-serving-skew
 
 ### Practice
 

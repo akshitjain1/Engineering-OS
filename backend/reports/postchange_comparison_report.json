@@ -172,7 +172,7 @@
     {
       "check": "resources_not_deleted",
       "before": 766,
-      "after": 899,
+      "after": 916,
       "pass": true
     }
   ],

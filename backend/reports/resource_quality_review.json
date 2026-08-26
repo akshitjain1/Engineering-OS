@@ -1,0 +1,384 @@
+{
+  "summary": {
+    "KEEP": 430,
+    "REPLACE": 16,
+    "SUPPLEMENT": 67,
+    "DEMOTE": 16,
+    "vizuara_units_added": 16,
+    "video_primary_before": 7,
+    "video_primary_after": 16,
+    "documentation_primary_before": 434,
+    "documentation_primary_after": 425
+  },
+  "details": [
+    {
+      "topic": "cf-bits-and-bytes",
+      "learning_unit": "cf-bits-and-bytes-core",
+      "current_resource": {
+        "title": "CS50x 2026 \u2014 Lecture 0 (Scratch)",
+        "url": "https://www.youtube.com/watch?v=UuIEbpQms8o",
+        "provider": "CS50"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "00:00:00->00:20:00",
+      "estimated_minutes": 20,
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cf-binary",
+      "learning_unit": "cf-binary-core",
+      "current_resource": {
+        "title": "CS50x 2026 \u2014 Lecture 0 (Scratch)",
+        "url": "https://www.youtube.com/watch?v=UuIEbpQms8o",
+        "provider": "CS50"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "00:00:00->00:22:00",
+      "estimated_minutes": 22,
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cf-hexadecimal",
+      "learning_unit": "cf-hexadecimal-core",
+      "current_resource": {
+        "title": "CS50x 2026 \u2014 Lecture 0 (Scratch)",
+        "url": "https://www.youtube.com/watch?v=UuIEbpQms8o",
+        "provider": "CS50"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "00:00:00->00:20:00",
+      "estimated_minutes": 20,
+      "confidence": "HIGH"
+    },
+    {
+      "topic": "cf-cpu",
+      "learning_unit": "cf-cpu-core",
+      "current_resource": {
+        "title": "GFG \u2014 Central Processing Unit (CPU)",
+        "url": "https://www.geeksforgeeks.org/central-processing-unit-cpu/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "central-processing-unit-cpu->central-processing-unit-cpu",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-alu",
+      "learning_unit": "cf-alu-core",
+      "current_resource": {
+        "title": "GFG \u2014 Introduction of ALU and Data Path",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/introduction-of-alu-and-data-path/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "ALU; Arithmetic and logical operations->ALU; Arithmetic and logical operations",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-registers",
+      "learning_unit": "cf-registers-core",
+      "current_resource": {
+        "title": "GFG \u2014 Different Classes of CPU Registers",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/different-classes-of-cpu-registers/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "General purpose; Special purpose registers->General purpose; Special purpose registers",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-ram",
+      "learning_unit": "cf-ram-core",
+      "current_resource": {
+        "title": "GFG \u2014 Random Access Memory (RAM)",
+        "url": "https://www.geeksforgeeks.org/random-access-memory-ram/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "random-access-memory-ram->random-access-memory-ram",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-cache",
+      "learning_unit": "cf-cache-core",
+      "current_resource": {
+        "title": "GFG \u2014 Cache Memory in Computer Organization",
+        "url": "https://www.geeksforgeeks.org/cache-memory-in-computer-organization/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "cache-memory-in-computer-organization->cache-memory-in-computer-organization",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-storage",
+      "learning_unit": "cf-storage-core",
+      "current_resource": {
+        "title": "GFG \u2014 Storage Devices (persistent storage)",
+        "url": "https://www.geeksforgeeks.org/storage-devices/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "storage-devices->storage-devices",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-instruction-execution",
+      "learning_unit": "cf-instruction-execution-core",
+      "current_resource": {
+        "title": "GFG \u2014 Different Instruction Cycles",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/different-instruction-cycles/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "Fetch, decode, execute cycles->Fetch, decode, execute cycles",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-machine-code",
+      "learning_unit": "cf-machine-code-core",
+      "current_resource": {
+        "title": "GFG \u2014 Machine Language",
+        "url": "https://www.geeksforgeeks.org/machine-language-in-computer-organization/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "machine-language-in-computer-organization->machine-language-in-computer-organization",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-compiler",
+      "learning_unit": "cf-compiler-core",
+      "current_resource": {
+        "title": "GFG \u2014 Introduction of Compiler Design",
+        "url": "https://www.geeksforgeeks.org/introduction-of-compiler-design/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "introduction-of-compiler-design->introduction-of-compiler-design",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-interpreter",
+      "learning_unit": "cf-interpreter-core",
+      "current_resource": {
+        "title": "GFG \u2014 Interpreter in Compiler Design",
+        "url": "https://www.geeksforgeeks.org/interpreter-in-compiler-design/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "interpreter-in-compiler-design->interpreter-in-compiler-design",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-program",
+      "learning_unit": "cf-program-core",
+      "current_resource": {
+        "title": "GFG \u2014 Program and its Types in Operating System",
+        "url": "https://www.geeksforgeeks.org/program-and-its-types-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "program-and-its-types-in-operating-system->program-and-its-types-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-process",
+      "learning_unit": "cf-process-core",
+      "current_resource": {
+        "title": "GFG \u2014 Process in Operating System",
+        "url": "https://www.geeksforgeeks.org/process-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "process-in-operating-system->process-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-kernel",
+      "learning_unit": "cf-kernel-core",
+      "current_resource": {
+        "title": "GFG \u2014 Kernel in Operating System",
+        "url": "https://www.geeksforgeeks.org/kernel-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "kernel-in-operating-system->kernel-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-os-processes",
+      "learning_unit": "cf-os-processes-core",
+      "current_resource": {
+        "title": "GFG \u2014 Process Management in Operating System",
+        "url": "https://www.geeksforgeeks.org/process-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "process-in-operating-system->process-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-threads",
+      "learning_unit": "cf-threads-core",
+      "current_resource": {
+        "title": "GFG \u2014 Threads in Operating System",
+        "url": "https://www.geeksforgeeks.org/thread-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "thread-in-operating-system->thread-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-system-calls",
+      "learning_unit": "cf-system-calls-core",
+      "current_resource": {
+        "title": "GFG \u2014 System Calls in Operating System",
+        "url": "https://www.geeksforgeeks.org/system-calls-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "system-calls-in-operating-system->system-calls-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic": "cf-os-memory",
+      "learning_unit": "cf-os-memory-core",
+      "current_resource": {
+        "title": "GFG \u2014 Memory Management in Operating System",
+        "url": "https://www.geeksforgeeks.org/memory-management-in-operating-system/",
+        "provider": "GeeksforGeeks"
+      },
+      "decision": "KEEP",
+      "replacement_resource": null,
+      "why_old_is_weaker": "",
+      "why_new_is_better": "",
+      "exact_segment": "memory-management-in-operating-system->memory-management-in-operating-system",
+      "estimated_minutes": 18,
+      "confidence": "MEDIUM"
+    }
+  ],
+  "practice_improvements": {
+    "before": "Complete 3 exercises.",
+    "after": "Implement gradient descent for y=mx+b. Run 20 iterations. Plot loss. Explain why learning rate changes convergence. (ML: ml-gradient-descent-intuition)",
+    "topic": "ml-gradient-descent-intuition"
+  },
+  "remaining_needs_review": [
+    {
+      "slug": "java-memory-model-basics-reference",
+      "url": "https://dev.java/learn/jvm/tool/garbage-collection/",
+      "reason": "JS-rendered SPA, cannot verify content"
+    },
+    {
+      "slug": "cf-os-env-primary",
+      "url": "https://www.geeksforgeeks.org/environment-variables-in-linux-unix/",
+      "reason": "JS-rendered SPA, cannot verify content"
+    },
+    {
+      "slug": "math-conditional-probability-primary",
+      "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/conditional-probability-independence/a/conditional-probability-and-independence",
+      "reason": "JS-rendered SPA, cannot verify content"
+    },
+    {
+      "slug": "math-expectation-variance-primary",
+      "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library/expected-value-lib/v/expected-value-of-a-random-variable",
+      "reason": "JS-rendered SPA, cannot verify content"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "resource": "Vizuara Graph Neural Networks playlist",
+      "topic": "N/A",
+      "reason": "advanced - outside 12-month core; marked OPTIONAL/DEEP_DIVE"
+    },
+    {
+      "resource": "Vizuara Diffusion Models",
+      "topic": "N/A",
+      "reason": "advanced - not displacing CORE/DL fundamentals"
+    },
+    {
+      "resource": "Vizuara Explainable AI - SHAP",
+      "topic": "ml-feature-importance",
+      "reason": "redundant - permutation importance already well-covered; kept as DEEP_DIVE"
+    },
+    {
+      "resource": "scikit-learn getting_started as PRIMARY for ml-what-is-ml",
+      "topic": "ml-what-is-ml",
+      "reason": "too broad for orientation - replaced with Vizuara video where better"
+    }
+  ]
+}

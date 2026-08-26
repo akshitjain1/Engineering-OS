@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-08-26T12:00:00Z",
+  "playlists_discovered": [
+    {
+      "id": "PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "title": "Building Neural Networks from Scratch",
+      "videos_discovered": 6,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu"
+    },
+    {
+      "id": "PLPTV0NXA_ZSi-nLQ4XV2Mds8Z7bihK68L",
+      "title": "Machine Learning: Teach by Doing",
+      "videos_discovered": 7,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSi-nLQ4XV2Mds8Z7bihK68L"
+    },
+    {
+      "id": "PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "title": "Transformers Explained",
+      "videos_discovered": 5,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1"
+    },
+    {
+      "id": "PLPTV0NXA_ZSh_HfFtLf5p8hPAW8a7Tr2a",
+      "title": "Generative AI: From Fundamentals to Deployment",
+      "videos_discovered": 17,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSh_HfFtLf5p8hPAW8a7Tr2a"
+    },
+    {
+      "id": "PLPTV0NXA_ZShaln9GfiHO_c0HzOSqLOGv",
+      "title": "Explainable AI (XAI)",
+      "videos_discovered": 13,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZShaln9GfiHO_c0HzOSqLOGv"
+    },
+    {
+      "id": "PLPTV0NXA_ZSgHj4a9CE1KLSarhkjocecO",
+      "title": "Data Structures and Algorithms in Python",
+      "videos_discovered": 5,
+      "url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSgHj4a9CE1KLSarhkjocecO"
+    }
+  ],
+  "total_playlists": 6,
+  "videos_mapped": 7,
+  "learning_units_with_vizuara_primary": [
+    "dl-activation-functions",
+    "dl-attention-intuition",
+    "dl-neuron-intuition",
+    "dl-perceptron",
+    "dl-transformers-foundations",
+    "ml-gradient-descent-intuition",
+    "nlp-transformers-nlp"
+  ],
+  "video_segments": [
+    {
+      "video_id": "zrKpz9-AZ_E",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "dl-neuron-intuition",
+      "start": "00:00",
+      "end": "28:37",
+      "minutes": 33
+    },
+    {
+      "video_id": "SP372QpruDg",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "dl-activation-functions",
+      "start": "00:00",
+      "end": "43:16",
+      "minutes": 43
+    },
+    {
+      "video_id": "mK_PfqM88OY",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "dl-perceptron",
+      "start": "00:00",
+      "end": "40:21",
+      "minutes": 40
+    },
+    {
+      "video_id": "CLQJ9M5LZao",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "dl-attention-intuition",
+      "start": "00:00",
+      "end": "43:55",
+      "minutes": 44
+    },
+    {
+      "video_id": "l0mAJ54xey0",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "dl-transformers-foundations",
+      "start": "00:00",
+      "end": "72:35",
+      "minutes": 73
+    },
+    {
+      "video_id": "FVcUKMu_M5Q",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "nlp-transformers-nlp",
+      "start": "00:00",
+      "end": "19:48",
+      "minutes": 20
+    },
+    {
+      "video_id": "rcXcGS1M77g",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "topic": "ml-gradient-descent-intuition",
+      "start": "00:00",
+      "end": "26:14",
+      "minutes": 26
+    }
+  ],
+  "unused_playlists": [
+    {
+      "playlist": "Explainable AI (XAI)",
+      "reason": "optional/advanced - not displacing CORE/DSA/ML/DL/CV"
+    },
+    {
+      "playlist": "Data Structures and Algorithms in Python",
+      "reason": "redundant - DSA already has strong practice platforms"
+    },
+    {
+      "playlist": "Generative AI: From Fundamentals to Deployment (partial)",
+      "reason": "advanced - optional deep dive, not early curriculum"
+    }
+  ],
+  "duplicate_mappings": 0,
+  "unresolved_mappings": 0
+}
