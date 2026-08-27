@@ -1,0 +1,1387 @@
+{
+  "generated_at": "2026-08-26T14:35:30.899263+00:00",
+  "boundary_fixes": {
+    "applied": 46,
+    "total_in_queue": 46
+  },
+  "canonical_url_fixes": {
+    "applied": 134,
+    "already_canonical": 0,
+    "total_in_queue": 134
+  },
+  "metadata_fixes": {
+    "applied": 3,
+    "total_in_queue": 3
+  },
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp_total": 888,
+    "user_xp_level": 9,
+    "xp_events": 37,
+    "learning_activities": 323,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "revision_schedules": 2
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp_total": 888,
+    "user_xp_level": 9,
+    "xp_events": 37,
+    "learning_activities": 323,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "revision_schedules": 2
+  },
+  "learner_data_match": true,
+  "duplicate_check": {
+    "duplicates_found": 0,
+    "details": []
+  },
+  "details": {
+    "boundary": [
+      {
+        "slug": "cf-os-environment-variables-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Shell / environment variables",
+          "end_boundary": "Shell / environment variables",
+          "section": "Shell / environment variables",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-compile-and-run-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "launch-simple-source-code-programs",
+          "end_boundary": "launch-simple-source-code-programs",
+          "section": "launch-simple-source-code-programs",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-type-conversion-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Primitive types and conversions",
+          "end_boundary": "Primitive types and conversions",
+          "section": "Primitive types and conversions",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-stringbuilder-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "string-builders",
+          "end_boundary": "string-builders",
+          "section": "string-builders",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-constructors-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "defining-constructors",
+          "end_boundary": "defining-constructors",
+          "section": "defining-constructors",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-inheritance-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "What is inheritance?",
+          "end_boundary": "What is inheritance?",
+          "section": "What is inheritance?",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-interfaces-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Defining interfaces",
+          "end_boundary": "Defining interfaces",
+          "section": "Defining interfaces",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-composition-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Creating objects / composition via fields",
+          "end_boundary": "Creating objects / composition via fields",
+          "section": "Creating objects / composition via fields",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-generic-types-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Generics intro",
+          "end_boundary": "Generics intro",
+          "section": "Generics intro",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-comparable-comparator-reference",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Writing comparators (lambdas)",
+          "end_boundary": "Writing comparators (lambdas)",
+          "section": "Writing comparators (lambdas)",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "cf-registers-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "General purpose; Special purpose registers",
+          "end_boundary": "General purpose; Special purpose registers",
+          "section": "General purpose; Special purpose registers",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "java-memory-model-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Chapter 17",
+          "end_boundary": "Chapter 17",
+          "section": "Chapter 17",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "se-versioning-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "SemVer: Semantic versioning",
+          "end_boundary": "SemVer: Semantic versioning",
+          "section": "SemVer: Semantic versioning",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "be-json-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "JSON grammar and values",
+          "end_boundary": "JSON grammar and values",
+          "section": "JSON grammar and values",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ml-features-labels-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Getting started \u2014 features and estimators",
+          "end_boundary": "Getting started \u2014 features and estimators",
+          "section": "Getting started \u2014 features and estimators",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ml-classification-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Decision Trees classification",
+          "end_boundary": "Decision Trees classification",
+          "section": "Decision Trees classification",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "devops-awareness-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "12-Factor: DevOps awareness",
+          "end_boundary": "12-Factor: DevOps awareness",
+          "section": "12-Factor: DevOps awareness",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "net-dns-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "What is a domain name / DNS",
+          "end_boundary": "What is a domain name / DNS",
+          "section": "What is a domain name / DNS",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ds-numpy-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "absolute_beginners.html",
+          "end_boundary": "absolute_beginners.html",
+          "section": "absolute_beginners.html",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dl-nn-basics-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Neural Networks Part 1 \u2014 architecture",
+          "end_boundary": "Neural Networks Part 1 \u2014 architecture",
+          "section": "Neural Networks Part 1 \u2014 architecture",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dl-backprop-primary",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Backpropagation and gradient computation",
+          "end_boundary": "Backpropagation and gradient computation",
+          "section": "Backpropagation and gradient computation",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-algorithmic-thinking-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Algorithm definition",
+          "end_boundary": "Algorithm definition",
+          "section": "Algorithm definition",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-big-o-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Big-O analysis",
+          "end_boundary": "Big-O analysis",
+          "section": "Big-O analysis",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-array-traversal-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Array traversal",
+          "end_boundary": "Array traversal",
+          "section": "Array traversal",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-array-insert-delete-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Array insert and delete operations",
+          "end_boundary": "Array insert and delete operations",
+          "section": "Array insert and delete operations",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-string-manipulation-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "String basics",
+          "end_boundary": "String basics",
+          "section": "String basics",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-hash-map-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Map implementations / HashMap",
+          "end_boundary": "Map implementations / HashMap",
+          "section": "Map implementations / HashMap",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-lookup-patterns-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Pair with given sum / complement lookup",
+          "end_boundary": "Pair with given sum / complement lookup",
+          "section": "Pair with given sum / complement lookup",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-sort-complexity-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Time complexities of sorting algorithms",
+          "end_boundary": "Time complexities of sorting algorithms",
+          "section": "Time complexities of sorting algorithms",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-binary-search-boundaries-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Binary search bounds / low-high updates",
+          "end_boundary": "Binary search bounds / low-high updates",
+          "section": "Binary search bounds / low-high updates",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-bst-search-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "BST search",
+          "end_boundary": "BST search",
+          "section": "BST search",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-bst-insert-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "BST insert",
+          "end_boundary": "BST insert",
+          "section": "BST insert",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-bst-delete-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "BST delete",
+          "end_boundary": "BST delete",
+          "section": "BST delete",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-dp-state-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Overlapping subproblems / DP state thinking",
+          "end_boundary": "Overlapping subproblems / DP state thinking",
+          "section": "Overlapping subproblems / DP state thinking",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-dp-transition-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Tabulation vs memoization transitions",
+          "end_boundary": "Tabulation vs memoization transitions",
+          "section": "Tabulation vs memoization transitions",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-grid-dp-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Grid DP paths",
+          "end_boundary": "Grid DP paths",
+          "section": "Grid DP paths",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-interval-dp-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Matrix chain / interval DP",
+          "end_boundary": "Matrix chain / interval DP",
+          "section": "Matrix chain / interval DP",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-dp-optimization-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Space optimization notes for DP",
+          "end_boundary": "Space optimization notes for DP",
+          "section": "Space optimization notes for DP",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-bit-manipulation-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Bit manipulation",
+          "end_boundary": "Bit manipulation",
+          "section": "Bit manipulation",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-segment-tree-concept-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Segment tree range queries",
+          "end_boundary": "Segment tree range queries",
+          "section": "Segment tree range queries",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "dsa-interview-hygiene-learn-exact",
+        "action": "BOUNDARY_RENAMED_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "Coding interview techniques",
+          "end_boundary": "Coding interview techniques",
+          "section": "Coding interview techniques",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "nlp-tf-idf-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "through Evaluation on test set begins",
+          "end_boundary": "through Evaluation on test set begins",
+          "section": "through Evaluation on test set begins",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ai-eng-multi-agent-awareness-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "through Cost/latency tradeoffs end",
+          "end_boundary": "through Cost/latency tradeoffs end",
+          "section": "through Cost/latency tradeoffs end",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ml-feature-importance-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "above; content inspection pending",
+          "end_boundary": "above; content inspection pending",
+          "section": "above; content inspection pending",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ml-gradient-boosting-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "above; content inspection pending",
+          "end_boundary": "above; content inspection pending",
+          "section": "above; content inspection pending",
+          "exactness": "EXACT"
+        }
+      },
+      {
+        "slug": "ml-grid-search-primary",
+        "action": "FULL_PAGE_FIX",
+        "old": {
+          "boundary_type": "ARTICLE_SECTION",
+          "start_boundary": "above; content inspection pending",
+          "end_boundary": "above; content inspection pending",
+          "section": "above; content inspection pending",
+          "exactness": "EXACT"
+        }
+      }
+    ],
+    "canonical": [
+      {
+        "slug": "cf-compiler-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-of-compiler-design/",
+        "new_url": "https://www.geeksforgeeks.org/compiler-design/introduction-of-compiler-design/"
+      },
+      {
+        "slug": "cf-process-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/process-in-operating-system/",
+        "new_url": "https://www.geeksforgeeks.org/operating-systems/process-in-operating-system/"
+      },
+      {
+        "slug": "cf-os-processes-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/process-in-operating-system/",
+        "new_url": "https://www.geeksforgeeks.org/operating-systems/process-in-operating-system/"
+      },
+      {
+        "slug": "java-assertions-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://junit.org/junit5/docs/current/user-guide/",
+        "new_url": "https://docs.junit.org/6.1.3/overview.html"
+      },
+      {
+        "slug": "cf-cpu-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/central-processing-unit-cpu/",
+        "new_url": "https://www.geeksforgeeks.org/computer-science-fundamentals/central-processing-unit-cpu/"
+      },
+      {
+        "slug": "cf-ram-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/random-access-memory-ram/",
+        "new_url": "https://www.geeksforgeeks.org/computer-science-fundamentals/random-access-memory-ram/"
+      },
+      {
+        "slug": "cf-cache-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/cache-memory-in-computer-organization/",
+        "new_url": "https://www.geeksforgeeks.org/computer-organization-architecture/cache-memory-in-computer-organization/"
+      },
+      {
+        "slug": "cf-kernel-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/kernel-in-operating-system/",
+        "new_url": "https://www.geeksforgeeks.org/operating-systems/kernel-in-operating-system/"
+      },
+      {
+        "slug": "cf-threads-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/thread-in-operating-system/",
+        "new_url": "https://www.geeksforgeeks.org/operating-systems/thread-in-operating-system/"
+      },
+      {
+        "slug": "cf-os-memory-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/memory-management-in-operating-system/",
+        "new_url": "https://www.geeksforgeeks.org/operating-systems/memory-management-in-operating-system/"
+      },
+      {
+        "slug": "cf-dev-compiler-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-to-compilers/",
+        "new_url": "https://www.geeksforgeeks.org/compiler-design/introduction-to-compilers/"
+      },
+      {
+        "slug": "se-sdlc-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.ibm.com/topics/software-development-lifecycle",
+        "new_url": "https://www.ibm.com/think/topics"
+      },
+      {
+        "slug": "se-requirements-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/software-engineering-requirements-engineering-process/",
+        "new_url": "https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-engineering-process/"
+      },
+      {
+        "slug": "be-http-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+        "new_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+      },
+      {
+        "slug": "net-tcp-udp-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/differences-between-tcp-and-udp/",
+        "new_url": "https://www.geeksforgeeks.org/computer-networks/differences-between-tcp-and-udp/"
+      },
+      {
+        "slug": "dl-transformers-intro-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://huggingface.co/learn/nlp-course/chapter1/4",
+        "new_url": "https://huggingface.co/learn/llm-course/chapter1/4"
+      },
+      {
+        "slug": "genai-embeddings-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/embeddings",
+        "new_url": "https://developers.openai.com/api/docs/guides/embeddings"
+      },
+      {
+        "slug": "genai-rag-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://python.langchain.com/docs/concepts/rag/",
+        "new_url": "https://docs.langchain.com/oss/python/langchain/overview"
+      },
+      {
+        "slug": "genai-agents-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/function-calling",
+        "new_url": "https://developers.openai.com/api/docs/guides/function-calling"
+      },
+      {
+        "slug": "genai-eval-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/evals",
+        "new_url": "https://developers.openai.com/api/docs/guides/evals"
+      },
+      {
+        "slug": "dsa-algorithmic-thinking-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/what-is-an-algorithm-definition-types-complexity-examples/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/introduction-to-algorithms/"
+      },
+      {
+        "slug": "dsa-big-o-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/analysis-algorithms-big-o-analysis/"
+      },
+      {
+        "slug": "dsa-best-worst-average-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/worst-average-and-best-case-analysis-of-algorithms/"
+      },
+      {
+        "slug": "dsa-array-traversal-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/array-data-structure-guide/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/array-data-structure-guide/"
+      },
+      {
+        "slug": "dsa-array-insert-delete-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/array-data-structure-guide/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/array-data-structure-guide/"
+      },
+      {
+        "slug": "dsa-prefix-sums-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/prefix-sum-array-implementation-applications-competitive-programming/"
+      },
+      {
+        "slug": "dsa-array-frequency-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/counting-frequencies-of-array-elements/"
+      },
+      {
+        "slug": "dsa-array-patterns-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/two-pointers-technique/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/"
+      },
+      {
+        "slug": "dsa-string-manipulation-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/string-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/string-data-structure/"
+      },
+      {
+        "slug": "dsa-string-frequency-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/string-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/string-data-structure/"
+      },
+      {
+        "slug": "dsa-character-processing-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-string-patterns-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/string-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/string-data-structure/"
+      },
+      {
+        "slug": "dsa-hash-set-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/hashset-in-java/",
+        "new_url": "https://www.geeksforgeeks.org/java/hashset-in-java/"
+      },
+      {
+        "slug": "dsa-frequency-maps-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-lookup-patterns-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/check-if-pair-with-given-sum-exists-in-array/"
+      },
+      {
+        "slug": "dsa-two-pointers-opposite-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/two-pointers-technique/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/"
+      },
+      {
+        "slug": "dsa-two-pointers-same-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/two-pointers-technique/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/"
+      },
+      {
+        "slug": "dsa-two-pointers-partition-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/two-pointers-technique/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/"
+      },
+      {
+        "slug": "dsa-window-fixed-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-window-variable-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-window-frequency-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-singly-linked-list-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/linked-list-set-1-introduction/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/what-is-linked-list/"
+      },
+      {
+        "slug": "dsa-list-operations-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-list-reversal-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-fast-slow-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-cycle-detection-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-list-merge-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-stack-fundamentals-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/stack-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/stack-data-structure/"
+      },
+      {
+        "slug": "dsa-monotonic-stack-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/stack-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/stack-data-structure/"
+      },
+      {
+        "slug": "dsa-queue-deque-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/queue-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/queue-data-structure/"
+      },
+      {
+        "slug": "dsa-queue-bfs-relationship-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/queue-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/queue-data-structure/"
+      },
+      {
+        "slug": "dsa-recursion-model-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-to-recursion-data-structure-and-algorithm-tutorials/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/introduction-to-recursion-2/"
+      },
+      {
+        "slug": "dsa-call-stack-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/stack-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/stack-data-structure/"
+      },
+      {
+        "slug": "dsa-recursive-trees-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-recursion-to-iteration-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-to-recursion-data-structure-and-algorithm-tutorials/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/introduction-to-recursion-2/"
+      },
+      {
+        "slug": "dsa-subsets-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-permutations-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/write-a-c-program-to-print-all-permutations-of-a-given-string/"
+      },
+      {
+        "slug": "dsa-combinations-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-constraint-search-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search/"
+      },
+      {
+        "slug": "dsa-bubble-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/bubble-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/bubble-sort-algorithm/"
+      },
+      {
+        "slug": "dsa-selection-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/selection-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/selection-sort-algorithm-2/"
+      },
+      {
+        "slug": "dsa-insertion-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/insertion-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/insertion-sort-algorithm/"
+      },
+      {
+        "slug": "dsa-merge-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/merge-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/merge-sort/"
+      },
+      {
+        "slug": "dsa-quick-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/quick-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/"
+      },
+      {
+        "slug": "dsa-heap-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/heap-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/heap-sort/"
+      },
+      {
+        "slug": "dsa-counting-radix-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/radix-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/radix-sort/"
+      },
+      {
+        "slug": "dsa-sort-stability-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/sorting-algorithms/"
+      },
+      {
+        "slug": "dsa-sort-complexity-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/time-complexities-of-all-sorting-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/time-complexities-of-all-sorting-algorithms/"
+      },
+      {
+        "slug": "dsa-binary-search-classic-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search/"
+      },
+      {
+        "slug": "dsa-binary-search-boundaries-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search/"
+      },
+      {
+        "slug": "dsa-first-last-occurrence-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-search-on-answer-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search/"
+      },
+      {
+        "slug": "dsa-rotated-arrays-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/array-data-structure-guide/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/array-data-structure-guide/"
+      },
+      {
+        "slug": "dsa-tree-terminology-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-binary-trees-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-tree-dfs-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-tree-bfs-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-tree-height-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-tree-paths-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-tree-construction-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-bst-search-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search-tree-set-1-search-and-insertion/"
+      },
+      {
+        "slug": "dsa-bst-insert-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-search-tree-set-1-search-and-insertion/"
+      },
+      {
+        "slug": "dsa-bst-delete-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/deletion-in-binary-search-tree/"
+      },
+      {
+        "slug": "dsa-bst-validate-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/a-program-to-check-if-a-binary-tree-is-bst-or-not/"
+      },
+      {
+        "slug": "dsa-bst-ordered-properties-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/binary-tree-data-structure/"
+      },
+      {
+        "slug": "dsa-heap-structure-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/heap-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/heap-data-structure/"
+      },
+      {
+        "slug": "dsa-priority-queue-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/heap-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/heap-data-structure/"
+      },
+      {
+        "slug": "dsa-heapify-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/heap-sort/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/heap-sort/"
+      },
+      {
+        "slug": "dsa-top-k-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/k-largestor-smallest-elements-in-an-array/"
+      },
+      {
+        "slug": "dsa-heap-scheduling-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/heap-data-structure/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/heap-data-structure/"
+      },
+      {
+        "slug": "dsa-graph-representations-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/"
+      },
+      {
+        "slug": "dsa-graph-bfs-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/"
+      },
+      {
+        "slug": "dsa-graph-dfs-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/"
+      },
+      {
+        "slug": "dsa-connected-components-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-graph-cycle-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/"
+      },
+      {
+        "slug": "dsa-bipartite-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/"
+      },
+      {
+        "slug": "dsa-topological-sort-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/sorting-algorithms/"
+      },
+      {
+        "slug": "dsa-union-find-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/"
+      },
+      {
+        "slug": "dsa-unweighted-shortest-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-dijkstra-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-mst-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-greedy-reasoning-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/greedy-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/greedy-algorithms/"
+      },
+      {
+        "slug": "dsa-greedy-exchange-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/greedy-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/greedy-algorithms/"
+      },
+      {
+        "slug": "dsa-interval-problems-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-greedy-scheduling-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/greedy-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/greedy-algorithms/"
+      },
+      {
+        "slug": "dsa-greedy-patterns-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/greedy-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/greedy-algorithms/"
+      },
+      {
+        "slug": "dsa-dp-mindset-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/overlapping-subproblems-property-in-dynamic-programming-dp-1/"
+      },
+      {
+        "slug": "dsa-memoization-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/memoization-1d-2d-and-3d/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/memoization-1d-2d-and-3d/"
+      },
+      {
+        "slug": "dsa-tabulation-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "dsa-dp-state-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/overlapping-subproblems-property-in-dynamic-programming-dp-1/"
+      },
+      {
+        "slug": "dsa-dp-transition-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/tabulation-vs-memoization/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/tabulation-vs-memoization/"
+      },
+      {
+        "slug": "dsa-dp-1d-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/"
+      },
+      {
+        "slug": "dsa-dp-2d-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/dynamic-programming/",
+        "new_url": "https://www.geeksforgeeks.org/category/dsa/algorithm/dynamic-programming/"
+      },
+      {
+        "slug": "dsa-subsequence-dp-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/longest-common-subsequence-dp-4/"
+      },
+      {
+        "slug": "dsa-knapsack-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/0-1-knapsack-problem-dp-10/"
+      },
+      {
+        "slug": "dsa-grid-dp-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/unique-paths-in-a-grid-with-obstacles/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/unique-paths-in-a-grid-with-obstacles/"
+      },
+      {
+        "slug": "dsa-interval-dp-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/matrix-chain-multiplication-dp-8/"
+      },
+      {
+        "slug": "dsa-dp-optimization-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/space-optimization-using-bit-manipulations/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/space-optimization-using-bit-manipulations/"
+      },
+      {
+        "slug": "dsa-tries-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/trie-insert-and-search/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/trie-insert-and-search/"
+      },
+      {
+        "slug": "dsa-bit-manipulation-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/bits-manipulation-important-tactics/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/bits-manipulation-important-tactics/"
+      },
+      {
+        "slug": "dsa-segment-tree-concept-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/segment-tree-sum-of-given-range/"
+      },
+      {
+        "slug": "dsa-advanced-graphs-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/"
+      },
+      {
+        "slug": "dsa-advanced-dp-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/bitmasking-and-dynamic-programming-set-1-count-ways-to-assign-unique-cap-to-every-person/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/bitmasking-and-dynamic-programming-set-1-count-ways-to-assign-unique-cap-to-every-person/"
+      },
+      {
+        "slug": "dsa-pattern-selection-learn-exact",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.geeksforgeeks.org/data-structures/",
+        "new_url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"
+      },
+      {
+        "slug": "cv-traditional-filters-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://docs.opencv.org/4.x/d4/dbd/tutorial_filter_2d.html",
+        "new_url": "https://docs.opencv.org/4.13.0/d4/dbd/tutorial_filter_2d.html"
+      },
+      {
+        "slug": "cv-vision-transformers-awareness-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://www.d2l.ai/chapter_vision-transformer",
+        "new_url": "https://d2l.ai/index.html"
+      },
+      {
+        "slug": "genai-context-windows-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://docs.anthropic.com/en/docs/build-with-claude/context-windows",
+        "new_url": "https://platform.claude.com/docs/en/build-with-claude/context-windows"
+      },
+      {
+        "slug": "genai-vector-databases-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/embeddings",
+        "new_url": "https://developers.openai.com/api/docs/guides/embeddings"
+      },
+      {
+        "slug": "genai-chunking-retrieval-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://python.langchain.com/docs/tutorials/rag/",
+        "new_url": "https://docs.langchain.com/oss/python/deepagents/rag"
+      },
+      {
+        "slug": "ai-eng-structured-output-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/structured-outputs",
+        "new_url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      },
+      {
+        "slug": "ai-eng-tool-calling-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/function-calling",
+        "new_url": "https://developers.openai.com/api/docs/guides/function-calling"
+      },
+      {
+        "slug": "ai-eng-function-calling-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
+        "new_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"
+      },
+      {
+        "slug": "ai-eng-production-deployment-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://platform.openai.com/docs/guides/production-best-practices",
+        "new_url": "https://developers.openai.com/api/docs/guides/production-best-practices"
+      },
+      {
+        "slug": "cv-sift-orb-awareness-primary",
+        "action": "URL_UPDATED",
+        "old_url": "https://docs.opencv.org/4.x/da/df5/tutorial_py_sift_intro.html",
+        "new_url": "https://docs.opencv.org/4.13.0/da/df5/tutorial_py_sift_intro.html"
+      }
+    ],
+    "metadata": [
+      {
+        "slug": "dl-nn-basics-primary",
+        "action": "PROVIDER_FIXED",
+        "old_provider": "PyTorch",
+        "new_provider": "CS231n",
+        "old_title": "PyTorch Basics Intro",
+        "new_title": "CS231n \u2014 Neural Networks Part 1: Setting up the Architecture"
+      },
+      {
+        "slug": "dl-backprop-primary",
+        "action": "PROVIDER_FIXED",
+        "old_provider": "PyTorch",
+        "new_provider": "CS231n",
+        "old_title": "Automatic Differentiation with torch.autograd",
+        "new_title": "CS231n \u2014 Backpropagation, Intuitions"
+      },
+      {
+        "slug": "dl-cnn-primary",
+        "action": "PROVIDER_FIXED",
+        "old_provider": "PyTorch",
+        "new_provider": "CS231n",
+        "old_title": "Training a Classifier (CIFAR10)",
+        "new_title": "CS231n \u2014 Convolutional Neural Networks"
+      }
+    ]
+  }
+}

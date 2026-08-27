@@ -1,0 +1,185 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_batch4_dp_resource_mapping_20260827_195640.bak",
+  "backup_size": 3293184,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "curriculum_graph_unchanged": true,
+  "processed": 8,
+  "changed": [
+    {
+      "topic": "dsa-dp-state",
+      "lesson_id": 207,
+      "old_primary": {
+        "slug": "dsa-dp-state-learn-exact",
+        "title": "Steps to solve a Dynamic Programming Problem",
+        "url": "https://www.geeksforgeeks.org/dsa/solve-dynamic-programming-problem/",
+        "boundary": "Step 2: Decide a state expression with the Least parameters. through Step 3: Formulate state and transition relationship."
+      },
+      "new_primary": {
+        "slug": "dsa-dp-state-learn-exact",
+        "title": "Steps to solve a Dynamic Programming Problem",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/solve-dynamic-programming-problem/",
+        "boundary": "Step 2: Decide a state expression with the Least parameters. through Step 3: Formulate state and transition relationship.",
+        "instruction": "Learn how to define a DP state using the smallest set of parameters that uniquely describes a subproblem. Do the knapsack example mentally and explain what dp[index][capacity] means."
+      }
+    },
+    {
+      "topic": "dsa-dp-transition",
+      "lesson_id": 208,
+      "old_primary": {
+        "slug": "dsa-dp-transition-learn-exact",
+        "title": "Steps to solve a Dynamic Programming Problem",
+        "url": "https://www.geeksforgeeks.org/dsa/solve-dynamic-programming-problem/",
+        "boundary": "Step 3: Formulate state and transition relationship. through Step 4: Add memoization or tabulation."
+      },
+      "new_primary": {
+        "slug": "dsa-dp-transition-learn-exact",
+        "title": "Steps to solve a Dynamic Programming Problem",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/solve-dynamic-programming-problem/",
+        "boundary": "Step 3: Formulate state and transition relationship. through Step 4: Add memoization or tabulation.",
+        "instruction": "Learn how a DP transition converts smaller solved states into the current state. Be able to write a recurrence from the meaning of the state before thinking about code."
+      }
+    },
+    {
+      "topic": "dsa-advanced-dp",
+      "lesson_id": 220,
+      "old_primary": {
+        "slug": "dsa-advanced-dp-learn-exact",
+        "title": "CP-Algorithms — Knuth's Optimization",
+        "url": "https://cp-algorithms.com/dynamic_programming/knuth-optimization.html",
+        "boundary": "FULL_SINGLE_PAGE"
+      },
+      "new_primary": {
+        "slug": "dsa-advanced-dp-learn-exact",
+        "title": "CP-Algorithms — Knuth's Optimization",
+        "provider": "CP-Algorithms",
+        "url": "https://cp-algorithms.com/dynamic_programming/knuth-optimization.html",
+        "boundary": "FULL_SINGLE_PAGE",
+        "instruction": "Treat this as an introduction to what advanced DP means: exploiting additional mathematical structure in a transition to reduce complexity. Understand range DP, optimal split points, the monotonicity condition, and why the optimization can reduce O(n^3) range DP to O(n^2)."
+      }
+    },
+    {
+      "topic": "dsa-dp-2d",
+      "lesson_id": 210,
+      "old_primary": {
+        "slug": "dsa-dp-2d-learn-exact",
+        "title": "Dynamic Programming (DP) on Grids",
+        "url": "https://www.geeksforgeeks.org/dsa/dp-on-grids/",
+        "boundary": "Idea behind Dynamic Programming (DP) on Grids through Iteratively filling the DP table"
+      },
+      "new_primary": {
+        "slug": "dsa-dp-2d-learn-exact",
+        "title": "Dynamic Programming (DP) on Grids",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/dp-on-grids/",
+        "boundary": "Idea behind Dynamic Programming (DP) on Grids through Iteratively filling the DP table",
+        "instruction": "Learn why grid coordinates become DP states, how transitions come from neighbouring cells, how base cases are chosen, and how the 2D table is filled."
+      }
+    },
+    {
+      "topic": "dsa-subsequence-dp",
+      "lesson_id": 211,
+      "old_primary": {
+        "slug": "dsa-subsequence-dp-learn-exact",
+        "title": "Longest Increasing Subsequence (LIS)",
+        "url": "https://www.geeksforgeeks.org/dsa/longest-increasing-subsequence-dp-3/",
+        "boundary": "Naive Approach through Using Dynamic Programming"
+      },
+      "new_primary": {
+        "slug": "dsa-subsequence-dp-learn-exact",
+        "title": "Longest Increasing Subsequence (LIS)",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/longest-increasing-subsequence-dp-3/",
+        "boundary": "Naive Approach through Using Dynamic Programming",
+        "instruction": "Learn the canonical subsequence-DP pattern using LIS: define what dp[i] means, compare previous elements, derive the recurrence, and understand why the state depends on earlier subsequences."
+      }
+    },
+    {
+      "topic": "dsa-grid-dp",
+      "lesson_id": 213,
+      "old_primary": {
+        "slug": "dsa-grid-dp-learn-exact",
+        "title": "Dynamic Programming (DP) on Grids",
+        "url": "https://www.geeksforgeeks.org/dsa/dp-on-grids/",
+        "boundary": "Idea behind Dynamic Programming (DP) on Grids through Use Cases of Dynamic Programming (DP) on Grids"
+      },
+      "new_primary": {
+        "slug": "dsa-grid-dp-learn-exact",
+        "title": "Dynamic Programming (DP) on Grids",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/dp-on-grids/",
+        "boundary": "Idea behind Dynamic Programming (DP) on Grids through Use Cases of Dynamic Programming (DP) on Grids",
+        "instruction": "Learn the standard grid-DP pattern: cell as state, valid movement as transition, boundary/base conditions, and iterative computation."
+      }
+    },
+    {
+      "topic": "dsa-interval-dp",
+      "lesson_id": 214,
+      "old_primary": {
+        "slug": "dsa-interval-dp-learn-exact",
+        "title": "Matrix Chain Multiplication",
+        "url": "https://www.geeksforgeeks.org/dsa/matrix-chain-multiplication-dp-8/",
+        "boundary": "Better Approach 1] Using Top-Down DP (Memoization) through Better Approach 2] Using Bottom-Up DP (Tabulation)"
+      },
+      "new_primary": {
+        "slug": "dsa-interval-dp-learn-exact",
+        "title": "Matrix Chain Multiplication",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/matrix-chain-multiplication-dp-8/",
+        "boundary": "Better Approach 1] Using Top-Down DP (Memoization) through Better Approach 2] Using Bottom-Up DP (Tabulation)",
+        "instruction": "Learn interval/range DP through Matrix Chain Multiplication. Focus on dp[i][j] representing an interval, trying every split k, combining the two subintervals, and filling states in increasing interval length."
+      }
+    },
+    {
+      "topic": "dsa-dp-optimization",
+      "lesson_id": 215,
+      "old_primary": {
+        "slug": "dsa-dp-optimization-learn-exact",
+        "title": "Count Unique Paths in a Grid",
+        "url": "https://www.geeksforgeeks.org/dsa/count-possible-paths-top-left-bottom-right-nxm-matrix/",
+        "boundary": "Better Approach: Using DP through Expected Approach: Using Combinatorics"
+      },
+      "new_primary": {
+        "slug": "dsa-dp-optimization-learn-exact",
+        "title": "Count Unique Paths in a Grid",
+        "provider": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dsa/count-possible-paths-top-left-bottom-right-nxm-matrix/",
+        "boundary": "Better Approach: Using DP through Expected Approach: Using Combinatorics",
+        "instruction": "Focus on the space optimization idea: recognize when the current state depends only on the previous row/current left state, replace a full 2D table with a 1D array, and reason about the correct update order."
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "topic": "dsa-dp-mindset",
+      "reason": "NEEDS_BOUNDARY_VERIFICATION",
+      "detail": "Full duration for video 5dRGRueKU3M is not present in existing repository data."
+    }
+  ],
+  "tests": "223 passed, 1 warning in 320.67s",
+  "lint": "passed",
+  "build": "passed"
+}

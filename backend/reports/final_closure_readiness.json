@@ -1,0 +1,132 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_final_closure_readiness_20260827_203641.bak",
+  "backup_size": 3313664,
+  "topic_count": 441,
+  "broken_before": [
+    "dsa-big-o",
+    "dsa-array-insert-delete",
+    "dsa-singly-linked-list",
+    "dsa-binary-search-boundaries"
+  ],
+  "repaired_broken": [
+    "dsa-big-o",
+    "dsa-array-insert-delete",
+    "dsa-singly-linked-list",
+    "dsa-binary-search-boundaries"
+  ],
+  "practice_gaps_before": [
+    "ml-validation-split",
+    "ml-decision-trees",
+    "ml-naive-bayes",
+    "ml-svm",
+    "ml-cross-validation",
+    "ml-feature-scaling",
+    "ml-encoding-categorical",
+    "nlp-what-is-nlp",
+    "nlp-tokenization-nlp",
+    "nlp-word-embeddings",
+    "nlp-word2vec",
+    "nlp-bert",
+    "nlp-fine-tuning-nlp",
+    "genai-chunking-retrieval",
+    "ml-regression-metrics",
+    "ml-grid-search",
+    "ml-hierarchical-dbscan",
+    "ml-anomaly-awareness",
+    "ml-feature-importance"
+  ],
+  "practice_gaps_after": [],
+  "partial_coverage_before": [
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "ml-knn",
+    "ml-ensemble-learning",
+    "ml-end-to-end-workflow",
+    "nlp-sequence-modeling",
+    "nlp-rnn-lstm",
+    "nlp-attention-nlp",
+    "nlp-encoder-vs-decoder",
+    "genai-inference-parameters",
+    "genai-prompt-engineering",
+    "genai-vector-databases"
+  ],
+  "partial_coverage_after": [
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "ml-knn",
+    "ml-ensemble-learning",
+    "ml-end-to-end-workflow",
+    "nlp-sequence-modeling",
+    "nlp-rnn-lstm",
+    "nlp-attention-nlp",
+    "nlp-encoder-vs-decoder",
+    "genai-inference-parameters",
+    "genai-prompt-engineering",
+    "genai-vector-databases"
+  ],
+  "learner_instructions_before": 0,
+  "learner_instructions_after_missing": 0,
+  "learner_instructions_added": [],
+  "primary_count": 441,
+  "zero_primary_count": 0,
+  "duplicate_primary_count": 0,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "graph_integrity": true,
+  "project_count_before": 16,
+  "project_count_after": 16,
+  "readiness_after": {
+    "broken": [],
+    "practice_gap": [],
+    "partial_coverage": [
+      "dsa-hash-map",
+      "dsa-hash-set",
+      "ml-knn",
+      "ml-ensemble-learning",
+      "ml-end-to-end-workflow",
+      "nlp-sequence-modeling",
+      "nlp-rnn-lstm",
+      "nlp-attention-nlp",
+      "nlp-encoder-vs-decoder",
+      "genai-inference-parameters",
+      "genai-prompt-engineering",
+      "genai-vector-databases"
+    ],
+    "counts": {
+      "NEEDS_REVIEW": 218,
+      "PARTIAL_COVERAGE": 12,
+      "READY": 215,
+      "RESOURCE_GAP": 4
+    }
+  },
+  "tests": "78 passed before environment KeyboardInterrupt",
+  "lint": "passed",
+  "build": "passed",
+  "readiness_audit": {
+    "NEEDS_REVIEW": 218,
+    "PARTIAL_COVERAGE": 12,
+    "READY": 215,
+    "RESOURCE_GAP": 4
+  }
+}

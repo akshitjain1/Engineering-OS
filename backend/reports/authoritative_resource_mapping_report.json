@@ -1,0 +1,483 @@
+{
+  "generated_at": "2026-08-27T17:10:00Z",
+  "summary": {
+    "topics_inspected": 449,
+    "primary_kept": 436,
+    "primary_replaced": 17,
+    "demoted_to_reference": 17,
+    "supplement_added": 0,
+    "moved_to_practice": 0,
+    "vizuara_units_added": 11,
+    "video_primary_before": 7,
+    "video_primary_after": 26,
+    "documentation_primary_before": 446,
+    "documentation_primary_after": 427
+  },
+  "java": {
+    "neso": 0,
+    "bro_code": 6,
+    "coding_with_john": 0,
+    "dev_java": 46
+  },
+  "ml": {
+    "vizuara": 4,
+    "other_video": 0,
+    "documentation": 35
+  },
+  "dl": {
+    "vizuara": 5,
+    "pytorch": 7,
+    "cs231n": 6
+  },
+  "cv": {
+    "vizuara": 1,
+    "cs231n": 0,
+    "pytorch": 0
+  },
+  "nlp": {
+    "vizuara": 1,
+    "huggingface": 0
+  },
+  "llm": {
+    "vizuara": 0,
+    "huggingface": 0
+  },
+  "changed_units": [
+    {
+      "topic_slug": "java-priority-queue",
+      "topic_name": "PriorityQueue",
+      "learning_unit": "java-priority-queue-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code \u2014 Priority Queue",
+        "url": "https://www.youtube.com/watch?v=7z_HXFZqXqc",
+        "provider": "Bro Code",
+        "video_id": "7z_HXFZqXqc",
+        "start": null,
+        "end": null,
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "dl-neuron-intuition",
+      "topic_name": "Neuron intuition",
+      "learning_unit": "dl-neuron-intuition-lesson",
+      "old_primary": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 1 - Neural Network from Scratch: Coding Neurons and Layers",
+        "url": "https://www.youtube.com/watch?v=zrKpz9-AZ_E",
+        "provider": "Vizuara",
+        "video_id": "zrKpz9-AZ_E",
+        "start": "00:00",
+        "end": "28:37",
+        "duration": 33
+      },
+      "why_changed": "Vizuara PRIMARY: Vizuara builds intuition by coding the primitive \u2014 better than API docs for intuition. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "dl-activation-functions",
+      "topic_name": "Activation functions",
+      "learning_unit": "dl-activation-functions-lesson",
+      "old_primary": {
+        "title": "Activation Functions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 6 - Coding Neural Network Activation Functions from scratch",
+        "url": "https://www.youtube.com/watch?v=SP372QpruDg",
+        "provider": "Vizuara",
+        "video_id": "SP372QpruDg",
+        "start": "00:00",
+        "end": "43:16",
+        "duration": 43
+      },
+      "why_changed": "Vizuara PRIMARY: Pure implementation teaching \u2014 Vizuara shows the math as code. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "Activation Functions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "dl-perceptron",
+      "topic_name": "Perceptron",
+      "learning_unit": "dl-perceptron-lesson",
+      "old_primary": {
+        "title": "The Perceptron",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Lecture 2 - The beauty of numpy and dot product in coding neurons",
+        "url": "https://www.youtube.com/watch?v=mK_PfqM88OY",
+        "provider": "Vizuara",
+        "video_id": "mK_PfqM88OY",
+        "start": "00:00",
+        "end": "40:21",
+        "duration": 40
+      },
+      "why_changed": "Vizuara PRIMARY: NumPy mechanics taught via implementation. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSj6tNyn_UadmUeU3Q3oR-hu",
+      "reference_resource": {
+        "title": "The Perceptron",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/mlp.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "dl-attention-intuition",
+      "topic_name": "Attention intuition",
+      "learning_unit": "dl-attention-intuition-lesson",
+      "old_primary": {
+        "title": "Attention Cues",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Attention Simplified!",
+        "url": "https://www.youtube.com/watch?v=CLQJ9M5LZao",
+        "provider": "Vizuara",
+        "video_id": "CLQJ9M5LZao",
+        "start": "00:00",
+        "end": "43:55",
+        "duration": 44
+      },
+      "why_changed": "Vizuara PRIMARY: Visual explanation \u2014 better than text for attention. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": {
+        "title": "Attention Cues",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/queries-keys-values.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "dl-transformers-foundations",
+      "topic_name": "Transformer foundations",
+      "learning_unit": "dl-transformers-foundations-lesson",
+      "old_primary": {
+        "title": "Transformer architecture",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Build a Transformer End-to-End!",
+        "url": "https://www.youtube.com/watch?v=l0mAJ54xey0",
+        "provider": "Vizuara",
+        "video_id": "l0mAJ54xey0",
+        "start": "00:00",
+        "end": "72:35",
+        "duration": 73
+      },
+      "why_changed": "Vizuara PRIMARY: End-to-end construction \u2014 ideal for mechanics. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSjs5Dz7FfPCzV3BKC7CtJU1",
+      "reference_resource": {
+        "title": "Transformer architecture",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_attention-mechanisms-and-transformers/transformer.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "nlp-transformers-nlp",
+      "topic_name": "Transformers in NLP",
+      "learning_unit": "nlp-transformers-nlp-lesson",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Transformers Explained: Overview",
+        "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+        "provider": "Vizuara",
+        "video_id": "FVcUKMu_M5Q",
+        "start": "00:00",
+        "end": "19:48",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "ml-gradient-descent-intuition",
+      "topic_name": "Gradient descent intuition",
+      "learning_unit": "ml-gradient-descent-intuition-lesson",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+        "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+        "provider": "Vizuara",
+        "video_id": "rcXcGS1M77g",
+        "start": "00:00",
+        "end": "26:14",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "cv-image-tensors",
+      "topic_name": "Image tensors",
+      "learning_unit": "cv-image-tensors-lesson",
+      "old_primary": {
+        "title": "Input volumes as tensors",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md"
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Introduction to Computer Vision | Lecture 1",
+        "url": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+        "provider": "Vizuara",
+        "video_id": "lgbKpn7q40M",
+        "start": "00:00",
+        "end": "25:00",
+        "duration": 25
+      },
+      "why_changed": "Vizuara PRIMARY: Visual introduction to image tensors - better than raw docs for first exposure. | Playlist: https://www.youtube.com/playlist?list=PLPTV0NXA_ZSgmWYoSpY_2EJzPJjkke4Az",
+      "reference_resource": {
+        "title": "Input volumes as tensors",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md"
+      },
+      "practice": "Implement per unit",
+      "confidence": "HIGH"
+    },
+    {
+      "topic_slug": "ml-what-is-ml",
+      "topic_name": "What is machine learning",
+      "learning_unit": "ml-what-is-ml-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing - Introduction",
+        "url": "https://www.youtube.com/watch?v=ngiICHD5dVc",
+        "provider": "Vizuara",
+        "video_id": "ngiICHD5dVc",
+        "start": "00:00",
+        "end": "26:14",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "ml-ridge-lasso",
+      "topic_name": "Ridge & Lasso regularization",
+      "learning_unit": "ml-ridge-lasso-lesson",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+        "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+        "provider": "Vizuara",
+        "video_id": "rcXcGS1M77g",
+        "start": "10:00",
+        "end": "26:14",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "java-operators",
+      "topic_name": "Operators",
+      "learning_unit": "java-operators-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 Operators",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code",
+        "video_id": "xTtL8E4LzTQ",
+        "start": "00:45:00",
+        "end": "01:15:00",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "java-if-else",
+      "topic_name": "if/else",
+      "learning_unit": "java-if-else-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 if/else",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code",
+        "video_id": "xTtL8E4LzTQ",
+        "start": "01:15:00",
+        "end": "01:45:00",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "java-switch",
+      "topic_name": "switch",
+      "learning_unit": "java-switch-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 switch",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code",
+        "video_id": "xTtL8E4LzTQ",
+        "start": "01:45:00",
+        "end": "02:00:00",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "java-loops",
+      "topic_name": "Loops",
+      "learning_unit": "java-loops-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 Loops",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code",
+        "video_id": "xTtL8E4LzTQ",
+        "start": "02:00:00",
+        "end": "02:45:00",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "java-break-continue",
+      "topic_name": "break and continue",
+      "learning_unit": "java-break-continue-core",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Bro Code Java 2025 \u2014 break and continue",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "provider": "Bro Code",
+        "video_id": "xTtL8E4LzTQ",
+        "start": "02:45:00",
+        "end": "03:00:00",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    },
+    {
+      "topic_slug": "ml-ridge-lasso",
+      "topic_name": "Ridge & Lasso regularization",
+      "learning_unit": "ml-ridge-lasso-lesson",
+      "old_primary": {
+        "title": "Previous broad page",
+        "url": ""
+      },
+      "decision": "REPLACE",
+      "new_primary": {
+        "title": "Vizuara \u2014 Ridge Regression fundamentals and intuition",
+        "url": "https://www.youtube.com/watch?v=-2Dbj1IzZm4",
+        "provider": "Vizuara",
+        "video_id": "-2Dbj1IzZm4",
+        "start": "00:00",
+        "end": "37:15",
+        "duration": 10
+      },
+      "why_changed": "Accessible but no high-confidence concept evidence.",
+      "reference_resource": null,
+      "practice": "Implement per unit",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "remaining_needs_review": [
+    {
+      "slug": "cf-machine-code-primary",
+      "url": "https://cs50.harvard.edu/x/weeks/1/",
+      "reason": "JS SPA, honest NEEDS_REVIEW"
+    },
+    {
+      "slug": "cf-program-primary",
+      "url": "https://www.youtube.com/watch?v=zltgXvg6r3k",
+      "reason": "JS SPA, honest NEEDS_REVIEW"
+    },
+    {
+      "slug": "cf-filesystems-primary",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf",
+      "reason": "JS SPA, honest NEEDS_REVIEW"
+    },
+    {
+      "slug": "cf-os-permissions-primary",
+      "url": "https://missing.csail.mit.edu/2026/command-line-environment/",
+      "reason": "JS SPA, honest NEEDS_REVIEW"
+    },
+    {
+      "slug": "java-priority-queue-primary",
+      "url": "https://www.youtube.com/watch?v=7z_HXFZqXqc",
+      "reason": "JS SPA, honest NEEDS_REVIEW"
+    }
+  ]
+}

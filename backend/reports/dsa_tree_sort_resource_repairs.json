@@ -1,0 +1,375 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_dsa_tree_sort_resource_repairs_20260827_191437.bak",
+  "backup_size": 3293184,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "updated": 23,
+  "changed": [
+    {
+      "topic_slug": "dsa-tree-terminology",
+      "resource_slug": "dsa-tree-terminology-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-terminology-learn-exact",
+        "title": "Learn: Tree terminology",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Introduction to Binary Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-binary-tree/",
+        "boundary": "Root; Node; Edge; Leaf; Internal node; Subtree; Path; Depth/level; Height"
+      }
+    },
+    {
+      "topic_slug": "dsa-binary-trees",
+      "resource_slug": "dsa-binary-trees-learn-exact",
+      "old_primary": {
+        "slug": "dsa-binary-trees-learn-exact",
+        "title": "Learn: Binary trees",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Binary tree"
+      },
+      "new_primary": {
+        "title": "GFG — Introduction to Binary Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-binary-tree/",
+        "boundary": "Introduction; Structural definition of a binary tree"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-search",
+      "resource_slug": "dsa-bst-search-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bst-search-learn-exact",
+        "title": "Learn: BST search",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Searching in Binary Search Tree (BST)",
+        "url": "https://www.geeksforgeeks.org/dsa/binary-search-tree-set-1-search-and-insertion/",
+        "boundary": "Search explanation; Search procedure"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-insert",
+      "resource_slug": "dsa-bst-insert-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bst-insert-learn-exact",
+        "title": "Learn: BST insertion",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Insertion in Binary Search Tree (BST)",
+        "url": "https://www.geeksforgeeks.org/dsa/insertion-in-binary-search-tree/",
+        "boundary": "Recursive insertion; Iterative insertion"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-delete",
+      "resource_slug": "dsa-bst-delete-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bst-delete-learn-exact",
+        "title": "Learn: BST deletion",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Binary Search Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/binary-search-tree-data-structure/",
+        "boundary": "Deletion: leaf; one child; two children"
+      }
+    },
+    {
+      "topic_slug": "dsa-recursive-trees",
+      "resource_slug": "dsa-recursive-trees-learn-exact",
+      "old_primary": {
+        "slug": "dsa-recursive-trees-learn-exact",
+        "title": "Learn: Recursive tree problems",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — DFS Traversal of a Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/dfs-traversal-of-a-tree-using-recursion/",
+        "boundary": "Recursive DFS/tree traversal"
+      }
+    },
+    {
+      "topic_slug": "dsa-tree-dfs",
+      "resource_slug": "dsa-tree-dfs-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-dfs-learn-exact",
+        "title": "Learn: DFS traversals",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Tree Traversal Techniques",
+        "url": "https://www.geeksforgeeks.org/dsa/tree-traversals-inorder-preorder-and-postorder/",
+        "boundary": "Inorder; Preorder; Postorder; Traversal logic"
+      }
+    },
+    {
+      "topic_slug": "dsa-tree-bfs",
+      "resource_slug": "dsa-tree-bfs-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-bfs-learn-exact",
+        "title": "Learn: BFS / level order",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Level Order Traversal (Breadth First Search) of Binary Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/level-order-tree-traversal/",
+        "boundary": "Queue-based level-order traversal"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-validate",
+      "resource_slug": "dsa-bst-validate-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bst-validate-learn-exact",
+        "title": "NeetCode — Validate Binary Search Tree",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Check if a Binary Tree is BST or not",
+        "url": "https://www.geeksforgeeks.org/dsa/a-program-to-check-if-a-binary-tree-is-bst-or-not/",
+        "boundary": "BST validity definition; Range validation; Inorder validation"
+      }
+    },
+    {
+      "topic_slug": "dsa-tree-height",
+      "resource_slug": "dsa-tree-height-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-height-learn-exact",
+        "title": "Learn: Height and depth",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Maximum Depth or Height of a Binary Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/find-the-maximum-depth-or-height-of-a-tree/",
+        "boundary": "Recursive definition; Recurrence"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-ordered-properties",
+      "resource_slug": "dsa-bst-ordered-properties-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bst-ordered-properties-learn-exact",
+        "title": "Learn: Ordered properties",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Introduction to Binary Search Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-binary-search-tree/",
+        "boundary": "Ordering invariant; Balanced-vs-skewed complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-tree-paths",
+      "resource_slug": "dsa-tree-paths-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-paths-learn-exact",
+        "title": "Learn: Path problems",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Print Root-to-Leaf Paths in a Binary Tree",
+        "url": "https://www.geeksforgeeks.org/dsa/given-a-binary-tree-print-all-root-to-leaf-paths/",
+        "boundary": "Recursion; Backtracking"
+      }
+    },
+    {
+      "topic_slug": "dsa-tree-construction",
+      "resource_slug": "dsa-tree-construction-learn-exact",
+      "old_primary": {
+        "slug": "dsa-tree-construction-learn-exact",
+        "title": "Learn: Construction",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Construct a Binary Tree from Postorder and Inorder",
+        "url": "https://www.geeksforgeeks.org/dsa/construct-a-binary-tree-from-postorder-and-inorder/",
+        "boundary": "Construction explanation; Recursive decomposition"
+      }
+    },
+    {
+      "topic_slug": "dsa-segment-tree-concept",
+      "resource_slug": "dsa-segment-tree-concept-learn-exact",
+      "old_primary": {
+        "slug": "dsa-segment-tree-concept-learn-exact",
+        "title": "Learn: Segment tree concept",
+        "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/",
+        "section": "Trees"
+      },
+      "new_primary": {
+        "title": "GFG — Introduction to Segment Trees",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-segment-trees-2/",
+        "boundary": "Definition; Range-query intuition; Tree structure; Construction; Merge operation"
+      }
+    },
+    {
+      "topic_slug": "dsa-bubble-sort",
+      "resource_slug": "dsa-bubble-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-bubble-sort-learn-exact",
+        "title": "Learn: Bubble sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Bubble Sort Algorithm",
+        "url": "https://www.geeksforgeeks.org/dsa/bubble-sort-algorithm/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-selection-sort",
+      "resource_slug": "dsa-selection-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-selection-sort-learn-exact",
+        "title": "Learn: Selection sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Selection Sort Algorithm",
+        "url": "https://www.geeksforgeeks.org/dsa/selection-sort-algorithm-2/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-insertion-sort",
+      "resource_slug": "dsa-insertion-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-insertion-sort-learn-exact",
+        "title": "Learn: Insertion sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Insertion Sort Algorithm",
+        "url": "https://www.geeksforgeeks.org/dsa/insertion-sort-algorithm/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-merge-sort",
+      "resource_slug": "dsa-merge-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-merge-sort-learn-exact",
+        "title": "Learn: Merge sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Merge Sort",
+        "url": "https://www.geeksforgeeks.org/dsa/merge-sort/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-quick-sort",
+      "resource_slug": "dsa-quick-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-quick-sort-learn-exact",
+        "title": "Learn: Quick sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Quick Sort Algorithm",
+        "url": "https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-heap-sort",
+      "resource_slug": "dsa-heap-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-heap-sort-learn-exact",
+        "title": "Learn: Heap sort",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Heap Sort",
+        "url": "https://www.geeksforgeeks.org/dsa/heap-sort/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-topological-sort",
+      "resource_slug": "dsa-topological-sort-learn-exact",
+      "old_primary": {
+        "slug": "dsa-topological-sort-learn-exact",
+        "title": "Learn: Topological sorting",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Topological Sorting",
+        "url": "https://www.geeksforgeeks.org/dsa/topological-sorting-indegree-based-solution/",
+        "boundary": "Full algorithm article"
+      }
+    },
+    {
+      "topic_slug": "dsa-sort-stability",
+      "resource_slug": "dsa-sort-stability-learn-exact",
+      "old_primary": {
+        "slug": "dsa-sort-stability-learn-exact",
+        "title": "Learn: Stability",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Analysis of Different Sorting Techniques",
+        "url": "https://www.geeksforgeeks.org/dsa/analysis-of-different-sorting-techniques/",
+        "boundary": "Stability section/table"
+      }
+    },
+    {
+      "topic_slug": "dsa-sort-complexity",
+      "resource_slug": "dsa-sort-complexity-learn-exact",
+      "old_primary": {
+        "slug": "dsa-sort-complexity-learn-exact",
+        "title": "Learn: Complexity comparison",
+        "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+        "section": "Sorting"
+      },
+      "new_primary": {
+        "title": "GFG — Introduction to Sorting Algorithm",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-sorting-algorithm/",
+        "boundary": "Complexity comparison section/table"
+      }
+    }
+  ]
+}

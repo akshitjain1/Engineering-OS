@@ -1,12 +1,12 @@
 # External Resource Review — 441 Learner-Facing Units
 
-Generated: 2026-08-26T12:28:42.745344+00:00
+Generated: 2026-08-26T13:34:45.170628+00:00
 
 Validation: {
   "topics_exported": 441,
   "learning_units_exported": 441,
   "primary_resources_exported": 441,
-  "supplementary_resources_exported": 300,
+  "supplementary_resources_exported": 309,
   "practice_units_exported": 453,
   "projects_exported": 16,
   "missing_primary_urls": 0,
@@ -17,9 +17,9 @@ Validation: {
 }
 
 # External Resource Review — Learner-Facing Curriculum
-Generated: 2026-08-26T12:28:42.551403+00:00
+Generated: 2026-08-26T13:34:44.860318+00:00
 
-Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects: 16
+Topics: 449 | Lessons: 449 | Resources (visible): 755 | Practice: 461 | Projects: 16
 
 ## Bits and bytes
 - Domain: CS Foundations | Topic: `cf-bits-and-bytes` | Unit: `cf-bits-and-bytes-core` | Order: 0 | Track: CORE | Depth: WORKING_KNOWLEDGE
@@ -441,32 +441,37 @@ Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects
 ## Operators
 - Domain: Java | Topic: `java-operators` | Unit: `java-operators-core` | Order: 0 | Track: CORE | Depth: STRONG
 - Objective: Predict arithmetic, comparison, logical, assignment, increment, ternary, and short-circuit behavior.
-- PRIMARY: Using operators (Dev.java) — https://dev.java/learn/language-basics/using-operators/ [ARTICLE_SECTION: using-operators → using-operators] 14m VERIFIED_COVERAGE
+- PRIMARY: Bro Code Java 2025 — Operators (Bro Code) — https://www.youtube.com/watch?v=xTtL8E4LzTQ [VIDEO_TIMESTAMP: 00:45:00 → 01:15:00] 30m VERIFIED_COVERAGE
+  - SUPP: Using operators (Dev.java) — https://dev.java/learn/language-basics/using-operators/
   - SUPP: Helsinki Part 1 — Calculating with numbers (University of Helsinki) — https://java-programming.mooc.fi/part-1/5-calculating/
   - SUPP: Wrapping up the Java operators (Dev.java) — https://dev.java/learn/language-basics/all-operators/
 - Practice: SELF_REFLECTION x2 → LOCAL_IDE
 ## if/else
 - Domain: Java | Topic: `java-if-else` | Unit: `java-if-else-core` | Order: 0 | Track: CORE | Depth: STRONG
 - Objective: Branch with if/else, including nested conditions, without unreadable ladders.
-- PRIMARY: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/ [ARTICLE_SECTION: Control flow statements → Control flow statements] 15m VERIFIED_COVERAGE
+- PRIMARY: Bro Code Java 2025 — if/else (Bro Code) — https://www.youtube.com/watch?v=xTtL8E4LzTQ [VIDEO_TIMESTAMP: 01:15:00 → 01:45:00] 30m VERIFIED_COVERAGE
+  - SUPP: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/
 - Practice: SELF_REFLECTION x3 → LOCAL_IDE
 ## switch
 - Domain: Java | Topic: `java-switch` | Unit: `java-switch-core` | Order: 1 | Track: CORE | Depth: STRONG
 - Objective: Use switch statements and modern switch expressions; know when if/else is clearer.
-- PRIMARY: Branching with switch statements (Dev.java) — https://dev.java/learn/language-basics/switch-statement/ [ARTICLE_SECTION: switch-statement → switch-statement] 10m VERIFIED_COVERAGE
+- PRIMARY: Bro Code Java 2025 — switch (Bro Code) — https://www.youtube.com/watch?v=xTtL8E4LzTQ [VIDEO_TIMESTAMP: 01:45:00 → 02:00:00] 15m VERIFIED_COVERAGE
+  - SUPP: Branching with switch statements (Dev.java) — https://dev.java/learn/language-basics/switch-statement/
   - SUPP: Branching with switch expressions (Dev.java) — https://dev.java/learn/language-basics/switch-expression/
   - SUPP: Helsinki Part 1 — Conditional statements (University of Helsinki) — https://java-programming.mooc.fi/part-1/6-conditional-statements/
 - Practice: SELF_REFLECTION x2 → LOCAL_IDE
 ## Loops
 - Domain: Java | Topic: `java-loops` | Unit: `java-loops-core` | Order: 2 | Track: CORE | Depth: STRONG
 - Objective: Choose for, while, and do-while; write validation loops and controlled iteration.
-- PRIMARY: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/ [ARTICLE_SECTION: Control flow statements → Control flow statements] 15m VERIFIED_COVERAGE
+- PRIMARY: Bro Code Java 2025 — Loops (Bro Code) — https://www.youtube.com/watch?v=xTtL8E4LzTQ [VIDEO_TIMESTAMP: 02:00:00 → 02:45:00] 45m VERIFIED_COVERAGE
+  - SUPP: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/
   - SUPP: Helsinki Part 2 — More loops (University of Helsinki) — https://java-programming.mooc.fi/part-2/3-more-loops/
 - Practice: SELF_REFLECTION x3 → LOCAL_IDE
 ## break and continue
 - Domain: Java | Topic: `java-break-continue` | Unit: `java-break-continue-core` | Order: 3 | Track: CORE | Depth: STRONG
 - Objective: Use break and continue deliberately; avoid using them to hide messy structure.
-- PRIMARY: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/ [ARTICLE_SECTION: controlling-flow → controlling-flow] 15m VERIFIED_COVERAGE
+- PRIMARY: Bro Code Java 2025 — break and continue (Bro Code) — https://www.youtube.com/watch?v=xTtL8E4LzTQ [VIDEO_TIMESTAMP: 02:45:00 → 03:00:00] 15m VERIFIED_COVERAGE
+  - SUPP: Control flow statements (Dev.java) — https://dev.java/learn/language-basics/controlling-flow/
   - SUPP: Helsinki Part 2 — More loops (University of Helsinki) — https://java-programming.mooc.fi/part-2/3-more-loops/
 - Practice: SELF_REFLECTION x2 → LOCAL_IDE
 ## Method basics
@@ -1567,7 +1572,8 @@ Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects
 ## What is machine learning
 - Domain: Machine Learning | Topic: `ml-what-is-ml` | Unit: `ml-what-is-ml-core` | Order: 0 | Track: CORE | Depth: WORKING_KNOWLEDGE
 - Objective: Distinguish supervised/unsupervised learning and typical tasks.
-- PRIMARY: Getting Started — scikit-learn (scikit-learn) — https://scikit-learn.org/stable/getting_started.html [ARTICLE_SECTION: Getting Started → Getting Started] 14m VERIFIED_COVERAGE
+- PRIMARY: ML Teach by Doing - Introduction (Vizuara) — https://www.youtube.com/watch?v=ngiICHD5dVc [VIDEO_TIMESTAMP: 00:00 → 26:14] 26m VERIFIED_COVERAGE
+  - SUPP: Getting Started — scikit-learn (scikit-learn) — https://scikit-learn.org/stable/getting_started.html
 - Practice: ACTION_CHECKLIST x2 → LOCAL_IDE
 ## Features & labels
 - Domain: Machine Learning | Topic: `ml-features-labels` | Unit: `ml-features-labels-core` | Order: 1 | Track: CORE | Depth: WORKING_KNOWLEDGE
@@ -1693,7 +1699,8 @@ Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects
 ## Ridge & Lasso regularization
 - Domain: Machine Learning | Topic: `ml-ridge-lasso` | Unit: `ml-ridge-lasso-lesson` | Order: 25 | Track: CORE | Depth: MECHANICS
 - Objective: Constrain linear weights with L2/L1 penalties; pick via validation
-- PRIMARY: Linear Models — Ridge/Lasso (scikit-learn) — https://scikit-learn.org/stable/modules/linear_model.html [ARTICLE_SECTION: above; content inspection pending → above; content inspection pending] 30m VERIFIED_COVERAGE
+- PRIMARY: ML Teach by Doing Day 6: Linear Classifiers Part 1 (Vizuara) — https://www.youtube.com/watch?v=rcXcGS1M77g [VIDEO_TIMESTAMP: 10:00 → 26:14] 16m VERIFIED_COVERAGE
+  - SUPP: Linear Models — Ridge/Lasso (scikit-learn) — https://scikit-learn.org/stable/modules/linear_model.html
 - Practice: TRACE x1 → SELF_CHECK
 ## ROC curves & AUC
 - Domain: Machine Learning | Topic: `ml-roc-auc` | Unit: `ml-roc-auc-lesson` | Order: 26 | Track: CORE | Depth: MECHANICS
@@ -2333,7 +2340,8 @@ Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects
 ## Image tensors
 - Domain: Computer Vision | Topic: `cv-image-tensors` | Unit: `cv-image-tensors-lesson` | Order: 4 | Track: CORE | Depth: MECHANICS
 - Objective: Batch tensors for networks; normalize ranges and dtype traps
-- PRIMARY: Input volumes as tensors (Stanford CS231n) — https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md [FULL_SINGLE_PAGE: FULL_SINGLE_PAGE → FULL_SINGLE_PAGE] 20m VERIFIED_COVERAGE
+- PRIMARY: Introduction to Computer Vision | Lecture 1 (Vizuara) — https://www.youtube.com/watch?v=lgbKpn7q40M [VIDEO_TIMESTAMP: 00:00 → 25:00] 25m VERIFIED_COVERAGE
+  - SUPP: Input volumes as tensors (Stanford CS231n) — https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md
 - Practice: TRACE x1 → SELF_CHECK
 ## Image transformations
 - Domain: Computer Vision | Topic: `cv-transformations` | Unit: `cv-transformations-lesson` | Order: 5 | Track: CORE | Depth: MECHANICS
@@ -2358,7 +2366,8 @@ Topics: 449 | Lessons: 449 | Resources (visible): 741 | Practice: 461 | Projects
 ## Convolution for images
 - Domain: Computer Vision | Topic: `cv-convolution-in-cv` | Unit: `cv-convolution-in-cv-lesson` | Order: 9 | Track: CORE | Depth: MECHANICS
 - Objective: Reuse DL conv mechanics on real image grids; stride/padding effects visually
-- PRIMARY: Convolutional layers (Stanford CS231n) — https://cs231n.github.io/convolutional-networks/ [FULL_SINGLE_PAGE: FULL_SINGLE_PAGE → FULL_SINGLE_PAGE] 25m VERIFIED_COVERAGE
+- PRIMARY: U-Net Evolution and Modern Applications (Vizuara) — https://www.youtube.com/watch?v=9KvngtchNww [VIDEO_TIMESTAMP: 00:00 → 20:00] 20m VERIFIED_COVERAGE
+  - SUPP: Convolutional layers (Stanford CS231n) — https://cs231n.github.io/convolutional-networks/
 - Practice: TRACE x1 → SELF_CHECK
 ## Image classification workflow
 - Domain: Computer Vision | Topic: `cv-classification-workflow` | Unit: `cv-classification-workflow-lesson` | Order: 10 | Track: CORE | Depth: APPLICATION

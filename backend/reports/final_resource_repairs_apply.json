@@ -1,0 +1,1146 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_final_resource_repairs_20260826_221836.bak",
+  "updated": 67,
+  "missing": [],
+  "changed": [
+    {
+      "topic_slug": "cf-alu",
+      "before": {
+        "title": "GFG — Introduction of ALU and Data Path",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/introduction-of-alu-and-data-path/",
+        "provider": "GeeksforGeeks",
+        "section": "ALU; Arithmetic and logical operations",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "GFG — Arithmetic Logic Unit (ALU)",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/introduction-of-alu-and-data-path/",
+        "provider": "GeeksforGeeks",
+        "section": "Arithmetic Logic Unit; Functions and Operations of ALU"
+      }
+    },
+    {
+      "topic_slug": "cf-build-system",
+      "before": {
+        "title": "GFG — Build Systems in Software Engineering",
+        "url": "https://www.geeksforgeeks.org/build-systems-in-software-engineering/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Makefile Tutorial — Build Automation",
+        "url": "https://makefiletutorial.com/",
+        "provider": "Makefile Tutorial",
+        "section": "What is a Makefile?; Basic Makefile; Build Targets and Dependencies"
+      }
+    },
+    {
+      "topic_slug": "cf-debugger",
+      "before": {
+        "title": "Visual Studio Code — Debug code with VS Code",
+        "url": "https://code.visualstudio.com/docs/debugtest/debugging",
+        "provider": "Microsoft",
+        "section": "Debugger user interface; Start a debugging session; Debug actions; Breakpoints; Data inspection",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Visual Studio Code — Debugging",
+        "url": "https://code.visualstudio.com/docs/debugtest/debugging",
+        "provider": "Microsoft",
+        "section": "Debugger user interface; Start a debugging session; Debug actions; Breakpoints; Data inspection"
+      }
+    },
+    {
+      "topic_slug": "cf-dev-package-manager",
+      "before": {
+        "title": "MIT Missing Semester — Packaging and Shipping Code",
+        "url": "https://missing.csail.mit.edu/2026/shipping-code/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Dependencies & Environments",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "MIT Missing Semester — Packaging and Shipping Code",
+        "url": "https://missing.csail.mit.edu/2026/shipping-code/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Dependencies & Environments"
+      }
+    },
+    {
+      "topic_slug": "cf-dry-runs",
+      "before": {
+        "title": "GFG — Dry Run in Software Engineering",
+        "url": "https://www.geeksforgeeks.org/dry-run-in-software-engineering/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "FutureLogic — Trace Tables",
+        "url": "https://futurelogiceducation.com/knowledge-library/topic-7-algorithms/7.8-trace-tables.html",
+        "provider": "FutureLogic",
+        "section": "Trace Tables Explained Simply; Big Idea"
+      }
+    },
+    {
+      "topic_slug": "cf-edge-cases",
+      "before": {
+        "title": "GFG — Edge Cases in Software Testing",
+        "url": "https://www.geeksforgeeks.org/edge-cases-in-software-engineering/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "CMU 15-122 — General Debugging Practices",
+        "url": "https://www.cs.cmu.edu/~15122/handouts/gts/c0debugging.pdf",
+        "provider": "Carnegie Mellon University",
+        "section": "Test edge cases"
+      }
+    },
+    {
+      "topic_slug": "cf-filesystems",
+      "before": {
+        "title": "OSTEP — Files and Directories",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf",
+        "provider": "OSTEP",
+        "section": "Files; Directories; Directory Trees; File System Interface",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "OSTEP — Files and Directories",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf",
+        "provider": "OSTEP",
+        "section": "Files; Directories; Directory Trees; File System Interface"
+      }
+    },
+    {
+      "topic_slug": "cf-formatter",
+      "before": {
+        "title": "GFG — Code Formatting in Software Engineering",
+        "url": "https://www.geeksforgeeks.org/code-formatting-in-software-engineering/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "MIT Missing Semester — Code Quality",
+        "url": "https://missing.csail.mit.edu/2026/code-quality/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Formatting"
+      }
+    },
+    {
+      "topic_slug": "cf-ide",
+      "before": {
+        "title": "GFG — Introduction to Integrated Development Environment",
+        "url": "https://www.geeksforgeeks.org/introduction-to-integrated-development-environment/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Visual Studio Code — Get Started",
+        "url": "https://code.visualstudio.com/docs/editing/getting-started",
+        "provider": "Microsoft",
+        "section": "Open a folder in VS Code; Explore the user interface; Access the terminal; Use source control; Run and debug your code"
+      }
+    },
+    {
+      "topic_slug": "cf-instruction-execution",
+      "before": {
+        "title": "GFG — Different Instruction Cycles",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/different-instruction-cycles/",
+        "provider": "GeeksforGeeks",
+        "section": "Fetch, decode, execute cycles",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "The Fetch Decode Execute Cycle — Computer Science Lessons",
+        "url": "https://www.youtube.com/watch?v=ByllwN8q2ss",
+        "provider": "Computer Science Lessons",
+        "section": "CPU registers; CPU components; RAM; Fetch decode execute cycle"
+      }
+    },
+    {
+      "topic_slug": "cf-interpreter",
+      "before": {
+        "title": "GFG — Interpreter in Compiler Design",
+        "url": "https://www.geeksforgeeks.org/interpreter-in-compiler-design/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "The Fetch Decode Execute Cycle — Compilation and Interpretation segment",
+        "url": "https://www.youtube.com/watch?v=ByllwN8q2ss",
+        "provider": "Computer Science Lessons",
+        "section": "Compilation and interpretation"
+      }
+    },
+    {
+      "topic_slug": "cf-linter",
+      "before": {
+        "title": "GFG — Linting in Software Development",
+        "url": "https://www.geeksforgeeks.org/linting-in-software-development/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "MIT Missing Semester — Code Quality",
+        "url": "https://missing.csail.mit.edu/2026/code-quality/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Linting"
+      }
+    },
+    {
+      "topic_slug": "cf-machine-code",
+      "before": {
+        "title": "GFG — Machine Language",
+        "url": "https://www.geeksforgeeks.org/machine-language-in-computer-organization/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "CS50x 2026 — Week 1 C: source to machine code",
+        "url": "https://cs50.harvard.edu/x/weeks/1/",
+        "provider": "CS50x",
+        "section": "Source code; Machine code; Compiling"
+      }
+    },
+    {
+      "topic_slug": "cf-os-permissions",
+      "before": {
+        "title": "MIT Missing Semester — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/command-line-environment/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Users, Files, and Permissions",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "MIT Missing Semester — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/command-line-environment/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Users, Files, and Permissions"
+      }
+    },
+    {
+      "topic_slug": "cf-program",
+      "before": {
+        "title": "GFG — Program and its Types in Operating System",
+        "url": "https://www.geeksforgeeks.org/program-and-its-types-in-operating-system/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Instructions & Programs — Crash Course Computer Science #8",
+        "url": "https://www.youtube.com/watch?v=zltgXvg6r3k",
+        "provider": "CrashCourse",
+        "section": "Introduction to CPU and Instructions; Program Execution; Example Program Execution"
+      }
+    },
+    {
+      "topic_slug": "cf-space-complexity",
+      "before": {
+        "title": "Kunal Kushwaha — Time and Space Complexity",
+        "url": "https://www.youtube.com/watch?v=mV3wrLBbuuE",
+        "provider": "Kunal Kushwaha",
+        "section": "Space Complexity",
+        "role": "PRIMARY",
+        "resource_type": "youtube_video"
+      },
+      "after": {
+        "title": "Kunal Kushwaha — Time and Space Complexity",
+        "url": "https://www.youtube.com/watch?v=mV3wrLBbuuE",
+        "provider": "Kunal Kushwaha",
+        "section": "Space Complexity"
+      }
+    },
+    {
+      "topic_slug": "cf-storage",
+      "before": {
+        "title": "GFG — Storage Devices (persistent storage)",
+        "url": "https://www.geeksforgeeks.org/storage-devices/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Caltech CS122 — Storage Hierarchy",
+        "url": "https://courses.cms.caltech.edu/cs122/lectures-wi2018/CS122Lec01.pdf",
+        "provider": "Caltech CS122",
+        "section": "Storage hierarchy; Main memory; Secondary storage"
+      }
+    },
+    {
+      "topic_slug": "cf-system-calls",
+      "before": {
+        "title": "GFG — System Calls in Operating System",
+        "url": "https://www.geeksforgeeks.org/system-calls-in-operating-system/",
+        "provider": "GeeksforGeeks",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "MIT Missing Semester — Debugging and Profiling",
+        "url": "https://missing.csail.mit.edu/2026/debugging-profiling/",
+        "provider": "MIT Missing Semester 2026",
+        "section": "Debugging; journalctl; process/system interaction"
+      }
+    },
+    {
+      "topic_slug": "java-priority-queue",
+      "before": {
+        "title": "Stacks and queues",
+        "url": "https://dev.java/learn/api/collections-framework/stacks-queues/",
+        "provider": "Dev.java",
+        "section": "stacks-queues",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Bro Code — Priority Queue",
+        "url": "https://www.youtube.com/watch?v=7z_HXFZqXqc",
+        "provider": "Bro Code",
+        "section": null
+      }
+    },
+    {
+      "topic_slug": "db-sql-joins",
+      "before": {
+        "title": "SQLite: SQL JOINs",
+        "url": "https://www.sqlite.org/lang_select.html",
+        "provider": "SQLite",
+        "section": "lang_select.html",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "SQLite — SELECT and JOIN processing",
+        "url": "https://www.sqlite.org/lang_select.html",
+        "provider": "SQLite",
+        "section": "The SELECT core; JOIN clause; Join Operators"
+      }
+    },
+    {
+      "topic_slug": "db-sql-select",
+      "before": {
+        "title": "SQLite: SQL SELECT",
+        "url": "https://www.sqlite.org/lang_select.html",
+        "provider": "SQLite",
+        "section": "lang_select.html",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "SQLite — SELECT statement",
+        "url": "https://www.sqlite.org/lang_select.html",
+        "provider": "SQLite",
+        "section": "Simple SELECT; WHERE; ORDER BY; LIMIT; compound SELECT"
+      }
+    },
+    {
+      "topic_slug": "db-transactions",
+      "before": {
+        "title": "SQLite: Transactions",
+        "url": "https://www.sqlite.org/lang_transaction.html",
+        "provider": "SQLite",
+        "section": "lang_transaction.html",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "SQLite — Transactions",
+        "url": "https://www.sqlite.org/lang_transaction.html",
+        "provider": "SQLite",
+        "section": "2. Transactions; 2.1 Read transactions versus write transactions; 2.2 DEFERRED, IMMEDIATE, and EXCLUSIVE transactions"
+      }
+    },
+    {
+      "topic_slug": "devops-awareness",
+      "before": {
+        "title": "12-Factor: DevOps awareness",
+        "url": "https://12factor.net/",
+        "provider": "12-Factor",
+        "section": null,
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Microsoft Learn — Discover DevOps",
+        "url": "https://learn.microsoft.com/en-us/training/modules/discover-devops/",
+        "provider": "Microsoft Learn",
+        "section": "Introduction; What is DevOps?; Explore DevOps culture; Explore DevOps goals and benefits; Explore DevOps application lifecycle; Summary"
+      }
+    },
+    {
+      "topic_slug": "devops-path",
+      "before": {
+        "title": "12-Factor: DevOps learning path",
+        "url": "https://12factor.net/",
+        "provider": "12-Factor",
+        "section": "12-Factor: DevOps learning path",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Microsoft Learn — DevOps foundations: The core principles and practices",
+        "url": "https://learn.microsoft.com/en-us/training/paths/devops-foundations-core-principles-practices/",
+        "provider": "Microsoft Learn",
+        "section": "Modules in this learning path"
+      }
+    },
+    {
+      "topic_slug": "ops-linux-services",
+      "before": {
+        "title": "man7: Linux services basics",
+        "url": "https://man7.org/linux/man-pages/man1/systemctl.1.html",
+        "provider": "man7",
+        "section": "systemctl.1.html",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "systemctl(1) — systemd system and service manager",
+        "url": "https://www.man7.org/linux/man-pages/man1/systemctl.1.html",
+        "provider": "man7.org",
+        "section": "NAME; DESCRIPTION; COMMANDS; Unit Commands"
+      }
+    },
+    {
+      "topic_slug": "sys-queues",
+      "before": {
+        "title": "System Design Primer: Message queues",
+        "url": "https://github.com/donnemartin/system-design-primer#asynchronous-processing-with-message-queues",
+        "provider": "System Design Primer",
+        "section": "asynchronous-processing-with-message-queues",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "System Design Primer — Message Queues",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "provider": "System Design Primer",
+        "section": "Message queues; Asynchronous processing"
+      }
+    },
+    {
+      "topic_slug": "dsa-array-frequency-learn-exact",
+      "before": {
+        "title": "Learn: Frequency counting",
+        "url": "https://www.geeksforgeeks.org/dsa/counting-frequencies-of-array-elements/",
+        "provider": "GeeksforGeeks",
+        "section": "Frequency counting",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Valid Anagram",
+        "url": "https://neetcode.io/solutions/valid-anagram",
+        "provider": "NeetCode",
+        "section": "Hash Map; Hash Table (Using Array)"
+      }
+    },
+    {
+      "topic_slug": "dsa-array-patterns-learn-exact",
+      "before": {
+        "title": "Learn: Array patterns",
+        "url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/",
+        "provider": "GeeksforGeeks",
+        "section": "Array patterns / two pointers",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Product of Array Except Self",
+        "url": "https://neetcode.io/solutions/product-of-array-except-self",
+        "provider": "NeetCode",
+        "section": "Prefix and Suffix Products"
+      }
+    },
+    {
+      "topic_slug": "dsa-best-worst-average-learn-exact",
+      "before": {
+        "title": "Learn: Best, worst, average",
+        "url": "https://www.geeksforgeeks.org/dsa/worst-average-and-best-case-analysis-of-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Best/worst/average",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Best Time to Buy and Sell Stock",
+        "url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+        "provider": "NeetCode",
+        "section": "Brute Force; Two Pointers; Dynamic Programming; Time & Space Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-bst-validate-learn-exact",
+      "before": {
+        "title": "Learn: BST validation",
+        "url": "https://www.geeksforgeeks.org/dsa/a-program-to-check-if-a-binary-tree-is-bst-or-not/",
+        "provider": "GeeksforGeeks",
+        "section": "Validate BST",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Validate Binary Search Tree",
+        "url": "https://neetcode.io/solutions/validate-binary-search-tree",
+        "provider": "NeetCode",
+        "section": "DFS; Bounds; Common Pitfalls"
+      }
+    },
+    {
+      "topic_slug": "dsa-character-processing-learn-exact",
+      "before": {
+        "title": "Learn: Character processing",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Valid Anagram",
+        "url": "https://neetcode.io/solutions/valid-anagram",
+        "provider": "NeetCode",
+        "section": "Hash Map (Using Array); String"
+      }
+    },
+    {
+      "topic_slug": "dsa-combinations-learn-exact",
+      "before": {
+        "title": "Learn: Combinations",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Combinations",
+        "url": "https://neetcode.io/solutions/combinations",
+        "provider": "NeetCode",
+        "section": "Backtracking; Algorithm; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-connected-components-learn-exact",
+      "before": {
+        "title": "Learn: Connected components",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Number of Connected Components In An Undirected Graph",
+        "url": "https://neetcode.io/solutions/number-of-connected-components-in-an-undirected-graph",
+        "provider": "NeetCode",
+        "section": "DFS; BFS; Union Find; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-cycle-detection-learn-exact",
+      "before": {
+        "title": "Learn: Cycle detection",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Course Schedule",
+        "url": "https://neetcode.io/solutions/course-schedule",
+        "provider": "NeetCode",
+        "section": "Cycle Detection; Topological Sort"
+      }
+    },
+    {
+      "topic_slug": "dsa-dijkstra-learn-exact",
+      "before": {
+        "title": "Learn: Dijkstra",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Network Delay Time",
+        "url": "https://neetcode.io/solutions/network-delay-time",
+        "provider": "NeetCode",
+        "section": "Dijkstra's Algorithm; Min-Heap; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-dp-1d-learn-exact",
+      "before": {
+        "title": "Learn: 1D DP",
+        "url": "https://www.geeksforgeeks.org/dsa/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/",
+        "provider": "GeeksforGeeks",
+        "section": "1D DP",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Climbing Stairs",
+        "url": "https://neetcode.io/solutions/climbing-stairs",
+        "provider": "NeetCode",
+        "section": "Dynamic Programming; State transition; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-dp-2d-learn-exact",
+      "before": {
+        "title": "Learn: 2D DP",
+        "url": "https://www.geeksforgeeks.org/category/dsa/algorithm/dynamic-programming/",
+        "provider": "GeeksforGeeks",
+        "section": "2D DP overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Unique Paths",
+        "url": "https://neetcode.io/solutions/unique-paths",
+        "provider": "NeetCode",
+        "section": "2D Dynamic Programming; State transition"
+      }
+    },
+    {
+      "topic_slug": "dsa-fast-slow-learn-exact",
+      "before": {
+        "title": "Learn: Fast and slow pointers",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Linked List Cycle",
+        "url": "https://neetcode.io/solutions/linked-list-cycle",
+        "provider": "NeetCode",
+        "section": "Floyd's Algorithm; Fast and Slow Pointers"
+      }
+    },
+    {
+      "topic_slug": "dsa-first-last-occurrence-learn-exact",
+      "before": {
+        "title": "Learn: First and last occurrence",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Find First and Last Position of Element in Sorted Array",
+        "url": "https://neetcode.io/solutions/find-first-and-last-position-of-element-in-sorted-array",
+        "provider": "NeetCode",
+        "section": "Binary Search; Left boundary; Right boundary"
+      }
+    },
+    {
+      "topic_slug": "dsa-frequency-maps-learn-exact",
+      "before": {
+        "title": "Learn: Frequency maps",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Top K Frequent Elements",
+        "url": "https://neetcode.io/solutions/top-k-frequent-elements",
+        "provider": "NeetCode",
+        "section": "Hash Map; Frequency counting; Min-Heap; Bucket Sort"
+      }
+    },
+    {
+      "topic_slug": "dsa-interval-problems-learn-exact",
+      "before": {
+        "title": "Learn: Interval problems",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Merge Intervals",
+        "url": "https://neetcode.io/solutions/merge-intervals",
+        "provider": "NeetCode",
+        "section": "Sorting; Interval merging"
+      }
+    },
+    {
+      "topic_slug": "dsa-list-merge-learn-exact",
+      "before": {
+        "title": "Learn: Merge patterns",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Merge Two Sorted Linked Lists",
+        "url": "https://neetcode.io/solutions/merge-two-sorted-linked-lists",
+        "provider": "NeetCode",
+        "section": "Two-pointer linked-list merge"
+      }
+    },
+    {
+      "topic_slug": "dsa-list-operations-learn-exact",
+      "before": {
+        "title": "Learn: List operations",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "GeeksforGeeks — Linked List Data Structure",
+        "url": "https://www.geeksforgeeks.org/dsa/linked-list-data-structure/",
+        "provider": "GeeksforGeeks",
+        "section": "Introduction; Insertion; Deletion; Traversal"
+      }
+    },
+    {
+      "topic_slug": "dsa-list-reversal-learn-exact",
+      "before": {
+        "title": "Learn: Reversal",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Reverse Linked List",
+        "url": "https://neetcode.io/solutions/reverse-linked-list",
+        "provider": "NeetCode",
+        "section": "Iterative reversal; Recursive reversal; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-mst-learn-exact",
+      "before": {
+        "title": "Learn: MST",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Min Cost to Connect All Points",
+        "url": "https://neetcode.io/solutions/min-cost-to-connect-all-points",
+        "provider": "NeetCode",
+        "section": "Minimum Spanning Tree; Prim; Kruskal"
+      }
+    },
+    {
+      "topic_slug": "dsa-singly-linked-list-learn-exact",
+      "before": {
+        "title": "Learn: Singly linked list",
+        "url": "https://www.geeksforgeeks.org/dsa/what-is-linked-list/",
+        "provider": "GeeksforGeeks",
+        "section": "Singly linked list introduction",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "GeeksforGeeks — Linked List Data Structure",
+        "url": "https://www.geeksforgeeks.org/dsa/linked-list-data-structure/",
+        "provider": "GeeksforGeeks",
+        "section": "Introduction to Linked List; Node; Traversal"
+      }
+    },
+    {
+      "topic_slug": "dsa-subsets-learn-exact",
+      "before": {
+        "title": "Learn: Subsets",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Subsets",
+        "url": "https://neetcode.io/solutions/subsets",
+        "provider": "NeetCode",
+        "section": "Backtracking; Choose/Skip"
+      }
+    },
+    {
+      "topic_slug": "dsa-tabulation-learn-exact",
+      "before": {
+        "title": "Learn: Tabulation",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Coin Change",
+        "url": "https://neetcode.io/solutions/coin-change",
+        "provider": "NeetCode",
+        "section": "Dynamic Programming; Bottom-Up Tabulation"
+      }
+    },
+    {
+      "topic_slug": "dsa-top-k-learn-exact",
+      "before": {
+        "title": "Learn: Top-K",
+        "url": "https://www.geeksforgeeks.org/dsa/k-largestor-smallest-elements-in-an-array/",
+        "provider": "GeeksforGeeks",
+        "section": "Top-K / heap selection",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Top K Frequent Elements",
+        "url": "https://neetcode.io/solutions/top-k-frequent-elements",
+        "provider": "NeetCode",
+        "section": "Min-Heap; Bucket Sort; Complexity"
+      }
+    },
+    {
+      "topic_slug": "dsa-unweighted-shortest-learn-exact",
+      "before": {
+        "title": "Learn: Unweighted shortest paths",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Shortest Path in Binary Matrix",
+        "url": "https://neetcode.io/solutions/shortest-path-in-binary-matrix",
+        "provider": "NeetCode",
+        "section": "Breadth First Search; Unweighted Shortest Path"
+      }
+    },
+    {
+      "topic_slug": "dsa-window-fixed-learn-exact",
+      "before": {
+        "title": "Learn: Fixed window",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Sliding Window Maximum",
+        "url": "https://neetcode.io/solutions/sliding-window-maximum",
+        "provider": "NeetCode",
+        "section": "Fixed Window; Monotonic Queue"
+      }
+    },
+    {
+      "topic_slug": "dsa-window-frequency-learn-exact",
+      "before": {
+        "title": "Learn: Frequency window state",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Permutation in String",
+        "url": "https://neetcode.io/solutions/permutation-in-string",
+        "provider": "NeetCode",
+        "section": "Frequency Window; Hash Map/Array"
+      }
+    },
+    {
+      "topic_slug": "dsa-window-variable-learn-exact",
+      "before": {
+        "title": "Learn: Variable window",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Longest Substring Without Repeating Characters",
+        "url": "https://neetcode.io/solutions/longest-substring-without-repeating-characters",
+        "provider": "NeetCode",
+        "section": "Variable Window; Two Pointers"
+      }
+    },
+    {
+      "topic_slug": "dsa-advanced-dp-learn-exact",
+      "before": {
+        "title": "Learn: Advanced DP",
+        "url": "https://www.geeksforgeeks.org/dsa/bitmasking-and-dynamic-programming-set-1-count-ways-to-assign-unique-cap-to-every-person/",
+        "provider": "GeeksforGeeks",
+        "section": "Bitmask DP",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — Advanced Algorithms Course",
+        "url": "https://neetcode.io/courses/advanced-algorithms/0",
+        "provider": "NeetCode",
+        "section": "Dynamic Programming; Advanced algorithm patterns"
+      }
+    },
+    {
+      "topic_slug": "dsa-pattern-selection-learn-exact",
+      "before": {
+        "title": "Learn: Pattern selection",
+        "url": "https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/",
+        "provider": "GeeksforGeeks",
+        "section": "Data structures overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — DSA for Beginners",
+        "url": "https://neetcode.io/courses/dsa-for-beginners/0",
+        "provider": "NeetCode",
+        "section": "How to identify and apply patterns; Course progression"
+      }
+    },
+    {
+      "topic_slug": "dsa-heapify-learn-exact",
+      "before": {
+        "title": "Learn: Heapify",
+        "url": "https://www.geeksforgeeks.org/dsa/heap-sort/",
+        "provider": "GeeksforGeeks",
+        "section": "Heapify / heap",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "NeetCode — DSA for Beginners: Heap / Priority Queue",
+        "url": "https://neetcode.io/courses/dsa-for-beginners/0",
+        "provider": "NeetCode",
+        "section": "Heap / Priority Queue"
+      }
+    },
+    {
+      "topic_slug": "genai-context-windows",
+      "before": {
+        "title": "Context windows guidance",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+        "provider": "Anthropic",
+        "section": "through Token usage tips end",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Anthropic — Context Windows",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+        "provider": "Anthropic",
+        "section": "Context windows; Input and output tokens; Context management"
+      }
+    },
+    {
+      "topic_slug": "genai-rag",
+      "before": {
+        "title": "DeepLearning.AI: RAG systems",
+        "url": "https://docs.langchain.com/oss/python/langchain/overview",
+        "provider": "DeepLearning.AI",
+        "section": "RAG concepts",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "LangChain — Retrieval",
+        "url": "https://docs.langchain.com/oss/python/langchain/retrieval",
+        "provider": "LangChain",
+        "section": "Retrieval; Retrieval-augmented generation"
+      }
+    },
+    {
+      "topic_slug": "genai-lora-peft",
+      "before": {
+        "title": "PEFT / LoRA documentation",
+        "url": "https://huggingface.co/docs/peft/index",
+        "provider": "Hugging Face",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Hugging Face PEFT — LoRA and parameter-efficient fine-tuning",
+        "url": "https://huggingface.co/docs/peft/en/index",
+        "provider": "Hugging Face",
+        "section": "PEFT; LoRA; Parameter-efficient fine-tuning"
+      }
+    },
+    {
+      "topic_slug": "ml-kmeans",
+      "before": {
+        "title": "Clustering — K-means",
+        "url": "https://scikit-learn.org/stable/modules/clustering.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "StatQuest — K-means Clustering",
+        "url": "https://www.youtube.com/watch?v=4b5d3muPQmA",
+        "provider": "StatQuest",
+        "section": "Conceptual motivation; K-means algorithm; Choosing K"
+      }
+    },
+    {
+      "topic_slug": "ml-anomaly-awareness",
+      "before": {
+        "title": "Novelty & Outlier Detection",
+        "url": "https://scikit-learn.org/stable/modules/neighbors.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "scikit-learn — Novelty and Outlier Detection",
+        "url": "https://scikit-learn.org/stable/modules/outlier_detection.html",
+        "provider": "scikit-learn",
+        "section": "Overview; Novelty detection; Outlier detection"
+      }
+    },
+    {
+      "topic_slug": "ml-hierarchical-dbscan",
+      "before": {
+        "title": "Clustering — Hierarchical & DBSCAN",
+        "url": "https://scikit-learn.org/stable/modules/clustering.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "scikit-learn — Clustering: Hierarchical and DBSCAN",
+        "url": "https://scikit-learn.org/stable/modules/clustering.html",
+        "provider": "scikit-learn",
+        "section": "Hierarchical clustering; DBSCAN; Density-based clustering"
+      }
+    },
+    {
+      "topic_slug": "ml-pca",
+      "before": {
+        "title": "Decompositions — PCA",
+        "url": "https://scikit-learn.org/stable/modules/decomposition.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "StatQuest — Principal Component Analysis (PCA), Step-by-Step",
+        "url": "https://www.youtube.com/watch?v=FgakZw6K1QQ",
+        "provider": "StatQuest",
+        "section": "Conceptual motivation; PCA worked out; Eigenvectors/values; Explained variation"
+      }
+    },
+    {
+      "topic_slug": "ml-regression-metrics",
+      "before": {
+        "title": "Model Evaluation — Regression metrics",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "scikit-learn — Regression metrics",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics",
+        "provider": "scikit-learn",
+        "section": "Regression metrics"
+      }
+    },
+    {
+      "topic_slug": "ml-roc-auc",
+      "before": {
+        "title": "Model Evaluation — ROC/AUC",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "provider": "scikit-learn",
+        "section": "above; content inspection pending",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "scikit-learn — ROC metrics",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#roc-metrics",
+        "provider": "scikit-learn",
+        "section": "Receiver operating characteristic (ROC); ROC AUC"
+      }
+    },
+    {
+      "topic_slug": "se-api-design",
+      "before": {
+        "title": "restfulapi.net: API design basics",
+        "url": "https://restfulapi.net/",
+        "provider": "restfulapi.net",
+        "section": "restfulapi.net: API design basics",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "Microsoft Azure Architecture — API Design",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design",
+        "provider": "Microsoft Learn",
+        "section": "API design; Resource modeling; HTTP methods; Errors"
+      }
+    },
+    {
+      "topic_slug": "se-sdlc",
+      "before": {
+        "title": "Software Development Lifecycle (IBM)",
+        "url": "https://www.ibm.com/think/topics",
+        "provider": "IBM",
+        "section": "SDLC overview",
+        "role": "PRIMARY",
+        "resource_type": "documentation"
+      },
+      "after": {
+        "title": "IBM — Software Development Life Cycle (SDLC)",
+        "url": "https://www.ibm.com/think/topics/sdlc",
+        "provider": "IBM",
+        "section": "SDLC phases; Planning; Analysis; Design; Development; Testing; Deployment; Maintenance"
+      }
+    }
+  ]
+}

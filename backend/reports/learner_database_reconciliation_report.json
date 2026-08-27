@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-08-26T13:44:25.570028+00:00",
+  "current_runtime_db": {
+    "path": "backend/dev.db",
+    "resolved_url": "sqlite:///./dev.db -> D:/Akshit Personal OS/backend/dev.db",
+    "database_url_env": null,
+    "size": 3149824,
+    "topic_count": 449,
+    "learner_units": 441,
+    "domains": 20,
+    "projects": 16,
+    "user_progress": 6,
+    "topic_mastery": 0,
+    "mastery_evidence": 0,
+    "user_xp": {
+      "akshit": 0
+    },
+    "xp_events": 0,
+    "status": "FRESH - not the historical learner DB"
+  },
+  "candidate_historical_dbs": [
+    {
+      "path": "backend/dev.db",
+      "size": 3149824,
+      "modified": "2026-08-26 19:09:53",
+      "topic_count": 449,
+      "user_progress": 6,
+      "topic_mastery": 0,
+      "mastery_evidence": 0,
+      "user_xp": {
+        "user_id": "akshit",
+        "total_xp": 0,
+        "level": 1
+      },
+      "xp_events": 0,
+      "revision_schedules": 0,
+      "diagnostic_sessions": 0,
+      "learning_activities": 0,
+      "verdict": "Fresh development DB - 449-topic curriculum, minimal progress (6 rows), no mastery history"
+    },
+    {
+      "path": "backend/dev.db.20260819-194409.bak",
+      "size": 1499136,
+      "modified": "2026-08-19 19:17:57",
+      "topic_count": 226,
+      "user_progress": 3,
+      "topic_mastery": 80,
+      "mastery_evidence": 95,
+      "user_xp": {
+        "user_id": "akshit",
+        "total_xp": 888,
+        "level": 9
+      },
+      "xp_events": 37,
+      "revision_schedules": 2,
+      "diagnostic_sessions": 1,
+      "diagnostic_answers": 76,
+      "learning_activities": 323,
+      "verdict": "REAL LEARNER HISTORY - 226-topic era, substantial progress (80 mastery, 888 XP, 323 activities)"
+    },
+    {
+      "path": "backend/dev.db.pre_curriculum_reconciliation_20260826_133804.bak",
+      "size": 3145728,
+      "modified": "2026-08-26 18:42:51",
+      "topic_count": 449,
+      "user_progress": 6,
+      "topic_mastery": 0,
+      "mastery_evidence": 0,
+      "user_xp": {
+        "user_id": "akshit",
+        "total_xp": 0,
+        "level": 1
+      },
+      "xp_events": 0,
+      "revision_schedules": 0,
+      "diagnostic_sessions": 0,
+      "learning_activities": 0,
+      "verdict": "Identical to current dev.db (pre-reconciliation backup of 449-topic fresh DB)"
+    },
+    {
+      "path": "backend/data.db",
+      "size": 0,
+      "modified": "2026-08-23 12:55:51",
+      "topic_count": 0,
+      "verdict": "Empty file, not a valid DB"
+    }
+  ],
+  "analysis": {
+    "real_learner_db_path": "backend/dev.db.20260819-194409.bak",
+    "real_learner_db_reason": "Contains 80 topic_mastery, 95 mastery_evidence, 888 XP (level 9), 37 xp_events, 323 learning_activities, and 76 diagnostic answers \u2014 substantial history vs. current DB's 0 mastery/0 XP. Modified 2026-08-19, predates the 449-topic expansion (226 topics = original 222 spine era).",
+    "current_db_is_fresh": true,
+    "data_loss_risk": "If current dev.db (449-topic fresh) remains runtime, the 888 XP and 80 mastery records from Aug 19 are effectively lost to the learner. They exist only in the backup file.",
+    "should_become_learner_db": "backend/dev.db.20260819-194409.bak (after careful migration of its user data into the 449-topic schema)",
+    "why": "It is the only candidate with non-trivial learner history; all other candidates are fresh/empty. The 226\u2192449 expansion is additive (no spine slugs deleted), so user data can be migrated forward without loss.",
+    "what_must_be_preserved": [
+      "user_progress (3 rows)",
+      "topic_mastery (80 rows, 80 slugs, scores, statuses)",
+      "mastery_evidence (95 rows, per-topic registers)",
+      "user_xp (888 XP, level 9)",
+      "xp_events (37 rows)",
+      "revision_schedules (2 rows)",
+      "diagnostic_sessions (1) + diagnostic_answers (76)",
+      "learning_activities (323 rows)",
+      "user_streaks (1 row)"
+    ],
+    "migration_notes": "226\u2192449 is additive; 222 spine intact; 80 mastery slugs all exist in 449 (verified via slug set). No XP should be regenerated; no completions should be fabricated. Use slug-based upsert, not ID-based.",
+    "uncertainty": "None \u2014 identification is unambiguous via quantitative history comparison. The only open question is WHEN to perform the migration (requires dedicated user-data migration script, not part of this read-only verification pass)."
+  },
+  "learner_database_source_of_truth": "UNAMBIGUOUS \u2014 Historical backup holds real learner data; current runtime DB is fresh and must not be considered the learner's history without migration",
+  "recommendation": "DO NOT overwrite the historical backup. DO NOT import 449 curriculum into it yet without a migration script. Current runtime may continue as 449-topic fresh DB for verification purposes, but learner-facing deployment must migrate the 80 mastery / 888 XP history forward before the learner begins the 12-month journey.",
+  "stop_part_a": false,
+  "proceed_to_part_b": true,
+  "proceed_condition": "Part A source of truth is unambiguous (fresh vs historical clearly distinguished); Part B resource verification can proceed against the ACTUAL RUNTIME DB (449-topic) as instructed, since it is the intended final curriculum's runtime state. Learner data preservation is documented and will be handled before learner onboarding."
+}

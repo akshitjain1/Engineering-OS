@@ -52,7 +52,9 @@ function TopicRow({ topic, current }: { topic: TopicNode; current: boolean }) {
   if (topic.locked) {
     return (
       <div>
-        {inner}
+        <Link href={`/learn/topic/${topic.id}`} className="block">
+          {inner}
+        </Link>
         <div className="mt-1 px-1">
           <PrerequisiteList items={topic.prerequisites} message={topic.lock_message} />
         </div>

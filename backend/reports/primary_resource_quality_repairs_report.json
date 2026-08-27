@@ -1,0 +1,159 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_primary_resource_quality_repairs_20260827_184707.bak",
+  "backup_size": 3293184,
+  "learner_counts_before": {
+    "dsa-character-processing": 2,
+    "dsa-frequency-maps": 3,
+    "dsa-window-fixed": 2,
+    "dsa-window-variable": 2,
+    "dsa-window-frequency": 2,
+    "dsa-list-operations": 2,
+    "dsa-list-reversal": 2,
+    "dsa-fast-slow": 2,
+    "dsa-cycle-detection": 2,
+    "dsa-list-merge": 2,
+    "dsa-subsets": 2,
+    "dsa-combinations": 2,
+    "dsa-first-last-occurrence": 2,
+    "dsa-connected-components": 3,
+    "dsa-unweighted-shortest": 3,
+    "dsa-dijkstra": 6,
+    "dsa-mst": 4,
+    "dsa-interval-problems": 2,
+    "dsa-tabulation": 3,
+    "dsa-pattern-selection": 2,
+    "cv-convolution-in-cv": 1
+  },
+  "learner_counts_after": {
+    "dsa-character-processing": 2,
+    "dsa-frequency-maps": 3,
+    "dsa-window-fixed": 2,
+    "dsa-window-variable": 2,
+    "dsa-window-frequency": 2,
+    "dsa-list-operations": 2,
+    "dsa-list-reversal": 2,
+    "dsa-fast-slow": 2,
+    "dsa-cycle-detection": 2,
+    "dsa-list-merge": 2,
+    "dsa-subsets": 2,
+    "dsa-combinations": 2,
+    "dsa-first-last-occurrence": 2,
+    "dsa-connected-components": 3,
+    "dsa-unweighted-shortest": 3,
+    "dsa-dijkstra": 6,
+    "dsa-mst": 4,
+    "dsa-interval-problems": 2,
+    "dsa-tabulation": 3,
+    "dsa-pattern-selection": 2,
+    "cv-convolution-in-cv": 1
+  },
+  "updated": 21,
+  "missing": [],
+  "changed": [
+    {
+      "topic_slug": "dsa-character-processing",
+      "resource_slug": "dsa-character-processing-learn-exact",
+      "lesson_id": 127
+    },
+    {
+      "topic_slug": "dsa-frequency-maps",
+      "resource_slug": "dsa-frequency-maps-learn-exact",
+      "lesson_id": 131
+    },
+    {
+      "topic_slug": "dsa-window-fixed",
+      "resource_slug": "dsa-window-fixed-learn-exact",
+      "lesson_id": 136
+    },
+    {
+      "topic_slug": "dsa-window-variable",
+      "resource_slug": "dsa-window-variable-learn-exact",
+      "lesson_id": 137
+    },
+    {
+      "topic_slug": "dsa-window-frequency",
+      "resource_slug": "dsa-window-frequency-learn-exact",
+      "lesson_id": 138
+    },
+    {
+      "topic_slug": "dsa-list-operations",
+      "resource_slug": "dsa-list-operations-learn-exact",
+      "lesson_id": 140
+    },
+    {
+      "topic_slug": "dsa-list-reversal",
+      "resource_slug": "dsa-list-reversal-learn-exact",
+      "lesson_id": 141
+    },
+    {
+      "topic_slug": "dsa-fast-slow",
+      "resource_slug": "dsa-fast-slow-learn-exact",
+      "lesson_id": 142
+    },
+    {
+      "topic_slug": "dsa-cycle-detection",
+      "resource_slug": "dsa-cycle-detection-learn-exact",
+      "lesson_id": 143
+    },
+    {
+      "topic_slug": "dsa-list-merge",
+      "resource_slug": "dsa-list-merge-learn-exact",
+      "lesson_id": 144
+    },
+    {
+      "topic_slug": "dsa-subsets",
+      "resource_slug": "dsa-subsets-learn-exact",
+      "lesson_id": 153
+    },
+    {
+      "topic_slug": "dsa-combinations",
+      "resource_slug": "dsa-combinations-learn-exact",
+      "lesson_id": 155
+    },
+    {
+      "topic_slug": "dsa-first-last-occurrence",
+      "resource_slug": "dsa-first-last-occurrence-learn-exact",
+      "lesson_id": 168
+    },
+    {
+      "topic_slug": "dsa-connected-components",
+      "resource_slug": "dsa-connected-components-learn-exact",
+      "lesson_id": 191
+    },
+    {
+      "topic_slug": "dsa-unweighted-shortest",
+      "resource_slug": "dsa-unweighted-shortest-learn-exact",
+      "lesson_id": 196
+    },
+    {
+      "topic_slug": "dsa-dijkstra",
+      "resource_slug": "dsa-dijkstra-learn-exact",
+      "lesson_id": 197
+    },
+    {
+      "topic_slug": "dsa-mst",
+      "resource_slug": "dsa-mst-learn-exact",
+      "lesson_id": 198
+    },
+    {
+      "topic_slug": "dsa-interval-problems",
+      "resource_slug": "dsa-interval-problems-learn-exact",
+      "lesson_id": 201
+    },
+    {
+      "topic_slug": "dsa-tabulation",
+      "resource_slug": "dsa-tabulation-learn-exact",
+      "lesson_id": 206
+    },
+    {
+      "topic_slug": "dsa-pattern-selection",
+      "resource_slug": "dsa-pattern-selection-learn-exact",
+      "lesson_id": 221
+    },
+    {
+      "topic_slug": "cv-convolution-in-cv",
+      "resource_slug": "cv-convolution-in-cv-primary",
+      "lesson_id": 374
+    }
+  ]
+}

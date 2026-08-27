@@ -503,15 +503,25 @@ track:
             hours_estimated: 0.33
             resources:
             - slug: devops-awareness-primary
-              title: '12-Factor: DevOps awareness'
+              title: 'Microsoft Learn — Discover DevOps'
+              type: documentation
+              url: https://learn.microsoft.com/en-us/training/modules/discover-devops/
+              provider: Microsoft Learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              description: Beginner 26-minute DevOps overview covering approach, culture, goals/benefits, and application lifecycle.
+            - slug: devops-awareness-reference-12factor
+              title: 'The Twelve-Factor App — methodology reference'
               type: documentation
               url: https://12factor.net/
               provider: 12-Factor
-              role: PRIMARY
+              role: REFERENCE
               verification_status: TRUSTED
               official: true
-              order: 0
-              description: TRUSTED official/docs source for DevOps awareness.
+              order: 1
+              description: 'Reference after the DevOps overview: SaaS methodology and build/release/run practices.'
             questions:
             - slug: devops-awareness-q1
               prompt: What is the core idea of DevOps awareness?
@@ -557,15 +567,25 @@ track:
             hours_estimated: 0.33
             resources:
             - slug: devops-path-primary
-              title: '12-Factor: DevOps learning path'
+              title: 'Microsoft Learn — DevOps foundations: The core principles and practices'
+              type: documentation
+              url: https://learn.microsoft.com/en-us/training/paths/devops-foundations-core-principles-practices/
+              provider: Microsoft Learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              description: Learning-path orientation showing the DevOps modules that follow the introductory awareness unit.
+            - slug: devops-path-reference-12factor
+              title: 'The Twelve-Factor App — methodology reference'
               type: documentation
               url: https://12factor.net/
               provider: 12-Factor
-              role: PRIMARY
+              role: REFERENCE
               verification_status: TRUSTED
               official: true
-              order: 0
-              description: TRUSTED official/docs source for DevOps learning path.
+              order: 1
+              description: Optional methodology reference for cloud/SaaS application practices.
             questions:
             - slug: devops-path-q1
               prompt: What is the core idea of DevOps learning path?

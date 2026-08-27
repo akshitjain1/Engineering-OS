@@ -1,0 +1,123 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_content_fit_repairs_20260827_154409.bak",
+  "created": 3,
+  "updated": 10,
+  "demoted_or_repurposed": 8,
+  "missing_topics": [],
+  "changes": [
+    {
+      "topic": "ml-ridge-lasso",
+      "action": "DEMOTE",
+      "resource": "ml-ridge-lasso-primary",
+      "detail": "scikit-learn remains implementation/reference"
+    },
+    {
+      "topic": "ml-ridge-lasso",
+      "action": "PRIMARY",
+      "resource": "ml-ridge-lasso-vizuara-primary",
+      "detail": "Vizuara Ridge Regression 00:00-37:15"
+    },
+    {
+      "topic": "ai-eng-observability-security",
+      "action": "DEMOTE",
+      "resource": "ai-eng-observability-security-primary",
+      "detail": "OWASP retained as security reference"
+    },
+    {
+      "topic": "ai-eng-observability-security",
+      "action": "PRIMARY",
+      "resource": "ai-eng-observability-security-primary",
+      "detail": "Microsoft Learn observability page"
+    },
+    {
+      "topic": "be-json",
+      "action": "DEMOTE",
+      "resource": "be-json-primary",
+      "detail": "JSON.org retained as spec reference"
+    },
+    {
+      "topic": "be-json",
+      "action": "PRIMARY",
+      "resource": "be-json-primary",
+      "detail": "MDN Working with JSON"
+    },
+    {
+      "topic": "dl-convolution-op",
+      "action": "DEMOTE",
+      "resource": "dl-convolution-op-vizuara-qFMpq4-v2",
+      "detail": "Wrong concept was mapped as PRIMARY"
+    },
+    {
+      "topic": "dl-convolution-op",
+      "action": "REPURPOSE",
+      "resource": "dl-convolution-vizuara-supplement",
+      "detail": "Vizuara \u2014 Filters in 1D and Convolution Operation"
+    },
+    {
+      "topic": "dl-pooling",
+      "action": "DEMOTE",
+      "resource": "dl-pooling-vizuara-rtFpq6-v2",
+      "detail": "Wrong concept was mapped as PRIMARY"
+    },
+    {
+      "topic": "dl-pooling",
+      "action": "REPURPOSE",
+      "resource": "dl-pooling-vizuara-supplement",
+      "detail": "Vizuara \u2014 What is Max Pooling in CNNs?"
+    },
+    {
+      "topic": "genai-tokenization-llm",
+      "action": "DEMOTE",
+      "resource": "genai-tokenization-llm-vizuara-7CNElr-v2",
+      "detail": "Wrong concept was mapped as PRIMARY"
+    },
+    {
+      "topic": "genai-tokenization-llm",
+      "action": "REPURPOSE",
+      "resource": "genai-tokenization-position-encoding-reference",
+      "detail": "Vizuara \u2014 Positional Encoding"
+    },
+    {
+      "topic": "cv-convolution-in-cv",
+      "action": "DEMOTE",
+      "resource": "cv-convolution-in-cv-vizuara-9Kvngt-v2",
+      "detail": "Wrong concept was mapped as PRIMARY"
+    },
+    {
+      "topic": "cv-convolution-in-cv",
+      "action": "REPURPOSE",
+      "resource": "cv-convolution-vizuara-supplement",
+      "detail": "Vizuara \u2014 Filters in 1D and Convolution Operation"
+    },
+    {
+      "topic": "cv-what-is-an-image",
+      "action": "DEMOTE",
+      "resource": "cv-what-is-an-image-vizuara-Tu11SM-v2",
+      "detail": "Wrong concept was mapped as PRIMARY"
+    },
+    {
+      "topic": "cv-what-is-an-image",
+      "action": "REPURPOSE",
+      "resource": "cv-what-is-an-image-vizuara-reference",
+      "detail": "Vizuara \u2014 Computer Vision from Scratch Intro"
+    },
+    {
+      "topic": "genai-what-is-lm",
+      "action": "METADATA",
+      "resource": "genai-what-is-lm-primary",
+      "detail": "Corrected provider/title to match URL"
+    },
+    {
+      "topic": "genai-next-token-prediction",
+      "action": "METADATA",
+      "resource": "genai-next-token-prediction-primary",
+      "detail": "Corrected provider/title to match URL"
+    },
+    {
+      "topic": "cv-what-is-an-image",
+      "action": "METADATA",
+      "resource": "cv-what-is-an-image-primary",
+      "detail": "Provider corrected from Stanford CS231n to scikit-image"
+    }
+  ]
+}

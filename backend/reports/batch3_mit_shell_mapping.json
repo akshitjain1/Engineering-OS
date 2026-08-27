@@ -1,0 +1,195 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_batch3_mit_shell_mapping_20260827_193533.bak",
+  "backup_size": 3293184,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "curriculum_graph_unchanged": true,
+  "unresolved_boundary_items": [],
+  "processed": 10,
+  "changed": [
+    {
+      "topic": "cf-shell",
+      "lesson_id": 25,
+      "old_primary": {
+        "slug": "cf-shell-primary",
+        "title": "MIT Missing Semester 2026 — Course Overview + Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/",
+        "boundary": "Course Overview + Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-shell-primary",
+        "title": "MIT Missing Semester 2026 — Course Overview + Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/",
+        "boundary": "Course Overview + Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-command-line",
+      "lesson_id": 26,
+      "old_primary": {
+        "slug": "cf-command-line-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-command-line-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-filesystem-navigation",
+      "lesson_id": 27,
+      "old_primary": {
+        "slug": "cf-filesystem-navigation-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-filesystem-navigation-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-linux-files",
+      "lesson_id": 28,
+      "old_primary": {
+        "slug": "cf-linux-files-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-linux-files-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-pipes",
+      "lesson_id": 29,
+      "old_primary": {
+        "slug": "cf-pipes-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-pipes-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-redirection",
+      "lesson_id": 30,
+      "old_primary": {
+        "slug": "cf-redirection-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-redirection-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-grep",
+      "lesson_id": 31,
+      "old_primary": {
+        "slug": "cf-grep-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-grep-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-find",
+      "lesson_id": 32,
+      "old_primary": {
+        "slug": "cf-find-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      },
+      "new_primary": {
+        "slug": "cf-find-primary",
+        "title": "MIT Missing Semester 2026 — Introduction to the Shell",
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "boundary": "Introduction to the Shell"
+      }
+    },
+    {
+      "topic": "cf-linux-permissions",
+      "lesson_id": 33,
+      "old_primary": {
+        "slug": "cf-linux-permissions-primary",
+        "title": "MIT Missing Semester 2026 — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "boundary": "Files and Permissions"
+      },
+      "new_primary": {
+        "slug": "cf-linux-permissions-primary",
+        "title": "MIT Missing Semester 2026 — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "boundary": "Files and Permissions"
+      }
+    },
+    {
+      "topic": "cf-linux-processes",
+      "lesson_id": 34,
+      "old_primary": {
+        "slug": "cf-linux-processes-primary",
+        "title": "MIT Missing Semester 2026 — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "boundary": "Processes / Signals / Job Control"
+      },
+      "new_primary": {
+        "slug": "cf-linux-processes-primary",
+        "title": "MIT Missing Semester 2026 — Command-line Environment",
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "boundary": "Processes / Signals / Job Control"
+      }
+    }
+  ],
+  "tests": "223 passed, 1 warning",
+  "lint": "passed",
+  "build": "passed"
+}

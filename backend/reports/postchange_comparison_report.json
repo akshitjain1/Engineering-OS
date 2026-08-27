@@ -154,19 +154,19 @@
     {
       "check": "user_progress_rows",
       "before": 6,
-      "after": 6,
-      "pass": true
+      "after": 9,
+      "pass": false
     },
     {
       "check": "xp_events_unchanged",
       "before": 0,
-      "after": 0,
-      "pass": true
+      "after": 37,
+      "pass": false
     },
     {
       "check": "revision_state_baseline",
       "before": 0,
-      "after": 0,
+      "after": 2,
       "pass": true
     },
     {
@@ -176,5 +176,5 @@
       "pass": true
     }
   ],
-  "overall_pass": true
+  "overall_pass": false
 }

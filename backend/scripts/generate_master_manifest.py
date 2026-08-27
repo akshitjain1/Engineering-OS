@@ -151,7 +151,7 @@ def main() -> None:
         sim365 = json.load(open(f"{REPORT_DIR}\\learner_simulation_365.json", encoding="utf-8"))
         evidence = json.load(open(f"{REPORT_DIR}\\resource_evidence_final.json",
                                   encoding="utf-8"))["resources"]
-        ev_by_topic = {r["topic_slug"]: r for r in evidence}
+        ev_by_topic = {r.get("topic_slug") or r.get("slug"): r for r in evidence if r.get("topic_slug") or r.get("slug")}
 
         # ── indexes ────────────────────────────────────────────────
         lessons_by_topic = defaultdict(list)

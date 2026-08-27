@@ -260,7 +260,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: central-processing-unit-cpu
   - SECTION END: central-processing-unit-cpu
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 6
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 5
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -324,14 +324,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Introduction of ALU and Data Path** (GeeksforGeeks)
+- **GFG — Arithmetic Logic Unit (ALU)** (GeeksforGeeks)
   - ID: 514 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/computer-organization-architecture/introduction-of-alu-and-data-path/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: ALU; Arithmetic and logical operations
-  - SECTION END: ALU; Arithmetic and logical operations
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - SECTION START: Arithmetic Logic Unit; Functions and Operations of ALU
+  - SECTION END: Arithmetic Logic Unit; Functions and Operations of ALU
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -396,7 +396,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **GFG — Different Classes of CPU Registers** (GeeksforGeeks)
   - ID: 516 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/computer-organization-architecture/different-classes-of-cpu-registers/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
+  - Exactness: FULL_SINGLE_PAGE · Boundary: ARTICLE_SECTION
   - SECTION START: General purpose; Special purpose registers
   - SECTION END: General purpose; Special purpose registers
   - Minutes: 18 · Confidence: MEDIUM
@@ -534,7 +534,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: cache-memory-in-computer-organization
   - SECTION END: cache-memory-in-computer-organization
   - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -596,14 +596,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Storage Devices (persistent storage)** (GeeksforGeeks)
+- **Caltech CS122 — Storage Hierarchy** (Caltech CS122)
   - ID: 521 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/storage-devices/
+  - URL: https://courses.cms.caltech.edu/cs122/lectures-wi2018/CS122Lec01.pdf
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: storage-devices
-  - SECTION END: storage-devices
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - SECTION START: Storage hierarchy; Main memory; Secondary storage
+  - SECTION END: Storage hierarchy; Main memory; Secondary storage
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -656,19 +656,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cf-instruction-execution-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `fetch-decode-execute-loop`, `assignment-to-instructions`, `pc-increment`
 
 #### Primary Resource(s)
 
-- **GFG — Different Instruction Cycles** (GeeksforGeeks)
-  - ID: 522 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/computer-organization-architecture/different-instruction-cycles/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Fetch, decode, execute cycles
-  - SECTION END: Fetch, decode, execute cycles
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+- **The Fetch Decode Execute Cycle — Computer Science Lessons** (Computer Science Lessons)
+  - ID: 522 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=ByllwN8q2ss
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 480
+  - SECTION END: 875
+  - Minutes: 7 · Confidence: HIGH
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -731,14 +731,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Machine Language** (GeeksforGeeks)
+- **CS50x 2026 — Week 1 C: source to machine code** (CS50x)
   - ID: 10 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/machine-language-in-computer-organization/
+  - URL: https://cs50.harvard.edu/x/weeks/1/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: machine-language-in-computer-organization
-  - SECTION END: machine-language-in-computer-organization
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - SECTION START: Source code; Machine code; Compiling
+  - SECTION END: Source code; Machine code; Compiling
+  - Minutes: 25 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -856,19 +856,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cf-interpreter-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `interpreter-incremental`, `interpreter-vs-compiler`, `interpreter-vm`
 
 #### Primary Resource(s)
 
-- **GFG — Interpreter in Compiler Design** (GeeksforGeeks)
-  - ID: 525 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/interpreter-in-compiler-design/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: interpreter-in-compiler-design
-  - SECTION END: interpreter-in-compiler-design
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+- **The Fetch Decode Execute Cycle — Compilation and Interpretation segment** (Computer Science Lessons)
+  - ID: 525 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=ByllwN8q2ss
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 125
+  - SECTION END: 326
+  - Minutes: 4 · Confidence: HIGH
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -925,19 +925,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cf-program-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: HIGH)
 - Required concepts: `program-artifact`, `program-vs-process`
 
 #### Primary Resource(s)
 
-- **GFG — Program and its Types in Operating System** (GeeksforGeeks)
-  - ID: 15 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/program-and-its-types-in-operating-system/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: program-and-its-types-in-operating-system
-  - SECTION END: program-and-its-types-in-operating-system
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Instructions & Programs — Crash Course Computer Science #8** (CrashCourse)
+  - ID: 15 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=zltgXvg6r3k
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 3
+  - SECTION END: 271
+  - Minutes: 5 · Confidence: HIGH
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -1263,14 +1263,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — System Calls in Operating System** (GeeksforGeeks)
+- **MIT Missing Semester — Debugging and Profiling** (MIT Missing Semester 2026)
   - ID: 532 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/system-calls-in-operating-system/
+  - URL: https://missing.csail.mit.edu/2026/debugging-profiling/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: system-calls-in-operating-system
-  - SECTION END: system-calls-in-operating-system
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Debugging; journalctl; process/system interaction
+  - SECTION END: Debugging; journalctl; process/system interaction
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -1462,14 +1462,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — File System in Operating System** (GeeksforGeeks)
+- **OSTEP — Files and Directories** (OSTEP)
   - ID: 22 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/file-system-in-operating-system/
+  - URL: https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: file-system-in-operating-system
-  - SECTION END: file-system-in-operating-system
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - SECTION START: Files; Directories; Directory Trees; File System Interface
+  - SECTION END: Files; Directories; Directory Trees; File System Interface
+  - Minutes: 30 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -1527,14 +1527,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — File Permissions in Linux** (GeeksforGeeks)
+- **MIT Missing Semester — Command-line Environment** (MIT Missing Semester 2026)
   - ID: 23 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/file-permissions-in-linux/
+  - URL: https://missing.csail.mit.edu/2026/command-line-environment/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: file-permissions-in-linux
-  - SECTION END: file-permissions-in-linux
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Users, Files, and Permissions
+  - SECTION END: Users, Files, and Permissions
+  - Minutes: 12 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -1595,12 +1595,16 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **The Shell — MIT Missing Semester** (MIT)
   - ID: 25 · type=article · role=PRIMARY
   - URL: https://missing.csail.mit.edu/2020/command-line/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Shell / environment variables
-  - SECTION END: Shell / environment variables
+  - Exactness: FULL_SINGLE_PAGE · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 18 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
+
+#### Internal / verification resources (NOT shown to learners)
+
+- GFG — Environment Variables in Operating System — COVERAGE_SUPPLEMENT — https://www.geeksforgeeks.org/environment-variables-in-operating-system/
 
 ### Practice
 
@@ -1659,13 +1663,17 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **MIT Missing Semester — Introduction to the Shell** (MIT Missing Semester 2026)
   - ID: 539 · type=documentation · role=PRIMARY
-  - URL: https://missing.csail.mit.edu/2020/shell-tools/
+  - URL: https://missing.csail.mit.edu/2026/course-shell/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Shell tools and scripting
   - SECTION END: Shell tools and scripting
   - Minutes: 30 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
+
+#### Internal / verification resources (NOT shown to learners)
+
+- Official Missing Semester 2026 shell exercises — LEGACY_DUPLICATE — https://missing.csail.mit.edu/2026/course-shell/
 
 ### Practice
 
@@ -3218,14 +3226,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Introduction to Integrated Development Environment** (GeeksforGeeks)
+- **Visual Studio Code — Get Started** (Microsoft)
   - ID: 540 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/introduction-to-integrated-development-environment/
+  - URL: https://code.visualstudio.com/docs/editing/getting-started
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: introduction-to-integrated-development-environment
-  - SECTION END: introduction-to-integrated-development-environment
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Open a folder in VS Code; Explore the user interface; Access the terminal; Use source control; Run and debug your code
+  - SECTION END: Open a folder in VS Code; Explore the user interface; Access the terminal; Use source control; Run and debug your code
+  - Minutes: 25 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -3356,14 +3364,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Debugging in Software Engineering** (GeeksforGeeks)
+- **Visual Studio Code — Debugging** (Microsoft)
   - ID: 544 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/debugging-in-software-engineering/
+  - URL: https://code.visualstudio.com/docs/debugtest/debugging
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: debugging-in-software-engineering
-  - SECTION END: debugging-in-software-engineering
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Debugger user interface; Start a debugging session; Debug actions; Breakpoints; Data inspection
+  - SECTION END: Debugger user interface; Start a debugging session; Debug actions; Breakpoints; Data inspection
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -3425,14 +3433,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Code Formatting in Software Engineering** (GeeksforGeeks)
+- **MIT Missing Semester — Code Quality** (MIT Missing Semester 2026)
   - ID: 546 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/code-formatting-in-software-engineering/
+  - URL: https://missing.csail.mit.edu/2026/code-quality/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: code-formatting-in-software-engineering
-  - SECTION END: code-formatting-in-software-engineering
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - SECTION START: Formatting
+  - SECTION END: Formatting
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -3494,14 +3502,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Linting in Software Development** (GeeksforGeeks)
+- **MIT Missing Semester — Code Quality** (MIT Missing Semester 2026)
   - ID: 548 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/linting-in-software-development/
+  - URL: https://missing.csail.mit.edu/2026/code-quality/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: linting-in-software-development
-  - SECTION END: linting-in-software-development
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - SECTION START: Linting
+  - SECTION END: Linting
+  - Minutes: 12 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -3563,15 +3571,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Package Manager in Operating System** (GeeksforGeeks)
+- **MIT Missing Semester — Packaging and Shipping Code** (MIT Missing Semester 2026)
   - ID: 550 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/package-manager-in-operating-system/
+  - URL: https://missing.csail.mit.edu/2026/shipping-code/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: package-manager-in-operating-system
-  - SECTION END: package-manager-in-operating-system
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Dependencies & Environments
+  - SECTION END: Dependencies & Environments
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
+
+#### Internal / verification resources (NOT shown to learners)
+
+- MIT Missing Semester 2026 — Packaging and Shipping Code — LEGACY_DUPLICATE — https://missing.csail.mit.edu/2026/shipping-code/
 
 ### Practice
 
@@ -3628,14 +3640,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Build Systems in Software Engineering** (GeeksforGeeks)
+- **Makefile Tutorial — Build Automation** (Makefile Tutorial)
   - ID: 552 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/build-systems-in-software-engineering/
+  - URL: https://makefiletutorial.com/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: build-systems-in-software-engineering
-  - SECTION END: build-systems-in-software-engineering
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - SECTION START: What is a Makefile?; Basic Makefile; Build Targets and Dependencies
+  - SECTION END: What is a Makefile?; Basic Makefile; Build Targets and Dependencies
+  - Minutes: 25 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -3697,19 +3709,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Dependency resolution (pip)** (PyPA)
+- **GFG — Dependency Management** (GeeksforGeeks)
   - ID: 554 · type=documentation · role=PRIMARY
-  - URL: https://pip.pypa.io/en/stable/topics/dependency-resolution/
+  - URL: https://www.geeksforgeeks.org/package-manager-in-operating-system/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Dependency resolution
   - SECTION END: Dependency resolution
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
-
-#### Internal / verification resources (NOT shown to learners)
-
-- pip — Dependency Resolution — LEGACY_DUPLICATE — https://pip.pypa.io/en/stable/topics/dependency-resolution/
 
 ### Practice
 
@@ -3961,14 +3969,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Dry Run in Software Engineering** (GeeksforGeeks)
+- **FutureLogic — Trace Tables** (FutureLogic)
   - ID: 557 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/dry-run-in-software-engineering/
+  - URL: https://futurelogiceducation.com/knowledge-library/topic-7-algorithms/7.8-trace-tables.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: dry-run-in-software-engineering
-  - SECTION END: dry-run-in-software-engineering
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Trace Tables Explained Simply; Big Idea
+  - SECTION END: Trace Tables Explained Simply; Big Idea
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4030,14 +4038,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **GFG — Edge Cases in Software Testing** (GeeksforGeeks)
+- **CMU 15-122 — General Debugging Practices** (Carnegie Mellon University)
   - ID: 560 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/edge-cases-in-software-engineering/
+  - URL: https://www.cs.cmu.edu/~15122/handouts/gts/c0debugging.pdf
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: edge-cases-in-software-engineering
-  - SECTION END: edge-cases-in-software-engineering
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Test edge cases
+  - SECTION END: Test edge cases
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4233,14 +4241,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Space Complexity** (GeeksforGeeks)
-  - ID: 559 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/gfact-51-space-complexity/
+- **Kunal Kushwaha — Time and Space Complexity** (Kunal Kushwaha)
+  - ID: 559 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=mV3wrLBbuuE
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Space complexity
-  - SECTION END: Space complexity
-  - Minutes: 18 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Space Complexity
+  - SECTION END: Space Complexity
+  - Minutes: 30 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4262,7 +4270,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Java
 
-Topics: 52 · Units: 52 · READY 47 · PARTIAL 5 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 52 · Units: 52 · READY 46 · PARTIAL 0 · GAP 0 · NR 6 · NO_PRIMARY 0
 
 ## JDK and JRE
 
@@ -4443,9 +4451,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Launching simple source-code programs** (Dev.java)
   - ID: 99 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/launch-simple-source-code-programs/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: launch-simple-source-code-programs
-  - SECTION END: launch-simple-source-code-programs
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -4577,9 +4585,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Primitive types** (Dev.java)
   - ID: 106 · type=documentation · role=PRIMARY
   - URL: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Primitive types and conversions
-  - SECTION END: Primitive types and conversions
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 18 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -4676,7 +4684,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 71
-- Readiness: **PARTIAL**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -4703,7 +4711,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-operators-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `java-operators-operators`, `java-operators-predict-arithmetic-comparison-logical-as`
 
 #### Primary Resource(s)
@@ -4714,8 +4722,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 00:45:00
   - SECTION END: 01:15:00
-  - Minutes: 30 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -4741,7 +4749,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 72
-- Readiness: **PARTIAL**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -4768,7 +4776,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-if-else-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `java-if-else-if-else`, `java-if-else-branch-with-if-else-including-nested-con`
 
 #### Primary Resource(s)
@@ -4779,8 +4787,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 01:15:00
   - SECTION END: 01:45:00
-  - Minutes: 30 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4810,7 +4818,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 73
-- Readiness: **PARTIAL**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -4837,7 +4845,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-switch-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `java-switch-switch`, `java-switch-switch-statements-and-modern-switch-expr`
 
 #### Primary Resource(s)
@@ -4848,8 +4856,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 01:45:00
   - SECTION END: 02:00:00
-  - Minutes: 15 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -4875,7 +4883,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 74
-- Readiness: **PARTIAL**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -4902,7 +4910,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-loops-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `java-loops-loops`, `java-loops-choose-for-while-and-do-while-write-vali`
 
 #### Primary Resource(s)
@@ -4913,8 +4921,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 02:00:00
   - SECTION END: 02:45:00
-  - Minutes: 45 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -4944,7 +4952,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 75
-- Readiness: **PARTIAL**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -4971,7 +4979,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `java-break-continue-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `java-break-continue-break-and-continue`, `java-break-continue-break-and-continue-deliberately-avoid-us`
 
 #### Primary Resource(s)
@@ -4982,8 +4990,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 02:45:00
   - SECTION END: 03:00:00
-  - Minutes: 15 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -5385,9 +5393,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **String builders** (Dev.java)
   - ID: 136 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/numbers-strings/string-builders/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: string-builders
-  - SECTION END: string-builders
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 11 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -5588,9 +5596,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Providing constructors** (Dev.java)
   - ID: 144 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/classes-objects/defining-constructors/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: defining-constructors
-  - SECTION END: defining-constructors
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -5722,9 +5730,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **What is inheritance?** (Dev.java)
   - ID: 149 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/inheritance/what-is-inheritance/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: What is inheritance?
-  - SECTION END: What is inheritance?
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 14 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -5925,9 +5933,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Defining interfaces** (Dev.java)
   - ID: 157 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/interfaces/defining-interfaces/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Defining interfaces
-  - SECTION END: Defining interfaces
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 11 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -5994,9 +6002,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Class design best practices** (Dev.java)
   - ID: 160 · type=documentation · role=PRIMARY
   - URL: https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Creating objects / composition via fields
-  - SECTION END: Creating objects / composition via fields
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 12 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -6495,7 +6503,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 98
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -6527,14 +6535,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Stacks and queues** (Dev.java)
-  - ID: 180 · type=documentation · role=PRIMARY
-  - URL: https://dev.java/learn/api/collections-framework/stacks-queues/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: stacks-queues
-  - SECTION END: stacks-queues
-  - Minutes: 13 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **Bro Code — Priority Queue** (Bro Code)
+  - ID: 180 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=7z_HXFZqXqc
+  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: Priority Queue
+  - SECTION END: 00:10:00
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -6595,9 +6603,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Generics intro** (Dev.java)
   - ID: 184 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/generics/intro/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Generics intro
-  - SECTION END: Generics intro
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 22 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -6729,9 +6737,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Writing comparators (lambdas)** (Dev.java)
   - ID: 189 · type=documentation · role=PRIMARY
   - URL: https://dev.java/learn/lambdas/writing-comparators/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Writing comparators (lambdas)
-  - SECTION END: Writing comparators (lambdas)
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -7256,7 +7264,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **JUnit 5 User Guide** (JUnit)
   - ID: 210 · type=documentation · role=PRIMARY
-  - URL: https://junit.org/junit5/docs/current/user-guide/
+  - URL: https://docs.junit.org/6.1.3/overview.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: user-guide
   - SECTION END: user-guide
@@ -7514,19 +7522,15 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **JLS Chapter 17 — Threads and Locks** (Oracle)
-  - ID: 561 · type=documentation · role=PRIMARY
+- **Java Language Specification SE 21 — Chapter 17 Threads and Locks** (Oracle)
+  - ID: 562 · type=documentation · role=PRIMARY
   - URL: https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Chapter 17
-  - SECTION END: Chapter 17
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 63 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
-
-#### Internal / verification resources (NOT shown to learners)
-
-- Java Language Specification SE 21 — Chapter 17 Threads and Locks — LEGACY_DUPLICATE — https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html
 
 ### Practice
 
@@ -7746,7 +7750,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: DSA & Algorithms
 
-Topics: 106 · Units: 106 · READY 106 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 106 · Units: 106 · READY 97 · PARTIAL 2 · GAP 4 · NR 3 · NO_PRIMARY 0
 
 ## Algorithmic thinking
 
@@ -7828,7 +7832,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 118
-- Readiness: **READY**
+- Readiness: **RESOURCE_GAP**
 - Spine: yes
 
 ### Learning Objective
@@ -7855,19 +7859,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dsa-big-o-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: LOW)
 - Required concepts: `dsa-big-o-big-o-notation`, `dsa-big-o-read-and-write-simple-big-o-for-loops-an`
 
 #### Primary Resource(s)
 
 - **Learn: Big-O notation** (GeeksforGeeks)
   - ID: 662 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Big-O analysis
-  - SECTION END: Big-O analysis
-  - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - URL: https://www.geeksforgeeks.org/analysis-of-algorithms-big-o-analysis/
+  - Exactness: COLLECTION · Boundary: ARTICLE_SECTION
+  - SECTION START: Big-O
+  - SECTION END: Big-O
+  - Minutes: None · Confidence: LOW
+  - Verification: BROKEN · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -7929,12 +7933,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Best, worst, average** (GeeksforGeeks)
+- **NeetCode — Best Time to Buy and Sell Stock** (NeetCode)
   - ID: 663 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Best/worst/average
-  - SECTION END: Best/worst/average
+  - SECTION START: Brute Force; Two Pointers; Dynamic Programming; Time & Space Complexity
+  - SECTION END: Brute Force; Two Pointers; Dynamic Programming; Time & Space Complexity
   - Minutes: 19 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -8036,7 +8040,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 121
-- Readiness: **READY**
+- Readiness: **RESOURCE_GAP**
 - Spine: yes
 
 ### Learning Objective
@@ -8063,19 +8067,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dsa-array-insert-delete-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: LOW)
 - Required concepts: `dsa-array-insert-delete-insertion-and-deletion-concepts`, `dsa-array-insert-delete-insert-delete-cost-in-contiguous-arrays`
 
 #### Primary Resource(s)
 
 - **Learn: Insertion and deletion concepts** (GeeksforGeeks)
   - ID: 665 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/array-data-structure-guide/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Array insert and delete operations
-  - SECTION END: Array insert and delete operations
-  - Minutes: 10 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - URL: https://www.geeksforgeeks.org/insertion-and-deletion-in-arrays/
+  - Exactness: COLLECTION · Boundary: ARTICLE_SECTION
+  - SECTION START: Insert/Delete
+  - SECTION END: Insert/Delete
+  - Minutes: None · Confidence: LOW
+  - Verification: BROKEN · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -8206,12 +8210,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Frequency counting** (GeeksforGeeks)
+- **NeetCode — Valid Anagram** (NeetCode)
   - ID: 667 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Frequency counting
-  - SECTION END: Frequency counting
+  - SECTION START: Hash Map; Hash Table (Using Array)
+  - SECTION END: Hash Map; Hash Table (Using Array)
   - Minutes: 24 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -8275,12 +8279,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Array patterns** (GeeksforGeeks)
+- **NeetCode — Product of Array Except Self** (NeetCode)
   - ID: 668 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/two-pointers-technique/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Array patterns / two pointers
-  - SECTION END: Array patterns / two pointers
+  - SECTION START: Prefix and Suffix Products
+  - SECTION END: Prefix and Suffix Products
   - Minutes: 23 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -8483,12 +8487,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Character processing** (GeeksforGeeks)
+- **NeetCode — Valid Anagram** (NeetCode)
   - ID: 671 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Hash Map (Using Array); String
+  - SECTION END: Hash Map (Using Array); String
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -8589,7 +8593,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 129
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -8625,12 +8629,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Hash map** (GeeksforGeeks)
   - ID: 673 · type=documentation · role=PRIMARY
-  - URL: https://docs.oracle.com/javase/tutorial/collections/implementations/map.html
+  - URL: https://www.geeksforgeeks.org/hashing-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Map implementations / HashMap
-  - SECTION END: Map implementations / HashMap
+  - SECTION START: Hashing
+  - SECTION END: Hashing
   - Minutes: 10 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -8660,7 +8664,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 130
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: yes
 
 ### Learning Objective
@@ -8694,12 +8698,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Hash set** (GeeksforGeeks)
   - ID: 674 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/hashset-in-java/
+  - URL: https://www.geeksforgeeks.org/hashing-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: HashSet
   - SECTION END: HashSet
-  - Minutes: 13 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -8761,12 +8765,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Frequency maps** (GeeksforGeeks)
+- **NeetCode — Top K Frequent Elements** (NeetCode)
   - ID: 675 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Hash Map; Frequency counting; Min-Heap; Bucket Sort
+  - SECTION END: Hash Map; Frequency counting; Min-Heap; Bucket Sort
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -8798,7 +8802,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 132
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -8832,12 +8836,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Lookup patterns** (GeeksforGeeks)
   - ID: 676 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Pair with given sum / complement lookup
-  - SECTION END: Pair with given sum / complement lookup
-  - Minutes: 33 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: Data structures overview
+  - SECTION END: Data structures overview
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -9109,12 +9113,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Fixed window** (GeeksforGeeks)
+- **NeetCode — Sliding Window Maximum** (NeetCode)
   - ID: 680 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Fixed Window; Monotonic Queue
+  - SECTION END: Fixed Window; Monotonic Queue
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9178,12 +9182,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Variable window** (GeeksforGeeks)
+- **NeetCode — Longest Substring Without Repeating Characters** (NeetCode)
   - ID: 681 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Variable Window; Two Pointers
+  - SECTION END: Variable Window; Two Pointers
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9247,12 +9251,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Frequency window state** (GeeksforGeeks)
+- **NeetCode — Permutation in String** (NeetCode)
   - ID: 682 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Frequency Window; Hash Map/Array
+  - SECTION END: Frequency Window; Hash Map/Array
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9284,7 +9288,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 139
-- Readiness: **READY**
+- Readiness: **RESOURCE_GAP**
 - Spine: yes
 
 ### Learning Objective
@@ -9313,19 +9317,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dsa-singly-linked-list-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: LOW)
 - Required concepts: `dsa-singly-linked-list-singly-linked-list`, `dsa-singly-linked-list-represent-a-singly-linked-list-with-node`
 
 #### Primary Resource(s)
 
-- **Learn: Singly linked list** (GeeksforGeeks)
+- **GeeksforGeeks — Linked List Data Structure** (GeeksforGeeks)
   - ID: 683 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/linked-list-set-1-introduction/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Singly linked list introduction
-  - SECTION END: Singly linked list introduction
-  - Minutes: 10 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - URL: https://www.geeksforgeeks.org/singly-linked-list/
+  - Exactness: COLLECTION · Boundary: ARTICLE_SECTION
+  - SECTION START: Introduction to Linked List; Node; Traversal
+  - SECTION END: Introduction to Linked List; Node; Traversal
+  - Minutes: None · Confidence: LOW
+  - Verification: BROKEN · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -9387,12 +9391,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: List operations** (GeeksforGeeks)
+- **GeeksforGeeks — Linked List Data Structure** (GeeksforGeeks)
   - ID: 684 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Introduction; Insertion; Deletion; Traversal
+  - SECTION END: Introduction; Insertion; Deletion; Traversal
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9456,12 +9460,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Reversal** (GeeksforGeeks)
+- **NeetCode — Reverse Linked List** (NeetCode)
   - ID: 685 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Iterative reversal; Recursive reversal; Complexity
+  - SECTION END: Iterative reversal; Recursive reversal; Complexity
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9525,12 +9529,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Fast and slow pointers** (GeeksforGeeks)
+- **NeetCode — Linked List Cycle** (NeetCode)
   - ID: 686 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Floyd's Algorithm; Fast and Slow Pointers
+  - SECTION END: Floyd's Algorithm; Fast and Slow Pointers
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9594,12 +9598,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Cycle detection** (GeeksforGeeks)
+- **NeetCode — Course Schedule** (NeetCode)
   - ID: 687 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Cycle Detection; Topological Sort
+  - SECTION END: Cycle Detection; Topological Sort
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -9663,12 +9667,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Merge patterns** (GeeksforGeeks)
+- **NeetCode — Merge Two Sorted Linked Lists** (NeetCode)
   - ID: 688 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Two-pointer linked-list merge
+  - SECTION END: Two-pointer linked-list merge
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -10291,12 +10295,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Subsets** (GeeksforGeeks)
+- **NeetCode — Subsets** (NeetCode)
   - ID: 697 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Backtracking; Choose/Skip
+  - SECTION END: Backtracking; Choose/Skip
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -10362,11 +10366,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Permutations** (GeeksforGeeks)
   - ID: 698 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Print all permutations
   - SECTION END: Print all permutations
-  - Minutes: 12 · Confidence: MEDIUM
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10429,12 +10433,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Combinations** (GeeksforGeeks)
+- **NeetCode — Combinations** (NeetCode)
   - ID: 699 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Backtracking; Algorithm; Complexity
+  - SECTION END: Backtracking; Algorithm; Complexity
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -10570,11 +10574,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Bubble sort** (GeeksforGeeks)
   - ID: 701 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/bubble-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Bubble sort
   - SECTION END: Bubble sort
-  - Minutes: 16 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10639,11 +10643,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Selection sort** (GeeksforGeeks)
   - ID: 702 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/selection-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Selection sort
   - SECTION END: Selection sort
-  - Minutes: 17 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10708,11 +10712,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Insertion sort** (GeeksforGeeks)
   - ID: 703 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/insertion-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Insertion sort
   - SECTION END: Insertion sort
-  - Minutes: 17 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10777,11 +10781,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Merge sort** (GeeksforGeeks)
   - ID: 704 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/merge-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Merge sort
   - SECTION END: Merge sort
-  - Minutes: 23 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10846,11 +10850,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Quick sort** (GeeksforGeeks)
   - ID: 705 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/quick-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Quick sort
   - SECTION END: Quick sort
-  - Minutes: 22 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10915,11 +10919,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Heap sort** (GeeksforGeeks)
   - ID: 706 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/heap-sort/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Heap sort
   - SECTION END: Heap sort
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -10984,11 +10988,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Counting and radix concepts** (GeeksforGeeks)
   - ID: 707 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/radix-sort/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Radix sort
   - SECTION END: Radix sort
-  - Minutes: 29 · Confidence: MEDIUM
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -11122,10 +11126,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Complexity comparison** (GeeksforGeeks)
   - ID: 709 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/time-complexities-of-all-sorting-algorithms/
+  - URL: https://www.geeksforgeeks.org/sorting-algorithms/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Time complexities of sorting algorithms
-  - SECTION END: Time complexities of sorting algorithms
+  - SECTION START: Sorting
+  - SECTION END: Sorting
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -11227,7 +11231,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 167
-- Readiness: **READY**
+- Readiness: **RESOURCE_GAP**
 - Spine: yes
 
 ### Learning Objective
@@ -11254,19 +11258,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `dsa-binary-search-boundaries-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: MEDIUM)
+- Estimated minutes: 30 (confidence: LOW)
 - Required concepts: `dsa-binary-search-boundaries-boundaries`, `dsa-binary-search-boundaries-get-low-high-updates-right`
 
 #### Primary Resource(s)
 
 - **Learn: Boundaries** (GeeksforGeeks)
   - ID: 711 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/binary-search/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Binary search bounds / low-high updates
-  - SECTION END: Binary search bounds / low-high updates
-  - Minutes: 26 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - URL: https://www.geeksforgeeks.org/lower-and-upper-bound/
+  - Exactness: COLLECTION · Boundary: ARTICLE_SECTION
+  - SECTION START: Lower/upper bound
+  - SECTION END: Lower/upper bound
+  - Minutes: None · Confidence: LOW
+  - Verification: BROKEN · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -11328,12 +11332,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: First and last occurrence** (GeeksforGeeks)
+- **NeetCode — Find First and Last Position of Element in Sorted Array** (NeetCode)
   - ID: 712 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Binary Search; Left boundary; Right boundary
+  - SECTION END: Binary Search; Left boundary; Right boundary
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -12024,11 +12028,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: BST search** (GeeksforGeeks)
   - ID: 722 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+  - URL: https://www.geeksforgeeks.org/binary-tree-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: BST search
-  - SECTION END: BST search
-  - Minutes: 21 · Confidence: MEDIUM
+  - SECTION START: Trees
+  - SECTION END: Trees
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12093,11 +12097,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: BST insertion** (GeeksforGeeks)
   - ID: 723 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+  - URL: https://www.geeksforgeeks.org/binary-tree-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: BST insert
-  - SECTION END: BST insert
-  - Minutes: 21 · Confidence: MEDIUM
+  - SECTION START: Trees
+  - SECTION END: Trees
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12162,11 +12166,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: BST deletion** (GeeksforGeeks)
   - ID: 724 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+  - URL: https://www.geeksforgeeks.org/binary-tree-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: BST delete
-  - SECTION END: BST delete
-  - Minutes: 29 · Confidence: MEDIUM
+  - SECTION START: Trees
+  - SECTION END: Trees
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12229,13 +12233,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: BST validation** (GeeksforGeeks)
+- **NeetCode — Validate Binary Search Tree** (NeetCode)
   - ID: 725 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
+  - URL: https://www.geeksforgeeks.org/binary-tree-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Validate BST
-  - SECTION END: Validate BST
-  - Minutes: 38 · Confidence: MEDIUM
+  - SECTION START: DFS; Bounds; Common Pitfalls
+  - SECTION END: DFS; Bounds; Common Pitfalls
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12507,12 +12511,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Heapify** (GeeksforGeeks)
+- **NeetCode — DSA for Beginners: Heap / Priority Queue** (NeetCode)
   - ID: 729 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/heap-sort/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Heapify / heap
-  - SECTION END: Heapify / heap
+  - SECTION START: Heap / Priority Queue
+  - SECTION END: Heap / Priority Queue
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -12576,13 +12580,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Top-K** (GeeksforGeeks)
+- **NeetCode — Top K Frequent Elements** (NeetCode)
   - ID: 730 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Top-K / heap selection
-  - SECTION END: Top-K / heap selection
-  - Minutes: 34 · Confidence: MEDIUM
+  - SECTION START: Min-Heap; Bucket Sort; Complexity
+  - SECTION END: Min-Heap; Bucket Sort; Complexity
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12862,7 +12866,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: DFS
   - SECTION END: DFS
-  - Minutes: 29 · Confidence: MEDIUM
+  - Minutes: 28 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -12925,12 +12929,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Connected components** (GeeksforGeeks)
+- **NeetCode — Number of Connected Components In An Undirected Graph** (NeetCode)
   - ID: 735 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: DFS; BFS; Union Find; Complexity
+  - SECTION END: DFS; BFS; Union Find; Complexity
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -13211,11 +13215,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Union-Find** (GeeksforGeeks)
   - ID: 739 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Union-Find
   - SECTION END: Union-Find
-  - Minutes: 17 · Confidence: MEDIUM
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -13283,12 +13287,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Unweighted shortest paths** (GeeksforGeeks)
+- **NeetCode — Shortest Path in Binary Matrix** (NeetCode)
   - ID: 740 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Breadth First Search; Unweighted Shortest Path
+  - SECTION END: Breadth First Search; Unweighted Shortest Path
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -13352,12 +13356,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Dijkstra** (GeeksforGeeks)
+- **NeetCode — Network Delay Time** (NeetCode)
   - ID: 741 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Dijkstra's Algorithm; Min-Heap; Complexity
+  - SECTION END: Dijkstra's Algorithm; Min-Heap; Complexity
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -13425,12 +13429,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: MST** (GeeksforGeeks)
+- **NeetCode — Min Cost to Connect All Points** (NeetCode)
   - ID: 742 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Minimum Spanning Tree; Prim; Kruskal
+  - SECTION END: Minimum Spanning Tree; Prim; Kruskal
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -13632,12 +13636,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Interval problems** (GeeksforGeeks)
+- **NeetCode — Merge Intervals** (NeetCode)
   - ID: 745 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Sorting; Interval merging
+  - SECTION END: Sorting; Interval merging
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -13841,11 +13845,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: DP mindset** (GeeksforGeeks)
   - ID: 748 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Overlapping subproblems
   - SECTION END: Overlapping subproblems
-  - Minutes: 22 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -13876,7 +13880,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 205
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -13910,12 +13914,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Memoization** (GeeksforGeeks)
   - ID: 749 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/memoization-1d-2d-and-3d/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Memoization
   - SECTION END: Memoization
-  - Minutes: 58 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -13977,12 +13981,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Tabulation** (GeeksforGeeks)
+- **NeetCode — Coin Change** (NeetCode)
   - ID: 750 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: Dynamic Programming; Bottom-Up Tabulation
+  - SECTION END: Dynamic Programming; Bottom-Up Tabulation
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -14048,11 +14052,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: State definition** (GeeksforGeeks)
   - ID: 751 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Overlapping subproblems / DP state thinking
-  - SECTION END: Overlapping subproblems / DP state thinking
-  - Minutes: 22 · Confidence: MEDIUM
+  - SECTION START: DP
+  - SECTION END: DP
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14117,11 +14121,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Transition** (GeeksforGeeks)
   - ID: 752 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/tabulation-vs-memoization/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Tabulation vs memoization transitions
-  - SECTION END: Tabulation vs memoization transitions
-  - Minutes: 19 · Confidence: MEDIUM
+  - SECTION START: DP
+  - SECTION END: DP
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14184,12 +14188,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: 1D DP** (GeeksforGeeks)
+- **NeetCode — Climbing Stairs** (NeetCode)
   - ID: 753 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: 1D DP
-  - SECTION END: 1D DP
+  - SECTION START: Dynamic Programming; State transition; Complexity
+  - SECTION END: Dynamic Programming; State transition; Complexity
   - Minutes: 27 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -14253,12 +14257,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: 2D DP** (GeeksforGeeks)
+- **NeetCode — Unique Paths** (NeetCode)
   - ID: 754 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: 2D DP overview
-  - SECTION END: 2D DP overview
+  - SECTION START: 2D Dynamic Programming; State transition
+  - SECTION END: 2D Dynamic Programming; State transition
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -14324,11 +14328,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Subsequence DP** (GeeksforGeeks)
   - ID: 755 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: LCS
   - SECTION END: LCS
-  - Minutes: 52 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14359,7 +14363,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: STRONG
 - Sequential order: 212
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -14393,12 +14397,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Knapsack** (GeeksforGeeks)
   - ID: 756 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: 0/1 Knapsack
   - SECTION END: 0/1 Knapsack
-  - Minutes: 38 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -14462,11 +14466,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Grid DP** (GeeksforGeeks)
   - ID: 757 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/unique-paths-in-a-grid-with-obstacles/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Grid DP paths
-  - SECTION END: Grid DP paths
-  - Minutes: 46 · Confidence: MEDIUM
+  - SECTION START: DP
+  - SECTION END: DP
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14531,11 +14535,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Interval DP concepts** (GeeksforGeeks)
   - ID: 758 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Matrix chain / interval DP
-  - SECTION END: Matrix chain / interval DP
-  - Minutes: 33 · Confidence: MEDIUM
+  - SECTION START: DP
+  - SECTION END: DP
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14600,11 +14604,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: DP optimization** (GeeksforGeeks)
   - ID: 759 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/space-optimization-using-bit-manipulations/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Space optimization notes for DP
-  - SECTION END: Space optimization notes for DP
-  - Minutes: 22 · Confidence: MEDIUM
+  - SECTION START: DP
+  - SECTION END: DP
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14807,11 +14811,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Segment tree concept** (GeeksforGeeks)
   - ID: 762 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
+  - URL: https://www.geeksforgeeks.org/binary-tree-data-structure/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Segment tree range queries
-  - SECTION END: Segment tree range queries
-  - Minutes: 49 · Confidence: MEDIUM
+  - SECTION START: Trees
+  - SECTION END: Trees
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -14943,13 +14947,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Advanced DP** (GeeksforGeeks)
+- **NeetCode — Advanced Algorithms Course** (NeetCode)
   - ID: 764 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/bitmasking-and-dynamic-programming-set-1-count-ways-to-assign-unique-cap-to-every-person/
+  - URL: https://www.geeksforgeeks.org/dynamic-programming/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Bitmask DP
-  - SECTION END: Bitmask DP
-  - Minutes: 45 · Confidence: MEDIUM
+  - SECTION START: Dynamic Programming; Advanced algorithm patterns
+  - SECTION END: Dynamic Programming; Advanced algorithm patterns
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -15012,12 +15016,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Learn: Pattern selection** (GeeksforGeeks)
+- **NeetCode — DSA for Beginners** (NeetCode)
   - ID: 765 · type=documentation · role=PRIMARY
   - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Data structures overview
-  - SECTION END: Data structures overview
+  - SECTION START: How to identify and apply patterns; Course progression
+  - SECTION END: How to identify and apply patterns; Course progression
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -15083,11 +15087,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Learn: Interview hygiene** (GeeksforGeeks)
   - ID: 766 · type=documentation · role=PRIMARY
-  - URL: https://www.techinterviewhandbook.org/coding-interview-techniques/
+  - URL: https://www.geeksforgeeks.org/data-structures/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Coding interview techniques
-  - SECTION END: Coding interview techniques
-  - Minutes: 25 · Confidence: MEDIUM
+  - SECTION START: Data structures overview
+  - SECTION END: Data structures overview
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -15154,13 +15158,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Software Development Lifecycle (IBM)** (IBM)
+- **IBM — Software Development Life Cycle (SDLC)** (IBM)
   - ID: 563 · type=documentation · role=PRIMARY
-  - URL: https://www.ibm.com/topics/software-development-lifecycle
+  - URL: https://www.ibm.com/think/topics/sdlc
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: SDLC overview
-  - SECTION END: SDLC overview
-  - Minutes: 22 · Confidence: MEDIUM
+  - SECTION START: SDLC phases; Planning; Analysis; Design; Development; Testing; Deployment; Maintenance
+  - SECTION END: SDLC phases; Planning; Analysis; Design; Development; Testing; Deployment; Maintenance
+  - Minutes: 30 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -15221,7 +15225,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **IBM: Requirements & scope** (IBM)
   - ID: 564 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/software-engineering-requirements-engineering-process/
+  - URL: https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-engineering-process/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Requirements engineering process
   - SECTION END: Requirements engineering process
@@ -15287,9 +15291,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **SemVer: Semantic versioning** (SemVer)
   - ID: 565 · type=documentation · role=PRIMARY
   - URL: https://semver.org/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: SemVer: Semantic versioning
-  - SECTION END: SemVer: Semantic versioning
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -15615,13 +15619,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **restfulapi.net: API design basics** (restfulapi.net)
+- **Microsoft Azure Architecture — API Design** (Microsoft Learn)
   - ID: 570 · type=documentation · role=PRIMARY
-  - URL: https://restfulapi.net/
+  - URL: https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: restfulapi.net: API design basics
-  - SECTION END: restfulapi.net: API design basics
-  - Minutes: 16 · Confidence: MEDIUM
+  - SECTION START: API design; Resource modeling; HTTP methods; Errors
+  - SECTION END: API design; Resource modeling; HTTP methods; Errors
+  - Minutes: 44 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -15817,12 +15821,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **SQLite: SQL SELECT** (SQLite)
+- **SQLite — SELECT statement** (SQLite)
   - ID: 573 · type=documentation · role=PRIMARY
   - URL: https://www.sqlite.org/lang_select.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: lang_select.html
-  - SECTION END: lang_select.html
+  - SECTION START: Simple SELECT; WHERE; ORDER BY; LIMIT; compound SELECT
+  - SECTION END: Simple SELECT; WHERE; ORDER BY; LIMIT; compound SELECT
   - Minutes: 53 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -15882,12 +15886,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **SQLite: SQL JOINs** (SQLite)
+- **SQLite — SELECT and JOIN processing** (SQLite)
   - ID: 574 · type=documentation · role=PRIMARY
   - URL: https://www.sqlite.org/lang_select.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: lang_select.html
-  - SECTION END: lang_select.html
+  - SECTION START: The SELECT core; JOIN clause; Join Operators
+  - SECTION END: The SELECT core; JOIN clause; Join Operators
   - Minutes: 53 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -16012,12 +16016,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **SQLite: Transactions** (SQLite)
+- **SQLite — Transactions** (SQLite)
   - ID: 576 · type=documentation · role=PRIMARY
   - URL: https://www.sqlite.org/lang_transaction.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: lang_transaction.html
-  - SECTION END: lang_transaction.html
+  - SECTION START: 2. Transactions; 2.1 Read transactions versus write transactions; 2.2 DEFERRED, IMMEDIATE, and EXCLUSIVE transactions
+  - SECTION END: 2. Transactions; 2.1 Read transactions versus write transactions; 2.2 DEFERRED, IMMEDIATE, and EXCLUSIVE transactions
   - Minutes: 13 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -16144,7 +16148,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **MDN: HTTP fundamentals** (MDN)
   - ID: 578 · type=documentation · role=PRIMARY
-  - URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+  - URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Overview
   - SECTION END: Overview
@@ -16272,13 +16276,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **json.org: JSON APIs** (json.org)
+- **MDN — Working with JSON** (MDN)
   - ID: 580 · type=documentation · role=PRIMARY
-  - URL: https://www.json.org/json-en.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: JSON grammar and values
-  - SECTION END: JSON grammar and values
-  - Minutes: 10 · Confidence: MEDIUM
+  - URL: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
+  - Minutes: 19 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -17461,9 +17465,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **NumPy: NumPy foundations** (NumPy)
   - ID: 640 · type=documentation · role=PRIMARY
   - URL: https://numpy.org/doc/stable/user/absolute_beginners.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: absolute_beginners.html
-  - SECTION END: absolute_beginners.html
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 56 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -18186,7 +18190,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -18251,7 +18255,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -18317,7 +18321,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -18447,7 +18451,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -18577,7 +18581,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -18642,7 +18646,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -18707,7 +18711,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -18725,7 +18729,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Machine Learning
 
-Topics: 35 · Units: 35 · READY 35 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 35 · Units: 35 · READY 25 · PARTIAL 5 · GAP 0 · NR 5 · NO_PRIMARY 0
 
 ## What is machine learning
 
@@ -18737,7 +18741,7 @@ Topics: 35 · Units: 35 · READY 35 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Lane/Track: CORE (CORE)
 - Depth: WORKING_KNOWLEDGE
 - Sequential order: 260
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -18764,7 +18768,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-what-is-ml-core`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 45 (confidence: HIGH)
+- Estimated minutes: 45 (confidence: MEDIUM)
 - Required concepts: `ml-what-is-ml-what-is-machine-learning`, `ml-what-is-ml-distinguish-supervised-unsupervised-lear`
 
 #### Primary Resource(s)
@@ -18775,8 +18779,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 00:00
   - SECTION END: 26:14
-  - Minutes: 26 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -18837,9 +18841,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **scikit-learn: Features & labels** (scikit-learn)
   - ID: 592 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/getting_started.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Getting started — features and estimators
-  - SECTION END: Getting started — features and estimators
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 14 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -19033,9 +19037,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **scikit-learn: Classification basics** (scikit-learn)
   - ID: 595 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/tree.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Decision Trees classification
-  - SECTION END: Decision Trees classification
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 30 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -19293,10 +19297,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Supervised learning (ML Crash Course)** (Google Developers)
   - ID: 773 · type=documentation · role=PRIMARY
   - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_introduction/index.md
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 18 · Confidence: MEDIUM
+  - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19361,7 +19365,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 15 · Confidence: MEDIUM
+  - Minutes: 42 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19388,7 +19392,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: INTUITION
 - Sequential order: 270
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -19423,11 +19427,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Linear model — OLS cost** (scikit-learn)
   - ID: 775 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 60 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -19453,7 +19457,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: INTUITION
 - Sequential order: 271
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -19482,7 +19486,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-gradient-descent-intuition-lesson`
 - Role: FOUNDATION · Difficulty: beginner
-- Estimated minutes: 25 (confidence: HIGH)
+- Estimated minutes: 25 (confidence: MEDIUM)
 - Required concepts: `descent-analogy`, `learning-rate-role`, `gradient-direction`
 
 #### Primary Resource(s)
@@ -19493,8 +19497,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 00:00
   - SECTION END: 26:14
-  - Minutes: 26 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -19555,10 +19559,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Logistic regression** (scikit-learn)
   - ID: 777 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 30 · Confidence: MEDIUM
+  - Minutes: 60 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19685,10 +19689,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Forests of randomized trees** (scikit-learn)
   - ID: 779 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/ensemble.html#forests-of-randomized-trees
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 63 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19715,7 +19719,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 275
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -19753,8 +19757,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 33 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -19819,7 +19823,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 14 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19884,7 +19888,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 32 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19946,10 +19950,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Confusion matrix** (scikit-learn)
   - ID: 783 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -19976,7 +19980,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: INTUITION
 - Sequential order: 279
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -20011,11 +20015,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Underfitting vs overfitting** (scikit-learn)
   - ID: 784 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/model_evaluation.html#underfitting-vs-overfitting
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 75 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -20079,7 +20083,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 42 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -20144,7 +20148,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 15 · Confidence: MEDIUM
+  - Minutes: 49 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -20209,7 +20213,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 49 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -20236,7 +20240,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: INTUITION
 - Sequential order: 283
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -20271,11 +20275,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Ensembles user guide overview** (scikit-learn)
   - ID: 788 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/ensemble.html
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 63 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -20301,7 +20305,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: APPLICATION
 - Sequential order: 284
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -20340,8 +20344,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 35 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -20367,7 +20371,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 285
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -20394,7 +20398,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `ml-ridge-lasso-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `ridge-l2`, `lasso-l1`
 
 #### Primary Resource(s)
@@ -20405,8 +20409,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 10:00
   - SECTION END: 26:14
-  - Minutes: 16 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -20464,13 +20468,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Model Evaluation — ROC/AUC** (scikit-learn)
+- **scikit-learn — ROC metrics** (scikit-learn)
   - ID: 897 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/model_evaluation.html
+  - URL: https://scikit-learn.org/stable/modules/model_evaluation.html#roc-metrics
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
+  - SECTION START: Receiver operating characteristic (ROC); ROC AUC
+  - SECTION END: Receiver operating characteristic (ROC); ROC AUC
+  - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -20529,13 +20533,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Model Evaluation — Regression metrics** (scikit-learn)
+- **scikit-learn — Regression metrics** (scikit-learn)
   - ID: 895 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/model_evaluation.html
+  - URL: https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 20 · Confidence: MEDIUM
+  - SECTION START: Regression metrics
+  - SECTION END: Regression metrics
+  - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -20597,10 +20601,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Grid Search & Randomized Search** (scikit-learn)
   - ID: 891 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/grid_search.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
+  - Minutes: 31 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -20627,7 +20631,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 289
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -20659,14 +20663,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Clustering — K-means** (scikit-learn)
-  - ID: 893 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/clustering.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **StatQuest — K-means Clustering** (StatQuest)
+  - ID: 893 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=4b5d3muPQmA
+  - Exactness: MULTI_TOPIC · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 0
+  - SECTION END: 510
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -20724,13 +20728,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Clustering — Hierarchical & DBSCAN** (scikit-learn)
+- **scikit-learn — Clustering: Hierarchical and DBSCAN** (scikit-learn)
   - ID: 892 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/clustering.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
+  - SECTION START: Hierarchical clustering; DBSCAN; Density-based clustering
+  - SECTION END: Hierarchical clustering; DBSCAN; Density-based clustering
+  - Minutes: 74 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -20757,7 +20761,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 291
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -20790,14 +20794,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Decompositions — PCA** (scikit-learn)
-  - ID: 894 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/decomposition.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+- **StatQuest — Principal Component Analysis (PCA), Step-by-Step** (StatQuest)
+  - ID: 894 · type=youtube_video · role=PRIMARY
+  - URL: https://www.youtube.com/watch?v=FgakZw6K1QQ
+  - Exactness: MULTI_TOPIC · Boundary: VIDEO_TIMESTAMP
+  - SECTION START: 30
+  - SECTION END: 990
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -20855,12 +20859,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Novelty & Outlier Detection** (scikit-learn)
+- **scikit-learn — Novelty and Outlier Detection** (scikit-learn)
   - ID: 888 · type=documentation · role=PRIMARY
-  - URL: https://scikit-learn.org/stable/modules/neighbors.html
+  - URL: https://scikit-learn.org/stable/modules/outlier_detection.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
+  - SECTION START: Overview; Novelty detection; Outlier detection
+  - SECTION END: Overview; Novelty detection; Outlier detection
   - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
@@ -20923,10 +20927,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Ensembles — Gradient Boosting** (scikit-learn)
   - ID: 890 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/ensemble.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 30 · Confidence: MEDIUM
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
+  - Minutes: 63 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -20988,10 +20992,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Permutation Importance** (scikit-learn)
   - ID: 889 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/permutation_importance.html
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 20 · Confidence: MEDIUM
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
+  - Minutes: 14 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -21010,7 +21014,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Deep Learning
 
-Topics: 38 · Units: 38 · READY 38 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 38 · Units: 38 · READY 36 · PARTIAL 0 · GAP 0 · NR 2 · NO_PRIMARY 0
 
 ## Deep Learning awareness
 
@@ -21022,7 +21026,7 @@ Topics: 38 · Units: 38 · READY 38 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 295
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -21082,7 +21086,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 296
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -21176,12 +21180,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **PyTorch Basics Intro** (PyTorch)
+- **CS231n — Neural Networks Part 1: Setting up the Architecture** (CS231n)
   - ID: 645 · type=documentation · role=PRIMARY
   - URL: https://cs231n.github.io/neural-networks-1/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Neural Networks Part 1 — architecture
-  - SECTION END: Neural Networks Part 1 — architecture
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 32 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -21245,12 +21249,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Automatic Differentiation with torch.autograd** (PyTorch)
+- **CS231n — Backpropagation, Intuitions** (CS231n)
   - ID: 646 · type=documentation · role=PRIMARY
   - URL: https://cs231n.github.io/optimization-2/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: Backpropagation and gradient computation
-  - SECTION END: Backpropagation and gradient computation
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 31 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -21311,7 +21315,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Training a Classifier (CIFAR10)** (PyTorch)
+- **CS231n — Convolutional Neural Networks** (CS231n)
   - ID: 647 · type=documentation · role=PRIMARY
   - URL: https://cs231n.github.io/convolutional-networks/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
@@ -21382,7 +21386,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Hugging Face: Transformers intro** (Hugging Face)
   - ID: 648 · type=documentation · role=PRIMARY
-  - URL: https://huggingface.co/learn/nlp-course/chapter1/4
+  - URL: https://huggingface.co/learn/llm-course/chapter1/4
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: 4
   - SECTION END: 4
@@ -21452,7 +21456,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21518,7 +21522,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 28:37
   - Minutes: 33 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21583,7 +21587,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 40:21
   - Minutes: 40 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -21648,7 +21652,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 43:16
   - Minutes: 43 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21713,7 +21717,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21779,7 +21783,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21845,7 +21849,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21910,7 +21914,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -21975,7 +21979,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22040,7 +22044,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22105,7 +22109,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22170,7 +22174,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22235,7 +22239,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22300,7 +22304,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22365,7 +22369,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -22430,7 +22434,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22495,7 +22499,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22561,7 +22565,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22626,16 +22630,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
-  - Visibility: LEARNER
-- **Lecture 4 - Implementing the Dense Layer Class** (Vizuara)
-  - ID: 913 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=qFMpq46hEjE
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 25:24
-  - Minutes: 25 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22700,7 +22695,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22765,16 +22760,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
-  - Visibility: LEARNER
-- **Lecture 5 - Broadcasting and array summation** (Vizuara)
-  - ID: 914 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=rtFpq608aEo
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 25:28
-  - Minutes: 25 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22839,7 +22825,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -22904,7 +22890,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -22969,7 +22955,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -23034,7 +23020,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 43:55
   - Minutes: 44 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -23099,7 +23085,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 72:35
   - Minutes: 73 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -23164,7 +23150,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23229,7 +23215,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23294,7 +23280,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23359,7 +23345,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23425,7 +23411,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 35 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23490,7 +23476,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23508,7 +23494,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Computer Vision
 
-Topics: 26 · Units: 26 · READY 26 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 26 · Units: 26 · READY 24 · PARTIAL 0 · GAP 0 · NR 1 · NO_PRIMARY 1
 
 ## What is an image?
 
@@ -23552,23 +23538,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Image representation basics (Python/Numpy tutorial)** (scikit-image)
+- **scikit-image — Image data representation with NumPy** (scikit-image)
   - ID: 816 · type=documentation · role=PRIMARY
   - URL: https://scikit-image.org/docs/stable/user_guide/numpy_images.html
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
-  - Visibility: LEARNER
-- **Computer Vision from Scratch | New course launch** (Vizuara)
-  - ID: 908 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=Tu11SMJGGIA
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 28:43
-  - Minutes: 29 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23633,7 +23610,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -23698,7 +23675,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23763,7 +23740,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: 00:00
   - SECTION END: 25:00
   - Minutes: 25 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23828,7 +23805,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23893,7 +23870,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -23958,7 +23935,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -24018,12 +23995,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Convolution as edge detection origin** (OpenCV)
   - ID: 823 · type=documentation · role=PRIMARY
-  - URL: https://docs.opencv.org/4.x/d4/dbd/tutorial_filter_2d.html
+  - URL: https://docs.opencv.org/4.13.0/d4/dbd/tutorial_filter_2d.html
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -24049,7 +24026,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 416
-- Readiness: **READY**
+- Readiness: **NO_PRIMARY**
 - Spine: expansion
 
 ### Learning Objective
@@ -24077,20 +24054,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `cv-convolution-in-cv-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 25 (confidence: HIGH)
+- Estimated minutes: 25 (confidence: None)
 - Required concepts: `conv-on-images`, `stride-padding-vis`
 
 #### Primary Resource(s)
 
-- **U-Net Evolution and Modern Applications** (Vizuara)
-  - ID: 910 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=9KvngtchNww
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 20:00
-  - Minutes: 20 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
-  - Visibility: LEARNER
 
 ### Practice
 
@@ -24155,7 +24123,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -24220,7 +24188,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24286,7 +24254,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24312,7 +24280,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: AWARENESS
 - Sequential order: 420
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -24351,7 +24319,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 15 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 0
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -24416,7 +24384,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24481,7 +24449,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -24546,7 +24514,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24611,7 +24579,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24676,7 +24644,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -24741,7 +24709,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24806,7 +24774,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -24871,7 +24839,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -24937,7 +24905,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -25002,7 +24970,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -25062,12 +25030,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Vision Transformer** (Dive into Deep Learning)
   - ID: 839 · type=documentation · role=PRIMARY
-  - URL: https://www.d2l.ai/chapter_vision-transformer
+  - URL: https://d2l.ai/index.html
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -25133,7 +25101,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 60 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -25193,12 +25161,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Introduction to SIFT** (OpenCV)
   - ID: 876 · type=documentation · role=PRIMARY
-  - URL: https://docs.opencv.org/4.x/da/df5/tutorial_py_sift_intro.html
+  - URL: https://docs.opencv.org/4.13.0/da/df5/tutorial_py_sift_intro.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Verification: NEEDS_REVIEW · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -25216,7 +25184,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: NLP
 
-Topics: 18 · Units: 18 · READY 18 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 18 · Units: 18 · READY 10 · PARTIAL 5 · GAP 0 · NR 3 · NO_PRIMARY 0
 
 ## NLP awareness
 
@@ -25228,7 +25196,7 @@ Topics: 18 · Units: 18 · READY 18 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 297
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -25288,7 +25256,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 298
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -25449,10 +25417,10 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Text preprocessing (tokenizers intro)** (Hugging Face)
   - ID: 842 · type=documentation · role=PRIMARY
   - URL: https://www.nltk.org/book/ch03.html
-  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - Exactness: MULTI_TOPIC · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
@@ -25517,7 +25485,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -25582,7 +25550,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 42 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -25645,9 +25613,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - ID: 845 · type=documentation · role=PRIMARY
   - URL: https://scikit-learn.org/stable/modules/feature_extraction.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: through Evaluation on test set begins
-  - SECTION END: through Evaluation on test set begins
-  - Minutes: 20 · Confidence: MEDIUM
+  - SECTION START: TfidfTransformer section
+  - SECTION END: Evaluation on test set begins
+  - Minutes: 42 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -25713,7 +25681,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -25778,7 +25746,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: through Encoder-decoder prelude
   - SECTION END: through Encoder-decoder prelude
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 13 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -25805,7 +25773,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: INTUITION
 - Sequential order: 441
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -25843,8 +25811,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 25 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -25870,7 +25838,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 442
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -25909,8 +25877,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 16 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -25936,7 +25904,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 443
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -25975,8 +25943,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 19 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -26002,7 +25970,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 444
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -26030,7 +25998,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - Unit ID: `nlp-transformers-nlp-lesson`
 - Role: CORE · Difficulty: intermediate
-- Estimated minutes: 30 (confidence: HIGH)
+- Estimated minutes: 30 (confidence: MEDIUM)
 - Required concepts: `parallel-self-attn`, `positional-info`
 
 #### Primary Resource(s)
@@ -26041,8 +26009,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
   - SECTION START: 00:00
   - SECTION END: 19:48
-  - Minutes: 20 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -26106,7 +26074,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 24 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 3
   - Visibility: LEARNER
 
@@ -26133,7 +26101,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 446
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -26171,8 +26139,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 11 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -26236,7 +26204,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 31 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26301,7 +26269,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 15 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26328,7 +26296,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 449
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -26366,8 +26334,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 31 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -26385,7 +26353,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: Generative AI / LLMs
 
-Topics: 19 · Units: 19 · READY 19 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 19 · Units: 19 · READY 9 · PARTIAL 4 · GAP 0 · NR 6 · NO_PRIMARY 0
 
 ## Generative AI awareness
 
@@ -26397,7 +26365,7 @@ Topics: 19 · Units: 19 · READY 19 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 299
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -26457,7 +26425,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 300
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -26551,11 +26519,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **OpenAI: Embeddings & semantic search** (OpenAI)
   - ID: 649 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/embeddings
+  - URL: https://developers.openai.com/api/docs/guides/embeddings
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: embeddings
   - SECTION END: embeddings
-  - Minutes: 35 · Confidence: MEDIUM
+  - Minutes: 36 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26619,12 +26587,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **DeepLearning.AI: RAG systems** (DeepLearning.AI)
+- **LangChain — Retrieval** (LangChain)
   - ID: 650 · type=documentation · role=PRIMARY
-  - URL: https://python.langchain.com/docs/concepts/rag/
+  - URL: https://docs.langchain.com/oss/python/langchain/retrieval
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: RAG concepts
-  - SECTION END: RAG concepts
+  - SECTION START: Retrieval; Retrieval-augmented generation
+  - SECTION END: Retrieval; Retrieval-augmented generation
   - Minutes: 14 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -26687,7 +26655,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **OpenAI: Tool-using agents** (OpenAI)
   - ID: 651 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/function-calling
+  - URL: https://developers.openai.com/api/docs/guides/function-calling
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: function-calling
   - SECTION END: function-calling
@@ -26755,11 +26723,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **OpenAI Evals guide** (OpenAI)
   - ID: 652 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/evals
+  - URL: https://developers.openai.com/api/docs/guides/evals
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Evals
   - SECTION END: Evals
-  - Minutes: 42 · Confidence: MEDIUM
+  - Minutes: 43 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -26818,24 +26786,19 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **What language models are** (Hugging Face LLM Course)
+- **D2L.ai — Language Modeling** (D2L.ai)
   - ID: 857 · type=documentation · role=PRIMARY
   - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
+  - Minutes: 19 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
-- **Transformers Explained: Overview** (Vizuara)
-  - ID: 915 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=FVcUKMu_M5Q
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 19:48
-  - Minutes: 20 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
-  - Visibility: LEARNER
+
+#### Internal / verification resources (NOT shown to learners)
+
+- Transformers Explained: Overview — COVERAGE_SUPPLEMENT — https://www.youtube.com/watch?v=FVcUKMu_M5Q
 
 ### Practice
 
@@ -26860,7 +26823,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 346
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -26892,14 +26855,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Next-token objective** (Hugging Face LLM Course)
+- **D2L.ai — Language Modeling: Pretraining Objective** (D2L.ai)
   - ID: 858 · type=documentation · role=PRIMARY
   - URL: https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 0
+  - Minutes: 19 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -26925,7 +26888,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 347
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -26964,17 +26927,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
-  - Visibility: LEARNER
-- **Transformers Explained: Positional Encoding** (Vizuara)
-  - ID: 916 · type=youtube · role=PRIMARY
-  - URL: https://www.youtube.com/watch?v=7CNElr-TAQw
-  - Exactness: EXACT · Boundary: VIDEO_TIMESTAMP
-  - SECTION START: 00:00
-  - SECTION END: 13:57
-  - Minutes: 14 · Confidence: HIGH
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 14 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -27000,7 +26954,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 348
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -27039,7 +26993,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -27130,7 +27084,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 350
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -27168,8 +27122,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 11 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -27227,13 +27181,13 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Context windows guidance** (Anthropic)
+- **Anthropic — Context Windows** (Anthropic)
   - ID: 863 · type=documentation · role=PRIMARY
-  - URL: https://docs.anthropic.com/en/docs/build-with-claude/context-windows
+  - URL: https://platform.claude.com/docs/en/build-with-claude/context-windows
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: through Token usage tips end
-  - SECTION END: through Token usage tips end
-  - Minutes: 15 · Confidence: MEDIUM
+  - SECTION START: Context windows; Input and output tokens; Context management
+  - SECTION END: Context windows; Input and output tokens; Context management
+  - Minutes: 18 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
@@ -27260,7 +27214,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: APPLICATION
 - Sequential order: 352
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -27298,8 +27252,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 13 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -27325,7 +27279,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 353
-- Readiness: **READY**
+- Readiness: **PARTIAL**
 - Spine: expansion
 
 ### Learning Objective
@@ -27359,12 +27313,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Embeddings & similarity storage** (OpenAI)
   - ID: 865 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/embeddings
+  - URL: https://developers.openai.com/api/docs/guides/embeddings
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Minutes: 36 · Confidence: MEDIUM
+  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
 ### Practice
@@ -27424,11 +27378,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Retrieval-augmented generation** (Hugging Face LLM Course)
   - ID: 866 · type=documentation · role=PRIMARY
-  - URL: https://python.langchain.com/docs/tutorials/rag/
+  - URL: https://docs.langchain.com/oss/python/deepagents/rag
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 41 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 1
   - Visibility: LEARNER
 
@@ -27455,7 +27409,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 355
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -27494,8 +27448,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 1
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -27521,7 +27475,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 356
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: expansion
 
 ### Learning Objective
@@ -27553,14 +27507,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **PEFT / LoRA documentation** (Hugging Face)
+- **Hugging Face PEFT — LoRA and parameter-efficient fine-tuning** (Hugging Face)
   - ID: 883 · type=documentation · role=PRIMARY
-  - URL: https://huggingface.co/docs/peft/index
+  - URL: https://huggingface.co/docs/peft/en/index
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: above; content inspection pending
-  - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - SECTION START: PEFT; LoRA; Parameter-efficient fine-tuning
+  - SECTION END: PEFT; LoRA; Parameter-efficient fine-tuning
+  - Minutes: 10 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 ### Practice
@@ -27624,7 +27578,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -27643,7 +27597,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: AI Engineering / Agents
 
-Topics: 10 · Units: 10 · READY 10 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 10 · Units: 10 · READY 8 · PARTIAL 0 · GAP 0 · NR 2 · NO_PRIMARY 0
 
 ## AI Engineering awareness
 
@@ -27655,7 +27609,7 @@ Topics: 10 · Units: 10 · READY 10 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 301
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -27715,7 +27669,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: PARALLEL (Specialization / Runway) (OPTIONAL)
 - Depth: AWARENESS
 - Sequential order: 302
-- Readiness: **READY**
+- Readiness: **NEEDS_REVIEW**
 - Spine: yes
 
 ### Learning Objective
@@ -27809,12 +27763,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Structured outputs** (OpenAI)
   - ID: 868 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/structured-outputs
+  - URL: https://developers.openai.com/api/docs/guides/structured-outputs
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -27874,12 +27828,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Function/tool calling** (OpenAI)
   - ID: 869 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/function-calling
+  - URL: https://developers.openai.com/api/docs/guides/function-calling
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -27939,12 +27893,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Tool use implementation** (Anthropic)
   - ID: 870 · type=documentation · role=PRIMARY
-  - URL: https://docs.anthropic.com/en/docs/build-with-claude/tool-use
+  - URL: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28009,7 +27963,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28074,7 +28028,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28135,11 +28089,11 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **Multi-agent orchestration awareness** (Anthropic)
   - ID: 873 · type=documentation · role=PRIMARY
   - URL: https://www.anthropic.com/engineering/building-effective-agents
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: through Cost/latency tradeoffs end
-  - SECTION END: through Cost/latency tradeoffs end
+  - Exactness: FULL_SINGLE_PAGE · Boundary: ARTICLE_SECTION
+  - SECTION START: Multi-agent patterns section
+  - SECTION END: Cost/latency tradeoffs end
   - Minutes: 20 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28197,14 +28151,14 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **Safety & observability strategies** (OpenAI)
+- **Microsoft Learn — Observability for Generative AI and agentic AI systems** (Microsoft Learn)
   - ID: 874 · type=documentation · role=PRIMARY
-  - URL: https://owasp.org/www-project-top-10-for-large-language-model-applications/
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: end
-  - SECTION END: end
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - URL: https://learn.microsoft.com/en-us/security/zero-trust/sfi/observability-ai-systems
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
+  - Minutes: 20 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 2
   - Visibility: LEARNER
 
 ### Practice
@@ -28265,12 +28219,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **Production deployment checklist** (OpenAI)
   - ID: 875 · type=documentation · role=PRIMARY
-  - URL: https://platform.openai.com/docs/guides/production-best-practices
+  - URL: https://developers.openai.com/api/docs/guides/production-best-practices
   - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
   - SECTION START: FULL_SINGLE_PAGE
   - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 30 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 3
+  - Verification: NEEDS_REVIEW · Concepts covered: 3
   - Visibility: LEARNER
 
 ### Practice
@@ -28288,7 +28242,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 # DOMAIN: MLOps
 
-Topics: 6 · Units: 6 · READY 6 · PARTIAL 0 · GAP 0 · NR 0 · NO_PRIMARY 0
+Topics: 6 · Units: 6 · READY 5 · PARTIAL 0 · GAP 1 · NR 0 · NO_PRIMARY 0
 
 ## Experiment tracking
 
@@ -28605,7 +28559,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
+  - Minutes: 20 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
 
@@ -28632,7 +28586,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - Lane/Track: CORE (CORE)
 - Depth: MECHANICS
 - Sequential order: 371
-- Readiness: **READY**
+- Readiness: **RESOURCE_GAP**
 - Spine: expansion
 
 ### Learning Objective
@@ -28670,8 +28624,8 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: above; content inspection pending
   - SECTION END: above; content inspection pending
-  - Minutes: 25 · Confidence: MEDIUM
-  - Verification: VERIFIED_COVERAGE · Concepts covered: 2
+  - Minutes: 14 · Confidence: MEDIUM
+  - Verification: NEEDS_REVIEW · Concepts covered: 0
   - Visibility: LEARNER
 
 #### Internal / verification resources (NOT shown to learners)
@@ -28871,12 +28825,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **System Design Primer: Message queues** (System Design Primer)
+- **System Design Primer — Message Queues** (System Design Primer)
   - ID: 659 · type=documentation · role=PRIMARY
-  - URL: https://github.com/donnemartin/system-design-primer#asynchronous-processing-with-message-queues
+  - URL: https://github.com/donnemartin/system-design-primer
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: asynchronous-processing-with-message-queues
-  - SECTION END: asynchronous-processing-with-message-queues
+  - SECTION START: Message queues; Asynchronous processing
+  - SECTION END: Message queues; Asynchronous processing
   - Minutes: 67 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -29077,9 +29031,9 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 - **MDN: DNS** (MDN)
   - ID: 629 · type=documentation · role=PRIMARY
   - URL: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_domain_name
-  - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: What is a domain name / DNS
-  - SECTION END: What is a domain name / DNS
+  - Exactness: EXACT · Boundary: FULL_SINGLE_PAGE
+  - SECTION START: FULL_SINGLE_PAGE
+  - SECTION END: FULL_SINGLE_PAGE
   - Minutes: 13 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -29141,7 +29095,7 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 - **MDN: TCP vs UDP** (MDN)
   - ID: 630 · type=documentation · role=PRIMARY
-  - URL: https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
+  - URL: https://www.geeksforgeeks.org/computer-networks/differences-between-tcp-and-udp/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
   - SECTION START: Differences between TCP and UDP
   - SECTION END: Differences between TCP and UDP
@@ -29602,12 +29556,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **man7: Linux services basics** (man7)
+- **systemctl(1) — systemd system and service manager** (man7.org)
   - ID: 637 · type=documentation · role=PRIMARY
-  - URL: https://man7.org/linux/man-pages/man1/systemctl.1.html
+  - URL: https://www.man7.org/linux/man-pages/man1/systemctl.1.html
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: systemctl.1.html
-  - SECTION END: systemctl.1.html
+  - SECTION START: NAME; DESCRIPTION; COMMANDS; Unit Commands
+  - SECTION END: NAME; DESCRIPTION; COMMANDS; Unit Commands
   - Minutes: 75 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -29802,12 +29756,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **12-Factor: DevOps awareness** (12-Factor)
+- **Microsoft Learn — Discover DevOps** (Microsoft Learn)
   - ID: 607 · type=documentation · role=PRIMARY
-  - URL: https://12factor.net/
+  - URL: https://learn.microsoft.com/en-us/training/modules/discover-devops/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: 12-Factor: DevOps awareness
-  - SECTION END: 12-Factor: DevOps awareness
+  - SECTION START: Introduction; What is DevOps?; Explore DevOps culture; Explore DevOps goals and benefits; Explore DevOps application lifecycle; Summary
+  - SECTION END: Introduction; What is DevOps?; Explore DevOps culture; Explore DevOps goals and benefits; Explore DevOps application lifecycle; Summary
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER
@@ -29867,12 +29821,12 @@ All REQUIRED prerequisites complete (planner unlock_status; RECOMMENDED/AWARENES
 
 #### Primary Resource(s)
 
-- **12-Factor: DevOps learning path** (12-Factor)
+- **Microsoft Learn — DevOps foundations: The core principles and practices** (Microsoft Learn)
   - ID: 608 · type=documentation · role=PRIMARY
-  - URL: https://12factor.net/
+  - URL: https://learn.microsoft.com/en-us/training/paths/devops-foundations-core-principles-practices/
   - Exactness: EXACT · Boundary: ARTICLE_SECTION
-  - SECTION START: 12-Factor: DevOps learning path
-  - SECTION END: 12-Factor: DevOps learning path
+  - SECTION START: Modules in this learning path
+  - SECTION END: Modules in this learning path
   - Minutes: 10 · Confidence: MEDIUM
   - Verification: VERIFIED_COVERAGE · Concepts covered: 2
   - Visibility: LEARNER

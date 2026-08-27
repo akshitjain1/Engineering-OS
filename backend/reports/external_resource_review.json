@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T12:28:42.680246+00:00",
+  "generated_at": "2026-08-26T13:34:45.069006+00:00",
   "topics": [
     {
       "domain": "CS Foundations",
@@ -5863,28 +5863,38 @@
       "depth": "STRONG",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 0 in its module",
       "primary_resource": {
-        "resource_id": 110,
-        "provider": "Dev.java",
-        "title": "Using operators",
-        "url": "https://dev.java/learn/language-basics/using-operators/",
-        "resource_type": "documentation",
+        "resource_id": 917,
+        "provider": "Bro Code",
+        "title": "Bro Code Java 2025 — Operators",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "using-operators",
-        "section_end": "using-operators",
-        "estimated_minutes": 14,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "00:45:00",
+        "end_timestamp": "01:15:00",
+        "section_start": "00:45:00",
+        "section_end": "01:15:00",
+        "estimated_minutes": 30,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
-          "java-operators-operators",
-          "java-operators-predict-arithmetic-comparison-logical-as"
+          "java-operators"
         ],
-        "evidence_summary": "{\"resource_slug\": \"java-operators-primary\", \"verified_concepts\": [{\"concept\": \"java-operators-operators\", \"evidence\": \"Using Operators in Your Programs\", \"location\": \"heading: Using Operators in Your Programs\", \"confidence\": \"HIGH\", \"matched_terms\": [\"operators\"]}, {\"concept\": \"java-operators-predic"
+        "evidence_summary": ""
       },
       "supplementary_resources": [
+        {
+          "title": "Using operators",
+          "provider": "Dev.java",
+          "url": "https://dev.java/learn/language-basics/using-operators/",
+          "role": "REFERENCE",
+          "purpose": "Authoritative operator tutorial.",
+          "estimated_minutes": 14,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "using-operators",
+          "end": "using-operators"
+        },
         {
           "title": "Helsinki Part 1 — Calculating with numbers",
           "provider": "University of Helsinki",
@@ -5957,28 +5967,39 @@
       "depth": "STRONG",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 0 in its module",
       "primary_resource": {
-        "resource_id": 114,
-        "provider": "Dev.java",
-        "title": "Control flow statements",
-        "url": "https://dev.java/learn/language-basics/controlling-flow/",
-        "resource_type": "documentation",
+        "resource_id": 918,
+        "provider": "Bro Code",
+        "title": "Bro Code Java 2025 — if/else",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "Control flow statements",
-        "section_end": "Control flow statements",
-        "estimated_minutes": 15,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "01:15:00",
+        "end_timestamp": "01:45:00",
+        "section_start": "01:15:00",
+        "section_end": "01:45:00",
+        "estimated_minutes": 30,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
-          "java-if-else-if-else",
-          "java-if-else-branch-with-if-else-including-nested-con"
+          "java-if-else"
         ],
-        "evidence_summary": "{\"resource_slug\": \"java-if-else-reference\", \"verified_concepts\": [{\"concept\": \"java-if-else-if-else\", \"evidence\": \"wing program, BreakWithLabelDemo , is similar to the previous program, but uses nested for loops to search for a value in a two-dimensional array. When the value is found, a labeled bre"
+        "evidence_summary": ""
       },
-      "supplementary_resources": [],
+      "supplementary_resources": [
+        {
+          "title": "Control flow statements",
+          "provider": "Dev.java",
+          "url": "https://dev.java/learn/language-basics/controlling-flow/",
+          "role": "REFERENCE",
+          "purpose": "Decision, loop, and branch statements. Use the if/else portions.",
+          "estimated_minutes": 15,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "Control flow statements",
+          "end": "Control flow statements"
+        }
+      ],
       "practice": [
         {
           "practice_type": "SELF_REFLECTION",
@@ -6028,28 +6049,38 @@
       "depth": "STRONG",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 1 in its module",
       "primary_resource": {
-        "resource_id": 115,
-        "provider": "Dev.java",
-        "title": "Branching with switch statements",
-        "url": "https://dev.java/learn/language-basics/switch-statement/",
-        "resource_type": "documentation",
+        "resource_id": 919,
+        "provider": "Bro Code",
+        "title": "Bro Code Java 2025 — switch",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "switch-statement",
-        "section_end": "switch-statement",
-        "estimated_minutes": 10,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "01:45:00",
+        "end_timestamp": "02:00:00",
+        "section_start": "01:45:00",
+        "section_end": "02:00:00",
+        "estimated_minutes": 15,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
-          "java-switch-switch",
-          "java-switch-switch-statements-and-modern-switch-expr"
+          "java-switch"
         ],
-        "evidence_summary": "{\"resource_slug\": \"java-switch-primary\", \"verified_concepts\": [{\"concept\": \"java-switch-switch\", \"evidence\": \"Branching with Switch Statements\", \"location\": \"heading: Branching with Switch Statements\", \"confidence\": \"HIGH\", \"matched_terms\": [\"switch\", \"statements\"]}, {\"concept\": \"java-switch-switch-"
+        "evidence_summary": ""
       },
       "supplementary_resources": [
+        {
+          "title": "Branching with switch statements",
+          "provider": "Dev.java",
+          "url": "https://dev.java/learn/language-basics/switch-statement/",
+          "role": "REFERENCE",
+          "purpose": "Classic switch. Note break and fall-through.",
+          "estimated_minutes": 10,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "switch-statement",
+          "end": "switch-statement"
+        },
         {
           "title": "Branching with switch expressions",
           "provider": "Dev.java",
@@ -6122,28 +6153,38 @@
       "depth": "STRONG",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 2 in its module",
       "primary_resource": {
-        "resource_id": 119,
-        "provider": "Dev.java",
-        "title": "Control flow statements",
-        "url": "https://dev.java/learn/language-basics/controlling-flow/",
-        "resource_type": "documentation",
+        "resource_id": 920,
+        "provider": "Bro Code",
+        "title": "Bro Code Java 2025 — Loops",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "Control flow statements",
-        "section_end": "Control flow statements",
-        "estimated_minutes": 15,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "02:00:00",
+        "end_timestamp": "02:45:00",
+        "section_start": "02:00:00",
+        "section_end": "02:45:00",
+        "estimated_minutes": 45,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
-          "java-loops-loops",
-          "java-loops-choose-for-while-and-do-while-write-vali"
+          "java-loops"
         ],
-        "evidence_summary": "{\"resource_slug\": \"java-loops-reference\", \"verified_concepts\": [{\"concept\": \"java-loops-loops\", \"evidence\": \"The While and Do-while Statements\", \"location\": \"heading: The While and Do-while Statements\", \"confidence\": \"HIGH\", \"matched_terms\": [\"while\"]}, {\"concept\": \"java-loops-choose-for-while-and-d"
+        "evidence_summary": ""
       },
       "supplementary_resources": [
+        {
+          "title": "Control flow statements",
+          "provider": "Dev.java",
+          "url": "https://dev.java/learn/language-basics/controlling-flow/",
+          "role": "REFERENCE",
+          "purpose": "Looping statements in modern Java.",
+          "estimated_minutes": 15,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "Control flow statements",
+          "end": "Control flow statements"
+        },
         {
           "title": "Helsinki Part 2 — More loops",
           "provider": "University of Helsinki",
@@ -6205,28 +6246,38 @@
       "depth": "STRONG",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 3 in its module",
       "primary_resource": {
-        "resource_id": 121,
-        "provider": "Dev.java",
-        "title": "Control flow statements",
-        "url": "https://dev.java/learn/language-basics/controlling-flow/",
-        "resource_type": "documentation",
+        "resource_id": 921,
+        "provider": "Bro Code",
+        "title": "Bro Code Java 2025 — break and continue",
+        "url": "https://www.youtube.com/watch?v=xTtL8E4LzTQ",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "controlling-flow",
-        "section_end": "controlling-flow",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "02:45:00",
+        "end_timestamp": "03:00:00",
+        "section_start": "02:45:00",
+        "section_end": "03:00:00",
         "estimated_minutes": 15,
-        "estimate_confidence": "MEDIUM",
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
-          "java-break-continue-break-and-continue",
-          "java-break-continue-break-and-continue-deliberately-avoid-us"
+          "java-break-continue"
         ],
-        "evidence_summary": "{\"resource_slug\": \"java-break-continue-primary\", \"verified_concepts\": [{\"concept\": \"java-break-continue-break-and-continue\", \"evidence\": \"The Break Statement\", \"location\": \"heading: The Break Statement\", \"confidence\": \"HIGH\", \"matched_terms\": [\"break\"]}, {\"concept\": \"java-break-continue-break-and-co"
+        "evidence_summary": ""
       },
       "supplementary_resources": [
+        {
+          "title": "Control flow statements",
+          "provider": "Dev.java",
+          "url": "https://dev.java/learn/language-basics/controlling-flow/",
+          "role": "REFERENCE",
+          "purpose": "Branching statements including break and continue.",
+          "estimated_minutes": 15,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "controlling-flow",
+          "end": "controlling-flow"
+        },
         {
           "title": "Helsinki Part 2 — More loops",
           "provider": "University of Helsinki",
@@ -21498,28 +21549,40 @@
       "depth": "WORKING_KNOWLEDGE",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 0 in its module",
       "primary_resource": {
-        "resource_id": 591,
-        "provider": "scikit-learn",
-        "title": "Getting Started — scikit-learn",
-        "url": "https://scikit-learn.org/stable/getting_started.html",
-        "resource_type": "documentation",
+        "resource_id": 911,
+        "provider": "Vizuara",
+        "title": "ML Teach by Doing - Introduction",
+        "url": "https://www.youtube.com/watch?v=ngiICHD5dVc",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "Getting Started",
-        "section_end": "Getting Started",
-        "estimated_minutes": 14,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "00:00",
+        "end_timestamp": "26:14",
+        "section_start": "00:00",
+        "section_end": "26:14",
+        "estimated_minutes": 26,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
           "ml-what-is-ml-what-is-machine-learning",
           "ml-what-is-ml-distinguish-supervised-unsupervised-lear"
         ],
-        "evidence_summary": "{\"resource_slug\": \"ml-what-is-ml-primary\", \"verified_concepts\": [{\"concept\": \"ml-what-is-ml-what-is-machine-learning\", \"evidence\": \"ght Dark GitHub Choose version Getting Started # Scikit-learn is an open source machine learning library that supports supervised and unsupervised learning. It also pro"
+        "evidence_summary": ""
       },
-      "supplementary_resources": [],
+      "supplementary_resources": [
+        {
+          "title": "Getting Started — scikit-learn",
+          "provider": "scikit-learn",
+          "url": "https://scikit-learn.org/stable/getting_started.html",
+          "role": "REFERENCE",
+          "purpose": "TRUSTED official/docs source for What is machine learning.",
+          "estimated_minutes": 14,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "Getting Started",
+          "end": "Getting Started"
+        }
+      ],
       "practice": [
         {
           "practice_type": "ACTION_CHECKLIST",
@@ -23369,28 +23432,40 @@
       "depth": "MECHANICS",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 25 in its module",
       "primary_resource": {
-        "resource_id": 896,
-        "provider": "scikit-learn",
-        "title": "Linear Models — Ridge/Lasso",
-        "url": "https://scikit-learn.org/stable/modules/linear_model.html",
-        "resource_type": "documentation",
+        "resource_id": 912,
+        "provider": "Vizuara",
+        "title": "ML Teach by Doing Day 6: Linear Classifiers Part 1",
+        "url": "https://www.youtube.com/watch?v=rcXcGS1M77g",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "ARTICLE_SECTION",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "above; content inspection pending",
-        "section_end": "above; content inspection pending",
-        "estimated_minutes": 30,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "10:00",
+        "end_timestamp": "26:14",
+        "section_start": "10:00",
+        "section_end": "26:14",
+        "estimated_minutes": 16,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
           "ridge-l2",
           "lasso-l1"
         ],
-        "evidence_summary": "{\"verification_method\": \"CONTENT_INSPECTION_V3\", \"http_status\": 200, \"content_chars\": 68882, \"inspected_at\": \"2026-08-25T12:30:33.538076+00:00\", \"url\": \"https://scikit-learn.org/stable/modules/linear_model.html\", \"verified_concepts\": [{\"concept_slug\": \"ridge-l2\", \"anchor\": \"1.1.2. Ridge regression a"
+        "evidence_summary": ""
       },
-      "supplementary_resources": [],
+      "supplementary_resources": [
+        {
+          "title": "Linear Models — Ridge/Lasso",
+          "provider": "scikit-learn",
+          "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+          "role": "REFERENCE",
+          "purpose": "Learner unit bounded to the official section above; content inspection pending.",
+          "estimated_minutes": 30,
+          "boundary_type": "ARTICLE_SECTION",
+          "start": "above; content inspection pending",
+          "end": "above; content inspection pending"
+        }
+      ],
       "practice": [
         {
           "practice_type": "TRACE",
@@ -32919,28 +32994,40 @@
       "depth": "MECHANICS",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 4 in its module",
       "primary_resource": {
-        "resource_id": 819,
-        "provider": "Stanford CS231n",
-        "title": "Input volumes as tensors",
-        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
-        "resource_type": "documentation",
+        "resource_id": 909,
+        "provider": "Vizuara",
+        "title": "Introduction to Computer Vision | Lecture 1",
+        "url": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "FULL_SINGLE_PAGE",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "FULL_SINGLE_PAGE",
-        "section_end": "FULL_SINGLE_PAGE",
-        "estimated_minutes": 20,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "00:00",
+        "end_timestamp": "25:00",
+        "section_start": "00:00",
+        "section_end": "25:00",
+        "estimated_minutes": 25,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
           "batch-dim",
           "dtype-normalize"
         ],
-        "evidence_summary": "{\"verification_method\": \"CONTENT_INSPECTION_V3\", \"http_status\": 200, \"content_chars\": 20433, \"inspected_at\": \"2026-08-25T12:29:30.970141+00:00\", \"url\": \"https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md\", \"verified_concepts\": [{\"concept_slug\": \"batch-di"
+        "evidence_summary": ""
       },
-      "supplementary_resources": [],
+      "supplementary_resources": [
+        {
+          "title": "Input volumes as tensors",
+          "provider": "Stanford CS231n",
+          "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/kaggle-cifar10.md",
+          "role": "REFERENCE",
+          "purpose": "Learner unit: Building blocks conv layer dims through Spatial arrangement ends. Official source mapped with explicit boundaries; content inspection pe",
+          "estimated_minutes": 20,
+          "boundary_type": "FULL_SINGLE_PAGE",
+          "start": "FULL_SINGLE_PAGE",
+          "end": "FULL_SINGLE_PAGE"
+        }
+      ],
       "practice": [
         {
           "practice_type": "TRACE",
@@ -33286,28 +33373,40 @@
       "depth": "MECHANICS",
       "why_now": "Unlocked after REQUIRED prerequisites complete; appears at sequential position 9 in its module",
       "primary_resource": {
-        "resource_id": 824,
-        "provider": "Stanford CS231n",
-        "title": "Convolutional layers",
-        "url": "https://cs231n.github.io/convolutional-networks/",
-        "resource_type": "documentation",
+        "resource_id": 910,
+        "provider": "Vizuara",
+        "title": "U-Net Evolution and Modern Applications",
+        "url": "https://www.youtube.com/watch?v=9KvngtchNww",
+        "resource_type": "youtube",
         "role": "PRIMARY",
         "verification_status": "VERIFIED_COVERAGE",
         "exactness": "EXACT",
-        "boundary_type": "FULL_SINGLE_PAGE",
-        "start_timestamp": null,
-        "end_timestamp": null,
-        "section_start": "FULL_SINGLE_PAGE",
-        "section_end": "FULL_SINGLE_PAGE",
-        "estimated_minutes": 25,
-        "estimate_confidence": "MEDIUM",
+        "boundary_type": "VIDEO_TIMESTAMP",
+        "start_timestamp": "00:00",
+        "end_timestamp": "20:00",
+        "section_start": "00:00",
+        "section_end": "20:00",
+        "estimated_minutes": 20,
+        "estimate_confidence": "HIGH",
         "concepts_covered": [
           "conv-on-images",
           "stride-padding-vis"
         ],
-        "evidence_summary": "{\"verification_method\": \"CONTENT_INSPECTION_V3\", \"http_status\": 200, \"content_chars\": 54310, \"inspected_at\": \"2026-08-25T12:29:29.174136+00:00\", \"url\": \"https://cs231n.github.io/convolutional-networks/\", \"verified_concepts\": [{\"concept_slug\": \"conv-on-images\", \"anchor\": \"Convolutional Neural Network"
+        "evidence_summary": ""
       },
-      "supplementary_resources": [],
+      "supplementary_resources": [
+        {
+          "title": "Convolutional layers",
+          "provider": "Stanford CS231n",
+          "url": "https://cs231n.github.io/convolutional-networks/",
+          "role": "REFERENCE",
+          "purpose": "Learner unit: Conv Layer computation through Pooling layer begins. Official source mapped with explicit boundaries; content inspection pending (NEEDS_",
+          "estimated_minutes": 25,
+          "boundary_type": "FULL_SINGLE_PAGE",
+          "start": "FULL_SINGLE_PAGE",
+          "end": "FULL_SINGLE_PAGE"
+        }
+      ],
       "practice": [
         {
           "practice_type": "TRACE",
@@ -35790,7 +35889,7 @@
     "topics_exported": 441,
     "learning_units_exported": 441,
     "primary_resources_exported": 441,
-    "supplementary_resources_exported": 300,
+    "supplementary_resources_exported": 309,
     "practice_units_exported": 453,
     "projects_exported": 16,
     "missing_primary_urls": 0,

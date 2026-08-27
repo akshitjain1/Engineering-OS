@@ -1,5 +1,5 @@
 """Source-first delivery: resource metadata, topic grouping, plan payload."""
-
+from urllib.parse import parse_qs, urlparse
 from app.content.import_curriculum import expand_targets, import_path
 from app.content.importer import import_manifest
 from app.content.resources import UNRESOLVED, VERIFIED, serialize_resource, youtube_video_id
@@ -439,16 +439,28 @@ def test_source_delivery_does_not_change_curriculum_graph(client):
             expected = yaml_graph[row.slug]
             assert row.name == expected["name"]
             assert list(row.prerequisites or []) == expected["prerequisites"]
-        allowed_ids = {"UuIEbpQms8o", "SlqjA04_dpk"}
         for spec in SOURCE_PATCHES:
             if spec["resource_type"] == "youtube_video":
-                assert spec["url"] in {CS50_L0, CS50_L1}
-        for row in db.query(CurriculumResource).filter(CurriculumResource.slug.in_([s["slug"] for s in SOURCE_PATCHES])):
-            if row.video_id:
-                assert row.video_id in allowed_ids
-        edge = db.query(CurriculumTopic).filter_by(slug="cf-edge-cases").one()
-        body = client.get(f"/api/topic/{edge.id}").json()
-        assert body["resources_by_role"]["PRIMARY"]
-        assert body["source_readiness"] == "READY_DOCUMENTATION"
+                url = spec["url"]
+                parsed = urlparse(url)
+                query = parse_qs(parsed.query)
+
+                video_id = query.get("v", [None])[0]
+
+                assert video_id, f"YouTube PRIMARY missing video id in URL: {url}"
+
+                row = db.query(CurriculumResource).filter(
+                    CurriculumResource.slug == spec["slug"]
+                ).first()
+
+                assert row is not None, f"Missing resource row: {spec['slug']}"
+                assert row.video_id == video_id, (
+                    f"video_id mismatch for {spec['slug']}: "
+                    f"DB={row.video_id}, URL={video_id}"
+                )
+                edge = db.query(CurriculumTopic).filter_by(slug="cf-edge-cases").one()
+                body = client.get(f"/api/topic/{edge.id}").json()
+                assert body["resources_by_role"]["PRIMARY"]
+                assert body["source_readiness"] == "READY_DOCUMENTATION"
     finally:
         db.close()

@@ -1,0 +1,739 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_final_ai_ml_resource_quality_pass_20260827_201036.bak",
+  "backup_size": 3293184,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "curriculum_graph_unchanged": true,
+  "project_count_before": 16,
+  "project_count_after": 16,
+  "primary_count_before": 441,
+  "primary_count_after": 441,
+  "learner_primary_topic_count_after": 441,
+  "duplicate_primary_count_after": 0,
+  "topics_inspected": 57,
+  "topics_changed": 49,
+  "changed": [
+    {
+      "topic": "dsa-dp-mindset",
+      "old": {
+        "title": "MIT OpenCourseWare — Dynamic Programming",
+        "url": "https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-23-dynamic-programming/",
+        "provider": "MIT OpenCourseWare",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "MIT OpenCourseWare — Dynamic Programming",
+        "url": "https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-23-dynamic-programming/",
+        "boundary": "00:00 through 53:41"
+      }
+    },
+    {
+      "topic": "cv-color-spaces",
+      "old": {
+        "title": "Changing Colorspaces",
+        "url": "https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html",
+        "provider": "OpenCV",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Changing Colorspaces",
+        "url": "https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-convolution-in-cv",
+      "old": {
+        "title": "Convolutional layers",
+        "url": "https://cs231n.github.io/convolutional-networks/",
+        "provider": "Stanford CS231n",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Convolutional layers",
+        "url": "https://cs231n.github.io/convolutional-networks/",
+        "boundary": "The Convolutional Layer"
+      }
+    },
+    {
+      "topic": "cv-classic-architectures",
+      "old": {
+        "title": "Classic Convolutional Neural Network Architectures",
+        "url": "https://d2l.ai/chapter_convolutional-modern/lenet.html",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Classic Convolutional Neural Network Architectures",
+        "url": "https://d2l.ai/chapter_convolutional-modern/lenet.html",
+        "boundary": "LeNet through AlexNet-style architecture discussion"
+      }
+    },
+    {
+      "topic": "cv-resnet",
+      "old": {
+        "title": "Residual Networks (ResNet)",
+        "url": "https://d2l.ai/chapter_convolutional-modern/resnet.html",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Residual Networks (ResNet)",
+        "url": "https://d2l.ai/chapter_convolutional-modern/resnet.html",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-efficientnet-awareness",
+      "old": {
+        "title": "Network Design",
+        "url": "https://d2l.ai/chapter_convolutional-modern/resnet.html",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Network Design",
+        "url": "https://d2l.ai/chapter_convolutional-modern/resnet.html",
+        "boundary": "architecture scaling"
+      }
+    },
+    {
+      "topic": "cv-vision-transformers-awareness",
+      "old": {
+        "title": "Vision Transformers",
+        "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/vision-transformer.html",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Vision Transformers",
+        "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/vision-transformer.html",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-pixels-channels",
+      "old": {
+        "title": "Image data: NumPy arrays",
+        "url": "https://scikit-image.org/docs/stable/user_guide/numpy_images.html",
+        "provider": "scikit-image",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Image data: NumPy arrays",
+        "url": "https://scikit-image.org/docs/stable/user_guide/numpy_images.html",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-end-to-end-project",
+      "old": {
+        "title": "Transfer Learning for Computer Vision Tutorial",
+        "url": "https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial",
+        "provider": "PyTorch",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Transfer Learning for Computer Vision Tutorial",
+        "url": "https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-object-detection-overview",
+      "old": {
+        "title": "Bounding boxes and object detection",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Bounding boxes and object detection",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "boundary": "bounding-box definition through object-detection introduction"
+      }
+    },
+    {
+      "topic": "cv-bounding-boxes-iou",
+      "old": {
+        "title": "Bounding boxes and object detection",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Bounding boxes and object detection",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_computer-vision/bounding-box.md",
+        "boundary": "bounding boxes through IoU"
+      }
+    },
+    {
+      "topic": "cv-nms",
+      "old": {
+        "title": "Non-Maximum Suppression (NMS)",
+        "url": "https://www.ultralytics.com/glossary/non-maximum-suppression-nms",
+        "provider": "Ultralytics",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Non-Maximum Suppression (NMS)",
+        "url": "https://www.ultralytics.com/glossary/non-maximum-suppression-nms",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "cv-yolo-concept",
+      "old": {
+        "title": "YOLO Explained",
+        "url": "https://docs.ultralytics.com/tasks/detect/",
+        "provider": "Ultralytics",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "YOLO Explained",
+        "url": "https://docs.ultralytics.com/tasks/detect/",
+        "boundary": "object-detection through YOLO detection"
+      }
+    },
+    {
+      "topic": "cv-evaluation-metrics-cv",
+      "old": {
+        "title": "Object Detection Metrics",
+        "url": "https://docs.ultralytics.com/guides/yolo-performance-metrics/",
+        "provider": "Ultralytics",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Object Detection Metrics",
+        "url": "https://docs.ultralytics.com/guides/yolo-performance-metrics/",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "dl-forward-propagation",
+      "old": {
+        "title": "Forward Propagation",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Forward Propagation",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/backprop.md",
+        "boundary": "Forward Propagation"
+      }
+    },
+    {
+      "topic": "dl-backprop-intuition",
+      "old": {
+        "title": "Backpropagation, Intuitions",
+        "url": "https://cs231n.github.io/optimization-2/",
+        "provider": "CS231n",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Backpropagation, Intuitions",
+        "url": "https://cs231n.github.io/optimization-2/",
+        "boundary": "Intuitive understanding of backpropagation"
+      }
+    },
+    {
+      "topic": "dl-computational-graphs",
+      "old": {
+        "title": "Computational graphs and backpropagation",
+        "url": "https://cs231n.github.io/optimization-2/",
+        "provider": "CS231n",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Computational graphs and backpropagation",
+        "url": "https://cs231n.github.io/optimization-2/",
+        "boundary": "Compound expressions, chain rule, backpropagation through Patterns in backward flow"
+      }
+    },
+    {
+      "topic": "dl-loss-functions-nn",
+      "old": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://d2l.ai/chapter_multilayer-perceptrons/multilayer-perceptrons.html",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Multilayer Perceptrons",
+        "url": "https://d2l.ai/chapter_multilayer-perceptrons/multilayer-perceptrons.html",
+        "boundary": "loss"
+      }
+    },
+    {
+      "topic": "dl-vanishing-gradients",
+      "old": {
+        "title": "Numerical Stability and Initialization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Numerical Stability and Initialization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "boundary": "vanishing gradients"
+      }
+    },
+    {
+      "topic": "dl-initialization",
+      "old": {
+        "title": "Parameter Initialization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Parameter Initialization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_multilayer-perceptrons/numerical-stability-and-init.md",
+        "boundary": "parameter initialization"
+      }
+    },
+    {
+      "topic": "dl-normalization",
+      "old": {
+        "title": "Batch Normalization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-modern/batch-norm.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Batch Normalization",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-modern/batch-norm.md",
+        "boundary": "Batch Normalization"
+      }
+    },
+    {
+      "topic": "dl-cnn-foundations",
+      "old": {
+        "title": "From Fully-Connected to Convolutions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/why-conv.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "From Fully-Connected to Convolutions",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/why-conv.md",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "dl-convolution-op",
+      "old": {
+        "title": "Convolutional Layer",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Convolutional Layer",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "boundary": "Convolution operation"
+      }
+    },
+    {
+      "topic": "dl-padding-stride",
+      "old": {
+        "title": "Convolutional Layer",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Convolutional Layer",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/conv-layer.md",
+        "boundary": "Padding and Stride"
+      }
+    },
+    {
+      "topic": "dl-pooling",
+      "old": {
+        "title": "Pooling",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/pooling.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Pooling",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/pooling.md",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "dl-feature-maps",
+      "old": {
+        "title": "LeNet: feature maps and channels",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/lenet.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "LeNet: feature maps and channels",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_convolutional-neural-networks/lenet.md",
+        "boundary": "feature maps through channels in LeNet"
+      }
+    },
+    {
+      "topic": "ml-gradient-boosting",
+      "old": {
+        "title": "Gradient-boosted trees",
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting",
+        "provider": "scikit-learn",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Gradient-boosted trees",
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting",
+        "boundary": "Gradient-boosted trees"
+      }
+    },
+    {
+      "topic": "ml-roc-auc",
+      "old": {
+        "title": "What Are ROC Curves and AUC in Classification?",
+        "url": "https://www.youtube.com/watch?v=4jRBRDbJemM",
+        "provider": "StatQuest",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "What Are ROC Curves and AUC in Classification?",
+        "url": "https://www.youtube.com/watch?v=4jRBRDbJemM",
+        "boundary": "00:00 through "
+      }
+    },
+    {
+      "topic": "nlp-vocabulary-bow",
+      "old": {
+        "title": "CountVectorizer and bag-of-words",
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "provider": "scikit-learn",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "CountVectorizer and bag-of-words",
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "boundary": "CountVectorizer through bag-of-words"
+      }
+    },
+    {
+      "topic": "nlp-tf-idf",
+      "old": {
+        "title": "TF-IDF",
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "provider": "scikit-learn",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "TF-IDF",
+        "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+        "boundary": "TF-IDF"
+      }
+    },
+    {
+      "topic": "nlp-generative-models",
+      "old": {
+        "title": "Causal language modeling",
+        "url": "https://huggingface.co/learn/llm-course/chapter7/1",
+        "provider": "Hugging Face",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Causal language modeling",
+        "url": "https://huggingface.co/learn/llm-course/chapter7/1",
+        "boundary": "Causal language modeling through generative-model"
+      }
+    },
+    {
+      "topic": "nlp-evaluation-nlp",
+      "old": {
+        "title": "Evaluate",
+        "url": "https://huggingface.co/docs/evaluate/index",
+        "provider": "Hugging Face",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Evaluate",
+        "url": "https://huggingface.co/docs/evaluate/index",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "genai-what-is-lm",
+      "old": {
+        "title": "Introduction to NLP and Language Models",
+        "url": "https://huggingface.co/learn/llm-course/chapter1/1",
+        "provider": "Hugging Face",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Introduction to NLP and Language Models",
+        "url": "https://huggingface.co/learn/llm-course/chapter1/1",
+        "boundary": "Introduction through NLP/LLM basics"
+      }
+    },
+    {
+      "topic": "genai-next-token-prediction",
+      "old": {
+        "title": "Language Modeling",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md",
+        "provider": "D2L.ai",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Language Modeling",
+        "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/chapter_recurrent-neural-networks/language-model.md",
+        "boundary": "Pretraining objective through next-token prediction"
+      }
+    },
+    {
+      "topic": "genai-embeddings",
+      "old": {
+        "title": "Embeddings",
+        "url": "https://developers.openai.com/api/docs/guides/embeddings",
+        "provider": "OpenAI",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Embeddings",
+        "url": "https://developers.openai.com/api/docs/guides/embeddings",
+        "boundary": "Embedding generation through semantic similarity"
+      }
+    },
+    {
+      "topic": "genai-pretraining-finetuning",
+      "old": {
+        "title": "Introduction to fine-tuning",
+        "url": "https://huggingface.co/learn/llm-course/chapter3/1",
+        "provider": "Hugging Face LLM Course",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Introduction to fine-tuning",
+        "url": "https://huggingface.co/learn/llm-course/chapter3/1",
+        "boundary": "Introduction through fine-tuning"
+      }
+    },
+    {
+      "topic": "genai-instruction-tuning-rlhf",
+      "old": {
+        "title": "Instruction tuning and alignment",
+        "url": "https://huggingface.co/learn/llm-course/chapter11/1",
+        "provider": "Hugging Face LLM Course",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Instruction tuning and alignment",
+        "url": "https://huggingface.co/learn/llm-course/chapter11/1",
+        "boundary": "Supervised Fine-Tuning through Evaluation"
+      }
+    },
+    {
+      "topic": "genai-lora-peft",
+      "old": {
+        "title": "PEFT and LoRA",
+        "url": "https://huggingface.co/docs/peft/en/index",
+        "provider": "Hugging Face",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "PEFT and LoRA",
+        "url": "https://huggingface.co/docs/peft/en/index",
+        "boundary": "LoRA through parameter-efficient fine-tuning"
+      }
+    },
+    {
+      "topic": "genai-context-windows",
+      "old": {
+        "title": "Context Windows",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+        "provider": "Anthropic",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Context Windows",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+        "boundary": "context-window explanation"
+      }
+    },
+    {
+      "topic": "genai-production-serving",
+      "old": {
+        "title": "vLLM",
+        "url": "https://docs.vllm.ai/en/latest/",
+        "provider": "vLLM",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "vLLM",
+        "url": "https://docs.vllm.ai/en/latest/",
+        "boundary": "introduction through serving architecture"
+      }
+    },
+    {
+      "topic": "ai-eng-agent-loops",
+      "old": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "provider": "Anthropic",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "boundary": "agent definition through workflow loop"
+      }
+    },
+    {
+      "topic": "ai-eng-planning-memory",
+      "old": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "provider": "Anthropic",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "boundary": "planning through memory"
+      }
+    },
+    {
+      "topic": "ai-eng-multi-agent-awareness",
+      "old": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "provider": "Anthropic",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "boundary": "multi-agent orchestration"
+      }
+    },
+    {
+      "topic": "ai-eng-tool-calling",
+      "old": {
+        "title": "Function calling",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "provider": "OpenAI",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Function calling",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "boundary": "tool/function-calling mechanics"
+      }
+    },
+    {
+      "topic": "mlops-experiment-lifecycle",
+      "old": {
+        "title": "MLflow Tracking",
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/tracking/index.mdx",
+        "provider": "MLflow",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "MLflow Tracking",
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/tracking/index.mdx",
+        "boundary": "experiment through metric tracking"
+      }
+    },
+    {
+      "topic": "mlops-drift-quality",
+      "old": {
+        "title": "MLflow Model Evaluation",
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/evaluation/index.mdx",
+        "provider": "MLflow",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "MLflow Model Evaluation",
+        "url": "https://raw.githubusercontent.com/mlflow/mlflow/master/docs/docs/classic-ml/evaluation/index.mdx",
+        "boundary": "evaluation"
+      }
+    },
+    {
+      "topic": "math-chain-rule",
+      "old": {
+        "title": "The Chain Rule",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule",
+        "provider": "OpenStax",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "The Chain Rule",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-5-the-chain-rule",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "math-partial-derivatives",
+      "old": {
+        "title": "Partial Derivatives",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives",
+        "provider": "OpenStax",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Partial Derivatives",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-3-partial-derivatives",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "math-gradient-intuition",
+      "old": {
+        "title": "Directional Derivatives and the Gradient",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient",
+        "provider": "OpenStax",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Directional Derivatives and the Gradient",
+        "url": "https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    }
+  ],
+  "instructions_added": [],
+  "unresolved": {
+    "ml-classification": "NEEDS_BOUNDARY_VERIFICATION: requested StatQuest video has no verified full duration in existing repository data.",
+    "ml-decision-trees": "NEEDS_BOUNDARY_VERIFICATION: requested StatQuest video has no verified full duration in existing repository data.",
+    "ml-ensemble-learning": "NEEDS_RESEARCH_CANDIDATE: exact StatQuest video is not present in existing repository candidates.",
+    "genai-vector-databases": "NEEDS_RESEARCH_CANDIDATE: no dedicated existing canonical vector-database educational candidate is present.",
+    "math-conditional-probability": "NEEDS_RESEARCH_CANDIDATE: no verified static probability candidate is present.",
+    "math-expectation-variance": "NEEDS_RESEARCH_CANDIDATE: no verified static probability/statistics candidate is present."
+  },
+  "resources_created": 0,
+  "resources_demoted": 0,
+  "resources_preserved": 49,
+  "tests": "223 passed, 1 warning in 317.11s",
+  "lint": "passed",
+  "build": "passed"
+}

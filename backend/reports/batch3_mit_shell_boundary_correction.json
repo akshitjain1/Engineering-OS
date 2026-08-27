@@ -1,0 +1,161 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_batch3_mit_shell_boundary_correction_20260827_193933.bak",
+  "backup_size": 3293184,
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "curriculum_graph_unchanged": true,
+  "processed": 10,
+  "changed": [
+    {
+      "topic": "cf-shell",
+      "resource": "cf-shell-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-shell-primary"
+      },
+      "boundary": "\"Topic 1: The Shell\" through \"Why should you care about it?\"",
+      "instruction": "Study what a shell is, why command-line interfaces matter, and how the shell fits between the learner and operating-system programs."
+    },
+    {
+      "topic": "cf-command-line",
+      "resource": "cf-command-line-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-command-line-primary"
+      },
+      "boundary": "\"Navigating in the shell\" through the first command/argument examples",
+      "instruction": "Focus on how the shell parses a command, executes a program, passes arguments, and represents the current working directory."
+    },
+    {
+      "topic": "cf-filesystem-navigation",
+      "resource": "cf-filesystem-navigation-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-filesystem-navigation-primary"
+      },
+      "boundary": "\"Navigating in the shell\"",
+      "instruction": "Study pwd, cd, absolute paths, relative paths, ., .., and how the current working directory affects relative paths."
+    },
+    {
+      "topic": "cf-linux-files",
+      "resource": "cf-linux-files-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-linux-files-primary"
+      },
+      "boundary": "\"What is available in the shell?\"",
+      "instruction": "Focus on basic file/directory commands: cat, sort, uniq, head, tail, sed, find and related command-line file manipulation/discovery concepts."
+    },
+    {
+      "topic": "cf-pipes",
+      "resource": "cf-pipes-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-pipes-primary"
+      },
+      "boundary": "\"The shell language (bash)\"",
+      "instruction": "Focus specifically on the pipe operator |, stdin/stdout streams, and how the shell connects the output of one process to the input of another."
+    },
+    {
+      "topic": "cf-redirection",
+      "resource": "cf-redirection-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-redirection-primary"
+      },
+      "boundary": "\"The shell language (bash)\"",
+      "instruction": "Focus specifically on >, >>, <, stdout, stderr, and tee. Understand the difference between piping data to another program and redirecting it to a file."
+    },
+    {
+      "topic": "cf-grep",
+      "resource": "cf-grep-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-grep-primary"
+      },
+      "boundary": "\"What is available in the shell?\"",
+      "instruction": "Focus only on grep: searching text, regular-expression patterns, recursive searching, and using grep inside pipelines."
+    },
+    {
+      "topic": "cf-find",
+      "resource": "cf-find-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/01-shell/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-find-primary"
+      },
+      "boundary": "\"What is available in the shell?\"",
+      "instruction": "Focus only on find: recursive file discovery, predicates such as -type/-name, and combining find with other command-line tools."
+    },
+    {
+      "topic": "cf-linux-permissions",
+      "resource": "cf-linux-permissions-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-linux-permissions-primary"
+      },
+      "boundary": "\"Files and Permissions\"",
+      "instruction": "Study Unix file permissions, users/groups, read/write/execute bits, and how permissions control access."
+    },
+    {
+      "topic": "cf-linux-processes",
+      "resource": "cf-linux-processes-primary",
+      "protected": {
+        "url": "https://missing.csail.mit.edu/2026/02-environment/",
+        "provider": "MIT Missing Semester 2026",
+        "role": "PRIMARY",
+        "learner_visible": true,
+        "slug": "cf-linux-processes-primary"
+      },
+      "boundary": "\"Signals and Job Control\"",
+      "instruction": "Study processes, signals, Ctrl-C, Ctrl-Z, jobs, fg, bg, kill, and basic foreground/background process control."
+    }
+  ]
+}

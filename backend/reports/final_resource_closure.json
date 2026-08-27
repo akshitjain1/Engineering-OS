@@ -1,0 +1,149 @@
+{
+  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_final_resource_closure_20260827_202328.bak",
+  "backup_size": 3301376,
+  "six_resource_decisions": [
+    {
+      "topic": "ml-classification",
+      "old": {
+        "slug": "ml-classification-primary",
+        "title": "Decision and Classification Trees, Clearly Explained!!!",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=_L39rN6gz7Y",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Decision and Classification Trees, Clearly Explained!!!",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=_L39rN6gz7Y",
+        "boundary": "00:18"
+      }
+    },
+    {
+      "topic": "ml-decision-trees",
+      "old": {
+        "slug": "ml-decision-trees-primary",
+        "title": "Decision and Classification Trees, Clearly Explained!!!",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=_L39rN6gz7Y",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "Decision and Classification Trees, Clearly Explained!!!",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=_L39rN6gz7Y",
+        "boundary": "00:18"
+      }
+    },
+    {
+      "topic": "ml-ensemble-learning",
+      "old": {
+        "slug": "ml-ensemble-learning-primary",
+        "title": "StatQuest: Random Forests Part 1 - Building, Using and Evaluating",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "StatQuest: Random Forests Part 1 - Building, Using and Evaluating",
+        "provider": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ",
+        "boundary": "00:31"
+      }
+    },
+    {
+      "topic": "genai-vector-databases",
+      "old": {
+        "slug": "genai-vector-databases-primary",
+        "title": "What is a Vector Database?",
+        "provider": "Pinecone",
+        "url": "https://www.pinecone.io/learn/vector-database/",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "What is a Vector Database?",
+        "provider": "Pinecone",
+        "url": "https://www.pinecone.io/learn/vector-database/",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    },
+    {
+      "topic": "math-conditional-probability",
+      "old": {
+        "slug": "math-conditional-probability-primary",
+        "title": "3.1 Terminology — Introductory Statistics 2e",
+        "provider": "OpenStax",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-1-terminology",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "3.1 Terminology — Introductory Statistics 2e",
+        "provider": "OpenStax",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-1-terminology",
+        "boundary": "Conditional Probability of A GIVEN B"
+      }
+    },
+    {
+      "topic": "math-expectation-variance",
+      "old": {
+        "slug": "math-expectation-variance-primary",
+        "title": "4.2 Mean or Expected Value and Standard Deviation — Introductory Statistics 2e",
+        "provider": "OpenStax",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/4-2-mean-or-expected-value-and-standard-deviation",
+        "role": "PRIMARY"
+      },
+      "new": {
+        "title": "4.2 Mean or Expected Value and Standard Deviation — Introductory Statistics 2e",
+        "provider": "OpenStax",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/4-2-mean-or-expected-value-and-standard-deviation",
+        "boundary": "FULL_SINGLE_PAGE"
+      }
+    }
+  ],
+  "resources_already_correct": [
+    "ml-classification",
+    "ml-decision-trees",
+    "ml-ensemble-learning",
+    "genai-vector-databases",
+    "math-conditional-probability",
+    "math-expectation-variance"
+  ],
+  "resources_changed": 6,
+  "resources_created": [],
+  "resources_demoted": 0,
+  "resources_preserved": 6,
+  "learner_instructions_added": [],
+  "needs_instruction_review": [],
+  "learner_data_before": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_after": {
+    "user_progress": 9,
+    "topic_mastery": 80,
+    "mastery_evidence": 95,
+    "user_xp": 1,
+    "xp_events": 37,
+    "revision_schedules": 2,
+    "diagnostic_sessions": 1,
+    "diagnostic_answers": 76,
+    "learning_activities": 323
+  },
+  "learner_data_unchanged": true,
+  "graph_integrity": true,
+  "project_count_before": 16,
+  "project_count_after": 16,
+  "final_primary_count": 441,
+  "zero_primary_count": 0,
+  "duplicate_primary_count": 0,
+  "tests": "223 passed, 1 warning in 331.72s",
+  "lint": "passed",
+  "build": "passed",
+  "readiness_audit": "449 topics: READY 196, NEEDS_REVIEW 218, PARTIAL_COVERAGE 12, PRACTICE_GAP 19, BROKEN 4"
+}

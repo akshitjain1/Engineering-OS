@@ -1,0 +1,80 @@
+{
+  "resource_gap_before": [
+    "dsa-big-o",
+    "dsa-array-insert-delete",
+    "dsa-singly-linked-list",
+    "dsa-binary-search-boundaries"
+  ],
+  "resource_gap_after": [
+    "dsa-big-o",
+    "dsa-array-insert-delete",
+    "dsa-singly-linked-list",
+    "dsa-binary-search-boundaries"
+  ],
+  "partial_coverage_before": [
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "ml-knn",
+    "ml-ensemble-learning",
+    "ml-end-to-end-workflow",
+    "nlp-sequence-modeling",
+    "nlp-rnn-lstm",
+    "nlp-attention-nlp",
+    "nlp-encoder-vs-decoder",
+    "genai-inference-parameters",
+    "genai-prompt-engineering",
+    "genai-vector-databases"
+  ],
+  "partial_coverage_after": [
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "ml-knn",
+    "ml-ensemble-learning",
+    "ml-end-to-end-workflow",
+    "nlp-sequence-modeling",
+    "nlp-rnn-lstm",
+    "nlp-attention-nlp",
+    "nlp-encoder-vs-decoder",
+    "genai-inference-parameters",
+    "genai-prompt-engineering",
+    "genai-vector-databases"
+  ],
+  "needs_review_count": 218,
+  "unresolved_topics": {
+    "dsa-big-o": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "dsa-array-insert-delete": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "dsa-singly-linked-list": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "dsa-binary-search-boundaries": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "dsa-hash-map": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "dsa-hash-set": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "ml-knn": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "ml-ensemble-learning": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "ml-end-to-end-workflow": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "nlp-sequence-modeling": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "nlp-rnn-lstm": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "nlp-attention-nlp": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "nlp-encoder-vs-decoder": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "genai-inference-parameters": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "genai-prompt-engineering": "NEEDS_EXTERNAL_RESOURCE_RESEARCH",
+    "genai-vector-databases": "NEEDS_EXTERNAL_RESOURCE_RESEARCH"
+  },
+  "changes": [],
+  "final_primary_count": 441,
+  "zero_primary_count": 0,
+  "duplicate_primary_count": 0,
+  "learner_data_before": {},
+  "learner_data_after": {},
+  "learner_data_unchanged": true,
+  "topic_count": 449,
+  "learner_visible_topic_count": 441,
+  "project_count": 16,
+  "graph_integrity": {
+    "topic_count": true,
+    "learner_visible_topics": true,
+    "acyclic": true
+  },
+  "pytest": "223 passed, 1 warning",
+  "lint": "passed",
+  "build": "passed",
+  "readiness_decision": "NOT_READY"
+}

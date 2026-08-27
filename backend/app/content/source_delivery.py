@@ -14,6 +14,7 @@ from typing import Any, Optional
 from sqlalchemy.orm import Session
 
 from app.content.resources import metadata_from_spec
+from app.content.final_resource_repairs import apply_final_resource_repairs
 from app.db.models import CurriculumLesson, CurriculumResource, CurriculumTopic
 
 CS50_L0 = "https://www.youtube.com/watch?v=UuIEbpQms8o"
@@ -522,8 +523,9 @@ def apply_source_delivery(db: Session) -> dict[str, int]:
             )
         )
         created += 1
+    final = apply_final_resource_repairs(db, commit=False)
     db.commit()
-    return {"created": created, "updated": updated, "skipped": skipped}
+    return {"created": created, "updated": updated, "skipped": skipped, "final_resource_repairs": final["updated"]}
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4800 @@
+{
+  "generated_at": "2026-08-26T13:39:28.609055+00:00",
+  "topic_count": 449,
+  "topic_slugs": [
+    "ai-eng-agent-loops",
+    "ai-eng-awareness",
+    "ai-eng-function-calling",
+    "ai-eng-multi-agent-awareness",
+    "ai-eng-observability-security",
+    "ai-eng-path",
+    "ai-eng-planning-memory",
+    "ai-eng-production-deployment",
+    "ai-eng-structured-output",
+    "ai-eng-tool-calling",
+    "be-auth-basics",
+    "be-errors",
+    "be-fastapi-intro",
+    "be-http",
+    "be-json",
+    "be-persistence",
+    "be-rest",
+    "cf-algorithms",
+    "cf-alu",
+    "cf-binary",
+    "cf-bits-and-bytes",
+    "cf-branches",
+    "cf-build-system",
+    "cf-cache",
+    "cf-cherry-pick",
+    "cf-command-line",
+    "cf-commits",
+    "cf-compiler",
+    "cf-conflicts",
+    "cf-cpu",
+    "cf-debugger",
+    "cf-debugging-thinking",
+    "cf-dependency-management",
+    "cf-dev-compiler",
+    "cf-dev-package-manager",
+    "cf-dry-runs",
+    "cf-edge-cases",
+    "cf-filesystem-navigation",
+    "cf-filesystems",
+    "cf-find",
+    "cf-formatter",
+    "cf-github-workflow",
+    "cf-grep",
+    "cf-hexadecimal",
+    "cf-ide",
+    "cf-instruction-execution",
+    "cf-interpreter",
+    "cf-kernel",
+    "cf-linter",
+    "cf-linux-environment-variables",
+    "cf-linux-files",
+    "cf-linux-permissions",
+    "cf-linux-processes",
+    "cf-machine-code",
+    "cf-merge",
+    "cf-os-environment-variables",
+    "cf-os-memory",
+    "cf-os-permissions",
+    "cf-os-processes",
+    "cf-package-management",
+    "cf-pipes",
+    "cf-problem-decomposition",
+    "cf-process",
+    "cf-program",
+    "cf-pseudocode",
+    "cf-pull-push",
+    "cf-ram",
+    "cf-rebase",
+    "cf-redirection",
+    "cf-registers",
+    "cf-remote",
+    "cf-repository",
+    "cf-reset-revert",
+    "cf-shell",
+    "cf-space-complexity-intro",
+    "cf-stash",
+    "cf-storage",
+    "cf-system-calls",
+    "cf-threads",
+    "cf-time-complexity-intro",
+    "cf-virtual-memory-basics",
+    "cv-augmentation",
+    "cv-bounding-boxes-iou",
+    "cv-classic-architectures",
+    "cv-classification-workflow",
+    "cv-color-spaces",
+    "cv-convolution-in-cv",
+    "cv-efficientnet-awareness",
+    "cv-end-to-end-project",
+    "cv-evaluation-metrics-cv",
+    "cv-image-tensors",
+    "cv-instance-segmentation",
+    "cv-nms",
+    "cv-normalization-cv",
+    "cv-object-detection-overview",
+    "cv-pixels-channels",
+    "cv-resnet",
+    "cv-semantic-segmentation",
+    "cv-sift-orb-awareness",
+    "cv-traditional-filters",
+    "cv-transfer-learning-cv",
+    "cv-transformations",
+    "cv-two-stage-vs-one-stage",
+    "cv-u-net",
+    "cv-vision-transformers-awareness",
+    "cv-what-is-an-image",
+    "cv-yolo-concept",
+    "db-indexes",
+    "db-schema-design",
+    "db-sql-joins",
+    "db-sql-select",
+    "db-transactions",
+    "devops-awareness",
+    "devops-path",
+    "dl-activation-functions",
+    "dl-attention-intuition",
+    "dl-awareness",
+    "dl-backprop",
+    "dl-backprop-intuition",
+    "dl-batch-epoch-lr",
+    "dl-cnn",
+    "dl-cnn-foundations",
+    "dl-computational-graphs",
+    "dl-convolution-op",
+    "dl-dropout",
+    "dl-feature-maps",
+    "dl-forward-propagation",
+    "dl-gradient-descent-nn",
+    "dl-initialization",
+    "dl-loss-functions-nn",
+    "dl-lstm-gru",
+    "dl-mlp",
+    "dl-neuron-intuition",
+    "dl-nn-basics",
+    "dl-normalization",
+    "dl-optimizers-adam",
+    "dl-optimizers-sgd",
+    "dl-padding-stride",
+    "dl-path",
+    "dl-perceptron",
+    "dl-pooling",
+    "dl-pytorch-autograd",
+    "dl-pytorch-build-model",
+    "dl-pytorch-data",
+    "dl-pytorch-save-load",
+    "dl-pytorch-tensors",
+    "dl-pytorch-training-loop",
+    "dl-rnn-awareness",
+    "dl-transformers-foundations",
+    "dl-transformers-intro",
+    "dl-vanishing-gradients",
+    "dl-why-deep-learning",
+    "ds-eda",
+    "ds-feature-eng",
+    "ds-numpy",
+    "ds-pandas",
+    "ds-sql-analytics",
+    "dsa-advanced-dp",
+    "dsa-advanced-graphs",
+    "dsa-algorithmic-thinking",
+    "dsa-array-frequency",
+    "dsa-array-insert-delete",
+    "dsa-array-patterns",
+    "dsa-array-traversal",
+    "dsa-best-worst-average",
+    "dsa-big-o",
+    "dsa-binary-search-boundaries",
+    "dsa-binary-search-classic",
+    "dsa-binary-trees",
+    "dsa-bipartite",
+    "dsa-bit-manipulation",
+    "dsa-bst-delete",
+    "dsa-bst-insert",
+    "dsa-bst-ordered-properties",
+    "dsa-bst-search",
+    "dsa-bst-validate",
+    "dsa-bubble-sort",
+    "dsa-call-stack",
+    "dsa-character-processing",
+    "dsa-combinations",
+    "dsa-connected-components",
+    "dsa-constraint-search",
+    "dsa-counting-radix",
+    "dsa-cycle-detection",
+    "dsa-dijkstra",
+    "dsa-dp-1d",
+    "dsa-dp-2d",
+    "dsa-dp-mindset",
+    "dsa-dp-optimization",
+    "dsa-dp-state",
+    "dsa-dp-transition",
+    "dsa-fast-slow",
+    "dsa-first-last-occurrence",
+    "dsa-frequency-maps",
+    "dsa-graph-bfs",
+    "dsa-graph-cycle",
+    "dsa-graph-dfs",
+    "dsa-graph-representations",
+    "dsa-greedy-exchange",
+    "dsa-greedy-patterns",
+    "dsa-greedy-reasoning",
+    "dsa-greedy-scheduling",
+    "dsa-grid-dp",
+    "dsa-hash-map",
+    "dsa-hash-set",
+    "dsa-heap-scheduling",
+    "dsa-heap-sort",
+    "dsa-heap-structure",
+    "dsa-heapify",
+    "dsa-insertion-sort",
+    "dsa-interval-dp",
+    "dsa-interval-problems",
+    "dsa-interview-hygiene",
+    "dsa-knapsack",
+    "dsa-list-merge",
+    "dsa-list-operations",
+    "dsa-list-reversal",
+    "dsa-lookup-patterns",
+    "dsa-memoization",
+    "dsa-merge-sort",
+    "dsa-monotonic-stack",
+    "dsa-mst",
+    "dsa-pattern-selection",
+    "dsa-permutations",
+    "dsa-prefix-sums",
+    "dsa-priority-queue",
+    "dsa-queue-bfs-relationship",
+    "dsa-queue-deque",
+    "dsa-quick-sort",
+    "dsa-recursion-model",
+    "dsa-recursion-to-iteration",
+    "dsa-recursive-trees",
+    "dsa-rotated-arrays",
+    "dsa-search-on-answer",
+    "dsa-segment-tree-concept",
+    "dsa-selection-sort",
+    "dsa-singly-linked-list",
+    "dsa-sort-complexity",
+    "dsa-sort-stability",
+    "dsa-stack-fundamentals",
+    "dsa-string-frequency",
+    "dsa-string-manipulation",
+    "dsa-string-patterns",
+    "dsa-subsequence-dp",
+    "dsa-subsets",
+    "dsa-tabulation",
+    "dsa-top-k",
+    "dsa-topological-sort",
+    "dsa-tree-bfs",
+    "dsa-tree-construction",
+    "dsa-tree-dfs",
+    "dsa-tree-height",
+    "dsa-tree-paths",
+    "dsa-tree-terminology",
+    "dsa-tries",
+    "dsa-two-pointers-opposite",
+    "dsa-two-pointers-partition",
+    "dsa-two-pointers-same",
+    "dsa-union-find",
+    "dsa-unweighted-shortest",
+    "dsa-window-fixed",
+    "dsa-window-frequency",
+    "dsa-window-variable",
+    "genai-agents",
+    "genai-awareness",
+    "genai-chunking-retrieval",
+    "genai-context-windows",
+    "genai-embeddings",
+    "genai-eval",
+    "genai-hallucinations-guardrails",
+    "genai-inference-parameters",
+    "genai-instruction-tuning-rlhf",
+    "genai-lora-peft",
+    "genai-next-token-prediction",
+    "genai-path",
+    "genai-pretraining-finetuning",
+    "genai-production-serving",
+    "genai-prompt-engineering",
+    "genai-rag",
+    "genai-tokenization-llm",
+    "genai-vector-databases",
+    "genai-what-is-lm",
+    "java-abstract-classes",
+    "java-api-hygiene",
+    "java-arrays",
+    "java-assertions",
+    "java-break-continue",
+    "java-bytecode",
+    "java-checked-unchecked",
+    "java-classes-objects",
+    "java-comparable-comparator",
+    "java-compile-and-run",
+    "java-composition",
+    "java-console-io",
+    "java-constructors",
+    "java-custom-exceptions",
+    "java-encapsulation",
+    "java-first-program",
+    "java-functional-interfaces",
+    "java-gc-intro",
+    "java-generic-bounds",
+    "java-generic-types",
+    "java-if-else",
+    "java-inheritance",
+    "java-interfaces",
+    "java-iteration",
+    "java-jdk-jre",
+    "java-junit-basics",
+    "java-lambdas",
+    "java-list",
+    "java-loops",
+    "java-map",
+    "java-memory-model-basics",
+    "java-method-basics",
+    "java-operators",
+    "java-overloading",
+    "java-packages",
+    "java-paths-files",
+    "java-polymorphism",
+    "java-primitives",
+    "java-priority-queue",
+    "java-readers-writers",
+    "java-references",
+    "java-scope",
+    "java-set",
+    "java-stream-operations",
+    "java-stream-pipeline",
+    "java-stringbuilder",
+    "java-strings",
+    "java-switch",
+    "java-synchronization-basics",
+    "java-threads",
+    "java-try-catch",
+    "java-type-conversion",
+    "math-bayes-theorem",
+    "math-chain-rule",
+    "math-conditional-probability",
+    "math-covariance-correlation",
+    "math-derivatives",
+    "math-distributions",
+    "math-dot-product-norms",
+    "math-expectation-variance",
+    "math-functions",
+    "math-gradient-intuition",
+    "math-matrices",
+    "math-partial-derivatives",
+    "math-probability",
+    "math-stats-summary",
+    "math-vectors",
+    "ml-anomaly-awareness",
+    "ml-bias-variance",
+    "ml-classification",
+    "ml-confusion-matrix",
+    "ml-cross-validation",
+    "ml-decision-trees",
+    "ml-encoding-categorical",
+    "ml-end-to-end-workflow",
+    "ml-ensemble-learning",
+    "ml-feature-importance",
+    "ml-feature-scaling",
+    "ml-features-labels",
+    "ml-gradient-boosting",
+    "ml-gradient-descent-intuition",
+    "ml-grid-search",
+    "ml-hierarchical-dbscan",
+    "ml-kmeans",
+    "ml-knn",
+    "ml-linear-regression",
+    "ml-logistic-regression",
+    "ml-loss-intuition",
+    "ml-metrics",
+    "ml-naive-bayes",
+    "ml-overfitting",
+    "ml-pca",
+    "ml-random-forests",
+    "ml-regression-metrics",
+    "ml-ridge-lasso",
+    "ml-roc-auc",
+    "ml-sklearn-pipeline",
+    "ml-svm",
+    "ml-train-test",
+    "ml-types-of-ml",
+    "ml-validation-split",
+    "ml-what-is-ml",
+    "mlops-drift-quality",
+    "mlops-experiment-lifecycle",
+    "mlops-model-packaging",
+    "mlops-monitoring",
+    "mlops-serving",
+    "mlops-tracking",
+    "net-dns",
+    "net-http",
+    "net-https-tls",
+    "net-internet-basics",
+    "net-tcp-udp",
+    "net-websockets",
+    "nlp-attention-nlp",
+    "nlp-awareness",
+    "nlp-bert",
+    "nlp-encoder-vs-decoder",
+    "nlp-evaluation-nlp",
+    "nlp-fine-tuning-nlp",
+    "nlp-generative-models",
+    "nlp-path",
+    "nlp-rnn-lstm",
+    "nlp-sequence-modeling",
+    "nlp-text-preprocessing",
+    "nlp-tf-idf",
+    "nlp-tokenization-nlp",
+    "nlp-transformers-nlp",
+    "nlp-vocabulary-bow",
+    "nlp-what-is-nlp",
+    "nlp-word-embeddings",
+    "nlp-word2vec",
+    "ops-ci-github-actions",
+    "ops-compose",
+    "ops-docker-intro",
+    "ops-k8s-awareness",
+    "ops-linux-services",
+    "ops-observability",
+    "py-data-structures",
+    "py-functions-modules",
+    "py-oop",
+    "py-syntax",
+    "py-testing",
+    "se-api-design",
+    "se-ci-basics",
+    "se-code-review",
+    "se-requirements",
+    "se-sdlc",
+    "se-solid-ocp",
+    "se-solid-srp",
+    "se-testing-pyramid",
+    "se-unit-tests",
+    "se-versioning",
+    "sys-caching",
+    "sys-observability-design",
+    "sys-queues",
+    "sys-scalability",
+    "sysdesign-awareness",
+    "sysdesign-path",
+    "web-css-basics",
+    "web-forms-a11y",
+    "web-html-basics",
+    "web-js-basics",
+    "web-nextjs-intro",
+    "web-react-intro",
+    "web-responsive",
+    "web-ts-intro"
+  ],
+  "topic_ordering": {
+    "cf-bits-and-bytes": [
+      1,
+      0
+    ],
+    "cf-binary": [
+      1,
+      1
+    ],
+    "cf-hexadecimal": [
+      1,
+      2
+    ],
+    "cf-cpu": [
+      1,
+      3
+    ],
+    "cf-alu": [
+      1,
+      4
+    ],
+    "cf-registers": [
+      1,
+      5
+    ],
+    "cf-ram": [
+      1,
+      6
+    ],
+    "cf-cache": [
+      1,
+      7
+    ],
+    "cf-storage": [
+      1,
+      8
+    ],
+    "cf-instruction-execution": [
+      1,
+      9
+    ],
+    "cf-machine-code": [
+      1,
+      10
+    ],
+    "cf-compiler": [
+      1,
+      11
+    ],
+    "cf-interpreter": [
+      1,
+      12
+    ],
+    "cf-program": [
+      1,
+      13
+    ],
+    "cf-process": [
+      1,
+      14
+    ],
+    "cf-kernel": [
+      2,
+      0
+    ],
+    "cf-os-processes": [
+      2,
+      1
+    ],
+    "cf-threads": [
+      2,
+      2
+    ],
+    "cf-system-calls": [
+      2,
+      3
+    ],
+    "cf-os-memory": [
+      2,
+      4
+    ],
+    "cf-virtual-memory-basics": [
+      2,
+      5
+    ],
+    "cf-filesystems": [
+      2,
+      6
+    ],
+    "cf-os-permissions": [
+      2,
+      7
+    ],
+    "cf-os-environment-variables": [
+      2,
+      8
+    ],
+    "cf-shell": [
+      3,
+      0
+    ],
+    "cf-command-line": [
+      3,
+      1
+    ],
+    "cf-filesystem-navigation": [
+      3,
+      2
+    ],
+    "cf-linux-files": [
+      3,
+      3
+    ],
+    "cf-pipes": [
+      3,
+      4
+    ],
+    "cf-redirection": [
+      3,
+      5
+    ],
+    "cf-grep": [
+      3,
+      6
+    ],
+    "cf-find": [
+      3,
+      7
+    ],
+    "cf-linux-permissions": [
+      3,
+      8
+    ],
+    "cf-linux-processes": [
+      3,
+      9
+    ],
+    "cf-package-management": [
+      3,
+      10
+    ],
+    "cf-linux-environment-variables": [
+      3,
+      11
+    ],
+    "cf-repository": [
+      4,
+      0
+    ],
+    "cf-commits": [
+      4,
+      1
+    ],
+    "cf-branches": [
+      4,
+      2
+    ],
+    "cf-merge": [
+      4,
+      3
+    ],
+    "cf-rebase": [
+      4,
+      4
+    ],
+    "cf-remote": [
+      4,
+      5
+    ],
+    "cf-pull-push": [
+      4,
+      6
+    ],
+    "cf-conflicts": [
+      4,
+      7
+    ],
+    "cf-reset-revert": [
+      4,
+      8
+    ],
+    "cf-cherry-pick": [
+      4,
+      9
+    ],
+    "cf-stash": [
+      4,
+      10
+    ],
+    "cf-github-workflow": [
+      4,
+      11
+    ],
+    "cf-ide": [
+      5,
+      0
+    ],
+    "cf-dev-compiler": [
+      5,
+      1
+    ],
+    "cf-debugger": [
+      5,
+      2
+    ],
+    "cf-formatter": [
+      5,
+      3
+    ],
+    "cf-linter": [
+      5,
+      4
+    ],
+    "cf-dev-package-manager": [
+      5,
+      5
+    ],
+    "cf-build-system": [
+      5,
+      6
+    ],
+    "cf-dependency-management": [
+      5,
+      7
+    ],
+    "cf-problem-decomposition": [
+      6,
+      0
+    ],
+    "cf-pseudocode": [
+      6,
+      1
+    ],
+    "cf-algorithms": [
+      6,
+      2
+    ],
+    "cf-dry-runs": [
+      6,
+      3
+    ],
+    "cf-edge-cases": [
+      6,
+      4
+    ],
+    "cf-debugging-thinking": [
+      6,
+      5
+    ],
+    "cf-time-complexity-intro": [
+      6,
+      6
+    ],
+    "cf-space-complexity-intro": [
+      6,
+      7
+    ],
+    "java-jdk-jre": [
+      7,
+      0
+    ],
+    "java-first-program": [
+      7,
+      1
+    ],
+    "java-compile-and-run": [
+      7,
+      2
+    ],
+    "java-primitives": [
+      8,
+      0
+    ],
+    "java-type-conversion": [
+      8,
+      1
+    ],
+    "java-console-io": [
+      9,
+      0
+    ],
+    "java-operators": [
+      10,
+      0
+    ],
+    "java-if-else": [
+      11,
+      0
+    ],
+    "java-switch": [
+      11,
+      1
+    ],
+    "java-loops": [
+      11,
+      2
+    ],
+    "java-break-continue": [
+      11,
+      3
+    ],
+    "java-method-basics": [
+      12,
+      0
+    ],
+    "java-overloading": [
+      12,
+      1
+    ],
+    "java-scope": [
+      12,
+      2
+    ],
+    "java-arrays": [
+      13,
+      0
+    ],
+    "java-strings": [
+      14,
+      0
+    ],
+    "java-stringbuilder": [
+      14,
+      1
+    ],
+    "java-classes-objects": [
+      15,
+      0
+    ],
+    "java-references": [
+      15,
+      1
+    ],
+    "java-constructors": [
+      15,
+      2
+    ],
+    "java-encapsulation": [
+      15,
+      3
+    ],
+    "java-inheritance": [
+      15,
+      4
+    ],
+    "java-polymorphism": [
+      15,
+      5
+    ],
+    "java-abstract-classes": [
+      16,
+      0
+    ],
+    "java-interfaces": [
+      16,
+      1
+    ],
+    "java-composition": [
+      16,
+      2
+    ],
+    "java-try-catch": [
+      17,
+      0
+    ],
+    "java-checked-unchecked": [
+      17,
+      1
+    ],
+    "java-custom-exceptions": [
+      17,
+      2
+    ],
+    "java-list": [
+      18,
+      0
+    ],
+    "java-set": [
+      18,
+      1
+    ],
+    "java-map": [
+      18,
+      2
+    ],
+    "java-iteration": [
+      18,
+      3
+    ],
+    "java-priority-queue": [
+      18,
+      4
+    ],
+    "java-generic-types": [
+      19,
+      0
+    ],
+    "java-generic-bounds": [
+      19,
+      1
+    ],
+    "java-comparable-comparator": [
+      20,
+      0
+    ],
+    "java-functional-interfaces": [
+      21,
+      0
+    ],
+    "java-lambdas": [
+      21,
+      1
+    ],
+    "java-stream-pipeline": [
+      22,
+      0
+    ],
+    "java-stream-operations": [
+      22,
+      1
+    ],
+    "java-paths-files": [
+      23,
+      0
+    ],
+    "java-readers-writers": [
+      23,
+      1
+    ],
+    "java-junit-basics": [
+      24,
+      0
+    ],
+    "java-assertions": [
+      24,
+      1
+    ],
+    "java-threads": [
+      25,
+      0
+    ],
+    "java-synchronization-basics": [
+      25,
+      1
+    ],
+    "java-bytecode": [
+      26,
+      0
+    ],
+    "java-memory-model-basics": [
+      26,
+      1
+    ],
+    "java-gc-intro": [
+      26,
+      2
+    ],
+    "java-packages": [
+      27,
+      0
+    ],
+    "java-api-hygiene": [
+      27,
+      1
+    ],
+    "dsa-algorithmic-thinking": [
+      28,
+      0
+    ],
+    "dsa-big-o": [
+      29,
+      0
+    ],
+    "dsa-best-worst-average": [
+      29,
+      1
+    ],
+    "dsa-array-traversal": [
+      30,
+      0
+    ],
+    "dsa-array-insert-delete": [
+      30,
+      1
+    ],
+    "dsa-prefix-sums": [
+      30,
+      2
+    ],
+    "dsa-array-frequency": [
+      30,
+      3
+    ],
+    "dsa-array-patterns": [
+      30,
+      4
+    ],
+    "dsa-string-manipulation": [
+      31,
+      0
+    ],
+    "dsa-string-frequency": [
+      31,
+      1
+    ],
+    "dsa-character-processing": [
+      31,
+      2
+    ],
+    "dsa-string-patterns": [
+      31,
+      3
+    ],
+    "dsa-hash-map": [
+      32,
+      0
+    ],
+    "dsa-hash-set": [
+      32,
+      1
+    ],
+    "dsa-frequency-maps": [
+      32,
+      2
+    ],
+    "dsa-lookup-patterns": [
+      32,
+      3
+    ],
+    "dsa-two-pointers-opposite": [
+      33,
+      0
+    ],
+    "dsa-two-pointers-same": [
+      33,
+      1
+    ],
+    "dsa-two-pointers-partition": [
+      33,
+      2
+    ],
+    "dsa-window-fixed": [
+      34,
+      0
+    ],
+    "dsa-window-variable": [
+      34,
+      1
+    ],
+    "dsa-window-frequency": [
+      34,
+      2
+    ],
+    "dsa-singly-linked-list": [
+      35,
+      0
+    ],
+    "dsa-list-operations": [
+      35,
+      1
+    ],
+    "dsa-list-reversal": [
+      35,
+      2
+    ],
+    "dsa-fast-slow": [
+      35,
+      3
+    ],
+    "dsa-cycle-detection": [
+      35,
+      4
+    ],
+    "dsa-list-merge": [
+      35,
+      5
+    ],
+    "dsa-stack-fundamentals": [
+      36,
+      0
+    ],
+    "dsa-monotonic-stack": [
+      36,
+      1
+    ],
+    "dsa-queue-deque": [
+      37,
+      0
+    ],
+    "dsa-queue-bfs-relationship": [
+      37,
+      1
+    ],
+    "dsa-recursion-model": [
+      38,
+      0
+    ],
+    "dsa-call-stack": [
+      38,
+      1
+    ],
+    "dsa-recursive-trees": [
+      38,
+      2
+    ],
+    "dsa-recursion-to-iteration": [
+      38,
+      3
+    ],
+    "dsa-subsets": [
+      39,
+      0
+    ],
+    "dsa-permutations": [
+      39,
+      1
+    ],
+    "dsa-combinations": [
+      39,
+      2
+    ],
+    "dsa-constraint-search": [
+      39,
+      3
+    ],
+    "dsa-bubble-sort": [
+      40,
+      0
+    ],
+    "dsa-selection-sort": [
+      40,
+      1
+    ],
+    "dsa-insertion-sort": [
+      40,
+      2
+    ],
+    "dsa-merge-sort": [
+      40,
+      3
+    ],
+    "dsa-quick-sort": [
+      40,
+      4
+    ],
+    "dsa-heap-sort": [
+      40,
+      5
+    ],
+    "dsa-counting-radix": [
+      40,
+      6
+    ],
+    "dsa-sort-stability": [
+      40,
+      7
+    ],
+    "dsa-sort-complexity": [
+      40,
+      8
+    ],
+    "dsa-binary-search-classic": [
+      41,
+      0
+    ],
+    "dsa-binary-search-boundaries": [
+      41,
+      1
+    ],
+    "dsa-first-last-occurrence": [
+      41,
+      2
+    ],
+    "dsa-search-on-answer": [
+      41,
+      3
+    ],
+    "dsa-rotated-arrays": [
+      41,
+      4
+    ],
+    "dsa-tree-terminology": [
+      42,
+      0
+    ],
+    "dsa-binary-trees": [
+      42,
+      1
+    ],
+    "dsa-tree-dfs": [
+      42,
+      2
+    ],
+    "dsa-tree-bfs": [
+      42,
+      3
+    ],
+    "dsa-tree-height": [
+      42,
+      4
+    ],
+    "dsa-tree-paths": [
+      42,
+      5
+    ],
+    "dsa-tree-construction": [
+      42,
+      6
+    ],
+    "dsa-bst-search": [
+      43,
+      0
+    ],
+    "dsa-bst-insert": [
+      43,
+      1
+    ],
+    "dsa-bst-delete": [
+      43,
+      2
+    ],
+    "dsa-bst-validate": [
+      43,
+      3
+    ],
+    "dsa-bst-ordered-properties": [
+      43,
+      4
+    ],
+    "dsa-heap-structure": [
+      44,
+      0
+    ],
+    "dsa-priority-queue": [
+      44,
+      1
+    ],
+    "dsa-heapify": [
+      44,
+      2
+    ],
+    "dsa-top-k": [
+      44,
+      3
+    ],
+    "dsa-heap-scheduling": [
+      44,
+      4
+    ],
+    "dsa-graph-representations": [
+      45,
+      0
+    ],
+    "dsa-graph-bfs": [
+      45,
+      1
+    ],
+    "dsa-graph-dfs": [
+      45,
+      2
+    ],
+    "dsa-connected-components": [
+      45,
+      3
+    ],
+    "dsa-graph-cycle": [
+      45,
+      4
+    ],
+    "dsa-bipartite": [
+      45,
+      5
+    ],
+    "dsa-topological-sort": [
+      46,
+      0
+    ],
+    "dsa-union-find": [
+      47,
+      0
+    ],
+    "dsa-unweighted-shortest": [
+      48,
+      0
+    ],
+    "dsa-dijkstra": [
+      48,
+      1
+    ],
+    "dsa-mst": [
+      49,
+      0
+    ],
+    "dsa-greedy-reasoning": [
+      50,
+      0
+    ],
+    "dsa-greedy-exchange": [
+      50,
+      1
+    ],
+    "dsa-interval-problems": [
+      50,
+      2
+    ],
+    "dsa-greedy-scheduling": [
+      50,
+      3
+    ],
+    "dsa-greedy-patterns": [
+      50,
+      4
+    ],
+    "dsa-dp-mindset": [
+      51,
+      0
+    ],
+    "dsa-memoization": [
+      51,
+      1
+    ],
+    "dsa-tabulation": [
+      51,
+      2
+    ],
+    "dsa-dp-state": [
+      51,
+      3
+    ],
+    "dsa-dp-transition": [
+      51,
+      4
+    ],
+    "dsa-dp-1d": [
+      51,
+      5
+    ],
+    "dsa-dp-2d": [
+      51,
+      6
+    ],
+    "dsa-subsequence-dp": [
+      51,
+      7
+    ],
+    "dsa-knapsack": [
+      51,
+      8
+    ],
+    "dsa-grid-dp": [
+      51,
+      9
+    ],
+    "dsa-interval-dp": [
+      51,
+      10
+    ],
+    "dsa-dp-optimization": [
+      51,
+      11
+    ],
+    "dsa-tries": [
+      52,
+      0
+    ],
+    "dsa-bit-manipulation": [
+      52,
+      1
+    ],
+    "dsa-segment-tree-concept": [
+      52,
+      2
+    ],
+    "dsa-advanced-graphs": [
+      52,
+      3
+    ],
+    "dsa-advanced-dp": [
+      52,
+      4
+    ],
+    "dsa-pattern-selection": [
+      52,
+      5
+    ],
+    "dsa-interview-hygiene": [
+      52,
+      6
+    ],
+    "se-sdlc": [
+      53,
+      0
+    ],
+    "se-requirements": [
+      53,
+      1
+    ],
+    "se-versioning": [
+      53,
+      2
+    ],
+    "se-solid-srp": [
+      53,
+      3
+    ],
+    "se-solid-ocp": [
+      53,
+      4
+    ],
+    "se-testing-pyramid": [
+      53,
+      5
+    ],
+    "se-unit-tests": [
+      53,
+      6
+    ],
+    "se-api-design": [
+      53,
+      7
+    ],
+    "se-code-review": [
+      53,
+      8
+    ],
+    "se-ci-basics": [
+      53,
+      9
+    ],
+    "db-sql-select": [
+      54,
+      0
+    ],
+    "db-sql-joins": [
+      54,
+      1
+    ],
+    "db-indexes": [
+      54,
+      2
+    ],
+    "db-transactions": [
+      54,
+      3
+    ],
+    "db-schema-design": [
+      54,
+      4
+    ],
+    "be-http": [
+      55,
+      5
+    ],
+    "be-rest": [
+      55,
+      6
+    ],
+    "be-json": [
+      55,
+      7
+    ],
+    "be-fastapi-intro": [
+      55,
+      8
+    ],
+    "be-auth-basics": [
+      55,
+      9
+    ],
+    "be-errors": [
+      55,
+      10
+    ],
+    "be-persistence": [
+      55,
+      11
+    ],
+    "math-vectors": [
+      56,
+      0
+    ],
+    "math-matrices": [
+      56,
+      1
+    ],
+    "math-probability": [
+      56,
+      2
+    ],
+    "math-distributions": [
+      56,
+      3
+    ],
+    "math-stats-summary": [
+      56,
+      4
+    ],
+    "math-gradient-intuition": [
+      56,
+      5
+    ],
+    "ml-what-is-ml": [
+      57,
+      0
+    ],
+    "ml-features-labels": [
+      57,
+      1
+    ],
+    "ml-train-test": [
+      57,
+      2
+    ],
+    "ml-linear-regression": [
+      57,
+      3
+    ],
+    "ml-classification": [
+      57,
+      4
+    ],
+    "ml-metrics": [
+      57,
+      5
+    ],
+    "ml-overfitting": [
+      57,
+      6
+    ],
+    "ml-sklearn-pipeline": [
+      57,
+      7
+    ],
+    "dl-awareness": [
+      58,
+      0
+    ],
+    "dl-path": [
+      58,
+      1
+    ],
+    "nlp-awareness": [
+      59,
+      0
+    ],
+    "nlp-path": [
+      59,
+      1
+    ],
+    "genai-awareness": [
+      60,
+      0
+    ],
+    "genai-path": [
+      60,
+      1
+    ],
+    "ai-eng-awareness": [
+      61,
+      0
+    ],
+    "ai-eng-path": [
+      61,
+      1
+    ],
+    "devops-awareness": [
+      62,
+      0
+    ],
+    "devops-path": [
+      62,
+      1
+    ],
+    "sysdesign-awareness": [
+      63,
+      0
+    ],
+    "sysdesign-path": [
+      63,
+      1
+    ],
+    "py-syntax": [
+      64,
+      0
+    ],
+    "py-data-structures": [
+      64,
+      1
+    ],
+    "py-functions-modules": [
+      64,
+      2
+    ],
+    "py-oop": [
+      64,
+      3
+    ],
+    "py-testing": [
+      64,
+      4
+    ],
+    "web-html-basics": [
+      65,
+      0
+    ],
+    "web-css-basics": [
+      65,
+      1
+    ],
+    "web-responsive": [
+      65,
+      2
+    ],
+    "web-js-basics": [
+      65,
+      3
+    ],
+    "web-ts-intro": [
+      65,
+      4
+    ],
+    "web-react-intro": [
+      65,
+      5
+    ],
+    "web-nextjs-intro": [
+      65,
+      6
+    ],
+    "web-forms-a11y": [
+      65,
+      7
+    ],
+    "net-internet-basics": [
+      66,
+      0
+    ],
+    "net-dns": [
+      66,
+      1
+    ],
+    "net-tcp-udp": [
+      66,
+      2
+    ],
+    "net-http": [
+      66,
+      3
+    ],
+    "net-https-tls": [
+      66,
+      4
+    ],
+    "net-websockets": [
+      66,
+      5
+    ],
+    "ops-docker-intro": [
+      67,
+      0
+    ],
+    "ops-compose": [
+      67,
+      1
+    ],
+    "ops-ci-github-actions": [
+      67,
+      2
+    ],
+    "ops-linux-services": [
+      67,
+      3
+    ],
+    "ops-k8s-awareness": [
+      67,
+      4
+    ],
+    "ops-observability": [
+      67,
+      5
+    ],
+    "ds-numpy": [
+      68,
+      0
+    ],
+    "ds-pandas": [
+      68,
+      1
+    ],
+    "ds-eda": [
+      68,
+      2
+    ],
+    "ds-feature-eng": [
+      68,
+      3
+    ],
+    "ds-sql-analytics": [
+      68,
+      4
+    ],
+    "dl-nn-basics": [
+      69,
+      0
+    ],
+    "dl-backprop": [
+      69,
+      1
+    ],
+    "dl-cnn": [
+      69,
+      2
+    ],
+    "dl-transformers-intro": [
+      69,
+      3
+    ],
+    "genai-embeddings": [
+      70,
+      0
+    ],
+    "genai-rag": [
+      70,
+      1
+    ],
+    "genai-agents": [
+      70,
+      2
+    ],
+    "genai-eval": [
+      70,
+      3
+    ],
+    "mlops-tracking": [
+      71,
+      0
+    ],
+    "mlops-model-packaging": [
+      71,
+      1
+    ],
+    "mlops-serving": [
+      71,
+      2
+    ],
+    "mlops-monitoring": [
+      71,
+      3
+    ],
+    "sys-scalability": [
+      72,
+      0
+    ],
+    "sys-caching": [
+      72,
+      1
+    ],
+    "sys-queues": [
+      72,
+      2
+    ],
+    "sys-observability-design": [
+      72,
+      3
+    ],
+    "math-functions": [
+      73,
+      1
+    ],
+    "math-derivatives": [
+      73,
+      2
+    ],
+    "math-partial-derivatives": [
+      73,
+      3
+    ],
+    "math-conditional-probability": [
+      73,
+      4
+    ],
+    "math-bayes-theorem": [
+      73,
+      5
+    ],
+    "math-expectation-variance": [
+      73,
+      6
+    ],
+    "ml-types-of-ml": [
+      57,
+      8
+    ],
+    "ml-validation-split": [
+      57,
+      9
+    ],
+    "ml-loss-intuition": [
+      57,
+      10
+    ],
+    "ml-gradient-descent-intuition": [
+      57,
+      11
+    ],
+    "ml-logistic-regression": [
+      57,
+      12
+    ],
+    "ml-decision-trees": [
+      57,
+      13
+    ],
+    "ml-random-forests": [
+      57,
+      14
+    ],
+    "ml-knn": [
+      57,
+      15
+    ],
+    "ml-naive-bayes": [
+      57,
+      16
+    ],
+    "ml-svm": [
+      57,
+      17
+    ],
+    "ml-confusion-matrix": [
+      57,
+      18
+    ],
+    "ml-bias-variance": [
+      57,
+      19
+    ],
+    "ml-cross-validation": [
+      57,
+      20
+    ],
+    "ml-feature-scaling": [
+      57,
+      21
+    ],
+    "ml-encoding-categorical": [
+      57,
+      22
+    ],
+    "ml-ensemble-learning": [
+      57,
+      23
+    ],
+    "ml-end-to-end-workflow": [
+      57,
+      24
+    ],
+    "dl-why-deep-learning": [
+      74,
+      1
+    ],
+    "dl-neuron-intuition": [
+      74,
+      2
+    ],
+    "dl-perceptron": [
+      74,
+      3
+    ],
+    "dl-activation-functions": [
+      74,
+      4
+    ],
+    "dl-forward-propagation": [
+      74,
+      5
+    ],
+    "dl-loss-functions-nn": [
+      74,
+      6
+    ],
+    "dl-backprop-intuition": [
+      74,
+      7
+    ],
+    "dl-computational-graphs": [
+      74,
+      8
+    ],
+    "dl-gradient-descent-nn": [
+      74,
+      9
+    ],
+    "dl-mlp": [
+      74,
+      10
+    ],
+    "dl-vanishing-gradients": [
+      74,
+      11
+    ],
+    "dl-initialization": [
+      74,
+      12
+    ],
+    "dl-normalization": [
+      74,
+      13
+    ],
+    "dl-dropout": [
+      74,
+      14
+    ],
+    "dl-optimizers-sgd": [
+      74,
+      15
+    ],
+    "dl-optimizers-adam": [
+      74,
+      16
+    ],
+    "dl-batch-epoch-lr": [
+      74,
+      17
+    ],
+    "dl-cnn-foundations": [
+      74,
+      18
+    ],
+    "dl-convolution-op": [
+      74,
+      19
+    ],
+    "dl-padding-stride": [
+      74,
+      20
+    ],
+    "dl-pooling": [
+      74,
+      21
+    ],
+    "dl-feature-maps": [
+      74,
+      22
+    ],
+    "dl-rnn-awareness": [
+      74,
+      23
+    ],
+    "dl-lstm-gru": [
+      74,
+      24
+    ],
+    "dl-attention-intuition": [
+      74,
+      25
+    ],
+    "dl-transformers-foundations": [
+      74,
+      26
+    ],
+    "cv-what-is-an-image": [
+      75,
+      1
+    ],
+    "cv-pixels-channels": [
+      75,
+      2
+    ],
+    "cv-color-spaces": [
+      75,
+      3
+    ],
+    "cv-image-tensors": [
+      75,
+      4
+    ],
+    "cv-transformations": [
+      75,
+      5
+    ],
+    "cv-normalization-cv": [
+      75,
+      6
+    ],
+    "cv-augmentation": [
+      75,
+      7
+    ],
+    "cv-traditional-filters": [
+      75,
+      8
+    ],
+    "cv-convolution-in-cv": [
+      75,
+      9
+    ],
+    "cv-classification-workflow": [
+      75,
+      10
+    ],
+    "cv-classic-architectures": [
+      75,
+      11
+    ],
+    "cv-resnet": [
+      75,
+      12
+    ],
+    "cv-efficientnet-awareness": [
+      75,
+      13
+    ],
+    "cv-transfer-learning-cv": [
+      75,
+      14
+    ],
+    "cv-object-detection-overview": [
+      75,
+      15
+    ],
+    "cv-bounding-boxes-iou": [
+      75,
+      16
+    ],
+    "cv-nms": [
+      75,
+      17
+    ],
+    "cv-two-stage-vs-one-stage": [
+      75,
+      18
+    ],
+    "cv-yolo-concept": [
+      75,
+      19
+    ],
+    "cv-semantic-segmentation": [
+      75,
+      20
+    ],
+    "cv-u-net": [
+      75,
+      21
+    ],
+    "cv-instance-segmentation": [
+      75,
+      22
+    ],
+    "cv-evaluation-metrics-cv": [
+      75,
+      23
+    ],
+    "cv-vision-transformers-awareness": [
+      75,
+      24
+    ],
+    "cv-end-to-end-project": [
+      75,
+      25
+    ],
+    "nlp-what-is-nlp": [
+      76,
+      1
+    ],
+    "nlp-text-preprocessing": [
+      76,
+      2
+    ],
+    "nlp-tokenization-nlp": [
+      76,
+      3
+    ],
+    "nlp-vocabulary-bow": [
+      76,
+      4
+    ],
+    "nlp-tf-idf": [
+      76,
+      5
+    ],
+    "nlp-word-embeddings": [
+      76,
+      6
+    ],
+    "nlp-word2vec": [
+      76,
+      7
+    ],
+    "nlp-sequence-modeling": [
+      76,
+      8
+    ],
+    "nlp-rnn-lstm": [
+      76,
+      9
+    ],
+    "nlp-attention-nlp": [
+      76,
+      10
+    ],
+    "nlp-transformers-nlp": [
+      76,
+      11
+    ],
+    "nlp-bert": [
+      76,
+      12
+    ],
+    "nlp-encoder-vs-decoder": [
+      76,
+      13
+    ],
+    "nlp-generative-models": [
+      76,
+      14
+    ],
+    "nlp-fine-tuning-nlp": [
+      76,
+      15
+    ],
+    "nlp-evaluation-nlp": [
+      76,
+      16
+    ],
+    "genai-what-is-lm": [
+      70,
+      4
+    ],
+    "genai-next-token-prediction": [
+      70,
+      5
+    ],
+    "genai-tokenization-llm": [
+      70,
+      6
+    ],
+    "genai-pretraining-finetuning": [
+      70,
+      7
+    ],
+    "genai-instruction-tuning-rlhf": [
+      70,
+      8
+    ],
+    "genai-inference-parameters": [
+      70,
+      9
+    ],
+    "genai-context-windows": [
+      70,
+      10
+    ],
+    "genai-prompt-engineering": [
+      70,
+      11
+    ],
+    "genai-vector-databases": [
+      70,
+      12
+    ],
+    "genai-chunking-retrieval": [
+      70,
+      13
+    ],
+    "genai-hallucinations-guardrails": [
+      70,
+      14
+    ],
+    "ai-eng-structured-output": [
+      71,
+      4
+    ],
+    "ai-eng-tool-calling": [
+      71,
+      5
+    ],
+    "ai-eng-function-calling": [
+      71,
+      6
+    ],
+    "ai-eng-agent-loops": [
+      71,
+      7
+    ],
+    "ai-eng-planning-memory": [
+      71,
+      8
+    ],
+    "ai-eng-multi-agent-awareness": [
+      71,
+      9
+    ],
+    "ai-eng-observability-security": [
+      71,
+      10
+    ],
+    "ai-eng-production-deployment": [
+      71,
+      11
+    ],
+    "ml-ridge-lasso": [
+      57,
+      25
+    ],
+    "ml-roc-auc": [
+      57,
+      26
+    ],
+    "ml-regression-metrics": [
+      57,
+      27
+    ],
+    "ml-grid-search": [
+      57,
+      28
+    ],
+    "ml-kmeans": [
+      57,
+      29
+    ],
+    "ml-hierarchical-dbscan": [
+      57,
+      30
+    ],
+    "ml-pca": [
+      57,
+      31
+    ],
+    "ml-anomaly-awareness": [
+      57,
+      32
+    ],
+    "ml-gradient-boosting": [
+      57,
+      33
+    ],
+    "ml-feature-importance": [
+      57,
+      34
+    ],
+    "dl-pytorch-tensors": [
+      74,
+      27
+    ],
+    "dl-pytorch-data": [
+      74,
+      28
+    ],
+    "dl-pytorch-build-model": [
+      74,
+      29
+    ],
+    "dl-pytorch-autograd": [
+      74,
+      30
+    ],
+    "dl-pytorch-training-loop": [
+      74,
+      31
+    ],
+    "dl-pytorch-save-load": [
+      74,
+      32
+    ],
+    "cv-sift-orb-awareness": [
+      75,
+      26
+    ],
+    "genai-lora-peft": [
+      70,
+      15
+    ],
+    "genai-production-serving": [
+      70,
+      16
+    ],
+    "mlops-experiment-lifecycle": [
+      71,
+      12
+    ],
+    "mlops-drift-quality": [
+      71,
+      13
+    ],
+    "math-dot-product-norms": [
+      73,
+      7
+    ],
+    "math-chain-rule": [
+      73,
+      8
+    ],
+    "math-covariance-correlation": [
+      73,
+      9
+    ]
+  },
+  "prerequisites": {
+    "cf-bits-and-bytes": [],
+    "cf-binary": [
+      {
+        "slug": "cf-bits-and-bytes",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-hexadecimal": [
+      {
+        "slug": "cf-binary",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-cpu": [
+      {
+        "slug": "cf-hexadecimal",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-alu": [
+      {
+        "slug": "cf-cpu",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-registers": [
+      {
+        "slug": "cf-alu",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-ram": [
+      {
+        "slug": "cf-registers",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-cache": [
+      {
+        "slug": "cf-ram",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-storage": [
+      {
+        "slug": "cf-cache",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-instruction-execution": [
+      {
+        "slug": "cf-storage",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-machine-code": [
+      {
+        "slug": "cf-instruction-execution",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-compiler": [
+      {
+        "slug": "cf-machine-code",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-interpreter": [
+      {
+        "slug": "cf-compiler",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-program": [
+      {
+        "slug": "cf-interpreter",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-process": [
+      {
+        "slug": "cf-program",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-kernel": [
+      {
+        "slug": "cf-process",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-os-processes": [
+      {
+        "slug": "cf-kernel",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-threads": [
+      {
+        "slug": "cf-os-processes",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-system-calls": [
+      {
+        "slug": "cf-threads",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-os-memory": [
+      {
+        "slug": "cf-system-calls",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-virtual-memory-basics": [
+      {
+        "slug": "cf-os-memory",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-filesystems": [
+      {
+        "slug": "cf-virtual-memory-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-os-permissions": [
+      {
+        "slug": "cf-filesystems",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-os-environment-variables": [
+      {
+        "slug": "cf-os-permissions",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-shell": [
+      {
+        "slug": "cf-os-environment-variables",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-command-line": [
+      {
+        "slug": "cf-shell",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-filesystem-navigation": [
+      {
+        "slug": "cf-command-line",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-linux-files": [
+      {
+        "slug": "cf-filesystem-navigation",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-pipes": [
+      {
+        "slug": "cf-linux-files",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-redirection": [
+      {
+        "slug": "cf-pipes",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-grep": [
+      {
+        "slug": "cf-redirection",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-find": [
+      {
+        "slug": "cf-grep",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-linux-permissions": [
+      {
+        "slug": "cf-find",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-linux-processes": [
+      {
+        "slug": "cf-linux-permissions",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-package-management": [
+      {
+        "slug": "cf-linux-processes",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-linux-environment-variables": [
+      {
+        "slug": "cf-package-management",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-repository": [
+      {
+        "slug": "cf-linux-environment-variables",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-commits": [
+      {
+        "slug": "cf-repository",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-branches": [
+      {
+        "slug": "cf-commits",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-merge": [
+      {
+        "slug": "cf-branches",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-rebase": [
+      {
+        "slug": "cf-merge",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-remote": [
+      {
+        "slug": "cf-rebase",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-pull-push": [
+      {
+        "slug": "cf-remote",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-conflicts": [
+      {
+        "slug": "cf-pull-push",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-reset-revert": [
+      {
+        "slug": "cf-conflicts",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-cherry-pick": [
+      {
+        "slug": "cf-reset-revert",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-stash": [
+      {
+        "slug": "cf-cherry-pick",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-github-workflow": [
+      {
+        "slug": "cf-stash",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-ide": [
+      {
+        "slug": "cf-github-workflow",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "cf-compiler",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-dev-compiler": [
+      {
+        "slug": "cf-ide",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-debugger": [
+      {
+        "slug": "cf-dev-compiler",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-formatter": [
+      {
+        "slug": "cf-debugger",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-linter": [
+      {
+        "slug": "cf-formatter",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-dev-package-manager": [
+      {
+        "slug": "cf-linter",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-build-system": [
+      {
+        "slug": "cf-dev-package-manager",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-dependency-management": [
+      {
+        "slug": "cf-build-system",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-problem-decomposition": [],
+    "cf-pseudocode": [
+      {
+        "slug": "cf-problem-decomposition",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-algorithms": [
+      {
+        "slug": "cf-pseudocode",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-dry-runs": [
+      {
+        "slug": "cf-algorithms",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-edge-cases": [
+      {
+        "slug": "cf-dry-runs",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-debugging-thinking": [
+      {
+        "slug": "cf-edge-cases",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-time-complexity-intro": [
+      {
+        "slug": "cf-problem-decomposition",
+        "type": "REQUIRED"
+      }
+    ],
+    "cf-space-complexity-intro": [
+      {
+        "slug": "cf-time-complexity-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-jdk-jre": [
+      {
+        "slug": "cf-space-complexity-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-first-program": [
+      {
+        "slug": "java-jdk-jre",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-compile-and-run": [
+      {
+        "slug": "java-first-program",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-primitives": [
+      {
+        "slug": "java-compile-and-run",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-type-conversion": [
+      {
+        "slug": "java-primitives",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-console-io": [
+      {
+        "slug": "java-type-conversion",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-operators": [
+      {
+        "slug": "java-console-io",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-if-else": [
+      {
+        "slug": "java-operators",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-switch": [
+      {
+        "slug": "java-if-else",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-loops": [
+      {
+        "slug": "java-switch",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-break-continue": [
+      {
+        "slug": "java-loops",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-method-basics": [
+      {
+        "slug": "java-break-continue",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-overloading": [
+      {
+        "slug": "java-method-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-scope": [
+      {
+        "slug": "java-overloading",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-arrays": [
+      {
+        "slug": "java-scope",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-strings": [
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-stringbuilder": [
+      {
+        "slug": "java-strings",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-classes-objects": [
+      {
+        "slug": "java-stringbuilder",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-references": [
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-constructors": [
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-encapsulation": [
+      {
+        "slug": "java-constructors",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-inheritance": [
+      {
+        "slug": "java-encapsulation",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-polymorphism": [
+      {
+        "slug": "java-inheritance",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-abstract-classes": [
+      {
+        "slug": "java-polymorphism",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-interfaces": [
+      {
+        "slug": "java-abstract-classes",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-composition": [
+      {
+        "slug": "java-interfaces",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-try-catch": [
+      {
+        "slug": "java-composition",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-checked-unchecked": [
+      {
+        "slug": "java-try-catch",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-custom-exceptions": [
+      {
+        "slug": "java-checked-unchecked",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-list": [
+      {
+        "slug": "java-custom-exceptions",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-set": [
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-map": [
+      {
+        "slug": "java-set",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-iteration": [
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-priority-queue": [
+      {
+        "slug": "java-iteration",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-generic-types": [
+      {
+        "slug": "java-priority-queue",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-generic-bounds": [
+      {
+        "slug": "java-generic-types",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-comparable-comparator": [
+      {
+        "slug": "java-generic-bounds",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-functional-interfaces": [
+      {
+        "slug": "java-comparable-comparator",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-lambdas": [
+      {
+        "slug": "java-functional-interfaces",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-stream-pipeline": [
+      {
+        "slug": "java-lambdas",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-stream-operations": [
+      {
+        "slug": "java-stream-pipeline",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-paths-files": [
+      {
+        "slug": "java-stream-operations",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-readers-writers": [
+      {
+        "slug": "java-paths-files",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-junit-basics": [
+      {
+        "slug": "java-readers-writers",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-assertions": [
+      {
+        "slug": "java-junit-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-threads": [
+      {
+        "slug": "java-assertions",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-synchronization-basics": [
+      {
+        "slug": "java-threads",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-bytecode": [
+      {
+        "slug": "java-synchronization-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-memory-model-basics": [
+      {
+        "slug": "java-bytecode",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-gc-intro": [
+      {
+        "slug": "java-memory-model-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-packages": [
+      {
+        "slug": "java-gc-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "java-api-hygiene": [
+      {
+        "slug": "java-packages",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-algorithmic-thinking": [
+      {
+        "slug": "cf-time-complexity-intro",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-method-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-big-o": [
+      {
+        "slug": "dsa-algorithmic-thinking",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-best-worst-average": [
+      {
+        "slug": "dsa-big-o",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-array-traversal": [
+      {
+        "slug": "dsa-best-worst-average",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-array-insert-delete": [
+      {
+        "slug": "dsa-array-traversal",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-prefix-sums": [
+      {
+        "slug": "dsa-array-insert-delete",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-array-frequency": [
+      {
+        "slug": "dsa-prefix-sums",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-array-patterns": [
+      {
+        "slug": "dsa-array-frequency",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-string-manipulation": [
+      {
+        "slug": "dsa-array-patterns",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-strings",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-string-frequency": [
+      {
+        "slug": "dsa-string-manipulation",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-character-processing": [
+      {
+        "slug": "dsa-string-frequency",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-string-patterns": [
+      {
+        "slug": "dsa-character-processing",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-hash-map": [
+      {
+        "slug": "dsa-string-patterns",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-set",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-hash-set": [
+      {
+        "slug": "dsa-hash-map",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-frequency-maps": [
+      {
+        "slug": "dsa-hash-set",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-lookup-patterns": [
+      {
+        "slug": "dsa-frequency-maps",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-two-pointers-opposite": [
+      {
+        "slug": "dsa-lookup-patterns",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-two-pointers-same": [
+      {
+        "slug": "dsa-two-pointers-opposite",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-two-pointers-partition": [
+      {
+        "slug": "dsa-two-pointers-same",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-window-fixed": [
+      {
+        "slug": "dsa-two-pointers-partition",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-window-variable": [
+      {
+        "slug": "dsa-window-fixed",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-window-frequency": [
+      {
+        "slug": "dsa-window-variable",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-singly-linked-list": [
+      {
+        "slug": "dsa-window-frequency",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-list-operations": [
+      {
+        "slug": "dsa-singly-linked-list",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-list-reversal": [
+      {
+        "slug": "dsa-list-operations",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-fast-slow": [
+      {
+        "slug": "dsa-list-reversal",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-cycle-detection": [
+      {
+        "slug": "dsa-fast-slow",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-list-merge": [
+      {
+        "slug": "dsa-cycle-detection",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-stack-fundamentals": [
+      {
+        "slug": "dsa-list-merge",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-monotonic-stack": [
+      {
+        "slug": "dsa-stack-fundamentals",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-queue-deque": [
+      {
+        "slug": "dsa-monotonic-stack",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-queue-bfs-relationship": [
+      {
+        "slug": "dsa-queue-deque",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-recursion-model": [
+      {
+        "slug": "dsa-queue-bfs-relationship",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-method-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-call-stack": [
+      {
+        "slug": "dsa-recursion-model",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-recursive-trees": [
+      {
+        "slug": "dsa-call-stack",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-recursion-to-iteration": [
+      {
+        "slug": "dsa-recursive-trees",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-subsets": [
+      {
+        "slug": "dsa-recursion-to-iteration",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-permutations": [
+      {
+        "slug": "dsa-subsets",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-combinations": [
+      {
+        "slug": "dsa-permutations",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-constraint-search": [
+      {
+        "slug": "dsa-combinations",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bubble-sort": [
+      {
+        "slug": "dsa-constraint-search",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-selection-sort": [
+      {
+        "slug": "dsa-bubble-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-insertion-sort": [
+      {
+        "slug": "dsa-selection-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-merge-sort": [
+      {
+        "slug": "dsa-insertion-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-quick-sort": [
+      {
+        "slug": "dsa-merge-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-heap-sort": [
+      {
+        "slug": "dsa-quick-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-counting-radix": [
+      {
+        "slug": "dsa-heap-sort",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-sort-stability": [
+      {
+        "slug": "dsa-counting-radix",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-sort-complexity": [
+      {
+        "slug": "dsa-sort-stability",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-binary-search-classic": [
+      {
+        "slug": "dsa-sort-complexity",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-arrays",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-binary-search-boundaries": [
+      {
+        "slug": "dsa-binary-search-classic",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-first-last-occurrence": [
+      {
+        "slug": "dsa-binary-search-boundaries",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-search-on-answer": [
+      {
+        "slug": "dsa-first-last-occurrence",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-rotated-arrays": [
+      {
+        "slug": "dsa-search-on-answer",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-terminology": [
+      {
+        "slug": "dsa-rotated-arrays",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-binary-trees": [
+      {
+        "slug": "dsa-tree-terminology",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-dfs": [
+      {
+        "slug": "dsa-binary-trees",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-bfs": [
+      {
+        "slug": "dsa-tree-dfs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-height": [
+      {
+        "slug": "dsa-tree-bfs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-paths": [
+      {
+        "slug": "dsa-tree-height",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tree-construction": [
+      {
+        "slug": "dsa-tree-paths",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bst-search": [
+      {
+        "slug": "dsa-tree-construction",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bst-insert": [
+      {
+        "slug": "dsa-bst-search",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bst-delete": [
+      {
+        "slug": "dsa-bst-insert",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bst-validate": [
+      {
+        "slug": "dsa-bst-delete",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bst-ordered-properties": [
+      {
+        "slug": "dsa-bst-validate",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-heap-structure": [
+      {
+        "slug": "dsa-bst-ordered-properties",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-priority-queue",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-comparable-comparator",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-priority-queue": [
+      {
+        "slug": "dsa-heap-structure",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-heapify": [
+      {
+        "slug": "dsa-priority-queue",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-top-k": [
+      {
+        "slug": "dsa-heapify",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-heap-scheduling": [
+      {
+        "slug": "dsa-top-k",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-graph-representations": [
+      {
+        "slug": "dsa-heap-scheduling",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-graph-bfs": [
+      {
+        "slug": "dsa-graph-representations",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-graph-dfs": [
+      {
+        "slug": "dsa-graph-bfs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-connected-components": [
+      {
+        "slug": "dsa-graph-dfs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-graph-cycle": [
+      {
+        "slug": "dsa-connected-components",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bipartite": [
+      {
+        "slug": "dsa-graph-cycle",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-topological-sort": [
+      {
+        "slug": "dsa-bipartite",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-union-find": [
+      {
+        "slug": "dsa-topological-sort",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-unweighted-shortest": [
+      {
+        "slug": "dsa-union-find",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-priority-queue",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dijkstra": [
+      {
+        "slug": "dsa-unweighted-shortest",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-mst": [
+      {
+        "slug": "dsa-dijkstra",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-list",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-map",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-classes-objects",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "java-references",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-greedy-reasoning": [
+      {
+        "slug": "dsa-mst",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-greedy-exchange": [
+      {
+        "slug": "dsa-greedy-reasoning",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-interval-problems": [
+      {
+        "slug": "dsa-greedy-exchange",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-greedy-scheduling": [
+      {
+        "slug": "dsa-interval-problems",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-greedy-patterns": [
+      {
+        "slug": "dsa-greedy-scheduling",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-mindset": [
+      {
+        "slug": "dsa-greedy-patterns",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-memoization": [
+      {
+        "slug": "dsa-dp-mindset",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tabulation": [
+      {
+        "slug": "dsa-memoization",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-state": [
+      {
+        "slug": "dsa-tabulation",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-transition": [
+      {
+        "slug": "dsa-dp-state",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-1d": [
+      {
+        "slug": "dsa-dp-transition",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-2d": [
+      {
+        "slug": "dsa-dp-1d",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-subsequence-dp": [
+      {
+        "slug": "dsa-dp-2d",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-knapsack": [
+      {
+        "slug": "dsa-subsequence-dp",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-grid-dp": [
+      {
+        "slug": "dsa-knapsack",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-interval-dp": [
+      {
+        "slug": "dsa-grid-dp",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-dp-optimization": [
+      {
+        "slug": "dsa-interval-dp",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-tries": [
+      {
+        "slug": "dsa-dp-optimization",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-bit-manipulation": [
+      {
+        "slug": "dsa-tries",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-segment-tree-concept": [
+      {
+        "slug": "dsa-bit-manipulation",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-advanced-graphs": [
+      {
+        "slug": "dsa-segment-tree-concept",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-advanced-dp": [
+      {
+        "slug": "dsa-advanced-graphs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-pattern-selection": [
+      {
+        "slug": "dsa-advanced-dp",
+        "type": "REQUIRED"
+      }
+    ],
+    "dsa-interview-hygiene": [
+      {
+        "slug": "dsa-pattern-selection",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-sdlc": [],
+    "se-requirements": [
+      {
+        "slug": "se-sdlc",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-versioning": [
+      {
+        "slug": "se-sdlc",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-solid-srp": [
+      {
+        "slug": "se-sdlc",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-solid-ocp": [
+      {
+        "slug": "se-solid-srp",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-testing-pyramid": [
+      {
+        "slug": "se-sdlc",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-unit-tests": [
+      {
+        "slug": "se-testing-pyramid",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-api-design": [
+      {
+        "slug": "se-requirements",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-code-review": [
+      {
+        "slug": "se-unit-tests",
+        "type": "REQUIRED"
+      }
+    ],
+    "se-ci-basics": [
+      {
+        "slug": "se-unit-tests",
+        "type": "REQUIRED"
+      }
+    ],
+    "db-sql-select": [],
+    "db-sql-joins": [
+      {
+        "slug": "db-sql-select",
+        "type": "REQUIRED"
+      }
+    ],
+    "db-indexes": [
+      {
+        "slug": "db-sql-select",
+        "type": "REQUIRED"
+      }
+    ],
+    "db-transactions": [
+      {
+        "slug": "db-sql-select",
+        "type": "REQUIRED"
+      }
+    ],
+    "db-schema-design": [
+      {
+        "slug": "db-sql-joins",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-http": [],
+    "be-rest": [
+      {
+        "slug": "be-http",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-json": [
+      {
+        "slug": "be-http",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-fastapi-intro": [
+      {
+        "slug": "be-rest",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "be-json",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-auth-basics": [
+      {
+        "slug": "be-fastapi-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-errors": [
+      {
+        "slug": "be-fastapi-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "be-persistence": [
+      {
+        "slug": "be-fastapi-intro",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "db-sql-select",
+        "type": "REQUIRED"
+      }
+    ],
+    "math-vectors": [],
+    "math-matrices": [
+      {
+        "slug": "math-vectors",
+        "type": "REQUIRED"
+      }
+    ],
+    "math-probability": [],
+    "math-distributions": [
+      {
+        "slug": "math-probability",
+        "type": "REQUIRED"
+      }
+    ],
+    "math-stats-summary": [
+      {
+        "slug": "math-probability",
+        "type": "REQUIRED"
+      }
+    ],
+    "math-gradient-intuition": [
+      {
+        "slug": "math-vectors",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-what-is-ml": [
+      {
+        "slug": "math-probability",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-features-labels": [
+      {
+        "slug": "ml-what-is-ml",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-train-test": [
+      {
+        "slug": "ml-features-labels",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-linear-regression": [
+      {
+        "slug": "ml-train-test",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "math-vectors",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-classification": [
+      {
+        "slug": "ml-train-test",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-metrics": [
+      {
+        "slug": "ml-classification",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-overfitting": [
+      {
+        "slug": "ml-metrics",
+        "type": "REQUIRED"
+      }
+    ],
+    "ml-sklearn-pipeline": [
+      {
+        "slug": "ml-overfitting",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-awareness": [],
+    "dl-path": [
+      {
+        "slug": "dl-awareness",
+        "type": "REQUIRED"
+      }
+    ],
+    "nlp-awareness": [],
+    "nlp-path": [
+      {
+        "slug": "nlp-awareness",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "nlp-what-is-nlp",
+        "type": "REQUIRED"
+      }
+    ],
+    "genai-awareness": [],
+    "genai-path": [
+      {
+        "slug": "genai-awareness",
+        "type": "REQUIRED"
+      }
+    ],
+    "ai-eng-awareness": [],
+    "ai-eng-path": [
+      {
+        "slug": "ai-eng-awareness",
+        "type": "REQUIRED"
+      }
+    ],
+    "devops-awareness": [],
+    "devops-path": [
+      {
+        "slug": "devops-awareness",
+        "type": "REQUIRED"
+      }
+    ],
+    "sysdesign-awareness": [],
+    "sysdesign-path": [
+      {
+        "slug": "sysdesign-awareness",
+        "type": "REQUIRED"
+      }
+    ],
+    "py-syntax": [
+      {
+        "slug": "cf-command-line",
+        "type": "REQUIRED"
+      }
+    ],
+    "py-data-structures": [
+      {
+        "slug": "py-syntax",
+        "type": "REQUIRED"
+      }
+    ],
+    "py-functions-modules": [
+      {
+        "slug": "py-data-structures",
+        "type": "REQUIRED"
+      }
+    ],
+    "py-oop": [
+      {
+        "slug": "py-functions-modules",
+        "type": "REQUIRED"
+      }
+    ],
+    "py-testing": [
+      {
+        "slug": "py-functions-modules",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "se-unit-tests",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-html-basics": [],
+    "web-css-basics": [
+      {
+        "slug": "web-html-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-responsive": [
+      {
+        "slug": "web-css-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-js-basics": [
+      {
+        "slug": "web-html-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-ts-intro": [
+      {
+        "slug": "web-js-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-react-intro": [
+      {
+        "slug": "web-js-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-nextjs-intro": [
+      {
+        "slug": "web-react-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "web-forms-a11y": [
+      {
+        "slug": "web-html-basics",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "web-css-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "net-internet-basics": [],
+    "net-dns": [
+      {
+        "slug": "net-internet-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "net-tcp-udp": [
+      {
+        "slug": "net-internet-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "net-http": [
+      {
+        "slug": "net-internet-basics",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "be-http",
+        "type": "REQUIRED"
+      }
+    ],
+    "net-https-tls": [
+      {
+        "slug": "net-http",
+        "type": "REQUIRED"
+      }
+    ],
+    "net-websockets": [
+      {
+        "slug": "net-http",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-docker-intro": [
+      {
+        "slug": "cf-shell",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-compose": [
+      {
+        "slug": "ops-docker-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-ci-github-actions": [
+      {
+        "slug": "se-ci-basics",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-linux-services": [
+      {
+        "slug": "cf-linux-processes",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-k8s-awareness": [
+      {
+        "slug": "ops-docker-intro",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "ops-compose",
+        "type": "REQUIRED"
+      }
+    ],
+    "ops-observability": [
+      {
+        "slug": "ops-docker-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "ds-numpy": [
+      {
+        "slug": "math-vectors",
+        "type": "REQUIRED"
+      }
+    ],
+    "ds-pandas": [
+      {
+        "slug": "ds-numpy",
+        "type": "REQUIRED"
+      }
+    ],
+    "ds-eda": [
+      {
+        "slug": "ds-pandas",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "math-stats-summary",
+        "type": "REQUIRED"
+      }
+    ],
+    "ds-feature-eng": [
+      {
+        "slug": "ds-eda",
+        "type": "REQUIRED"
+      }
+    ],
+    "ds-sql-analytics": [
+      {
+        "slug": "db-sql-select",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "ds-pandas",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-nn-basics": [
+      {
+        "slug": "ml-sklearn-pipeline",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "math-gradient-intuition",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "dl-perceptron",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-backprop": [
+      {
+        "slug": "dl-nn-basics",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "dl-computational-graphs",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-cnn": [
+      {
+        "slug": "dl-nn-basics",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "dl-cnn-foundations",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-transformers-intro": [
+      {
+        "slug": "dl-nn-basics",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "dl-transformers-foundations",
+        "type": "REQUIRED"
+      }
+    ],
+    "genai-embeddings": [
+      {
+        "slug": "dl-transformers-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "genai-rag": [
+      {
+        "slug": "genai-embeddings",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "be-fastapi-intro",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "genai-chunking-retrieval",
+        "type": "REQUIRED"
+      }
+    ],
+    "genai-agents": [
+      {
+        "slug": "genai-rag",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "ai-eng-agent-loops",
+        "type": "REQUIRED"
+      }
+    ],
+    "genai-eval": [
+      {
+        "slug": "genai-rag",
+        "type": "REQUIRED"
+      }
+    ],
+    "mlops-tracking": [
+      {
+        "slug": "ml-sklearn-pipeline",
+        "type": "REQUIRED"
+      }
+    ],
+    "mlops-model-packaging": [
+      {
+        "slug": "mlops-tracking",
+        "type": "REQUIRED"
+      }
+    ],
+    "mlops-serving": [
+      {
+        "slug": "mlops-model-packaging",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "be-fastapi-intro",
+        "type": "REQUIRED"
+      }
+    ],
+    "mlops-monitoring": [
+      {
+        "slug": "mlops-serving",
+        "type": "REQUIRED"
+      }
+    ],
+    "sys-scalability": [
+      {
+        "slug": "be-persistence",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "db-indexes",
+        "type": "REQUIRED"
+      }
+    ],
+    "sys-caching": [
+      {
+        "slug": "sys-scalability",
+        "type": "REQUIRED"
+      }
+    ],
+    "sys-queues": [
+      {
+        "slug": "sys-scalability",
+        "type": "REQUIRED"
+      }
+    ],
+    "sys-observability-design": [
+      {
+        "slug": "ops-observability",
+        "type": "REQUIRED"
+      },
+      {
+        "slug": "sys-scalability",
+        "type": "REQUIRED"
+      }
+    ],
+    "math-functions": [
+      "math-stats-summary"
+    ],
+    "math-derivatives": [
+      "math-functions"
+    ],
+    "math-partial-derivatives": [
+      "math-derivatives",
+      {
+        "slug": "math-vectors",
+        "type": "RECOMMENDED"
+      }
+    ],
+    "math-conditional-probability": [
+      "math-probability"
+    ],
+    "math-bayes-theorem": [
+      "math-conditional-probability"
+    ],
+    "math-expectation-variance": [
+      "math-probability"
+    ],
+    "ml-types-of-ml": [
+      "ml-what-is-ml"
+    ],
+    "ml-validation-split": [
+      "ml-train-test"
+    ],
+    "ml-loss-intuition": [
+      "ml-linear-regression"
+    ],
+    "ml-gradient-descent-intuition": [
+      "ml-loss-intuition",
+      "math-gradient-intuition",
+      "math-derivatives"
+    ],
+    "ml-logistic-regression": [
+      "ml-classification"
+    ],
+    "ml-decision-trees": [
+      "ml-classification"
+    ],
+    "ml-random-forests": [
+      "ml-decision-trees"
+    ],
+    "ml-knn": [
+      "ml-classification"
+    ],
+    "ml-naive-bayes": [
+      "ml-classification",
+      "math-bayes-theorem"
+    ],
+    "ml-svm": [
+      "ml-classification"
+    ],
+    "ml-confusion-matrix": [
+      "ml-metrics"
+    ],
+    "ml-bias-variance": [
+      "ml-overfitting"
+    ],
+    "ml-cross-validation": [
+      "ml-validation-split"
+    ],
+    "ml-feature-scaling": [
+      "ds-feature-eng"
+    ],
+    "ml-encoding-categorical": [
+      "ds-feature-eng"
+    ],
+    "ml-ensemble-learning": [
+      "ml-random-forests"
+    ],
+    "ml-end-to-end-workflow": [
+      "ml-sklearn-pipeline",
+      "ml-cross-validation"
+    ],
+    "dl-why-deep-learning": [
+      "ml-end-to-end-workflow"
+    ],
+    "dl-neuron-intuition": [
+      "dl-why-deep-learning",
+      "ml-logistic-regression"
+    ],
+    "dl-perceptron": [
+      "dl-neuron-intuition"
+    ],
+    "dl-activation-functions": [
+      "dl-neuron-intuition"
+    ],
+    "dl-forward-propagation": [
+      "dl-activation-functions"
+    ],
+    "dl-loss-functions-nn": [
+      "dl-forward-propagation",
+      "ml-loss-intuition"
+    ],
+    "dl-backprop-intuition": [
+      "dl-loss-functions-nn",
+      "math-partial-derivatives"
+    ],
+    "dl-computational-graphs": [
+      "dl-backprop-intuition"
+    ],
+    "dl-gradient-descent-nn": [
+      "dl-computational-graphs"
+    ],
+    "dl-mlp": [
+      "dl-gradient-descent-nn"
+    ],
+    "dl-vanishing-gradients": [
+      "dl-mlp"
+    ],
+    "dl-initialization": [
+      "dl-vanishing-gradients"
+    ],
+    "dl-normalization": [
+      "dl-initialization"
+    ],
+    "dl-dropout": [
+      "dl-mlp"
+    ],
+    "dl-optimizers-sgd": [
+      "dl-gradient-descent-nn"
+    ],
+    "dl-optimizers-adam": [
+      "dl-optimizers-sgd"
+    ],
+    "dl-batch-epoch-lr": [
+      "dl-optimizers-adam"
+    ],
+    "dl-cnn-foundations": [
+      "dl-batch-epoch-lr",
+      {
+        "slug": "dl-pytorch-training-loop",
+        "type": "REQUIRED"
+      }
+    ],
+    "dl-convolution-op": [
+      "dl-cnn-foundations"
+    ],
+    "dl-padding-stride": [
+      "dl-convolution-op"
+    ],
+    "dl-pooling": [
+      "dl-padding-stride"
+    ],
+    "dl-feature-maps": [
+      "dl-pooling"
+    ],
+    "dl-rnn-awareness": [
+      "dl-mlp"
+    ],
+    "dl-lstm-gru": [
+      "dl-rnn-awareness"
+    ],
+    "dl-attention-intuition": [
+      "dl-lstm-gru"
+    ],
+    "dl-transformers-foundations": [
+      "dl-attention-intuition"
+    ],
+    "cv-what-is-an-image": [],
+    "cv-pixels-channels": [
+      "cv-what-is-an-image"
+    ],
+    "cv-color-spaces": [
+      "cv-pixels-channels"
+    ],
+    "cv-image-tensors": [
+      "cv-color-spaces"
+    ],
+    "cv-transformations": [
+      "cv-image-tensors"
+    ],
+    "cv-normalization-cv": [
+      "cv-transformations"
+    ],
+    "cv-augmentation": [
+      "cv-normalization-cv"
+    ],
+    "cv-traditional-filters": [
+      "cv-what-is-an-image"
+    ],
+    "cv-convolution-in-cv": [
+      "cv-traditional-filters",
+      "dl-feature-maps"
+    ],
+    "cv-classification-workflow": [
+      "cv-convolution-in-cv",
+      "dl-cnn"
+    ],
+    "cv-classic-architectures": [
+      "cv-classification-workflow"
+    ],
+    "cv-resnet": [
+      "cv-classic-architectures",
+      "dl-vanishing-gradients"
+    ],
+    "cv-efficientnet-awareness": [
+      "cv-resnet"
+    ],
+    "cv-transfer-learning-cv": [
+      "cv-resnet"
+    ],
+    "cv-object-detection-overview": [
+      "cv-classification-workflow"
+    ],
+    "cv-bounding-boxes-iou": [
+      "cv-object-detection-overview"
+    ],
+    "cv-nms": [
+      "cv-bounding-boxes-iou"
+    ],
+    "cv-two-stage-vs-one-stage": [
+      "cv-nms"
+    ],
+    "cv-yolo-concept": [
+      "cv-two-stage-vs-one-stage"
+    ],
+    "cv-semantic-segmentation": [
+      "cv-classification-workflow"
+    ],
+    "cv-u-net": [
+      "cv-semantic-segmentation"
+    ],
+    "cv-instance-segmentation": [
+      "cv-u-net",
+      "cv-two-stage-vs-one-stage"
+    ],
+    "cv-evaluation-metrics-cv": [
+      "cv-bounding-boxes-iou"
+    ],
+    "cv-vision-transformers-awareness": [
+      "dl-transformers-foundations"
+    ],
+    "cv-end-to-end-project": [
+      "cv-transfer-learning-cv",
+      "cv-evaluation-metrics-cv"
+    ],
+    "nlp-what-is-nlp": [],
+    "nlp-text-preprocessing": [
+      "nlp-what-is-nlp"
+    ],
+    "nlp-tokenization-nlp": [
+      "nlp-text-preprocessing"
+    ],
+    "nlp-vocabulary-bow": [
+      "nlp-tokenization-nlp"
+    ],
+    "nlp-tf-idf": [
+      "nlp-vocabulary-bow"
+    ],
+    "nlp-word-embeddings": [
+      "nlp-tf-idf",
+      "math-vectors"
+    ],
+    "nlp-word2vec": [
+      "nlp-word-embeddings"
+    ],
+    "nlp-sequence-modeling": [
+      "nlp-word-embeddings"
+    ],
+    "nlp-rnn-lstm": [
+      "nlp-sequence-modeling",
+      "dl-lstm-gru"
+    ],
+    "nlp-attention-nlp": [
+      "nlp-rnn-lstm",
+      "dl-attention-intuition"
+    ],
+    "nlp-transformers-nlp": [
+      "nlp-attention-nlp",
+      "dl-transformers-foundations"
+    ],
+    "nlp-bert": [
+      "nlp-transformers-nlp"
+    ],
+    "nlp-encoder-vs-decoder": [
+      "nlp-bert"
+    ],
+    "nlp-generative-models": [
+      "nlp-encoder-vs-decoder"
+    ],
+    "nlp-fine-tuning-nlp": [
+      "nlp-generative-models"
+    ],
+    "nlp-evaluation-nlp": [
+      "nlp-fine-tuning-nlp"
+    ],
+    "genai-what-is-lm": [
+      "nlp-sequence-modeling"
+    ],
+    "genai-next-token-prediction": [
+      "genai-what-is-lm"
+    ],
+    "genai-tokenization-llm": [
+      "genai-next-token-prediction",
+      "nlp-tokenization-nlp"
+    ],
+    "genai-pretraining-finetuning": [
+      "genai-next-token-prediction"
+    ],
+    "genai-instruction-tuning-rlhf": [
+      "genai-pretraining-finetuning"
+    ],
+    "genai-inference-parameters": [
+      "genai-what-is-lm"
+    ],
+    "genai-context-windows": [
+      "genai-tokenization-llm"
+    ],
+    "genai-prompt-engineering": [
+      "genai-context-windows"
+    ],
+    "genai-vector-databases": [
+      "genai-embeddings"
+    ],
+    "genai-chunking-retrieval": [
+      "genai-vector-databases"
+    ],
+    "genai-hallucinations-guardrails": [
+      "genai-rag",
+      "genai-eval"
+    ],
+    "ai-eng-structured-output": [
+      "genai-prompt-engineering"
+    ],
+    "ai-eng-tool-calling": [
+      "ai-eng-structured-output"
+    ],
+    "ai-eng-function-calling": [
+      "ai-eng-tool-calling"
+    ],
+    "ai-eng-agent-loops": [
+      "ai-eng-tool-calling"
+    ],
+    "ai-eng-planning-memory": [
+      "ai-eng-agent-loops"
+    ],
+    "ai-eng-multi-agent-awareness": [
+      "ai-eng-planning-memory"
+    ],
+    "ai-eng-observability-security": [
+      "genai-agents"
+    ],
+    "ai-eng-production-deployment": [
+      "ai-eng-observability-security",
+      "ops-ci-github-actions"
+    ],
+    "ml-ridge-lasso": [
+      "ml-linear-regression"
+    ],
+    "ml-roc-auc": [
+      "ml-confusion-matrix"
+    ],
+    "ml-regression-metrics": [
+      "ml-loss-intuition"
+    ],
+    "ml-grid-search": [
+      "ml-cross-validation"
+    ],
+    "ml-kmeans": [
+      "ml-feature-scaling"
+    ],
+    "ml-hierarchical-dbscan": [
+      "ml-kmeans"
+    ],
+    "ml-pca": [
+      "ml-feature-scaling",
+      "math-matrices"
+    ],
+    "ml-anomaly-awareness": [
+      "ml-kmeans"
+    ],
+    "ml-gradient-boosting": [
+      "ml-random-forests"
+    ],
+    "ml-feature-importance": [
+      "ml-random-forests"
+    ],
+    "dl-pytorch-tensors": [],
+    "dl-pytorch-data": [
+      "dl-pytorch-tensors"
+    ],
+    "dl-pytorch-build-model": [
+      "dl-pytorch-data"
+    ],
+    "dl-pytorch-autograd": [
+      "dl-pytorch-build-model"
+    ],
+    "dl-pytorch-training-loop": [
+      "dl-pytorch-autograd",
+      "dl-batch-epoch-lr"
+    ],
+    "dl-pytorch-save-load": [
+      "dl-pytorch-training-loop"
+    ],
+    "cv-sift-orb-awareness": [
+      "cv-traditional-filters"
+    ],
+    "genai-lora-peft": [
+      "genai-pretraining-finetuning"
+    ],
+    "genai-production-serving": [
+      "genai-inference-parameters"
+    ],
+    "mlops-experiment-lifecycle": [
+      "ml-end-to-end-workflow"
+    ],
+    "mlops-drift-quality": [
+      "mlops-serving"
+    ],
+    "math-dot-product-norms": [
+      "math-vectors"
+    ],
+    "math-chain-rule": [
+      "math-derivatives"
+    ],
+    "math-covariance-correlation": [
+      "math-expectation-variance"
+    ]
+  },
+  "next_topic": {},
+  "subject_domain_counts": 14,
+  "resource_counts": 921,
+  "project_counts": 16,
+  "user_progress": 6,
+  "topic_mastery": 0,
+  "mastery_evidence": 0,
+  "xp_events": 0,
+  "user_xp": [
+    {
+      "user_id": "akshit",
+      "total_xp": 0,
+      "level": 1
+    }
+  ],
+  "revision_schedules": 0,
+  "diagnostic_sessions": 0,
+  "diagnostic_answers": 0,
+  "learning_activities": 0,
+  "user_streaks": 1,
+  "subject_count": 14,
+  "module_count": 76,
+  "resource_count": 921,
+  "project_count": 16,
+  "user_progress_count": 6,
+  "topic_mastery_count": 0,
+  "learner_progress": {
+    "progress_rows": 6
+  },
+  "learner_progress_count": 6
+}

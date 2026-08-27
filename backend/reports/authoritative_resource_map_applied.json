@@ -1,0 +1,110 @@
+{
+  "backup_path": "D:\\Akshit Personal OS\\backend\\dev.db.pre_authoritative_map_20260827_173325.bak",
+  "created_resources": [],
+  "updated_resources": [
+    {
+      "topic": "java-priority-queue",
+      "action": "UPDATE",
+      "resource": "java-priority-queue-primary",
+      "detail": "Updated to 7z_HXFZqXqc 00:00->15:00"
+    },
+    {
+      "topic": "dl-neuron-intuition",
+      "action": "UPDATE",
+      "resource": "dl-neuron-intuition-vizuara-zrKpz9",
+      "detail": "Updated to zrKpz9-AZ_E 00:00->28:37"
+    },
+    {
+      "topic": "dl-activation-functions",
+      "action": "UPDATE",
+      "resource": "dl-activation-functions-vizuara-SP372Q",
+      "detail": "Updated to SP372QpruDg 00:00->43:16"
+    },
+    {
+      "topic": "dl-perceptron",
+      "action": "UPDATE",
+      "resource": "dl-perceptron-vizuara-mK_Pfq",
+      "detail": "Updated to mK_PfqM88OY 00:00->40:21"
+    },
+    {
+      "topic": "dl-attention-intuition",
+      "action": "UPDATE",
+      "resource": "dl-attention-intuition-vizuara-CLQJ9M",
+      "detail": "Updated to CLQJ9M5LZao 00:00->43:55"
+    },
+    {
+      "topic": "dl-transformers-foundations",
+      "action": "UPDATE",
+      "resource": "dl-transformers-foundations-vizuara-l0mAJ5",
+      "detail": "Updated to l0mAJ54xey0 00:00->72:35"
+    },
+    {
+      "topic": "nlp-transformers-nlp",
+      "action": "UPDATE",
+      "resource": "nlp-transformers-nlp-vizuara-FVcUKM",
+      "detail": "Updated to FVcUKMu_M5Q 00:00->19:48"
+    },
+    {
+      "topic": "ml-gradient-descent-intuition",
+      "action": "UPDATE",
+      "resource": "ml-gradient-descent-intuition-vizuara-rcXcGS",
+      "detail": "Updated to rcXcGS1M77g 00:00->26:14"
+    },
+    {
+      "topic": "ml-what-is-ml",
+      "action": "UPDATE",
+      "resource": "ml-what-is-ml-vizuara-ngiICH-v2",
+      "detail": "Updated to ngiICHD5dVc 00:00->26:14"
+    },
+    {
+      "topic": "cv-image-tensors",
+      "action": "UPDATE",
+      "resource": "cv-image-tensors-vizuara-lgbKpn-v2",
+      "detail": "Updated to lgbKpn7q40M 00:00->25:00"
+    }
+  ],
+  "demoted_resources": [],
+  "skipped": [],
+  "all_10_topics": [
+    "java-priority-queue",
+    "dl-neuron-intuition",
+    "dl-activation-functions",
+    "dl-perceptron",
+    "dl-attention-intuition",
+    "dl-transformers-foundations",
+    "nlp-transformers-nlp",
+    "ml-gradient-descent-intuition",
+    "ml-what-is-ml",
+    "cv-image-tensors"
+  ],
+  "learner_data_before": {
+    "UserProgress": 9,
+    "TopicMastery": 80,
+    "MasteryEvidence": 95,
+    "UserXP": 1,
+    "XpEvent": 37,
+    "RevisionSchedule": 2,
+    "DiagnosticSession": 1,
+    "DiagnosticAnswer": 76,
+    "LearningActivity": 323
+  },
+  "learner_data_after": {
+    "UserProgress": 9,
+    "TopicMastery": 80,
+    "MasteryEvidence": 95,
+    "UserXP": 1,
+    "XpEvent": 37,
+    "RevisionSchedule": 2,
+    "DiagnosticSession": 1,
+    "DiagnosticAnswer": 76,
+    "LearningActivity": 323
+  },
+  "curriculum_integrity": {
+    "topic_count": 449,
+    "spine_intact": true,
+    "prerequisites_unchanged": true
+  },
+  "pytest": "223 passed",
+  "lint": "PASS",
+  "build": "PASS (17/17 pages)"
+}
