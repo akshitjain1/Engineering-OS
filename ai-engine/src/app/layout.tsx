@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
+import { PomodoroProvider } from "@/components/pomodoro";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full bg-[var(--background)] font-sans text-[var(--foreground)]">
-        <AppShell>{children}</AppShell>
+        <PomodoroProvider>
+          <AppShell>{children}</AppShell>
+        </PomodoroProvider>
       </body>
     </html>
   );

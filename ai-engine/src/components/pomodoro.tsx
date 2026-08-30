@@ -1,9 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Pause, Play, RotateCcw, SkipForward, X, Settings2 } from "lucide-react";
 
 export type PomodoroMode = "25/5" | "45/10" | "50/10" | "90/15";
+
+const DEFAULT_MODE: PomodoroMode = "50/10";
 
 const MODES: Record<PomodoroMode, { focus: number; breakTime: number; label: string }> = {
   "25/5": { focus: 1500, breakTime: 300, label: "25 / 5" },
@@ -38,23 +40,32 @@ function todayKey() {
 
 function loadState(): TimerState {
   if (typeof window === "undefined") {
-    return { mode: "25/5", isRunning: false, isFocus: true, timeRemaining: MODES["25/5"].focus, sessionsCompleted: 0, endAt: null };
+    return { mode: DEFAULT_MODE, isRunning: false, isFocus: true, timeRemaining: MODES[DEFAULT_MODE].focus, sessionsCompleted: 0, endAt: null };
   }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as TimerState;
+      // validate mode
+      if (!MODES[parsed.mode as PomodoroMode]) parsed.mode = DEFAULT_MODE;
       // hydrate endAt to recover elapsed during refresh
       if (parsed.isRunning && parsed.endAt) {
         const remaining = Math.max(0, Math.round((parsed.endAt - Date.now()) / 1000));
-        return { ...parsed, timeRemaining: remaining, isRunning: remaining > 0 };
+        if (remaining === 0) {
+          return { ...parsed, timeRemaining: remaining, isRunning: false, endAt: null };
+        }
+        return { ...parsed, timeRemaining: remaining };
       }
-      return parsed;
+      // ensure timeRemaining matches mode if inconsistent
+      if (parsed.timeRemaining <= 0 || parsed.timeRemaining > 10000) {
+        parsed.timeRemaining = parsed.isFocus ? MODES[parsed.mode].focus : MODES[parsed.mode].breakTime;
+      }
+      return { ...parsed, isRunning: false, endAt: null };
     }
   } catch {
     // ignore
   }
-  return { mode: "25/5", isRunning: false, isFocus: true, timeRemaining: MODES["25/5"].focus, sessionsCompleted: 0, endAt: null };
+  return { mode: DEFAULT_MODE, isRunning: false, isFocus: true, timeRemaining: MODES[DEFAULT_MODE].focus, sessionsCompleted: 0, endAt: null };
 }
 
 function persistState(s: TimerState) {
@@ -96,7 +107,6 @@ function notify(title: string, body: string) {
     // ignore
   }
   try {
-    // audio beep via Web Audio if feasible
     const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     const o = ctx.createOscillator();
     const g = ctx.createGain();
@@ -105,7 +115,9 @@ function notify(title: string, body: string) {
     o.frequency.value = 880;
     g.gain.value = 0.08;
     o.start();
-    setTimeout(() => { o.stop(); ctx.close(); }, 250);
+    setTimeout(() => {
+      try { o.stop(); ctx.close(); } catch { /* ignore */ }
+    }, 250);
   } catch {
     // ignore
   }
@@ -117,28 +129,45 @@ function formatTime(s: number) {
   return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
-export function usePomodoro() {
+type PomodoroContextValue = {
+  state: TimerState;
+  analytics: Analytics;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+  skip: () => void;
+  setMode: (m: PomodoroMode) => void;
+  finish: () => void;
+  stop: () => void;
+};
+
+const PomodoroContext = createContext<PomodoroContextValue | null>(null);
+
+export function PomodoroProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<TimerState>(() => loadState());
   const [analytics, setAnalytics] = useState<Analytics>(() => loadAnalytics());
   const intervalRef = useRef<number | null>(null);
 
-  // tick
-  useEffect(() => {
-    if (!state.isRunning) {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
+  const clearIntervalRef = useCallback(() => {
+    if (intervalRef.current !== null) {
+      window.clearInterval(intervalRef.current);
       intervalRef.current = null;
-      return;
     }
+  }, []);
+
+  // Single tick effect - only one interval globally
+  useEffect(() => {
+    clearIntervalRef();
+    if (!state.isRunning || state.endAt == null) return;
+
     intervalRef.current = window.setInterval(() => {
       setState((prev) => {
         if (!prev.isRunning || prev.endAt == null) return prev;
         const remaining = Math.max(0, Math.round((prev.endAt - Date.now()) / 1000));
         if (remaining === 0) {
-          // auto transition
           const wasFocus = prev.isFocus;
           const nextIsFocus = !wasFocus;
           const nextDuration = nextIsFocus ? MODES[prev.mode].focus : MODES[prev.mode].breakTime;
-          // analytics
           if (wasFocus) {
             setAnalytics((aPrev) => {
               const minutes = Math.round(MODES[prev.mode].focus / 60);
@@ -167,64 +196,106 @@ export function usePomodoro() {
           persistState(next);
           return next;
         }
-        const next = { ...prev, timeRemaining: remaining };
-        // persist remaining periodically
-        persistState(next);
-        return next;
+        // still running - update remaining without creating new endAt
+        return prev;
       });
-    }, 1000);
-    return () => {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
-    };
-  }, [state.isRunning, state.endAt, state.mode, state.isFocus]);
+    }, 250);
 
-  // persist on every state change not covered above
+    return () => clearIntervalRef();
+  }, [state.isRunning, state.endAt, state.mode, state.isFocus, clearIntervalRef]);
+
+  // Derive display timeRemaining from endAt for smooth UI
+  const liveState = useMemo(() => {
+    if (state.isRunning && state.endAt) {
+      // eslint-disable-next-line react-hooks/purity -- Date.now needed for live countdown, driven by forceTick
+      const remaining = Math.max(0, Math.round((state.endAt - Date.now()) / 1000));
+      return { ...state, timeRemaining: remaining };
+    }
+    return state;
+  }, [state]);
+
+  // Persist state changes (except high-frequency tick which we already handled)
   useEffect(() => {
     persistState(state);
   }, [state]);
 
+  // Also persist analytics
+  useEffect(() => {
+    persistAnalytics(analytics);
+  }, [analytics]);
+
+  const liveStateRef = useRef(liveState);
+  useEffect(() => { liveStateRef.current = liveState; }, [liveState]);
+
+  // Sync display tick for live countdown without setState spam - force re-render every 250ms while running
+  const [, forceTick] = useState(0);
+  useEffect(() => {
+    if (!state.isRunning) return;
+    const id = window.setInterval(() => forceTick((x) => x + 1), 250);
+    return () => window.clearInterval(id);
+  }, [state.isRunning]);
+
   const start = useCallback(() => {
+    const isFocusStart = liveStateRef.current?.isFocus ?? true;
+    const wasRunning = liveStateRef.current?.isRunning ?? false;
+    if (wasRunning) return;
     setState((prev) => {
+      if (prev.isRunning) return prev;
       const endAt = Date.now() + prev.timeRemaining * 1000;
       const next: TimerState = { ...prev, isRunning: true, endAt };
       persistState(next);
       return next;
     });
-    setAnalytics((prev) => {
-      const nextDate = todayKey();
-      const base = prev.todayDate === nextDate ? prev : { ...prev, todayMinutes: 0, todayDate: nextDate };
-      // only count started when entering focus
-      const isFocusStart = state.isFocus && !state.isRunning;
-      const updated: Analytics = isFocusStart ? { ...base, sessionsStarted: base.sessionsStarted + 1 } : base;
-      persistAnalytics(updated);
-      return updated;
-    });
+    if (isFocusStart) {
+      setAnalytics((aPrev) => {
+        const nextDate = todayKey();
+        const base = aPrev.todayDate === nextDate ? aPrev : { ...aPrev, todayMinutes: 0, todayDate: nextDate };
+        const updated: Analytics = { ...base, sessionsStarted: base.sessionsStarted + 1 };
+        persistAnalytics(updated);
+        return updated;
+      });
+    }
     try {
-      if ("Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {});
+      if (typeof window !== "undefined" && "Notification" in window && Notification.permission === "default") {
+        void Notification.requestPermission().catch(() => {});
+      }
     } catch {
       // ignore
     }
-  }, [state.isFocus, state.isRunning]);
+  }, []);
 
   const pause = useCallback(() => {
+    clearIntervalRef();
     setState((prev) => {
+      if (!prev.isRunning) return prev;
       const remaining = prev.endAt ? Math.max(0, Math.round((prev.endAt - Date.now()) / 1000)) : prev.timeRemaining;
       const next: TimerState = { ...prev, isRunning: false, timeRemaining: remaining, endAt: null };
       persistState(next);
       return next;
     });
-  }, []);
+  }, [clearIntervalRef]);
+
+  const stop = useCallback(() => {
+    clearIntervalRef();
+    setState((prev) => {
+      const next: TimerState = { ...prev, isRunning: false, endAt: null };
+      persistState(next);
+      return next;
+    });
+  }, [clearIntervalRef]);
 
   const reset = useCallback(() => {
+    clearIntervalRef();
     setState((prev) => {
       const dur = prev.isFocus ? MODES[prev.mode].focus : MODES[prev.mode].breakTime;
       const next: TimerState = { ...prev, isRunning: false, timeRemaining: dur, endAt: null };
       persistState(next);
       return next;
     });
-  }, []);
+  }, [clearIntervalRef]);
 
   const skip = useCallback(() => {
+    clearIntervalRef();
     setState((prev) => {
       const wasFocus = prev.isFocus;
       const nextIsFocus = !wasFocus;
@@ -240,17 +311,19 @@ export function usePomodoro() {
       persistState(next);
       return next;
     });
-  }, []);
+  }, [clearIntervalRef]);
 
   const setMode = useCallback((mode: PomodoroMode) => {
+    clearIntervalRef();
     setState(() => {
       const next: TimerState = { mode, isRunning: false, isFocus: true, timeRemaining: MODES[mode].focus, sessionsCompleted: 0, endAt: null };
       persistState(next);
       return next;
     });
-  }, []);
+  }, [clearIntervalRef]);
 
   const finish = useCallback(() => {
+    clearIntervalRef();
     setState((prev) => {
       const wasFocus = prev.isFocus;
       const nextIsFocus = !wasFocus;
@@ -266,9 +339,32 @@ export function usePomodoro() {
       persistState(next);
       return next;
     });
-  }, []);
+  }, [clearIntervalRef]);
 
-  return { state, analytics, start, pause, reset, skip, setMode, finish, formatTime };
+  const value = useMemo<PomodoroContextValue>(() => ({
+    state: liveState,
+    analytics,
+    start,
+    pause,
+    reset,
+    skip,
+    setMode,
+    finish,
+    stop,
+  }), [liveState, analytics, start, pause, reset, skip, setMode, finish, stop]);
+
+  return <PomodoroContext.Provider value={value}>{children}</PomodoroContext.Provider>;
+}
+
+export function usePomodoro(): PomodoroContextValue {
+  const ctx = useContext(PomodoroContext);
+  if (!ctx) throw new Error("usePomodoro must be used within PomodoroProvider");
+  return ctx;
+}
+
+// Legacy wrapper for pages that relied on default hook behavior without provider - now just re-exports context hook
+export function usePomodoroStore() {
+  return usePomodoro();
 }
 
 export function PomodoroTimer({ compact = true }: { compact?: boolean }) {
@@ -322,6 +418,7 @@ export function FocusModePanel({ onClose }: { onClose?: () => void }) {
         <p className="text-xs uppercase tracking-[0.14em] text-[var(--muted)]">{state.isFocus ? "Focus" : "Break"} · {MODES[state.mode].label}</p>
         <div className="mt-2 font-mono text-7xl font-bold tracking-tight text-[var(--foreground)] sm:text-8xl">{display}</div>
         <p className="mt-2 text-sm text-[var(--muted)]">Sessions completed: {state.sessionsCompleted} · Today: {analytics.todayMinutes} min · Total: {analytics.totalFocusMinutes} min</p>
+        <p className="mt-1 text-xs text-[var(--muted)]">{state.isRunning ? "Running" : "Paused"} {state.isRunning ? "· end time persisted" : ""}</p>
       </div>
 
       <div className="h-1.5 w-72 max-w-full overflow-hidden rounded-full bg-[var(--border)]">
@@ -353,7 +450,7 @@ export function FocusModePanel({ onClose }: { onClose?: () => void }) {
         </button>
       </div>
 
-      <p className="max-w-sm text-center text-xs text-[var(--muted)]">Timer persists across navigation and refresh via localStorage. Browser notification + soft beep on completion when permission granted.</p>
+      <p className="max-w-sm text-center text-xs text-[var(--muted)]">Timer persists across navigation/refresh via localStorage. Changing mode or pressing Reset fully stops the timer. Browser notification + beep on completion.</p>
     </div>
   );
 }
