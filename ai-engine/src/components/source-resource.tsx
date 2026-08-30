@@ -15,27 +15,29 @@ export function SourceResourceCard({
   const url = resource.url;
   const playlist = resource.is_playlist;
   const embeddable = Boolean(resource.embeddable && resource.video_id && !playlist);
-  const exactness =
-    resource.exactness ||
-    (playlist ? "Playlist" : embeddable && resource.exact ? "Exact lecture" : resource.exact ? "Exact page" : url ? "Collection" : "Unresolved");
+  void (resource.exactness || playlist);
 
+  const boundary = resource.lecture || resource.section ? `${resource.lecture ? resource.lecture : ""}${resource.lecture && resource.section ? " · " : ""}${resource.section ?? ""}` : null;
+  const minutes = resource.duration ? Math.round(resource.duration * 60) : null;
   return (
-    <article className="glow-card p-4">
+    <article className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--muted)]">
             {resource.role || "RESOURCE"}
             {resource.provider ? ` · ${resource.provider}` : ""}
+            {resource.resource_type ? ` · ${resource.resource_type}` : ""}
+            {minutes ? ` · ~${minutes} min` : ""}
           </p>
-          <h3 className="mt-1 font-medium">{resource.title}</h3>
+          <h3 className="mt-1 font-medium leading-tight">{resource.title}</h3>
+          {boundary ? <p className="mt-1 text-xs font-medium text-[var(--foreground)]">Focus: {boundary}</p> : null}
           <p className="mt-1 text-xs text-[var(--muted)]">
-            Source: {resource.provider || "unspecified"}
-            {resource.lecture ? ` · ${resource.lecture}` : ""}
-            {resource.section ? ` · ${resource.section}` : ""}
+            {resource.provider || "Official source"}
+            {boundary ? ` · ${boundary}` : ""}
+            {minutes ? ` · ${minutes} min` : ""}
           </p>
-          <p className="mt-1 text-xs text-[var(--muted)]">Exactness: {exactness}</p>
         </div>
-        <span className="text-xs text-[var(--muted)]">{resource.completed ? "Consumed" : "Not consumed"}</span>
+        <span className="shrink-0 text-xs text-[var(--muted)]">{resource.completed ? "Consumed" : "Not consumed"}</span>
       </div>
 
       {resource.role === "PRACTICE" && url && resource.exact === false ? (

@@ -287,7 +287,7 @@ function TopicView({
     run("complete", () => api(`/api/topic/${topic.id}/complete`, { method: "POST" }));
 
   return (
-    <Page>
+    <Page wide>
       <p className="text-sm text-[var(--muted)]">
         <Link href="/roadmap" className="underline hover:text-[var(--foreground)]">
           Roadmap
@@ -315,17 +315,6 @@ function TopicView({
         {topic.learning_objective ? (
           <p className="mt-3 max-w-prose text-sm leading-relaxed text-[var(--muted)]">{topic.learning_objective}</p>
         ) : null}
-        {(topic as { learning_track?: string; depth_target?: string }).learning_track ? (
-          <p className="mt-2 text-xs text-[var(--muted)]">
-            Track {(topic as { learning_track?: string }).learning_track}
-            {(topic as { depth_target?: string }).depth_target
-              ? ` · depth ${(topic as { depth_target?: string }).depth_target}`
-              : ""}
-            {(topic as { study_contract?: { readiness?: string } }).study_contract?.readiness
-              ? ` · readiness ${(topic as { study_contract?: { readiness?: string } }).study_contract?.readiness}`
-              : ""}
-          </p>
-        ) : null}
       </header>
 
       {(topic as unknown as { study_contract?: StudyContract }).study_contract ? (
@@ -343,10 +332,10 @@ function TopicView({
       {topic.locked ? (
         <div className="glow-card mt-6 p-5">
           <p className="flex items-center gap-2 text-sm font-medium">
-            <Lock className="h-4 w-4 text-[var(--warn)]" /> Topic locked
+            <Lock className="h-4 w-4 text-[var(--warn)]" /> Preview — locked
           </p>
           <p className="mt-1 text-sm text-[var(--muted)]">
-            {topic.lock_message || "Complete the prerequisites to unlock."}
+            {topic.lock_message || "Complete the prerequisites to unlock progression. You can still inspect resources."}
           </p>
           <div className="mt-4">
             <PrerequisiteList items={topic.prerequisites} message={topic.lock_message} />
@@ -354,7 +343,28 @@ function TopicView({
         </div>
       ) : null}
 
-      <section id="what-to-do" className="mt-10 scroll-mt-20">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[180px_minmax(0,1fr)_260px]">
+        {/* LEFT: mini TOC */}
+        <nav className="hidden lg:block" aria-label="Topic sections">
+          <div className="sticky top-16 rounded-lg border border-[var(--border)] bg-[var(--card)] p-3 text-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">On this topic</p>
+            <ul className="mt-2 space-y-1">
+              {[
+                ["what-to-do", "Overview"],
+                ["learn", "Learn"],
+                ["practice", "Practice"],
+                ["build", "Build"],
+                ["deep-dive", "Deep Dive"],
+              ].map(([id, label]) => (
+                <li key={id}><a href={`#${id}`} className="block rounded px-2 py-1 hover:bg-[var(--card-2)]">{label}</a></li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        {/* CENTER */}
+        <div>
+      <section id="what-to-do" className="scroll-mt-20">
         <SectionTitle step="1" title="What to do" hint="A short working plan for this topic." />
         <ul className="mt-3 space-y-2">
           <WhatToDoRow
@@ -496,7 +506,9 @@ function TopicView({
               <p className="text-sm text-[var(--muted)]">This is the last official topic in sequence.</p>
             )}
           </div>
-        ) : topic.locked ? null : (
+        ) : topic.locked ? (
+          <p className="text-sm text-[var(--muted)]">Locked — inspect resources, then complete prerequisites to mark done.</p>
+        ) : (
           <div className="flex flex-wrap items-center gap-3">
             <PrimaryButton onClick={markComplete} disabled={busy === "complete"}>
               {busy === "complete" ? (
@@ -513,6 +525,37 @@ function TopicView({
           </div>
         )}
       </section>
+        </div>
+
+        {/* RIGHT: study context */}
+        <aside className="space-y-4">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Study</p>
+            <p className="mt-2 text-sm"><span className="font-semibold">~{minutes()} min</span> estimated</p>
+            <StatusBadge status={topic.status} />
+            <div className="mt-3">
+              <a href="#learn" className="block w-full rounded-md bg-[var(--accent)] px-3 py-2 text-center text-sm font-medium text-[var(--accent-fg)] hover:opacity-90">Start Focus</a>
+            </div>
+            {topic.next_in_sequence ? (
+              <div className="mt-4 border-t border-[var(--border)] pt-3">
+                <p className="text-xs uppercase tracking-wider text-[var(--muted)]">Next</p>
+                <p className="mt-1 text-sm font-medium">{topic.next_in_sequence.name}</p>
+                <Link href={`/learn/topic/${topic.next_in_sequence.id}`} className="mt-1 inline-block text-xs underline">Open next →</Link>
+              </div>
+            ) : null}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Prerequisites</p>
+            <div className="mt-2">
+              <PrerequisiteList items={topic.prerequisites} message={topic.lock_message} />
+            </div>
+            <p className="mt-2 text-xs text-[var(--muted)]">You can preview the topic even when locked.</p>
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-3 text-xs text-[var(--muted)]">
+            Flow: Open → Read/Watch Primary → Mark Learn → Practice → Build → Review → Next
+          </div>
+        </aside>
+      </div>
     </Page>
   );
 }

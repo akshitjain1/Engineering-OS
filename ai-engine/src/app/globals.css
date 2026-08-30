@@ -1,6 +1,35 @@
 @import "tailwindcss";
 
 :root {
+  --background: #f8f9fb;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --muted-2: #94a3b8;
+  --card: #ffffff;
+  --card-2: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-fg: #ffffff;
+  --accent-2: #0891b2;
+  --accent-soft: rgba(79, 70, 229, 0.08);
+  --accent-soft-2: rgba(8, 145, 178, 0.08);
+  --ok: #059669;
+  --ok-soft: rgba(5, 150, 105, 0.08);
+  --warn: #d97706;
+  --warn-soft: rgba(217, 119, 6, 0.08);
+  --error: #dc2626;
+  --error-soft: rgba(220, 38, 38, 0.06);
+  --radius: 8px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.06);
+  color-scheme: light;
+}
+
+/* Dark opt-in only */
+.dark {
   --background: #0a0c11;
   --foreground: #eef1f7;
   --muted: #8f97a8;
@@ -10,36 +39,7 @@
   --accent: #7c6cf6;
   --accent-fg: #0b0d14;
   --accent-2: #61d7f5;
-  --accent-soft: rgba(124, 108, 246, 0.14);
-  --accent-soft-2: rgba(97, 215, 245, 0.1);
-  --ok: #34d399;
-  --ok-soft: rgba(52, 211, 153, 0.14);
-  --warn: #fbbf24;
-  --warn-soft: rgba(251, 191, 36, 0.12);
-  --glow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset,
-    0 18px 44px -20px rgba(0, 0, 0, 0.65),
-    0 0 44px -18px rgba(124, 108, 246, 0.22);
   color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f6f7fb;
-    --foreground: #171a22;
-    --muted: #5f6675;
-    --card: #ffffff;
-    --card-2: #f1f3f9;
-    --border: #e5e8f1;
-    --accent: #5b4ce8;
-    --accent-fg: #ffffff;
-    --accent-2: #0891b2;
-    --accent-soft: rgba(91, 76, 232, 0.1);
-    --accent-soft-2: rgba(8, 145, 178, 0.08);
-    --ok-soft: rgba(16, 185, 129, 0.12);
-    --warn-soft: rgba(245, 158, 11, 0.12);
-    --glow: 0 1px 2px rgba(23, 26, 34, 0.05), 0 12px 32px -16px rgba(23, 26, 34, 0.12);
-    color-scheme: light;
-  }
 }
 
 @theme inline {
@@ -53,64 +53,40 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-html,
-body {
+html { scroll-behavior: smooth; }
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
-
-body {
-  background-image: radial-gradient(1100px 520px at 50% -12%, var(--accent-soft), transparent 62%),
-    radial-gradient(900px 480px at 108% 4%, var(--accent-soft-2), transparent 60%);
-  background-attachment: fixed;
-}
+body { background-color: var(--background); }
 
 *:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  box-shadow: 0 0 0 5px rgba(124, 108, 246, 0.18);
 }
+::selection { background: var(--accent); color: var(--accent-fg); }
 
-@media (prefers-color-scheme: light) {
-  *:focus-visible {
-    box-shadow: 0 0 0 5px rgba(91, 76, 232, 0.14);
-  }
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--accent-fg);
-}
-
-/* Premium raised panel with a soft omnidirectional glow. */
+/* Utilities */
 .glow-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: var(--glow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
-
-/* Accent gradient text for heroes. */
 .text-gradient {
   background: linear-gradient(110deg, var(--accent) 10%, var(--accent-2) 90%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-
-/* Thin, theme-aware scrollbars. */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

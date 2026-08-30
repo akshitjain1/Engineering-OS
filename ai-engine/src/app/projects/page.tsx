@@ -69,6 +69,9 @@ export default function ProjectsPage() {
         title="Build when unlocked"
         description="Projects open after prerequisite topics are lesson-complete. Start with small L1 builds, then level up."
       />
+      <div className="mb-6 flex items-center gap-2 text-xs font-medium tracking-wider text-[var(--muted)]">
+        <span className="rounded bg-[var(--card-2)] px-2 py-1">L1</span> → <span className="rounded bg-[var(--card-2)] px-2 py-1">L2</span> → <span className="rounded bg-[var(--card-2)] px-2 py-1">L3</span> → <span className="rounded bg-[var(--card-2)] px-2 py-1">L4</span>
+      </div>
       {error ? <Banner>{error}</Banner> : null}
       {!data ? (
         <LoadingLine />
