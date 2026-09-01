@@ -44,6 +44,9 @@ from .db.models import (
     TopicMastery,
 )
 from .learning.api import router as learning_router
+from .learning.day_api import router as day_router
+from .learning.dsa_api import router as dsa_router
+from .learning import day_models  # noqa: F401  (registers daily_plan_items on Base)
 from .learning import service as learning_service
 from .learning import revision_engine
 from .learning.planner import domain_from_slug
@@ -99,7 +102,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(learning_router)
-
+app.include_router(day_router)
+app.include_router(dsa_router)
 
 class DSATopicCreate(BaseModel):
     name: str
