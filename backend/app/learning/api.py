@@ -62,6 +62,7 @@ class StudySettingsBody(BaseModel):
     weekday_capacity_minutes: Optional[int] = Field(None, ge=15, le=360)
     weekend_capacity_minutes: Optional[int] = Field(None, ge=15, le=480)
     timezone: Optional[str] = None
+    revision_weighted: Optional[bool] = None
 
 
 @router.get("/api/diagnostic/status", tags=["Diagnostic"])
@@ -181,6 +182,7 @@ def put_study_settings(body: StudySettingsBody, db: Session = Depends(get_db)):
         weekday_capacity_minutes=body.weekday_capacity_minutes,
         weekend_capacity_minutes=body.weekend_capacity_minutes,
         timezone_name=body.timezone,
+        revision_weighted=body.revision_weighted,
     )
     db.commit()
     return result

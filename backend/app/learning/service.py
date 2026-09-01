@@ -1152,6 +1152,7 @@ def serialize_study_settings(row: UserStudySettings) -> dict[str, Any]:
         "weekday_capacity_minutes": row.weekday_capacity_minutes,
         "weekend_capacity_minutes": row.weekend_capacity_minutes,
         "timezone": row.timezone,
+        "revision_weighted": bool(row.revision_weighted),
     }
 
 
@@ -1161,6 +1162,7 @@ def update_study_settings(
     weekday_capacity_minutes: Optional[int] = None,
     weekend_capacity_minutes: Optional[int] = None,
     timezone_name: Optional[str] = None,
+    revision_weighted: Optional[bool] = None,
     user_id: str = DEFAULT_USER,
 ) -> dict[str, Any]:
     row = get_or_create_study_settings(db, user_id)
@@ -1170,6 +1172,8 @@ def update_study_settings(
         row.weekend_capacity_minutes = max(15, min(480, int(weekend_capacity_minutes)))
     if timezone_name:
         row.timezone = timezone_name
+    if revision_weighted is not None:
+        row.revision_weighted = bool(revision_weighted)
     db.flush()
     return serialize_study_settings(row)
 

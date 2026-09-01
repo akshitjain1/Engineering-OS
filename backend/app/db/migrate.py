@@ -165,6 +165,7 @@ def ensure_optional_columns(engine: Engine) -> None:
                     "weekday_capacity_minutes INTEGER NOT NULL DEFAULT 90, "
                     "weekend_capacity_minutes INTEGER NOT NULL DEFAULT 180, "
                     "timezone VARCHAR(64) NOT NULL DEFAULT 'Asia/Kolkata', "
+                    "revision_weighted BOOLEAN NOT NULL DEFAULT 0, "
                     "CONSTRAINT uq_user_study_settings UNIQUE (user_id))"
                 )
             )
@@ -172,6 +173,15 @@ def ensure_optional_columns(engine: Engine) -> None:
                 text("CREATE INDEX IF NOT EXISTS ix_user_study_settings_user_id "
                      "ON user_study_settings (user_id)")
             )
+        else:
+            existing = _columns(conn, "user_study_settings")
+            if "revision_weighted" not in existing:
+                conn.execute(
+                    text(
+                        "ALTER TABLE user_study_settings "
+                        "ADD COLUMN revision_weighted BOOLEAN DEFAULT 0 NOT NULL"
+                    )
+                )
 
         if "engineering_projects" not in tables:
             conn.execute(

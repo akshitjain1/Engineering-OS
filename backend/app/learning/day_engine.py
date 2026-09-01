@@ -220,6 +220,22 @@ def _prereq_hint(topic: CurriculumTopic, completion: dict[str, bool]) -> str:
     return f"Optional warm-up if you feel lost: {head}."
 
 
+# LEARN targets are calibrated for first-time learning. When the learner is
+# re-covering material they already know, that overshoots -- so LEARN drops to
+# ~60% and DSA, which is genuinely new material, takes the surplus. PRACTICE and
+# REFLECT are unchanged: retrieval and reflection cost the same either way.
+LEARN_TARGET = {"weekday": 35, "weekend": 45}
+LEARN_TARGET_REVISION = {"weekday": 20, "weekend": 28}
+DSA_TARGET = {"weekday": 40, "weekend": 60}
+DSA_TARGET_REVISION = {"weekday": 55, "weekend": 80}
+
+# Pass-2 stretch ceiling as a multiple of target. DSA is allowed to absorb more
+# in revision mode because that is where the spare capacity should land.
+DSA_STRETCH = 1.5
+DSA_STRETCH_REVISION = 2.0
+LEARN_STRETCH = 1.5
+
+
 def build_blocks(
     db: Session,
     *,
@@ -230,6 +246,7 @@ def build_blocks(
     mode = day_mode(plan_date)
     core, dsa, completion = cursors(db, user_id)
     due_reviews = service.pending_revisions(db, user_id)
+    revision = bool(service.get_or_create_study_settings(db, user_id).revision_weighted)
 
     topic_ids = [t.id for t in (core, dsa) if t]
     resources = resources_for_topics(db, topic_ids)
@@ -260,8 +277,8 @@ def build_blocks(
                 subtitle=(getattr(core, "domain_key", None) or "core").upper(),
                 why=("Next topic in your main track. " + hint).strip(),
                 how="Watch or read once at normal speed. Then write the idea in your own words in three lines.",
-                floor_minutes=25,
-                target_minutes=35 if mode == "weekday" else 45,
+                floor_minutes=20 if revision else 25,
+                target_minutes=(LEARN_TARGET_REVISION if revision else LEARN_TARGET)[mode],
                 topic=core,
                 resource=resource,
                 resource_kind="study",
@@ -294,7 +311,7 @@ def build_blocks(
                 why="DSA compounds only with daily reps. It runs on its own track, so it never waits on anything else.",
                 how="Learn or revise the pattern, then solve two problems. Write the approach before writing code.",
                 floor_minutes=25,
-                target_minutes=40 if mode == "weekday" else 60,
+                target_minutes=(DSA_TARGET_REVISION if revision else DSA_TARGET)[mode],
                 topic=dsa,
                 resource=dsa_resource,
                 resource_kind="pattern",
@@ -327,10 +344,12 @@ def build_blocks(
             target_minutes=8,
         )
     )
-    return _fit_to_budget(blocks, budget_minutes)
+    return _fit_to_budget(blocks, budget_minutes, revision=revision)
 
 
-def _fit_to_budget(blocks: list[BlockSpec], budget: int) -> list[BlockSpec]:
+def _fit_to_budget(
+    blocks: list[BlockSpec], budget: int, *, revision: bool = False
+) -> list[BlockSpec]:
     """Floors first, then grow toward target. Non-droppable blocks always survive."""
     budget = max(30, int(budget))
     kept: list[BlockSpec] = []
@@ -353,13 +372,18 @@ def _fit_to_budget(blocks: list[BlockSpec], budget: int) -> list[BlockSpec]:
         leftover -= grant
 
     # Pass 2: spend anything still left on the two blocks that reward extra
-    # time most, capped at 1.5x target so a big budget cannot produce a
-    # two-hour single block that nobody will actually sit through.
-    stretchable = [b for b in kept if b.activity_type in (ACTIVITY_DSA, ACTIVITY_LEARN)]
+    # time most, capped at a multiple of target so a big budget cannot produce a
+    # two-hour single block that nobody will actually sit through. In revision
+    # mode DSA gets a higher ceiling -- it is the first-time material.
+    dsa_stretch = DSA_STRETCH_REVISION if revision else DSA_STRETCH
+    # DSA before LEARN so the surplus reaches the block that should absorb it.
+    stretchable = [b for b in kept if b.activity_type == ACTIVITY_DSA]
+    stretchable += [b for b in kept if b.activity_type == ACTIVITY_LEARN]
     for block in stretchable:
         if leftover <= 0:
             break
-        cap = int(block.target_minutes * 1.5)
+        multiplier = dsa_stretch if block.activity_type == ACTIVITY_DSA else LEARN_STRETCH
+        cap = int(block.target_minutes * multiplier)
         grant = min(max(0, cap - minutes[id(block)]), leftover)
         minutes[id(block)] += grant
         leftover -= grant

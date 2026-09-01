@@ -467,6 +467,8 @@ class UserStudySettings(Base):
     weekday_capacity_minutes: Mapped[int] = Column(Integer, default=90, nullable=False)
     weekend_capacity_minutes: Mapped[int] = Column(Integer, default=180, nullable=False)
     timezone: Mapped[str] = Column(String(64), default="Asia/Kolkata", nullable=False)
+    # Re-covering known material: shrink LEARN, give the surplus to DSA.
+    revision_weighted: Mapped[bool] = Column(Boolean, default=False, nullable=False)
 
 
 class EngineeringProject(Base):

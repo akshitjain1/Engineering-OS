@@ -5,6 +5,7 @@ Coverage contract:
 2.  complete_item returns the next open item and the status survives a reload
 3.  a forced regenerate keeps done and skipped items
 4.  a skipped item is not re-added by a regenerate
+5.  revision-weighted mode shrinks LEARN, grows DSA, and still yields one DSA
 """
 
 import pytest
@@ -19,7 +20,7 @@ from app.db.models import (
     CurriculumTrack,
 )
 from app.db.session import SessionLocal
-from app.learning import day_engine
+from app.learning import day_engine, service
 from app.learning.day_models import DailyPlanItem
 
 BUDGETS = [90, 150, 240]
@@ -115,6 +116,19 @@ def _generate(budget: int, force: bool = False) -> dict:
 
 def _dsa_items(day: dict) -> list[dict]:
     return [item for item in day["items"] if item["activity_type"] == "DSA"]
+
+
+def _learn_items(day: dict) -> list[dict]:
+    return [item for item in day["items"] if item["activity_type"] == "LEARN"]
+
+
+def _set_revision_weighted(value: bool) -> None:
+    db = SessionLocal()
+    try:
+        service.update_study_settings(db, revision_weighted=value)
+        db.commit()
+    finally:
+        db.close()
 
 
 # ---------------------------------------------------------------------------
@@ -247,3 +261,66 @@ def test_skipped_item_is_not_re_added_on_regenerate(client):
     assert len(dsa_after) == 1
     assert dsa_after[0]["id"] == dsa["id"]
     assert dsa_after[0]["status"] == "skipped"
+
+
+# ---------------------------------------------------------------------------
+# 5. Revision-weighted mode
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("budget", BUDGETS)
+def test_revision_mode_still_yields_exactly_one_dsa_block(client, budget):
+    seed = _seed_curriculum()
+    _set_revision_weighted(True)
+    day = _generate(budget, force=True)
+
+    dsa = _dsa_items(day)
+    assert len(dsa) == 1, f"revision budget {budget} produced {len(dsa)} DSA blocks"
+    assert dsa[0]["topic_id"] == seed["dsa_ids"][0]
+    assert dsa[0]["planned_minutes"] > 0
+
+
+@pytest.mark.parametrize("budget", BUDGETS)
+def test_revision_mode_shifts_minutes_from_learn_to_dsa(client, budget):
+    _seed_curriculum()
+
+    _set_revision_weighted(False)
+    normal = _generate(budget, force=True)
+    normal_learn = _learn_items(normal)[0]["planned_minutes"]
+    normal_dsa = _dsa_items(normal)[0]["planned_minutes"]
+
+    _set_revision_weighted(True)
+    revised = _generate(budget, force=True)
+    revised_learn = _learn_items(revised)[0]["planned_minutes"]
+    revised_dsa = _dsa_items(revised)[0]["planned_minutes"]
+
+    assert revised_learn < normal_learn, "revision mode did not shrink LEARN"
+    assert revised_dsa > normal_dsa, "revision mode did not grow DSA"
+
+
+def test_revision_mode_leaves_practice_and_reflect_alone(client):
+    _seed_curriculum()
+
+    _set_revision_weighted(False)
+    normal = _generate(150, force=True)
+    _set_revision_weighted(True)
+    revised = _generate(150, force=True)
+
+    def targets(day, activity):
+        return [i["planned_minutes"] for i in day["items"] if i["activity_type"] == activity]
+
+    assert targets(revised, "REFLECT") == targets(normal, "REFLECT")
+    # The topic-bound PRACTICE block keeps its own budget; only LEARN and DSA move.
+    assert targets(revised, "PRACTICE")[:1] == targets(normal, "PRACTICE")[:1]
+
+
+def test_revision_mode_defaults_off(client):
+    _seed_curriculum()
+    db = SessionLocal()
+    try:
+        assert service.get_or_create_study_settings(db).revision_weighted is False
+        assert service.serialize_study_settings(
+            service.get_or_create_study_settings(db)
+        )["revision_weighted"] is False
+    finally:
+        db.close()

@@ -8,12 +8,14 @@ type StudySettings = {
   weekday_capacity_minutes: number;
   weekend_capacity_minutes: number;
   timezone: string;
+  revision_weighted: boolean;
 };
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<StudySettings | null>(null);
   const [weekday, setWeekday] = useState(90);
   const [weekend, setWeekend] = useState(180);
+  const [revisionWeighted, setRevisionWeighted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -24,6 +26,7 @@ export default function SettingsPage() {
         setSettings(payload);
         setWeekday(payload.weekday_capacity_minutes);
         setWeekend(payload.weekend_capacity_minutes);
+        setRevisionWeighted(payload.revision_weighted);
       })
       .catch((err) => setError(errorMessage(err)));
   }, []);
@@ -37,6 +40,7 @@ export default function SettingsPage() {
         body: JSON.stringify({
           weekday_capacity_minutes: weekday,
           weekend_capacity_minutes: weekend,
+          revision_weighted: revisionWeighted,
         }),
       });
       setSettings(payload);
@@ -83,6 +87,24 @@ export default function SettingsPage() {
               className="mt-1 w-full rounded-md border border-[var(--border)] bg-[var(--background)] px-3 py-2"
             />
           </label>
+          <div className="border-t border-[var(--border)] pt-4">
+            <label className="flex cursor-pointer items-start gap-3 text-sm">
+              <input
+                type="checkbox"
+                checked={revisionWeighted}
+                onChange={(e) => setRevisionWeighted(e.target.checked)}
+                className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]"
+              />
+              <span>
+                <span className="font-medium">Revision-weighted day</span>
+                <span className="mt-1 block text-xs text-[var(--muted)]">
+                  For re-covering material you already know. Shrinks the LEARN block to
+                  about 60% and gives the surplus to DSA, which is first-time material.
+                  Practice and reflection are unchanged.
+                </span>
+              </span>
+            </label>
+          </div>
           <p className="text-xs text-[var(--muted)]">Timezone: {settings.timezone}</p>
           <button
             type="button"
@@ -90,7 +112,7 @@ export default function SettingsPage() {
             onClick={save}
             className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm font-medium text-[var(--accent-fg)]"
           >
-            Save capacity
+            Save settings
           </button>
           {saved ? <p className="text-xs text-[var(--muted)]">Saved.</p> : null}
         </div>
