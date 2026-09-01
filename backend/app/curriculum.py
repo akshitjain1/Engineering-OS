@@ -10,6 +10,17 @@ NOT_STARTED_STATES = frozenset({"not_started", ""})
 
 UI_LESSON_STATES = frozenset({"not_started", "in_progress", "completed"})
 
+# Prerequisites are advice, not a gate.
+#
+# The curriculum ships a single 431-topic prerequisite chain. Enforcing it made
+# 425 of 449 topics unreachable and put all of DSA behind all of Java, so the
+# planner could only ever offer one topic. Setting this to False keeps the
+# prerequisite data (it is still shown as a "you may want to review X first"
+# hint) but stops it from hiding anything.
+#
+# Flip to True only if you deliberately want a locked, strictly linear course.
+ENFORCE_PREREQUISITES = False
+
 STATE_ALIASES = {
     "completed": "completed",
     "in_progress": "in_progress",
@@ -135,8 +146,8 @@ def evaluate_prerequisites(
         if not complete:
             missing.append(display)
 
-    locked = bool(missing)
-    if not refs:
+    locked = bool(missing) and ENFORCE_PREREQUISITES
+    if not refs or not missing:
         message = None
     elif locked:
         if len(missing) == 1:
@@ -144,9 +155,19 @@ def evaluate_prerequisites(
         else:
             message = 'Complete these topics to unlock: ' + ', '.join(missing) + '.'
     else:
-        message = None
+        # Advisory wording. Nothing is blocked; this is a suggestion only.
+        if len(missing) == 1:
+            message = f'Suggested warm-up first: {missing[0]}.'
+        else:
+            message = 'Suggested warm-up first: ' + ', '.join(missing[:3]) + '.'
 
-    return {'locked': locked, 'message': message, 'items': items, 'missing': missing}
+    return {
+        'locked': locked,
+        'message': message,
+        'items': items,
+        'missing': missing,
+        'advisory': bool(missing) and not locked,
+    }
 
 def compose_topic_status(locked: bool, lesson_progress: dict[str, Any]) -> str:
     if locked:
