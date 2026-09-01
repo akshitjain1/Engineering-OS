@@ -85,9 +85,16 @@ def test_tree_and_prerequisites(client):
     rest = next(topic for topic in topics if topic["id"] == ids["rest_topic_id"])
     assert http["locked"] is False
     assert http["status"] == "not_started"
-    assert rest["locked"] is True
-    assert rest["status"] == "locked"
+    # Prerequisites are advisory now: REST still reports HTTP as unmet, but it
+    # is not locked and the learner may open it whenever they like.
+    assert rest["locked"] is False
+    assert rest["status"] == "not_started"
+    assert rest["advisory"] is True
     assert "HTTP Fundamentals" in rest["lock_message"]
+    assert rest["prerequisites"][0]["complete"] is False
+    # A topic with nothing unmet carries no advisory at all.
+    assert http["advisory"] is False
+    assert http["lock_message"] is None
     assert tree["next"]["topic_id"] == ids["http_topic_id"]
 
 
@@ -97,15 +104,20 @@ def test_topic_404(client):
     assert client.get("/api/lesson/999").status_code == 404
 
 
-def test_locked_topic_detail_and_progress_forbidden(client):
+def test_topic_detail_and_progress_open(client):
+    """A topic with unmet prerequisites is fully usable, advisory only."""
     ids = _seed_chain()
-    detail = client.get(f"/api/topic/{ids['rest_topic_id']}").json()
-    assert detail["locked"] is True
-    forbidden = client.post(
+    response = client.get(f"/api/topic/{ids['rest_topic_id']}")
+    assert response.status_code == 200
+    detail = response.json()
+    assert detail["locked"] is False
+    assert detail["advisory"] is True
+    assert "HTTP Fundamentals" in detail["lock_message"]
+    accepted = client.post(
         f"/api/progress/lesson/{ids['rest_lesson_id']}",
         params={"state": "completed"},
     )
-    assert forbidden.status_code == 403
+    assert accepted.status_code == 200
 
 
 def test_completing_prereq_unlocks_next_topic(client):
@@ -199,10 +211,18 @@ def test_evaluate_prerequisites_unit():
     }
     unlocked = evaluate_prerequisites(["HTTP Fundamentals"], by_name)
     assert unlocked["locked"] is False
-    locked = evaluate_prerequisites(["REST Principles"], by_name)
-    assert locked["locked"] is True
-    assert locked["missing"] == ["REST Principles"]
+    assert unlocked["missing"] == []
+    assert unlocked["advisory"] is False
+    # Unmet prerequisites are still reported -- they just do not lock.
+    unmet = evaluate_prerequisites(["REST Principles"], by_name)
+    assert unmet["locked"] is False
+    assert unmet["missing"] == ["REST Principles"]
+    assert unmet["advisory"] is True
+    assert unmet["message"] is not None
+    assert unmet["items"][0]["complete"] is False
     assert is_topic_complete(by_name["HTTP Fundamentals"].lessons) is True
     progress = topic_lesson_progress(by_name["REST Principles"].lessons)
     assert progress["status"] == "not_started"
-    assert evaluate_prerequisites([], by_name)["locked"] is False
+    empty = evaluate_prerequisites([], by_name)
+    assert empty["locked"] is False
+    assert empty["advisory"] is False

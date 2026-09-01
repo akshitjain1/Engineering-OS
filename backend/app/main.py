@@ -308,6 +308,8 @@ def _topic_payload(
         "prerequisites": lock["items"],
         "locked": lock["locked"],
         "lock_message": lock["message"],
+        # Advisory: prerequisites are unmet but nothing is blocked.
+        "advisory": lock["advisory"],
         "status": status,
         "progress": {"completed": progress["completed"], "total": progress["total"], "percent": progress["percent"]},
         "lessons": [_serialize_lesson_summary(lesson) for lesson in lessons],
@@ -843,6 +845,8 @@ def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
         "hours_estimated": lesson.hours_estimated,
         "locked": lock["locked"],
         "lock_message": lock["message"],
+        # Advisory: prerequisites are unmet but nothing is blocked.
+        "advisory": lock["advisory"],
         "prerequisites": lock["items"],
         "breadcrumb": {
             "module_id": lesson.topic.module_id if lesson.topic else None,

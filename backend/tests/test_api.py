@@ -85,25 +85,27 @@ def test_missing_track_404(client):
     assert response.status_code == 404
 
 
-def test_dsa_create_list_and_get(client):
-    created = client.post("/api/dsa/topics", json={"name": "Two Pointers", "pattern": "Two Pointers"})
-    assert created.status_code == 200
-    listed = client.get("/api/dsa/topics").json()
-    assert any(row["name"] == "Two Pointers" for row in listed)
-    fetched = client.get("/api/dsa/topics/Two Pointers")
-    assert fetched.status_code == 200
-    assert fetched.json()["pattern"] == "Two Pointers"
+def test_legacy_dsa_topic_routes_are_gone(client):
+    """The dsa_topics CRUD surface was removed; /api/dsa/board replaced it.
+
+    dsa_topics has been empty since the DSA curriculum moved into
+    curriculum_topics (domain_key='dsa'). The table and the DSATopic model stay
+    because user_progress.dsa_topic_id still references them, but nothing reads
+    them over HTTP any more.
+    """
+    paths = set(client.app.openapi()["paths"])
+    assert "/api/dsa/topics" not in paths
+    assert "/api/dsa/topics/{topic_name}" not in paths
+    assert "/api/progress/dsa/{topic_id}" not in paths
+    assert "/api/dsa/board" in paths
 
 
-def test_dsa_progress_requires_existing_topic(client):
-    missing = client.post("/api/progress/dsa/1", params={"solved": True, "time_taken": 12})
-    assert missing.status_code == 404
-    client.post("/api/dsa/topics", json={"name": "Arrays"})
-    ok = client.post("/api/progress/dsa/1", params={"solved": True, "time_taken": 12})
-    assert ok.status_code == 200
-    body = ok.json()
-    assert body["attempt_count"] == 1
-    assert body["solved_status"] is True
+def test_dsa_board_reads_the_curriculum(client):
+    board = client.get("/api/dsa/board")
+    assert board.status_code == 200
+    body = board.json()
+    assert set(body) == {"cursor", "totals", "modules"}
+    assert set(body["totals"]) == {"topics", "completed", "questions", "exercises"}
 
 
 def test_xp_award_and_get(client):

@@ -126,27 +126,35 @@ def test_1_2_complete_topic_idempotent_no_gamification(client):
     assert client.get("/api/xp").json()["total_xp"] == 0
 
 
-def test_3_complete_topic_unlocks_next(client):
+def test_3_complete_topic_advances_cursor(client):
+    """Completing a prerequisite still clears the advisory and moves the cursor."""
     seed = _seed_pair()
     binary_before = client.get("/api/roadmap").json()
     node = _node_payload(binary_before, seed["binary_id"])
-    assert node["locked"] is True
+    assert node["locked"] is False
+    assert node["advisory"] is True
+    assert binary_before["next"]["topic_id"] == seed["bits_id"]
 
     client.post(f"/api/topic/{seed['bits_id']}/complete")
 
     tree_after = client.get("/api/roadmap").json()
     node = _node_payload(tree_after, seed["binary_id"])
     assert node["locked"] is False
+    assert node["advisory"] is False
     detail = client.get(f"/api/topic/{seed['binary_id']}").json()
     assert detail["locked"] is False
     assert detail["prerequisites"][0]["complete"] is True
+    # Cursor has moved off the completed topic and onto the next one.
+    assert tree_after["next"]["topic_id"] == seed["binary_id"]
 
 
-def test_4_locked_topic_rejects_complete(client):
+def test_4_any_topic_accepts_complete(client):
+    """Completing out of order is allowed: prerequisites never block."""
     seed = _seed_pair()
     response = client.post(f"/api/topic/{seed['binary_id']}/complete")
-    assert response.status_code == 403
-    assert "locked" in str(response.json()).lower()
+    assert response.status_code == 200
+    detail = client.get(f"/api/topic/{seed['binary_id']}").json()
+    assert detail["locked"] is False
 
 
 def test_5_exercise_complete_no_xp(client):

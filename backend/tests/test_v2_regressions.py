@@ -462,7 +462,10 @@ def test_10_resources_only_completion_unlocks_binary(client):
         for topic in module["topics"]
         if topic["id"] == binary_id
     )
-    assert binary_node_before["locked"] is True
+    # Never locked -- but the unmet prerequisite is reported as advisory, and
+    # that is what has to clear once the resource is consumed.
+    assert binary_node_before["locked"] is False
+    assert binary_node_before["advisory"] is True
 
     # Consume the resource (learning activity) — no lesson state touched.
     consumed = client.post(f"/api/progress/resource/{resource_id}", json={"completed": True})
@@ -482,11 +485,12 @@ def test_10_resources_only_completion_unlocks_binary(client):
         if topic["id"] == binary_id
     )
     assert binary_node["locked"] is False
+    assert binary_node["advisory"] is False
     binary_detail = client.get(f"/api/topic/{binary_id}").json()
     assert binary_detail["locked"] is False
     assert binary_detail["prerequisites"][0]["complete"] is True
     # Propagates without any refresh call.
-    assert client.get(f"/api/topic/{binary_id}").json()["locked"] is False
+    assert client.get(f"/api/topic/{binary_id}").json()["advisory"] is False
 
 
 def test_11_contract_requires_exercise_and_assessment_when_present(client):
