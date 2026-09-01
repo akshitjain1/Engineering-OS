@@ -58,11 +58,14 @@ class JournalBody(BaseModel):
 
 @router.get("/api/day", tags=["Day"])
 def read_day(db: Session = Depends(get_db)):
-    """Today's session. Auto-creates it on first open so the app is never blank."""
-    day = day_engine.get_day(db, user_id=DEFAULT_USER)
-    if not day["items"]:
-        day = day_engine.generate_day(db, user_id=DEFAULT_USER)
-    return day
+    """Today's session, read-only.
+
+    This used to generate the day when none existed, which meant any page that
+    read it wrote rows -- including /learn, which only wants the current topic
+    for a banner. Callers that should build a day (only /today) act on
+    needs_generation and POST /api/day/generate.
+    """
+    return day_engine.get_day(db, user_id=DEFAULT_USER)
 
 
 @router.post("/api/day/generate", tags=["Day"])

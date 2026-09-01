@@ -7,6 +7,7 @@ Coverage contract:
 4.  a skipped item is not re-added by a regenerate
 5.  revision-weighted mode shrinks LEARN, grows DSA, and still yields one DSA
 6.  extend_day appends a fresh cycle on uncovered topics, never rebuilds
+7.  get_day is read-only and reports needs_generation
 """
 
 import pytest
@@ -480,3 +481,43 @@ def test_cursors_exclude_topic_ids_defaults_to_old_behaviour(client):
         assert dsa_c.id == seed["dsa_ids"][1]
     finally:
         db.close()
+
+
+# ---------------------------------------------------------------------------
+# 7. get_day is read-only
+# ---------------------------------------------------------------------------
+
+
+def test_get_day_writes_nothing_and_flags_needs_generation(client):
+    _seed_curriculum()
+    db = SessionLocal()
+    try:
+        assert db.query(DailyPlanItem).count() == 0
+        for _ in range(3):
+            day = day_engine.get_day(db)
+            assert day["needs_generation"] is True
+            assert day["items"] == []
+        db.commit()
+        assert db.query(DailyPlanItem).count() == 0
+    finally:
+        db.close()
+
+
+def test_get_day_endpoint_writes_nothing(client):
+    _seed_curriculum()
+    for _ in range(3):
+        body = client.get("/api/day").json()
+        assert body["needs_generation"] is True
+        assert body["items"] == []
+
+    db = SessionLocal()
+    try:
+        assert db.query(DailyPlanItem).count() == 0
+    finally:
+        db.close()
+
+    # Generate is what builds it, and then the flag flips.
+    built = client.post("/api/day/generate", json={"minutes": 150}).json()
+    assert built["needs_generation"] is False
+    assert built["items"]
+    assert client.get("/api/day").json()["needs_generation"] is False

@@ -412,7 +412,10 @@ export function DayRunner() {
 
   const load = useCallback(async () => {
     try {
-      const next = await getDay();
+      // GET /api/day is read-only. /today is the one surface allowed to build a
+      // day, so it generates when the read comes back empty.
+      let next = await getDay();
+      if (next.needs_generation) next = await generateDay();
       setDay(next);
       setActiveId((current) => current ?? next.current_item_id);
       setError(null);

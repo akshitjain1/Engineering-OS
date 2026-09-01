@@ -41,6 +41,9 @@ export type DayItem = {
 export type Day = {
   plan_date: string;
   mode: "weekday" | "weekend";
+  /** True when no plan exists yet. GET /api/day never writes, so only /today
+   *  acts on this -- reading the day from anywhere else creates nothing. */
+  needs_generation: boolean;
   items: DayItem[];
   current_item_id: number | null;
   totals: {

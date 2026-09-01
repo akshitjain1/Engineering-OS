@@ -653,6 +653,9 @@ def get_day(
         "plan_date": plan_date,
         "mode": mode or day_mode(plan_date),
         "items": serialized,
+        # The read path never writes. An empty day tells the caller to generate;
+        # only /today acts on it, so opening a catalog page creates nothing.
+        "needs_generation": not serialized,
         "current_item_id": current["id"] if current else None,
         "totals": {
             "planned_minutes": planned,
