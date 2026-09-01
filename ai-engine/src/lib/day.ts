@@ -110,11 +110,3 @@ export const ACTIVITY_COPY: Record<ActivityType, { label: string; blurb: string 
   REFLECT: { label: "Reflect", blurb: "Close the day in writing" },
 };
 
-/** Minutes elapsed since the block was started, from the server timestamp so a
- *  page refresh does not reset the clock. */
-export function elapsedMinutes(item: DayItem): number {
-  if (!item.started_at) return 0;
-  const started = new Date(item.started_at).getTime();
-  if (Number.isNaN(started)) return 0;
-  return Math.max(0, Math.round((Date.now() - started) / 60000));
-}

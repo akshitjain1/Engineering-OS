@@ -759,6 +759,11 @@ def complete_item(
     """Finish a block and hand back the next one. This is the routing hop
     the UI needs so the user is never dropped back on a dashboard."""
     item = _get_item(db, item_id, user_id)
+    if item.status == STATUS_DONE:
+        # Idempotent. record_activity appends a row every call, so a
+        # double-click, a retried request or a replayed one used to log the
+        # same block's minutes twice and move the streak on work done once.
+        return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
     item.status = STATUS_DONE
     item.completed_at = _now()
     item.actual_minutes = int(minutes if minutes is not None else item.planned_minutes)
@@ -793,6 +798,11 @@ def skip_item(
     db: Session, item_id: int, *, reason: Optional[str] = None, user_id: str = DEFAULT_USER
 ) -> dict[str, Any]:
     item = _get_item(db, item_id, user_id)
+    if item.status == STATUS_DONE:
+        # Finishing outranks skipping. Downgrading a done block stripped its
+        # credit from the day totals while the LearningActivity row it already
+        # wrote stayed behind, so the two disagreed permanently.
+        return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
     item.status = STATUS_SKIPPED
     item.completed_at = _now()
     item.note = reason

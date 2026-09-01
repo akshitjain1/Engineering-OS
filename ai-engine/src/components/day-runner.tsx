@@ -13,6 +13,23 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { errorMessage } from "@/lib/api";
+import { TopicWorkPanel } from "@/components/topic-work";
+import {
+  EMPTY_RECORD,
+  HEARTBEAT_MS,
+  clearRecord,
+  pruneRecords,
+  elapsedOf,
+  fold,
+  isRunning,
+  isUntouched,
+  pause,
+  readRecord,
+  reset as resetRecord,
+  resume,
+  writeRecord,
+  type TimerRecord,
+} from "@/lib/block-timer";
 import {
   ACTIVITY_COPY,
   completeItem,
@@ -81,35 +98,99 @@ function DayRail({
 }
 
 /* -------------------------------------------------------------------------
- * Timer. Seeded from the server's started_at so a refresh does not reset it.
+ * Timer. A real stopwatch: it accumulates only while it is actually running,
+ * survives a refresh, and never bills you for wall-clock time you spent away
+ * from the desk. The old version derived elapsed from the server's started_at,
+ * which meant Pause did nothing and an hour-old block read an hour of "work".
  * ---------------------------------------------------------------------- */
 
 function useBlockTimer(item: DayItem | null) {
-  const [seconds, setSeconds] = useState(0);
-  const [running, setRunning] = useState(false);
   const itemId = item?.id ?? null;
+  const status = item?.status ?? null;
+  const isActive = status === "active";
+  // Once a block is closed the server owns its number. Showing a local
+  // stopwatch for it would let the card disagree with the logged total.
+  const settled = status === "done" || status === "skipped";
+  const loggedMinutes = item?.actual_minutes ?? 0;
+  const recordRef = useRef<TimerRecord>(EMPTY_RECORD);
+  // Starts at a constant so the server render and the hydration render agree;
+  // storage is only ever read from an effect.
+  const [seconds, setSeconds] = useState(0);
+  const [running, setRunningState] = useState(false);
 
+  const commit = useCallback((itemId: number, rec: TimerRecord) => {
+    recordRef.current = rec;
+    writeRecord(itemId, rec);
+    setSeconds(Math.floor(elapsedOf(rec)));
+    setRunningState(isRunning(rec));
+  }, []);
+
+  // Keyed on the id alone. The old effect also depended on the item object, so
+  // any background refetch handed it a fresh reference and silently restarted
+  // the clock from started_at, undoing a pause.
+  /* eslint-disable react-hooks/set-state-in-effect -- reading the persisted
+     stopwatch has to happen after the hydration render; doing it during render
+     would make the server and client disagree. Runs once per block. */
   useEffect(() => {
-    if (!item) {
+    if (itemId == null) {
+      recordRef.current = EMPTY_RECORD;
       setSeconds(0);
-      setRunning(false);
+      setRunningState(false);
       return;
     }
-    const base = item.started_at
-      ? Math.max(0, Math.floor((Date.now() - new Date(item.started_at).getTime()) / 1000))
-      : 0;
-    setSeconds(base);
-    setRunning(item.status === "active");
-  }, [itemId, item?.started_at, item?.status, item]);
+    if (settled) {
+      recordRef.current = EMPTY_RECORD;
+      setSeconds(loggedMinutes * 60);
+      setRunningState(false);
+      return;
+    }
+    const stored = readRecord(itemId);
+    // A block you have just moved onto starts counting on its own; one you are
+    // coming back to resumes exactly where you left it.
+    commit(itemId, isUntouched(stored) && isActive ? resume(stored) : stored);
+  }, [itemId, isActive, settled, loggedMinutes, commit]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
+  // Display tick. Derived from timestamps rather than incremented, so a
+  // throttled background tab still shows the right total on return.
   useEffect(() => {
     if (!running) return;
-    const id = window.setInterval(() => setSeconds((s) => s + 1), 1000);
+    const id = window.setInterval(() => setSeconds(Math.floor(elapsedOf(recordRef.current))), 1000);
     return () => window.clearInterval(id);
   }, [running]);
 
+  useEffect(() => {
+    if (!running || itemId == null) return;
+    const id = window.setInterval(() => {
+      const rec = recordRef.current;
+      if (!isRunning(rec)) return;
+      const folded: TimerRecord = fold(rec);
+      recordRef.current = folded;
+      writeRecord(itemId, folded);
+    }, HEARTBEAT_MS);
+    return () => window.clearInterval(id);
+  }, [running, itemId]);
+
+  const setRunning = useCallback(
+    (next: boolean | ((prev: boolean) => boolean)) => {
+      if (itemId == null) return;
+      const rec = recordRef.current;
+      const want = typeof next === "function" ? next(isRunning(rec)) : next;
+      if (want === isRunning(rec)) return;
+      commit(itemId, want ? resume(rec) : pause(rec));
+    },
+    [itemId, commit],
+  );
+
+  const reset = useCallback(() => {
+    if (itemId == null) return;
+    // Zero the total but keep running if it was running -- a stopwatch reset,
+    // not a stop.
+    commit(itemId, resetRecord(recordRef.current));
+  }, [itemId, commit]);
+
   const minutes = Math.max(1, Math.round(seconds / 60));
-  return { seconds, minutes, running, setRunning, reset: () => setSeconds(0) };
+  return { seconds, minutes, running, settled, setRunning, reset };
 }
 
 function clock(seconds: number) {
@@ -135,8 +216,14 @@ function FocusCard({
 }) {
   const timer = useBlockTimer(item);
   const copy = ACTIVITY_COPY[item.activity_type];
-  const over = timer.seconds > item.planned_minutes * 60;
+  // A finished block is never "running over" -- it is just its logged number.
+  const over = !timer.settled && timer.seconds > item.planned_minutes * 60;
   const isLearnLike = item.activity_type === "LEARN" || item.activity_type === "DSA";
+  // Practice and Build are the blocks whose work lives on the topic. Render it
+  // here so the block is self-contained instead of a link away.
+  const inlineWork =
+    item.topic_id !== null &&
+    (item.activity_type === "PRACTICE" || item.activity_type === "BUILD");
   // Checked by default. The cursor only advances when a topic is marked
   // finished, so defaulting this off silently served the same topic every day.
   const [alsoComplete, setAlsoComplete] = useState(true);
@@ -194,7 +281,17 @@ function FocusCard({
                 Open source <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
-          ) : item.topic_id ? (
+          ) : null}
+
+          {inlineWork && item.topic_id ? (
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4">
+              <TopicWorkPanel
+                key={item.topic_id}
+                topicId={item.topic_id}
+                show={item.activity_type === "BUILD" ? "build" : "both"}
+              />
+            </div>
+          ) : !item.resource?.url && item.topic_id ? (
             <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
               <p className="text-sm font-medium">Work inside the topic</p>
               <p className="mt-1 text-sm text-[var(--muted)]">
@@ -222,7 +319,9 @@ function FocusCard({
             {clock(timer.seconds)}
           </p>
           <p className="mt-1 text-xs text-[var(--muted)]">
-            {over
+            {timer.settled
+              ? `Logged ${item.actual_minutes} of ${item.planned_minutes} planned minutes.`
+              : over
               ? `Past the ${item.planned_minutes} minute estimate. That is fine — the number logged is what you actually spent.`
               : `Planned ${item.planned_minutes} minutes`}
           </p>
@@ -230,16 +329,18 @@ function FocusCard({
           <div className="mt-4 flex flex-wrap gap-2">
             <button
               type="button"
+              disabled={timer.settled}
               onClick={() => timer.setRunning((r) => !r)}
-              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm font-medium hover:border-[var(--border-strong)]"
+              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm font-medium hover:border-[var(--border-strong)] disabled:opacity-50"
             >
               {timer.running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
               {timer.running ? "Pause" : "Start timer"}
             </button>
             <button
               type="button"
+              disabled={timer.settled}
               onClick={timer.reset}
-              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm text-[var(--muted)] hover:border-[var(--border-strong)]"
+              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm text-[var(--muted)] hover:border-[var(--border-strong)] disabled:opacity-50"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Reset
             </button>
@@ -408,6 +509,9 @@ export function DayRunner() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [exhausted, setExhausted] = useState<string | null>(null);
+  // Distinct from `error`, which replaces the whole day. A background sync
+  // failure should be visible without throwing away what is on screen.
+  const [notice, setNotice] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
 
   const load = useCallback(async () => {
@@ -417,6 +521,9 @@ export function DayRunner() {
       let next = await getDay();
       if (next.needs_generation) next = await generateDay();
       setDay(next);
+      // Row ids are reused after a rebuild, so stopwatches for blocks that no
+      // longer exist have to go before one of them is mistaken for a new block.
+      pruneRecords(next.items.map((i) => i.id));
       setActiveId((current) => current ?? next.current_item_id);
       setError(null);
     } catch (err) {
@@ -433,11 +540,25 @@ export function DayRunner() {
     day?.items.find((i) => i.id === day.current_item_id) ??
     null;
 
-  // Starting the block on the server is what makes the clock survive a refresh.
+  // Marking the block started on the server. Fires once per block: the old
+  // version also depended on the item object, so every refetch handed it a new
+  // reference and it re-POSTed. Failures used to be swallowed whole, which left
+  // the server thinking the block never began with nothing on screen to say so.
+  const activeItemId = activeItem?.id ?? null;
+  const activeItemStatus = activeItem?.status ?? null;
+  const startedRef = useRef<Set<number>>(new Set());
   useEffect(() => {
-    if (!activeItem || activeItem.status !== "pending") return;
-    startItem(activeItem.id).then(load).catch(() => {});
-  }, [activeItem?.id, activeItem?.status, activeItem, load]);
+    if (activeItemId == null || activeItemStatus !== "pending") return;
+    if (startedRef.current.has(activeItemId)) return;
+    startedRef.current.add(activeItemId);
+    startItem(activeItemId)
+      .then(load)
+      .catch((err) => {
+        // Let it be retried rather than stranding the block as pending.
+        startedRef.current.delete(activeItemId);
+        setNotice(`Could not mark this block started: ${errorMessage(err)}`);
+      });
+  }, [activeItemId, activeItemStatus, load]);
 
   const advance = useCallback(
     (next: DayItem | null) => {
@@ -455,6 +576,9 @@ export function DayRunner() {
         minutes,
         complete_topic: completeTopic,
       });
+      // The minutes are banked server-side now; the local stopwatch would only
+      // be a second, drifting copy of them.
+      clearRecord(activeItem.id);
       advance(result.next);
       await load();
     } catch (err) {
@@ -469,6 +593,7 @@ export function DayRunner() {
     setBusy(true);
     try {
       const result = await skipItem(activeItem.id);
+      clearRecord(activeItem.id);
       advance(result.next);
       await load();
     } catch (err) {
@@ -571,6 +696,19 @@ export function DayRunner() {
           ))}
         </div>
       </header>
+
+      {notice ? (
+        <div className="flex items-start justify-between gap-3 rounded-lg border border-[var(--warn)] bg-[var(--warn-soft)] px-4 py-2.5">
+          <p className="text-sm">{notice}</p>
+          <button
+            type="button"
+            onClick={() => setNotice(null)}
+            className="shrink-0 text-sm text-[var(--muted)] underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      ) : null}
 
       <DayRail items={day.items} activeId={activeItem?.id ?? null} onJump={setActiveId} />
 

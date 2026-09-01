@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Check, ChevronRight, Clipboard, Clock, Loader2, Lock } from "lucide-react";
+import { Check, ChevronRight, Clock, Loader2, Lock } from "lucide-react";
 import { PrerequisiteList } from "@/components/prerequisite-list";
 import { SourceResourceCard } from "@/components/source-resource";
+import { PracticePrompt } from "@/components/topic-work";
 import { StatusBadge } from "@/components/status-badge";
 import { Banner, GhostButton, LoadingLine, Page, PrimaryButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
@@ -632,49 +633,4 @@ function sourceLabel(resource: ResourcePublic): string {
   if (resource.resource_type === "course") return "COURSE";
   if (resource.resource_type === "problem" || resource.resource_type === "exercise") return "PRACTICE COLLECTION";
   return resource.exact === false ? "COLLECTION" : "OFFICIAL RESOURCE";
-}
-
-function PracticePrompt({ topic }: { topic: TopicNode }) {
-  const [copied, setCopied] = useState(false);
-  const source = (topic.resources_by_role?.PRIMARY || [])[0];
-  const prompt = [
-    `I am studying "${topic.name}".`,
-    source ? `Primary source: ${source.title}${source.provider ? ` by ${source.provider}` : ""}${source.url ? ` (${source.url})` : ""}.` : "",
-    `Give me a small set of practice exercises for ${topic.name}.`,
-    "Prefer plain problems with worked solutions over multiple choice. Do not send me to any specific website or problem ID.",
-    "I will attempt them on my own and come back with my code or answers for feedback.",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(prompt);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      /* clipboard unavailable */
-    }
-  };
-
-  return (
-    <div className="glow-card p-4">
-      <p className="text-sm font-medium">No practice source is mapped yet.</p>
-      <p className="mt-1 text-sm text-[var(--muted)]">
-        Copy this prompt into any AI assistant or coding platform — the app does not track answers or call an LLM.
-      </p>
-      <textarea
-        readOnly
-        value={prompt}
-        rows={6}
-        className="mt-3 w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-xs leading-relaxed text-[var(--foreground)]"
-      />
-      <div className="mt-3">
-        <GhostButton onClick={copy}>
-          <Clipboard className="mr-2 h-4 w-4" />
-          {copied ? "Copied" : "Copy prompt"}
-        </GhostButton>
-      </div>
-    </div>
-  );
 }

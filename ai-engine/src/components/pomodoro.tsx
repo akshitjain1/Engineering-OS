@@ -38,10 +38,19 @@ function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// Deterministic first-paint state. Must not touch localStorage or the clock:
+// the server render and the client's hydration render both use this, so
+// anything environment-dependent here surfaces as a hydration mismatch.
+function defaultState(): TimerState {
+  return { mode: DEFAULT_MODE, isRunning: false, isFocus: true, timeRemaining: MODES[DEFAULT_MODE].focus, sessionsCompleted: 0, endAt: null };
+}
+
+function defaultAnalytics(): Analytics {
+  return { sessionsStarted: 0, sessionsCompleted: 0, totalFocusMinutes: 0, todayMinutes: 0, todayDate: "" };
+}
+
+// Client-only. Called from an effect after hydration, never during render.
 function loadState(): TimerState {
-  if (typeof window === "undefined") {
-    return { mode: DEFAULT_MODE, isRunning: false, isFocus: true, timeRemaining: MODES[DEFAULT_MODE].focus, sessionsCompleted: 0, endAt: null };
-  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -65,7 +74,7 @@ function loadState(): TimerState {
   } catch {
     // ignore
   }
-  return { mode: DEFAULT_MODE, isRunning: false, isFocus: true, timeRemaining: MODES[DEFAULT_MODE].focus, sessionsCompleted: 0, endAt: null };
+  return defaultState();
 }
 
 function persistState(s: TimerState) {
@@ -87,7 +96,7 @@ function loadAnalytics(): Analytics {
   } catch {
     // ignore
   }
-  return { sessionsStarted: 0, sessionsCompleted: 0, totalFocusMinutes: 0, todayMinutes: 0, todayDate: todayKey() };
+  return { ...defaultAnalytics(), todayDate: todayKey() };
 }
 
 function persistAnalytics(a: Analytics) {
@@ -144,9 +153,24 @@ type PomodoroContextValue = {
 const PomodoroContext = createContext<PomodoroContextValue | null>(null);
 
 export function PomodoroProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState<TimerState>(() => loadState());
-  const [analytics, setAnalytics] = useState<Analytics>(() => loadAnalytics());
+  const [state, setState] = useState<TimerState>(defaultState);
+  const [analytics, setAnalytics] = useState<Analytics>(defaultAnalytics);
+  // Gates persistence so the deterministic default can't overwrite stored
+  // state before it has been read back in.
+  const [hydrated, setHydrated] = useState(false);
   const intervalRef = useRef<number | null>(null);
+
+  // Restore persisted state after hydration. Effects never run on the server
+  // and never run during the hydration render, so this cannot cause a mismatch.
+  /* eslint-disable react-hooks/set-state-in-effect -- rehydrating from localStorage
+     has to happen after the hydration render; doing it during render is exactly the
+     server/client mismatch this guards against. Costs one extra render on mount. */
+  useEffect(() => {
+    setState(loadState());
+    setAnalytics(loadAnalytics());
+    setHydrated(true);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const clearIntervalRef = useCallback(() => {
     if (intervalRef.current !== null) {
@@ -216,13 +240,15 @@ export function PomodoroProvider({ children }: { children: React.ReactNode }) {
 
   // Persist state changes (except high-frequency tick which we already handled)
   useEffect(() => {
+    if (!hydrated) return;
     persistState(state);
-  }, [state]);
+  }, [state, hydrated]);
 
   // Also persist analytics
   useEffect(() => {
+    if (!hydrated) return;
     persistAnalytics(analytics);
-  }, [analytics]);
+  }, [analytics, hydrated]);
 
   const liveStateRef = useRef(liveState);
   useEffect(() => { liveStateRef.current = liveState; }, [liveState]);

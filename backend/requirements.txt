@@ -5,5 +5,7 @@ pydantic>=2.13.0
 alembic>=1.19.0
 python-dotenv>=1.0.0
 httpx>=0.27.0
+# starlette>=1.6 uses httpx2 for TestClient; plain httpx is deprecated there
+httpx2>=2.0
 pytest>=8.0.0
 pyyaml>=6.0.0

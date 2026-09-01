@@ -10,6 +10,8 @@ Coverage contract:
 7.  get_day is read-only and reports needs_generation
 8.  finishing a LEARN/DSA topic feeds the spaced-review queue
 9.  GET /api/cursor is read-only and agrees with what the day schedules
+10. closing a block is idempotent: repeat calls never log its minutes twice,
+    and skipping never downgrades a block that is already done
 """
 
 import pytest
@@ -23,7 +25,7 @@ from app.db.models import (
     CurriculumTopic,
     CurriculumTrack,
 )
-from app.db.models import RevisionSchedule
+from app.db.models import LearningActivity, RevisionSchedule
 from app.db.session import SessionLocal
 from app.learning import day_engine, service
 from app.learning.day_models import DailyPlanItem
@@ -760,3 +762,114 @@ def test_cursor_advances_when_a_topic_is_completed(client):
         db.close()
 
     assert client.get("/api/cursor").json()["core"]["topic_id"] == seed["core_ids"][1]
+
+
+def _activities() -> list[LearningActivity]:
+    db = SessionLocal()
+    try:
+        return db.query(LearningActivity).all()
+    finally:
+        db.close()
+
+
+def _status(item_id: int) -> str:
+    db = SessionLocal()
+    try:
+        return db.get(DailyPlanItem, item_id).status
+    finally:
+        db.close()
+
+
+def _read_day() -> dict:
+    db = SessionLocal()
+    try:
+        return day_engine.get_day(db)
+    finally:
+        db.close()
+
+
+def _complete_returning(item_id: int, *, minutes: int = 20) -> dict:
+    db = SessionLocal()
+    try:
+        result = day_engine.complete_item(db, item_id, minutes=minutes)
+        db.commit()
+        return result
+    finally:
+        db.close()
+
+
+def _skip(item_id: int) -> dict:
+    db = SessionLocal()
+    try:
+        result = day_engine.skip_item(db, item_id)
+        db.commit()
+        return result
+    finally:
+        db.close()
+
+
+def test_completing_a_block_twice_logs_its_minutes_once(client):
+    """record_activity appends, so a double-click used to bill the day twice."""
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    _complete(learn["id"], complete_topic=False, minutes=25)
+    _complete(learn["id"], complete_topic=False, minutes=25)
+
+    rows = _activities()
+    assert len(rows) == 1
+    assert rows[0].minutes == 25
+
+
+def test_repeat_completion_does_not_move_the_logged_total(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    _complete(learn["id"], complete_topic=False, minutes=30)
+    once = _read_day()["totals"]["logged_minutes"]
+    _complete(learn["id"], complete_topic=False, minutes=30)
+
+    assert _read_day()["totals"]["logged_minutes"] == once
+
+
+def test_repeat_completion_still_reports_the_next_block(client):
+    """Idempotent must not mean inert -- the UI still needs somewhere to go."""
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    first = _complete_returning(learn["id"])
+    again = _complete_returning(learn["id"])
+
+    assert again["item"]["status"] == "done"
+    assert again["next"] is not None
+    assert again["next"]["id"] == first["next"]["id"]
+
+
+def test_skipping_a_finished_block_does_not_undo_it(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+    _complete(learn["id"], complete_topic=False, minutes=20)
+
+    _skip(learn["id"])
+
+    assert _status(learn["id"]) == "done"
+    totals = _read_day()["totals"]
+    assert totals["items_done"] == 1
+    assert totals["logged_minutes"] == 20
+    # the activity row written on completion still has a done block behind it
+    assert len(_activities()) == 1
+
+
+def test_skipping_an_open_block_still_works(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    _skip(learn["id"])
+
+    assert _status(learn["id"]) == "skipped"
+    assert _activities() == []
