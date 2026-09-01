@@ -4,3 +4,4 @@ __pycache__/
 dev.db
 *.log
 .env
+backups/

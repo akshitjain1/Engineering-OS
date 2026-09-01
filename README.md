@@ -104,6 +104,36 @@ python -m app.content.import_curriculum content/curriculum/v1-index.yaml
 
 `origin: demo` is the development fixture. Official V1 (Domains 0–2) is structure-only: resource URLs are not mapped yet.
 
+## Backups
+
+The whole learning history is one SQLite file, so back it up:
+
+```
+cd backend
+venv\Scripts\python scripts\backup_db.py
+```
+
+Writes `backend/backups/dev-YYYY-MM-DD.db` using the SQLite online backup API
+rather than a file copy, so it is safe to run while the server is up. Keeps the
+14 most recent and prunes older ones; re-running on the same day overwrites that
+day's file. `backups/` is gitignored.
+
+To run it daily on Windows Task Scheduler:
+
+1. Task Scheduler -> **Create Task**, name it `Engineering OS backup`.
+2. **Triggers** -> New -> Daily, at a time the machine is usually on.
+3. **Actions** -> New -> Start a program, with
+   Program `<repo>\backend\venv\Scripts\python.exe`,
+   Arguments `scripts\backup_db.py`,
+   Start in `<repo>\backend` (the "Start in" box matters -- the script resolves
+   paths from the backend directory).
+4. **Settings** -> tick *Run task as soon as possible after a scheduled start is
+   missed*, so a machine that was off still gets a backup.
+5. Select the task -> **Run**, then check `backend\backups\`.
+
+Restore is a plain file copy: stop the server, replace `backend/dev.db` with the
+chosen backup, restart.
+
 ## Current status
 
 Stabilized foundation plus curriculum explorer:
