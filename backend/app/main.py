@@ -46,6 +46,7 @@ from .db.models import (
 from .learning.api import router as learning_router
 from .learning.day_api import router as day_router
 from .learning.dsa_api import router as dsa_router
+from .learning.cursor_api import router as cursor_router
 from .learning import day_models  # noqa: F401  (registers daily_plan_items on Base)
 from .learning import service as learning_service
 from .learning import revision_engine
@@ -109,6 +110,7 @@ async def _topic_view_cache(request, call_next):
 app.include_router(learning_router)
 app.include_router(day_router)
 app.include_router(dsa_router)
+app.include_router(cursor_router)
 
 
 class QuestionAttemptBody(BaseModel):

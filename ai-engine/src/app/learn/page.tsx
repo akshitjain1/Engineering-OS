@@ -7,25 +7,25 @@ import { StatusBadge } from "@/components/status-badge";
 import { Banner, EmptyState, LoadingLine, Page, PageTitle } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
 import type { CurriculumTree } from "@/lib/curriculum";
-import { getDay, type Day, type DayItem } from "@/lib/day";
+import { getCursors, type CursorTopic } from "@/lib/cursor";
 
-// The "current" topic comes from today's session rather than a dashboard
-// snapshot -- same topic, and it stays in step with what /today is showing.
-function currentTopicItem(day: Day | null): DayItem | null {
-  if (!day) return null;
-  const open = day.items.filter((i) => i.topic_id != null && i.status !== "skipped");
-  return open.find((i) => i.id === day.current_item_id) ?? open.find((i) => i.status !== "done") ?? null;
-}
+// The "current" topic comes from the CORE cursor, not from today's session. A
+// catalog page must not depend on the runner having been opened -- and this is
+// the same cursor /today and /dsa read, so all three name the same topic.
 
 export default function LearnPage() {
-  const [day, setDay] = useState<Day | null>(null);
+  const [current, setCurrent] = useState<CursorTopic | null>(null);
+  const [loaded, setLoaded] = useState(false);
   const [tree, setTree] = useState<CurriculumTree | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
-    getDay().then(setDay).catch((err) => setError(errorMessage(err)));
+    getCursors()
+      .then((c) => setCurrent(c.core))
+      .catch((err) => setError(errorMessage(err)))
+      .finally(() => setLoaded(true));
     api<CurriculumTree>("/api/curriculum/tree").then(setTree).catch(() => {});
   }, []);
 
@@ -37,17 +37,17 @@ export default function LearnPage() {
     return true;
   }).slice(0, 100);
 
-  const current = currentTopicItem(day);
+
 
   return (
     <Page wide>
       <PageTitle kicker="Learn" title="Topics" description="Dense catalog of all topics. Search, filter, and jump straight into any of them." />
       {error ? <Banner>{error}</Banner> : null}
-      {!day && !error ? <LoadingLine /> : null}
+      {!loaded && !error ? <LoadingLine /> : null}
 
       {current ? (
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border border-[var(--border)] bg-[var(--card)] px-4 py-3">
-          <div><p className="text-xs uppercase tracking-widest text-[var(--muted)]">Current</p><p className="font-semibold">{current.title} <span className="text-xs font-normal text-[var(--muted)]">· {(current.domain || "").toUpperCase()} · ~{current.planned_minutes} min</span></p></div>
+          <div><p className="text-xs uppercase tracking-widest text-[var(--muted)]">Current</p><p className="font-semibold">{current.name} <span className="text-xs font-normal text-[var(--muted)]">· {(current.domain || "").toUpperCase()}{current.module_name ? ` · ${current.module_name}` : ""} · ~{current.estimated_minutes} min</span></p></div>
           <Link href={`/learn/topic/${current.topic_id}`} className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-fg)]">Continue <ArrowRight className="h-4 w-4" /></Link>
         </div>
       ) : null}

@@ -9,6 +9,7 @@ Coverage contract:
 6.  extend_day appends a fresh cycle on uncovered topics, never rebuilds
 7.  get_day is read-only and reports needs_generation
 8.  finishing a LEARN/DSA topic feeds the spaced-review queue
+9.  GET /api/cursor is read-only and agrees with what the day schedules
 """
 
 import pytest
@@ -706,3 +707,56 @@ def test_pending_revisions_endpoint_reports_the_queued_topic(client):
     assert match[0]["item_type"] == "topic"
     assert match[0]["review_interval"] == 1
     assert match[0]["title"]
+
+
+# ---------------------------------------------------------------------------
+# 9. GET /api/cursor -- /learn's banner source
+# ---------------------------------------------------------------------------
+
+
+def test_cursor_endpoint_works_with_no_day_and_writes_nothing(client):
+    """A catalog page must not depend on the runner having been opened."""
+    seed = _seed_curriculum()
+    db = SessionLocal()
+    try:
+        assert db.query(DailyPlanItem).count() == 0
+    finally:
+        db.close()
+
+    for _ in range(3):
+        body = client.get("/api/cursor").json()
+        assert body["core"] is not None
+        assert body["core"]["topic_id"] == seed["core_ids"][0]
+        assert body["core"]["name"]
+        assert body["dsa"]["topic_id"] == seed["dsa_ids"][0]
+
+    db = SessionLocal()
+    try:
+        assert db.query(DailyPlanItem).count() == 0, "/api/cursor created plan items"
+    finally:
+        db.close()
+
+
+def test_cursor_agrees_with_the_generated_day(client):
+    _seed_curriculum()
+    cursors = client.get("/api/cursor").json()
+    day = _generate(150)
+
+    learn = next(i for i in day["items"] if i["activity_type"] == "LEARN")
+    dsa = next(i for i in day["items"] if i["activity_type"] == "DSA")
+    assert learn["topic_id"] == cursors["core"]["topic_id"]
+    assert dsa["topic_id"] == cursors["dsa"]["topic_id"]
+
+
+def test_cursor_advances_when_a_topic_is_completed(client):
+    seed = _seed_curriculum()
+    assert client.get("/api/cursor").json()["core"]["topic_id"] == seed["core_ids"][0]
+
+    db = SessionLocal()
+    try:
+        service.complete_topic(db, seed["core_ids"][0])
+        db.commit()
+    finally:
+        db.close()
+
+    assert client.get("/api/cursor").json()["core"]["topic_id"] == seed["core_ids"][1]
