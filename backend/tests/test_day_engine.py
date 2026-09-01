@@ -8,6 +8,7 @@ Coverage contract:
 5.  revision-weighted mode shrinks LEARN, grows DSA, and still yields one DSA
 6.  extend_day appends a fresh cycle on uncovered topics, never rebuilds
 7.  get_day is read-only and reports needs_generation
+8.  finishing a LEARN/DSA topic feeds the spaced-review queue
 """
 
 import pytest
@@ -21,6 +22,7 @@ from app.db.models import (
     CurriculumTopic,
     CurriculumTrack,
 )
+from app.db.models import RevisionSchedule
 from app.db.session import SessionLocal
 from app.learning import day_engine, service
 from app.learning.day_models import DailyPlanItem
@@ -521,3 +523,186 @@ def test_get_day_endpoint_writes_nothing(client):
     assert built["needs_generation"] is False
     assert built["items"]
     assert client.get("/api/day").json()["needs_generation"] is False
+
+
+# ---------------------------------------------------------------------------
+# 8. The revision queue is fed by finishing a topic
+# ---------------------------------------------------------------------------
+
+
+def _revisions() -> list[RevisionSchedule]:
+    db = SessionLocal()
+    try:
+        return db.query(RevisionSchedule).all()
+    finally:
+        db.close()
+
+
+def _complete(item_id: int, *, complete_topic: bool, minutes: int = 20) -> None:
+    db = SessionLocal()
+    try:
+        day_engine.complete_item(
+            db, item_id, minutes=minutes, complete_topic=complete_topic
+        )
+        db.commit()
+    finally:
+        db.close()
+
+
+def _block(day: dict, activity: str) -> dict:
+    return next(i for i in day["items"] if i["activity_type"] == activity)
+
+
+def _reopen(item_id: int) -> None:
+    """Put a finished block back to pending so it can be completed again."""
+    db = SessionLocal()
+    try:
+        row = db.get(DailyPlanItem, item_id)
+        row.status = "pending"
+        row.completed_at = None
+        db.commit()
+    finally:
+        db.close()
+
+
+def test_completing_learn_topic_enqueues_one_revision(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+    assert _revisions() == []
+
+    _complete(learn["id"], complete_topic=True)
+
+    rows = _revisions()
+    assert len(rows) == 1
+    assert rows[0].item_type == "topic"
+    assert rows[0].item_id == learn["topic_id"]
+    assert rows[0].review_interval == day_engine.FIRST_REVIEW_DAYS == 1
+    assert rows[0].next_review is not None
+
+
+def test_completing_dsa_topic_enqueues_a_revision(client):
+    _seed_curriculum()
+    day = _generate(150)
+    dsa = _block(day, "DSA")
+
+    _complete(dsa["id"], complete_topic=True)
+
+    rows = _revisions()
+    assert len(rows) == 1
+    assert rows[0].item_id == dsa["topic_id"]
+
+
+def test_completing_the_same_topic_twice_leaves_one_row(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    _complete(learn["id"], complete_topic=True)
+    _reopen(learn["id"])
+    _complete(learn["id"], complete_topic=True)
+
+    assert len(_revisions()) == 1
+
+
+def test_re_completing_does_not_reset_a_matured_interval(client):
+    """Spacing must survive. A 30-day interval is not knocked back to tomorrow."""
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+    _complete(learn["id"], complete_topic=True)
+
+    db = SessionLocal()
+    try:
+        row = db.query(RevisionSchedule).one()
+        row.review_interval = 30
+        matured = row.next_review
+        db.commit()
+    finally:
+        db.close()
+
+    _reopen(learn["id"])
+    _complete(learn["id"], complete_topic=True)
+
+    db = SessionLocal()
+    try:
+        row = db.query(RevisionSchedule).one()
+        assert row.review_interval == 30
+        assert row.next_review == matured
+    finally:
+        db.close()
+
+
+def test_complete_topic_false_enqueues_nothing(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    _complete(learn["id"], complete_topic=False)
+
+    assert _revisions() == []
+
+
+def test_practice_and_reflect_blocks_enqueue_nothing(client):
+    _seed_curriculum()
+    day = _generate(150)
+
+    _complete(_block(day, "PRACTICE")["id"], complete_topic=True)
+    _complete(_block(day, "REFLECT")["id"], complete_topic=True)
+
+    assert _revisions() == []
+
+
+def test_enqueue_failure_never_blocks_completion(client, monkeypatch):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+
+    def boom(*_a, **_k):
+        raise RuntimeError("revision table on fire")
+
+    monkeypatch.setattr(service, "_upsert_revision", boom)
+    _complete(learn["id"], complete_topic=True)
+
+    db = SessionLocal()
+    try:
+        row = db.get(DailyPlanItem, learn["id"])
+        assert row.status == "done", "a broken revision row blocked the completion"
+        assert row.actual_minutes == 20
+    finally:
+        db.close()
+    assert _revisions() == []
+
+
+def test_queued_topic_produces_a_review_block_the_next_day(client):
+    from datetime import date, timedelta
+
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+    _complete(learn["id"], complete_topic=True)
+
+    tomorrow = (date.today() + timedelta(days=1)).isoformat()
+    db = SessionLocal()
+    try:
+        kinds = [
+            b.activity_type
+            for b in day_engine.build_blocks(db, budget_minutes=150, plan_date=tomorrow)
+        ]
+    finally:
+        db.close()
+    assert "REVIEW" in kinds, kinds
+
+
+def test_pending_revisions_endpoint_reports_the_queued_topic(client):
+    _seed_curriculum()
+    day = _generate(150)
+    learn = _block(day, "LEARN")
+    _complete(learn["id"], complete_topic=True)
+
+    pending = client.get("/api/revision/pending").json()
+    match = [r for r in pending if r["item_id"] == learn["topic_id"]]
+    assert len(match) == 1
+    assert match[0]["item_type"] == "topic"
+    assert match[0]["review_interval"] == 1
+    assert match[0]["title"]

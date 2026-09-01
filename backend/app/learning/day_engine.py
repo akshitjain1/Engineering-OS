@@ -37,6 +37,7 @@ from app.db.models import (
     CurriculumLesson,
     CurriculumResource,
     CurriculumTopic,
+    RevisionSchedule,
 )
 from app.learning import service
 from app.learning.day_models import (
@@ -694,6 +695,58 @@ def start_item(db: Session, item_id: int, user_id: str = DEFAULT_USER) -> dict[s
     return _serialize(item)
 
 
+#: Activities that represent learning a topic, and so feed the revision queue.
+#: PRACTICE and REFLECT do not -- practice is retrieval on material the LEARN
+#: block already queued, and REFLECT is not topic-bound at all.
+REVISABLE_ACTIVITIES = {ACTIVITY_LEARN, ACTIVITY_DSA}
+
+#: First review lands tomorrow. This is REVISION_INTERVALS[0], which is also
+#: what service.revision_interval(0.0) returns -- a topic with no assessment
+#: evidence yet has no measured confidence.
+FIRST_REVIEW_DAYS = 1
+
+
+def _enqueue_revision(db: Session, item: DailyPlanItem, user_id: str) -> None:
+    """Put a just-finished topic into the spaced-review queue.
+
+    Nothing else fed this queue: service.complete_topic deliberately never
+    touches revision schedules, and the only other entry point was a manual
+    "Add to review" click. So the Revise leg of Learn -> Practice -> Build ->
+    Revise never ran, and early topics decayed while the learner was deep in
+    DSA.
+
+    Scheduling itself is service._upsert_revision -- the same function the
+    mastery path uses. No second scheduler.
+
+    An existing row is left exactly as it is. Idempotency is the stated
+    requirement, but the reason to skip rather than re-upsert is spacing: a
+    topic that has already earned a 30-day interval must not be knocked back
+    to tomorrow just because its LEARN block came round again.
+    """
+    if item.activity_type not in REVISABLE_ACTIVITIES or not item.topic_id:
+        return
+    existing = (
+        db.query(RevisionSchedule)
+        .filter(
+            RevisionSchedule.user_id == user_id,
+            RevisionSchedule.item_id == item.topic_id,
+            RevisionSchedule.item_type == "topic",
+        )
+        .first()
+    )
+    if existing is not None:
+        return
+    service._upsert_revision(
+        db,
+        item.topic_id,
+        0.0,
+        user_id,
+        _now(),
+        FIRST_REVIEW_DAYS,
+    )
+    db.flush()
+
+
 def complete_item(
     db: Session,
     item_id: int,
@@ -715,6 +768,12 @@ def complete_item(
 
     if complete_topic and item.topic_id:
         service.complete_topic(db, item.topic_id, user_id)
+        # Never let a bad revision row block marking work as done. Finishing a
+        # block is the user's action; the queue is bookkeeping behind it.
+        try:
+            _enqueue_revision(db, item, user_id)
+        except Exception:  # noqa: BLE001
+            pass
 
     # Logging here is what makes the streak real. Previously nothing in the
     # daily plan ever wrote a LearningActivity row, so the streak never moved.
