@@ -101,9 +101,26 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def _topic_view_cache(request, call_next):
+    """Memoize build_topic_views per read-only request.
+
+    /api/dashboard calls it four times (directly, plus inside tracks_snapshot
+    and study_focus) and each call is ~1s. Scoped to GET only: a mutating
+    request must never read a view computed before its own write.
+    """
+    if request.method != "GET":
+        return await call_next(request)
+    with learning_service.request_view_cache():
+        return await call_next(request)
+
+
 app.include_router(learning_router)
 app.include_router(day_router)
 app.include_router(dsa_router)
+
 
 class DSATopicCreate(BaseModel):
     name: str

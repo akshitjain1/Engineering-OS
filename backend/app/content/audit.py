@@ -27,7 +27,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from app.content.readiness_contract import evaluate_readiness
 from app.content.resources import serialize_resource
@@ -98,7 +98,46 @@ class AuditResult:
     estimate_method: Optional[str] = None
 
 
-def _topic_lessons(db: Session, topic: CurriculumTopic) -> list[CurriculumLesson]:
+@dataclass
+class AuditIndex:
+    """Whole-curriculum prefetch so a sweep of audit_topic is not N+1.
+
+    audit_topic issues ~7 queries per topic on its own (a lesson query per
+    helper, plus a lazy load per lesson for resources and exercises). Over 449
+    topics that is ~2.2k queries. Passing an index built by build_audit_index
+    collapses that to three, and every audit_topic result is byte-identical --
+    the ordering here is the same (order_index, id) the per-topic query used.
+    """
+
+    topics_by_slug: dict[str, CurriculumTopic] = field(default_factory=dict)
+    lessons_by_topic: dict[int, list[CurriculumLesson]] = field(default_factory=dict)
+
+
+def build_audit_index(db: Session) -> AuditIndex:
+    topics = db.query(CurriculumTopic).all()
+    lessons = (
+        db.query(CurriculumLesson)
+        .options(
+            selectinload(CurriculumLesson.resources),
+            selectinload(CurriculumLesson.exercises),
+        )
+        .order_by(CurriculumLesson.order_index, CurriculumLesson.id)
+        .all()
+    )
+    index = AuditIndex()
+    for topic in topics:
+        if topic.slug:
+            index.topics_by_slug[topic.slug] = topic
+    for lesson in lessons:
+        index.lessons_by_topic.setdefault(lesson.topic_id, []).append(lesson)
+    return index
+
+
+def _topic_lessons(
+    db: Session, topic: CurriculumTopic, index: Optional[AuditIndex] = None
+) -> list[CurriculumLesson]:
+    if index is not None:
+        return index.lessons_by_topic.get(topic.id, [])
     return (
         db.query(CurriculumLesson)
         .filter(CurriculumLesson.topic_id == topic.id)
@@ -107,8 +146,10 @@ def _topic_lessons(db: Session, topic: CurriculumTopic) -> list[CurriculumLesson
     )
 
 
-def _all_resources_for_topic(db: Session, topic: CurriculumTopic) -> list[CurriculumResource]:
-    lessons = _topic_lessons(db, topic)
+def _all_resources_for_topic(
+    db: Session, topic: CurriculumTopic, index: Optional[AuditIndex] = None
+) -> list[CurriculumResource]:
+    lessons = _topic_lessons(db, topic, index)
     out: list[CurriculumResource] = []
     for les in lessons:
         out.extend(sorted(les.resources, key=lambda r: (r.order_index or 0, r.id or 0)))
@@ -124,8 +165,10 @@ def _ordered_primary_resources(resources: list[CurriculumResource]) -> list[Curr
     return primaries
 
 
-def _collect_practice_items(db: Session, topic: CurriculumTopic) -> list[PracticeItem]:
-    lessons = _topic_lessons(db, topic)
+def _collect_practice_items(
+    db: Session, topic: CurriculumTopic, index: Optional[AuditIndex] = None
+) -> list[PracticeItem]:
+    lessons = _topic_lessons(db, topic, index)
     items: list[PracticeItem] = []
     for les in lessons:
         for ex in les.exercises:
@@ -145,7 +188,7 @@ def _collect_practice_items(db: Session, topic: CurriculumTopic) -> list[Practic
                     destination_type=ex.destination_type,
                 )
             )
-    for r in _all_resources_for_topic(db, topic):
+    for r in _all_resources_for_topic(db, topic, index):
         if (r.role or "").upper() == "PRACTICE":
             items.append(
                 PracticeItem(
@@ -235,12 +278,18 @@ def _verification_for_primaries(primaries: list[CurriculumResource]) -> tuple[st
     return VERIFICATION_NEEDS_REVIEW, EXACTNESS_COLLECTION
 
 
-def audit_topic(db: Session, topic_slug: str) -> Optional[AuditResult]:
-    topic: Optional[CurriculumTopic] = db.query(CurriculumTopic).filter(CurriculumTopic.slug == topic_slug).first()
+def audit_topic(
+    db: Session, topic_slug: str, index: Optional[AuditIndex] = None
+) -> Optional[AuditResult]:
+    topic: Optional[CurriculumTopic]
+    if index is not None:
+        topic = index.topics_by_slug.get(topic_slug)
+    else:
+        topic = db.query(CurriculumTopic).filter(CurriculumTopic.slug == topic_slug).first()
     if not topic:
         return None
-    lessons = _topic_lessons(db, topic)
-    resources = _all_resources_for_topic(db, topic)
+    lessons = _topic_lessons(db, topic, index)
+    resources = _all_resources_for_topic(db, topic, index)
     primaries = _ordered_primary_resources(resources)
 
     lo = ""
@@ -291,7 +340,7 @@ def audit_topic(db: Session, topic_slug: str) -> Optional[AuditResult]:
             else:
                 verification_status = VERIFICATION_PARTIAL_COVERAGE
 
-    practice_items = _collect_practice_items(db, topic)
+    practice_items = _collect_practice_items(db, topic, index)
     practice_concepts: set[str] = set()
     for pi in practice_items:
         for c in pi.concepts_required:

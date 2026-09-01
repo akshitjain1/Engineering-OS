@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import datetime, timedelta, timezone
 from typing import Any, Optional
 
@@ -61,6 +63,29 @@ from app.learning.xp import (
     get_or_create_xp,
     serialize_xp,
 )
+
+
+# ---------------------------------------------------------------------------
+# Request-scoped view cache
+# ---------------------------------------------------------------------------
+# A ContextVar, not a module-level dict: the cache only exists for the span of
+# one request and is discarded afterwards, so completion changes can never be
+# served stale. Outside a request (tests, CLI) the var is None and every call
+# recomputes, which is the old behaviour exactly.
+_view_cache: ContextVar[Optional[dict[str, Any]]] = ContextVar(
+    "topic_view_cache", default=None
+)
+
+
+@contextmanager
+def request_view_cache():
+    """Memoize build_topic_views for the duration of one read-only request."""
+    token = _view_cache.set({})
+    try:
+        yield
+    finally:
+        _view_cache.reset(token)
+
 
 ASSESSMENT_MINUTES = 15
 
@@ -1044,10 +1069,28 @@ def _practice_pending_count(topic: CurriculumTopic) -> int:
 
 
 def build_topic_views(db: Session, user_id: str = DEFAULT_USER) -> list[TopicView]:
-    from app.content.audit import audit_topic
+    """Every topic as a planner-ready view.
+
+    /api/dashboard reaches this four times per request (directly, plus inside
+    tracks_snapshot and study_focus). The result only depends on (db, user_id),
+    so a read-only request memoizes it -- see request_view_cache.
+    """
+    cache = _view_cache.get()
+    if cache is not None and user_id in cache:
+        return cache[user_id]
+    views = _build_topic_views_uncached(db, user_id)
+    if cache is not None:
+        cache[user_id] = views
+    return views
+
+
+def _build_topic_views_uncached(db: Session, user_id: str) -> list[TopicView]:
+    from app.content.audit import audit_topic, build_audit_index
 
     index = _topics_index(db)
     completion = topic_completion_index(db, user_id)
+    # One prefetch for all 449 audits instead of ~7 queries per topic.
+    audit_index = build_audit_index(db)
     views: list[TopicView] = []
     for topic in ordered_topics(db):
         lock = evaluate_prerequisites(
@@ -1060,7 +1103,7 @@ def build_topic_views(db: Session, user_id: str = DEFAULT_USER) -> list[TopicVie
         domain = getattr(topic, "domain_key", None) or domain_from_slug(slug)
         readiness = None
         try:
-            audited = audit_topic(db, slug) if topic.slug else None
+            audited = audit_topic(db, slug, audit_index) if topic.slug else None
             readiness = audited.readiness if audited else None
         except Exception:  # noqa: BLE001
             readiness = None
