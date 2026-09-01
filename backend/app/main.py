@@ -1,3 +1,4 @@
+import os
 from typing import Any, Optional
 from datetime import datetime, timezone, timedelta
 
@@ -61,26 +62,15 @@ LESSON_COMPLETE_XP = 10
 Base.metadata.create_all(bind=engine)
 ensure_optional_columns(engine)
 
-# Additive track backfill for existing curriculum (idempotent).
-with SessionLocal() as _db:
-    from .content.backfill_tracks import backfill_topic_tracks
-    from .content.domain0_repair import apply_domain0_repairs
-    from .learning.projects import seed_projects
-    from .content.learner_visibility import (
-        apply_learner_visibility,
-        restore_content_verification_statuses,
-    )
+# Curriculum repairs are idempotent and slow. They now live in
+# app.content.repair and run on demand (`python -m app.content.repair`), not on
+# every import. Set EOS_RUN_REPAIRS=1 to keep the old boot-time behaviour.
+if os.getenv("EOS_RUN_REPAIRS") == "1":
+    from .content.repair import run_all as _run_repairs
 
-    backfill_topic_tracks(_db)
-    apply_domain0_repairs(_db)
-    from .content.dsa_practice import enrich_dsa_practice
-
-    enrich_dsa_practice(_db)
-    seed_projects(_db)
-    # After repairs: restore content-verification statuses, then hide internal resources.
-    restore_content_verification_statuses(_db)
-    apply_learner_visibility(_db)
-    _db.commit()
+    with SessionLocal() as _db:
+        _run_repairs(_db)
+        _db.commit()
 
 app = FastAPI(
     title="Akshit Engineering OS API",
