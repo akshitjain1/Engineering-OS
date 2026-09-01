@@ -36,7 +36,6 @@ from .db.models import (
     CurriculumResource,
     LessonQuestion,
     LessonExercise,
-    DSATopic,
     UserProgress,
     UserXP,
     RevisionSchedule,
@@ -122,15 +121,6 @@ app.include_router(day_router)
 app.include_router(dsa_router)
 
 
-class DSATopicCreate(BaseModel):
-    name: str
-    pattern: str = ""
-    difficulty: str = ""
-    source: str = ""
-    url: str = ""
-    difficulty_level: str = ""
-
-
 class QuestionAttemptBody(BaseModel):
     selected: str
 
@@ -168,26 +158,6 @@ def get_db():
 
 def _iso(value: Optional[datetime]) -> Optional[str]:
     return str(value) if value else None
-
-
-def _serialize_dsa(topic: DSATopic) -> dict[str, Any]:
-    return {
-        "id": topic.id,
-        "name": topic.name,
-        "pattern": topic.pattern,
-        "difficulty": topic.difficulty,
-        "source": topic.source,
-        "url": topic.url,
-        "solution_notes": topic.solution_notes,
-        "attempt_count": topic.attempt_count,
-        "time_taken": topic.time_taken,
-        "solved_status": topic.solved_status,
-        "revision_status": topic.revision_status,
-        "last_attempted": _iso(topic.last_attempted),
-        "next_revision": _iso(topic.next_revision),
-        "personal_notes": topic.personal_notes,
-        "difficulty_level": topic.difficulty_level,
-    }
 
 
 def _serialize_progress(progress: UserProgress) -> dict[str, Any]:
@@ -901,36 +871,6 @@ def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
     }
 
 
-@app.get("/api/dsa/topics", tags=["DSA"])
-def list_dsa_topics(db: Session = Depends(get_db)):
-    topics = db.query(DSATopic).order_by(DSATopic.id).all()
-    return [_serialize_dsa(t) for t in topics]
-
-
-@app.post("/api/dsa/topics", tags=["DSA"])
-def create_dsa_topic(topic: DSATopicCreate, db: Session = Depends(get_db)):
-    new_topic = DSATopic(
-        name=topic.name,
-        pattern=topic.pattern or None,
-        difficulty=topic.difficulty or None,
-        source=topic.source or None,
-        url=topic.url or None,
-        difficulty_level=topic.difficulty_level or None,
-    )
-    db.add(new_topic)
-    db.commit()
-    db.refresh(new_topic)
-    return {"id": new_topic.id, "name": new_topic.name}
-
-
-@app.get("/api/dsa/topics/{topic_name}", tags=["DSA"])
-def get_dsa_topic(topic_name: str, db: Session = Depends(get_db)):
-    result = db.query(DSATopic).filter(DSATopic.name == topic_name).first()
-    if not result:
-        raise HTTPException(status_code=404, detail="DSA topic not found")
-    return _serialize_dsa(result)
-
-
 @app.get("/api/progress", tags=["Progress"])
 def get_progress(db: Session = Depends(get_db)):
     overview = _overview_progress(db)
@@ -1237,36 +1177,6 @@ def complete_assessment(body: AssessmentCompleteBody, db: Session = Depends(get_
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     db.commit()
     return result
-
-
-@app.post("/api/progress/dsa/{topic_id}", tags=["Progress"])
-def update_dsa_progress(
-    topic_id: int,
-    solved: bool,
-    time_taken: float = 0,
-    db: Session = Depends(get_db),
-):
-    dsa_topic = db.get(DSATopic, topic_id)
-    if not dsa_topic:
-        raise HTTPException(status_code=404, detail="DSA topic not found")
-
-    dsa_topic.attempt_count = (dsa_topic.attempt_count or 0) + 1
-    dsa_topic.solved_status = solved
-    if time_taken > 0:
-        dsa_topic.time_taken = time_taken
-    dsa_topic.last_attempted = datetime.now(timezone.utc)
-    if solved:
-        dsa_topic.revision_status = "mastered"
-
-    db.commit()
-    db.refresh(dsa_topic)
-    return {
-        "id": dsa_topic.id,
-        "name": dsa_topic.name,
-        "attempt_count": dsa_topic.attempt_count,
-        "solved_status": dsa_topic.solved_status,
-        "revision_status": dsa_topic.revision_status,
-    }
 
 
 @app.get("/api/xp", tags=["XP"])

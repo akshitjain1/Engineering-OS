@@ -1,0 +1,522 @@
+"use client";
+
+import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ArrowRight,
+  Check,
+  ExternalLink,
+  Pause,
+  Play,
+  RotateCcw,
+  SkipForward,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { errorMessage } from "@/lib/api";
+import {
+  ACTIVITY_COPY,
+  completeItem,
+  generateDay,
+  getDay,
+  saveJournal,
+  skipItem,
+  startItem,
+  type Day,
+  type DayItem,
+} from "@/lib/day";
+
+/* -------------------------------------------------------------------------
+ * The day rail. Shows the whole day in one line so the focus card can stay
+ * uncluttered. Clicking a block jumps to it — the only navigation you need.
+ * ---------------------------------------------------------------------- */
+
+function DayRail({
+  items,
+  activeId,
+  onJump,
+}: {
+  items: DayItem[];
+  activeId: number | null;
+  onJump: (id: number) => void;
+}) {
+  return (
+    <ol className="flex items-stretch gap-1.5" aria-label="Blocks in today's session">
+      {items.map((item) => {
+        const settled = item.status === "done" || item.status === "skipped";
+        const isActive = item.id === activeId;
+        return (
+          <li key={item.id} className="min-w-0 flex-1" style={{ flexGrow: item.planned_minutes }}>
+            <button
+              type="button"
+              onClick={() => onJump(item.id)}
+              aria-current={isActive ? "step" : undefined}
+              title={`${item.title} — ${item.planned_minutes} min`}
+              className="group block w-full text-left"
+            >
+              <span
+                className={cn(
+                  "block h-1.5 w-full rounded-full transition-colors",
+                  item.status === "done" && "bg-[var(--ok)]",
+                  item.status === "skipped" && "bg-[var(--border-strong)]",
+                  !settled && isActive && "bg-[var(--accent)]",
+                  !settled && !isActive && "bg-[var(--border)] group-hover:bg-[var(--border-strong)]",
+                )}
+              />
+              <span
+                className={cn(
+                  "mt-1.5 block truncate text-[11px] font-medium tracking-wide",
+                  isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]",
+                  item.status === "skipped" && "line-through",
+                )}
+              >
+                {ACTIVITY_COPY[item.activity_type]?.label ?? item.activity_type}
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+/* -------------------------------------------------------------------------
+ * Timer. Seeded from the server's started_at so a refresh does not reset it.
+ * ---------------------------------------------------------------------- */
+
+function useBlockTimer(item: DayItem | null) {
+  const [seconds, setSeconds] = useState(0);
+  const [running, setRunning] = useState(false);
+  const itemId = item?.id ?? null;
+
+  useEffect(() => {
+    if (!item) {
+      setSeconds(0);
+      setRunning(false);
+      return;
+    }
+    const base = item.started_at
+      ? Math.max(0, Math.floor((Date.now() - new Date(item.started_at).getTime()) / 1000))
+      : 0;
+    setSeconds(base);
+    setRunning(item.status === "active");
+  }, [itemId, item?.started_at, item?.status, item]);
+
+  useEffect(() => {
+    if (!running) return;
+    const id = window.setInterval(() => setSeconds((s) => s + 1), 1000);
+    return () => window.clearInterval(id);
+  }, [running]);
+
+  const minutes = Math.max(1, Math.round(seconds / 60));
+  return { seconds, minutes, running, setRunning, reset: () => setSeconds(0) };
+}
+
+function clock(seconds: number) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+/* -------------------------------------------------------------------------
+ * Focus card — one block, everything needed to do it, nothing else.
+ * ---------------------------------------------------------------------- */
+
+function FocusCard({
+  item,
+  onDone,
+  onSkip,
+  busy,
+}: {
+  item: DayItem;
+  onDone: (minutes: number, completeTopic: boolean) => void;
+  onSkip: () => void;
+  busy: boolean;
+}) {
+  const timer = useBlockTimer(item);
+  const copy = ACTIVITY_COPY[item.activity_type];
+  const over = timer.seconds > item.planned_minutes * 60;
+  const isLearnLike = item.activity_type === "LEARN" || item.activity_type === "DSA";
+  const [alsoComplete, setAlsoComplete] = useState(false);
+
+  useEffect(() => setAlsoComplete(false), [item.id]);
+
+  return (
+    <article className="rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow)]">
+      <div className="border-b border-[var(--border)] px-6 py-5 sm:px-8">
+        <p className="text-sm font-medium text-[var(--accent)]">
+          {copy?.label ?? item.activity_type}
+          <span className="ml-2 font-normal text-[var(--muted)]">
+            {item.planned_minutes} minutes · {copy?.blurb}
+          </span>
+        </p>
+        <h1 className="mt-2 text-[30px] font-bold leading-tight tracking-tight sm:text-[34px]">
+          {item.title}
+        </h1>
+        {item.subtitle ? (
+          <p className="mt-1 text-sm text-[var(--muted)]">{item.subtitle}</p>
+        ) : null}
+      </div>
+
+      <div className="grid gap-0 lg:grid-cols-[1.4fr_1fr]">
+        <div className="space-y-5 border-b border-[var(--border)] px-6 py-6 sm:px-8 lg:border-b-0 lg:border-r">
+          {item.why ? (
+            <div>
+              <p className="text-sm font-semibold">Why this now</p>
+              <p className="mt-1 max-w-[68ch] text-[15px] leading-relaxed text-[var(--muted)]">
+                {item.why}
+              </p>
+            </div>
+          ) : null}
+          {item.how ? (
+            <div>
+              <p className="text-sm font-semibold">How to work through it</p>
+              <p className="mt-1 max-w-[68ch] text-[15px] leading-relaxed text-[var(--muted)]">
+                {item.how}
+              </p>
+            </div>
+          ) : null}
+
+          {item.resource?.url ? (
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4">
+              <p className="text-xs font-medium text-[var(--muted)]">
+                {item.resource.provider ?? "Source"}
+              </p>
+              <p className="mt-0.5 text-sm font-medium">{item.resource.title}</p>
+              <a
+                href={item.resource.url}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]"
+              >
+                Open source <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          ) : item.topic_id ? (
+            <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
+              <p className="text-sm font-medium">Work inside the topic</p>
+              <p className="mt-1 text-sm text-[var(--muted)]">
+                No separate source is mapped for this block. Use the topic&apos;s own questions
+                and exercises.
+              </p>
+              <Link
+                href={`/learn/topic/${item.topic_id}`}
+                className="mt-3 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3.5 py-2 text-sm font-medium hover:border-[var(--border-strong)]"
+              >
+                Open topic <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="px-6 py-6 sm:px-8">
+          <p className="text-sm font-semibold">Time on this block</p>
+          <p
+            className={cn(
+              "mt-2 font-mono text-[44px] font-semibold leading-none tabular-nums",
+              over ? "text-[var(--warn)]" : "text-[var(--foreground)]",
+            )}
+          >
+            {clock(timer.seconds)}
+          </p>
+          <p className="mt-1 text-xs text-[var(--muted)]">
+            {over
+              ? `Past the ${item.planned_minutes} minute estimate. That is fine — the number logged is what you actually spent.`
+              : `Planned ${item.planned_minutes} minutes`}
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => timer.setRunning((r) => !r)}
+              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm font-medium hover:border-[var(--border-strong)]"
+            >
+              {timer.running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+              {timer.running ? "Pause" : "Start timer"}
+            </button>
+            <button
+              type="button"
+              onClick={timer.reset}
+              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm text-[var(--muted)] hover:border-[var(--border-strong)]"
+            >
+              <RotateCcw className="h-3.5 w-3.5" /> Reset
+            </button>
+          </div>
+
+          {isLearnLike && item.topic_id ? (
+            <label className="mt-5 flex cursor-pointer items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={alsoComplete}
+                onChange={(e) => setAlsoComplete(e.target.checked)}
+                className="mt-0.5 h-4 w-4 accent-[var(--accent)]"
+              />
+              <span>
+                Mark the whole topic finished
+                <span className="block text-xs text-[var(--muted)]">
+                  Leave this off if you are coming back to it tomorrow.
+                </span>
+              </span>
+            </label>
+          ) : null}
+
+          <div className="mt-6 space-y-2 border-t border-[var(--border)] pt-5">
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => onDone(timer.minutes, alsoComplete)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-[var(--accent-fg)] hover:bg-[var(--accent-hover)] disabled:opacity-50"
+            >
+              <Check className="h-4 w-4" /> Done — next block
+            </button>
+            <button
+              type="button"
+              disabled={busy}
+              onClick={onSkip}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-4 py-2 text-sm text-[var(--muted)] hover:border-[var(--border-strong)] disabled:opacity-50"
+            >
+              <SkipForward className="h-3.5 w-3.5" /> Skip today
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* -------------------------------------------------------------------------
+ * End of day. The only screen that is allowed to be a dead end.
+ * ---------------------------------------------------------------------- */
+
+function DayComplete({ day, onReopen }: { day: Day; onReopen: () => void }) {
+  const [form, setForm] = useState({
+    learned: day.journal?.learned ?? "",
+    struggled: day.journal?.struggled ?? "",
+    tomorrow: day.journal?.tomorrow ?? "",
+  });
+  const [saved, setSaved] = useState<"idle" | "saving" | "saved">("idle");
+
+  const persist = useCallback(async (next: typeof form) => {
+    setSaved("saving");
+    try {
+      await saveJournal(next);
+      setSaved("saved");
+    } catch {
+      setSaved("idle");
+    }
+  }, []);
+
+  const field = (
+    key: keyof typeof form,
+    label: string,
+    placeholder: string,
+  ) => (
+    <label className="block">
+      <span className="text-sm font-semibold">{label}</span>
+      <textarea
+        rows={3}
+        value={form[key]}
+        placeholder={placeholder}
+        onChange={(e) => {
+          const next = { ...form, [key]: e.target.value };
+          setForm(next);
+          setSaved("idle");
+        }}
+        onBlur={() => persist(form)}
+        className="mt-1.5 w-full rounded-md border border-[var(--border)] bg-[var(--background)] p-3 text-sm leading-relaxed"
+      />
+    </label>
+  );
+
+  return (
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] sm:p-8">
+      <p className="text-sm font-medium text-[var(--ok)]">Session finished</p>
+      <h1 className="mt-2 text-[30px] font-bold tracking-tight">
+        {day.totals.logged_minutes} minutes logged across {day.totals.items_done} blocks
+      </h1>
+      <p className="mt-2 max-w-[62ch] text-[15px] leading-relaxed text-[var(--muted)]">
+        Two minutes of writing now is what turns today into something you can still use next
+        month. It saves as you go.
+      </p>
+      <div className="mt-6 grid gap-5 lg:grid-cols-3">
+        {field("learned", "What I learned", "The idea in my own words…")}
+        {field("struggled", "Where I got stuck", "The part I could not explain…")}
+        {field("tomorrow", "First thing tomorrow", "Concrete and small…")}
+      </div>
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={() => persist(form)}
+          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]"
+        >
+          Save notes
+        </button>
+        <button
+          type="button"
+          onClick={onReopen}
+          className="rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--border-strong)]"
+        >
+          Add more time today
+        </button>
+        <span className="text-xs text-[var(--muted)]">
+          {saved === "saving" ? "Saving…" : saved === "saved" ? "Saved" : ""}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------
+ * Runner
+ * ---------------------------------------------------------------------- */
+
+export function DayRunner() {
+  const [day, setDay] = useState<Day | null>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const topRef = useRef<HTMLDivElement | null>(null);
+
+  const load = useCallback(async () => {
+    try {
+      const next = await getDay();
+      setDay(next);
+      setActiveId((current) => current ?? next.current_item_id);
+      setError(null);
+    } catch (err) {
+      setError(errorMessage(err));
+    }
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const activeItem =
+    day?.items.find((i) => i.id === activeId) ??
+    day?.items.find((i) => i.id === day.current_item_id) ??
+    null;
+
+  // Starting the block on the server is what makes the clock survive a refresh.
+  useEffect(() => {
+    if (!activeItem || activeItem.status !== "pending") return;
+    startItem(activeItem.id).then(load).catch(() => {});
+  }, [activeItem?.id, activeItem?.status, activeItem, load]);
+
+  const advance = useCallback(
+    (next: DayItem | null) => {
+      setActiveId(next ? next.id : null);
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    },
+    [],
+  );
+
+  async function handleDone(minutes: number, completeTopic: boolean) {
+    if (!activeItem) return;
+    setBusy(true);
+    try {
+      const result = await completeItem(activeItem.id, {
+        minutes,
+        complete_topic: completeTopic,
+      });
+      advance(result.next);
+      await load();
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleSkip() {
+    if (!activeItem) return;
+    setBusy(true);
+    try {
+      const result = await skipItem(activeItem.id);
+      advance(result.next);
+      await load();
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function extend(minutes: number) {
+    setBusy(true);
+    try {
+      const next = await generateDay(minutes, true);
+      setDay(next);
+      setActiveId(next.current_item_id);
+      setError(null);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-lg border border-[var(--border)] bg-[var(--warn-soft)] px-5 py-4">
+        <p className="text-sm font-medium">Today&apos;s session did not load.</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">{error}</p>
+        <button
+          type="button"
+          onClick={load}
+          className="mt-3 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-sm font-medium"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (!day) {
+    return <p className="text-sm text-[var(--muted)]">Building today&apos;s session…</p>;
+  }
+
+  const remaining = day.totals.planned_minutes - day.totals.logged_minutes;
+
+  return (
+    <div ref={topRef} className="space-y-6">
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="text-sm font-medium text-[var(--muted)]">
+            {new Date(day.plan_date).toLocaleDateString("en-GB", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+            })}
+          </h2>
+          <p className="mt-0.5 text-[15px]">
+            {day.totals.items_done} of {day.totals.items_total} blocks done ·{" "}
+            {day.totals.logged_minutes} of {day.totals.planned_minutes} minutes logged
+            {remaining > 0 ? ` · about ${remaining} left` : ""}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[60, 90, 120, 180, 240].map((m) => (
+            <button
+              key={m}
+              type="button"
+              disabled={busy}
+              onClick={() => extend(m)}
+              className="rounded-md border border-[var(--border)] bg-[var(--card)] px-2.5 py-1.5 text-xs font-medium hover:border-[var(--border-strong)] disabled:opacity-50"
+              title={`Rebuild today for ${m} minutes. Finished blocks are kept.`}
+            >
+              {m}m
+            </button>
+          ))}
+        </div>
+      </header>
+
+      <DayRail items={day.items} activeId={activeItem?.id ?? null} onJump={setActiveId} />
+
+      {activeItem ? (
+        <FocusCard item={activeItem} onDone={handleDone} onSkip={handleSkip} busy={busy} />
+      ) : (
+        <DayComplete day={day} onReopen={() => extend(day.totals.planned_minutes + 60)} />
+      )}
+    </div>
+  );
+}

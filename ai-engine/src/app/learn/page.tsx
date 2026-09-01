@@ -7,18 +7,25 @@ import { StatusBadge } from "@/components/status-badge";
 import { Banner, EmptyState, LoadingLine, Page, PageTitle } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
 import type { CurriculumTree } from "@/lib/curriculum";
+import { getDay, type Day, type DayItem } from "@/lib/day";
 
-type Snapshot = { focus?: { current: { topic_id: number; name: string; domain?: string; module_name?: string | null; status?: string; hours_estimated?: number } | null; upcoming: { topic_id: number; name: string; status?: string; locked?: boolean; hours_estimated?: number }[] } };
+// The "current" topic comes from today's session rather than a dashboard
+// snapshot -- same topic, and it stays in step with what /today is showing.
+function currentTopicItem(day: Day | null): DayItem | null {
+  if (!day) return null;
+  const open = day.items.filter((i) => i.topic_id != null && i.status !== "skipped");
+  return open.find((i) => i.id === day.current_item_id) ?? open.find((i) => i.status !== "done") ?? null;
+}
 
 export default function LearnPage() {
-  const [data, setData] = useState<Snapshot | null>(null);
+  const [day, setDay] = useState<Day | null>(null);
   const [tree, setTree] = useState<CurriculumTree | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
-    api<Snapshot>("/api/dashboard").then((s) => setData(s)).catch((err) => setError(errorMessage(err)));
+    getDay().then(setDay).catch((err) => setError(errorMessage(err)));
     api<CurriculumTree>("/api/curriculum/tree").then(setTree).catch(() => {});
   }, []);
 
@@ -31,17 +38,17 @@ export default function LearnPage() {
     return true;
   }).slice(0, 100);
 
-  const current = data?.focus?.current;
+  const current = currentTopicItem(day);
 
   return (
     <Page wide>
       <PageTitle kicker="Learn" title="Topics" description="Dense catalog of all topics. Preview locked topics, continue the current one." />
       {error ? <Banner>{error}</Banner> : null}
-      {!data && !error ? <LoadingLine /> : null}
+      {!day && !error ? <LoadingLine /> : null}
 
       {current ? (
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border border-[var(--border)] bg-[var(--card)] px-4 py-3">
-          <div><p className="text-xs uppercase tracking-widest text-[var(--muted)]">Current</p><p className="font-semibold">{current.name} <span className="text-xs font-normal text-[var(--muted)]">· {(current.domain || "").toUpperCase()} · ~{current.hours_estimated ? Math.round(current.hours_estimated*60) : 30} min</span></p></div>
+          <div><p className="text-xs uppercase tracking-widest text-[var(--muted)]">Current</p><p className="font-semibold">{current.title} <span className="text-xs font-normal text-[var(--muted)]">· {(current.domain || "").toUpperCase()} · ~{current.planned_minutes} min</span></p></div>
           <Link href={`/learn/topic/${current.topic_id}`} className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-fg)]">Continue <ArrowRight className="h-4 w-4" /></Link>
         </div>
       ) : null}
