@@ -36,6 +36,10 @@ class GenerateBody(BaseModel):
     force: bool = False
 
 
+class ExtendBody(BaseModel):
+    minutes: int = Field(default=60, ge=20, le=240)
+
+
 class CompleteBody(BaseModel):
     minutes: Optional[int] = Field(default=None, ge=0, le=600)
     note: Optional[str] = None
@@ -67,6 +71,17 @@ def generate(body: GenerateBody | None = None, db: Session = Depends(get_db)):
     return day_engine.generate_day(
         db, budget_minutes=body.minutes, force=body.force, user_id=DEFAULT_USER
     )
+
+
+@router.post("/api/day/extend", tags=["Day"])
+def extend(body: ExtendBody | None = None, db: Session = Depends(get_db)):
+    """Append one more teaching cycle to today.
+
+    Distinct from /generate, which rebuilds. This never touches an existing
+    block and always advances to topics today has not covered yet.
+    """
+    body = body or ExtendBody()
+    return day_engine.extend_day(db, minutes=body.minutes, user_id=DEFAULT_USER)
 
 
 @router.post("/api/day/item/{item_id}/start", tags=["Day"])

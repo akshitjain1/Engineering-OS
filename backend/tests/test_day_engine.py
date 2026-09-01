@@ -6,6 +6,7 @@ Coverage contract:
 3.  a forced regenerate keeps done and skipped items
 4.  a skipped item is not re-added by a regenerate
 5.  revision-weighted mode shrinks LEARN, grows DSA, and still yields one DSA
+6.  extend_day appends a fresh cycle on uncovered topics, never rebuilds
 """
 
 import pytest
@@ -322,5 +323,160 @@ def test_revision_mode_defaults_off(client):
         assert service.serialize_study_settings(
             service.get_or_create_study_settings(db)
         )["revision_weighted"] is False
+    finally:
+        db.close()
+
+
+# ---------------------------------------------------------------------------
+# 6. extend_day
+# ---------------------------------------------------------------------------
+
+
+def _settle_everything(day: dict) -> None:
+    db = SessionLocal()
+    try:
+        for item in day["items"]:
+            day_engine.complete_item(db, item["id"], minutes=11)
+        db.commit()
+    finally:
+        db.close()
+
+
+def _extend(minutes: int = 60) -> dict:
+    db = SessionLocal()
+    try:
+        result = day_engine.extend_day(db, minutes=minutes)
+        db.commit()
+        return result
+    finally:
+        db.close()
+
+
+def test_extend_appends_one_full_cycle(client):
+    _seed_curriculum()
+    day = _generate(150)
+    _settle_everything(day)
+
+    before = {i["id"] for i in day["items"]}
+    result = _extend(60)
+    added = [i for i in result["items"] if i["id"] not in before]
+
+    assert sorted(i["activity_type"] for i in added) == ["DSA", "LEARN", "PRACTICE"]
+    assert result["first_new_item_id"] == added[0]["id"]
+    assert result["message"] is None
+
+
+def test_extend_never_touches_settled_items(client):
+    _seed_curriculum()
+    day = _generate(150)
+    _settle_everything(day)
+
+    db = SessionLocal()
+    try:
+        baseline = {
+            row.id: (row.status, row.actual_minutes, row.planned_minutes, row.title)
+            for row in db.query(DailyPlanItem).all()
+        }
+    finally:
+        db.close()
+
+    _extend(60)
+
+    db = SessionLocal()
+    try:
+        for item_id, snapshot in baseline.items():
+            row = db.get(DailyPlanItem, item_id)
+            assert row is not None, f"extend deleted settled item {item_id}"
+            assert (row.status, row.actual_minutes, row.planned_minutes, row.title) == snapshot
+    finally:
+        db.close()
+
+
+def test_extend_advances_even_when_topic_never_marked_complete(client):
+    """The whole point: no complete_topic tick, and it still moves on."""
+    _seed_curriculum()
+    day = _generate(150)
+    db = SessionLocal()
+    try:
+        for item in day["items"]:
+            # complete_topic defaults to False -- topics stay incomplete.
+            day_engine.complete_item(db, item["id"], minutes=11)
+        db.commit()
+    finally:
+        db.close()
+
+    covered = {i["topic_id"] for i in day["items"] if i["topic_id"]}
+    before = {i["id"] for i in day["items"]}
+    result = _extend(60)
+    added = [i for i in result["items"] if i["id"] not in before]
+
+    new_topics = {i["topic_id"] for i in added if i["topic_id"]}
+    assert new_topics, "extend produced no topic-bound blocks"
+    assert not (new_topics & covered), "extend re-served a topic already covered today"
+
+
+def test_extend_keeps_reflect_last_and_never_duplicates_it(client):
+    _seed_curriculum()
+    day = _generate(150)
+    _settle_everything(day)
+
+    result = _extend(60)
+    reflects = [i for i in result["items"] if i["activity_type"] == "REFLECT"]
+    assert len(reflects) == 1
+    assert reflects[0]["position"] == max(i["position"] for i in result["items"])
+
+
+def test_two_extends_yield_four_distinct_topics(client):
+    _seed_curriculum()
+    day = _generate(150)
+    _settle_everything(day)
+
+    ids_after_day = {i["id"] for i in day["items"]}
+    first = _extend(60)
+    ids_after_first = {i["id"] for i in first["items"]}
+    second = _extend(60)
+
+    cycle1 = [i for i in first["items"] if i["id"] not in ids_after_day]
+    cycle2 = [i for i in second["items"] if i["id"] not in ids_after_first]
+
+    anchors = {
+        i["topic_id"]
+        for i in cycle1 + cycle2
+        if i["activity_type"] in ("LEARN", "DSA") and i["topic_id"]
+    }
+    assert len(anchors) == 4, f"expected 4 distinct LEARN/DSA topics, got {anchors}"
+
+
+def test_extend_reports_exhaustion_without_erroring(client):
+    _seed_curriculum()
+    day = _generate(150)
+    _settle_everything(day)
+
+    result = None
+    for _ in range(12):
+        result = _extend(60)
+        if result["first_new_item_id"] is None:
+            break
+    assert result is not None
+    assert result["first_new_item_id"] is None
+    assert result["message"] == day_engine.CURRICULUM_EXHAUSTED
+
+
+def test_cursors_exclude_topic_ids_defaults_to_old_behaviour(client):
+    seed = _seed_curriculum()
+    db = SessionLocal()
+    try:
+        core_a, dsa_a, _ = day_engine.cursors(db)
+        core_b, dsa_b, _ = day_engine.cursors(db, exclude_topic_ids=None)
+        assert (core_a.id, dsa_a.id) == (core_b.id, dsa_b.id)
+        assert core_a.id == seed["core_ids"][0]
+        assert dsa_a.id == seed["dsa_ids"][0]
+
+        # Excluding the current pair moves both lanes on by one.
+        core_c, dsa_c, _ = day_engine.cursors(
+            db, exclude_topic_ids={core_a.id, dsa_a.id}
+        )
+        assert core_c.id == seed["core_ids"][1]
+        assert dsa_c.id == seed["dsa_ids"][1]
     finally:
         db.close()

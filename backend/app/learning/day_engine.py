@@ -173,19 +173,27 @@ def _spine(db: Session) -> list[CurriculumTopic]:
 
 
 def cursors(
-    db: Session, user_id: str = DEFAULT_USER
+    db: Session,
+    user_id: str = DEFAULT_USER,
+    exclude_topic_ids: Optional[set[int]] = None,
 ) -> tuple[Optional[CurriculumTopic], Optional[CurriculumTopic], dict[str, bool]]:
     """Return (core_topic, dsa_topic, completion_index).
 
     CORE skips the DSA domain so the two lanes never fight over the same slot.
+
+    ``exclude_topic_ids`` skips topics regardless of completion state. extend_day
+    uses it to find the next *uncovered* topic, so asking for more time advances
+    past whatever today already scheduled -- even if the learner never ticked the
+    "finished this topic" box. Passing None behaves exactly as before.
     """
     completion = service.topic_completion_index(db, user_id)
+    skip = exclude_topic_ids or set()
     core: Optional[CurriculumTopic] = None
     dsa: Optional[CurriculumTopic] = None
     for topic in _spine(db):
         domain = (getattr(topic, "domain_key", None) or "").lower()
         done = bool(completion.get(topic.slug))
-        if done:
+        if done or topic.id in skip:
             continue
         if domain == DSA_DOMAIN:
             if dsa is None:
@@ -242,10 +250,18 @@ def build_blocks(
     budget_minutes: int,
     plan_date: str,
     user_id: str = DEFAULT_USER,
+    exclude_topic_ids: Optional[set[int]] = None,
+    cycle_only: bool = False,
 ) -> list[BlockSpec]:
+    """Today's blocks.
+
+    ``cycle_only`` builds just the teaching cycle -- LEARN + PRACTICE for the
+    CORE cursor and one DSA block -- with no REVIEW, BUILD, REFLECT or leftover
+    filler. That is what extend_day appends: one more lap, not a second day.
+    """
     mode = day_mode(plan_date)
-    core, dsa, completion = cursors(db, user_id)
-    due_reviews = service.pending_revisions(db, user_id)
+    core, dsa, completion = cursors(db, user_id, exclude_topic_ids)
+    due_reviews = [] if cycle_only else service.pending_revisions(db, user_id)
     revision = bool(service.get_or_create_study_settings(db, user_id).revision_weighted)
 
     topic_ids = [t.id for t in (core, dsa) if t]
@@ -318,7 +334,7 @@ def build_blocks(
             )
         )
 
-    if mode == "weekend":
+    if mode == "weekend" and not cycle_only:
         hint = service._available_project_hint(db, user_id)
         if hint:
             blocks.append(
@@ -332,6 +348,11 @@ def build_blocks(
                     target_minutes=60,
                 )
             )
+
+    if cycle_only:
+        return _fit_to_budget(
+            blocks, budget_minutes, revision=revision, allow_filler=False
+        )
 
     blocks.append(
         BlockSpec(
@@ -348,7 +369,11 @@ def build_blocks(
 
 
 def _fit_to_budget(
-    blocks: list[BlockSpec], budget: int, *, revision: bool = False
+    blocks: list[BlockSpec],
+    budget: int,
+    *,
+    revision: bool = False,
+    allow_filler: bool = True,
 ) -> list[BlockSpec]:
     """Floors first, then grow toward target. Non-droppable blocks always survive."""
     budget = max(30, int(budget))
@@ -393,7 +418,7 @@ def _fit_to_budget(
 
     # Anything still unspent becomes a real extra block rather than silently
     # vanishing. The old planner reported "150 of 180" and left you guessing.
-    if leftover >= 25:
+    if leftover >= 25 and allow_filler:
         kept.insert(
             max(0, len(kept) - 1),
             BlockSpec(
@@ -493,32 +518,108 @@ def generate_day(
         key = (block.activity_type, block.topic.id if block.topic else None)
         if key in settled_keys:
             continue  # already done or deliberately skipped today
-        topic = block.topic
-        resource = block.resource
-        db.add(
-            DailyPlanItem(
-                user_id=user_id,
-                plan_date=plan_date,
-                position=position,
-                activity_type=block.activity_type,
-                title=block.title,
-                subtitle=block.subtitle,
-                why=block.why,
-                how=block.how,
-                topic_id=topic.id if topic else None,
-                topic_slug=topic.slug if topic else None,
-                domain=(getattr(topic, "domain_key", None) if topic else None),
-                resource_id=resource.id if resource else None,
-                resource_title=resource.title if resource else None,
-                resource_provider=resource.provider if resource else None,
-                resource_url=resource.url if resource else None,
-                resource_kind=block.resource_kind,
-                planned_minutes=block.floor_minutes,
-            )
-        )
+        db.add(_item_from_block(block, user_id=user_id, plan_date=plan_date, position=position))
         position += 1
     db.flush()
     return get_day(db, user_id=user_id, timezone_name=timezone_name, mode=mode)
+
+
+def _item_from_block(
+    block: BlockSpec, *, user_id: str, plan_date: str, position: int
+) -> DailyPlanItem:
+    topic = block.topic
+    resource = block.resource
+    return DailyPlanItem(
+        user_id=user_id,
+        plan_date=plan_date,
+        position=position,
+        activity_type=block.activity_type,
+        title=block.title,
+        subtitle=block.subtitle,
+        why=block.why,
+        how=block.how,
+        topic_id=topic.id if topic else None,
+        topic_slug=topic.slug if topic else None,
+        domain=(getattr(topic, "domain_key", None) if topic else None),
+        resource_id=resource.id if resource else None,
+        resource_title=resource.title if resource else None,
+        resource_provider=resource.provider if resource else None,
+        resource_url=resource.url if resource else None,
+        resource_kind=block.resource_kind,
+        planned_minutes=block.floor_minutes,
+    )
+
+
+CURRICULUM_EXHAUSTED = "You have reached the end of the curriculum."
+
+
+def extend_day(
+    db: Session,
+    *,
+    minutes: int = 60,
+    user_id: str = DEFAULT_USER,
+    timezone_name: Optional[str] = None,
+) -> dict[str, Any]:
+    """Append one more teaching cycle to today. Never rebuilds, never deletes.
+
+    generate_day(force=True) cannot do this job: it excludes every
+    (activity_type, topic_id) that already settled today, so on a finished day
+    every candidate block is filtered out and the rebuild yields nothing. This
+    instead asks the cursors for the next topic *not already covered today*, so
+    it advances whether or not the learner marked the current topic finished.
+    """
+    plan_date = local_today(timezone_name)
+    existing = (
+        db.query(DailyPlanItem)
+        .filter(DailyPlanItem.user_id == user_id, DailyPlanItem.plan_date == plan_date)
+        .order_by(DailyPlanItem.position)
+        .all()
+    )
+
+    covered = {i.topic_id for i in existing if i.topic_id}
+    core, dsa, _completion = cursors(db, user_id, covered)
+    if core is None and dsa is None:
+        day = get_day(db, user_id=user_id, timezone_name=timezone_name)
+        day["first_new_item_id"] = None
+        day["message"] = CURRICULUM_EXHAUSTED
+        return day
+
+    blocks = build_blocks(
+        db,
+        budget_minutes=minutes,
+        plan_date=plan_date,
+        user_id=user_id,
+        exclude_topic_ids=covered,
+        cycle_only=True,
+    )
+    if not blocks:
+        day = get_day(db, user_id=user_id, timezone_name=timezone_name)
+        day["first_new_item_id"] = None
+        day["message"] = CURRICULUM_EXHAUSTED
+        return day
+
+    position = max((i.position for i in existing), default=-1) + 1
+    added: list[DailyPlanItem] = []
+    for block in blocks:
+        item = _item_from_block(
+            block, user_id=user_id, plan_date=plan_date, position=position
+        )
+        db.add(item)
+        added.append(item)
+        position += 1
+
+    # Keep REFLECT as the closing block in the rail rather than stranding it in
+    # the middle of the day. Only ever one REFLECT: cycle_only does not add one.
+    for item in existing:
+        if item.activity_type == ACTIVITY_REFLECT:
+            item.position = position
+            position += 1
+
+    db.flush()
+    day = get_day(db, user_id=user_id, timezone_name=timezone_name)
+    day["first_new_item_id"] = added[0].id if added else None
+    day["message"] = None
+    return day
 
 
 def get_day(

@@ -16,6 +16,7 @@ import { errorMessage } from "@/lib/api";
 import {
   ACTIVITY_COPY,
   completeItem,
+  extendDay,
   generateDay,
   getDay,
   saveJournal,
@@ -136,7 +137,9 @@ function FocusCard({
   const copy = ACTIVITY_COPY[item.activity_type];
   const over = timer.seconds > item.planned_minutes * 60;
   const isLearnLike = item.activity_type === "LEARN" || item.activity_type === "DSA";
-  const [alsoComplete, setAlsoComplete] = useState(false);
+  // Checked by default. The cursor only advances when a topic is marked
+  // finished, so defaulting this off silently served the same topic every day.
+  const [alsoComplete, setAlsoComplete] = useState(true);
 
   useEffect(() => setAlsoComplete(false), [item.id]);
 
@@ -251,9 +254,9 @@ function FocusCard({
                 className="mt-0.5 h-4 w-4 accent-[var(--accent)]"
               />
               <span>
-                Mark the whole topic finished
+                Finished this topic — move to the next one
                 <span className="block text-xs text-[var(--muted)]">
-                  Leave this off if you are coming back to it tomorrow.
+                  Uncheck if you want the same topic again tomorrow.
                 </span>
               </span>
             </label>
@@ -287,7 +290,17 @@ function FocusCard({
  * End of day. The only screen that is allowed to be a dead end.
  * ---------------------------------------------------------------------- */
 
-function DayComplete({ day, onReopen }: { day: Day; onReopen: () => void }) {
+function DayComplete({
+  day,
+  onExtend,
+  busy,
+  exhaustedMessage,
+}: {
+  day: Day;
+  onExtend: (minutes: number) => void;
+  busy: boolean;
+  exhaustedMessage: string | null;
+}) {
   const [form, setForm] = useState({
     learned: day.journal?.learned ?? "",
     struggled: day.journal?.struggled ?? "",
@@ -350,16 +363,36 @@ function DayComplete({ day, onReopen }: { day: Day; onReopen: () => void }) {
         >
           Save notes
         </button>
-        <button
-          type="button"
-          onClick={onReopen}
-          className="rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--border-strong)]"
-        >
-          Add more time today
-        </button>
         <span className="text-xs text-[var(--muted)]">
           {saved === "saving" ? "Saving…" : saved === "saved" ? "Saved" : ""}
         </span>
+      </div>
+
+      <div className="mt-6 border-t border-[var(--border)] pt-5">
+        {exhaustedMessage ? (
+          <p className="text-sm font-medium">{exhaustedMessage}</p>
+        ) : (
+          <>
+            <p className="text-sm font-medium">Add more time today</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              Appends another Learn, Practice and DSA block on the next topics. Nothing
+              you have already finished is touched.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[30, 60, 90].map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => onExtend(m)}
+                  className="rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm font-medium hover:border-[var(--border-strong)] disabled:opacity-50"
+                >
+                  +{m} min
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -374,6 +407,7 @@ export function DayRunner() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [exhausted, setExhausted] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
 
   const load = useCallback(async () => {
@@ -441,12 +475,36 @@ export function DayRunner() {
     }
   }
 
-  async function extend(minutes: number) {
+  /** Append one more cycle and jump straight into it. */
+  async function handleExtend(minutes: number) {
+    setBusy(true);
+    try {
+      const next = await extendDay(minutes);
+      setDay(next);
+      if (next.first_new_item_id != null) {
+        setActiveId(next.first_new_item_id);
+        setExhausted(null);
+        topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        // Nothing left to schedule -- say so instead of doing nothing visible.
+        setExhausted(next.message ?? "Nothing left to schedule.");
+      }
+      setError(null);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  /** Rebuild today at a different budget. Finished blocks are kept. */
+  async function handleRebuild(minutes: number) {
     setBusy(true);
     try {
       const next = await generateDay(minutes, true);
       setDay(next);
       setActiveId(next.current_item_id);
+      setExhausted(null);
       setError(null);
     } catch (err) {
       setError(errorMessage(err));
@@ -494,15 +552,16 @@ export function DayRunner() {
             {remaining > 0 ? ` · about ${remaining} left` : ""}
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs text-[var(--muted)]">Rebuild at</span>
           {[60, 90, 120, 180, 240].map((m) => (
             <button
               key={m}
               type="button"
               disabled={busy}
-              onClick={() => extend(m)}
+              onClick={() => handleRebuild(m)}
               className="rounded-md border border-[var(--border)] bg-[var(--card)] px-2.5 py-1.5 text-xs font-medium hover:border-[var(--border-strong)] disabled:opacity-50"
-              title={`Rebuild today for ${m} minutes. Finished blocks are kept.`}
+              title={`Rebuild today for ${m} minutes. Finished blocks are kept, open blocks are replaced.`}
             >
               {m}m
             </button>
@@ -515,7 +574,12 @@ export function DayRunner() {
       {activeItem ? (
         <FocusCard item={activeItem} onDone={handleDone} onSkip={handleSkip} busy={busy} />
       ) : (
-        <DayComplete day={day} onReopen={() => extend(day.totals.planned_minutes + 60)} />
+        <DayComplete
+          day={day}
+          onExtend={handleExtend}
+          busy={busy}
+          exhaustedMessage={exhausted}
+        />
       )}
     </div>
   );

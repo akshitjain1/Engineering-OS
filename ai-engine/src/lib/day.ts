@@ -55,12 +55,26 @@ export type Day = {
 
 export type StepResult = { item: DayItem; next: DayItem | null };
 
+/** Day plus what the extend appended. first_new_item_id is null when the
+ *  curriculum is exhausted, in which case message says so. */
+export type ExtendResult = Day & {
+  first_new_item_id: number | null;
+  message: string | null;
+};
+
 export const getDay = () => api<Day>("/api/day");
 
 export const generateDay = (minutes?: number, force = false) =>
   api<Day>("/api/day/generate", {
     method: "POST",
     body: JSON.stringify({ minutes: minutes ?? null, force }),
+  });
+
+/** Append one more cycle. Distinct from generateDay, which rebuilds. */
+export const extendDay = (minutes: number) =>
+  api<ExtendResult>("/api/day/extend", {
+    method: "POST",
+    body: JSON.stringify({ minutes }),
   });
 
 export const startItem = (id: number) =>
