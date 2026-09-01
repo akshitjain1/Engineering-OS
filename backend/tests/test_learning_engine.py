@@ -15,8 +15,26 @@ from app.learning.diagnostic import score_implementation, score_mcq, score_respo
 from app.learning.diagnostic_bank import domain_counts, questions_by_id
 from app.learning.mastery import mastery_score, pace_from_score, status_from_score, summarize_mastery
 from app.learning.planner import RevisionView, TopicView, build_daily_plan
+from app.learning import service
 from app.learning.streak import day_is_meaningful, record_activity, refresh_streak_for_date
 from app.learning.xp import award_xp
+
+
+def _generate_plan(minutes):
+    """Legacy planner output, straight from the service.
+
+    GET /api/daily-plan and POST /api/daily-plan/generate were removed -- two
+    endpoints both claiming to own "today" (the other being /api/day) is how you
+    end up trusting neither. The planner itself is still live behind
+    /api/dashboard, so these tests exercise it directly.
+    """
+    db = SessionLocal()
+    try:
+        plan = service.generate_daily_plan(db, budget_minutes=minutes)
+        db.commit()
+        return plan
+    finally:
+        db.close()
 
 
 def test_mastery_score_redistributes_missing_category():
@@ -357,11 +375,9 @@ def test_diagnostic_and_planner_endpoints(client):
     client.get("/api/diagnostic/status")
     assert client.get("/api/xp").json()["total_xp"] == xp_after
 
-    plan = client.post("/api/daily-plan/generate", json={"minutes": 60}).json()["plan"]
+    plan = _generate_plan(60)
     assert plan["total_minutes"] <= 60
-    assert client.post("/api/daily-plan/generate", json={"minutes": 45}).status_code == 400
-    fetched = client.get("/api/daily-plan").json()["plan"]
-    assert fetched["budget_minutes"] == 60
+    assert plan["budget_minutes"] == 60
     streak = client.get("/api/streak").json()
     assert "current_streak" in streak
     assert client.get("/api/revision/pending").status_code == 200
@@ -392,7 +408,7 @@ def test_planner_does_not_reset_progress(client):
         state = progress.progress_state
     finally:
         db.close()
-    client.post("/api/daily-plan/generate", json={"minutes": 30})
+    _generate_plan(30)
     db = SessionLocal()
     try:
         assert db.query(UserProgress).count() == before

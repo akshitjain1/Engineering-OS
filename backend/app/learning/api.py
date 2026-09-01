@@ -52,12 +52,6 @@ class DiagnosticCompleteBody(BaseModel):
     timezone: Optional[str] = None
 
 
-class DailyPlanBody(BaseModel):
-    minutes: Optional[int] = Field(None, ge=1, le=360)
-    goal: str = service.DEFAULT_GOAL
-    timezone: Optional[str] = None
-
-
 class StudySettingsBody(BaseModel):
     weekday_capacity_minutes: Optional[int] = Field(None, ge=15, le=360)
     weekend_capacity_minutes: Optional[int] = Field(None, ge=15, le=480)
@@ -129,30 +123,6 @@ def get_mastery(topic_id: int, db: Session = Depends(get_db)):
     if not row:
         raise HTTPException(status_code=404, detail="No mastery record for this topic yet")
     return service.serialize_mastery(row)
-
-
-@router.get("/api/daily-plan", tags=["Planner"])
-def get_daily_plan(timezone: Optional[str] = Query(None), db: Session = Depends(get_db)):
-    plan = service.get_daily_plan(db, timezone_name=timezone)
-    if not plan:
-        return {"plan": None}
-    return {"plan": plan}
-
-
-@router.post("/api/daily-plan/generate", tags=["Planner"])
-def generate_daily_plan(body: DailyPlanBody, db: Session = Depends(get_db)):
-    minutes = body.minutes
-    allowed = {30, 60, 90, 120, 180}
-    if minutes is not None and minutes not in allowed:
-        raise HTTPException(status_code=400, detail="minutes must be one of 30, 60, 90, 120, 180")
-    plan = service.generate_daily_plan(
-        db,
-        budget_minutes=minutes,
-        goal=body.goal,
-        timezone_name=body.timezone,
-    )
-    db.commit()
-    return {"plan": plan}
 
 
 @router.get("/api/streak", tags=["Streak"])

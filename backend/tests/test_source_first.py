@@ -11,6 +11,7 @@ from app.db.models import (
     UserXP,
 )
 from app.db.session import SessionLocal
+from app.learning import service
 from app.learning.xp import get_or_create_xp
 from test_curriculum_v1 import D0, D1, D2, V1_INDEX, _load, _walk_topics
 
@@ -18,6 +19,23 @@ from test_curriculum_v1 import D0, D1, D2, V1_INDEX, _load, _walk_topics
 YOUTUBE_WATCH = "https://www.youtube.com/watch?v=0IAPZzGSbME"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O"
 DOCS = "https://dev.java/learn/language-basics/arrays/"
+
+
+def _generate_plan(minutes):
+    """Legacy planner output, straight from the service.
+
+    GET /api/daily-plan and POST /api/daily-plan/generate were removed -- two
+    endpoints both claiming to own "today" (the other being /api/day) is how you
+    end up trusting neither. The planner itself is still live behind
+    /api/dashboard, so these tests exercise it directly.
+    """
+    db = SessionLocal()
+    try:
+        plan = service.generate_daily_plan(db, budget_minutes=minutes)
+        db.commit()
+        return plan
+    finally:
+        db.close()
 
 
 def _source_manifest(include_primary=True, youtube=True):
@@ -197,7 +215,7 @@ def test_unresolved_when_no_primary_resource(client):
         topic = db.query(CurriculumTopic).filter_by(slug="source-topic").one()
         body = client.get(f"/api/topic/{topic.id}").json()
         assert body["resources_by_role"]["PRIMARY"] == []
-        plan = client.post("/api/daily-plan/generate", json={"minutes": 60}).json()["plan"]
+        plan = _generate_plan(60)
         learn = next(item for item in plan["items"] if item["type"] == "LEARN")
         assert learn["topic_slug"] == "source-topic"
         assert learn["resource_status"] == UNRESOLVED
@@ -229,7 +247,7 @@ def test_daily_plan_contains_source_metadata(client):
     db = SessionLocal()
     try:
         import_manifest(db, _source_manifest())
-        plan = client.post("/api/daily-plan/generate", json={"minutes": 90}).json()["plan"]
+        plan = _generate_plan(90)
         learn = next(item for item in plan["items"] if item["type"] == "LEARN")
         assert learn["activity_type"] == "LEARN"
         assert learn["topic_title"] == "Source Topic"
@@ -292,8 +310,7 @@ def test_xp_unchanged_on_get_topic_and_plan(client):
         db.commit()
         before = client.get("/api/xp").json()["total_xp"]
         client.get(f"/api/topic/{topic.id}")
-        client.get("/api/daily-plan")
-        client.post("/api/daily-plan/generate", json={"minutes": 30})
+        _generate_plan(30)
         client.get("/api/dashboard")
         after = client.get("/api/xp").json()["total_xp"]
         assert after == before
@@ -377,7 +394,7 @@ def test_bits_and_bytes_has_usable_primary_after_delivery(client):
         client.get(f"/api/topic/{topic.id}")
         client.get("/api/dashboard")
         assert client.get("/api/xp").json()["total_xp"] == xp_before
-        plan = client.post("/api/daily-plan/generate", json={"minutes": 60}).json()["plan"]
+        plan = _generate_plan(60)
         learn = next(item for item in plan["items"] if item["type"] == "LEARN")
         assert learn["topic_slug"] == "cf-bits-and-bytes"
         assert learn["resource_url"]

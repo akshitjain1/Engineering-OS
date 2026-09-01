@@ -60,6 +60,23 @@ from app.db.session import SessionLocal
 BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 
+def _generate_plan(minutes):
+    """Legacy planner output, straight from the service.
+
+    GET /api/daily-plan and POST /api/daily-plan/generate were removed -- two
+    endpoints both claiming to own "today" (the other being /api/day) is how you
+    end up trusting neither. The planner itself is still live behind
+    /api/dashboard, so these tests exercise it directly.
+    """
+    db = SessionLocal()
+    try:
+        plan = service.generate_daily_plan(db, budget_minutes=minutes)
+        db.commit()
+        return plan
+    finally:
+        db.close()
+
+
 def _seed_single_topic(db, *, slug="cf-bits-and-bytes", name="Bits and bytes", lessons=1, questions=4, exercises=1) -> dict[str, Any]:
     track = CurriculumTrack(name="SE-V2", order_index=0)
     level = CurriculumLevel(name="L1", order_index=0)
@@ -568,9 +585,7 @@ def test_12_completed_topic_leaves_planner_learn_and_tree_marks_done(client):
     completed = client.get(f"/api/topic/{topic_id}").json()
     assert completed["completion"]["complete"] is True
     assert completed["status"] == "completed"
-    plan = client.post(
-        "/api/daily-plan/generate", json={"minutes": 60}
-    ).json()["plan"]
+    plan = _generate_plan(60)
     learn_items = [item for item in plan["items"] if item["type"] == "LEARN"]
     assert all(item.get("topic_id") != topic_id for item in learn_items)
 
@@ -760,7 +775,7 @@ def test_19_planner_skips_contract_complete_topics(client):
             json={"session_id": session_id, "question_id": current["id"], "selected": "correct"},
         )
     client.post("/api/assessment/complete", json={"session_id": session_id})
-    plan = client.post("/api/daily-plan/generate", json={"minutes": 120}).json()["plan"]
+    plan = _generate_plan(120)
     slugs = {item.get("topic_slug") for item in plan["items"]}
     assert "cf-memory" not in slugs
     learn = [item for item in plan["items"] if item["type"] == "LEARN"]

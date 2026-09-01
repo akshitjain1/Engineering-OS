@@ -26,6 +26,24 @@ from app.db.models import (
     UserProgress,
 )
 from app.db.session import SessionLocal
+from app.learning import service
+
+
+def _generate_plan(minutes):
+    """Legacy planner output, straight from the service.
+
+    GET /api/daily-plan and POST /api/daily-plan/generate were removed -- two
+    endpoints both claiming to own "today" (the other being /api/day) is how you
+    end up trusting neither. The planner itself is still live behind
+    /api/dashboard, so these tests exercise it directly.
+    """
+    db = SessionLocal()
+    try:
+        plan = service.generate_daily_plan(db, budget_minutes=minutes)
+        db.commit()
+        return plan
+    finally:
+        db.close()
 
 
 def _seed_pair() -> dict:
@@ -183,7 +201,7 @@ def test_6_roadmap_mirrors_tree(client):
 
 def test_7_8_planner_emits_only_learn_practice_build_review(client):
     seed = _seed_pair()
-    plan = client.post("/api/daily-plan/generate", json={"minutes": 120}).json()["plan"]
+    plan = _generate_plan(120)
     allowed = {"LEARN", "PRACTICE", "BUILD", "REVIEW"}
     assert plan["total_minutes"] <= 120
     for item in plan["items"]:
@@ -193,6 +211,6 @@ def test_7_8_planner_emits_only_learn_practice_build_review(client):
 
     client.post(f"/api/topic/{seed['bits_id']}/complete")
 
-    plan2 = client.post("/api/daily-plan/generate", json={"minutes": 120}).json()["plan"]
+    plan2 = _generate_plan(120)
     learn = [item for item in plan2["items"] if item["type"] == "LEARN"]
     assert all(item.get("topic_id") != seed["bits_id"] for item in learn)

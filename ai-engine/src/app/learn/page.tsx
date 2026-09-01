@@ -33,8 +33,7 @@ export default function LearnPage() {
   const filtered = all.filter((t) => {
     if (q && !t.name.toLowerCase().includes(q.toLowerCase())) return false;
     if (filter === "completed" && t.status !== "completed") return false;
-    if (filter === "locked" && !t.locked) return false;
-    if (filter === "available" && (t.locked || t.status === "completed")) return false;
+    if (filter === "available" && t.status === "completed") return false;
     return true;
   }).slice(0, 100);
 
@@ -42,7 +41,7 @@ export default function LearnPage() {
 
   return (
     <Page wide>
-      <PageTitle kicker="Learn" title="Topics" description="Dense catalog of all topics. Preview locked topics, continue the current one." />
+      <PageTitle kicker="Learn" title="Topics" description="Dense catalog of all topics. Search, filter, and jump straight into any of them." />
       {error ? <Banner>{error}</Banner> : null}
       {!day && !error ? <LoadingLine /> : null}
 
@@ -56,7 +55,7 @@ export default function LearnPage() {
       <div className="mb-4 flex flex-wrap gap-2">
         <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-[var(--muted)]" /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search topics…" className="w-full rounded-md border border-[var(--border)] bg-[var(--card)] py-2 pl-8 pr-3 text-sm" /></div>
         <select value={filter} onChange={(e) => setFilter(e.target.value)} className="rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm">
-          <option value="all">All status</option><option value="available">Available</option><option value="completed">Completed</option><option value="locked">Locked</option>
+          <option value="all">All status</option><option value="available">Available</option><option value="completed">Completed</option>
         </select>
       </div>
 
