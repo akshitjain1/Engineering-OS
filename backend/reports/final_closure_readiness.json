@@ -1,5 +1,5 @@
 {
-  "backup": "D:\\Akshit Personal OS\\backend\\dev.db.pre_final_closure_readiness_20260827_203641.bak",
+  "backup": "C:\\Everything\\Projects\\Engineering OS\\Engineering-OS\\backend\\dev.db.pre_final_closure_readiness_20260831_102348.bak",
   "backup_size": 3313664,
   "topic_count": 441,
   "broken_before": [
@@ -114,9 +114,9 @@
       "genai-vector-databases"
     ],
     "counts": {
-      "NEEDS_REVIEW": 218,
+      "NEEDS_REVIEW": 191,
       "PARTIAL_COVERAGE": 12,
-      "READY": 215,
+      "READY": 242,
       "RESOURCE_GAP": 4
     }
   },
@@ -124,9 +124,9 @@
   "lint": "passed",
   "build": "passed",
   "readiness_audit": {
-    "NEEDS_REVIEW": 218,
+    "NEEDS_REVIEW": 191,
     "PARTIAL_COVERAGE": 12,
-    "READY": 215,
+    "READY": 242,
     "RESOURCE_GAP": 4
   }
 }
