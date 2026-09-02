@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { Check, ChevronRight, Clock, Loader2, Lock } from "lucide-react";
 import { PrerequisiteList } from "@/components/prerequisite-list";
 import { SourceResourceCard } from "@/components/source-resource";
-import { PracticePrompt } from "@/components/topic-work";
+import { PracticePrompt, ProblemRow, type ProblemContext } from "@/components/topic-work";
 import { StatusBadge } from "@/components/status-badge";
 import { Banner, GhostButton, LoadingLine, Page, PrimaryButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
@@ -254,6 +254,14 @@ function TopicView({
 
   const done = topic.status === "completed";
 
+  // Matches what the day runner passes, so a problem card offers the same
+  // prompt wherever you meet it.
+  const problemContext: ProblemContext = {
+    topicName: topic.name,
+    sourceTitle: primary[0]?.title ?? null,
+    sourceUrl: primary[0]?.url ?? null,
+  };
+
   const minutes = () => {
     const hours = topic.hours_estimated || 0;
     return hours > 0 ? Math.max(30, Math.round(hours * 60)) : 30;
@@ -428,11 +436,19 @@ function TopicView({
       <section id="practice" className="mt-10 scroll-mt-20">
         <SectionTitle step="3" title="Practice" hint="Do the work on the official platform — not an in-app quiz." />
         {practiceMapped ? (
-          <div className="mt-3 space-y-3">
-            {practice.map((resource) => (
-              <SourceResourceCard key={resource.id} resource={resource} locked={topic.locked} onToggle={onToggleResource} />
+          <ul className="mt-3 space-y-3">
+            {practice.map((resource, i) => (
+              <ProblemRow
+                key={resource.id}
+                resource={resource}
+                index={i}
+                context={problemContext}
+                locked={topic.locked}
+                busy={false}
+                onToggle={onToggleResource}
+              />
             ))}
-          </div>
+          </ul>
         ) : topic.locked ? null : (
           <div className="mt-3">
             <PracticePrompt topic={topic} />

@@ -50,10 +50,12 @@ query questionData($titleSlug: String!) {
 }
 """
 
-#: The "Stuck?" link sends the learner to community solutions. That link is only
-#: worth offering if solutions actually exist, so the count is fetched and
-#: asserted rather than assumed -- LeetCode serves 403 to non-browser clients on
-#: the HTML page, so this is the only way to check it from here.
+#: How many community write-ups a problem has. The app no longer links to them --
+#: being handed an answer you did not reach teaches little, so a stuck learner
+#: gets a tutoring prompt instead -- but the count is still a good signal that a
+#: problem is well-trodden rather than obscure, and it is there if you go looking
+#: on your own. LeetCode serves 403 to non-browser clients on the HTML page, so
+#: GraphQL is the only way to check it from here.
 _SOLUTIONS_QUERY = """
 query solutionArticles($questionSlug: String!) {
   ugcArticleSolutionArticles(questionSlug: $questionSlug, first: 1) {
@@ -158,8 +160,8 @@ def audit(facts: dict[str, Any]) -> list[str]:
                 failures.append(f"{topic_slug}/{problem_slug}: Premium-only, learner cannot open it")
             if fact.get("solution_count", 0) < 1:
                 failures.append(
-                    f"{topic_slug}/{problem_slug}: no community solutions, "
-                    "so the Stuck? link would be a dead end"
+                    f"{topic_slug}/{problem_slug}: no community write-ups at all, "
+                    "which suggests an obscure problem rather than a well-trodden one"
                 )
             overlap = set(expected_tags) & set(fact["tags"])
             if not overlap:

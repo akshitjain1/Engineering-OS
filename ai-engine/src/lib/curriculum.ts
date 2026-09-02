@@ -184,6 +184,10 @@ export type ResourcePublic = {
   duration: number | null;
   /** Minutes this one source is expected to take. */
   estimated_minutes?: number | null;
+  /** For a mapped problem: the technique its topic teaches. */
+  notes?: string | null;
+  /** Verified concept tags the problem was matched on. */
+  required_concepts_covered?: string[] | null;
   difficulty: string | null;
   description: string | null;
   official_unofficial: string;

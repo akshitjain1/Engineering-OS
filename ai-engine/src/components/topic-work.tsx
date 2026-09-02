@@ -7,6 +7,7 @@ import { SourceResourceCard } from "@/components/source-resource";
 import { GhostButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
 import type { ResourcePublic, TopicNode } from "@/lib/curriculum";
+import { buildStuckPrompt } from "@/lib/stuck-prompt";
 
 /* -------------------------------------------------------------------------
  * A topic's work, in the order you are meant to do it, rendered wherever you
@@ -21,14 +22,16 @@ import type { ResourcePublic, TopicNode } from "@/lib/curriculum";
 
 export type WorkSection = "learn" | "practice" | "build";
 
-/** Free community solutions for a LeetCode problem. Derived rather than
- *  stored: it is the problem URL plus a path segment, so there is nothing to
- *  keep in sync and nothing invented. Any other host returns null. */
-export function solutionsUrl(url: string | null | undefined): string | null {
-  if (!url) return null;
-  const match = /^https:\/\/leetcode\.com\/problems\/([a-z0-9-]+)\/?$/i.exec(url.trim());
-  return match ? `https://leetcode.com/problems/${match[1]}/solutions/` : null;
-}
+/** What a problem card needs to know about where it sits, so a stuck learner
+ *  gets a prompt with real context rather than just a problem title. */
+export type ProblemContext = {
+  topicName: string;
+  sourceTitle: string | null;
+  sourceUrl: string | null;
+};
+
+/** The language the generated prompt asks for code in. */
+export const PROMPT_LANGUAGE = "Java";
 
 /** Minutes this one source is expected to take. */
 function minutesFor(resource: ResourcePublic, fallback = 15): number {
@@ -92,23 +95,55 @@ export function PracticePrompt({ topic }: { topic: TopicNode }) {
 }
 
 /** One mapped problem: what it is, how long to give it, why it belongs to this
- *  topic, and a way out if you are stuck. */
-function ProblemRow({
+ *  topic, and -- when you are stuck -- a prompt that teaches instead of
+ *  answering. */
+export function ProblemRow({
   resource,
   index,
+  context,
   locked,
   busy,
   onToggle,
 }: {
   resource: ResourcePublic;
   index: number;
+  context: ProblemContext;
   locked?: boolean;
   busy: boolean;
   onToggle: (id: number, completed: boolean) => void;
 }) {
-  const [showHint, setShowHint] = useState(false);
-  const solutions = solutionsUrl(resource.url);
-  const tone = DIFFICULTY_TONE[(resource.difficulty || "").toLowerCase()] ?? "text-[var(--muted)] border-[var(--border)]";
+  const [stuck, setStuck] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const tone =
+    DIFFICULTY_TONE[(resource.difficulty || "").toLowerCase()] ??
+    "text-[var(--muted)] border-[var(--border)]";
+
+  const prompt = useMemo(
+    () =>
+      buildStuckPrompt({
+        problemTitle: resource.title,
+        problemUrl: resource.url,
+        difficulty: resource.difficulty,
+        technique: resource.notes ?? null,
+        concepts: resource.required_concepts_covered ?? [],
+        whyThisProblem: resource.description,
+        topicName: context.topicName,
+        sourceTitle: context.sourceTitle,
+        sourceUrl: context.sourceUrl,
+        language: PROMPT_LANGUAGE,
+      }),
+    [resource, context],
+  );
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard unavailable -- the textarea below is still selectable */
+    }
+  };
 
   return (
     <li className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
@@ -146,15 +181,14 @@ function ProblemRow({
             Solve it <ExternalLink className="h-3.5 w-3.5" />
           </a>
         ) : null}
-        {solutions ? (
-          <button
-            type="button"
-            onClick={() => setShowHint((v) => !v)}
-            className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-sm text-[var(--muted)] hover:border-[var(--border-strong)]"
-          >
-            <Lightbulb className="h-3.5 w-3.5" /> Stuck?
-          </button>
-        ) : null}
+        <button
+          type="button"
+          aria-expanded={stuck}
+          onClick={() => setStuck((v) => !v)}
+          className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-sm text-[var(--muted)] hover:border-[var(--border-strong)]"
+        >
+          <Lightbulb className="h-3.5 w-3.5" /> Stuck?
+        </button>
         {!locked ? (
           <button
             type="button"
@@ -173,20 +207,28 @@ function ProblemRow({
         ) : null}
       </div>
 
-      {showHint && solutions ? (
+      {stuck ? (
         <div className="mt-3 rounded-md border border-[var(--border)] bg-[var(--card-2)] p-3">
-          <p className="text-xs text-[var(--muted)]">
-            Give it a genuine attempt first — a solution you read after trying sticks; one you read
-            instead of trying does not.
+          <p className="text-sm font-medium">Ask for the reasoning, not the answer</p>
+          <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
+            Paste this into any AI assistant. It asks for the concepts, the plain-English problem,
+            the brute force and why it falls short, and the reasoning that makes the technique
+            obvious — with the {PROMPT_LANGUAGE} code only at the very end, so you read the thinking
+            first. Attempt it yourself before you paste.
           </p>
-          <a
-            href={solutions}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 text-sm underline"
-          >
-            Community solutions on LeetCode <ExternalLink className="h-3 w-3" />
-          </a>
+          <textarea
+            readOnly
+            value={prompt}
+            rows={12}
+            onFocus={(e) => e.currentTarget.select()}
+            className="mt-3 w-full resize-y rounded-lg border border-[var(--border)] bg-[var(--card)] px-3 py-2 font-mono text-[11px] leading-relaxed text-[var(--foreground)]"
+          />
+          <div className="mt-3">
+            <GhostButton onClick={copy}>
+              <Clipboard className="mr-2 h-4 w-4" />
+              {copied ? "Copied" : "Copy prompt"}
+            </GhostButton>
+          </div>
         </div>
       ) : null}
     </li>
@@ -246,6 +288,15 @@ export function TopicWorkPanel({
 
   const learn = useMemo(() => topic?.resources_by_role?.PRIMARY ?? [], [topic]);
   const practice = useMemo(() => topic?.resources_by_role?.PRACTICE ?? [], [topic]);
+
+  const problemContext = useMemo<ProblemContext>(() => {
+    const source = learn[0];
+    return {
+      topicName: topic?.name ?? "",
+      sourceTitle: source?.title ?? null,
+      sourceUrl: source?.url ?? null,
+    };
+  }, [topic, learn]);
 
   const plan = useMemo(() => {
     const readMinutes = learn.reduce((sum, r) => sum + minutesFor(r, 20), 0);
@@ -352,6 +403,7 @@ export function TopicWorkPanel({
                   key={resource.id}
                   resource={resource}
                   index={i}
+                  context={problemContext}
                   locked={topic.locked}
                   busy={busy === `resource-${resource.id}`}
                   onToggle={toggleResource}

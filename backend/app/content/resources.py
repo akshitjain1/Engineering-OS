@@ -207,6 +207,11 @@ def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, 
         "estimated_minutes": getattr(resource, "estimated_minutes", None),
         "difficulty": resource.difficulty,
         "description": resource.description,
+        # Context the learner-facing surfaces need to build a tutoring prompt
+        # for a problem: the technique its topic teaches, and the concepts the
+        # mapping verified it against.
+        "notes": getattr(resource, "notes", None),
+        "required_concepts_covered": getattr(resource, "required_concepts_covered", None) or [],
         "official_unofficial": resource.official_unofficial,
         "order_index": resource.order_index,
         "completion_status": lesson_ui_status(resource.completion_status),

@@ -539,8 +539,13 @@ def test_no_unreviewed_problem_sits_far_before_its_technique(client):
     )
 
 
-def test_every_problem_has_solutions_to_fall_back_on(facts):
-    """The Stuck? button must never lead somewhere empty."""
+def test_every_problem_is_well_trodden(facts):
+    """A problem nobody has written up is probably the wrong thing to set.
+
+    The app does not link to these -- a stuck learner gets a prompt that teaches
+    rather than an answer to read -- but a healthy write-up count is still the
+    cheapest available signal that a problem is standard rather than obscure.
+    """
     for slug, fact in facts.items():
         assert fact.get("solution_count", 0) > 0, f"{slug} has no community solutions"
         assert fact["solutions_url"] == f"https://leetcode.com/problems/{slug}/solutions/"
