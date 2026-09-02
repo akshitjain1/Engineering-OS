@@ -4,6 +4,8 @@
     "number": 542,
     "paid_only": false,
     "slug": "01-matrix",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/01-matrix/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -18,6 +20,8 @@
     "number": 15,
     "paid_only": false,
     "slug": "3sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/3sum/solutions/",
     "tags": [
       "array",
       "sorting",
@@ -31,6 +35,8 @@
     "number": 454,
     "paid_only": false,
     "slug": "4sum-ii",
+    "solution_count": 1710,
+    "solutions_url": "https://leetcode.com/problems/4sum-ii/solutions/",
     "tags": [
       "array",
       "hash-table"
@@ -43,6 +49,8 @@
     "number": 721,
     "paid_only": false,
     "slug": "accounts-merge",
+    "solution_count": 2341,
+    "solutions_url": "https://leetcode.com/problems/accounts-merge/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -60,6 +68,8 @@
     "number": 2,
     "paid_only": false,
     "slug": "add-two-numbers",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/add-two-numbers/solutions/",
     "tags": [
       "linked-list",
       "math",
@@ -73,6 +83,8 @@
     "number": 455,
     "paid_only": false,
     "slug": "assign-cookies",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/assign-cookies/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -88,6 +100,8 @@
     "number": 637,
     "paid_only": false,
     "slug": "average-of-levels-in-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/average-of-levels-in-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -102,6 +116,8 @@
     "number": 110,
     "paid_only": false,
     "slug": "balanced-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/balanced-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -115,6 +131,8 @@
     "number": 682,
     "paid_only": false,
     "slug": "baseball-game",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/baseball-game/solutions/",
     "tags": [
       "array",
       "simulation",
@@ -128,6 +146,8 @@
     "number": 121,
     "paid_only": false,
     "slug": "best-time-to-buy-and-sell-stock",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -140,6 +160,8 @@
     "number": 122,
     "paid_only": false,
     "slug": "best-time-to-buy-and-sell-stock-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -153,6 +175,8 @@
     "number": 309,
     "paid_only": false,
     "slug": "best-time-to-buy-and-sell-stock-with-cooldown",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -165,6 +189,8 @@
     "number": 704,
     "paid_only": false,
     "slug": "binary-search",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-search/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -177,6 +203,8 @@
     "number": 173,
     "paid_only": false,
     "slug": "binary-search-tree-iterator",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-search-tree-iterator/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -193,6 +221,8 @@
     "number": 1038,
     "paid_only": false,
     "slug": "binary-search-tree-to-greater-sum-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -207,6 +237,8 @@
     "number": 94,
     "paid_only": false,
     "slug": "binary-tree-inorder-traversal",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-inorder-traversal/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -221,6 +253,8 @@
     "number": 102,
     "paid_only": false,
     "slug": "binary-tree-level-order-traversal",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-level-order-traversal/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -234,6 +268,8 @@
     "number": 124,
     "paid_only": false,
     "slug": "binary-tree-maximum-path-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -249,6 +285,8 @@
     "number": 257,
     "paid_only": false,
     "slug": "binary-tree-paths",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-paths/solutions/",
     "tags": [
       "backtracking",
       "binary-tree",
@@ -264,6 +302,8 @@
     "number": 144,
     "paid_only": false,
     "slug": "binary-tree-preorder-traversal",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-preorder-traversal/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -278,6 +318,8 @@
     "number": 199,
     "paid_only": false,
     "slug": "binary-tree-right-side-view",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-right-side-view/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -292,6 +334,8 @@
     "number": 103,
     "paid_only": false,
     "slug": "binary-tree-zigzag-level-order-traversal",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -305,6 +349,8 @@
     "number": 312,
     "paid_only": false,
     "slug": "burst-balloons",
+    "solution_count": 1758,
+    "solutions_url": "https://leetcode.com/problems/burst-balloons/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -317,6 +363,8 @@
     "number": 1011,
     "paid_only": false,
     "slug": "capacity-to-ship-packages-within-d-days",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -329,6 +377,8 @@
     "number": 787,
     "paid_only": false,
     "slug": "cheapest-flights-within-k-stops",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/cheapest-flights-within-k-stops/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -345,6 +395,8 @@
     "number": 70,
     "paid_only": false,
     "slug": "climbing-stairs",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/climbing-stairs/solutions/",
     "tags": [
       "dynamic-programming",
       "math",
@@ -358,6 +410,8 @@
     "number": 133,
     "paid_only": false,
     "slug": "clone-graph",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/clone-graph/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -372,6 +426,8 @@
     "number": 322,
     "paid_only": false,
     "slug": "coin-change",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/coin-change/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -387,6 +443,8 @@
     "number": 518,
     "paid_only": false,
     "slug": "coin-change-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/coin-change-ii/solutions/",
     "tags": [
       "array",
       "complete-knapsack",
@@ -401,6 +459,8 @@
     "number": 39,
     "paid_only": false,
     "slug": "combination-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/combination-sum/solutions/",
     "tags": [
       "array",
       "backtracking"
@@ -413,6 +473,8 @@
     "number": 40,
     "paid_only": false,
     "slug": "combination-sum-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/combination-sum-ii/solutions/",
     "tags": [
       "array",
       "backtracking"
@@ -425,6 +487,8 @@
     "number": 77,
     "paid_only": false,
     "slug": "combinations",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/combinations/solutions/",
     "tags": [
       "backtracking"
     ],
@@ -436,6 +500,8 @@
     "number": 105,
     "paid_only": false,
     "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solutions/",
     "tags": [
       "array",
       "binary-tree",
@@ -451,6 +517,8 @@
     "number": 11,
     "paid_only": false,
     "slug": "container-with-most-water",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/container-with-most-water/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -464,6 +532,8 @@
     "number": 217,
     "paid_only": false,
     "slug": "contains-duplicate",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/contains-duplicate/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -477,6 +547,8 @@
     "number": 538,
     "paid_only": false,
     "slug": "convert-bst-to-greater-tree",
+    "solution_count": 2691,
+    "solutions_url": "https://leetcode.com/problems/convert-bst-to-greater-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -491,6 +563,8 @@
     "number": 108,
     "paid_only": false,
     "slug": "convert-sorted-array-to-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/solutions/",
     "tags": [
       "array",
       "binary-search-tree",
@@ -506,6 +580,8 @@
     "number": 222,
     "paid_only": false,
     "slug": "count-complete-tree-nodes",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/count-complete-tree-nodes/solutions/",
     "tags": [
       "binary-search",
       "binary-tree",
@@ -520,6 +596,8 @@
     "number": 315,
     "paid_only": false,
     "slug": "count-of-smaller-numbers-after-self",
+    "solution_count": 2575,
+    "solutions_url": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/solutions/",
     "tags": [
       "array",
       "binary-indexed-tree",
@@ -538,6 +616,8 @@
     "number": 1905,
     "paid_only": false,
     "slug": "count-sub-islands",
+    "solution_count": 2282,
+    "solutions_url": "https://leetcode.com/problems/count-sub-islands/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -553,6 +633,8 @@
     "number": 338,
     "paid_only": false,
     "slug": "counting-bits",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/counting-bits/solutions/",
     "tags": [
       "bit-manipulation",
       "dynamic-programming"
@@ -565,6 +647,8 @@
     "number": 207,
     "paid_only": false,
     "slug": "course-schedule",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/course-schedule/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -580,6 +664,8 @@
     "number": 210,
     "paid_only": false,
     "slug": "course-schedule-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/course-schedule-ii/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -594,6 +680,8 @@
     "number": 630,
     "paid_only": false,
     "slug": "course-schedule-iii",
+    "solution_count": 779,
+    "solutions_url": "https://leetcode.com/problems/course-schedule-iii/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -608,6 +696,8 @@
     "number": 739,
     "paid_only": false,
     "slug": "daily-temperatures",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/daily-temperatures/solutions/",
     "tags": [
       "array",
       "monotonic-stack",
@@ -621,6 +711,8 @@
     "number": 91,
     "paid_only": false,
     "slug": "decode-ways",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/decode-ways/solutions/",
     "tags": [
       "dynamic-programming",
       "string"
@@ -633,6 +725,8 @@
     "number": 450,
     "paid_only": false,
     "slug": "delete-node-in-a-bst",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/delete-node-in-a-bst/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -646,6 +740,8 @@
     "number": 211,
     "paid_only": false,
     "slug": "design-add-and-search-words-data-structure",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/solutions/",
     "tags": [
       "depth-first-search",
       "design",
@@ -660,6 +756,8 @@
     "number": 622,
     "paid_only": false,
     "slug": "design-circular-queue",
+    "solution_count": 2805,
+    "solutions_url": "https://leetcode.com/problems/design-circular-queue/solutions/",
     "tags": [
       "array",
       "design",
@@ -669,26 +767,13 @@
     "title": "Design Circular Queue",
     "url": "https://leetcode.com/problems/design-circular-queue/"
   },
-  "design-hashmap": {
-    "difficulty": "Easy",
-    "number": 706,
-    "paid_only": false,
-    "slug": "design-hashmap",
-    "tags": [
-      "array",
-      "design",
-      "hash-function",
-      "hash-table",
-      "linked-list"
-    ],
-    "title": "Design HashMap",
-    "url": "https://leetcode.com/problems/design-hashmap/"
-  },
   "design-linked-list": {
     "difficulty": "Medium",
     "number": 707,
     "paid_only": false,
     "slug": "design-linked-list",
+    "solution_count": 2390,
+    "solutions_url": "https://leetcode.com/problems/design-linked-list/solutions/",
     "tags": [
       "design",
       "linked-list"
@@ -701,6 +786,8 @@
     "number": 355,
     "paid_only": false,
     "slug": "design-twitter",
+    "solution_count": 2529,
+    "solutions_url": "https://leetcode.com/problems/design-twitter/solutions/",
     "tags": [
       "design",
       "hash-table",
@@ -715,6 +802,8 @@
     "number": 543,
     "paid_only": false,
     "slug": "diameter-of-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/diameter-of-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -729,6 +818,8 @@
     "number": 115,
     "paid_only": false,
     "slug": "distinct-subsequences",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/distinct-subsequences/solutions/",
     "tags": [
       "dynamic-programming",
       "string"
@@ -741,6 +832,8 @@
     "number": 1089,
     "paid_only": false,
     "slug": "duplicate-zeros",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/duplicate-zeros/solutions/",
     "tags": [
       "array",
       "two-pointers"
@@ -753,6 +846,8 @@
     "number": 72,
     "paid_only": false,
     "slug": "edit-distance",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/edit-distance/solutions/",
     "tags": [
       "dynamic-programming",
       "string"
@@ -765,6 +860,8 @@
     "number": 509,
     "paid_only": false,
     "slug": "fibonacci-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/fibonacci-number/solutions/",
     "tags": [
       "dynamic-programming",
       "math",
@@ -779,6 +876,8 @@
     "number": 438,
     "paid_only": false,
     "slug": "find-all-anagrams-in-a-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/solutions/",
     "tags": [
       "hash-table",
       "sliding-window",
@@ -787,11 +886,27 @@
     "title": "Find All Anagrams in a String",
     "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/"
   },
+  "find-all-numbers-disappeared-in-an-array": {
+    "difficulty": "Easy",
+    "number": 448,
+    "paid_only": false,
+    "slug": "find-all-numbers-disappeared-in-an-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/solutions/",
+    "tags": [
+      "array",
+      "hash-table"
+    ],
+    "title": "Find All Numbers Disappeared in an Array",
+    "url": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/"
+  },
   "find-center-of-star-graph": {
     "difficulty": "Easy",
     "number": 1791,
     "paid_only": false,
     "slug": "find-center-of-star-graph",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-center-of-star-graph/solutions/",
     "tags": [
       "graph"
     ],
@@ -803,6 +918,8 @@
     "number": 1489,
     "paid_only": false,
     "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+    "solution_count": 599,
+    "solutions_url": "https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/solutions/",
     "tags": [
       "boruvkas-algorithm",
       "graph",
@@ -821,6 +938,8 @@
     "number": 802,
     "paid_only": false,
     "slug": "find-eventual-safe-states",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-eventual-safe-states/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -837,6 +956,8 @@
     "number": 34,
     "paid_only": false,
     "slug": "find-first-and-last-position-of-element-in-sorted-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -849,6 +970,8 @@
     "number": 1971,
     "paid_only": false,
     "slug": "find-if-path-exists-in-graph",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-if-path-exists-in-graph/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -863,6 +986,8 @@
     "number": 295,
     "paid_only": false,
     "slug": "find-median-from-data-stream",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-median-from-data-stream/solutions/",
     "tags": [
       "data-stream",
       "design",
@@ -878,6 +1003,8 @@
     "number": 153,
     "paid_only": false,
     "slug": "find-minimum-in-rotated-sorted-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -890,6 +1017,8 @@
     "number": 1295,
     "paid_only": false,
     "slug": "find-numbers-with-even-number-of-digits",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-numbers-with-even-number-of-digits/solutions/",
     "tags": [
       "array",
       "math"
@@ -902,6 +1031,8 @@
     "number": 724,
     "paid_only": false,
     "slug": "find-pivot-index",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-pivot-index/solutions/",
     "tags": [
       "array",
       "prefix-sum"
@@ -914,6 +1045,8 @@
     "number": 744,
     "paid_only": false,
     "slug": "find-smallest-letter-greater-than-target",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-smallest-letter-greater-than-target/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -926,6 +1059,8 @@
     "number": 389,
     "paid_only": false,
     "slug": "find-the-difference",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-the-difference/solutions/",
     "tags": [
       "bit-manipulation",
       "hash-table",
@@ -940,6 +1075,8 @@
     "number": 287,
     "paid_only": false,
     "slug": "find-the-duplicate-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-the-duplicate-number/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -956,6 +1093,8 @@
     "number": 28,
     "paid_only": false,
     "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/solutions/",
     "tags": [
       "boyer-moore-string-search-algorithm",
       "knuth-morris-pratt-algorithm",
@@ -972,6 +1111,8 @@
     "number": 278,
     "paid_only": false,
     "slug": "first-bad-version",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/first-bad-version/solutions/",
     "tags": [
       "binary-search",
       "interactive"
@@ -984,6 +1125,8 @@
     "number": 412,
     "paid_only": false,
     "slug": "fizz-buzz",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/fizz-buzz/solutions/",
     "tags": [
       "math",
       "simulation",
@@ -997,6 +1140,8 @@
     "number": 114,
     "paid_only": false,
     "slug": "flatten-binary-tree-to-linked-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/solutions/",
     "tags": [
       "binary-tree",
       "depth-first-search",
@@ -1012,6 +1157,8 @@
     "number": 904,
     "paid_only": false,
     "slug": "fruit-into-baskets",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/fruit-into-baskets/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -1025,6 +1172,8 @@
     "number": 134,
     "paid_only": false,
     "slug": "gas-station",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/gas-station/solutions/",
     "tags": [
       "array",
       "greedy"
@@ -1037,6 +1186,8 @@
     "number": 49,
     "paid_only": false,
     "slug": "group-anagrams",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/group-anagrams/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -1051,6 +1202,8 @@
     "number": 846,
     "paid_only": false,
     "slug": "hand-of-straights",
+    "solution_count": 2784,
+    "solutions_url": "https://leetcode.com/problems/hand-of-straights/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -1065,6 +1218,8 @@
     "number": 202,
     "paid_only": false,
     "slug": "happy-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/happy-number/solutions/",
     "tags": [
       "floyds-cycle-finding-algorithm",
       "hash-table",
@@ -1079,6 +1234,8 @@
     "number": 1051,
     "paid_only": false,
     "slug": "height-checker",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/height-checker/solutions/",
     "tags": [
       "array",
       "bubble-sort",
@@ -1093,6 +1250,8 @@
     "number": 198,
     "paid_only": false,
     "slug": "house-robber",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/house-robber/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -1105,6 +1264,8 @@
     "number": 213,
     "paid_only": false,
     "slug": "house-robber-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/house-robber-ii/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -1117,6 +1278,8 @@
     "number": 232,
     "paid_only": false,
     "slug": "implement-queue-using-stacks",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/implement-queue-using-stacks/solutions/",
     "tags": [
       "design",
       "queue",
@@ -1130,6 +1293,8 @@
     "number": 208,
     "paid_only": false,
     "slug": "implement-trie-prefix-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/implement-trie-prefix-tree/solutions/",
     "tags": [
       "design",
       "hash-table",
@@ -1144,6 +1309,8 @@
     "number": 897,
     "paid_only": false,
     "slug": "increasing-order-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/increasing-order-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -1159,6 +1326,8 @@
     "number": 57,
     "paid_only": false,
     "slug": "insert-interval",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/insert-interval/solutions/",
     "tags": [
       "array"
     ],
@@ -1170,6 +1339,8 @@
     "number": 701,
     "paid_only": false,
     "slug": "insert-into-a-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/insert-into-a-binary-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -1183,6 +1354,8 @@
     "number": 147,
     "paid_only": false,
     "slug": "insertion-sort-list",
+    "solution_count": 2462,
+    "solutions_url": "https://leetcode.com/problems/insertion-sort-list/solutions/",
     "tags": [
       "linked-list",
       "sorting"
@@ -1195,6 +1368,8 @@
     "number": 349,
     "paid_only": false,
     "slug": "intersection-of-two-arrays",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/intersection-of-two-arrays/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -1210,6 +1385,8 @@
     "number": 226,
     "paid_only": false,
     "slug": "invert-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/invert-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -1224,6 +1401,8 @@
     "number": 785,
     "paid_only": false,
     "slug": "is-graph-bipartite",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/is-graph-bipartite/solutions/",
     "tags": [
       "bipartite-graph",
       "breadth-first-search",
@@ -1240,6 +1419,8 @@
     "number": 392,
     "paid_only": false,
     "slug": "is-subsequence",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/is-subsequence/solutions/",
     "tags": [
       "dynamic-programming",
       "string",
@@ -1253,6 +1434,8 @@
     "number": 205,
     "paid_only": false,
     "slug": "isomorphic-strings",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/isomorphic-strings/solutions/",
     "tags": [
       "hash-table",
       "string"
@@ -1265,6 +1448,8 @@
     "number": 55,
     "paid_only": false,
     "slug": "jump-game",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/jump-game/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -1278,6 +1463,8 @@
     "number": 45,
     "paid_only": false,
     "slug": "jump-game-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/jump-game-ii/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -1291,6 +1478,8 @@
     "number": 973,
     "paid_only": false,
     "slug": "k-closest-points-to-origin",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/k-closest-points-to-origin/solutions/",
     "tags": [
       "array",
       "divide-and-conquer",
@@ -1309,6 +1498,8 @@
     "number": 875,
     "paid_only": false,
     "slug": "koko-eating-bananas",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/koko-eating-bananas/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -1321,6 +1512,8 @@
     "number": 703,
     "paid_only": false,
     "slug": "kth-largest-element-in-a-stream",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -1337,6 +1530,8 @@
     "number": 215,
     "paid_only": false,
     "slug": "kth-largest-element-in-an-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/kth-largest-element-in-an-array/solutions/",
     "tags": [
       "array",
       "divide-and-conquer",
@@ -1352,6 +1547,8 @@
     "number": 230,
     "paid_only": false,
     "slug": "kth-smallest-element-in-a-bst",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -1366,6 +1563,8 @@
     "number": 179,
     "paid_only": false,
     "slug": "largest-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/largest-number/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -1380,6 +1579,8 @@
     "number": 84,
     "paid_only": false,
     "slug": "largest-rectangle-in-histogram",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/largest-rectangle-in-histogram/solutions/",
     "tags": [
       "array",
       "monotonic-stack",
@@ -1394,6 +1595,8 @@
     "number": 1046,
     "paid_only": false,
     "slug": "last-stone-weight",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/last-stone-weight/solutions/",
     "tags": [
       "array",
       "heap-priority-queue"
@@ -1406,6 +1609,8 @@
     "number": 860,
     "paid_only": false,
     "slug": "lemonade-change",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/lemonade-change/solutions/",
     "tags": [
       "array",
       "greedy"
@@ -1418,6 +1623,8 @@
     "number": 58,
     "paid_only": false,
     "slug": "length-of-last-word",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/length-of-last-word/solutions/",
     "tags": [
       "string"
     ],
@@ -1429,6 +1636,8 @@
     "number": 784,
     "paid_only": false,
     "slug": "letter-case-permutation",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/letter-case-permutation/solutions/",
     "tags": [
       "backtracking",
       "bit-manipulation",
@@ -1442,6 +1651,8 @@
     "number": 17,
     "paid_only": false,
     "slug": "letter-combinations-of-a-phone-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/solutions/",
     "tags": [
       "backtracking",
       "hash-table",
@@ -1455,6 +1666,8 @@
     "number": 141,
     "paid_only": false,
     "slug": "linked-list-cycle",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/linked-list-cycle/solutions/",
     "tags": [
       "floyds-cycle-finding-algorithm",
       "hash-table",
@@ -1469,6 +1682,8 @@
     "number": 142,
     "paid_only": false,
     "slug": "linked-list-cycle-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/linked-list-cycle-ii/solutions/",
     "tags": [
       "floyds-cycle-finding-algorithm",
       "hash-table",
@@ -1483,6 +1698,8 @@
     "number": 14,
     "paid_only": false,
     "slug": "longest-common-prefix",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-common-prefix/solutions/",
     "tags": [
       "array",
       "string",
@@ -1496,6 +1713,8 @@
     "number": 1143,
     "paid_only": false,
     "slug": "longest-common-subsequence",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-common-subsequence/solutions/",
     "tags": [
       "dynamic-programming",
       "longest-common-subsequence",
@@ -1509,6 +1728,8 @@
     "number": 128,
     "paid_only": false,
     "slug": "longest-consecutive-sequence",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-consecutive-sequence/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -1522,6 +1743,8 @@
     "number": 300,
     "paid_only": false,
     "slug": "longest-increasing-subsequence",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-increasing-subsequence/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -1536,6 +1759,8 @@
     "number": 516,
     "paid_only": false,
     "slug": "longest-palindromic-subsequence",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-palindromic-subsequence/solutions/",
     "tags": [
       "dynamic-programming",
       "string"
@@ -1548,6 +1773,8 @@
     "number": 5,
     "paid_only": false,
     "slug": "longest-palindromic-substring",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-palindromic-substring/solutions/",
     "tags": [
       "dynamic-programming",
       "manacher",
@@ -1562,6 +1789,8 @@
     "number": 424,
     "paid_only": false,
     "slug": "longest-repeating-character-replacement",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-repeating-character-replacement/solutions/",
     "tags": [
       "hash-table",
       "sliding-window",
@@ -1575,6 +1804,8 @@
     "number": 3,
     "paid_only": false,
     "slug": "longest-substring-without-repeating-characters",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/solutions/",
     "tags": [
       "hash-table",
       "sliding-window",
@@ -1588,6 +1819,8 @@
     "number": 235,
     "paid_only": false,
     "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/solutions/",
     "tags": [
       "binary-lifting",
       "binary-search-tree",
@@ -1604,6 +1837,8 @@
     "number": 169,
     "paid_only": false,
     "slug": "majority-element",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/majority-element/solutions/",
     "tags": [
       "array",
       "boyer-moore-majority-vote-algorithm",
@@ -1620,6 +1855,8 @@
     "number": 695,
     "paid_only": false,
     "slug": "max-area-of-island",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/max-area-of-island/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -1635,6 +1872,8 @@
     "number": 221,
     "paid_only": false,
     "slug": "maximal-square",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/maximal-square/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -1648,6 +1887,8 @@
     "number": 643,
     "paid_only": false,
     "slug": "maximum-average-subarray-i",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/maximum-average-subarray-i/solutions/",
     "tags": [
       "array",
       "sliding-window"
@@ -1660,6 +1901,8 @@
     "number": 654,
     "paid_only": false,
     "slug": "maximum-binary-tree",
+    "solution_count": 2780,
+    "solutions_url": "https://leetcode.com/problems/maximum-binary-tree/solutions/",
     "tags": [
       "array",
       "binary-tree",
@@ -1677,6 +1920,8 @@
     "number": 104,
     "paid_only": false,
     "slug": "maximum-depth-of-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -1691,6 +1936,8 @@
     "number": 164,
     "paid_only": false,
     "slug": "maximum-gap",
+    "solution_count": 2312,
+    "solutions_url": "https://leetcode.com/problems/maximum-gap/solutions/",
     "tags": [
       "array",
       "bucket-sort",
@@ -1706,6 +1953,8 @@
     "number": 53,
     "paid_only": false,
     "slug": "maximum-subarray",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/maximum-subarray/solutions/",
     "tags": [
       "array",
       "divide-and-conquer",
@@ -1719,6 +1968,8 @@
     "number": 56,
     "paid_only": false,
     "slug": "merge-intervals",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/merge-intervals/solutions/",
     "tags": [
       "array",
       "quicksort",
@@ -1732,6 +1983,8 @@
     "number": 23,
     "paid_only": false,
     "slug": "merge-k-sorted-lists",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/merge-k-sorted-lists/solutions/",
     "tags": [
       "divide-and-conquer",
       "heap-priority-queue",
@@ -1747,6 +2000,8 @@
     "number": 88,
     "paid_only": false,
     "slug": "merge-sorted-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/merge-sorted-array/solutions/",
     "tags": [
       "array",
       "sorting",
@@ -1760,6 +2015,8 @@
     "number": 21,
     "paid_only": false,
     "slug": "merge-two-sorted-lists",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/merge-two-sorted-lists/solutions/",
     "tags": [
       "linked-list",
       "recursion"
@@ -1772,6 +2029,8 @@
     "number": 876,
     "paid_only": false,
     "slug": "middle-of-the-linked-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/middle-of-the-linked-list/solutions/",
     "tags": [
       "linked-list",
       "two-pointers"
@@ -1784,6 +2043,8 @@
     "number": 746,
     "paid_only": false,
     "slug": "min-cost-climbing-stairs",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/min-cost-climbing-stairs/solutions/",
     "tags": [
       "array",
       "dynamic-programming"
@@ -1796,6 +2057,8 @@
     "number": 1584,
     "paid_only": false,
     "slug": "min-cost-to-connect-all-points",
+    "solution_count": 2681,
+    "solutions_url": "https://leetcode.com/problems/min-cost-to-connect-all-points/solutions/",
     "tags": [
       "array",
       "boruvkas-algorithm",
@@ -1813,6 +2076,8 @@
     "number": 155,
     "paid_only": false,
     "slug": "min-stack",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/min-stack/solutions/",
     "tags": [
       "design",
       "stack"
@@ -1825,6 +2090,8 @@
     "number": 530,
     "paid_only": false,
     "slug": "minimum-absolute-difference-in-bst",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-absolute-difference-in-bst/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -1840,6 +2107,8 @@
     "number": 1547,
     "paid_only": false,
     "slug": "minimum-cost-to-cut-a-stick",
+    "solution_count": 1237,
+    "solutions_url": "https://leetcode.com/problems/minimum-cost-to-cut-a-stick/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -1853,6 +2122,8 @@
     "number": 111,
     "paid_only": false,
     "slug": "minimum-depth-of-binary-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-depth-of-binary-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -1867,6 +2138,8 @@
     "number": 310,
     "paid_only": false,
     "slug": "minimum-height-trees",
+    "solution_count": 1857,
+    "solutions_url": "https://leetcode.com/problems/minimum-height-trees/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -1881,6 +2154,8 @@
     "number": 452,
     "paid_only": false,
     "slug": "minimum-number-of-arrows-to-burst-balloons",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/solutions/",
     "tags": [
       "array",
       "greedy",
@@ -1894,6 +2169,8 @@
     "number": 2037,
     "paid_only": false,
     "slug": "minimum-number-of-moves-to-seat-everyone",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/solutions/",
     "tags": [
       "array",
       "counting-sort",
@@ -1908,6 +2185,8 @@
     "number": 64,
     "paid_only": false,
     "slug": "minimum-path-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-path-sum/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -1921,6 +2200,8 @@
     "number": 209,
     "paid_only": false,
     "slug": "minimum-size-subarray-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-size-subarray-sum/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -1935,6 +2216,8 @@
     "number": 76,
     "paid_only": false,
     "slug": "minimum-window-substring",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/minimum-window-substring/solutions/",
     "tags": [
       "hash-table",
       "sliding-window",
@@ -1943,11 +2226,31 @@
     "title": "Minimum Window Substring",
     "url": "https://leetcode.com/problems/minimum-window-substring/"
   },
+  "missing-number": {
+    "difficulty": "Easy",
+    "number": 268,
+    "paid_only": false,
+    "slug": "missing-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/missing-number/solutions/",
+    "tags": [
+      "array",
+      "binary-search",
+      "bit-manipulation",
+      "hash-table",
+      "math",
+      "sorting"
+    ],
+    "title": "Missing Number",
+    "url": "https://leetcode.com/problems/missing-number/"
+  },
   "move-zeroes": {
     "difficulty": "Easy",
     "number": 283,
     "paid_only": false,
     "slug": "move-zeroes",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/move-zeroes/solutions/",
     "tags": [
       "array",
       "two-pointers"
@@ -1960,6 +2263,8 @@
     "number": 51,
     "paid_only": false,
     "slug": "n-queens",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/n-queens/solutions/",
     "tags": [
       "algorithm-x",
       "array",
@@ -1973,6 +2278,8 @@
     "number": 743,
     "paid_only": false,
     "slug": "network-delay-time",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/network-delay-time/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -1989,6 +2296,8 @@
     "number": 496,
     "paid_only": false,
     "slug": "next-greater-element-i",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/next-greater-element-i/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -2003,6 +2312,8 @@
     "number": 435,
     "paid_only": false,
     "slug": "non-overlapping-intervals",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/non-overlapping-intervals/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -2017,6 +2328,8 @@
     "number": 191,
     "paid_only": false,
     "slug": "number-of-1-bits",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/number-of-1-bits/solutions/",
     "tags": [
       "bit-manipulation",
       "divide-and-conquer"
@@ -2029,6 +2342,8 @@
     "number": 200,
     "paid_only": false,
     "slug": "number-of-islands",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/number-of-islands/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -2044,6 +2359,8 @@
     "number": 547,
     "paid_only": false,
     "slug": "number-of-provinces",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/number-of-provinces/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -2058,6 +2375,8 @@
     "number": 933,
     "paid_only": false,
     "slug": "number-of-recent-calls",
+    "solution_count": 2547,
+    "solutions_url": "https://leetcode.com/problems/number-of-recent-calls/solutions/",
     "tags": [
       "data-stream",
       "design",
@@ -2071,6 +2390,8 @@
     "number": 328,
     "paid_only": false,
     "slug": "odd-even-linked-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/odd-even-linked-list/solutions/",
     "tags": [
       "linked-list"
     ],
@@ -2082,6 +2403,8 @@
     "number": 417,
     "paid_only": false,
     "slug": "pacific-atlantic-water-flow",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/pacific-atlantic-water-flow/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -2096,6 +2419,8 @@
     "number": 234,
     "paid_only": false,
     "slug": "palindrome-linked-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/palindrome-linked-list/solutions/",
     "tags": [
       "linked-list",
       "recursion",
@@ -2110,6 +2435,8 @@
     "number": 131,
     "paid_only": false,
     "slug": "palindrome-partitioning",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/palindrome-partitioning/solutions/",
     "tags": [
       "backtracking",
       "dynamic-programming",
@@ -2123,6 +2450,8 @@
     "number": 416,
     "paid_only": false,
     "slug": "partition-equal-subset-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/partition-equal-subset-sum/solutions/",
     "tags": [
       "0-1-knapsack",
       "array",
@@ -2137,6 +2466,8 @@
     "number": 763,
     "paid_only": false,
     "slug": "partition-labels",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/partition-labels/solutions/",
     "tags": [
       "greedy",
       "hash-table",
@@ -2151,6 +2482,8 @@
     "number": 86,
     "paid_only": false,
     "slug": "partition-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/partition-list/solutions/",
     "tags": [
       "linked-list",
       "two-pointers"
@@ -2163,6 +2496,8 @@
     "number": 112,
     "paid_only": false,
     "slug": "path-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/path-sum/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -2177,6 +2512,8 @@
     "number": 113,
     "paid_only": false,
     "slug": "path-sum-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/path-sum-ii/solutions/",
     "tags": [
       "backtracking",
       "binary-tree",
@@ -2191,6 +2528,8 @@
     "number": 1631,
     "paid_only": false,
     "slug": "path-with-minimum-effort",
+    "solution_count": 2394,
+    "solutions_url": "https://leetcode.com/problems/path-with-minimum-effort/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -2209,6 +2548,8 @@
     "number": 852,
     "paid_only": false,
     "slug": "peak-index-in-a-mountain-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/peak-index-in-a-mountain-array/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -2222,6 +2563,8 @@
     "number": 567,
     "paid_only": false,
     "slug": "permutation-in-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/permutation-in-string/solutions/",
     "tags": [
       "hash-table",
       "sliding-window",
@@ -2236,6 +2579,8 @@
     "number": 46,
     "paid_only": false,
     "slug": "permutations",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/permutations/solutions/",
     "tags": [
       "array",
       "backtracking"
@@ -2248,6 +2593,8 @@
     "number": 47,
     "paid_only": false,
     "slug": "permutations-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/permutations-ii/solutions/",
     "tags": [
       "array",
       "backtracking",
@@ -2256,11 +2603,27 @@
     "title": "Permutations II",
     "url": "https://leetcode.com/problems/permutations-ii/"
   },
+  "plus-one": {
+    "difficulty": "Easy",
+    "number": 66,
+    "paid_only": false,
+    "slug": "plus-one",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/plus-one/solutions/",
+    "tags": [
+      "array",
+      "math"
+    ],
+    "title": "Plus One",
+    "url": "https://leetcode.com/problems/plus-one/"
+  },
   "possible-bipartition": {
     "difficulty": "Medium",
     "number": 886,
     "paid_only": false,
     "slug": "possible-bipartition",
+    "solution_count": 2131,
+    "solutions_url": "https://leetcode.com/problems/possible-bipartition/solutions/",
     "tags": [
       "bipartite-graph",
       "breadth-first-search",
@@ -2277,6 +2640,8 @@
     "number": 50,
     "paid_only": false,
     "slug": "powx-n",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/powx-n/solutions/",
     "tags": [
       "math",
       "recursion"
@@ -2289,6 +2654,8 @@
     "number": 238,
     "paid_only": false,
     "slug": "product-of-array-except-self",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/product-of-array-except-self/solutions/",
     "tags": [
       "array",
       "prefix-sum"
@@ -2301,6 +2668,8 @@
     "number": 938,
     "paid_only": false,
     "slug": "range-sum-of-bst",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/range-sum-of-bst/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -2315,6 +2684,8 @@
     "number": 303,
     "paid_only": false,
     "slug": "range-sum-query-immutable",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/range-sum-query-immutable/solutions/",
     "tags": [
       "array",
       "design",
@@ -2328,6 +2699,8 @@
     "number": 307,
     "paid_only": false,
     "slug": "range-sum-query-mutable",
+    "solution_count": 1838,
+    "solutions_url": "https://leetcode.com/problems/range-sum-query-mutable/solutions/",
     "tags": [
       "array",
       "binary-indexed-tree",
@@ -2344,6 +2717,8 @@
     "number": 383,
     "paid_only": false,
     "slug": "ransom-note",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/ransom-note/solutions/",
     "tags": [
       "counting",
       "hash-table",
@@ -2357,6 +2732,8 @@
     "number": 332,
     "paid_only": false,
     "slug": "reconstruct-itinerary",
+    "solution_count": 1964,
+    "solutions_url": "https://leetcode.com/problems/reconstruct-itinerary/solutions/",
     "tags": [
       "array",
       "depth-first-search",
@@ -2376,6 +2753,8 @@
     "number": 99,
     "paid_only": false,
     "slug": "recover-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/recover-binary-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -2390,6 +2769,8 @@
     "number": 684,
     "paid_only": false,
     "slug": "redundant-connection",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/redundant-connection/solutions/",
     "tags": [
       "breadth-first-search",
       "depth-first-search",
@@ -2404,6 +2785,8 @@
     "number": 10,
     "paid_only": false,
     "slug": "regular-expression-matching",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/regular-expression-matching/solutions/",
     "tags": [
       "dynamic-programming",
       "recursion",
@@ -2417,6 +2800,8 @@
     "number": 1122,
     "paid_only": false,
     "slug": "relative-sort-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/relative-sort-array/solutions/",
     "tags": [
       "array",
       "bubble-sort",
@@ -2433,6 +2818,8 @@
     "number": 26,
     "paid_only": false,
     "slug": "remove-duplicates-from-sorted-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/solutions/",
     "tags": [
       "array",
       "two-pointers"
@@ -2445,6 +2832,8 @@
     "number": 80,
     "paid_only": false,
     "slug": "remove-duplicates-from-sorted-array-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/solutions/",
     "tags": [
       "array",
       "two-pointers"
@@ -2457,6 +2846,8 @@
     "number": 83,
     "paid_only": false,
     "slug": "remove-duplicates-from-sorted-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-duplicates-from-sorted-list/solutions/",
     "tags": [
       "linked-list"
     ],
@@ -2468,6 +2859,8 @@
     "number": 27,
     "paid_only": false,
     "slug": "remove-element",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-element/solutions/",
     "tags": [
       "array",
       "two-pointers"
@@ -2480,6 +2873,8 @@
     "number": 203,
     "paid_only": false,
     "slug": "remove-linked-list-elements",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-linked-list-elements/solutions/",
     "tags": [
       "linked-list",
       "recursion"
@@ -2492,6 +2887,8 @@
     "number": 19,
     "paid_only": false,
     "slug": "remove-nth-node-from-end-of-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/solutions/",
     "tags": [
       "linked-list",
       "two-pointers"
@@ -2504,6 +2901,8 @@
     "number": 206,
     "paid_only": false,
     "slug": "reverse-linked-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/reverse-linked-list/solutions/",
     "tags": [
       "linked-list",
       "recursion"
@@ -2516,6 +2915,8 @@
     "number": 92,
     "paid_only": false,
     "slug": "reverse-linked-list-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/reverse-linked-list-ii/solutions/",
     "tags": [
       "linked-list"
     ],
@@ -2527,6 +2928,8 @@
     "number": 344,
     "paid_only": false,
     "slug": "reverse-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/reverse-string/solutions/",
     "tags": [
       "string",
       "two-pointers"
@@ -2539,6 +2942,8 @@
     "number": 345,
     "paid_only": false,
     "slug": "reverse-vowels-of-a-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/reverse-vowels-of-a-string/solutions/",
     "tags": [
       "string",
       "two-pointers"
@@ -2551,6 +2956,8 @@
     "number": 151,
     "paid_only": false,
     "slug": "reverse-words-in-a-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/reverse-words-in-a-string/solutions/",
     "tags": [
       "string",
       "two-pointers"
@@ -2563,6 +2970,8 @@
     "number": 1672,
     "paid_only": false,
     "slug": "richest-customer-wealth",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/richest-customer-wealth/solutions/",
     "tags": [
       "array",
       "matrix"
@@ -2575,6 +2984,8 @@
     "number": 13,
     "paid_only": false,
     "slug": "roman-to-integer",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/roman-to-integer/solutions/",
     "tags": [
       "hash-table",
       "math",
@@ -2588,6 +2999,8 @@
     "number": 189,
     "paid_only": false,
     "slug": "rotate-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/rotate-array/solutions/",
     "tags": [
       "array",
       "math",
@@ -2601,6 +3014,8 @@
     "number": 994,
     "paid_only": false,
     "slug": "rotting-oranges",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/rotting-oranges/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -2614,6 +3029,8 @@
     "number": 1480,
     "paid_only": false,
     "slug": "running-sum-of-1d-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/running-sum-of-1d-array/solutions/",
     "tags": [
       "array",
       "prefix-sum"
@@ -2626,6 +3043,8 @@
     "number": 100,
     "paid_only": false,
     "slug": "same-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/same-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -2640,6 +3059,8 @@
     "number": 700,
     "paid_only": false,
     "slug": "search-in-a-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/search-in-a-binary-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -2653,6 +3074,8 @@
     "number": 33,
     "paid_only": false,
     "slug": "search-in-rotated-sorted-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/search-in-rotated-sorted-array/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -2665,6 +3088,8 @@
     "number": 81,
     "paid_only": false,
     "slug": "search-in-rotated-sorted-array-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/search-in-rotated-sorted-array-ii/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -2677,6 +3102,8 @@
     "number": 35,
     "paid_only": false,
     "slug": "search-insert-position",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/search-insert-position/solutions/",
     "tags": [
       "array",
       "binary-search"
@@ -2689,6 +3116,8 @@
     "number": 1091,
     "paid_only": false,
     "slug": "shortest-path-in-binary-matrix",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/shortest-path-in-binary-matrix/solutions/",
     "tags": [
       "array",
       "breadth-first-search",
@@ -2702,6 +3131,8 @@
     "number": 136,
     "paid_only": false,
     "slug": "single-number",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/single-number/solutions/",
     "tags": [
       "array",
       "bit-manipulation"
@@ -2714,6 +3145,8 @@
     "number": 1834,
     "paid_only": false,
     "slug": "single-threaded-cpu",
+    "solution_count": 1271,
+    "solutions_url": "https://leetcode.com/problems/single-threaded-cpu/solutions/",
     "tags": [
       "array",
       "heap-priority-queue",
@@ -2727,6 +3160,8 @@
     "number": 912,
     "paid_only": false,
     "slug": "sort-an-array",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-an-array/solutions/",
     "tags": [
       "array",
       "bucket-sort",
@@ -2745,6 +3180,8 @@
     "number": 905,
     "paid_only": false,
     "slug": "sort-array-by-parity",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-array-by-parity/solutions/",
     "tags": [
       "array",
       "sorting",
@@ -2758,6 +3195,8 @@
     "number": 451,
     "paid_only": false,
     "slug": "sort-characters-by-frequency",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-characters-by-frequency/solutions/",
     "tags": [
       "bucket-sort",
       "counting",
@@ -2774,6 +3213,8 @@
     "number": 75,
     "paid_only": false,
     "slug": "sort-colors",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-colors/solutions/",
     "tags": [
       "array",
       "bubble-sort",
@@ -2789,6 +3230,8 @@
     "number": 148,
     "paid_only": false,
     "slug": "sort-list",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-list/solutions/",
     "tags": [
       "divide-and-conquer",
       "linked-list",
@@ -2804,6 +3247,8 @@
     "number": 2418,
     "paid_only": false,
     "slug": "sort-the-people",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sort-the-people/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -2818,6 +3263,8 @@
     "number": 410,
     "paid_only": false,
     "slug": "split-array-largest-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/split-array-largest-sum/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -2833,6 +3280,8 @@
     "number": 69,
     "paid_only": false,
     "slug": "sqrtx",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/sqrtx/solutions/",
     "tags": [
       "binary-search",
       "math",
@@ -2846,6 +3295,8 @@
     "number": 560,
     "paid_only": false,
     "slug": "subarray-sum-equals-k",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/subarray-sum-equals-k/solutions/",
     "tags": [
       "array",
       "hash-table",
@@ -2859,6 +3310,8 @@
     "number": 78,
     "paid_only": false,
     "slug": "subsets",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/subsets/solutions/",
     "tags": [
       "array",
       "backtracking",
@@ -2872,6 +3325,8 @@
     "number": 90,
     "paid_only": false,
     "slug": "subsets-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/subsets-ii/solutions/",
     "tags": [
       "array",
       "backtracking",
@@ -2885,6 +3340,8 @@
     "number": 778,
     "paid_only": false,
     "slug": "swim-in-rising-water",
+    "solution_count": 2352,
+    "solutions_url": "https://leetcode.com/problems/swim-in-rising-water/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -2904,6 +3361,8 @@
     "number": 101,
     "paid_only": false,
     "slug": "symmetric-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/symmetric-tree/solutions/",
     "tags": [
       "binary-tree",
       "breadth-first-search",
@@ -2918,6 +3377,8 @@
     "number": 494,
     "paid_only": false,
     "slug": "target-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/target-sum/solutions/",
     "tags": [
       "0-1-knapsack",
       "array",
@@ -2933,6 +3394,8 @@
     "number": 621,
     "paid_only": false,
     "slug": "task-scheduler",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/task-scheduler/solutions/",
     "tags": [
       "array",
       "counting",
@@ -2949,6 +3412,8 @@
     "number": 709,
     "paid_only": false,
     "slug": "to-lower-case",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/to-lower-case/solutions/",
     "tags": [
       "string"
     ],
@@ -2960,6 +3425,8 @@
     "number": 347,
     "paid_only": false,
     "slug": "top-k-frequent-elements",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/top-k-frequent-elements/solutions/",
     "tags": [
       "array",
       "bucket-sort",
@@ -2978,6 +3445,8 @@
     "number": 692,
     "paid_only": false,
     "slug": "top-k-frequent-words",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/top-k-frequent-words/solutions/",
     "tags": [
       "array",
       "bucket-sort",
@@ -2996,6 +3465,8 @@
     "number": 669,
     "paid_only": false,
     "slug": "trim-a-binary-search-tree",
+    "solution_count": 2221,
+    "solutions_url": "https://leetcode.com/problems/trim-a-binary-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -3010,6 +3481,8 @@
     "number": 1,
     "paid_only": false,
     "slug": "two-sum",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/two-sum/solutions/",
     "tags": [
       "array",
       "hash-table"
@@ -3022,6 +3495,8 @@
     "number": 167,
     "paid_only": false,
     "slug": "two-sum-ii-input-array-is-sorted",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/solutions/",
     "tags": [
       "array",
       "binary-search",
@@ -3035,6 +3510,8 @@
     "number": 62,
     "paid_only": false,
     "slug": "unique-paths",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/unique-paths/solutions/",
     "tags": [
       "combinatorics",
       "dynamic-programming",
@@ -3048,6 +3525,8 @@
     "number": 63,
     "paid_only": false,
     "slug": "unique-paths-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/unique-paths-ii/solutions/",
     "tags": [
       "array",
       "dynamic-programming",
@@ -3061,6 +3540,8 @@
     "number": 242,
     "paid_only": false,
     "slug": "valid-anagram",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/valid-anagram/solutions/",
     "tags": [
       "hash-table",
       "sorting",
@@ -3074,6 +3555,8 @@
     "number": 125,
     "paid_only": false,
     "slug": "valid-palindrome",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/valid-palindrome/solutions/",
     "tags": [
       "string",
       "two-pointers"
@@ -3086,6 +3569,8 @@
     "number": 20,
     "paid_only": false,
     "slug": "valid-parentheses",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/valid-parentheses/solutions/",
     "tags": [
       "bracket-sequences",
       "stack",
@@ -3099,6 +3584,8 @@
     "number": 678,
     "paid_only": false,
     "slug": "valid-parenthesis-string",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/valid-parenthesis-string/solutions/",
     "tags": [
       "bracket-sequences",
       "dynamic-programming",
@@ -3114,6 +3601,8 @@
     "number": 98,
     "paid_only": false,
     "slug": "validate-binary-search-tree",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/validate-binary-search-tree/solutions/",
     "tags": [
       "binary-search-tree",
       "binary-tree",
@@ -3128,6 +3617,8 @@
     "number": 139,
     "paid_only": false,
     "slug": "word-break",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/word-break/solutions/",
     "tags": [
       "array",
       "brute-force-search",
@@ -3145,6 +3636,8 @@
     "number": 127,
     "paid_only": false,
     "slug": "word-ladder",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/word-ladder/solutions/",
     "tags": [
       "bidirectional-search",
       "breadth-first-search",
@@ -3159,6 +3652,8 @@
     "number": 290,
     "paid_only": false,
     "slug": "word-pattern",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/word-pattern/solutions/",
     "tags": [
       "hash-table",
       "string"
@@ -3171,6 +3666,8 @@
     "number": 79,
     "paid_only": false,
     "slug": "word-search",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/word-search/solutions/",
     "tags": [
       "array",
       "backtracking",
@@ -3186,6 +3683,8 @@
     "number": 212,
     "paid_only": false,
     "slug": "word-search-ii",
+    "solution_count": 3000,
+    "solutions_url": "https://leetcode.com/problems/word-search-ii/solutions/",
     "tags": [
       "array",
       "backtracking",

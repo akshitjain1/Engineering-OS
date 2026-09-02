@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { errorMessage } from "@/lib/api";
-import { TopicWorkPanel } from "@/components/topic-work";
+import { TopicWorkPanel, type WorkSection } from "@/components/topic-work";
 import {
   EMPTY_RECORD,
   HEARTBEAT_MS,
@@ -219,11 +219,26 @@ function FocusCard({
   // A finished block is never "running over" -- it is just its logged number.
   const over = !timer.settled && timer.seconds > item.planned_minutes * 60;
   const isLearnLike = item.activity_type === "LEARN" || item.activity_type === "DSA";
-  // Practice and Build are the blocks whose work lives on the topic. Render it
-  // here so the block is self-contained instead of a link away.
-  const inlineWork =
-    item.topic_id !== null &&
-    (item.activity_type === "PRACTICE" || item.activity_type === "BUILD");
+  // Blocks whose work lives on the topic render it here, in order, so the block
+  // is self-contained instead of a link away.
+  //
+  // DSA is read-then-solve in one block: showing only the problem it picked
+  // asked for a solution before showing what to read, with the reading a page
+  // away. So DSA pulls in the learn step and drops the single-resource card
+  // below, which would otherwise repeat one of the problems.
+  const workSections: WorkSection[] | null =
+    item.topic_id === null
+      ? null
+      : item.activity_type === "DSA"
+        ? ["learn", "practice"]
+        : item.activity_type === "PRACTICE"
+          ? ["practice", "build"]
+          : item.activity_type === "BUILD"
+            ? ["build"]
+            : null;
+  const inlineWork = workSections !== null;
+  // The sequence already opens with the source, so a second copy is noise.
+  const showResourceCard = Boolean(item.resource?.url) && item.activity_type !== "DSA";
   // Checked by default. The cursor only advances when a topic is marked
   // finished, so defaulting this off silently served the same topic every day.
   const [alsoComplete, setAlsoComplete] = useState(true);
@@ -266,7 +281,7 @@ function FocusCard({
             </div>
           ) : null}
 
-          {item.resource?.url ? (
+          {showResourceCard && item.resource?.url ? (
             <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4">
               <p className="text-xs font-medium text-[var(--muted)]">
                 {item.resource.provider ?? "Source"}
@@ -288,10 +303,11 @@ function FocusCard({
               <TopicWorkPanel
                 key={item.topic_id}
                 topicId={item.topic_id}
-                show={item.activity_type === "BUILD" ? "build" : "both"}
+                sections={workSections ?? undefined}
+                blockMinutes={item.planned_minutes}
               />
             </div>
-          ) : !item.resource?.url && item.topic_id ? (
+          ) : !showResourceCard && item.topic_id ? (
             <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
               <p className="text-sm font-medium">Work inside the topic</p>
               <p className="mt-1 text-sm text-[var(--muted)]">

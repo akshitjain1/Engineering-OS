@@ -16,8 +16,10 @@ Facts come from data/dsa_problem_facts.json, written by verify_dsa_problems.
 This module refuses to run if any entry is unverified, so a hand-edited map
 cannot reach the database without passing the tag check first.
 
-Idempotent: resources are keyed by slug and updated in place, so re-running
-changes nothing.
+Idempotent and convergent: resources are keyed by slug and updated in place,
+and any row this module owns that the map no longer lists is retired, so the
+database ends up matching the map rather than accumulating whatever it has ever
+contained.
 
     python -m app.content.apply_dsa_exact_problems [--dry-run]
 """
@@ -45,6 +47,9 @@ COLLECTION_URLS = (
 #: Exact problems sort ahead of anything already on the lesson.
 FIRST_ORDER_INDEX = 10
 
+#: Completion values that mean real work happened against a row.
+DONE_STATUSES = {"complete", "completed", "done"}
+
 MINUTES_BY_DIFFICULTY = {"Easy": 15, "Medium": 25, "Hard": 40}
 
 
@@ -71,7 +76,14 @@ def apply(db: Session, *, dry_run: bool = False) -> dict[str, int]:
         )
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    stats = {"created": 0, "updated": 0, "demoted": 0, "skipped_no_lesson": 0}
+    stats = {
+        "created": 0,
+        "updated": 0,
+        "demoted": 0,
+        "skipped_no_lesson": 0,
+        "retired_deleted": 0,
+        "retired_hidden": 0,
+    }
 
     for topic_slug, spec in DSA_EXACT_PROBLEMS.items():
         topic = db.execute(
@@ -129,6 +141,40 @@ def apply(db: Session, *, dry_run: bool = False) -> dict[str, int]:
             if not existed:
                 row.completion_status = "not_started"
             stats["updated" if existed else "created"] += 1
+
+    # Retire rows this module owns that the map no longer lists.
+    #
+    # Without this the writer is additive, and that made it useless as a
+    # correction path: dropping a problem from the map left its row in place --
+    # still PRACTICE, still EXACT, still learner-visible -- so the topic went on
+    # offering a problem the map had already rejected, and the freed order_index
+    # collided with whatever replaced it.
+    for topic_slug, spec in DSA_EXACT_PROBLEMS.items():
+        prefix = f"{topic_slug}--lc-"
+        keep = {_resource_slug(topic_slug, problem[0]) for problem in spec["problems"]}
+        owned = [
+            row
+            for row in db.execute(
+                select(CurriculumResource)
+                .join(CurriculumLesson, CurriculumLesson.id == CurriculumResource.lesson_id)
+                .join(CurriculumTopic, CurriculumTopic.id == CurriculumLesson.topic_id)
+                .where(CurriculumTopic.slug == topic_slug)
+            ).scalars()
+            if (row.slug or "").startswith(prefix)
+        ]
+        for row in owned:
+            if row.slug in keep:
+                continue
+            if (row.completion_status or "").lower() in DONE_STATUSES:
+                # Work already done stays on the record; it just stops being
+                # offered. Deleting it would silently erase solved problems.
+                row.learner_visible = False
+                row.visibility_class = "ARCHIVED"
+                stats["retired_hidden"] += 1
+            else:
+                db.delete(row)
+                stats["retired_deleted"] += 1
+    db.flush()
 
     # Demote the collections. Same query the day engine walks, so nothing that
     # feeds a DSA block is missed.

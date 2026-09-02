@@ -201,6 +201,10 @@ def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, 
         "is_playlist": playlist,
         "exact": bool(url) and raw_status in (VERIFIED, "VERIFIED_COVERAGE", "PARTIAL_COVERAGE") and not collection,
         "duration": resource.duration,
+        # How long this one source is expected to take. The learner-facing
+        # surfaces budget a block's minutes across its sources with this, so it
+        # has to travel with the resource rather than being re-derived.
+        "estimated_minutes": getattr(resource, "estimated_minutes", None),
         "difficulty": resource.difficulty,
         "description": resource.description,
         "official_unofficial": resource.official_unofficial,

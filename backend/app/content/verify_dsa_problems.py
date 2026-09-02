@@ -34,6 +34,7 @@ from app.content.dsa_exact_problems import DSA_EXACT_PROBLEMS
 
 GRAPHQL = "https://leetcode.com/graphql"
 PROBLEM_URL = "https://leetcode.com/problems/{slug}/"
+SOLUTIONS_URL = "https://leetcode.com/problems/{slug}/solutions/"
 CACHE = Path(__file__).parent / "data" / "dsa_problem_facts.json"
 
 _QUERY = """
@@ -45,6 +46,18 @@ query questionData($titleSlug: String!) {
     difficulty
     isPaidOnly
     topicTags { slug }
+  }
+}
+"""
+
+#: The "Stuck?" link sends the learner to community solutions. That link is only
+#: worth offering if solutions actually exist, so the count is fetched and
+#: asserted rather than assumed -- LeetCode serves 403 to non-browser clients on
+#: the HTML page, so this is the only way to check it from here.
+_SOLUTIONS_QUERY = """
+query solutionArticles($questionSlug: String!) {
+  ugcArticleSolutionArticles(questionSlug: $questionSlug, first: 1) {
+    totalNum
   }
 }
 """
@@ -68,6 +81,17 @@ def fetch(slug: str, client: httpx.Client) -> dict[str, Any] | None:
     question = (resp.json().get("data") or {}).get("question")
     if not question:
         return None
+
+    solutions = client.post(
+        GRAPHQL,
+        json={"query": _SOLUTIONS_QUERY, "variables": {"questionSlug": slug}},
+        headers=_HEADERS,
+        timeout=25,
+    )
+    solutions.raise_for_status()
+    articles = (solutions.json().get("data") or {}).get("ugcArticleSolutionArticles")
+    solution_count = int(articles["totalNum"]) if articles else 0
+
     return {
         "slug": question["titleSlug"],
         "number": int(question["questionFrontendId"]),
@@ -76,6 +100,8 @@ def fetch(slug: str, client: httpx.Client) -> dict[str, Any] | None:
         "paid_only": bool(question["isPaidOnly"]),
         "tags": sorted(t["slug"] for t in question["topicTags"]),
         "url": PROBLEM_URL.format(slug=question["titleSlug"]),
+        "solution_count": solution_count,
+        "solutions_url": SOLUTIONS_URL.format(slug=question["titleSlug"]),
     }
 
 
@@ -130,6 +156,11 @@ def audit(facts: dict[str, Any]) -> list[str]:
                 continue
             if fact["paid_only"]:
                 failures.append(f"{topic_slug}/{problem_slug}: Premium-only, learner cannot open it")
+            if fact.get("solution_count", 0) < 1:
+                failures.append(
+                    f"{topic_slug}/{problem_slug}: no community solutions, "
+                    "so the Stuck? link would be a dead end"
+                )
             overlap = set(expected_tags) & set(fact["tags"])
             if not overlap:
                 failures.append(

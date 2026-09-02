@@ -182,6 +182,8 @@ export type ResourcePublic = {
   exactness?: string | null;
   embeddable?: boolean;
   duration: number | null;
+  /** Minutes this one source is expected to take. */
+  estimated_minutes?: number | null;
   difficulty: string | null;
   description: string | null;
   official_unofficial: string;

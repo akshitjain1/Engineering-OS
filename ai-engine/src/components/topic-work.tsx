@@ -1,19 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, Check, Clipboard, Loader2 } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ArrowRight, Check, Clipboard, ExternalLink, Lightbulb, Loader2 } from "lucide-react";
 import { SourceResourceCard } from "@/components/source-resource";
 import { GhostButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
-import type { TopicNode } from "@/lib/curriculum";
+import type { ResourcePublic, TopicNode } from "@/lib/curriculum";
 
 /* -------------------------------------------------------------------------
- * The Practice and Build work for a topic, rendered wherever you already are.
- * Same endpoints as the topic page, so anything marked done here is done
- * there too. Lives in its own file because both the topic page and the day
- * runner render it.
+ * A topic's work, in the order you are meant to do it, rendered wherever you
+ * already are. Same endpoints as the topic page, so anything marked done here
+ * is done there too.
+ *
+ * The point of this component is sequence. A DSA block used to show only the
+ * problem it had picked, which asked the learner to solve something before
+ * being shown what to read -- the reading was a page away on the topic. Read
+ * first, then solve, with a time budget on each, is the whole idea.
  * ---------------------------------------------------------------------- */
+
+export type WorkSection = "learn" | "practice" | "build";
+
+/** Free community solutions for a LeetCode problem. Derived rather than
+ *  stored: it is the problem URL plus a path segment, so there is nothing to
+ *  keep in sync and nothing invented. Any other host returns null. */
+export function solutionsUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const match = /^https:\/\/leetcode\.com\/problems\/([a-z0-9-]+)\/?$/i.exec(url.trim());
+  return match ? `https://leetcode.com/problems/${match[1]}/solutions/` : null;
+}
+
+/** Minutes this one source is expected to take. */
+function minutesFor(resource: ResourcePublic, fallback = 15): number {
+  return resource.estimated_minutes ?? resource.duration ?? fallback;
+}
+
+const DIFFICULTY_TONE: Record<string, string> = {
+  easy: "text-[var(--ok)] border-[var(--ok)]",
+  medium: "text-[var(--warn)] border-[var(--warn)]",
+  hard: "text-[var(--danger)] border-[var(--danger)]",
+};
 
 /** Shown when no practice source is mapped. The app never invents problem
  *  URLs, so the fallback is a prompt you take elsewhere. */
@@ -65,15 +91,119 @@ export function PracticePrompt({ topic }: { topic: TopicNode }) {
   );
 }
 
-/** Practice sources and build exercises for one topic, self-loading. Renders
- *  nothing but a loading line until the topic arrives. */
+/** One mapped problem: what it is, how long to give it, why it belongs to this
+ *  topic, and a way out if you are stuck. */
+function ProblemRow({
+  resource,
+  index,
+  locked,
+  busy,
+  onToggle,
+}: {
+  resource: ResourcePublic;
+  index: number;
+  locked?: boolean;
+  busy: boolean;
+  onToggle: (id: number, completed: boolean) => void;
+}) {
+  const [showHint, setShowHint] = useState(false);
+  const solutions = solutionsUrl(resource.url);
+  const tone = DIFFICULTY_TONE[(resource.difficulty || "").toLowerCase()] ?? "text-[var(--muted)] border-[var(--border)]";
+
+  return (
+    <li className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-xs text-[var(--muted)]">
+            Problem {index + 1} · {resource.provider ?? "LeetCode"}
+          </p>
+          <p className="mt-0.5 text-sm font-medium">{resource.title}</p>
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          {resource.difficulty ? (
+            <span className={`rounded border px-2 py-0.5 text-xs font-medium ${tone}`}>
+              {resource.difficulty}
+            </span>
+          ) : null}
+          <span className="rounded border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--muted)]">
+            ~{minutesFor(resource)} min
+          </span>
+        </div>
+      </div>
+
+      {resource.description ? (
+        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{resource.description}</p>
+      ) : null}
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        {resource.url ? (
+          <a
+            href={resource.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]"
+          >
+            Solve it <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        ) : null}
+        {solutions ? (
+          <button
+            type="button"
+            onClick={() => setShowHint((v) => !v)}
+            className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-sm text-[var(--muted)] hover:border-[var(--border-strong)]"
+          >
+            <Lightbulb className="h-3.5 w-3.5" /> Stuck?
+          </button>
+        ) : null}
+        {!locked ? (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => onToggle(resource.id, !resource.completed)}
+            className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-sm hover:border-[var(--border-strong)] disabled:opacity-50"
+          >
+            {resource.completed ? (
+              <>
+                <Check className="h-3.5 w-3.5 text-[var(--ok)]" /> Solved
+              </>
+            ) : (
+              "Mark solved"
+            )}
+          </button>
+        ) : null}
+      </div>
+
+      {showHint && solutions ? (
+        <div className="mt-3 rounded-md border border-[var(--border)] bg-[var(--card-2)] p-3">
+          <p className="text-xs text-[var(--muted)]">
+            Give it a genuine attempt first — a solution you read after trying sticks; one you read
+            instead of trying does not.
+          </p>
+          <a
+            href={solutions}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm underline"
+          >
+            Community solutions on LeetCode <ExternalLink className="h-3 w-3" />
+          </a>
+        </div>
+      ) : null}
+    </li>
+  );
+}
+
+/** The whole plan for a topic: read, then solve, then build -- self-loading.
+ *  `sections` decides which steps this block is responsible for. */
 export function TopicWorkPanel({
   topicId,
-  show = "both",
+  sections = ["practice", "build"],
+  blockMinutes,
 }: {
   topicId: number;
-  /** Practice blocks want practice first; build blocks only want the build. */
-  show?: "both" | "practice" | "build";
+  sections?: WorkSection[];
+  /** The block's planned minutes, so the plan can be checked against them. */
+  blockMinutes?: number;
 }) {
   const [topic, setTopic] = useState<TopicNode | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -114,6 +244,15 @@ export function TopicWorkPanel({
       }),
     );
 
+  const learn = useMemo(() => topic?.resources_by_role?.PRIMARY ?? [], [topic]);
+  const practice = useMemo(() => topic?.resources_by_role?.PRACTICE ?? [], [topic]);
+
+  const plan = useMemo(() => {
+    const readMinutes = learn.reduce((sum, r) => sum + minutesFor(r, 20), 0);
+    const solveMinutes = practice.reduce((sum, r) => sum + minutesFor(r), 0);
+    return { readMinutes, solveMinutes, total: readMinutes + solveMinutes };
+  }, [learn, practice]);
+
   if (error && !topic) {
     return (
       <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4">
@@ -136,32 +275,89 @@ export function TopicWorkPanel({
     );
   }
 
-  const practice = topic.resources_by_role?.PRACTICE || [];
   const build = topic.implement || topic.exercises || [];
-  const wantPractice = show !== "build";
-  const wantBuild = show !== "practice";
+  const wants = (section: WorkSection) => sections.includes(section);
+  const showLearn = wants("learn") && learn.length > 0;
+  const showPractice = wants("practice");
+  const showBuild = wants("build") && build.length > 0;
+  const overBudget = blockMinutes != null && plan.total > blockMinutes;
+
+  // Numbered from the steps this block actually shows, so a practice-only
+  // block starts at 1 rather than skipping to 2.
+  const steps: WorkSection[] = [
+    ...(showLearn ? (["learn"] as const) : []),
+    ...(showPractice ? (["practice"] as const) : []),
+    ...(showBuild ? (["build"] as const) : []),
+  ];
+  const stepLabel = (section: WorkSection) => steps.indexOf(section) + 1;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {error ? <p className="text-sm text-[var(--warn)]">{error}</p> : null}
 
-      {wantPractice ? (
+      {showLearn && showPractice ? (
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            Plan for this block
+          </p>
+          <p className="mt-1 text-sm">
+            Read ~{plan.readMinutes} min, then solve {practice.length}{" "}
+            {practice.length === 1 ? "problem" : "problems"} ~{plan.solveMinutes} min
+            <span className="text-[var(--muted)]"> · {plan.total} min total</span>
+          </p>
+          {overBudget ? (
+            <p className="mt-1 text-xs text-[var(--warn)]">
+              That is {plan.total - (blockMinutes ?? 0)} min over the {blockMinutes} planned here.
+              Read first and solve as far as you get — the timer logs what you actually spend.
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
+      {showLearn ? (
         <section>
-          <p className="text-sm font-semibold">Practice</p>
-          <p className="mt-0.5 text-xs text-[var(--muted)]">
-            Do the work on the official platform — not an in-app quiz.
+          <p className="text-sm font-semibold">
+            {stepLabel("learn")}. Learn it first
+            <span className="ml-2 text-xs font-normal text-[var(--muted)]">
+              ~{plan.readMinutes} min · read before you attempt anything below
+            </span>
+          </p>
+          <div className="mt-3 space-y-3">
+            {learn.map((resource) => (
+              <SourceResourceCard
+                key={resource.id}
+                resource={resource}
+                locked={topic.locked}
+                onToggle={toggleResource}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {showPractice ? (
+        <section>
+          <p className="text-sm font-semibold">
+            {stepLabel("practice")}. Then solve these
+            <span className="ml-2 text-xs font-normal text-[var(--muted)]">
+              {practice.length > 0
+                ? `~${plan.solveMinutes} min · mapped to this topic, in order`
+                : "do the work on the official platform — not an in-app quiz"}
+            </span>
           </p>
           {practice.length > 0 ? (
-            <div className="mt-3 space-y-3">
-              {practice.map((resource) => (
-                <SourceResourceCard
+            <ul className="mt-3 space-y-3">
+              {practice.map((resource, i) => (
+                <ProblemRow
                   key={resource.id}
                   resource={resource}
+                  index={i}
                   locked={topic.locked}
+                  busy={busy === `resource-${resource.id}`}
                   onToggle={toggleResource}
                 />
               ))}
-            </div>
+            </ul>
           ) : topic.locked ? null : (
             <div className="mt-3">
               <PracticePrompt topic={topic} />
@@ -170,54 +366,50 @@ export function TopicWorkPanel({
         </section>
       ) : null}
 
-      {wantBuild ? (
+      {showBuild ? (
         <section>
-          <p className="text-sm font-semibold">Build</p>
-          <p className="mt-0.5 text-xs text-[var(--muted)]">
-            One concrete implementation action — then mark it done.
+          <p className="text-sm font-semibold">
+            {stepLabel("build")}. Build
+            <span className="ml-2 text-xs font-normal text-[var(--muted)]">
+              one concrete implementation action
+            </span>
           </p>
-          {build.length === 0 ? (
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              No implementation task is mapped for this topic yet.
-            </p>
-          ) : (
-            <div className="mt-3 space-y-3">
-              {build.map((exercise) => (
-                <div
-                  key={exercise.id}
-                  className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium">{exercise.title}</p>
-                      {exercise.description ? (
-                        <p className="mt-1 text-sm text-[var(--muted)]">{exercise.description}</p>
-                      ) : null}
-                    </div>
-                    {exercise.completed ? (
-                      <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[var(--ok-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--ok)]">
-                        <Check className="h-3 w-3" /> Done
-                      </span>
+          <div className="mt-3 space-y-3">
+            {build.map((exercise) => (
+              <div
+                key={exercise.id}
+                className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{exercise.title}</p>
+                    {exercise.description ? (
+                      <p className="mt-1 text-sm text-[var(--muted)]">{exercise.description}</p>
                     ) : null}
                   </div>
-                  {!exercise.completed && !topic.locked ? (
-                    <div className="mt-3">
-                      <GhostButton
-                        disabled={busy === `build-${exercise.id}`}
-                        onClick={() =>
-                          run(`build-${exercise.id}`, () =>
-                            api(`/api/exercise/${exercise.id}/complete`, { method: "POST" }),
-                          )
-                        }
-                      >
-                        {busy === `build-${exercise.id}` ? "Saving…" : "Mark implementation complete"}
-                      </GhostButton>
-                    </div>
+                  {exercise.completed ? (
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[var(--ok-soft)] px-2.5 py-0.5 text-xs font-medium text-[var(--ok)]">
+                      <Check className="h-3 w-3" /> Done
+                    </span>
                   ) : null}
                 </div>
-              ))}
-            </div>
-          )}
+                {!exercise.completed && !topic.locked ? (
+                  <div className="mt-3">
+                    <GhostButton
+                      disabled={busy === `build-${exercise.id}`}
+                      onClick={() =>
+                        run(`build-${exercise.id}`, () =>
+                          api(`/api/exercise/${exercise.id}/complete`, { method: "POST" }),
+                        )
+                      }
+                    >
+                      {busy === `build-${exercise.id}` ? "Saving…" : "Mark implementation complete"}
+                    </GhostButton>
+                  </div>
+                ) : null}
+              </div>
+            ))}
+          </div>
         </section>
       ) : null}
 

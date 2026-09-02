@@ -25,6 +25,7 @@ import pytest
 
 from app.content.apply_dsa_exact_problems import (
     COLLECTION_URLS,
+    _resource_slug,
     apply,
     refresh_open_plan_items,
 )
@@ -98,6 +99,25 @@ def test_difficulty_never_decreases_within_a_topic(facts):
         assert difficulties == sorted(difficulties), (
             f"{topic_slug} is not a progression: {[(s, d) for s, d in pairs]}"
         )
+
+
+#: Topics that sit before any technique has been taught. Their PRIMARY source is
+#: a definition page, so a problem needing a named algorithm does not follow
+#: from it however well its tags line up. This is the rule the tag check cannot
+#: express: "correctly classified" is not the same as "reachable from today's
+#: reading". Kept deliberately small -- best/worst/average genuinely needs
+#: quickselect to make its point, so it is not in here.
+FOUNDATION_TOPICS = ("dsa-algorithmic-thinking", "dsa-big-o")
+
+
+def test_foundation_topics_stay_solvable_from_their_reading(facts):
+    for topic_slug in FOUNDATION_TOPICS:
+        for problem_slug, _tags, _why in DSA_EXACT_PROBLEMS[topic_slug]["problems"]:
+            fact = facts[problem_slug]
+            assert fact["difficulty"] == "Easy", (
+                f"{topic_slug} maps {fact['title']} ({fact['difficulty']}). "
+                "Nothing above Easy follows from a definition page."
+            )
 
 
 def test_no_topic_opens_on_a_hard_problem(facts):
@@ -302,3 +322,225 @@ def test_repointing_is_idempotent(client):
         assert refresh_open_plan_items(db) == 0
     finally:
         db.close()
+
+
+# --- the writer has to converge, not just accumulate -------------------
+
+
+def _managed_rows(topic_slug: str, *, visible_only: bool = True):
+    db = SessionLocal()
+    try:
+        rows = (
+            db.query(CurriculumResource)
+            .join(CurriculumLesson, CurriculumLesson.id == CurriculumResource.lesson_id)
+            .join(CurriculumTopic, CurriculumTopic.id == CurriculumLesson.topic_id)
+            .filter(CurriculumTopic.slug == topic_slug)
+            .all()
+        )
+        prefix = f"{topic_slug}--lc-"
+        return [
+            r for r in rows
+            if (r.slug or "").startswith(prefix) and (r.learner_visible or not visible_only)
+        ]
+    finally:
+        db.close()
+
+
+def test_dropping_a_problem_from_the_map_retires_its_row(client, monkeypatch):
+    """A correction to the map has to actually reach the database.
+
+    The writer used to be additive, so removing a problem left its row in place
+    -- still PRACTICE, still EXACT, still offered -- and the correction was
+    invisible in the app.
+    """
+    topic_slug = "dsa-array-traversal"
+    _seed([topic_slug])
+    db = SessionLocal()
+    try:
+        apply(db)
+        db.commit()
+    finally:
+        db.close()
+
+    full = DSA_EXACT_PROBLEMS[topic_slug]
+    assert len(full["problems"]) >= 2
+    dropped_slug = full["problems"][-1][0]
+    trimmed = dict(DSA_EXACT_PROBLEMS)
+    trimmed[topic_slug] = {**full, "problems": full["problems"][:-1]}
+
+    import app.content.apply_dsa_exact_problems as mod
+    monkeypatch.setattr(mod, "DSA_EXACT_PROBLEMS", trimmed)
+
+    db = SessionLocal()
+    try:
+        stats = mod.apply(db)
+        db.commit()
+    finally:
+        db.close()
+
+    assert stats["retired_deleted"] == 1
+    remaining = {r.slug for r in _managed_rows(topic_slug)}
+    assert _resource_slug(topic_slug, dropped_slug) not in remaining
+    assert len(remaining) == len(trimmed[topic_slug]["problems"])
+
+
+def test_a_solved_problem_is_hidden_rather_than_deleted(client, monkeypatch):
+    """Retiring must never erase evidence of work already done."""
+    topic_slug = "dsa-array-traversal"
+    _seed([topic_slug])
+    db = SessionLocal()
+    try:
+        apply(db)
+        db.commit()
+    finally:
+        db.close()
+
+    full = DSA_EXACT_PROBLEMS[topic_slug]
+    dropped_slug = full["problems"][-1][0]
+    row_slug = _resource_slug(topic_slug, dropped_slug)
+
+    db = SessionLocal()
+    try:
+        row = db.query(CurriculumResource).filter(CurriculumResource.slug == row_slug).one()
+        row.completion_status = "completed"
+        db.commit()
+    finally:
+        db.close()
+
+    trimmed = dict(DSA_EXACT_PROBLEMS)
+    trimmed[topic_slug] = {**full, "problems": full["problems"][:-1]}
+    import app.content.apply_dsa_exact_problems as mod
+    monkeypatch.setattr(mod, "DSA_EXACT_PROBLEMS", trimmed)
+
+    db = SessionLocal()
+    try:
+        stats = mod.apply(db)
+        db.commit()
+    finally:
+        db.close()
+
+    assert stats["retired_hidden"] == 1
+    assert stats["retired_deleted"] == 0
+    db = SessionLocal()
+    try:
+        row = db.query(CurriculumResource).filter(CurriculumResource.slug == row_slug).one()
+        assert row.completion_status == "completed", "solved work was destroyed"
+        assert not row.learner_visible, "a dropped problem is still being offered"
+    finally:
+        db.close()
+    assert row_slug not in {r.slug for r in _managed_rows(topic_slug)}
+
+
+def test_order_index_has_no_duplicates_within_a_topic(client):
+    _seed(SAMPLE_TOPICS)
+    db = SessionLocal()
+    try:
+        apply(db)
+        db.commit()
+    finally:
+        db.close()
+    for topic_slug in SAMPLE_TOPICS:
+        indices = [r.order_index for r in _managed_rows(topic_slug)]
+        assert len(indices) == len(set(indices)), f"{topic_slug} has colliding order_index {indices}"
+
+
+# --- reachability: reviewed, then ratcheted ----------------------------
+
+#: Entries that sit 10+ modules before a technique LeetCode tags them with, and
+#: which have been read individually and accepted. In every case the advanced
+#: tag names an *alternative* solution, not a requirement:
+#:
+#:   Missing Number            the sum formula needs nothing at all
+#:   Single Number             a count map solves it; XOR is the upgrade
+#:   Best Time to Buy/Sell     one pass with a running minimum, no DP
+#:   Longest Common Prefix     scan columns; the trie tag is a different route
+#:   Find the Difference       counting; bit tricks are optional
+#:   Longest Palindromic Sub.  expand around each centre, no table
+#:   Is Subsequence            two pointers; the DP tag is the harder variant
+#:   Find the Duplicate Number Floyd on an array -- that IS the topic
+#:   Container With Most Water the two-pointer move; "greedy" names its proof
+#:   Longest Consecutive Seq.  a hash set is the intended solution
+#:   01 Matrix                 multi-source BFS -- that IS the topic
+#:   Letter Case Permutation   backtracking; bitmask is the alternative
+#:   Fibonacci Number          plain recursion; memoisation comes later
+#:   Subsets / Subsets II      backtracking; the bitmask route is optional
+#:   Binary Search             a 3-line loop, standard in a complexity lesson
+#:   Palindrome Partitioning   backtracking with a palindrome check
+#:   Sort Characters By Freq.  counting then ordering; sorted() is a call
+#:   Top K Frequent Elements   counting then ordering; sorted() is a call
+#:   Count of Smaller Numbers  counting during the merge -- that IS the topic
+#:   Contains Duplicate        brute force, sort, or set: the point is comparing
+#:   Majority Element          counting
+#:   Merge Sorted Array        the merge step by hand
+#:   Split Array Largest Sum   binary search on the answer -- that IS the topic
+#:   Min Number of Moves       sort both sides and pair; sorted() is a call
+#:   Largest Number            a comparator -- that IS the topic
+#:   Count Complete Tree Nodes definition of completeness -- that IS the topic
+REVIEWED_EARLY = {
+    ("dsa-array-frequency", "Majority Element"),
+    ("dsa-array-frequency", "Single Number"),
+    ("dsa-array-patterns", "Best Time to Buy and Sell Stock"),
+    ("dsa-array-patterns", "Merge Sorted Array"),
+    ("dsa-best-worst-average", "Binary Search"),
+    ("dsa-best-worst-average", "Contains Duplicate"),
+    ("dsa-big-o", "Contains Duplicate"),
+    ("dsa-big-o", "Missing Number"),
+    ("dsa-constraint-search", "Palindrome Partitioning"),
+    ("dsa-fast-slow", "Find the Duplicate Number"),
+    ("dsa-frequency-maps", "Find the Difference"),
+    ("dsa-frequency-maps", "Sort Characters By Frequency"),
+    ("dsa-frequency-maps", "Top K Frequent Elements"),
+    ("dsa-hash-set", "Longest Consecutive Sequence"),
+    ("dsa-merge-sort", "Count of Smaller Numbers After Self"),
+    ("dsa-permutations", "Letter Case Permutation"),
+    ("dsa-queue-bfs-relationship", "01 Matrix"),
+    ("dsa-recursion-model", "Fibonacci Number"),
+    ("dsa-search-on-answer", "Split Array Largest Sum"),
+    ("dsa-selection-sort", "Minimum Number of Moves to Seat Everyone"),
+    ("dsa-sort-complexity", "Largest Number"),
+    ("dsa-string-patterns", "Longest Common Prefix"),
+    ("dsa-string-patterns", "Longest Palindromic Substring"),
+    ("dsa-subsets", "Subsets"),
+    ("dsa-subsets", "Subsets II"),
+    ("dsa-two-pointers-opposite", "Container With Most Water"),
+    ("dsa-two-pointers-same", "Is Subsequence"),
+    ("dsa-tree-terminology", "Count Complete Tree Nodes"),
+}
+
+#: Below this, the tag is nearly always an alternative route rather than a
+#: prerequisite, and pinning every one of them would be noise.
+EARLY_GAP_THRESHOLD = 10
+
+
+def test_no_unreviewed_problem_sits_far_before_its_technique(client):
+    """A ratchet, not a proof.
+
+    Tag checking shows a problem *uses* the technique it is filed under. It
+    cannot show the learner can reach it -- that is judgement. So the judgement
+    is written down once in REVIEWED_EARLY, and this fails the moment a new
+    entry lands far ahead of the module that teaches what it needs.
+    """
+    from app.content.audit_dsa_reachability import find_flags
+
+    current = {
+        (f["topic"], f["problem"]) for f in find_flags() if f["gap"] >= EARLY_GAP_THRESHOLD
+    }
+    unreviewed = current - REVIEWED_EARLY
+    assert not unreviewed, (
+        "these sit far before the technique they need and have not been reviewed:\n  "
+        + "\n  ".join(f"{t} -> {p}" for t, p in sorted(unreviewed))
+        + "\nEither remap them, or add them to REVIEWED_EARLY with the reason."
+    )
+
+    stale = REVIEWED_EARLY - current
+    assert not stale, (
+        "REVIEWED_EARLY names entries that no longer flag; drop them:\n  "
+        + "\n  ".join(f"{t} -> {p}" for t, p in sorted(stale))
+    )
+
+
+def test_every_problem_has_solutions_to_fall_back_on(facts):
+    """The Stuck? button must never lead somewhere empty."""
+    for slug, fact in facts.items():
+        assert fact.get("solution_count", 0) > 0, f"{slug} has no community solutions"
+        assert fact["solutions_url"] == f"https://leetcode.com/problems/{slug}/solutions/"
