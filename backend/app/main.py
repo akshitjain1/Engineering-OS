@@ -715,6 +715,22 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
         ),
         None,
     )
+    # A DSA topic's practice is now a list of exact, verified problems held as
+    # PRACTICE resources. Its legacy exercise row predates that mapping and
+    # still reads "solve 4 problems on the LeetCode 'array' tag" -- vaguer than
+    # what the mapped problems already answer, and contradicted by them. Worse,
+    # that row matched the build selector too ("...implementing it from
+    # scratch"), so the same stale sentence rendered twice on the page. Where
+    # real problems exist, they are the contract.
+    mapped_problems = [
+        r
+        for r in (payload["resources_by_role"].get("PRACTICE") or [])
+        if r.get("resource_type") == "problem" and r.get("url")
+    ]
+    if mapped_problems:
+        practice_ex = None
+        build_ex = None
+
     from app.content.audit import audit_topic
 
     audit = audit_topic(db, topic.slug) if topic.slug else None
@@ -743,14 +759,35 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
         },
         "focus_concepts": (audit.required_concepts if audit else [])[:12],
         "practice": {
-            "title": practice_ex.title if practice_ex else None,
-            "instructions": (
-                getattr(practice_ex, "practice_instructions", None)
-                or (practice_ex.description if practice_ex else None)
+            "title": (
+                f"{len(mapped_problems)} mapped problems"
+                if mapped_problems
+                else (practice_ex.title if practice_ex else None)
             ),
-            "destination_type": getattr(practice_ex, "destination_type", None) if practice_ex else None,
-            "destination_url": getattr(practice_ex, "destination_url", None) if practice_ex else None,
-            "quantity": getattr(practice_ex, "quantity", None) if practice_ex else None,
+            "instructions": (
+                "Solve these in order: "
+                + "; ".join(r["title"] for r in mapped_problems)
+                if mapped_problems
+                else (
+                    getattr(practice_ex, "practice_instructions", None)
+                    or (practice_ex.description if practice_ex else None)
+                )
+            ),
+            "destination_type": (
+                (mapped_problems[0].get("provider") or "").upper() or None
+                if mapped_problems
+                else (getattr(practice_ex, "destination_type", None) if practice_ex else None)
+            ),
+            "destination_url": (
+                mapped_problems[0]["url"]
+                if mapped_problems
+                else (getattr(practice_ex, "destination_url", None) if practice_ex else None)
+            ),
+            "quantity": (
+                len(mapped_problems)
+                if mapped_problems
+                else (getattr(practice_ex, "quantity", None) if practice_ex else None)
+            ),
         },
         "build": {
             "title": build_ex.title if build_ex else None,

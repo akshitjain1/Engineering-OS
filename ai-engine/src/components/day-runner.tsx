@@ -230,20 +230,29 @@ function FocusCard({
     item.topic_id === null
       ? null
       : item.activity_type === "DSA"
-        ? ["learn", "practice"]
+        ? ["learn", "practice", "recall"]
         : item.activity_type === "PRACTICE"
           ? ["practice", "build"]
           : item.activity_type === "BUILD"
             ? ["build"]
-            : null;
+            : item.activity_type === "LEARN"
+              ? // The source card above already covers the reading, so a LEARN
+                // block only needs the part that was missing: being asked.
+                ["recall"]
+              : null;
   const inlineWork = workSections !== null;
   // The sequence already opens with the source, so a second copy is noise.
   const showResourceCard = Boolean(item.resource?.url) && item.activity_type !== "DSA";
   // Checked by default. The cursor only advances when a topic is marked
-  // finished, so defaulting this off silently served the same topic every day.
+  // finished, so defaulting this off silently serves the same topic every day
+  // and leaves the DSA board reading zero however much work you did.
+  //
+  // That is exactly what happened: an effect here reset this to false on mount
+  // and on every item change, so the state initialiser below never survived and
+  // the box was permanently unchecked -- the precise failure the comment above
+  // was written to prevent. FocusCard is now keyed on the item id by its
+  // parent, so React remounts it per block and the default holds.
   const [alsoComplete, setAlsoComplete] = useState(true);
-
-  useEffect(() => setAlsoComplete(false), [item.id]);
 
   return (
     <article className="rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow)]">
@@ -729,7 +738,13 @@ export function DayRunner() {
       <DayRail items={day.items} activeId={activeItem?.id ?? null} onJump={setActiveId} />
 
       {activeItem ? (
-        <FocusCard item={activeItem} onDone={handleDone} onSkip={handleSkip} busy={busy} />
+        <FocusCard
+          key={activeItem.id}
+          item={activeItem}
+          onDone={handleDone}
+          onSkip={handleSkip}
+          busy={busy}
+        />
       ) : (
         <DayComplete
           day={day}

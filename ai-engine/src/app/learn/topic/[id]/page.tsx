@@ -6,7 +6,13 @@ import { useParams } from "next/navigation";
 import { Check, ChevronRight, Clock, Loader2, Lock } from "lucide-react";
 import { PrerequisiteList } from "@/components/prerequisite-list";
 import { SourceResourceCard } from "@/components/source-resource";
-import { PracticePrompt, ProblemRow, type ProblemContext } from "@/components/topic-work";
+import { TopicQuestions } from "@/components/topic-questions";
+import {
+  PracticePrompt,
+  ProblemRow,
+  isCodingProblem,
+  type ProblemContext,
+} from "@/components/topic-work";
 import { StatusBadge } from "@/components/status-badge";
 import { Banner, GhostButton, LoadingLine, Page, PrimaryButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
@@ -256,6 +262,27 @@ function TopicView({
 
   // Matches what the day runner passes, so a problem card offers the same
   // prompt wherever you meet it.
+  // Numbering counts problems only; a tutorial sitting in PRACTICE keeps the
+  // plain source card and does not consume a problem number.
+  const problems = practice.filter(isCodingProblem);
+
+  // DSA topics no longer show Build. Their build task is a leftover instruction
+  // to "solve 4 problems on the LeetCode array tag" -- written before exact
+  // problems were mapped, and now both redundant and contradicted by the
+  // numbered problems sitting directly above it.
+  const isDsa = (topic.domain_key || "").toLowerCase() === "dsa";
+  const questions = topic.questions ?? [];
+  const sections: [string, string][] = [
+    ["what-to-do", "Overview"],
+    ["learn", "Learn"],
+    ["practice", "Practice"],
+    ...((build.length > 0 && !isDsa ? [["build", "Build"]] : []) as [string, string][]),
+    ...((questions.length > 0 ? [["recall", "Recall"]] : []) as [string, string][]),
+    ...((deepDive.length > 0 ? [["deep-dive", "Deep Dive"]] : []) as [string, string][]),
+  ];
+  const stepNo = (id: string) => String(sections.findIndex(([key]) => key === id) + 1);
+  const shows = (id: string) => sections.some(([key]) => key === id);
+
   const problemContext: ProblemContext = {
     topicName: topic.name,
     sourceTitle: primary[0]?.title ?? null,
@@ -358,13 +385,7 @@ function TopicView({
           <div className="sticky top-16 rounded-lg border border-[var(--border)] bg-[var(--card)] p-3 text-sm">
             <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">On this topic</p>
             <ul className="mt-2 space-y-1">
-              {[
-                ["what-to-do", "Overview"],
-                ["learn", "Learn"],
-                ["practice", "Practice"],
-                ["build", "Build"],
-                ["deep-dive", "Deep Dive"],
-              ].map(([id, label]) => (
+              {sections.map(([id, label]) => (
                 <li key={id}><a href={`#${id}`} className="block rounded px-2 py-1 hover:bg-[var(--card-2)]">{label}</a></li>
               ))}
             </ul>
@@ -374,7 +395,7 @@ function TopicView({
         {/* CENTER */}
         <div>
       <section id="what-to-do" className="scroll-mt-20">
-        <SectionTitle step="1" title="What to do" hint="A short working plan for this topic." />
+        <SectionTitle step={stepNo("what-to-do")} title="What to do" hint="A short working plan for this topic." />
         <ul className="mt-3 space-y-2">
           <WhatToDoRow
             label="Learn from the source"
@@ -386,11 +407,20 @@ function TopicView({
             detail={practiceMapped ? `${Math.round(practice.length * 20)} min · mapped practice sources` : "20 min · take the prompt below to any AI or platform"}
             done={practiceDone}
           />
-          <WhatToDoRow
-            label="Build"
-            detail={build.length ? `${build.length * 25} min · implementation task` : "No implementation task mapped"}
-            done={buildDone}
-          />
+          {shows("build") ? (
+            <WhatToDoRow
+              label="Build"
+              detail={`${build.length * 25} min · implementation task`}
+              done={buildDone}
+            />
+          ) : null}
+          {shows("recall") ? (
+            <WhatToDoRow
+              label="Recall"
+              detail={`${questions.length} question${questions.length === 1 ? "" : "s"} · answer from memory`}
+              done={questions.every((q) => q.last_correct)}
+            />
+          ) : null}
           {deepDive.length > 0 ? (
             <WhatToDoRow
               label="Optional deep dive"
@@ -403,7 +433,7 @@ function TopicView({
       </section>
 
       <section id="learn" className="mt-10 scroll-mt-20">
-        <SectionTitle step="2" title="Learn from" hint="The primary source — watch or read it." />
+        <SectionTitle step={stepNo("learn")} title="Learn from" hint="The primary source — watch or read it." />
         {primary.length === 0 ? (
           <p className="mt-3 text-sm text-[var(--warn)]">
             SOURCE NOT MAPPED YET. Engineering OS does not invent URLs. Verified sources appear here when mapped.
@@ -434,20 +464,30 @@ function TopicView({
       </section>
 
       <section id="practice" className="mt-10 scroll-mt-20">
-        <SectionTitle step="3" title="Practice" hint="Do the work on the official platform — not an in-app quiz." />
+        <SectionTitle step={stepNo("practice")} title="Practice" hint="Do the work on the official platform — not an in-app quiz." />
         {practiceMapped ? (
           <ul className="mt-3 space-y-3">
-            {practice.map((resource, i) => (
-              <ProblemRow
-                key={resource.id}
-                resource={resource}
-                index={i}
-                context={problemContext}
-                locked={topic.locked}
-                busy={false}
-                onToggle={onToggleResource}
-              />
-            ))}
+            {practice.map((resource) =>
+              isCodingProblem(resource) ? (
+                <ProblemRow
+                  key={resource.id}
+                  resource={resource}
+                  index={problems.indexOf(resource)}
+                  context={problemContext}
+                  locked={topic.locked}
+                  busy={false}
+                  onToggle={onToggleResource}
+                />
+              ) : (
+                <li key={resource.id}>
+                  <SourceResourceCard
+                    resource={resource}
+                    locked={topic.locked}
+                    onToggle={onToggleResource}
+                  />
+                </li>
+              ),
+            )}
           </ul>
         ) : topic.locked ? null : (
           <div className="mt-3">
@@ -456,8 +496,9 @@ function TopicView({
         )}
       </section>
 
+      {shows("build") ? (
       <section id="build" className="mt-10 scroll-mt-20">
-        <SectionTitle step="4" title="Build" hint="One concrete implementation action — then mark it done." />
+        <SectionTitle step={stepNo("build")} title="Build" hint="One concrete implementation action — then mark it done." />
         {build.length === 0 ? (
           <p className="mt-3 text-sm text-[var(--muted)]">No implementation task is mapped for this topic yet.</p>
         ) : (
@@ -496,10 +537,24 @@ function TopicView({
           </div>
         )}
       </section>
+      ) : null}
 
-      {deepDive.length > 0 ? (
+      {shows("recall") ? (
+        <section id="recall" className="mt-10 scroll-mt-20">
+          <SectionTitle
+            step={stepNo("recall")}
+            title="Recall"
+            hint="Answer from memory — the only step that proves you have it."
+          />
+          <div className="mt-3">
+            <TopicQuestions questions={questions} />
+          </div>
+        </section>
+      ) : null}
+
+      {shows("deep-dive") ? (
         <section id="deep-dive" className="mt-10 scroll-mt-20">
-          <SectionTitle step="5" title="Optional deep dive" hint="Extra context — only if you want more." />
+          <SectionTitle step={stepNo("deep-dive")} title="Optional deep dive" hint="Extra context — only if you want more." />
           <div className="mt-3 space-y-3">
             {deepDive.map((resource) => (
               <SourceResourceCard key={resource.id} resource={resource} locked={topic.locked} onToggle={onToggleResource} />

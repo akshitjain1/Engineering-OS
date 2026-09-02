@@ -8,6 +8,7 @@ import { GhostButton } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
 import type { ResourcePublic, TopicNode } from "@/lib/curriculum";
 import { buildStuckPrompt } from "@/lib/stuck-prompt";
+import { TopicQuestions } from "@/components/topic-questions";
 
 /* -------------------------------------------------------------------------
  * A topic's work, in the order you are meant to do it, rendered wherever you
@@ -20,7 +21,7 @@ import { buildStuckPrompt } from "@/lib/stuck-prompt";
  * first, then solve, with a time budget on each, is the whole idea.
  * ---------------------------------------------------------------------- */
 
-export type WorkSection = "learn" | "practice" | "build";
+export type WorkSection = "learn" | "practice" | "build" | "recall";
 
 /** What a problem card needs to know about where it sits, so a stuck learner
  *  gets a prompt with real context rather than just a problem title. */
@@ -32,6 +33,16 @@ export type ProblemContext = {
 
 /** The language the generated prompt asks for code in. */
 export const PROMPT_LANGUAGE = "Java";
+
+/** Whether a practice resource is an actual coding problem.
+ *
+ *  The stuck prompt asks for a brute force, a dry run and similar LeetCode
+ *  numbers. That is meaningful for a problem and nonsense for a tutorial page,
+ *  so PRACTICE resources that are not problems keep the plain source card.
+ *  `resource_type` is the canonicalised value, where coding_problem becomes
+ *  "problem" and an interactive tutorial becomes "course". */
+export const isCodingProblem = (resource: ResourcePublic) =>
+  resource.resource_type === "problem";
 
 /** Minutes this one source is expected to take. */
 function minutesFor(resource: ResourcePublic, fallback = 15): number {
@@ -211,10 +222,10 @@ export function ProblemRow({
         <div className="mt-3 rounded-md border border-[var(--border)] bg-[var(--card-2)] p-3">
           <p className="text-sm font-medium">Ask for the reasoning, not the answer</p>
           <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
-            Paste this into any AI assistant. It asks for the concepts, the plain-English problem,
-            the brute force and why it falls short, and the reasoning that makes the technique
-            obvious — with the {PROMPT_LANGUAGE} code only at the very end, so you read the thinking
-            first. Attempt it yourself before you paste.
+            Paste this into any AI assistant. It asks for the reasoning that makes the technique
+            obvious, then pseudocode and a dry run so you see how a plan becomes code — mostly as
+            tables, with the {PROMPT_LANGUAGE} only near the end and a “remember this” after it.
+            Attempt the problem yourself first.
           </p>
           <textarea
             readOnly
@@ -298,6 +309,14 @@ export function TopicWorkPanel({
     };
   }, [topic, learn]);
 
+  // Problem 1, 2, 3... counts problems only, so a non-problem sitting among
+  // them cannot shift the numbering.
+  const problemIndex = useMemo(() => {
+    const map = new Map<number, number>();
+    practice.filter(isCodingProblem).forEach((r, i) => map.set(r.id, i));
+    return map;
+  }, [practice]);
+
   const plan = useMemo(() => {
     const readMinutes = learn.reduce((sum, r) => sum + minutesFor(r, 20), 0);
     const solveMinutes = practice.reduce((sum, r) => sum + minutesFor(r), 0);
@@ -331,6 +350,8 @@ export function TopicWorkPanel({
   const showLearn = wants("learn") && learn.length > 0;
   const showPractice = wants("practice");
   const showBuild = wants("build") && build.length > 0;
+  const questions = topic.questions ?? [];
+  const showRecall = wants("recall") && questions.length > 0;
   const overBudget = blockMinutes != null && plan.total > blockMinutes;
 
   // Numbered from the steps this block actually shows, so a practice-only
@@ -339,6 +360,7 @@ export function TopicWorkPanel({
     ...(showLearn ? (["learn"] as const) : []),
     ...(showPractice ? (["practice"] as const) : []),
     ...(showBuild ? (["build"] as const) : []),
+    ...(showRecall ? (["recall"] as const) : []),
   ];
   const stepLabel = (section: WorkSection) => steps.indexOf(section) + 1;
 
@@ -398,17 +420,27 @@ export function TopicWorkPanel({
           </p>
           {practice.length > 0 ? (
             <ul className="mt-3 space-y-3">
-              {practice.map((resource, i) => (
-                <ProblemRow
-                  key={resource.id}
-                  resource={resource}
-                  index={i}
-                  context={problemContext}
-                  locked={topic.locked}
-                  busy={busy === `resource-${resource.id}`}
-                  onToggle={toggleResource}
-                />
-              ))}
+              {practice.map((resource) =>
+                isCodingProblem(resource) ? (
+                  <ProblemRow
+                    key={resource.id}
+                    resource={resource}
+                    index={problemIndex.get(resource.id) ?? 0}
+                    context={problemContext}
+                    locked={topic.locked}
+                    busy={busy === `resource-${resource.id}`}
+                    onToggle={toggleResource}
+                  />
+                ) : (
+                  <li key={resource.id}>
+                    <SourceResourceCard
+                      resource={resource}
+                      locked={topic.locked}
+                      onToggle={toggleResource}
+                    />
+                  </li>
+                ),
+              )}
             </ul>
           ) : topic.locked ? null : (
             <div className="mt-3">
@@ -461,6 +493,20 @@ export function TopicWorkPanel({
                 ) : null}
               </div>
             ))}
+          </div>
+        </section>
+      ) : null}
+
+      {showRecall ? (
+        <section>
+          <p className="text-sm font-semibold">
+            {stepLabel("recall")}. Check you actually have it
+            <span className="ml-2 text-xs font-normal text-[var(--muted)]">
+              {questions.length} question{questions.length === 1 ? "" : "s"} · recall, not recognition
+            </span>
+          </p>
+          <div className="mt-3">
+            <TopicQuestions questions={questions} />
           </div>
         </section>
       ) : null}
