@@ -31,6 +31,11 @@ const NAV_GROUPS = [
   {
     label: "Review",
     items: [
+      // Grading a recall is what moves its next review date, and this page is
+      // the only place that grading exists. It was reachable only by typing the
+      // URL, which meant a REVIEW block could ask you to grade yourself with
+      // nowhere to do it -- and an ungraded item just comes back unchanged.
+      { href: "/revision", label: "Review queue" },
       { href: "/progress", label: "Progress" },
       { href: "/settings", label: "Settings" },
     ],

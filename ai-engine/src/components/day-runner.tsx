@@ -316,6 +316,26 @@ function FocusCard({
                 blockMinutes={item.planned_minutes}
               />
             </div>
+          ) : item.activity_type === "REVIEW" ? (
+            // A REVIEW block covers several due items at once, so it carries no
+            // topic_id and none of the inline work above applies. It tells you
+            // to grade yourself Hard / OK / Easy -- and the only place that
+            // grading exists is the review queue. Without this link the block
+            // asks for something the page gives you no way to do, and the
+            // schedule never advances.
+            <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
+              <p className="text-sm font-medium">Grade each one after you recall it</p>
+              <p className="mt-1 text-sm text-[var(--muted)]">
+                Say the explanation out loud first. Grading is what moves the next review
+                date — an ungraded item comes back tomorrow unchanged.
+              </p>
+              <Link
+                href="/revision"
+                className="mt-3 inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3.5 py-2 text-sm font-medium hover:border-[var(--border-strong)]"
+              >
+                Open the review queue <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           ) : !showResourceCard && item.topic_id ? (
             <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
               <p className="text-sm font-medium">Work inside the topic</p>
@@ -556,7 +576,12 @@ export function DayRunner() {
     }
   }, []);
 
+  // Fetching the day on mount is what an effect is for, and nothing is set
+  // synchronously here: `load` is async and its first statement awaits, so
+  // every setState inside it lands in a later tick. The rule cannot see through
+  // the async boundary, so it is silenced rather than the code contorted.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, [load]);
 
