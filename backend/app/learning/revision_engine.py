@@ -4,7 +4,7 @@ Replaces the static confidence→bucket mapping while keeping the existing
 API contract. SM-2-inspired:
 
 - confidence >= 80 → successful retrieval: interval *= ease, ease += 0.05
-- 50 <= confidence < 80 → partial: interval unchanged (repetition due sooner)
+- 50 <= confidence < 80 → partial: interval grows slowly (×1.2, at least +1 day)
 - confidence < 50 → failure: interval resets to 1 day, ease -= 0.2
 
 Initial ladder stays approximately +1/+3/+7/+14/+30 days via the ease
@@ -24,6 +24,10 @@ INITIAL_INTERVAL_DAYS = 1
 MIN_INTERVAL_DAYS = 1
 MAX_INTERVAL_DAYS = 60
 DEFAULT_EASE = 2.5
+#: Growth applied to a partial recall. Small enough that "recalled with effort"
+#: is clearly worse than "instant", large enough that it still moves -- see
+#: next_interval for why "unchanged" was not a safe answer.
+PARTIAL_GROWTH = 1.2
 EASE_MIN = 1.3
 EASE_MAX = 3.2
 LADDER_CAPS = (1, 3, 7, 14, 30)
@@ -64,7 +68,21 @@ def next_interval(
         else:
             nxt = int(round(previous_interval_days * new_ease))
     elif quality == "partial":
-        nxt = max(previous_interval_days, INITIAL_INTERVAL_DAYS)
+        # A partial recall must still move the date out -- slowly, but out.
+        #
+        # This used to return the interval unchanged. Because a new item is
+        # seeded at one day, anything graded "OK" came back tomorrow, and
+        # again the next day, for ever. Simulating four months of honest daily
+        # grading grew the queue to 228 items inside a fifteen-minute block --
+        # three seconds an item. Only ever pressing "Easy" kept it bounded, so
+        # the schedule quietly punished honest grading, which is the one thing
+        # spaced repetition depends on.
+        #
+        # The +1 floor matters as much as the ratio: round(1 * 1.2) is 1, so a
+        # bare multiplier would leave every new item pinned at a single day and
+        # change nothing.
+        nxt = max(previous_interval_days + 1,
+                  int(round(previous_interval_days * PARTIAL_GROWTH)))
     else:  # fail
         new_ease = max(EASE_MIN, ease - 0.2)
         nxt = MIN_INTERVAL_DAYS

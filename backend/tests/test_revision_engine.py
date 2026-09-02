@@ -79,11 +79,56 @@ def test_next_interval_bounds():
     assert ease_big <= 3.2
 
 
-def test_partial_keeps_interval():
+def test_partial_grows_the_interval_slowly():
+    """A partial recall pushes the date out a little -- it must not stand still.
+
+    This test previously asserted the interval was left unchanged, which is
+    what the engine did. That is what made the queue unbounded: a new item is
+    seeded at one day, so grading it "OK" scheduled it for tomorrow, and every
+    tomorrow after that. Four simulated months of honest grading reached 228
+    items due in a fifteen-minute block.
+    """
     rec = FakeRecord(interval=7, success=2)
     out = schedule_update(rec, 65)
     assert out["quality"] == "partial"
-    assert rec.review_interval == 7
+    assert rec.review_interval == 8  # round(7 * 1.2)
+
+
+def test_partial_moves_a_one_day_item_off_tomorrow():
+    """The case that actually bit: multiplying 1 by 1.2 rounds back to 1."""
+    rec = FakeRecord(interval=1, success=0)
+    schedule_update(rec, 60)
+    assert rec.review_interval > 1
+
+
+def test_repeated_partials_do_not_pile_up():
+    """Grading "OK" every time must still space an item out.
+
+    Twenty honest partial recalls should leave an item weeks away, not due
+    again tomorrow. This is the property the queue's size depends on.
+    """
+    rec = FakeRecord(interval=1, success=0)
+    for _ in range(20):
+        schedule_update(rec, 60)
+    assert rec.review_interval >= 14, (
+        f"after 20 partial recalls the interval is still {rec.review_interval} days"
+    )
+
+
+def test_partial_is_still_worse_than_a_confident_recall():
+    """Slower growth than "Easy" -- otherwise the grades mean nothing."""
+    partial = FakeRecord(interval=10, success=3)
+    confident = FakeRecord(interval=10, success=3)
+    schedule_update(partial, 60)
+    schedule_update(confident, 95)
+    assert partial.review_interval < confident.review_interval
+
+
+def test_failure_still_resets_to_tomorrow():
+    """Growth on partial must not leak into the failure path."""
+    rec = FakeRecord(interval=30, success=5)
+    schedule_update(rec, 10)
+    assert rec.review_interval == 1
 
 
 def test_priority_score_orders_sensibly():
