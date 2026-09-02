@@ -106,33 +106,72 @@ python -m app.content.import_curriculum content/curriculum/v1-index.yaml
 
 ## Backups
 
-The whole learning history is one SQLite file, so back it up:
+`dev.db` holds everything: the 449-topic curriculum and every completion, streak
+and review date. It is gitignored, and so is `backups/`, so **pushing this repo
+does not back up any of it.** Two mechanisms cover that, and they fail
+differently.
+
+### 1. Local snapshots — automatic
+
+The launcher runs `scripts/backup_db.py` on every start, before anything can
+write to the database. It writes `backend/backups/dev-YYYY-MM-DD.db` using the
+SQLite online backup API rather than a file copy, so it is safe with the server
+up. Keeps the 14 most recent; same-day runs overwrite that day's file.
+
+Instant to restore, useless if the disk goes. Run it by hand any time:
 
 ```
 cd backend
 venv\Scripts\python scripts\backup_db.py
 ```
 
-Writes `backend/backups/dev-YYYY-MM-DD.db` using the SQLite online backup API
-rather than a file copy, so it is safe to run while the server is up. Keeps the
-14 most recent and prunes older ones; re-running on the same day overwrites that
-day's file. `backups/` is gitignored.
+### 2. Off-machine snapshot — one double-click
 
-To run it daily on Windows Task Scheduler:
+`scripts/export_db.py` writes the entire database as JSON under
+`backend/data/snapshot/`, which **is** committed. That is what makes `git push`
+a real backup.
 
-1. Task Scheduler -> **Create Task**, name it `Engineering OS backup`.
-2. **Triggers** -> New -> Daily, at a time the machine is usually on.
-3. **Actions** -> New -> Start a program, with
-   Program `<repo>\backend\venv\Scripts\python.exe`,
-   Arguments `scripts\backup_db.py`,
-   Start in `<repo>\backend` (the "Start in" box matters -- the script resolves
-   paths from the backend directory).
-4. **Settings** -> tick *Run task as soon as possible after a scheduled start is
-   missed*, so a machine that was off still gets a backup.
-5. Select the task -> **Run**, then check `backend\backups\`.
+Double-click `launcher/Backup to GitHub.bat`: it exports, commits only
+`backend/data/snapshot`, and pushes. Committing just that path means it is safe
+to run mid-edit — nothing else you are working on is staged or touched.
 
-Restore is a plain file copy: stop the server, replace `backend/dev.db` with the
-chosen backup, restart.
+The launcher prints a reminder on startup whenever the snapshot has uncommitted
+changes, so a stale backup is visible rather than silent.
+
+Layout, and why it is split:
+
+| Path | Holds | Changes |
+| --- | --- | --- |
+| `data/snapshot/schema.sql` | `CREATE TABLE` / `CREATE INDEX` | rarely |
+| `data/snapshot/manifest.json` | table -> row count, and which directory | daily |
+| `data/snapshot/curriculum/` | topics, resources, questions, exercises | when a content script runs |
+| `data/snapshot/progress/` | completions, streaks, plans, reviews | daily |
+
+Rows are ordered by primary key and keys are sorted, so an unchanged table
+produces a byte-identical file and an empty diff.
+
+### Restoring
+
+From a local snapshot — a plain file copy. Stop the server, replace
+`backend/dev.db` with the chosen file from `backend/backups/`, restart.
+
+From git, on a new machine or after losing the disk:
+
+```
+cd backend
+venv\Scripts\python scripts\restore_db.py --db dev.db
+```
+
+It rebuilds the database from `data/snapshot/`, then runs `integrity_check`.
+It refuses to overwrite an existing `dev.db` unless you pass `--force`, because
+the day you reach for this is the day a wrong `--db` costs the most.
+
+Dangling foreign keys are reported but never fatal: rows outlive the things they
+point at, and a backup that declines to open is not a backup.
+
+`tests/test_db_snapshot.py` runs a full export -> restore round trip on every
+test run, including one against the snapshot actually committed here — so this
+is checked continuously rather than on the day you need it.
 
 ## Current status
 

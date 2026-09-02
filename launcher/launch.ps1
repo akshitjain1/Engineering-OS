@@ -187,6 +187,59 @@ function Start-LoggedCmd {
     return $proc.Id
 }
 
+function Protect-Data {
+    <#
+        Take the day's backup before anything is allowed to write to the database.
+
+        Two copies, because they fail differently. backups\ is a binary snapshot
+        on this disk -- instant to restore, useless if the disk goes. The JSON
+        snapshot under backend\data\snapshot\ is text that git can hold, so
+        committing and pushing it puts your history somewhere this machine is not.
+        dev.db itself is gitignored, so without that snapshot a `git push` backs
+        up the code and none of the learning.
+
+        Nothing here may stop the app from opening. A backup is a safety net, and
+        a safety net that blocks the door is worse than none: every failure is
+        logged and startup continues regardless.
+    #>
+    param([string] $Python, [string] $BackendDir)
+
+    if (-not (Test-Path $Python)) {
+        Write-Log "[!!] Backup    skipped (no venv python at $Python)"
+        return
+    }
+
+    foreach ($step in @(
+        @{ Name = "backup_db.py"; Label = "local snapshot" },
+        @{ Name = "export_db.py"; Label = "git snapshot" }
+    )) {
+        $script = Join-Path $BackendDir "scripts\$($step.Name)"
+        if (-not (Test-Path $script)) {
+            Write-Log "[!!] Backup    $($step.Label) skipped ($($step.Name) is missing)"
+            continue
+        }
+        try {
+            $output = & $Python $script
+            if ($LASTEXITCODE -eq 0) {
+                Write-Log "[OK] Backup    $($step.Label): $(@($output)[0])"
+            } else {
+                Write-Log "[!!] Backup    $($step.Label) failed (exit $LASTEXITCODE): $($output -join ' ')"
+            }
+        } catch {
+            Write-Log "[!!] Backup    $($step.Label) failed: $($_.Exception.Message)"
+        }
+    }
+
+    # The export only writes files. Until they are pushed they are still on this
+    # one disk, so say so plainly rather than letting a green line imply safety.
+    try {
+        $pending = & git -C $BackendDir status --porcelain -- "data/snapshot"
+        if ($LASTEXITCODE -eq 0 -and $pending) {
+            Write-Log "[--] Backup    snapshot has uncommitted changes -- run 'Backup to GitHub.bat' to push them off this machine"
+        }
+    } catch { }
+}
+
 function Get-ManualBackend {
     return @"
 cd /d `"$BackendDir`"
@@ -238,6 +291,8 @@ try {
     } else {
         Write-Log "[!!] Database  (dev.db not found; launcher will not create or seed it)"
     }
+
+    Protect-Data -Python $python -BackendDir $BackendDir
 
     $state = Read-OwnedState
     $startedBackend = $false
