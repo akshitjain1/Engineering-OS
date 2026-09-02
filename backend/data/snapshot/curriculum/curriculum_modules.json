@@ -1,0 +1,610 @@
+[
+ {
+  "description": null,
+  "id": 1,
+  "name": "Computer Fundamentals",
+  "order_index": 0,
+  "slug": "mod-cf-computer-fundamentals",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 2,
+  "name": "Operating System Fundamentals",
+  "order_index": 1,
+  "slug": "mod-cf-operating-systems",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 3,
+  "name": "Terminal & Linux",
+  "order_index": 2,
+  "slug": "mod-cf-terminal-linux",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 4,
+  "name": "Git & Version Control",
+  "order_index": 3,
+  "slug": "mod-cf-git",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 5,
+  "name": "Development Environment",
+  "order_index": 4,
+  "slug": "mod-cf-dev-environment",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 6,
+  "name": "Programming & Problem-Solving Fundamentals",
+  "order_index": 5,
+  "slug": "mod-cf-programming-thinking",
+  "subject_id": 1
+ },
+ {
+  "description": null,
+  "id": 7,
+  "name": "Getting Started",
+  "order_index": 0,
+  "slug": "mod-java-getting-started",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 8,
+  "name": "Variables & Types",
+  "order_index": 1,
+  "slug": "mod-java-variables-types",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 9,
+  "name": "Input & Output",
+  "order_index": 2,
+  "slug": "mod-java-input-output",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 10,
+  "name": "Operators",
+  "order_index": 3,
+  "slug": "mod-java-operators",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 11,
+  "name": "Control Flow",
+  "order_index": 4,
+  "slug": "mod-java-control-flow",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 12,
+  "name": "Methods",
+  "order_index": 5,
+  "slug": "mod-java-methods",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 13,
+  "name": "Arrays",
+  "order_index": 6,
+  "slug": "mod-java-arrays",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 14,
+  "name": "Strings",
+  "order_index": 7,
+  "slug": "mod-java-strings",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 15,
+  "name": "Object-Oriented Programming",
+  "order_index": 8,
+  "slug": "mod-java-oop",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 16,
+  "name": "Interfaces & Abstraction",
+  "order_index": 9,
+  "slug": "mod-java-interfaces-abstraction",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 17,
+  "name": "Exceptions",
+  "order_index": 10,
+  "slug": "mod-java-exceptions",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 18,
+  "name": "Collections",
+  "order_index": 11,
+  "slug": "mod-java-collections",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 19,
+  "name": "Generics",
+  "order_index": 12,
+  "slug": "mod-java-generics",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 20,
+  "name": "Comparable & Comparator",
+  "order_index": 13,
+  "slug": "mod-java-comparable-comparator",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 21,
+  "name": "Lambdas & Functional Programming",
+  "order_index": 14,
+  "slug": "mod-java-lambdas",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 22,
+  "name": "Streams",
+  "order_index": 15,
+  "slug": "mod-java-streams",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 23,
+  "name": "File I/O",
+  "order_index": 16,
+  "slug": "mod-java-file-io",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 24,
+  "name": "Testing",
+  "order_index": 17,
+  "slug": "mod-java-testing",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 25,
+  "name": "Concurrency Basics",
+  "order_index": 18,
+  "slug": "mod-java-concurrency",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 26,
+  "name": "JVM Fundamentals",
+  "order_index": 19,
+  "slug": "mod-java-jvm",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 27,
+  "name": "Java Development Practices",
+  "order_index": 20,
+  "slug": "mod-java-practices",
+  "subject_id": 2
+ },
+ {
+  "description": null,
+  "id": 28,
+  "name": "Algorithmic Thinking",
+  "order_index": 0,
+  "slug": "mod-dsa-algorithmic-thinking",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 29,
+  "name": "Complexity Analysis",
+  "order_index": 1,
+  "slug": "mod-dsa-complexity",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 30,
+  "name": "Arrays",
+  "order_index": 2,
+  "slug": "mod-dsa-arrays",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 31,
+  "name": "Strings",
+  "order_index": 3,
+  "slug": "mod-dsa-strings",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 32,
+  "name": "Hashing",
+  "order_index": 4,
+  "slug": "mod-dsa-hashing",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 33,
+  "name": "Two Pointers",
+  "order_index": 5,
+  "slug": "mod-dsa-two-pointers",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 34,
+  "name": "Sliding Window",
+  "order_index": 6,
+  "slug": "mod-dsa-sliding-window",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 35,
+  "name": "Linked Lists",
+  "order_index": 7,
+  "slug": "mod-dsa-linked-lists",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 36,
+  "name": "Stack",
+  "order_index": 8,
+  "slug": "mod-dsa-stack",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 37,
+  "name": "Queue",
+  "order_index": 9,
+  "slug": "mod-dsa-queue",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 38,
+  "name": "Recursion",
+  "order_index": 10,
+  "slug": "mod-dsa-recursion",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 39,
+  "name": "Backtracking",
+  "order_index": 11,
+  "slug": "mod-dsa-backtracking",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 40,
+  "name": "Sorting",
+  "order_index": 12,
+  "slug": "mod-dsa-sorting",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 41,
+  "name": "Binary Search",
+  "order_index": 13,
+  "slug": "mod-dsa-binary-search",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 42,
+  "name": "Trees",
+  "order_index": 14,
+  "slug": "mod-dsa-trees",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 43,
+  "name": "Binary Search Trees",
+  "order_index": 15,
+  "slug": "mod-dsa-bst",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 44,
+  "name": "Heaps & Priority Queues",
+  "order_index": 16,
+  "slug": "mod-dsa-heaps",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 45,
+  "name": "Graphs",
+  "order_index": 17,
+  "slug": "mod-dsa-graphs",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 46,
+  "name": "Topological Sorting",
+  "order_index": 18,
+  "slug": "mod-dsa-topo",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 47,
+  "name": "Union-Find",
+  "order_index": 19,
+  "slug": "mod-dsa-union-find",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 48,
+  "name": "Shortest Paths",
+  "order_index": 20,
+  "slug": "mod-dsa-shortest-paths",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 49,
+  "name": "Minimum Spanning Trees",
+  "order_index": 21,
+  "slug": "mod-dsa-mst",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 50,
+  "name": "Greedy Algorithms",
+  "order_index": 22,
+  "slug": "mod-dsa-greedy",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 51,
+  "name": "Dynamic Programming",
+  "order_index": 23,
+  "slug": "mod-dsa-dp",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 52,
+  "name": "Advanced Problem-Solving Patterns",
+  "order_index": 24,
+  "slug": "mod-dsa-advanced-patterns",
+  "subject_id": 3
+ },
+ {
+  "description": null,
+  "id": 53,
+  "name": "Engineering practice",
+  "order_index": 0,
+  "slug": "mod-se-core",
+  "subject_id": 4
+ },
+ {
+  "description": null,
+  "id": 54,
+  "name": "SQL & data",
+  "order_index": 0,
+  "slug": "mod-db-sql",
+  "subject_id": 5
+ },
+ {
+  "description": null,
+  "id": 55,
+  "name": "HTTP & APIs",
+  "order_index": 1,
+  "slug": "mod-be-http",
+  "subject_id": 5
+ },
+ {
+  "description": null,
+  "id": 56,
+  "name": "Math foundations",
+  "order_index": 0,
+  "slug": "mod-math-ml",
+  "subject_id": 6
+ },
+ {
+  "description": null,
+  "id": 57,
+  "name": "Supervised learning path",
+  "order_index": 0,
+  "slug": "mod-ml-core",
+  "subject_id": 7
+ },
+ {
+  "description": null,
+  "id": 58,
+  "name": "Deep Learning",
+  "order_index": 0,
+  "slug": "mod-dl-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 59,
+  "name": "NLP",
+  "order_index": 1,
+  "slug": "mod-nlp-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 60,
+  "name": "Generative AI",
+  "order_index": 2,
+  "slug": "mod-genai-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 61,
+  "name": "AI Engineering",
+  "order_index": 3,
+  "slug": "mod-ai-eng-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 62,
+  "name": "DevOps",
+  "order_index": 4,
+  "slug": "mod-devops-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 63,
+  "name": "System Design",
+  "order_index": 5,
+  "slug": "mod-sysdesign-shell",
+  "subject_id": 8
+ },
+ {
+  "description": null,
+  "id": 64,
+  "name": "Python core",
+  "order_index": 0,
+  "slug": "mod-py-core",
+  "subject_id": 9
+ },
+ {
+  "description": null,
+  "id": 65,
+  "name": "Full-stack web foundations",
+  "order_index": 0,
+  "slug": "mod-web-core",
+  "subject_id": 10
+ },
+ {
+  "description": null,
+  "id": 66,
+  "name": "Network fundamentals",
+  "order_index": 0,
+  "slug": "mod-net-core",
+  "subject_id": 11
+ },
+ {
+  "description": null,
+  "id": 67,
+  "name": "Containers and delivery",
+  "order_index": 0,
+  "slug": "mod-ops-core",
+  "subject_id": 12
+ },
+ {
+  "description": null,
+  "id": 68,
+  "name": "Scientific Python path",
+  "order_index": 0,
+  "slug": "mod-ds-core",
+  "subject_id": 13
+ },
+ {
+  "description": null,
+  "id": 69,
+  "name": "Deep Learning",
+  "order_index": 0,
+  "slug": "mod-dl",
+  "subject_id": 14
+ },
+ {
+  "description": null,
+  "id": 70,
+  "name": "Generative AI / LLM Engineering",
+  "order_index": 1,
+  "slug": "mod-genai",
+  "subject_id": 14
+ },
+ {
+  "description": null,
+  "id": 71,
+  "name": "MLOps / AI Engineering",
+  "order_index": 2,
+  "slug": "mod-mlops",
+  "subject_id": 14
+ },
+ {
+  "description": null,
+  "id": 72,
+  "name": "System Design",
+  "order_index": 3,
+  "slug": "mod-sysdesign",
+  "subject_id": 14
+ },
+ {
+  "description": "Auto-created during AI domain decomposition (additive).",
+  "id": 73,
+  "name": "Just-in-time calculus & probability",
+  "order_index": 96,
+  "slug": "mod-math-jit",
+  "subject_id": 6
+ },
+ {
+  "description": "Auto-created during AI domain decomposition (additive).",
+  "id": 74,
+  "name": "Deep Learning Core",
+  "order_index": 104,
+  "slug": "mod-dl-core",
+  "subject_id": 14
+ },
+ {
+  "description": "Auto-created during AI domain decomposition (additive).",
+  "id": 75,
+  "name": "Computer Vision",
+  "order_index": 104,
+  "slug": "mod-cv",
+  "subject_id": 14
+ },
+ {
+  "description": "Auto-created during AI domain decomposition (additive).",
+  "id": 76,
+  "name": "NLP Core",
+  "order_index": 104,
+  "slug": "mod-nlp-core",
+  "subject_id": 14
+ }
+]

@@ -1,0 +1,952 @@
+[
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.421664",
+  "id": 1,
+  "payload": "{\"question_id\": \"cf-01\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-bits-and-bytes",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.424455",
+  "id": 2,
+  "payload": "{\"question_id\": \"cf-03\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-hexadecimal",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.424663",
+  "id": 3,
+  "payload": "{\"question_id\": \"cf-03\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-binary",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.424854",
+  "id": 4,
+  "payload": "{\"question_id\": \"cf-04\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-cpu",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425031",
+  "id": 5,
+  "payload": "{\"question_id\": \"cf-05\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-ram",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425203",
+  "id": 6,
+  "payload": "{\"question_id\": \"cf-05\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-storage",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425382",
+  "id": 7,
+  "payload": "{\"question_id\": \"cf-06\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-cache",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425550",
+  "id": 8,
+  "payload": "{\"question_id\": \"cf-07\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-instruction-execution",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425710",
+  "id": 9,
+  "payload": "{\"question_id\": \"cf-08\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-compiler",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.425858",
+  "id": 10,
+  "payload": "{\"question_id\": \"cf-08\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-interpreter",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426004",
+  "id": 11,
+  "payload": "{\"question_id\": \"cf-09\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-process",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426152",
+  "id": 12,
+  "payload": "{\"question_id\": \"cf-09\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-program",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426308",
+  "id": 13,
+  "payload": "{\"question_id\": \"cf-10\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-kernel",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426453",
+  "id": 14,
+  "payload": "{\"question_id\": \"cf-11\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-threads",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426596",
+  "id": 15,
+  "payload": "{\"question_id\": \"cf-12\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-virtual-memory-basics",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426737",
+  "id": 16,
+  "payload": "{\"question_id\": \"cf-12\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-os-memory",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.426879",
+  "id": 17,
+  "payload": "{\"question_id\": \"cf-13\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-pipes",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.427021",
+  "id": 18,
+  "payload": "{\"question_id\": \"cf-13\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-shell",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.427168",
+  "id": 19,
+  "payload": "{\"question_id\": \"cf-14\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-commits",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.427312",
+  "id": 20,
+  "payload": "{\"question_id\": \"cf-15\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-branches",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.427455",
+  "id": 21,
+  "payload": "{\"question_id\": \"cf-16\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-time-complexity-intro",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.427600",
+  "id": 22,
+  "payload": "{\"question_id\": \"cf-17\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-debugging-thinking",
+  "user_id": "akshit"
+ },
+ {
+  "category": "explanation",
+  "created_at": "2026-08-18 20:06:08.427743",
+  "id": 23,
+  "payload": "{\"question_id\": \"cf-18\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "cf-edge-cases",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.427885",
+  "id": 24,
+  "payload": "{\"question_id\": \"dsa-01\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-algorithmic-thinking",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.428176",
+  "id": 25,
+  "payload": "{\"question_id\": \"dsa-03\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-best-worst-average",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.428328",
+  "id": 26,
+  "payload": "{\"question_id\": \"dsa-04\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-array-traversal",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.428473",
+  "id": 27,
+  "payload": "{\"question_id\": \"dsa-05\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-array-insert-delete",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.428616",
+  "id": 28,
+  "payload": "{\"question_id\": \"dsa-06\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-prefix-sums",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.429037",
+  "id": 29,
+  "payload": "{\"question_id\": \"dsa-08\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-hash-set",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.429178",
+  "id": 30,
+  "payload": "{\"question_id\": \"dsa-09\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-two-pointers-opposite",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.429542",
+  "id": 31,
+  "payload": "{\"question_id\": \"dsa-10\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-window-fixed",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.429692",
+  "id": 32,
+  "payload": "{\"question_id\": \"dsa-11\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-singly-linked-list",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.429839",
+  "id": 33,
+  "payload": "{\"question_id\": \"dsa-12\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-list-reversal",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.429983",
+  "id": 34,
+  "payload": "{\"question_id\": \"dsa-13\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-fast-slow",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430124",
+  "id": 35,
+  "payload": "{\"question_id\": \"dsa-13\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-cycle-detection",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430274",
+  "id": 36,
+  "payload": "{\"question_id\": \"dsa-14\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-stack-fundamentals",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430418",
+  "id": 37,
+  "payload": "{\"question_id\": \"dsa-15\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-graph-bfs",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430558",
+  "id": 38,
+  "payload": "{\"question_id\": \"dsa-15\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-queue-bfs-relationship",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430698",
+  "id": 39,
+  "payload": "{\"question_id\": \"dsa-16\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-graph-dfs",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.430838",
+  "id": 40,
+  "payload": "{\"question_id\": \"dsa-16\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-tree-dfs",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431117",
+  "id": 41,
+  "payload": "{\"question_id\": \"dsa-18\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-merge-sort",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431255",
+  "id": 42,
+  "payload": "{\"question_id\": \"dsa-18\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-sort-complexity",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431396",
+  "id": 43,
+  "payload": "{\"question_id\": \"dsa-19\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-quick-sort",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431541",
+  "id": 44,
+  "payload": "{\"question_id\": \"dsa-20\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-heap-structure",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431689",
+  "id": 45,
+  "payload": "{\"question_id\": \"dsa-20\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-priority-queue",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.431832",
+  "id": 46,
+  "payload": "{\"question_id\": \"dsa-21\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-bst-search",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.431972",
+  "id": 47,
+  "payload": "{\"question_id\": \"dsa-22\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-dp-mindset",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.432256",
+  "id": 48,
+  "payload": "{\"question_id\": \"dsa-23\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-memoization",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.432396",
+  "id": 49,
+  "payload": "{\"question_id\": \"dsa-23\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-tabulation",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.432538",
+  "id": 50,
+  "payload": "{\"question_id\": \"dsa-24\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-dijkstra",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.432679",
+  "id": 51,
+  "payload": "{\"question_id\": \"dsa-25\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-topological-sort",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.432821",
+  "id": 52,
+  "payload": "{\"question_id\": \"dsa-26\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-binary-search-classic",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.433102",
+  "id": 53,
+  "payload": "{\"question_id\": \"dsa-27\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-big-o",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433243",
+  "id": 54,
+  "payload": "{\"question_id\": \"dsa-28\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-binary-search-classic",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433382",
+  "id": 55,
+  "payload": "{\"question_id\": \"dsa-28\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-big-o",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433535",
+  "id": 56,
+  "payload": "{\"question_id\": \"dsa-29\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-list-reversal",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433680",
+  "id": 57,
+  "payload": "{\"question_id\": \"dsa-29\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-singly-linked-list",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433826",
+  "id": 58,
+  "payload": "{\"question_id\": \"dsa-30\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-graph-bfs",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.433967",
+  "id": 59,
+  "payload": "{\"question_id\": \"dsa-30\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-queue-bfs-relationship",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.434107",
+  "id": 60,
+  "payload": "{\"question_id\": \"dsa-31\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-dp-1d",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.434253",
+  "id": 61,
+  "payload": "{\"question_id\": \"dsa-31\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-memoization",
+  "user_id": "akshit"
+ },
+ {
+  "category": "explanation",
+  "created_at": "2026-08-18 20:06:08.434398",
+  "id": 62,
+  "payload": "{\"question_id\": \"dsa-32\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-hash-map",
+  "user_id": "akshit"
+ },
+ {
+  "category": "explanation",
+  "created_at": "2026-08-18 20:06:08.434538",
+  "id": 63,
+  "payload": "{\"question_id\": \"dsa-32\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-big-o",
+  "user_id": "akshit"
+ },
+ {
+  "category": "explanation",
+  "created_at": "2026-08-18 20:06:08.434678",
+  "id": 64,
+  "payload": "{\"question_id\": \"dsa-33\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-dp-mindset",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.434821",
+  "id": 65,
+  "payload": "{\"question_id\": \"dsa-34\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-tree-bfs",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.434962",
+  "id": 66,
+  "payload": "{\"question_id\": \"dsa-35\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-window-variable",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435101",
+  "id": 67,
+  "payload": "{\"question_id\": \"java-01\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-jdk-jre",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435241",
+  "id": 68,
+  "payload": "{\"question_id\": \"java-02\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-first-program",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435381",
+  "id": 69,
+  "payload": "{\"question_id\": \"java-03\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-compile-and-run",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435520",
+  "id": 70,
+  "payload": "{\"question_id\": \"java-04\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-primitives",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435661",
+  "id": 71,
+  "payload": "{\"question_id\": \"java-05\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-type-conversion",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435803",
+  "id": 72,
+  "payload": "{\"question_id\": \"java-06\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-operators",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.435943",
+  "id": 73,
+  "payload": "{\"question_id\": \"java-07\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-loops",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436083",
+  "id": 74,
+  "payload": "{\"question_id\": \"java-08\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-break-continue",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436222",
+  "id": 75,
+  "payload": "{\"question_id\": \"java-09\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-method-basics",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436371",
+  "id": 76,
+  "payload": "{\"question_id\": \"java-10\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-overloading",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436650",
+  "id": 77,
+  "payload": "{\"question_id\": \"java-11\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-arrays",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436790",
+  "id": 78,
+  "payload": "{\"question_id\": \"java-12\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-strings",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.436930",
+  "id": 79,
+  "payload": "{\"question_id\": \"java-13\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-classes-objects",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.437068",
+  "id": 80,
+  "payload": "{\"question_id\": \"java-13\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-references",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.437207",
+  "id": 81,
+  "payload": "{\"question_id\": \"java-14\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-constructors",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.437348",
+  "id": 82,
+  "payload": "{\"question_id\": \"java-15\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-encapsulation",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.437489",
+  "id": 83,
+  "payload": "{\"question_id\": \"java-16\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-list",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.437630",
+  "id": 84,
+  "payload": "{\"question_id\": \"java-17\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-map",
+  "user_id": "akshit"
+ },
+ {
+  "category": "problem_solving",
+  "created_at": "2026-08-18 20:06:08.437769",
+  "id": 85,
+  "payload": "{\"question_id\": \"java-17\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-hash-map",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.438021",
+  "id": 86,
+  "payload": "{\"question_id\": \"java-18\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-priority-queue",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.438309",
+  "id": 87,
+  "payload": "{\"question_id\": \"java-19\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-checked-unchecked",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.438545",
+  "id": 88,
+  "payload": "{\"question_id\": \"java-19\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-try-catch",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-18 20:06:08.438708",
+  "id": 89,
+  "payload": "{\"question_id\": \"java-20\", \"session_id\": 1}",
+  "score": 100.0,
+  "source": "diagnostic",
+  "topic_slug": "java-interfaces",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.438858",
+  "id": 90,
+  "payload": "{\"question_id\": \"java-21\", \"session_id\": 1}",
+  "score": 50.0,
+  "source": "diagnostic",
+  "topic_slug": "java-arrays",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.439003",
+  "id": 91,
+  "payload": "{\"question_id\": \"java-22\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-map",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-18 20:06:08.439146",
+  "id": 92,
+  "payload": "{\"question_id\": \"java-22\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "dsa-array-frequency",
+  "user_id": "akshit"
+ },
+ {
+  "category": "explanation",
+  "created_at": "2026-08-18 20:06:08.439291",
+  "id": 93,
+  "payload": "{\"question_id\": \"java-23\", \"session_id\": 1}",
+  "score": 0.0,
+  "source": "diagnostic",
+  "topic_slug": "java-references",
+  "user_id": "akshit"
+ },
+ {
+  "category": "implementation",
+  "created_at": "2026-08-19 13:08:09.848448",
+  "id": 94,
+  "payload": "{\"exercise_id\": 3}",
+  "score": 80.0,
+  "source": "exercise",
+  "topic_slug": "cf-bits-and-bytes",
+  "user_id": "akshit"
+ },
+ {
+  "category": "conceptual",
+  "created_at": "2026-08-19 13:15:10.902630",
+  "id": 95,
+  "payload": "{\"question_id\": 5}",
+  "score": 100.0,
+  "source": "question",
+  "topic_slug": "cf-bits-and-bytes",
+  "user_id": "akshit"
+ }
+]

@@ -1,0 +1,114 @@
+{
+ "alembic_version": {
+  "dir": "curriculum",
+  "rows": 1
+ },
+ "assessment_sessions": {
+  "dir": "progress",
+  "rows": 0
+ },
+ "curriculum_lessons": {
+  "dir": "curriculum",
+  "rows": 449
+ },
+ "curriculum_levels": {
+  "dir": "curriculum",
+  "rows": 14
+ },
+ "curriculum_modules": {
+  "dir": "curriculum",
+  "rows": 76
+ },
+ "curriculum_resources": {
+  "dir": "curriculum",
+  "rows": 1246
+ },
+ "curriculum_subjects": {
+  "dir": "curriculum",
+  "rows": 14
+ },
+ "curriculum_topics": {
+  "dir": "curriculum",
+  "rows": 449
+ },
+ "curriculum_tracks": {
+  "dir": "curriculum",
+  "rows": 1
+ },
+ "daily_plan_items": {
+  "dir": "progress",
+  "rows": 8
+ },
+ "daily_plans": {
+  "dir": "progress",
+  "rows": 7
+ },
+ "day_journals": {
+  "dir": "progress",
+  "rows": 1
+ },
+ "diagnostic_answers": {
+  "dir": "progress",
+  "rows": 76
+ },
+ "diagnostic_sessions": {
+  "dir": "progress",
+  "rows": 1
+ },
+ "dsa_topics": {
+  "dir": "curriculum",
+  "rows": 0
+ },
+ "engineering_projects": {
+  "dir": "curriculum",
+  "rows": 16
+ },
+ "learning_activities": {
+  "dir": "progress",
+  "rows": 342
+ },
+ "lesson_exercises": {
+  "dir": "curriculum",
+  "rows": 461
+ },
+ "lesson_questions": {
+  "dir": "curriculum",
+  "rows": 1355
+ },
+ "mastery_evidence": {
+  "dir": "progress",
+  "rows": 95
+ },
+ "revision_schedules": {
+  "dir": "progress",
+  "rows": 4
+ },
+ "topic_mastery": {
+  "dir": "progress",
+  "rows": 80
+ },
+ "user_progress": {
+  "dir": "progress",
+  "rows": 14
+ },
+ "user_project_progress": {
+  "dir": "progress",
+  "rows": 16
+ },
+ "user_streaks": {
+  "dir": "progress",
+  "rows": 1
+ },
+ "user_study_settings": {
+  "dir": "progress",
+  "rows": 1
+ },
+ "user_xp": {
+  "dir": "progress",
+  "rows": 1
+ },
+ "xp_events": {
+  "dir": "progress",
+  "rows": 37
+ }
+}

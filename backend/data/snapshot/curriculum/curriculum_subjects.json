@@ -1,0 +1,128 @@
+[
+ {
+  "description": "Hardware/OS literacy, terminal, Git, tooling, and problem-solving habits.",
+  "id": 1,
+  "level_id": 1,
+  "name": "Computer & Developer Foundations",
+  "order_index": 0,
+  "slug": "computer-developer-foundations",
+  "track_id": 1
+ },
+ {
+  "description": "A structured Java sequence. Streams, concurrency, and JVM are not DSA gates. Records/modules/virtual threads are later/reference.",
+  "id": 2,
+  "level_id": 2,
+  "name": "Java Programming",
+  "order_index": 0,
+  "slug": "java-programming",
+  "track_id": 1
+ },
+ {
+  "description": "Minimum Java per unit. Not gated on streams, concurrency, or JVM. Problem URLs come later.",
+  "id": 3,
+  "level_id": 3,
+  "name": "Data Structures & Algorithms",
+  "order_index": 0,
+  "slug": "data-structures-algorithms",
+  "track_id": 1
+ },
+ {
+  "description": "Software Engineering Core",
+  "id": 4,
+  "level_id": 4,
+  "name": "Software Engineering Core",
+  "order_index": 0,
+  "slug": "software-engineering",
+  "track_id": 1
+ },
+ {
+  "description": "Databases and Backend Foundations",
+  "id": 5,
+  "level_id": 5,
+  "name": "Databases and Backend Foundations",
+  "order_index": 0,
+  "slug": "databases-backend",
+  "track_id": 1
+ },
+ {
+  "description": "Mathematics for Machine Learning",
+  "id": 6,
+  "level_id": 6,
+  "name": "Mathematics for Machine Learning",
+  "order_index": 0,
+  "slug": "math-for-ml",
+  "track_id": 1
+ },
+ {
+  "description": "Machine Learning Foundations",
+  "id": 7,
+  "level_id": 7,
+  "name": "Machine Learning Foundations",
+  "order_index": 0,
+  "slug": "ml-foundations",
+  "track_id": 1
+ },
+ {
+  "description": "Later domains (awareness shells)",
+  "id": 8,
+  "level_id": 8,
+  "name": "Later domains (awareness shells)",
+  "order_index": 0,
+  "slug": "career-path-shells",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 9,
+  "level_id": 9,
+  "name": "Python for AI/ML",
+  "order_index": 0,
+  "slug": "python-programming",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 10,
+  "level_id": 10,
+  "name": "Web Development",
+  "order_index": 0,
+  "slug": "web-development",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 11,
+  "level_id": 11,
+  "name": "Networking Foundations",
+  "order_index": 0,
+  "slug": "networking",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 12,
+  "level_id": 12,
+  "name": "DevOps and Platform Engineering",
+  "order_index": 0,
+  "slug": "devops-platform",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 13,
+  "level_id": 13,
+  "name": "Data Science Path",
+  "order_index": 0,
+  "slug": "data-science",
+  "track_id": 1
+ },
+ {
+  "description": null,
+  "id": 14,
+  "level_id": 14,
+  "name": "Deep Learning, GenAI, MLOps, System Design",
+  "order_index": 0,
+  "slug": "ai-systems-design",
+  "track_id": 1
+ }
+]

@@ -1,0 +1,100 @@
+[
+ {
+  "description": "Computer and developer foundations before Java and DSA.",
+  "id": 1,
+  "name": "Domain 0 Foundations",
+  "order_index": 0,
+  "slug": "domain-0"
+ },
+ {
+  "description": "Java programming. Helsinki I/II for exercises; Dev.java for modern reference. Parallel with DSA after fundamentals.",
+  "id": 2,
+  "name": "Domain 1 Java",
+  "order_index": 1,
+  "slug": "domain-1"
+ },
+ {
+  "description": "Language-independent DSA. Java is the primary implementation language; C++ is existing knowledge, not a second curriculum.",
+  "id": 3,
+  "name": "Domain 2 DSA",
+  "order_index": 2,
+  "slug": "domain-2"
+ },
+ {
+  "description": "Software Engineering",
+  "id": 4,
+  "name": "Software Engineering",
+  "order_index": 3,
+  "slug": "domain-se"
+ },
+ {
+  "description": "Databases & Backend",
+  "id": 5,
+  "name": "Databases & Backend",
+  "order_index": 4,
+  "slug": "domain-backend"
+ },
+ {
+  "description": "Math for ML",
+  "id": 6,
+  "name": "Math for ML",
+  "order_index": 5,
+  "slug": "domain-math"
+ },
+ {
+  "description": "Machine Learning Foundations",
+  "id": 7,
+  "name": "Machine Learning Foundations",
+  "order_index": 6,
+  "slug": "domain-ml"
+ },
+ {
+  "description": "Career Path Shells",
+  "id": 8,
+  "name": "Career Path Shells",
+  "order_index": 7,
+  "slug": "domain-shells"
+ },
+ {
+  "description": "Python",
+  "id": 9,
+  "name": "Python",
+  "order_index": 2,
+  "slug": "domain-python"
+ },
+ {
+  "description": "Web Development",
+  "id": 10,
+  "name": "Web Development",
+  "order_index": 8,
+  "slug": "domain-web"
+ },
+ {
+  "description": "Networking",
+  "id": 11,
+  "name": "Networking",
+  "order_index": 9,
+  "slug": "domain-networking"
+ },
+ {
+  "description": "DevOps & Platform",
+  "id": 12,
+  "name": "DevOps & Platform",
+  "order_index": 10,
+  "slug": "domain-devops"
+ },
+ {
+  "description": "Data Science",
+  "id": 13,
+  "name": "Data Science",
+  "order_index": 11,
+  "slug": "domain-datascience"
+ },
+ {
+  "description": "AI Systems & Design",
+  "id": 14,
+  "name": "AI Systems & Design",
+  "order_index": 12,
+  "slug": "domain-ai-systems"
+ }
+]
