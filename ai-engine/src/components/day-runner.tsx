@@ -200,16 +200,83 @@ function clock(seconds: number) {
 }
 
 /* -------------------------------------------------------------------------
+ * Where the rest of this topic's day is.
+ *
+ * A topic is split across more than one block -- Storage is a 47-minute LEARN
+ * and a 20-minute PRACTICE -- and from inside the first one there was nothing
+ * saying the second existed. The exercises and the questions looked absent
+ * from Today rather than one step along, which is exactly the kind of thing
+ * that sends you off to hunt through the topic page mid-session.
+ * ---------------------------------------------------------------------- */
+
+const SECTION_SUMMARY: Record<string, string> = {
+  LEARN: "read the source",
+  PRACTICE: "the questions, the exercises and the build task",
+  DSA: "the pattern and its problems",
+  BUILD: "the implementation task",
+  REVIEW: "spaced recall",
+  REFLECT: "close the day",
+};
+
+function TopicHandoff({
+  current,
+  siblings,
+  onJump,
+}: {
+  current: DayItem;
+  siblings: DayItem[];
+  onJump: (id: number) => void;
+}) {
+  if (siblings.length === 0) return null;
+
+  // Where a sibling sits relative to this block, not just whether it is
+  // finished. Keying only off status called the unfinished LEARN block sitting
+  // above this one "Next", which points you backwards.
+  const relation = (sibling: DayItem) => {
+    if (sibling.status === "done") return "Done";
+    if (sibling.status === "skipped") return "Skipped";
+    return sibling.position < current.position ? "Earlier" : "Next";
+  };
+  return (
+    <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
+      <p className="text-sm font-medium">The rest of this topic today</p>
+      <ul className="mt-2 space-y-2">
+        {siblings.map((sibling) => (
+          <li key={sibling.id} className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+            <span className="text-[var(--muted)]">{relation(sibling)} —</span>
+            <button
+              type="button"
+              onClick={() => onJump(sibling.id)}
+              className="font-medium underline underline-offset-2 hover:text-[var(--accent)]"
+            >
+              {sibling.title}
+            </button>
+            <span className="text-[var(--muted)]">
+              {sibling.planned_minutes} min · {SECTION_SUMMARY[sibling.activity_type] ?? "more work"}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------
  * Focus card — one block, everything needed to do it, nothing else.
  * ---------------------------------------------------------------------- */
 
 function FocusCard({
   item,
+  siblings,
+  onJump,
   onDone,
   onSkip,
   busy,
 }: {
   item: DayItem;
+  /** Today's other blocks for the same topic, in day order. */
+  siblings: DayItem[];
+  onJump: (id: number) => void;
   onDone: (minutes: number, completeTopic: boolean) => void;
   onSkip: () => void;
   busy: boolean;
@@ -232,14 +299,23 @@ function FocusCard({
       : item.activity_type === "DSA"
         ? ["learn", "practice", "recall"]
         : item.activity_type === "PRACTICE"
-          ? ["practice", "build"]
+          ? // Everything this block already claims to be. Its subtitle reads
+            // "Questions and exercises for the topic you just studied" and it
+            // tells you to answer the questions from memory first -- and it
+            // showed no questions at all. They were rendered one block earlier,
+            // under LEARN, whose own instructions never mention them.
+            //
+            // So each block contradicted itself, and the exercises looked
+            // missing from Today entirely when you were still on LEARN. Recall
+            // leads here because that is the order the block asks for.
+            ["recall", "practice", "build"]
           : item.activity_type === "BUILD"
             ? ["build"]
-            : item.activity_type === "LEARN"
-              ? // The source card above already covers the reading, so a LEARN
-                // block only needs the part that was missing: being asked.
-                ["recall"]
-              : null;
+            : // A LEARN block is the reading, and its instructions say exactly
+              // that: read once at normal speed, then write the idea in your own
+              // words. The work that follows belongs to the PRACTICE block, and
+              // TopicHandoff below says so rather than leaving you to find it.
+              null;
   const inlineWork = workSections !== null;
   // The sequence already opens with the source, so a second copy is noise.
   const showResourceCard = Boolean(item.resource?.url) && item.activity_type !== "DSA";
@@ -336,7 +412,11 @@ function FocusCard({
                 Open the review queue <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-          ) : !showResourceCard && item.topic_id ? (
+          ) : null}
+
+          <TopicHandoff current={item} siblings={siblings} onJump={onJump} />
+
+          {!inlineWork && !showResourceCard && item.topic_id ? (
             <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--card-2)] p-4">
               <p className="text-sm font-medium">Work inside the topic</p>
               <p className="mt-1 text-sm text-[var(--muted)]">
@@ -590,6 +670,15 @@ export function DayRunner() {
     day?.items.find((i) => i.id === day.current_item_id) ??
     null;
 
+  // Today's other blocks for the same topic, in day order. A topic is normally
+  // split across two of them, and the second one is where the exercises live.
+  const siblingBlocks =
+    activeItem?.topic_id == null
+      ? []
+      : (day?.items ?? []).filter(
+          (i) => i.topic_id === activeItem.topic_id && i.id !== activeItem.id,
+        );
+
   // Marking the block started on the server. Fires once per block: the old
   // version also depended on the item object, so every refetch handed it a new
   // reference and it re-POSTed. Failures used to be swallowed whole, which left
@@ -766,6 +855,8 @@ export function DayRunner() {
         <FocusCard
           key={activeItem.id}
           item={activeItem}
+          siblings={siblingBlocks}
+          onJump={setActiveId}
           onDone={handleDone}
           onSkip={handleSkip}
           busy={busy}

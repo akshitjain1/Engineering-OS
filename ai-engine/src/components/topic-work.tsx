@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, Clipboard, ExternalLink, Lightbulb, Loader2 } from "lucide-react";
 import { SourceResourceCard } from "@/components/source-resource";
 import { GhostButton } from "@/components/study-ui";
@@ -89,12 +89,13 @@ export function PracticePrompt({ topic }: { topic: TopicNode }) {
         Copy this prompt into any AI assistant or coding platform — the app does not track answers
         or call an LLM.
       </p>
-      <textarea
-        readOnly
-        value={prompt}
-        rows={6}
-        className="mt-3 w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 text-xs leading-relaxed text-[var(--foreground)]"
-      />
+      {/* Not a textarea. A fixed `rows` clipped the last line of the prompt in
+          the narrower Today column -- the text wrapped past six rows and the
+          rest was only reachable by scrolling inside a box that did not look
+          scrollable. A <pre> is the whole prompt, always, at any width. */}
+      <pre className="mt-3 w-full overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-[var(--border)] bg-[var(--card-2)] px-3 py-2 font-sans text-xs leading-relaxed text-[var(--foreground)]">
+        {prompt}
+      </pre>
       <div className="mt-3">
         <GhostButton onClick={copy}>
           <Clipboard className="mr-2 h-4 w-4" />
@@ -354,40 +355,29 @@ export function TopicWorkPanel({
   const showRecall = wants("recall") && questions.length > 0;
   const overBudget = blockMinutes != null && plan.total > blockMinutes;
 
+  // `sections` is the running order, not just a filter. It used to be read as
+  // a set and rendered in a hardcoded learn/practice/build/recall order, so a
+  // block could not say "questions first, then the exercises" however it asked.
   // Numbered from the steps this block actually shows, so a practice-only
   // block starts at 1 rather than skipping to 2.
-  const steps: WorkSection[] = [
-    ...(showLearn ? (["learn"] as const) : []),
-    ...(showPractice ? (["practice"] as const) : []),
-    ...(showBuild ? (["build"] as const) : []),
-    ...(showRecall ? (["recall"] as const) : []),
-  ];
+  const available: Record<WorkSection, boolean> = {
+    learn: showLearn,
+    practice: showPractice,
+    build: showBuild,
+    recall: showRecall,
+  };
+  const steps: WorkSection[] = sections.filter(
+    (section, i) => sections.indexOf(section) === i && available[section],
+  );
   const stepLabel = (section: WorkSection) => steps.indexOf(section) + 1;
 
-  return (
-    <div className="space-y-6">
-      {error ? <p className="text-sm text-[var(--warn)]">{error}</p> : null}
-
-      {showLearn && showPractice ? (
-        <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
-            Plan for this block
-          </p>
-          <p className="mt-1 text-sm">
-            Read ~{plan.readMinutes} min, then solve {practice.length}{" "}
-            {practice.length === 1 ? "problem" : "problems"} ~{plan.solveMinutes} min
-            <span className="text-[var(--muted)]"> · {plan.total} min total</span>
-          </p>
-          {overBudget ? (
-            <p className="mt-1 text-xs text-[var(--warn)]">
-              That is {plan.total - (blockMinutes ?? 0)} min over the {blockMinutes} planned here.
-              Read first and solve as far as you get — the timer logs what you actually spend.
-            </p>
-          ) : null}
-        </div>
-      ) : null}
-
-      {showLearn ? (
+  // One step's markup, looked up by name. Rendered through `steps`, so the
+  // running order is whatever the block asked for rather than the order they
+  // happen to sit in this file.
+  const panel = (section: WorkSection) => {
+    switch (section) {
+      case "learn":
+        return (
         <section>
           <p className="text-sm font-semibold">
             {stepLabel("learn")}. Learn it first
@@ -406,9 +396,9 @@ export function TopicWorkPanel({
             ))}
           </div>
         </section>
-      ) : null}
-
-      {showPractice ? (
+        );
+      case "practice":
+        return (
         <section>
           <p className="text-sm font-semibold">
             {stepLabel("practice")}. Then solve these
@@ -448,9 +438,9 @@ export function TopicWorkPanel({
             </div>
           )}
         </section>
-      ) : null}
-
-      {showBuild ? (
+        );
+      case "build":
+        return (
         <section>
           <p className="text-sm font-semibold">
             {stepLabel("build")}. Build
@@ -495,9 +485,9 @@ export function TopicWorkPanel({
             ))}
           </div>
         </section>
-      ) : null}
-
-      {showRecall ? (
+        );
+      case "recall":
+        return (
         <section>
           <p className="text-sm font-semibold">
             {stepLabel("recall")}. Check you actually have it
@@ -509,7 +499,39 @@ export function TopicWorkPanel({
             <TopicQuestions questions={questions} />
           </div>
         </section>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {error ? <p className="text-sm text-[var(--warn)]">{error}</p> : null}
+
+      {showLearn && showPractice ? (
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            Plan for this block
+          </p>
+          <p className="mt-1 text-sm">
+            Read ~{plan.readMinutes} min, then solve {practice.length}{" "}
+            {practice.length === 1 ? "problem" : "problems"} ~{plan.solveMinutes} min
+            <span className="text-[var(--muted)]"> · {plan.total} min total</span>
+          </p>
+          {overBudget ? (
+            <p className="mt-1 text-xs text-[var(--warn)]">
+              That is {plan.total - (blockMinutes ?? 0)} min over the {blockMinutes} planned here.
+              Read first and solve as far as you get — the timer logs what you actually spend.
+            </p>
+          ) : null}
+        </div>
       ) : null}
+
+      {steps.map((section) => (
+        <Fragment key={section}>{panel(section)}</Fragment>
+      ))}
+
 
       <Link
         href={`/learn/topic/${topicId}`}
