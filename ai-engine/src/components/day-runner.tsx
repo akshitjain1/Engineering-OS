@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   ExternalLink,
   Pause,
@@ -311,14 +312,23 @@ function FocusCard({
             ["recall", "practice", "build"]
           : item.activity_type === "BUILD"
             ? ["build"]
-            : // A LEARN block is the reading, and its instructions say exactly
-              // that: read once at normal speed, then write the idea in your own
-              // words. The work that follows belongs to the PRACTICE block, and
-              // TopicHandoff below says so rather than leaving you to find it.
-              null;
+            : item.activity_type === "LEARN"
+              ? // The reading, and only the reading -- the work that follows
+                // belongs to the PRACTICE block, and TopicHandoff says so.
+                //
+                // Rendered through the work panel rather than the block's own
+                // resource card, because the card only had a provider, a title
+                // and an "Open source" button. Which pages to read, how long
+                // they should take and the concepts to watch for were all on
+                // the topic page, so starting a block meant leaving it.
+                ["learn"]
+              : null;
   const inlineWork = workSections !== null;
   // The sequence already opens with the source, so a second copy is noise.
-  const showResourceCard = Boolean(item.resource?.url) && item.activity_type !== "DSA";
+  const showResourceCard =
+    Boolean(item.resource?.url) &&
+    item.activity_type !== "DSA" &&
+    item.activity_type !== "LEARN";
   // Checked by default. The cursor only advances when a topic is marked
   // finished, so defaulting this off silently serves the same topic every day
   // and leaves the DSA board reading zero however much work you did.
@@ -340,7 +350,22 @@ function FocusCard({
           </span>
         </p>
         <h1 className="mt-2 text-[30px] font-bold leading-tight tracking-tight sm:text-[34px]">
-          {item.title}
+          {/* The heading is the way to the topic page. It was plain text, so
+              the only route out of a block was the small link under the work
+              panel -- and on a LEARN block, which had no panel, there was none
+              at all. */}
+          {item.topic_id ? (
+            <Link
+              href={`/learn/topic/${item.topic_id}`}
+              className="inline-flex items-baseline gap-2 hover:text-[var(--accent)]"
+              title={`Open the ${item.title} topic page`}
+            >
+              {item.title}
+              <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--muted)]" />
+            </Link>
+          ) : (
+            item.title
+          )}
         </h1>
         {item.subtitle ? (
           <p className="mt-1 text-sm text-[var(--muted)]">{item.subtitle}</p>

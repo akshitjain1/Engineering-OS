@@ -360,6 +360,19 @@ export function TopicWorkPanel({
   // block could not say "questions first, then the exercises" however it asked.
   // Numbered from the steps this block actually shows, so a practice-only
   // block starts at 1 rather than skipping to 2.
+  // What to watch for while reading. The contract already carries it and the
+  // topic page shows it under FOCUS; a block that only offered "Open source"
+  // sent you to that page to find out what the reading was even for.
+  const contract = (topic.study_contract ?? null) as {
+    focus_concepts?: unknown;
+    learn?: { instructions?: unknown } | null;
+  } | null;
+  const focusConcepts = Array.isArray(contract?.focus_concepts)
+    ? (contract.focus_concepts as unknown[]).filter(
+        (c): c is string => typeof c === "string" && c.trim().length > 0,
+      )
+    : [];
+
   const available: Record<WorkSection, boolean> = {
     learn: showLearn,
     practice: showPractice,
@@ -395,6 +408,26 @@ export function TopicWorkPanel({
               />
             ))}
           </div>
+          {focusConcepts.length > 0 ? (
+            <div className="mt-3 rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+                Watch for these while you read
+              </p>
+              <ul className="mt-2 flex flex-wrap gap-1.5">
+                {focusConcepts.map((concept) => (
+                  <li
+                    key={concept}
+                    className="rounded-md border border-[var(--border)] bg-[var(--card-2)] px-2 py-0.5 text-xs"
+                  >
+                    {concept}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-[var(--muted)]">
+                If you cannot explain each of these afterwards, you have not finished the reading.
+              </p>
+            </div>
+          ) : null}
         </section>
         );
       case "practice":

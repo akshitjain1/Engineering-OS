@@ -31,9 +31,10 @@ export function SourceResourceCard({
           </p>
           <h3 className="mt-1 font-medium leading-tight">{resource.title}</h3>
           {boundary ? <p className="mt-1 text-xs font-medium text-[var(--foreground)]">Focus: {boundary}</p> : null}
+          {/* The boundary is already on the "Focus:" line above; repeating it
+              here printed the same section twice under the title. */}
           <p className="mt-1 text-xs text-[var(--muted)]">
             {resource.provider || "Official source"}
-            {boundary ? ` · ${boundary}` : ""}
             {minutes ? ` · ${minutes} min` : ""}
           </p>
         </div>
