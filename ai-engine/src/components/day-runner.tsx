@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
   Check,
   ExternalLink,
+  Flag,
   Pause,
   Play,
   RotateCcw,
   SkipForward,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { errorMessage } from "@/lib/api";
+import { api, errorMessage } from "@/lib/api";
 import { TopicWorkPanel, type WorkSection } from "@/components/topic-work";
 import {
   EMPTY_RECORD,
@@ -40,6 +41,7 @@ import {
   saveJournal,
   skipItem,
   startItem,
+  type ActivityType,
   type Day,
   type DayItem,
 } from "@/lib/day";
@@ -541,6 +543,190 @@ function FocusCard({
  * End of day. The only screen that is allowed to be a dead end.
  * ---------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------
+ * Calling it a day.
+ *
+ * Finishing the blocks and *deciding you are done* are different acts, and only
+ * the second one lets you stop thinking about it. Without somewhere to make
+ * that decision, a finished day still ends on a row of buttons asking you to do
+ * more, so stopping feels like walking away rather than arriving.
+ *
+ * The praise is deliberately made of numbers you actually produced. "Great
+ * job!" is worth nothing on a day you know you coasted, and worth less than
+ * nothing on the day you dragged yourself through 152 minutes -- what carries
+ * is being shown the 152. So this panel says what you did, and the only
+ * adjectives are ones the figures earn.
+ * ---------------------------------------------------------------------- */
+
+type DayStats = {
+  minutes: number;
+  blocks: number;
+  byKind: { kind: ActivityType; minutes: number; blocks: number }[];
+  topics: string[];
+  overPlan: number;
+};
+
+function summarise(day: Day): DayStats {
+  const done = day.items.filter((i) => i.status === "done");
+  const byKind = new Map<ActivityType, { minutes: number; blocks: number }>();
+  const topics = new Map<number, string>();
+
+  for (const item of done) {
+    const bucket = byKind.get(item.activity_type) ?? { minutes: 0, blocks: 0 };
+    bucket.minutes += item.actual_minutes || 0;
+    bucket.blocks += 1;
+    byKind.set(item.activity_type, bucket);
+    // One name per topic: a topic shows up as "Storage" and "Practice: Storage",
+    // and counting both would inflate a day that studied one thing.
+    if (item.topic_id != null && !topics.has(item.topic_id)) {
+      topics.set(item.topic_id, item.title.replace(/^(Practice|DSA):\s*/, ""));
+    }
+  }
+
+  const minutes = done.reduce((sum, i) => sum + (i.actual_minutes || 0), 0);
+  const planned = done.reduce((sum, i) => sum + (i.planned_minutes || 0), 0);
+  return {
+    minutes,
+    blocks: done.length,
+    byKind: [...byKind.entries()].map(([kind, v]) => ({ kind, ...v })),
+    topics: [...topics.values()],
+    overPlan: minutes - planned,
+  };
+}
+
+type ProgressSnapshot = {
+  streak_days: number;
+  longest_streak: number;
+  topics_mastered: number;
+  level: number;
+};
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] px-4 py-3">
+      <p className="text-2xl font-semibold tabular-nums leading-none">{value}</p>
+      <p className="mt-1.5 text-xs text-[var(--muted)]">{label}</p>
+    </div>
+  );
+}
+
+function DayClosed({
+  day,
+  progress,
+  onReopen,
+  onExtend,
+  busy,
+  exhaustedMessage,
+}: {
+  day: Day;
+  progress: ProgressSnapshot | null;
+  onReopen: () => void;
+  onExtend: (minutes: number) => void;
+  busy: boolean;
+  exhaustedMessage: string | null;
+}) {
+  const stats = useMemo(() => summarise(day), [day]);
+  const streak = progress?.streak_days ?? 0;
+
+  return (
+    <div className="rounded-xl border border-[var(--ok)] bg-[var(--card)] p-6 shadow-[var(--shadow)] sm:p-8">
+      <p className="inline-flex items-center gap-2 text-sm font-medium text-[var(--ok)]">
+        <Flag className="h-4 w-4" /> Day closed
+      </p>
+      <h1 className="mt-2 text-[30px] font-bold tracking-tight sm:text-[34px]">
+        That is {stats.minutes} minutes of real work.
+      </h1>
+      <p className="mt-2 max-w-[62ch] text-[15px] leading-relaxed text-[var(--muted)]">
+        {stats.topics.length > 0
+          // Separated by a middot, not a comma: "Best, worst, average" is one
+          // topic, and a comma-joined list turns it into three.
+          ? `You moved ${stats.topics.length === 1 ? "one topic" : `${stats.topics.length} topics`} forward today — ${stats.topics.join(" · ")}. `
+          : ""}
+        Nothing is waiting for you. Close the laptop.
+      </p>
+
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Stat value={String(stats.minutes)} label="minutes logged" />
+        <Stat value={String(stats.blocks)} label="blocks finished" />
+        {streak > 0 ? (
+          <Stat value={`${streak}`} label={streak === 1 ? "day streak" : "days in a row"} />
+        ) : null}
+        {progress ? (
+          <Stat value={String(progress.topics_mastered)} label="topics mastered" />
+        ) : null}
+      </div>
+
+      {stats.byKind.length > 0 ? (
+        <div className="mt-5">
+          <p className="text-sm font-semibold">Where the time went</p>
+          <ul className="mt-2 space-y-1.5">
+            {stats.byKind
+              .slice()
+              .sort((a, b) => b.minutes - a.minutes)
+              .map(({ kind, minutes, blocks }) => (
+                <li key={kind} className="flex items-center gap-3 text-sm">
+                  <span className="w-20 shrink-0 text-[var(--muted)]">
+                    {ACTIVITY_COPY[kind]?.label ?? kind}
+                  </span>
+                  <span
+                    className="h-2 rounded-full bg-[var(--accent)]"
+                    style={{
+                      width: `${Math.max(4, Math.round((minutes / Math.max(stats.minutes, 1)) * 100))}%`,
+                    }}
+                  />
+                  <span className="tabular-nums text-[var(--muted)]">
+                    {minutes} min · {blocks} {blocks === 1 ? "block" : "blocks"}
+                  </span>
+                </li>
+              ))}
+          </ul>
+          {stats.overPlan > 4 ? (
+            <p className="mt-3 text-sm text-[var(--muted)]">
+              That is {stats.overPlan} minutes past what the plan asked for.
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="mt-6 border-t border-[var(--border)] pt-5">
+        {exhaustedMessage ? (
+          <p className="text-sm font-medium">{exhaustedMessage}</p>
+        ) : (
+          <>
+            <p className="text-sm font-medium">Changed your mind?</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              Adding time reopens the day and appends the next Learn, Practice and DSA
+              blocks. Nothing you have finished is touched.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[30, 60, 90].map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => onExtend(m)}
+                  className="rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm font-medium hover:border-[var(--border-strong)] disabled:opacity-50"
+                >
+                  +{m} min
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={onReopen}
+                className="rounded-md px-3 py-2 text-sm text-[var(--muted)] underline hover:text-[var(--foreground)]"
+              >
+                Back to my notes
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const CLOSED_KEY = "eos-day-closed";
+
 function DayComplete({
   day,
   onExtend,
@@ -552,6 +738,57 @@ function DayComplete({
   busy: boolean;
   exhaustedMessage: string | null;
 }) {
+  // Closing the day is a decision, so it has to survive a refresh -- reopening
+  // the tab to be asked "add more time?" again would undo the whole point.
+  // Stored against the date, so tomorrow starts open on its own.
+  const [closed, setClosed] = useState(false);
+  const [progress, setProgress] = useState<ProgressSnapshot | null>(null);
+
+  // Reading the stored decision after mount, over a deterministic `false`, so
+  // the server and the first client render agree and nothing has to hydrate
+  // around it.
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      if (localStorage.getItem(CLOSED_KEY) === day.plan_date) setClosed(true);
+    } catch {
+      /* private mode, or storage disabled */
+    }
+  }, [day.plan_date]);
+
+  useEffect(() => {
+    let alive = true;
+    api<ProgressSnapshot>("/api/progress")
+      .then((p) => {
+        if (alive) setProgress(p);
+      })
+      .catch(() => {
+        /* the panel reads fine without it */
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const close = () => {
+    try {
+      localStorage.setItem(CLOSED_KEY, day.plan_date);
+    } catch {
+      /* the decision still holds for this session */
+    }
+    setClosed(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const reopen = () => {
+    try {
+      localStorage.removeItem(CLOSED_KEY);
+    } catch {
+      /* nothing stored to clear */
+    }
+    setClosed(false);
+  };
+
   const [form, setForm] = useState({
     learned: day.journal?.learned ?? "",
     struggled: day.journal?.struggled ?? "",
@@ -591,6 +828,22 @@ function DayComplete({
     </label>
   );
 
+  if (closed) {
+    return (
+      <DayClosed
+        day={day}
+        progress={progress}
+        onReopen={reopen}
+        onExtend={(m) => {
+          reopen();
+          onExtend(m);
+        }}
+        busy={busy}
+        exhaustedMessage={exhaustedMessage}
+      />
+    );
+  }
+
   return (
     <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] sm:p-8">
       <p className="text-sm font-medium text-[var(--ok)]">Session finished</p>
@@ -624,12 +877,12 @@ function DayComplete({
           <p className="text-sm font-medium">{exhaustedMessage}</p>
         ) : (
           <>
-            <p className="text-sm font-medium">Add more time today</p>
+            <p className="text-sm font-medium">Keep going, or call it a day</p>
             <p className="mt-1 text-sm text-[var(--muted)]">
-              Appends another Learn, Practice and DSA block on the next topics. Nothing
-              you have already finished is touched.
+              Adding time appends another Learn, Practice and DSA block on the next
+              topics. Nothing you have already finished is touched.
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap items-center gap-2">
               {[30, 60, 90].map((m) => (
                 <button
                   key={m}
@@ -641,6 +894,14 @@ function DayComplete({
                   +{m} min
                 </button>
               ))}
+              <span className="mx-1 text-sm text-[var(--muted)]">or</span>
+              <button
+                type="button"
+                onClick={close}
+                className="inline-flex items-center gap-2 rounded-md bg-[var(--ok)] px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+              >
+                <Flag className="h-4 w-4" /> Done for the day
+              </button>
             </div>
           </>
         )}
