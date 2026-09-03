@@ -17,6 +17,25 @@ export function SourceResourceCard({
   const embeddable = Boolean(resource.embeddable && resource.video_id && !playlist);
   void (resource.exactness || playlist);
 
+  // Where "Watch on YouTube" actually goes. It used to reuse `url`, which is
+  // the row's own page and is not always the video: one resource embeds a
+  // YouTube lecture but carries a GeeksforGeeks article as its url, so both
+  // buttons opened GFG and the one promising YouTube was simply false.
+  const watchUrl = resource.video_id
+    ? `https://www.youtube.com/watch?v=${resource.video_id}`
+    : null;
+  // On the other 45 video rows the url IS the video, so a separate button for
+  // it was the same destination twice under two different labels.
+  const pageIsTheVideo = Boolean(url && resource.video_id && url.includes(resource.video_id));
+  const hostLabel = (() => {
+    if (!url) return null;
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return null;
+    }
+  })();
+
   const boundary = resource.lecture || resource.section ? `${resource.lecture ? resource.lecture : ""}${resource.lecture && resource.section ? " · " : ""}${resource.section ?? ""}` : null;
   const minutes = resource.duration ? Math.round(resource.duration * 60) : null;
   return (
@@ -63,14 +82,19 @@ export function SourceResourceCard({
         </div>
       ) : null}
 
-      {url ? (
+      {embeddable && watchUrl ? (
         <div className="mt-3 flex flex-wrap gap-2">
-          {embeddable ? (
-            <>
-              <PrimaryButton href={url}>Watch lecture</PrimaryButton>
-              <GhostButton href={url}>Watch on YouTube</GhostButton>
-            </>
-          ) : playlist ? (
+          <PrimaryButton href={watchUrl}>Watch on YouTube</PrimaryButton>
+          {/* A second button only when it is a second destination, named by its
+              host -- the provider on a row like this one is the YouTube channel
+              and would mislabel the page it points at. */}
+          {url && !pageIsTheVideo ? (
+            <GhostButton href={url}>Open {hostLabel ?? "the source page"}</GhostButton>
+          ) : null}
+        </div>
+      ) : url ? (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {playlist ? (
             <GhostButton href={url}>Open playlist</GhostButton>
           ) : (
             <PrimaryButton href={url}>Open official resource</PrimaryButton>

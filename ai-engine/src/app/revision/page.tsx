@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Banner, EmptyState, LoadingLine, Page, PageTitle } from "@/components/study-ui";
 import { api, errorMessage } from "@/lib/api";
@@ -36,7 +37,10 @@ export default function RevisionPage() {
             <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-4">
               <div className="min-w-0 flex-1"><p className="font-medium">{item.title || `${item.item_type} #${item.item_id}`}</p><p className="mt-1 text-sm text-[var(--muted)]">Explain <em>{item.title || "this topic"}</em> without notes — mechanism, example, misconception.</p><p className="mt-1 text-xs text-[var(--muted)]">{item.review_interval}d interval {typeof item.ease === "number" ? `· ease ${item.ease.toFixed(1)}` : ""} {item.retrieval_fail_count ? `· ${item.retrieval_fail_count} misses` : ""}</p></div>
               <div className="flex flex-wrap gap-2">
-                {item.item_type === "topic" ? <a href={`/learn/topic/${item.item_id}`} className="rounded-md border border-[var(--border)] px-3 py-1.5 text-xs">Open source</a> : null}
+                {/* Says what it does. It read "Open source" and went to the topic page,
+                    not to any source -- and as a plain <a> to an internal route it
+                    reloaded the whole app instead of navigating. */}
+                {item.item_type === "topic" ? <Link href={`/learn/topic/${item.item_id}`} className="rounded-md border border-[var(--border)] px-3 py-1.5 text-xs">Open topic</Link> : null}
                 {GRADES.map((g) => <button key={g.label} type="button" title={g.hint} disabled={busyId === item.id} onClick={() => review(item, g.confidence)} className={cn("rounded-md border px-3 py-1.5 text-xs font-medium hover:border-[var(--border-strong)]", busyId === item.id && "opacity-50")}>{g.label}</button>)}
               </div>
             </li>
