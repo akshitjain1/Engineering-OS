@@ -28,31 +28,31 @@
   "user_id": "akshit"
  },
  {
-  "confidence": 0.0,
+  "confidence": 60.0,
   "ease": 2.5,
   "id": 3,
   "importance": 1.0,
   "item_id": 8,
   "item_type": "topic",
-  "last_reviewed": "2026-09-02 06:12:56.147516",
-  "next_review": "2026-09-03 06:12:56.147516",
+  "last_reviewed": "2026-09-03 06:16:36.681063",
+  "next_review": "2026-09-05 06:16:36.681063",
   "retrieval_fail_count": 0,
   "retrieval_success_count": 0,
-  "review_interval": 1,
+  "review_interval": 2,
   "user_id": "akshit"
  },
  {
-  "confidence": 0.0,
+  "confidence": 60.0,
   "ease": 2.5,
   "id": 4,
   "importance": 1.0,
   "item_id": 117,
   "item_type": "topic",
-  "last_reviewed": "2026-09-02 13:41:01.870679",
-  "next_review": "2026-09-03 13:41:01.870679",
+  "last_reviewed": "2026-09-03 06:16:39.289610",
+  "next_review": "2026-09-05 06:16:39.289610",
   "retrieval_fail_count": 0,
   "retrieval_success_count": 0,
-  "review_interval": 1,
+  "review_interval": 2,
   "user_id": "akshit"
  }
 ]

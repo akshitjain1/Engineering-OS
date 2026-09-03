@@ -3076,5 +3076,14 @@
   "minutes": 3,
   "source": "question:517",
   "user_id": "akshit"
+ },
+ {
+  "activity_type": "review",
+  "created_at": "2026-09-03 06:17:14.987253",
+  "id": 343,
+  "local_date": "2026-09-03",
+  "minutes": 1,
+  "source": "day_session",
+  "user_id": "akshit"
  }
 ]
