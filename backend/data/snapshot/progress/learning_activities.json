@@ -3085,5 +3085,14 @@
   "minutes": 1,
   "source": "day_session",
   "user_id": "akshit"
+ },
+ {
+  "activity_type": "learn",
+  "created_at": "2026-09-03 07:39:04.978606",
+  "id": 344,
+  "local_date": "2026-09-03",
+  "minutes": 18,
+  "source": "day_session",
+  "user_id": "akshit"
  }
 ]

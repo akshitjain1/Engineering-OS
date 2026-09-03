@@ -96,7 +96,7 @@
   "topic_id": 8
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "Storage (SSD/HDD) keeps data when power is off. It is slower than RAM. Files, installed programs, and Git repos live here. The OS copies needed pieces into RAM to run them.",
   "hours_estimated": 0.4,

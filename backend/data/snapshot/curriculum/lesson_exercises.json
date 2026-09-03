@@ -200,8 +200,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-03 07:39:04.936151",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Describe the path of a `.c` or `.py` file from disk → editor (RAM) → save (disk) → run (load into RAM, CPU executes). Five to eight sentences.",
