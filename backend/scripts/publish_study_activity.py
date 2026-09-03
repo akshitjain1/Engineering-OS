@@ -46,7 +46,10 @@ DEFAULT_CLONE = Path(
     or Path(os.environ.get("LOCALAPPDATA", Path.home())) / "EngineeringOS" / "study-activity"
 )
 ACTIVITY_FILE = "activity.json"
-BUCKETS = ("dsa", "projects", "learning")
+#: Kept in the order bot.py renders them. "journal" is ours -- the bot was
+#: taught to read it, because a key it does not know would be dropped by the
+#: reset it performs after writing the log.
+BUCKETS = ("dsa", "projects", "learning", "journal")
 SEPARATOR = " — "  # em dash, and the key boundary
 
 
@@ -121,7 +124,41 @@ def summarise_day(db, day: str) -> dict[str, list[str]]:
         else:
             learning.append(entry)
 
-    return {"dsa": sorted(dsa), "projects": sorted(projects), "learning": sorted(learning)}
+    return {
+        "dsa": sorted(dsa),
+        "projects": sorted(projects),
+        "learning": sorted(learning),
+        "journal": _journal(db, day),
+    }
+
+
+#: The journal prompts, and how each reads as a line in a public daily log.
+JOURNAL_FIELDS = (("learned", "Learned"), ("struggled", "Stuck on"), ("tomorrow", "Tomorrow"))
+
+
+def _journal(db, day: str) -> list[str]:
+    """The day's own words, one bullet per prompt.
+
+    Newlines are collapsed: bot.py writes each entry as a single "- " bullet,
+    so a multi-line answer would break out of the list and land as loose text
+    under it.
+    """
+    row = db.execute(
+        _sql(
+            "select learned, struggled, tomorrow from day_journals "
+            "where entry_date = :day"
+        ),
+        {"day": day},
+    ).fetchone()
+    if row is None:
+        return []
+
+    out = []
+    for value, label in zip(row, [label for _, label in JOURNAL_FIELDS]):
+        text = " ".join((value or "").split())
+        if text:
+            out.append(f"{label}{SEPARATOR}{text}")
+    return out
 
 
 def _sql(text: str):

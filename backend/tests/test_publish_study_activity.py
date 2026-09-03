@@ -168,7 +168,61 @@ def test_reflect_and_review_are_not_logged(db_with_day):
           actual_minutes=8)
 
     out = summarise_day(db, DAY)
-    assert out == {"dsa": [], "projects": [], "learning": []}
+    assert out == {"dsa": [], "projects": [], "learning": [], "journal": []}
+
+
+def _journal(db, **fields):
+    from app.learning.day_models import DayJournal
+
+    db.add(DayJournal(user_id="akshit", entry_date=DAY, **fields))
+    db.commit()
+
+
+def test_the_journal_is_published_in_my_own_words(db_with_day):
+    db, _ = db_with_day
+    _journal(db, learned="Fetch and decode cycle", struggled="Java syntax",
+             tomorrow="Revise the syntax list")
+
+    assert summarise_day(db, DAY)["journal"] == [
+        f"Learned{SEPARATOR}Fetch and decode cycle",
+        f"Stuck on{SEPARATOR}Java syntax",
+        f"Tomorrow{SEPARATOR}Revise the syntax list",
+    ]
+
+
+def test_an_empty_journal_prompt_is_not_published(db_with_day):
+    """A blank box is not a reflection, and a bullet saying nothing is worse
+    than no bullet."""
+    db, _ = db_with_day
+    _journal(db, learned="Fetch and decode cycle", struggled="", tomorrow=None)
+
+    assert summarise_day(db, DAY)["journal"] == [f"Learned{SEPARATOR}Fetch and decode cycle"]
+
+
+def test_a_multi_line_answer_becomes_one_bullet(db_with_day):
+    """bot.py writes each entry as a single "- " line, so an embedded newline
+    would break out of the list and land as loose text underneath it."""
+    db, _ = db_with_day
+    _journal(db, learned="Cache hits\nCache misses\n\nLocality")
+
+    entry = summarise_day(db, DAY)["journal"][0]
+    assert "\n" not in entry
+    assert entry == f"Learned{SEPARATOR}Cache hits Cache misses Locality"
+
+
+def test_no_journal_row_is_not_an_error(db_with_day):
+    db, _ = db_with_day
+    assert summarise_day(db, DAY)["journal"] == []
+
+
+def test_rewriting_the_journal_replaces_the_old_line():
+    """Editing a note and closing again must not leave both versions."""
+    first = merge({}, {"dsa": [], "projects": [], "learning": [],
+                       "journal": [f"Learned{SEPARATOR}half a thought"]})
+    second = merge(first, {"dsa": [], "projects": [], "learning": [],
+                           "journal": [f"Learned{SEPARATOR}the finished thought"]})
+
+    assert second["journal"] == [f"Learned{SEPARATOR}the finished thought"]
 
 
 def test_publishing_twice_leaves_one_line_per_topic():
