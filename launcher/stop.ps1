@@ -8,6 +8,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $LauncherDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$Root = (Resolve-Path (Join-Path $LauncherDir "..")).Path
 $StateFile = Join-Path $LauncherDir "state\owned.json"
 $LogDir = Join-Path $LauncherDir "logs"
 $LogFile = Join-Path $LogDir ("launcher-{0:yyyyMMdd}.log" -f (Get-Date))
@@ -72,6 +73,38 @@ if (-not $Quiet) {
     Write-Host "-------------------"
 }
 
+function Publish-StudyActivity {
+    <#
+        Hand today's work to the study-activity repo on the way out.
+
+        That repo's bot turns activity.json into a dated markdown log at 18:00
+        UTC and then empties the file. Filling it by hand is the step that stops
+        happening, so the log ends up recording the days you remembered rather
+        than the days you worked. Engineering OS already knows what you did.
+
+        Best effort, like the backup: closing the app must not fail because a
+        second remote is unreachable. Nothing here touches this repository.
+    #>
+    $python = Join-Path $Root "backend\venv\Scripts\python.exe"
+    $script = Join-Path $Root "backend\scripts\publish_study_activity.py"
+    if (-not (Test-Path $python) -or -not (Test-Path $script)) {
+        Write-Log "Study activity: publisher not found, skipped."
+        return
+    }
+    Write-Log "Publishing today's activity to study-activity..."
+    try {
+        $output = & $python $script --apply
+        foreach ($line in @($output)) {
+            if ("$line".Trim()) { Write-Log "  $line" }
+        }
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "  Publish did not complete (exit $LASTEXITCODE). Engineering OS is unaffected."
+        }
+    } catch {
+        Write-Log "  Study activity publish failed: $($_.Exception.Message)"
+    }
+}
+
 function Sync-ToGitHub {
     <#
         Export the day's work and push it, on the way out.
@@ -109,7 +142,7 @@ if (-not (Test-Path $StateFile)) {
     }
     # Still worth syncing: the app may have been stopped some other way, and
     # the day's work is sitting unpushed either way.
-    if (-not $NoSync) { Sync-ToGitHub }
+    if (-not $NoSync) { Publish-StudyActivity; Sync-ToGitHub }
     exit 0
 }
 
@@ -119,5 +152,5 @@ Stop-OwnedPid -ProcessId $state.frontendPid -Label "Frontend"
 Remove-Item -Force $StateFile -ErrorAction SilentlyContinue
 Write-Log "Stop complete. Processes not started by the launcher were not touched."
 
-if (-not $NoSync) { Sync-ToGitHub }
+if (-not $NoSync) { Publish-StudyActivity; Sync-ToGitHub }
 exit 0
