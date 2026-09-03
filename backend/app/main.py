@@ -201,6 +201,17 @@ def _overview_progress(db: Session) -> UserProgress:
     return overview
 
 
+#: What a topic's practice actually is when nothing is mapped to it: the page
+#: offers a prompt to take to an AI, and the topic's own recall questions. Said
+#: here so the contract describes the page instead of promising exercises that
+#: were never written.
+PRACTICE_WITHOUT_SOURCE = (
+    "No practice source is mapped for this topic. Use the practice prompt on the "
+    "page to generate exercises, attempt them yourself, then answer the recall "
+    "questions from memory."
+)
+
+
 def _revision_interval(confidence: float) -> int:
     index = min(max(int(confidence / 20), 0), len(REVISION_INTERVALS) - 1)
     return REVISION_INTERVALS[index]
@@ -731,6 +742,28 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
         practice_ex = None
         build_ex = None
 
+    # The other half of the same problem, on topics with no mapped problems at
+    # all. The exercise rows were generated with a stock line -- "Complete 3
+    # exercises on cf-storage" -- and on 191 topics there is neither a third
+    # exercise nor a single PRACTICE resource to do it on. The page has always
+    # handled this honestly: with nothing mapped it offers a prompt you take to
+    # an AI, plus the topic's own recall questions. The contract kept promising
+    # the exercises instead, so the one panel meant to tell you what today
+    # requires was the one panel making it up.
+    #
+    # The row is still used when it holds a real instruction; only the invented
+    # quantity is dropped, and the text falls back to describing what is
+    # actually on the page.
+    practice_resources = payload["resources_by_role"].get("PRACTICE") or []
+    exercise_count = sum(len(lesson.exercises or []) for lesson in lessons)
+    claimed = getattr(practice_ex, "quantity", None) if practice_ex else None
+    overclaimed = bool(
+        practice_ex
+        and not practice_resources
+        and claimed
+        and claimed > exercise_count
+    )
+
     from app.content.audit import audit_topic
 
     audit = audit_topic(db, topic.slug) if topic.slug else None
@@ -762,15 +795,20 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
             "title": (
                 f"{len(mapped_problems)} mapped problems"
                 if mapped_problems
-                else (practice_ex.title if practice_ex else None)
+                else ("Generate your own practice" if overclaimed else
+                      (practice_ex.title if practice_ex else None))
             ),
             "instructions": (
                 "Solve these in order: "
                 + "; ".join(r["title"] for r in mapped_problems)
                 if mapped_problems
                 else (
-                    getattr(practice_ex, "practice_instructions", None)
-                    or (practice_ex.description if practice_ex else None)
+                    PRACTICE_WITHOUT_SOURCE
+                    if overclaimed
+                    else (
+                        getattr(practice_ex, "practice_instructions", None)
+                        or (practice_ex.description if practice_ex else None)
+                    )
                 )
             ),
             "destination_type": (
@@ -786,7 +824,8 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
             "quantity": (
                 len(mapped_problems)
                 if mapped_problems
-                else (getattr(practice_ex, "quantity", None) if practice_ex else None)
+                # None rather than a number nothing on the page can satisfy.
+                else (None if overclaimed else claimed)
             ),
         },
         "build": {
@@ -795,7 +834,11 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
         },
         "done_when": [
             "Finish the LEARN source segment/page listed above",
-            "Complete the PRACTICE quantity/destination",
+            (
+                "Work the practice prompt and answer the recall questions"
+                if overclaimed
+                else "Complete the PRACTICE quantity/destination"
+            ),
             "Finish BUILD/implement if listed",
         ],
         "next": next_in_sequence,

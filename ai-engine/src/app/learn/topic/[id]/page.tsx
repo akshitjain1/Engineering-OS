@@ -147,10 +147,16 @@ function StudyContractPanel({ contract }: { contract: StudyContract }) {
         <div>
           <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Practice</p>
           <p className="mt-1 whitespace-pre-wrap text-sm">{contract.practice.instructions}</p>
-          <p className="mt-1 text-xs text-[var(--muted)]">
-            {contract.practice.destination_type || "DESTINATION"}
-            {contract.practice.quantity != null ? ` · quantity ${contract.practice.quantity}` : ""}
-          </p>
+          {/* Only when there is something to say. This fell back to the literal
+              word "DESTINATION" with nothing after it once a topic with no
+              practice source stopped publishing an invented quantity. */}
+          {contract.practice.destination_type || contract.practice.quantity != null ? (
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              {contract.practice.destination_type ?? ""}
+              {contract.practice.destination_type && contract.practice.quantity != null ? " · " : ""}
+              {contract.practice.quantity != null ? `quantity ${contract.practice.quantity}` : ""}
+            </p>
+          ) : null}
           {contract.practice.destination_url ? (
             <a href={contract.practice.destination_url} target="_blank" rel="noreferrer" className="text-xs underline">
               Open practice destination
