@@ -1,0 +1,109 @@
+{
+  "https://docs.langchain.com/oss/python/deepagents/rag": {
+    "final_host": "docs.langchain.com",
+    "page_title": "Retrieval Augmented Generation (RAG) with Deep Agents - Docs by LangChain",
+    "status": 200,
+    "url": "https://docs.langchain.com/oss/python/deepagents/rag"
+  },
+  "https://onlinestatbook.com/2/probability/bayes.html": {
+    "final_host": "onlinestatbook.com",
+    "page_title": "Bayes' Theorem",
+    "status": 200,
+    "url": "https://onlinestatbook.com/2/probability/bayes.html"
+  },
+  "https://openstax.org/books/introductory-statistics/pages/2-5-measures-of-the-center-of-the-data": {
+    "final_host": "openstax.org",
+    "page_title": "2.5 Measures of the Center of the Data - Introductory Statistics | OpenStax",
+    "status": 200,
+    "url": "https://openstax.org/books/introductory-statistics/pages/2-5-measures-of-the-center-of-the-data"
+  },
+  "https://seeing-theory.brown.edu/basic-probability/index.html": {
+    "final_host": "seeing-theory.brown.edu",
+    "page_title": "Seeing Theory - Basic Probability",
+    "status": 200,
+    "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
+  },
+  "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDerivative.aspx": {
+    "final_host": "tutorial.math.lamar.edu",
+    "status": 406,
+    "url": "https://tutorial.math.lamar.edu/Classes/CalcI/DefnOfDerivative.aspx"
+  },
+  "https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Worst, Average and Best Case Analysis of Algorithms - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/"
+  },
+  "https://www.geeksforgeeks.org/computer-networks/differences-between-tcp-and-udp/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "TCP vs. UDP - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/computer-networks/differences-between-tcp-and-udp/"
+  },
+  "https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Counting frequencies of array elements - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/"
+  },
+  "https://www.geeksforgeeks.org/data-structures/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "DSA Tutorial - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/data-structures/"
+  },
+  "https://www.geeksforgeeks.org/heap-sort/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Heap Sort - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/heap-sort/"
+  },
+  "https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Dynamic Programming (DP) Introduction - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/introduction-to-dynamic-programming-data-structures-and-algorithm-tutorials/"
+  },
+  "https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-engineering-process/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Requirements Engineering Process in Software Engineering - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-engineering-process/"
+  },
+  "https://www.geeksforgeeks.org/two-pointers-technique/": {
+    "final_host": "geeksforgeeks.org",
+    "page_title": "Two Pointers Technique - GeeksforGeeks",
+    "status": 200,
+    "url": "https://www.geeksforgeeks.org/two-pointers-technique/"
+  },
+  "https://www.mathsisfun.com/sets/function.html": {
+    "final_host": "mathsisfun.com",
+    "page_title": "What is a Function",
+    "status": 200,
+    "url": "https://www.mathsisfun.com/sets/function.html"
+  },
+  "https://www.nltk.org/book/ch03.html": {
+    "final_host": "nltk.org",
+    "page_title": "ch03.rst2",
+    "status": 200,
+    "url": "https://www.nltk.org/book/ch03.html"
+  },
+  "https://www.promptingguide.ai/introduction/settings": {
+    "final_host": "promptingguide.ai",
+    "page_title": "LLM Settings | Prompt Engineering Guide<!-- -->",
+    "status": 200,
+    "url": "https://www.promptingguide.ai/introduction/settings"
+  },
+  "https://www.promptingguide.ai/introduction/tips": {
+    "final_host": "promptingguide.ai",
+    "page_title": "General Tips for Designing Prompts | Prompt Engineering Guide<!-- -->",
+    "status": 200,
+    "url": "https://www.promptingguide.ai/introduction/tips"
+  },
+  "https://www.promptingguide.ai/risks": {
+    "final_host": "promptingguide.ai",
+    "page_title": "Risks &amp; Misuses | Prompt Engineering Guide<!-- -->",
+    "status": 200,
+    "url": "https://www.promptingguide.ai/risks"
+  }
+}
