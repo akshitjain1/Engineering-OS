@@ -752,6 +752,50 @@ def topic_completion_index(db: Session, user_id: str = DEFAULT_USER) -> dict[str
     return result
 
 
+def is_coding_problem(resource: Any) -> bool:
+    """A row that stands for a problem on a judge, rather than something to read."""
+    url = (getattr(resource, "url", None) or "").strip()
+    if not url:
+        return False
+    kind = (getattr(resource, "resource_type", None) or "").lower()
+    return "problem" in kind or "leetcode.com/problems/" in url
+
+
+def set_problem_solved(db: Session, resource: Any, completed: bool) -> list[Any]:
+    """Record a problem as solved, everywhere that problem appears.
+
+    The mapping deliberately reuses problems: 57 of them are pinned to more than
+    one topic, and Two Sum alone sits under five. Each was its own row with its
+    own tick, so solving Two Sum under Algorithmic thinking left it reading
+    "Mark solved" when Big-O served it the next day -- the app asking whether
+    you had done something it already knew you had.
+
+    Solved is a fact about the problem, not about the row that happened to show
+    it, so it is written to every row with the same URL. Non-problem resources
+    are untouched: the same article can be set for different sections in
+    different topics, and reading one is not reading the other.
+
+    Returns the rows that were changed.
+    """
+    status = "completed" if completed else "not_started"
+    if not is_coding_problem(resource):
+        changed = [] if resource.completion_status == status else [resource]
+        resource.completion_status = status
+        return changed
+
+    rows = (
+        db.query(CurriculumResource)
+        .filter(CurriculumResource.url == resource.url)
+        .all()
+    )
+    changed = []
+    for row in rows or [resource]:
+        if row.completion_status != status:
+            row.completion_status = status
+            changed.append(row)
+    return changed
+
+
 #: Roles that make up a topic's actual work -- the source the day sends you to
 #: read, and the problems it sends you to solve. Finishing the topic means you
 #: did these, so completion marks them consumed.
@@ -794,7 +838,9 @@ def complete_topic(db: Session, topic_id: int, user_id: str = DEFAULT_USER) -> d
             if getattr(resource, "learner_visible", True) is False:
                 continue
             if not is_lesson_complete(resource.completion_status):
-                resource.completion_status = "completed"
+                # Through the helper, so finishing a DSA topic marks its
+                # problems solved wherever else they are mapped as well.
+                set_problem_solved(db, resource, True)
     row = (
         db.query(UserProgress)
         .filter(

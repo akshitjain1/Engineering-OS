@@ -188,6 +188,8 @@ export type ResourcePublic = {
   notes?: string | null;
   /** Verified concept tags the problem was matched on. */
   required_concepts_covered?: string[] | null;
+  /** Other topics that pin this same problem. Solving it counts for all of them. */
+  also_in_topics?: string[] | null;
   difficulty: string | null;
   description: string | null;
   official_unofficial: string;

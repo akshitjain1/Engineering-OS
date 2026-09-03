@@ -653,6 +653,33 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
     learner_resources = learner_facing_resources(resources)
     payload["resources"] = [_serialize_resource(resource) for resource in learner_resources]
     payload["resources_by_role"] = group_resources_by_role(resources, for_learner=True)
+
+    # Which other topics pin the same problem. Solving it counts for all of
+    # them (service.set_problem_solved), so a problem can arrive already ticked
+    # and the page has to be able to say why rather than just look wrong.
+    practice_urls = [
+        r["url"]
+        for r in (payload["resources_by_role"].get("PRACTICE") or [])
+        if r.get("url") and r.get("resource_type") == "problem"
+    ]
+    if practice_urls:
+        shared: dict[str, list[str]] = {}
+        rows = (
+            db.query(CurriculumResource.url, CurriculumTopic.name)
+            .join(CurriculumLesson, CurriculumLesson.id == CurriculumResource.lesson_id)
+            .join(CurriculumTopic, CurriculumTopic.id == CurriculumLesson.topic_id)
+            .filter(
+                CurriculumResource.url.in_(practice_urls),
+                CurriculumTopic.id != topic.id,
+            )
+            .all()
+        )
+        for url, name in rows:
+            if name and name not in shared.setdefault(url, []):
+                shared[url].append(name)
+        for r in payload["resources_by_role"].get("PRACTICE") or []:
+            r["also_in_topics"] = sorted(shared.get(r.get("url") or "", []))
+
     primaries = payload["resources_by_role"].get("PRIMARY") or []
     payload["source_readiness"] = (primaries[0].get("source_readiness") if primaries else "UNRESOLVED")
     mastery_row = (
@@ -1039,7 +1066,9 @@ def update_resource_progress(
         lesson = db.get(CurriculumLesson, resource.lesson_id)
         if lesson:
             _assert_topic_unlocked(lesson.topic, _topics_index(db))
-    resource.completion_status = "completed" if body.completed else "not_started"
+    # A problem solved is solved wherever it is mapped -- see
+    # service.set_problem_solved. Non-problem resources are set on their own row.
+    learning_service.set_problem_solved(db, resource, body.completed)
     db.commit()
     db.refresh(resource)
     return _serialize_resource(resource)

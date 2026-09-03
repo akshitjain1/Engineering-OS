@@ -157,6 +157,8 @@ export function ProblemRow({
     }
   };
 
+  const shared = resource.also_in_topics ?? [];
+
   return (
     <li className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -180,6 +182,21 @@ export function ProblemRow({
 
       {resource.description ? (
         <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{resource.description}</p>
+      ) : null}
+
+      {/* The mapping pins 57 problems to more than one topic, and solving one
+          counts everywhere it appears. Without saying so, a problem arriving
+          already ticked just looks wrong -- and worse, you would skip the
+          practice this topic wanted from it without knowing that is the
+          choice you were making. */}
+      {shared.length > 0 ? (
+        <p className="mt-2 text-xs text-[var(--muted)]">
+          {resource.completed ? "Solved already — this problem also belongs to " : "Also belongs to "}
+          {shared.join(" · ")}
+          {resource.completed
+            ? ". Worth redoing here if you want it under this topic's angle."
+            : ". Solving it once counts for all of them."}
+        </p>
       ) : null}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
