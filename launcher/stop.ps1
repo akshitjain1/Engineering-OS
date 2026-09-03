@@ -1,5 +1,10 @@
 # Stop only processes this launcher started. Never kills arbitrary Python/Node.
-param([switch] $Quiet)
+param(
+    [switch] $Quiet,
+    # Skip the GitHub push. Used when a script stops the app as part of some
+    # other job and does not want a commit as a side effect.
+    [switch] $NoSync
+)
 
 $ErrorActionPreference = "Stop"
 $LauncherDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -67,11 +72,44 @@ if (-not $Quiet) {
     Write-Host "-------------------"
 }
 
+function Sync-ToGitHub {
+    <#
+        Export the day's work and push it, on the way out.
+
+        Runs after the servers are down, so nothing is mid-write and the export
+        is a clean picture of the day you just finished. It commits only
+        backend/data/snapshot, so anything else in the working tree is left
+        alone.
+
+        Best effort, always. Closing the app is not allowed to fail because the
+        network is down, a push was rejected, or git is not on PATH -- the
+        local snapshot in backend\backups\ has already been taken by then.
+    #>
+    $script = Join-Path $LauncherDir "backup-to-github.ps1"
+    if (-not (Test-Path $script)) {
+        Write-Log "Backup: backup-to-github.ps1 is missing, nothing pushed."
+        return
+    }
+    Write-Log "Backing up today's work to GitHub..."
+    try {
+        $output = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $script -BestEffort
+        foreach ($line in @($output)) {
+            if ("$line".Trim()) { Write-Log "  $line" }
+        }
+    } catch {
+        Write-Log "  GitHub backup failed: $($_.Exception.Message)"
+        Write-Log "  Your data is safe - backend\backups\ still holds today's local snapshot."
+    }
+}
+
 if (-not (Test-Path $StateFile)) {
     Write-Log "No launcher-owned processes. Other Python/Node apps were left running."
     if (-not $Quiet) {
         Write-Host "If you started FastAPI or Next.js yourself, close those windows manually."
     }
+    # Still worth syncing: the app may have been stopped some other way, and
+    # the day's work is sitting unpushed either way.
+    if (-not $NoSync) { Sync-ToGitHub }
     exit 0
 }
 
@@ -80,4 +118,6 @@ Stop-OwnedPid -ProcessId $state.backendPid -Label "Backend"
 Stop-OwnedPid -ProcessId $state.frontendPid -Label "Frontend"
 Remove-Item -Force $StateFile -ErrorAction SilentlyContinue
 Write-Log "Stop complete. Processes not started by the launcher were not touched."
+
+if (-not $NoSync) { Sync-ToGitHub }
 exit 0

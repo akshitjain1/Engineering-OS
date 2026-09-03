@@ -4,7 +4,13 @@
 # progress. This exports the database to JSON under backend/data/snapshot/ and
 # commits and pushes only that path -- so it is safe to run mid-edit: nothing
 # else you are working on is staged, committed, or touched.
-param([switch] $Quiet)
+param(
+    [switch] $Quiet,
+    # Set when stop.ps1 calls this on the way out. Closing the app must never
+    # fail because the network is down or a push was rejected, so in this mode
+    # every failure becomes a printed warning and a clean exit.
+    [switch] $BestEffort
+)
 
 $ErrorActionPreference = "Stop"
 $LauncherDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -18,6 +24,12 @@ function Say { param([string] $Message) if (-not $Quiet) { Write-Host $Message }
 function Die {
     param([string] $Message)
     Write-Host ""
+    if ($BestEffort) {
+        Write-Host "GitHub backup skipped:"
+        Write-Host $Message
+        Write-Host "Your data is safe - backend\backups\ still holds today's local snapshot."
+        exit 0
+    }
     Write-Host "BACKUP DID NOT COMPLETE"
     Write-Host $Message
     Write-Host ""
@@ -79,5 +91,5 @@ credentials are sorted, or push manually:
     Pop-Location
 }
 
-if (-not $Quiet) { Start-Sleep -Seconds 2 }
+if (-not $Quiet -and -not $BestEffort) { Start-Sleep -Seconds 2 }
 exit 0
