@@ -74,11 +74,15 @@ try {
 
     $branch = (& git rev-parse --abbrev-ref HEAD).Trim()
     Say "Pushing $branch to GitHub..."
-    $push = & git push origin $branch 2>&1
+    # No 2>&1. git writes its normal progress to stderr even on success, and
+    # Windows PowerShell wraps every redirected stderr line from a native exe
+    # in a NativeCommandError -- so a push that worked printed a wall of red
+    # and set $? to false. Exit code is the honest signal; git's own output
+    # goes straight to the console either way.
+    & git push origin $branch | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Die @"
-The commit was made locally but the push failed:
-  $($push -join "`n  ")
+The commit was made locally but the push failed (git's own message is above).
 
 Your snapshot is committed -- run this again once the connection or
 credentials are sorted, or push manually:
