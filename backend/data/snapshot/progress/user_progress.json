@@ -206,5 +206,31 @@
   "total_streak_days": 0,
   "user_id": "akshit",
   "xp_earned": 0
+ },
+ {
+  "dsa_topic_id": null,
+  "id": 17,
+  "last_activity_at": "2026-09-03 13:18:02.360514",
+  "lesson_id": null,
+  "mastery_status": "not_started",
+  "progress_state": "completed",
+  "streak_days": 0,
+  "topic_id": 10,
+  "total_streak_days": 0,
+  "user_id": "akshit",
+  "xp_earned": 0
+ },
+ {
+  "dsa_topic_id": null,
+  "id": 18,
+  "last_activity_at": "2026-09-03 13:33:11.589827",
+  "lesson_id": null,
+  "mastery_status": "not_started",
+  "progress_state": "completed",
+  "streak_days": 0,
+  "topic_id": 119,
+  "total_streak_days": 0,
+  "user_id": "akshit",
+  "xp_earned": 0
  }
 ]

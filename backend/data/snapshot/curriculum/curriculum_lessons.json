@@ -108,7 +108,7 @@
   "topic_id": 9
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "The processor repeats: fetch the next instruction from memory, decode what it means, execute it (often with the ALU), then continue. A simple assignment becomes several instructions. CS50 Week 1 shows source becoming machine code; it does not walk microarchitecture pipelines.",
   "hours_estimated": 0.5,
@@ -1416,7 +1416,7 @@
   "topic_id": 118
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. The same algorithm can differ by input shape: quicksort is O(n log n) average but O(n²) worst on bad pivots. HashMap lookup is O(1) average but degrades with many collisions. Interviews usually ask worst-case unless stated otherwise. Abdul Bari's Frequency Count / analysis lectures and MIT L19 deepen this — not mastery alone.",
   "hours_estimated": 0.75,
