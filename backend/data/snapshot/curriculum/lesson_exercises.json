@@ -2925,8 +2925,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-03 12:17:55.707836",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "AFTER learning the concept and implementing it from scratch: solve 4 problems on LeetCode tag 'array' (prefer Easy→Medium progression). Do not use problems as PRIMARY learn.",

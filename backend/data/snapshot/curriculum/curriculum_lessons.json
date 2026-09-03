@@ -1404,7 +1404,7 @@
   "topic_id": 117
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Big-O describes asymptotic growth: constant factors and lower terms drop out. Count dominant operations in loops — one loop over n is O(n), nested loops often O(n²). This formalizes Domain 0's complexity intro. Same reasoning in C++ and Java. Watching Time Complexity / Asymptotic Notation lectures is not mastery.",
   "hours_estimated": 1.0,

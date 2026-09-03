@@ -23797,7 +23797,7 @@
  },
  {
   "boundary_type": "FULL_SINGLE_PAGE",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Read the page. Focus on what Big-O means, asymptotic growth, ignoring constants and lower-order terms, and analyzing simple loops/nested loops. Be able to derive O(1), O(n), O(n^2), and O(log n) for simple code.",
   "difficulty": null,
   "duration": null,
@@ -33553,7 +33553,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Three correct solutions at O(n^2), O(n log n) and O(n) -- write all three and time them.",
   "difficulty": "Easy",
   "duration": null,
@@ -33589,7 +33589,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "The nested-loop and hash solutions differ only in what you are willing to store.",
   "difficulty": "Easy",
   "duration": null,
@@ -34561,7 +34561,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Store what you have seen so the complement is one lookup away.",
   "difficulty": "Easy",
   "duration": null,
@@ -34669,7 +34669,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Seen-before is the entire question.",
   "difficulty": "Easy",
   "duration": null,
@@ -44497,7 +44497,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Short enough that the only thing to practise is how you talk through it.",
   "difficulty": "Easy",
   "duration": null,
@@ -44605,7 +44605,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "The inner loop collapses because the complement is one lookup away.",
   "difficulty": "Easy",
   "duration": null,
@@ -44677,7 +44677,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Sort, hash, sum and XOR all solve it at different cost -- one problem, four complexities.",
   "difficulty": "Easy",
   "duration": null,
@@ -44785,7 +44785,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "A hash set is O(1) average and O(n) worst per lookup -- average case you can actually feel.",
   "difficulty": "Easy",
   "duration": null,

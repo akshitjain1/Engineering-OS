@@ -184,12 +184,25 @@
  {
   "dsa_topic_id": null,
   "id": 15,
-  "last_activity_at": "2026-09-03 07:39:04.936151",
+  "last_activity_at": "2026-09-03 08:11:50.061123",
   "lesson_id": null,
   "mastery_status": "not_started",
   "progress_state": "completed",
   "streak_days": 0,
   "topic_id": 9,
+  "total_streak_days": 0,
+  "user_id": "akshit",
+  "xp_earned": 0
+ },
+ {
+  "dsa_topic_id": null,
+  "id": 16,
+  "last_activity_at": "2026-09-03 12:17:55.707836",
+  "lesson_id": null,
+  "mastery_status": "not_started",
+  "progress_state": "completed",
+  "streak_days": 0,
+  "topic_id": 118,
   "total_streak_days": 0,
   "user_id": "akshit",
   "xp_earned": 0
