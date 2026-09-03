@@ -752,12 +752,23 @@ def topic_completion_index(db: Session, user_id: str = DEFAULT_USER) -> dict[str
     return result
 
 
+#: Roles that make up a topic's actual work -- the source the day sends you to
+#: read, and the problems it sends you to solve. Finishing the topic means you
+#: did these, so completion marks them consumed.
+#:
+#: REFERENCE, SUPPLEMENT and DEEP_DIVE are deliberately not here. The flow never
+#: routes you through them, Deep Dive is its own optional section on the topic
+#: page, and ticking material you were never asked to open would make the page
+#: claim you had read something you had not.
+TOPIC_WORK_ROLES = {"PRIMARY", "PRACTICE"}
+
+
 def complete_topic(db: Session, topic_id: int, user_id: str = DEFAULT_USER) -> dict[str, Any]:
     """V3 Done action: mark a topic complete. Idempotent, no XP, no mastery.
 
-    Completes any unfinished lessons and exercises directly and records a
-    topic-level UserProgress row so the completion index unlocks the next
-    topic. Never writes mastery evidence, never awards XP, never touches
+    Completes any unfinished lessons, exercises and work resources directly and
+    records a topic-level UserProgress row so the completion index unlocks the
+    next topic. Never writes mastery evidence, never awards XP, never touches
     revision schedules.
     """
     topic = db.get(CurriculumTopic, topic_id)
@@ -772,6 +783,18 @@ def complete_topic(db: Session, topic_id: int, user_id: str = DEFAULT_USER) -> d
             if not is_lesson_complete(exercise.completion_status):
                 exercise.completion_status = "completed"
                 exercise.attempted_at = now
+        # Resources were the one thing completion never touched. Lessons and
+        # exercises were closed out, so saying "finished this topic" left the
+        # source you had just spent the whole block reading still labelled
+        # "Not consumed" -- and asked you to tick it again by hand, which is
+        # bookkeeping the app already had the answer to.
+        for resource in getattr(lesson, "resources", []) or []:
+            if (resource.role or "").upper() not in TOPIC_WORK_ROLES:
+                continue
+            if getattr(resource, "learner_visible", True) is False:
+                continue
+            if not is_lesson_complete(resource.completion_status):
+                resource.completion_status = "completed"
     row = (
         db.query(UserProgress)
         .filter(
