@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -104,13 +105,27 @@ def _rows(conn: sqlite3.Connection, table: str) -> list[dict]:
     return [dict(r) for r in cur]
 
 
+def _atomic_write(path: Path, text: str) -> None:
+    """Write via a temp file and one rename, so a reader never sees half a file.
+
+    This is the backup. A plain write truncates the old contents first, and
+    anything reading in that window -- the test that restores the committed
+    snapshot, a `git add`, another export -- gets a partial file. A crash in
+    that window leaves the truncated file *as* the backup, which is the one
+    failure a backup cannot have. os.replace is atomic on Windows and POSIX.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, path)
+
+
 def _write(path: Path, payload: object) -> bool:
     """Write only when the bytes differ, so unchanged tables keep their mtime."""
     text = json.dumps(payload, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
     if path.exists() and path.read_text(encoding="utf-8") == text:
         return False
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    _atomic_write(path, text)
     return True
 
 
@@ -135,9 +150,8 @@ def export(db_path: Path, out_dir: Path) -> dict:
         ]
         schema_text = ";\n\n".join(s.strip() for s in schema) + ";\n"
         schema_path = out_dir / "schema.sql"
-        schema_path.parent.mkdir(parents=True, exist_ok=True)
         if not schema_path.exists() or schema_path.read_text(encoding="utf-8") != schema_text:
-            schema_path.write_text(schema_text, encoding="utf-8")
+            _atomic_write(schema_path, schema_text)
 
         manifest: dict[str, dict] = {}
         changed: list[str] = []

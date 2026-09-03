@@ -214,6 +214,47 @@ def test_committed_snapshot_actually_restores(tmp_path: Path) -> None:
         conn.close()
 
 
+def test_a_crash_mid_export_leaves_the_previous_snapshot_intact(
+    populated_db: Path, tmp_path: Path, monkeypatch
+) -> None:
+    """The snapshot is the backup, so a failed export must not damage it.
+
+    Writing straight to the target truncates the good file first, so a crash in
+    that window leaves a half-written file standing in for the backup. Caught
+    for real once: an export running while the suite read the snapshot produced
+    a JSONDecodeError in test_committed_snapshot_actually_restores.
+    """
+    from scripts import export_db
+
+    out_dir = tmp_path / "snapshot"
+    export(populated_db, out_dir)
+    target = out_dir / "curriculum" / "curriculum_tracks.json"
+    good = target.read_text(encoding="utf-8")
+    assert json.loads(good), "fixture should have written a non-empty table"
+
+    real_write_text = Path.write_text
+
+    def explode(self, data, *args, **kwargs):
+        if self.name.endswith(".tmp"):
+            raise OSError("disk full, halfway through")
+        return real_write_text(self, data, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", explode)
+    with pytest.raises(OSError):
+        export_db._atomic_write(target, "brand new contents")
+
+    assert target.read_text(encoding="utf-8") == good, (
+        "a failed write destroyed the snapshot it was replacing"
+    )
+    assert json.loads(target.read_text(encoding="utf-8")) is not None
+
+
+def test_export_leaves_no_temp_files_behind(populated_db: Path, tmp_path: Path) -> None:
+    out_dir = tmp_path / "snapshot"
+    export(populated_db, out_dir)
+    assert not list(out_dir.rglob("*.tmp"))
+
+
 def test_scripts_run_as_modules_from_the_backend_directory() -> None:
     """The launcher invokes these by path. A syntax error must fail the suite,
     not the first morning you open the app."""
