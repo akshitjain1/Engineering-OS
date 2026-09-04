@@ -250,8 +250,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-04 07:16:21.178326",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "After skimming CS50 Week 1's source/machine code/compiler sections, write the chain: source file → compiler → machine code → loader/RAM → CPU. Do not submit CS50 problem sets.",

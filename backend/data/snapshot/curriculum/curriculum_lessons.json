@@ -120,7 +120,7 @@
   "topic_id": 10
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "Machine code is the binary instruction encoding a CPU family can execute. It is architecture-specific. CS50 Week 1: source code is compiled to machine code you can run.",
   "hours_estimated": 0.5,
