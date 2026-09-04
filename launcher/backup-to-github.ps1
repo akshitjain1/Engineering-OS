@@ -67,8 +67,13 @@ try {
 
         $stamp = Get-Date -Format "yyyy-MM-dd HH:mm"
         # Only this path is committed, so anything else in progress stays untouched.
-        & git commit --only -- $SnapshotPath -m "Snapshot learning data ($stamp)" | Out-Null
-        if ($LASTEXITCODE -ne 0) { Die "git commit failed." }
+        # -m BEFORE the --, or git reads the flag and the message as pathspecs
+        # and fails with "pathspec '-m' did not match any file(s)". This line was
+        # wrong from the day it was written and never once ran, because every
+        # stop until now found nothing to commit. It broke on the first evening
+        # there was real work to save, which is the only evening it mattered.
+        & git commit -m "Snapshot learning data ($stamp)" --only -- $SnapshotPath | Out-Null
+        if ($LASTEXITCODE -ne 0) { Die "git commit failed (exit $LASTEXITCODE)." }
         Say "  committed"
     }
 

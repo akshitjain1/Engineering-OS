@@ -27,6 +27,7 @@ from app.db.models import (  # noqa: E402
     CurriculumTopic,
     UserProgress,
 )
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 from app.learning.service import DEFAULT_USER, TOPIC_WORK_ROLES, is_lesson_complete  # noqa: E402
 
@@ -63,6 +64,7 @@ def find(db, user_id: str) -> list[tuple[CurriculumTopic, CurriculumResource]]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true", help="write the change (default: dry run)")
     parser.add_argument("--user", default=DEFAULT_USER)

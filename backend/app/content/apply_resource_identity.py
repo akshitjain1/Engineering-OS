@@ -23,10 +23,12 @@ from app.content.verify_resource_identity import (  # noqa: E402
     rows,
 )
 from app.db.models import CurriculumResource  # noqa: E402
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true", help="write the changes")
     parser.add_argument(

@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from app.content.dsa_primary_sources import DSA_PRIMARY_SOURCES, GFG  # noqa: E402
 from app.content.verify_resource_identity import clean_page_title, host_of, page_title  # noqa: E402
 from app.db.models import CurriculumLesson, CurriculumResource, CurriculumTopic  # noqa: E402
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 
 CACHE = Path(__file__).parent / "data" / "dsa_primary_source_facts.json"
@@ -128,6 +129,7 @@ def plan(db, facts: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--refresh", action="store_true", help="ignore the cache")

@@ -36,6 +36,7 @@ import httpx
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from app.db.models import CurriculumLesson, CurriculumResource, CurriculumTopic  # noqa: E402
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 
 CACHE = Path(__file__).parent / "data" / "resource_identity.json"
@@ -269,6 +270,7 @@ def corrections(db, facts: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--refresh", action="store_true", help="ignore the cache")
     parser.add_argument("--only", help="comma-separated resource ids")

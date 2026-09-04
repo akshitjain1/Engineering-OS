@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.curriculum import is_lesson_complete  # noqa: E402
 from app.db.models import CurriculumLesson, CurriculumResource, CurriculumTopic  # noqa: E402
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 from app.learning.service import is_coding_problem  # noqa: E402
 
@@ -51,6 +52,7 @@ def find(db) -> dict[str, list[tuple[str, CurriculumResource]]]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true", help="write the change (default: dry run)")
     args = parser.parse_args(argv)

@@ -37,6 +37,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from app.console import use_utf8  # noqa: E402
 from app.db.session import SessionLocal  # noqa: E402
 from app.learning.streak import local_today  # noqa: E402
 
@@ -224,6 +225,7 @@ def sync_to_origin(path: Path) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true", help="write, commit and push")
     parser.add_argument("--repo", type=Path, default=DEFAULT_CLONE)
