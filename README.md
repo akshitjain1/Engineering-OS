@@ -1,5 +1,7 @@
 # Akshit Engineering OS
 
+Copyright © 2026 **Akshit Jain** ([@akshitjain1](https://github.com/akshitjain1)) · Licensed under the [GNU AGPL-3.0](LICENSE) · First published 22 August 2026
+
 Private, local-first personal learning platform: **Learn → Practice → Build → Test → Revise → Track → Interview**.
 
 Built for exactly one user (Akshit). No multi-user, billing, social, or public features.
@@ -184,3 +186,23 @@ Stabilized foundation plus curriculum explorer:
 - Curriculum manifests (YAML/JSON) with validation and idempotent import
 
 Not implemented yet: daily learning engine, streaks, mastery diagnostics, curriculum UI wired to lessons, projects, journal, interviews.
+
+## Licence and attribution
+
+Engineering OS is the original work of **Akshit Jain**, first published on
+22 August 2026 at <https://github.com/akshitjain1/Engineering-OS>.
+
+It is licensed under the **GNU Affero General Public License v3.0** — see
+[LICENSE](LICENSE) and [NOTICE](NOTICE). In short:
+
+- You may read, run, study and modify it.
+- Any distributed or **network-hosted** derivative must remain under the AGPL
+  and must make its source available to its users.
+- The copyright notice must be preserved, and modified versions must say that
+  they are modified and when.
+
+The curriculum links to material published by GeeksforGeeks, LeetCode, NeetCode,
+CS50x, MIT OpenCourseWare and others. Those pages belong to their owners and are
+referenced by URL, never redistributed. The selection, sequencing and the
+rationale tying each source to a topic are original work and are covered by the
+licence.

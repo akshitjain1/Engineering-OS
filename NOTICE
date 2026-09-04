@@ -1,0 +1,41 @@
+Engineering OS
+Copyright (C) 2026 Akshit Jain
+
+Author and original creator: Akshit Jain <https://github.com/akshitjain1>
+Source of record: https://github.com/akshitjain1/Engineering-OS
+First published: 22 August 2026
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along
+with this program. If not, see <https://www.gnu.org/licenses/>.
+
+--------------------------------------------------------------------------------
+ON ATTRIBUTION
+
+Section 5 of the AGPL requires that modified versions carry prominent notices
+stating that they are modified and when, and that the copyright notice above is
+preserved. Section 13 additionally requires that anyone who runs a modified
+version over a network offer its users the corresponding source.
+
+Removing or altering the notice above does not transfer authorship. It makes the
+copy an unlicensed one, and the public commit history of the repository named
+above -- which begins on 22 August 2026 -- remains the record of where this
+originated.
+
+--------------------------------------------------------------------------------
+THIRD-PARTY MATERIAL
+
+The curriculum in this project links to material published by others --
+GeeksforGeeks, LeetCode, NeetCode, CS50x, MIT OpenCourseWare, dev.java,
+Khan Academy, Hugging Face, PyTorch, scikit-learn and others. Those pages remain
+the property of their respective owners and are referenced by URL, not
+redistributed here. The selection, sequencing and rationale linking them to
+topics are original work covered by the licence above.

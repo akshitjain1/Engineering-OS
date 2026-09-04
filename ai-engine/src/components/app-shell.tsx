@@ -121,6 +121,32 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           ) : (
             <div className="flex justify-center"><PomodoroTimer /></div>
           )}
+          {/* Whose work this is, on screen rather than only in a file nobody
+              opens. It stops no one from deleting it -- nothing can -- but it
+              makes removal a deliberate act rather than an oversight, and a
+              running copy says where it came from. */}
+          {!collapsed ? (
+            <p className="mt-3 px-1 text-[11px] leading-relaxed text-[var(--muted)]">
+              Engineering OS &middot; &copy; 2026{" "}
+              <a
+                href="https://github.com/akshitjain1"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-[var(--foreground)]"
+              >
+                Akshit Jain
+              </a>
+              <br />
+              <a
+                href="https://github.com/akshitjain1/Engineering-OS"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-[var(--foreground)]"
+              >
+                AGPL-3.0 source
+              </a>
+            </p>
+          ) : null}
         </div>
       </aside>
 

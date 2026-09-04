@@ -1,3 +1,12 @@
+"""Engineering OS - API.
+
+Copyright (C) 2026 Akshit Jain <https://github.com/akshitjain1>
+Licensed under the GNU Affero General Public License v3.0. See LICENSE and
+NOTICE at the repository root. First published 22 August 2026.
+
+This notice is required by section 5 of the licence to survive modification.
+"""
+
 import os
 from typing import Any, Optional
 from datetime import datetime, timezone, timedelta
@@ -73,11 +82,41 @@ if os.getenv("EOS_RUN_REPAIRS") == "1":
         _run_repairs(_db)
         _db.commit()
 
+#: Carried in the OpenAPI document, in /api/health, and on every response
+#: header, so a running copy states where it came from even when only the
+#: compiled frontend is being looked at.
+AUTHOR = "Akshit Jain"
+AUTHOR_URL = "https://github.com/akshitjain1"
+PROJECT_URL = "https://github.com/akshitjain1/Engineering-OS"
+LICENSE_NAME = "AGPL-3.0-or-later"
+COPYRIGHT = f"Copyright (C) 2026 {AUTHOR}. Licensed under {LICENSE_NAME}."
+
 app = FastAPI(
     title="Akshit Engineering OS API",
-    description="Private personal learning platform API",
+    description=(
+        "Private personal learning platform API. "
+        f"{COPYRIGHT} Source: {PROJECT_URL}"
+    ),
     version="0.1.0",
+    contact={"name": AUTHOR, "url": AUTHOR_URL},
+    license_info={"name": LICENSE_NAME, "url": "https://www.gnu.org/licenses/agpl-3.0.html"},
 )
+
+
+@app.middleware("http")
+async def _attribution_header(request, call_next):
+    """State the author on every response.
+
+    Not a protection -- anyone holding the source can delete this. It is here so
+    that a deployed copy says whose work it is without anyone having to go
+    looking, and so that removing the attribution has to be a deliberate act
+    rather than an oversight.
+    """
+    response = await call_next(request)
+    response.headers["X-Engineering-OS-Author"] = AUTHOR
+    response.headers["X-Engineering-OS-Source"] = PROJECT_URL
+    response.headers["X-Engineering-OS-License"] = LICENSE_NAME
+    return response
 
 app.add_middleware(
     CORSMiddleware,
@@ -340,7 +379,14 @@ def root():
 
 @app.get("/api/health", tags=["Root"])
 def health():
-    return {"status": "ok", "version": "0.1.0"}
+    return {
+        "status": "ok",
+        "version": "0.1.0",
+        "author": AUTHOR,
+        "source": PROJECT_URL,
+        "license": LICENSE_NAME,
+        "copyright": COPYRIGHT,
+    }
 
 
 @app.get("/api/curriculum/tree", tags=["Curriculum"])

@@ -15,9 +15,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+/* Engineering OS
+ * Copyright (C) 2026 Akshit Jain <https://github.com/akshitjain1>
+ * Licensed under the GNU Affero General Public License v3.0.
+ * See LICENSE and NOTICE at the repository root.
+ */
+
+export const AUTHOR = "Akshit Jain";
+export const PROJECT_URL = "https://github.com/akshitjain1/Engineering-OS";
+
 export const metadata: Metadata = {
   title: "Engineering OS",
   description: "Personal learning navigator: the sequence, the source, practice, build, revise.",
+  // Carried into the rendered HTML, so a deployed copy names its author even
+  // when only the built output is being looked at.
+  authors: [{ name: AUTHOR, url: "https://github.com/akshitjain1" }],
+  creator: AUTHOR,
+  publisher: AUTHOR,
+  applicationName: "Engineering OS",
+  other: {
+    copyright: "Copyright (C) 2026 Akshit Jain",
+    license: "AGPL-3.0-or-later",
+    "source-code": PROJECT_URL,
+  },
 };
 
 /* `suppressHydrationWarning` on these two tags only.
