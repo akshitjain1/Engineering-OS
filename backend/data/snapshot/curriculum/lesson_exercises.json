@@ -275,8 +275,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-04 10:32:52.845101",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Using CS50 Week 1 as reference (you may use any C toolchain you already have, or just write the steps): list compile-time vs run-time for a tiny program. Name one error that shows up at each time. You are not required to complete CS50 PSet 1.",
@@ -2975,8 +2975,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-04 12:59:16.911298",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "AFTER learning the concept and implementing it from scratch: solve 4 problems on LeetCode tag 'array' (prefer Easy→Medium progression). Do not use problems as PRIMARY learn.",
@@ -7875,8 +7875,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-04 09:46:45.564927",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "AFTER LEARN + IMPLEMENT from scratch: Solve 2 Easy traversal, 2 Easy/Medium pattern warmups, 1 variation. DESTINATION: LeetCode Array tag. Do not use a problem as the PRIMARY learning resource.",

@@ -397,7 +397,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: compiler translates source to machine code before run, compile-time vs run-time.",
   "difficulty": null,
   "duration": null,
@@ -23869,7 +23869,7 @@
  },
  {
   "boundary_type": "FULL_SINGLE_PAGE",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Complete this page. Focus on Array traversal. Be able to explain the main idea in your own words.",
   "difficulty": null,
   "duration": null,
@@ -23905,7 +23905,7 @@
  },
  {
   "boundary_type": "FULL_SINGLE_PAGE",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Study insertion at the beginning, a specified position, and the end of an array. Focus on why middle insertion requires shifting elements and why this causes O(n) worst-case work.",
   "difficulty": null,
   "duration": null,
@@ -33625,7 +33625,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Carry one accumulator left to right. Nothing else.",
   "difficulty": "Easy",
   "duration": null,
@@ -33661,7 +33661,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Nested traversal with a running maximum.",
   "difficulty": "Easy",
   "duration": null,
@@ -33697,7 +33697,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Traverse and test each element -- the plainest possible scan.",
   "difficulty": "Easy",
   "duration": null,
@@ -33733,7 +33733,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "A write index trailing a read index -- the whole idea in one problem.",
   "difficulty": "Easy",
   "duration": null,
@@ -33769,7 +33769,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Same write-pointer move, with a comparison guarding the write.",
   "difficulty": "Easy",
   "duration": null,
@@ -33805,7 +33805,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Shifting in place without a second array forces you to walk backwards.",
   "difficulty": "Easy",
   "duration": null,

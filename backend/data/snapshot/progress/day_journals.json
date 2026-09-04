@@ -18,5 +18,15 @@
   "tomorrow": "Revise the important java syntax list ",
   "updated_at": "2026-09-03 13:44:32.093446",
   "user_id": "akshit"
+ },
+ {
+  "entry_date": "2026-09-04",
+  "id": 3,
+  "learned": "Machine Code C How it works, Compilation , Compilers and types of compiler and Step inside compilation, \nARRAY TRAVERSAL, Insertion, DELETION",
+  "minutes_logged": 0,
+  "struggled": "LEETCODE 1089: https://leetcode.com/problems/duplicate-zeros/\nToo tough to think about the logic. ⭐⭐⭐⭐⭐ (for logical thinking)\nand Finding difficulty in Array Insertion and Shifting Especially for IN-PLACE",
+  "tomorrow": "Revise DSA and start working on weekend project.",
+  "updated_at": "2026-09-04 13:03:30.871814",
+  "user_id": "akshit"
  }
 ]

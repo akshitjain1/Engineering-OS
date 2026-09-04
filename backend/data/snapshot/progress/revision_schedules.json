@@ -124,5 +124,47 @@
   "retrieval_success_count": 0,
   "review_interval": 1,
   "user_id": "akshit"
+ },
+ {
+  "confidence": 0.0,
+  "ease": 2.5,
+  "id": 10,
+  "importance": 1.0,
+  "item_id": 120,
+  "item_type": "topic",
+  "last_reviewed": "2026-09-04 09:46:45.576546",
+  "next_review": "2026-09-05 09:46:45.576546",
+  "retrieval_fail_count": 0,
+  "retrieval_success_count": 0,
+  "review_interval": 1,
+  "user_id": "akshit"
+ },
+ {
+  "confidence": 0.0,
+  "ease": 2.5,
+  "id": 11,
+  "importance": 1.0,
+  "item_id": 12,
+  "item_type": "topic",
+  "last_reviewed": "2026-09-04 10:32:52.857623",
+  "next_review": "2026-09-05 10:32:52.857623",
+  "retrieval_fail_count": 0,
+  "retrieval_success_count": 0,
+  "review_interval": 1,
+  "user_id": "akshit"
+ },
+ {
+  "confidence": 0.0,
+  "ease": 2.5,
+  "id": 12,
+  "importance": 1.0,
+  "item_id": 121,
+  "item_type": "topic",
+  "last_reviewed": "2026-09-04 12:59:16.974639",
+  "next_review": "2026-09-05 12:59:16.974639",
+  "retrieval_fail_count": 0,
+  "retrieval_success_count": 0,
+  "review_interval": 1,
+  "user_id": "akshit"
  }
 ]

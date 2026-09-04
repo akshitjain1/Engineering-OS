@@ -132,7 +132,7 @@
   "topic_id": 11
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "A compiler translates source into machine code or bytecode before the program runs (compile time vs run time). CS50 Week 1 is the selected primary: clang/make turning .c into a runnable file.",
   "hours_estimated": 0.75,
@@ -1428,7 +1428,7 @@
   "topic_id": 119
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Traversal is index-driven linear scan: forward, backward, or with a step. Java int[] / ArrayList ≈ C++ vector (ArrayList grows; raw arrays are fixed). Use enhanced for when you only need values; use index loops when you need i or in-place writes. No Domain 1 array syntax lesson — focus on algorithmic scans.",
   "hours_estimated": 0.75,
@@ -1440,7 +1440,7 @@
   "topic_id": 120
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Contiguous arrays shift elements on middle insert/delete — O(n) worst case. ArrayList append is amortized O(1); insert at index i costs O(n-i). Java int[] / ArrayList ≈ C++ vector (ArrayList grows; raw arrays are fixed). Same shifting intuition as C++ vector.",
   "hours_estimated": 0.75,
