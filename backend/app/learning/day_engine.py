@@ -215,18 +215,40 @@ def day_mode(plan_date: str) -> str:
     return "weekend" if date_cls.fromisoformat(plan_date).weekday() >= 5 else "weekday"
 
 
-def _prereq_hint(topic: CurriculumTopic, completion: dict[str, bool]) -> str:
-    """Advisory only. Never blocks."""
+def _prereq_hint(
+    topic: CurriculumTopic,
+    completion: dict[str, bool],
+    names: Optional[dict[str, str]] = None,
+) -> str:
+    """What this topic assumes you already know, when you do not yet.
+
+    Advisory only. Never blocks -- and on the DSA lane it must not, because
+    every remaining DSA topic depends on a Java topic that lane deliberately
+    does not wait for. Gating here would stop the daily reps entirely, which is
+    the one thing the DSA track exists to protect.
+
+    But silence was not the answer either. "Array traversal" arrived as the
+    day's DSA block while `java-arrays` -- the topic that explains what an array
+    *is* -- sat weeks away on the main track, and nothing on the block said so.
+    The curriculum knew; the block did not pass it on.
+
+    Names, not slugs: "java-arrays" told the reader nothing that "Arrays" does
+    not tell them better.
+    """
     refs = topic.prerequisites or []
     missing: list[str] = []
     for ref in refs:
         slug = ref.get("slug") if isinstance(ref, dict) else ref
-        if slug and not completion.get(slug):
-            missing.append(str(slug))
+        if not slug or completion.get(slug):
+            continue
+        pretty = (names or {}).get(str(slug))
+        missing.append(pretty or str(slug))
     if not missing:
         return ""
-    head = ", ".join(missing[:2])
-    return f"Optional warm-up if you feel lost: {head}."
+    head = " and ".join(missing[:2]) if len(missing) <= 2 else (
+        ", ".join(missing[:2]) + f" and {len(missing) - 2} more"
+    )
+    return f"Assumes {head}, which you have not covered yet — skim first if this does not land."
 
 
 # LEARN targets are calibrated for first-time learning. When the learner is
@@ -262,6 +284,8 @@ def build_blocks(
     """
     mode = day_mode(plan_date)
     core, dsa, completion = cursors(db, user_id, exclude_topic_ids)
+    # slug -> name, so a hint can say "Arrays" rather than "java-arrays".
+    names = {slug: name for slug, name in db.query(CurriculumTopic.slug, CurriculumTopic.name)}
     due_reviews = [] if cycle_only else service.pending_revisions(db, user_id)
     revision = bool(service.get_or_create_study_settings(db, user_id).revision_weighted)
 
@@ -286,7 +310,7 @@ def build_blocks(
 
     if core:
         resource = pick_resource(resources.get(core.id, []), ACTIVITY_LEARN)
-        hint = _prereq_hint(core, completion)
+        hint = _prereq_hint(core, completion, names)
         blocks.append(
             BlockSpec(
                 activity_type=ACTIVITY_LEARN,
@@ -325,7 +349,11 @@ def build_blocks(
                 activity_type=ACTIVITY_DSA,
                 title=f"DSA: {dsa.name}",
                 subtitle="Daily pattern block",
-                why="DSA compounds only with daily reps. It runs on its own track, so it never waits on anything else.",
+                why=(
+                    "DSA compounds only with daily reps. It runs on its own track, so it "
+                    "never waits on anything else. "
+                    + _prereq_hint(dsa, completion, names)
+                ).strip(),
                 how="Learn or revise the pattern, then solve two problems. Write the approach before writing code.",
                 floor_minutes=25,
                 target_minutes=(DSA_TARGET_REVISION if revision else DSA_TARGET)[mode],
