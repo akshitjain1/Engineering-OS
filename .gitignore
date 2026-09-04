@@ -1,0 +1,13 @@
+# Key material must never be committed. A signing key was once generated with
+# the default filename answered as "key.txt", which put a private key in this
+# directory one `git add .` away from being published.
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+id_ecdsa*
+key.txt*
+*.ppk
+.env
+.env.*
+!.env.example
