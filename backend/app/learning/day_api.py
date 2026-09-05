@@ -54,6 +54,7 @@ class JournalBody(BaseModel):
     learned: Optional[str] = None
     struggled: Optional[str] = None
     tomorrow: Optional[str] = None
+    built: Optional[str] = None
 
 
 @router.get("/api/day", tags=["Day"])
@@ -127,5 +128,6 @@ def journal(body: JournalBody, db: Session = Depends(get_db)):
         learned=body.learned,
         struggled=body.struggled,
         tomorrow=body.tomorrow,
+        built=body.built,
         user_id=DEFAULT_USER,
     )

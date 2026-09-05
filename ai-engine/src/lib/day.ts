@@ -53,7 +53,13 @@ export type Day = {
     items_done: number;
     complete: boolean;
   };
-  journal: { learned: string | null; struggled: string | null; tomorrow: string | null } | null;
+  journal: {
+    learned: string | null;
+    struggled: string | null;
+    tomorrow: string | null;
+    /** Project or job work done today; feeds the study log's projects section. */
+    built: string | null;
+  } | null;
 };
 
 export type StepResult = { item: DayItem; next: DayItem | null };
@@ -98,6 +104,7 @@ export const saveJournal = (payload: {
   learned?: string;
   struggled?: string;
   tomorrow?: string;
+  built?: string;
 }) => api<unknown>("/api/day/journal", { method: "PUT", body: JSON.stringify(payload) });
 
 /** Copy that explains each block in the user's own terms, not the system's. */

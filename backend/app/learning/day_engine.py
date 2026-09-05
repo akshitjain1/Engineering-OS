@@ -379,22 +379,32 @@ def build_blocks(
             )
 
     if cycle_only:
-        return _fit_to_budget(
-            blocks, budget_minutes, revision=revision, allow_filler=False
-        )
+        kept, _ = _fit_to_budget(blocks, budget_minutes, revision=revision)
+        return kept
 
-    blocks.append(
-        BlockSpec(
-            activity_type=ACTIVITY_REFLECT,
-            title="Close the day",
-            subtitle="Two minutes of writing",
-            why="A short written recap is the cheapest way to find out what you did not actually understand.",
-            how="Answer three prompts: what I learned, where I got stuck, what I do first tomorrow.",
-            floor_minutes=5,
-            target_minutes=8,
-        )
+    reflect = BlockSpec(
+        activity_type=ACTIVITY_REFLECT,
+        title="Close the day",
+        subtitle="Two minutes of writing",
+        why="A short written recap is the cheapest way to find out what you did not actually understand.",
+        how="Answer three prompts: what I learned, where I got stuck, what I do first tomorrow.",
+        floor_minutes=5,
+        target_minutes=8,
     )
-    return _fit_to_budget(blocks, budget_minutes, revision=revision)
+    blocks.append(reflect)
+    kept, leftover = _fit_to_budget(blocks, budget_minutes, revision=revision)
+
+    # Unspent minutes buy the next topics rather than a note telling you to
+    # find your own. Inserted before REFLECT, which always closes the day.
+    if leftover >= MIN_EXTRA_BLOCK:
+        extra, leftover = _spend_leftover(
+            db, kept, leftover, user_id=user_id, mode=mode
+        )
+        if extra:
+            tail = [b for b in kept if b.activity_type == ACTIVITY_REFLECT]
+            head = [b for b in kept if b.activity_type != ACTIVITY_REFLECT]
+            kept = head + extra + tail
+    return kept
 
 
 def _fit_to_budget(
@@ -402,9 +412,13 @@ def _fit_to_budget(
     budget: int,
     *,
     revision: bool = False,
-    allow_filler: bool = True,
-) -> list[BlockSpec]:
-    """Floors first, then grow toward target. Non-droppable blocks always survive."""
+) -> tuple[list[BlockSpec], int]:
+    """Floors first, then grow toward target. Non-droppable blocks always survive.
+
+    Returns the blocks and whatever budget is left over, so the caller can
+    decide what the remainder buys. It used to invent a block here, which is how
+    a 250-minute weekend produced 210 minutes of curriculum and a note.
+    """
     budget = max(30, int(budget))
     kept: list[BlockSpec] = []
     used = 0
@@ -445,22 +459,86 @@ def _fit_to_budget(
     for block in kept:
         block.floor_minutes = minutes[id(block)]
 
-    # Anything still unspent becomes a real extra block rather than silently
-    # vanishing. The old planner reported "150 of 180" and left you guessing.
-    if leftover >= 25 and allow_filler:
-        kept.insert(
-            max(0, len(kept) - 1),
-            BlockSpec(
-                activity_type=ACTIVITY_PRACTICE,
-                title="Extra reps",
-                subtitle="Spare capacity today",
-                why=f"You budgeted {budget} minutes and the core blocks only needed {budget - leftover}.",
-                how="Pick one: more DSA problems on today's pattern, or re-derive this week's hardest topic from a blank page.",
-                floor_minutes=leftover,
-                target_minutes=leftover,
-            ),
-        )
-    return kept
+    return kept, max(0, leftover)
+
+
+#: A block below this is not worth scheduling as its own topic.
+MIN_EXTRA_BLOCK = 25
+
+
+def _spend_leftover(
+    db: Session,
+    blocks: list[BlockSpec],
+    leftover: int,
+    *,
+    user_id: str,
+    mode: str,
+) -> tuple[list[BlockSpec], int]:
+    """Turn unspent minutes into the next real topics.
+
+    A budget of 250 that only needed 210 used to produce a 40-minute block
+    called "Extra reps" whose instruction was "pick one: more DSA problems, or
+    re-derive this week's hardest topic". That is the planner handing the
+    planning back. If the time was set aside, the day should say what to do with
+    it -- and there are 100 more DSA topics and 300 more core topics waiting.
+
+    DSA first, because it compounds daily and is the track most worth doubling.
+    Then a core topic with its practice, if the remainder still affords one.
+    """
+    covered = {b.topic.id for b in blocks if b.topic is not None}
+    extra: list[BlockSpec] = []
+
+    while leftover >= MIN_EXTRA_BLOCK:
+        core, dsa, completion = cursors(db, user_id, covered)
+        # DSA before core: an extra lap of DSA is worth more than a second
+        # unrelated reading, and it is the track the learner asked to deepen.
+        pick, kind = (dsa, ACTIVITY_DSA) if dsa is not None else (core, ACTIVITY_LEARN)
+        if pick is None:
+            break
+
+        target = (DSA_TARGET if kind == ACTIVITY_DSA else LEARN_TARGET)[mode]
+        minutes = min(leftover, target)
+        resources = resources_for_topics(db, [pick.id])
+        resource = pick_resource(resources.get(pick.id, []), kind)
+        hint = _prereq_hint(pick, completion, _topic_names(db))
+
+        if kind == ACTIVITY_DSA:
+            extra.append(BlockSpec(
+                activity_type=ACTIVITY_DSA,
+                title=f"DSA: {pick.name}",
+                subtitle="Second DSA block -- the budget had room for it",
+                why=("You set aside more time than the core day needed, so this is another "
+                     "pattern rather than a note telling you to find one. " + hint).strip(),
+                how="Learn or revise the pattern, then solve two problems. Write the approach before writing code.",
+                floor_minutes=minutes,
+                target_minutes=minutes,
+                topic=pick,
+                resource=resource,
+                resource_kind="pattern",
+            ))
+        else:
+            extra.append(BlockSpec(
+                activity_type=ACTIVITY_LEARN,
+                title=pick.name,
+                subtitle=(getattr(pick, "domain_key", None) or "core").upper(),
+                why=("The next topic on your main track, pulled in because the budget had "
+                     "room for it. " + hint).strip(),
+                how="Watch or read once at normal speed. Then write the idea in your own words in three lines.",
+                floor_minutes=minutes,
+                target_minutes=minutes,
+                topic=pick,
+                resource=resource,
+                resource_kind="study",
+            ))
+
+        covered.add(pick.id)
+        leftover -= minutes
+
+    return extra, leftover
+
+
+def _topic_names(db: Session) -> dict[str, str]:
+    return {slug: name for slug, name in db.query(CurriculumTopic.slug, CurriculumTopic.name)}
 
 
 # ---------------------------------------------------------------------------
@@ -700,6 +778,7 @@ def get_day(
                 "learned": journal.learned,
                 "struggled": journal.struggled,
                 "tomorrow": journal.tomorrow,
+                "built": journal.built,
             }
             if journal
             else None
@@ -872,6 +951,7 @@ def save_journal(
     learned: Optional[str] = None,
     struggled: Optional[str] = None,
     tomorrow: Optional[str] = None,
+    built: Optional[str] = None,
     user_id: str = DEFAULT_USER,
     timezone_name: Optional[str] = None,
 ) -> dict[str, Any]:
@@ -890,6 +970,8 @@ def save_journal(
         row.struggled = struggled
     if tomorrow is not None:
         row.tomorrow = tomorrow
+    if built is not None:
+        row.built = built
     row.updated_at = _now()
     db.flush()
     return {
@@ -897,4 +979,5 @@ def save_journal(
         "learned": row.learned,
         "struggled": row.struggled,
         "tomorrow": row.tomorrow,
+        "built": row.built,
     }

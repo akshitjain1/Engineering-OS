@@ -139,20 +139,43 @@ def _set_revision_weighted(value: bool) -> None:
 
 
 # ---------------------------------------------------------------------------
-# 1. Exactly one DSA block at every budget
+# 1. DSA every day, and more of it when the budget pays for it
+#
+# This asserted exactly one DSA block at every budget. That invariant was
+# deliberately dropped: a 250-minute weekend was spending 210 minutes on the
+# curriculum and handing back a 40-minute block called "Extra reps" that told
+# the learner to pick their own work. Spare capacity now buys the next real DSA
+# topic. What still has to hold is that DSA appears every day, tracks its own
+# cursor, and never repeats a topic within one day.
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize("budget", BUDGETS)
-def test_one_dsa_block_at_every_budget(client, budget):
+def test_dsa_appears_every_day_and_tracks_its_own_cursor(client, budget):
     seed = _seed_curriculum()
     day = _generate(budget)
 
     dsa = _dsa_items(day)
-    assert len(dsa) == 1, f"budget {budget} produced {len(dsa)} DSA blocks"
-    # It tracks the DSA cursor, not the core cursor.
+    assert dsa, f"budget {budget} produced no DSA block"
+    # The first one tracks the DSA cursor, not the core cursor.
     assert dsa[0]["topic_id"] == seed["dsa_ids"][0]
-    assert dsa[0]["planned_minutes"] > 0
+    assert all(item["planned_minutes"] > 0 for item in dsa)
+
+
+@pytest.mark.parametrize("budget", BUDGETS)
+def test_extra_dsa_blocks_are_new_topics_never_repeats(client, budget):
+    """A second block on the same topic would be the cursor stuttering."""
+    _seed_curriculum()
+    day = _generate(budget)
+
+    ids = [item["topic_id"] for item in _dsa_items(day)]
+    assert len(ids) == len(set(ids)), f"budget {budget} repeated a DSA topic: {ids}"
+
+
+def test_a_small_budget_still_gets_exactly_one_dsa_block(client):
+    """The extra blocks are surplus only. A tight day is unchanged."""
+    _seed_curriculum()
+    assert len(_dsa_items(_generate(90))) == 1
 
 
 @pytest.mark.parametrize("budget", [30, 45, 60])

@@ -793,6 +793,7 @@ function DayComplete({
     learned: day.journal?.learned ?? "",
     struggled: day.journal?.struggled ?? "",
     tomorrow: day.journal?.tomorrow ?? "",
+    built: day.journal?.built ?? "",
   });
   const [saved, setSaved] = useState<"idle" | "saving" | "saved">("idle");
 
@@ -858,6 +859,16 @@ function DayComplete({
         {field("learned", "What I learned", "The idea in my own words…")}
         {field("struggled", "Where I got stuck", "The part I could not explain…")}
         {field("tomorrow", "First thing tomorrow", "Concrete and small…")}
+      </div>
+      {/* Separate row: this is not study, and most days it is the work that
+          paid for the day. The study log has a projects section that was fed
+          only by BUILD blocks and so sat empty. */}
+      <div className="mt-5">
+        {field(
+          "built",
+          "Anything I built or shipped today",
+          "Project or work at the job — a feature, a bug, a review. Leave blank if none.",
+        )}
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <button

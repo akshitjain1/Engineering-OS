@@ -100,6 +100,11 @@ def ensure_optional_columns(engine: Engine) -> None:
                     conn.execute(text(f"ALTER TABLE lesson_exercises ADD COLUMN {name} {ddl}"))
                     existing.add(name)
 
+        if "day_journals" in tables:
+            existing = _columns(conn, "day_journals")
+            if "built" not in existing:
+                conn.execute(text("ALTER TABLE day_journals ADD COLUMN built TEXT"))
+
         if "assessment_sessions" not in tables:
             conn.execute(
                 text(

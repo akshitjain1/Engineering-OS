@@ -114,6 +114,10 @@ class DayJournal(Base):
     learned: Mapped[Optional[str]] = Column(Text, nullable=True)
     struggled: Mapped[Optional[str]] = Column(Text, nullable=True)
     tomorrow: Mapped[Optional[str]] = Column(Text, nullable=True)
+    #: Project or job work done today. The study log has a "projects" section
+    #: that had no way to be filled -- BUILD blocks are rare, and the work that
+    #: actually happens on a weekday happens at a job this app never sees.
+    built: Mapped[Optional[str]] = Column(Text, nullable=True)
     minutes_logged: Mapped[int] = Column(Integer, nullable=False, default=0)
     updated_at: Mapped[datetime] = Column(
         DateTime, nullable=False, default=lambda: datetime.now(timezone.utc)

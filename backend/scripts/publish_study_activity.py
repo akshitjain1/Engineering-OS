@@ -127,7 +127,7 @@ def summarise_day(db, day: str) -> dict[str, list[str]]:
 
     return {
         "dsa": sorted(dsa),
-        "projects": sorted(projects),
+        "projects": sorted(projects) + _built(db, day),
         "learning": sorted(learning),
         "journal": _journal(db, day),
     }
@@ -160,6 +160,21 @@ def _journal(db, day: str) -> list[str]:
         if text:
             out.append(f"{label}{SEPARATOR}{text}")
     return out
+
+
+def _built(db, day: str) -> list[str]:
+    """Project or job work, for the log's own "projects" section.
+
+    That section existed from the start and was almost always empty: it was fed
+    only by BUILD blocks, which are rare, while the building that actually
+    happens on a weekday happens at a job this app never sees. Now the day asks.
+    """
+    row = db.execute(
+        _sql("select built from day_journals where entry_date = :day"),
+        {"day": day},
+    ).fetchone()
+    text = " ".join((row[0] or "").split()) if row else ""
+    return [f"Worked on{SEPARATOR}{text}"] if text else []
 
 
 def _sql(text: str):
