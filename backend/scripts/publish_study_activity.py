@@ -38,7 +38,8 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.console import use_utf8  # noqa: E402
-from app.db.session import SessionLocal  # noqa: E402
+from app.db.migrate import ensure_optional_columns  # noqa: E402
+from app.db.session import SessionLocal, engine  # noqa: E402
 from app.learning.streak import local_today  # noqa: E402
 
 REMOTE = "https://github.com/akshitjain1/study-activity.git"
@@ -241,6 +242,13 @@ def sync_to_origin(path: Path) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     use_utf8()
+    # Bring the schema up to date before reading it. This runs as its own
+    # process at shutdown, so it cannot assume the backend has started since a
+    # column was added -- and the first time one was, this crashed with
+    # "no such column: built" before printing a line, on the evening it was
+    # meant to publish. ensure_optional_columns is idempotent and the servers
+    # are already down by the time this runs.
+    ensure_optional_columns(engine)
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apply", action="store_true", help="write, commit and push")
     parser.add_argument("--repo", type=Path, default=DEFAULT_CLONE)
