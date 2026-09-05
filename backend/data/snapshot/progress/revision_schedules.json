@@ -194,5 +194,33 @@
   "retrieval_success_count": 0,
   "review_interval": 1,
   "user_id": "akshit"
+ },
+ {
+  "confidence": 0.0,
+  "ease": 2.5,
+  "id": 15,
+  "importance": 1.0,
+  "item_id": 14,
+  "item_type": "topic",
+  "last_reviewed": "2026-09-05 09:19:21.997268",
+  "next_review": "2026-09-06 09:19:21.997268",
+  "retrieval_fail_count": 0,
+  "retrieval_success_count": 0,
+  "review_interval": 1,
+  "user_id": "akshit"
+ },
+ {
+  "confidence": 0.0,
+  "ease": 2.5,
+  "id": 16,
+  "importance": 1.0,
+  "item_id": 123,
+  "item_type": "topic",
+  "last_reviewed": "2026-09-05 10:26:58.234054",
+  "next_review": "2026-09-06 10:26:58.234054",
+  "retrieval_fail_count": 0,
+  "retrieval_success_count": 0,
+  "review_interval": 1,
+  "user_id": "akshit"
  }
 ]

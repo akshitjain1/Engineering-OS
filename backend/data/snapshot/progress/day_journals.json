@@ -31,5 +31,16 @@
   "tomorrow": "Revise DSA and start working on weekend project.",
   "updated_at": "2026-09-04 13:03:30.871814",
   "user_id": "akshit"
+ },
+ {
+  "built": "Work on Computer Vision Face Recoginition Project Add some Metrics and Industry level Folder Structure\n",
+  "entry_date": "2026-09-05",
+  "id": 4,
+  "learned": "The Fetch Decode Execute Cycle — Compilation and Interpretation segment. \nLearn about the Programs and Instructions. \nCounting frequencies of array elements. \n\n",
+  "minutes_logged": 0,
+  "struggled": "Stuck on :\nhttps://leetcode.com/problems/subarray-sum-equals-k/description/\nhttps://leetcode.com/problems/range-sum-query-immutable/description/",
+  "tomorrow": "Solve every DSA Problem again. \nTomorrow Try to Learn and Implement More.",
+  "updated_at": "2026-09-05 12:18:51.350900",
+  "user_id": "akshit"
  }
 ]

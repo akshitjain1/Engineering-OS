@@ -505,7 +505,7 @@
  },
  {
   "boundary_type": "VIDEO_TIMESTAMP",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: program as a set of instructions stored on disk before execution.",
   "difficulty": null,
   "duration": null,
@@ -23977,7 +23977,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Read Frequency counting. Focus on Frequency counting. After reading, explain the main idea in your own words.",
   "difficulty": null,
   "duration": null,
@@ -33949,7 +33949,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Count, then read the answer off the counts.",
   "difficulty": "Easy",
   "duration": null,
@@ -33985,7 +33985,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Frequency reasoning that a hash map solves and XOR solves better.",
   "difficulty": "Easy",
   "duration": null,
@@ -43993,7 +43993,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "XOR cancels pairs -- the identity worth memorising.",
   "difficulty": "Easy",
   "duration": null,
@@ -44821,7 +44821,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Counting by marking positions in the array itself, with no second structure.",
   "difficulty": "Easy",
   "duration": null,

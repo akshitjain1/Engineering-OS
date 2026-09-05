@@ -156,7 +156,7 @@
   "topic_id": 13
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "A program is an artifact: source, maybe compiled form, sitting on storage. It is not yet a running process. CS50 Week 1 treats .c and the executable as program forms.",
   "hours_estimated": 0.4,
@@ -1464,7 +1464,7 @@
   "topic_id": 122
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Small fixed domain → int[26], int[10], etc. O(1) update per element. Graduate to HashMap when keys are large or unbounded. Same counting array idea as C++.",
   "hours_estimated": 0.75,

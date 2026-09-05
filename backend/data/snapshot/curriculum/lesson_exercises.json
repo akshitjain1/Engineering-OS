@@ -325,8 +325,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-05 09:19:21.979497",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Pick any small project you have (even a single script). List the artifacts that count as 'the program' (source, compiled output, scripts). State which are sufficient to run it on another machine.",
@@ -3025,8 +3025,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-05 10:26:58.224091",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "AFTER learning the concept and implementing it from scratch: solve 4 problems on LeetCode tag 'array' (prefer Easy→Medium progression). Do not use problems as PRIMARY learn.",
