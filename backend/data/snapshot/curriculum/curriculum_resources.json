@@ -18865,7 +18865,7 @@
  },
  {
   "boundary_type": "VIDEO_TIMESTAMP",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: interpreter executes source directly, contrasted with compiler translation.",
   "difficulty": null,
   "duration": null,
@@ -23941,7 +23941,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Read Prefix sum. Focus on Prefix sums. After reading, explain the main idea in your own words.",
   "difficulty": null,
   "duration": null,
@@ -33841,7 +33841,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Left total and right total from one cumulative pass.",
   "difficulty": "Easy",
   "duration": null,
@@ -33877,7 +33877,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "The data structure *is* the prefix array.",
   "difficulty": "Easy",
   "duration": null,
@@ -33913,7 +33913,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Prefix sums plus a hash of seen totals -- the pattern behind a whole family.",
   "difficulty": "Medium",
   "duration": null,
@@ -34921,7 +34921,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "The map holds prefix totals, not values -- the generalisation worth seeing.",
   "difficulty": "Medium",
   "duration": null,
@@ -44065,7 +44065,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Prefix sums first -- the baseline a segment tree has to beat.",
   "difficulty": "Easy",
   "duration": null,

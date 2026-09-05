@@ -300,8 +300,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-05 05:58:26.516383",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Make a 4-row table: C compiled with clang vs a Python script. Columns: when translation happens, what you distribute, what the user must install, one typical error timing. Use Week 1 as the C side.",
@@ -3000,8 +3000,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-05 07:45:33.383069",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "AFTER learning the concept and implementing it from scratch: solve 4 problems on LeetCode tag 'array' (prefer Easy→Medium progression). Do not use problems as PRIMARY learn.",

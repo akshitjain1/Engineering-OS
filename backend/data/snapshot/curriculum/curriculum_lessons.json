@@ -144,7 +144,7 @@
   "topic_id": 12
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "An interpreter executes a program by analyzing and running it incrementally (or running bytecode on a VM). You often need the language runtime installed. CS50 Week 1 is compiler-centric; this lesson supplies the contrast. Python is a familiar interpreted/VM example you may already know from C++-adjacent tooling.",
   "hours_estimated": 0.5,
@@ -1452,7 +1452,7 @@
   "topic_id": 121
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. prefix[i] = sum(a[0..i]). Range l..r = prefix[r] - prefix[l-1] (l=0 → prefix[r]). O(n) build, O(1) query — same prefix array technique as C++.",
   "hours_estimated": 1.0,
