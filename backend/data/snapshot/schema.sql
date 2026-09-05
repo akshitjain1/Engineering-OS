@@ -170,7 +170,7 @@ CREATE TABLE day_journals (
 	struggled TEXT, 
 	tomorrow TEXT, 
 	minutes_logged INTEGER NOT NULL, 
-	updated_at DATETIME NOT NULL, 
+	updated_at DATETIME NOT NULL, built TEXT, 
 	PRIMARY KEY (id), 
 	CONSTRAINT uq_day_journal UNIQUE (user_id, entry_date)
 );

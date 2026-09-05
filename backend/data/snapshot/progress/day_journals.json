@@ -1,5 +1,6 @@
 [
  {
+  "built": null,
   "entry_date": "2026-09-02",
   "id": 1,
   "learned": "Learned about Cache Memory, Why cache exists\nCache hit vs cache miss\nLocality\nCache hierarchy\nHit/miss tracing\nCache vs RAM\nBasic cache mapping.\nJava Basic Syntax cheatsheet and How Algorithm works or planned or ot be written\n",
@@ -10,6 +11,7 @@
   "user_id": "akshit"
  },
  {
+  "built": null,
   "entry_date": "2026-09-03",
   "id": 2,
   "learned": "In this learn the complete Fetch and Decode Cycle along with the types of complexities ",
@@ -20,6 +22,7 @@
   "user_id": "akshit"
  },
  {
+  "built": null,
   "entry_date": "2026-09-04",
   "id": 3,
   "learned": "Machine Code C How it works, Compilation , Compilers and types of compiler and Step inside compilation, \nARRAY TRAVERSAL, Insertion, DELETION",
