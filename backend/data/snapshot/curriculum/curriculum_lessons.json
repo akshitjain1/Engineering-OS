@@ -168,7 +168,7 @@
   "topic_id": 14
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "A process is the OS's running instance of a program: its own memory space, open files, and identity (PID). The same program can have many processes. MIT Missing Semester's shell lecture shows the shell starting programs; it is not a full OS textbook.",
   "hours_estimated": 0.5,

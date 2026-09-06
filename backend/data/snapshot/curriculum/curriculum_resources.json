@@ -541,7 +541,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: process as a running program with code, data, and execution context.",
   "difficulty": null,
   "duration": null,

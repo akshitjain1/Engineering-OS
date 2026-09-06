@@ -350,8 +350,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-06 12:16:31.452374",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Windows: complete this in WSL (Ubuntu) or a Linux VM. Do not use PowerShell or cmd.exe as a substitute for the Unix-shell curriculum. Open two shells. In each, run a command that lasts a few seconds (e.g. `sleep 20`). In a third shell run `ps` or `pgrep sleep` and record two PIDs. Write two sentences: same program, two processes.",
