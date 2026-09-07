@@ -180,7 +180,7 @@
   "topic_id": 15
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "The kernel is the privileged program that manages hardware, processes, memory, and filesystems. User programs ask it for services via system calls. Missing Semester is not an OS course; this explanation is the lesson.",
   "hours_estimated": 0.5,
@@ -1476,7 +1476,7 @@
   "topic_id": 123
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Patterns: compaction with write index, opposite pointers on sorted data, partition reorder. Foundation for two pointers and sliding window modules.",
   "hours_estimated": 1.0,

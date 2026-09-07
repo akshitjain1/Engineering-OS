@@ -375,8 +375,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-07 14:15:49.810741",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Write a half-page: what the kernel does, what a user program does, and one example of something only the kernel should do (schedule processes, talk to devices, enforce permissions). Do not claim Missing Semester taught kernel internals.",
@@ -7850,8 +7850,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-07 16:29:35.231805",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "PRACTICE: 2 Easy, 2 Medium array patterns, 1 variation. LeetCode Array tag.",

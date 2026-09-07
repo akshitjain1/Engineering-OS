@@ -53,5 +53,16 @@
   "tomorrow": "",
   "updated_at": "2026-09-06 12:26:41.460337",
   "user_id": "akshit"
+ },
+ {
+  "built": "Started Reading about Face Recognition CV DL",
+  "entry_date": "2026-09-07",
+  "id": 6,
+  "learned": "Kernel ,Two Pointers",
+  "minutes_logged": 0,
+  "struggled": "Stuck on Kernel Definition and difference between cpu scheduling and kernel",
+  "tomorrow": "Continue with the flow.",
+  "updated_at": "2026-09-07 16:30:54.799663",
+  "user_id": "akshit"
  }
 ]

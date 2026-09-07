@@ -37,7 +37,7 @@
  },
  "daily_plan_items": {
   "dir": "progress",
-  "rows": 39
+  "rows": 44
  },
  "daily_plans": {
   "dir": "progress",
@@ -45,7 +45,7 @@
  },
  "day_journals": {
   "dir": "progress",
-  "rows": 5
+  "rows": 6
  },
  "diagnostic_answers": {
   "dir": "progress",
@@ -65,7 +65,7 @@
  },
  "learning_activities": {
   "dir": "progress",
-  "rows": 438
+  "rows": 453
  },
  "lesson_exercises": {
   "dir": "curriculum",
@@ -81,7 +81,7 @@
  },
  "revision_schedules": {
   "dir": "progress",
-  "rows": 17
+  "rows": 19
  },
  "topic_mastery": {
   "dir": "progress",
@@ -89,7 +89,7 @@
  },
  "user_progress": {
   "dir": "progress",
-  "rows": 27
+  "rows": 29
  },
  "user_project_progress": {
   "dir": "progress",

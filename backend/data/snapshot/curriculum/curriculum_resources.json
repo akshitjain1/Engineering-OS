@@ -18973,7 +18973,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: kernel as the core OS component managing hardware and processes.",
   "difficulty": null,
   "duration": null,
@@ -24013,7 +24013,7 @@
  },
  {
   "boundary_type": "ARTICLE_SECTION",
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Read Array patterns / two pointers. Focus on Array patterns. After reading, explain the main idea in your own words.",
   "difficulty": null,
   "duration": null,
@@ -34021,7 +34021,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Running minimum and running best answer in one pass.",
   "difficulty": "Easy",
   "duration": null,
@@ -34057,7 +34057,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Filling from the back is the trick worth internalising.",
   "difficulty": "Easy",
   "duration": null,
@@ -34093,7 +34093,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "Three reversals -- a rearrangement that looks impossible in O(1) space until it doesn't.",
   "difficulty": "Medium",
   "duration": null,
@@ -37873,7 +37873,7 @@
  },
  {
   "boundary_type": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "The merge step alone, with no recursion around it yet.",
   "difficulty": "Easy",
   "duration": null,
