@@ -1,0 +1,491 @@
+# Retrieval quality self-check questions.
+#
+# Each question is answerable from the PRIMARY resource its topic maps to and
+# stays inside that topic's scope. mod-genai already covers embeddings, vector
+# databases, chunking and RAG at working level, so this module sits one layer
+# up: the reranking block asks why a cross-encoder cannot be pre-indexed and
+# where the recall ceiling binds, hybrid search asks about the fusion formula
+# rather than the alpha dial, chunking asks how to measure a strategy, metrics
+# come from the IR textbook, index choice is about measured trade-offs rather
+# than which product wins, and the Postgres block is about justifying the
+# architecture. Gates in app/content/question_bank.py refuse a prompt already
+# used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-retrieval-quality
+topics:
+  - topic: rag-reranking-cross-encoders
+    # Source: Sentence Transformers - Retrieve & Re-Rank, plus Cross-Encoders
+    questions:
+      - id: rag-rr-no-preindex
+        prompt: "Why can a cross-encoder's passage representations not be computed ahead of time and stored in the index?"
+        options:
+          - "It scores a query and a passage jointly in one pass, so there is no passage-only vector to store"
+          - "Its output is a probability rather than a vector, so the index has no field type able to hold it"
+          - "Its weights are updated by each query it sees, so any stored representation would go stale at once"
+          - "Its input length limit is too small for whole passages, so passages must be re-split at query time"
+        answer: "It scores a query and a passage jointly in one pass, so there is no passage-only vector to store"
+        explanation: >-
+          A cross-encoder concatenates query and passage and attends across both, emitting a single
+          relevance score, so the passage never has an independent embedding, which is exactly why it is
+          accurate and why it costs one forward pass per candidate. The bi-encoder is what produces the
+          storable vector, the model is frozen at inference, and input limits are a practical detail rather
+          than the architectural reason.
+        difficulty: intermediate
+        mastery: true
+      - id: rag-rr-recall-ceiling
+        prompt: "You added a cross-encoder reranker and answer quality barely moved. Measurement shows recall at one hundred candidates is only 0.4. What does that tell you?"
+        options:
+          - "Reranking can only reorder what the first stage returned, so it is the retrieval stage that needs fixing"
+          - "The reranker needs more candidates, so raising the candidate count to five hundred will recover the answers"
+          - "The reranker is undertrained for this domain, so fine-tuning it on in-domain pairs is the next step to take"
+          - "Recall at one hundred is the wrong measurement, so the pipeline should be judged on reranked precision instead"
+        answer: "Reranking can only reorder what the first stage returned, so it is the retrieval stage that needs fixing"
+        explanation: >-
+          With sixty percent of answers absent from the candidate set, no second stage can help, and the fix
+          is upstream: a better embedding model, a keyword leg, or different chunking. Raising the candidate
+          count is worth testing but patches the symptom while multiplying reranking cost, fine-tuning cannot
+          surface documents the reranker never sees, and dropping the recall measurement discards the
+          diagnostic that located the problem.
+        difficulty: advanced
+        mastery: true
+      - id: rag-rr-candidate-count-cost
+        prompt: "What happens to reranking latency as you raise the candidate count from twenty to two hundred, and why does that shape differ from the retrieval stage?"
+        options:
+          - "It grows roughly linearly, because each candidate is its own forward pass, while vector search grows sublinearly"
+          - "It stays unchanged, because all candidates are scored in one batched forward pass whatever their number"
+          - "It grows logarithmically, because the reranker prunes candidates as confidence in the leading ones rises"
+          - "It falls per candidate, because larger batches let the model reuse the encoded query across the passages"
+        answer: "It grows roughly linearly, because each candidate is its own forward pass, while vector search grows sublinearly"
+        explanation: >-
+          Every candidate has to be encoded together with the query, so cost is proportional to the candidate
+          count and reranking soon dominates the pipeline, whereas an approximate index answers in time much
+          closer to logarithmic in corpus size. Batching improves hardware utilisation without removing the
+          linear term, no pruning happens inside a scoring pass, and the query encoding cannot be shared
+          because it is fused with each passage.
+        difficulty: intermediate
+      - id: rag-rr-asymmetric-model-choice
+        prompt: "Short questions retrieve badly against long passages, and your first-stage model was trained for sentence similarity. What is the mismatch?"
+        options:
+          - "Similarity models expect two comparable texts, while retrieval needs a model trained on query and passage pairs"
+          - "Similarity models emit unnormalised vectors, so cosine scores end up dominated by passage length differences"
+          - "Similarity models use a smaller context window, so the long passages are silently truncated before encoding"
+          - "Similarity models are trained without negatives, so every stored passage scores highly against every query"
+        answer: "Similarity models expect two comparable texts, while retrieval needs a model trained on query and passage pairs"
+        explanation: >-
+          Symmetric similarity training teaches a model to match texts of the same kind and length, whereas
+          asymmetric search must place a short question near a long answer-bearing passage, which requires
+          training on query and document pairs. Cosine is length invariant so magnitudes are not the issue,
+          truncation would affect any model equally, and similarity models are trained with negatives.
+        difficulty: advanced
+      - id: rag-rr-why-two-stages
+        prompt: "Why not score every passage in a million-document corpus with the cross-encoder and skip vector retrieval altogether?"
+        options:
+          - "That is a million forward passes per query, while embeddings are computed once offline and searched in milliseconds"
+          - "Cross-encoders cannot produce a total ordering over more than a few hundred passages within one query"
+          - "Cross-encoder scores are meaningful only relative to a candidate set, so a full-corpus ranking is undefined"
+          - "The corpus would have to be re-encoded whenever the query changes, which the vector index does not support"
+        answer: "That is a million forward passes per query, while embeddings are computed once offline and searched in milliseconds"
+        explanation: >-
+          The two-stage design exists because the accurate model is far too expensive to run across a whole
+          corpus per query, while a bi-encoder pays its encoding cost once at index time. A cross-encoder can
+          rank any number of pairs given time, its score for a pair does not depend on which other candidates
+          are present, and re-encoding the corpus per query restates the cost problem rather than naming an
+          index limitation.
+        difficulty: intermediate
+
+  - topic: rag-hybrid-search
+    # Source: Weaviate - Hybrid search, plus Elastic - Reciprocal rank fusion
+    questions:
+      - id: rag-hs-rrf-formula
+        prompt: "Reciprocal rank fusion combines two result lists. What exactly does its formula consume, and why is that choice deliberate?"
+        options:
+          - "The rank of each document in each list, summed as one over a constant plus rank, so incomparable score scales never meet"
+          - "The normalised scores from each list, averaged together once both have been rescaled to the zero-to-one range"
+          - "The best score a document achieved in either list, since the stronger of the two signals should decide the order"
+          - "The product of both scores, so that a document has to rank well in both lists in order to survive the fusion"
+        answer: "The rank of each document in each list, summed as one over a constant plus rank, so incomparable score scales never meet"
+        explanation: >-
+          Fusion by reciprocal rank deliberately discards magnitudes and keeps positions, summing one over a
+          smoothing constant plus rank across lists, because a keyword score and a cosine similarity live on
+          unrelated scales that cannot be averaged meaningfully. Score normalisation is a different fusion
+          family, taking the maximum ignores agreement between lists, and multiplying would drop any
+          document missing from one list.
+        difficulty: advanced
+        mastery: true
+      - id: rag-hs-alpha-meaning
+        prompt: "In a Weaviate hybrid query, what does an alpha of 0.75 mean, and what do the two endpoints of that parameter represent?"
+        options:
+          - "Three-quarters weight to the vector side, with one meaning pure vector search and zero meaning pure keyword search"
+          - "Three-quarters of the candidates drawn from the vector index, with the remainder drawn from the keyword index"
+          - "A similarity threshold of 0.75, below which vector matches are discarded before fusion with the keyword hits"
+          - "Three-quarters weight to the keyword side, since alpha scales the sparse score before the two are combined"
+        answer: "Three-quarters weight to the vector side, with one meaning pure vector search and zero meaning pure keyword search"
+        explanation: >-
+          Alpha is the weight on the dense side of the fusion, so one is vector only, zero is keyword only
+          and a half balances them; it weights scores rather than allocating a quota of candidates or setting
+          a cutoff. Reading it as the keyword weight is the common inversion, and treating it as a similarity
+          threshold confuses fusion weighting with filtering.
+        difficulty: intermediate
+      - id: rag-hs-rare-token-failure
+        prompt: "Queries containing part numbers return products that are topically similar but never the right item. Why does adding a keyword leg fix that?"
+        options:
+          - "An exact token match scores the literal identifier, which the embedding had blurred into its nearest neighbours"
+          - "The keyword leg searches the whole corpus while the vector leg only searches the clusters its index visits"
+          - "Identifiers are out of vocabulary, so the embedding model returns a zero vector for that query entirely"
+          - "Keyword scoring is case sensitive, so it separates identifiers that the embedding model lowercases away"
+        answer: "An exact token match scores the literal identifier, which the embedding had blurred into its nearest neighbours"
+        explanation: >-
+          Dense encoders map a rare identifier string into a region shaped by the text around it, so
+          near-duplicate codes all look alike, whereas an inverted index matches the exact term and scores it
+          by rarity, which is what this query needs. The vector leg does search the whole index, an unseen
+          string becomes subword tokens rather than a zero vector, and casing is a minor tokenisation detail
+          rather than the mechanism.
+        difficulty: intermediate
+      - id: rag-hs-fusion-algorithm-choice
+        prompt: "Weaviate offers ranked fusion and relative-score fusion. What does choosing relative score buy you, and what does it risk?"
+        options:
+          - "It keeps how much better a hit was, rewarding a standout match, but one outlier score can skew the whole fusion"
+          - "It keeps only ordering information, which makes results stable but insensitive to how strong a match was"
+          - "It restricts fusion to documents present in both lists, which raises precision but discards the unique hits"
+          - "It recomputes both scores with one shared model, which removes the scale mismatch but doubles query latency"
+        answer: "It keeps how much better a hit was, rewarding a standout match, but one outlier score can skew the whole fusion"
+        explanation: >-
+          Relative-score fusion normalises each list's scores and combines the normalised values, so a
+          dramatically better match can outrank a document that merely placed well, and that sensitivity is
+          also its weakness because an extreme score compresses everything else. Keeping only ordering
+          describes ranked fusion, neither algorithm requires membership in both lists, and no extra model
+          is run.
+        difficulty: advanced
+      - id: rag-hs-typo-limits
+        prompt: "You enabled hybrid search, but a query with a mistyped product code still fails. What does that reveal about the keyword leg?"
+        options:
+          - "It matches tokens literally, so a misspelt term is simply absent from the inverted index and contributes nothing"
+          - "It weights rare terms highly, so the misspelling outranks the correct document by looking rarer than it is"
+          - "It applies stemming, so the misspelt token is reduced to a stem that then matches many unrelated documents"
+          - "It requires every query term to match, so one bad token removes all candidates from the keyword result list"
+        answer: "It matches tokens literally, so a misspelt term is simply absent from the inverted index and contributes nothing"
+        explanation: >-
+          Keyword scoring works over an inverted index of analysed tokens, so a token nobody indexed has no
+          postings list and adds nothing to the fusion; recovering from typos needs fuzzy matching or a
+          spelling correction step, and the dense leg is what supplies partial robustness. A misspelling
+          cannot rank a document it does not occur in, stemming does not repair arbitrary errors, and this
+          scoring rewards partial matches rather than demanding all terms.
+        difficulty: intermediate
+
+  - topic: rag-chunking-evaluation
+    # Source: Chroma - Evaluating Chunking Strategies for Retrieval
+    questions:
+      - id: rag-ce-token-level-metrics
+        prompt: "The chunking study scores retrieval at the token level rather than asking whether the retrieved chunk contained the answer. What does the chunk-level question hide?"
+        options:
+          - "How much irrelevant text arrived alongside the answer, which large chunks maximise while still counting as a hit"
+          - "Whether the answer appeared more than once in the corpus, which inflates any chunk-level hit rate that is reported"
+          - "Whether the embedding model or the chunker caused a miss, which counting tokens separates out automatically"
+          - "How many chunks the retriever had to read, which is the real cost driver in any production pipeline"
+        answer: "How much irrelevant text arrived alongside the answer, which large chunks maximise while still counting as a hit"
+        explanation: >-
+          A binary chunk-level hit treats a two-thousand-token chunk holding one relevant sentence as a
+          success, so it cannot separate precise retrieval from a lucky dragnet, whereas counting relevant
+          and retrieved tokens against annotated excerpts exposes that waste. Duplicate answers and
+          attribution of blame are separate concerns, and the number of chunks read is a cost measure rather
+          than what token scoring reveals.
+        difficulty: intermediate
+        mastery: true
+      - id: rag-ce-recall-inflation
+        prompt: "A team raises chunk size from 200 to 800 tokens and reports higher recall. Why is that not yet evidence of a better chunking strategy?"
+        options:
+          - "Bigger chunks capture relevant tokens by covering more text, so recall rises while precision and token efficiency fall"
+          - "Recall becomes undefined for larger chunks, since the annotated excerpts no longer align to any chunk boundary"
+          - "Recall improves only because fewer chunks now exist, so the retriever faces an easier ranking problem overall"
+          - "Recall was measured at the same k, which favours large chunks because each of them holds more embeddings"
+        answer: "Bigger chunks capture relevant tokens by covering more text, so recall rises while precision and token efficiency fall"
+        explanation: >-
+          Returning more text per hit almost guarantees that more relevant tokens are included, which is why
+          recall alone can be gamed by enlarging chunks; pairing it with precision over retrieved tokens
+          accounts for the context you pay for. Recall stays well defined at any chunk size, an easier
+          ranking problem is not what moves the number, and each chunk carries one embedding regardless of
+          its size.
+        difficulty: advanced
+        mastery: true
+      - id: rag-ce-controlled-comparison
+        prompt: "What has to be held constant to compare two chunking strategies fairly, given that chunk size changes how much text a fixed k returns?"
+        options:
+          - "The embedding model and query set, with the returned token budget normalised so both deliver comparable context"
+          - "The chunk overlap and the vector index type, since those decide how many neighbours each query can reach"
+          - "The corpus size and the count of annotated queries, since precision is sensitive to how many judgements exist"
+          - "The retriever's similarity threshold, since one fixed threshold makes results comparable across any chunk size"
+        answer: "The embedding model and query set, with the returned token budget normalised so both deliver comparable context"
+        explanation: >-
+          Comparability needs the same encoder and the same queries, and it needs context volume accounted
+          for, because retrieving five thousand-token chunks and five two-hundred-token chunks are not the
+          same experiment. Overlap is part of the strategy under comparison, corpus and query counts affect
+          variance rather than fairness, and a fixed similarity threshold means different things under
+          different chunkings.
+        difficulty: advanced
+      - id: rag-ce-semantic-chunking-honesty
+        prompt: "What did the study find when embedding-similarity semantic chunkers were compared against a well-configured recursive character splitter?"
+        options:
+          - "Gains were modest and not uniform, so a default splitter with sensible sizes remains a strong baseline"
+          - "Semantic chunkers dominated on every corpus, which is why they are now the recommended default everywhere"
+          - "Semantic chunkers were strictly worse, because splitting on similarity tends to break sentences mid-clause"
+          - "The comparison was inconclusive, because semantic chunkers produce a variable chunk count per document"
+        answer: "Gains were modest and not uniform, so a default splitter with sensible sizes remains a strong baseline"
+        explanation: >-
+          The measured result is undramatic: thoughtful defaults are competitive, and the more elaborate
+          strategies win on some corpora and not others, which is the reason to measure on your own data
+          rather than adopt a technique on reputation. They were neither uniformly better nor strictly
+          worse, and a variable chunk count is something the token-level metrics handle rather than a reason
+          to abandon the comparison.
+        difficulty: intermediate
+      - id: rag-ce-precision-ceiling
+        prompt: "Why is it useful to report the best precision a chunking could achieve if retrieval had returned the ideal chunks?"
+        options:
+          - "It separates the chunker's ceiling from the retriever's performance, so you know which stage to work on"
+          - "It replaces recall, since a strategy able to reach high precision will necessarily retrieve the relevant tokens"
+          - "It estimates how many chunks to retrieve, since that ceiling is reached at the k where precision peaks"
+          - "It corrects for annotator disagreement, since the ideal set is defined by whichever chunks annotators preferred"
+        answer: "It separates the chunker's ceiling from the retriever's performance, so you know which stage to work on"
+        explanation: >-
+          If even a perfect retriever could not exceed a low precision, the chunk boundaries themselves are
+          dragging irrelevant tokens into every answer and no reranking will rescue it; if the ceiling is
+          high while measured precision is low, the retriever is at fault. It does not substitute for recall,
+          is not a way to tune k, and says nothing about how far annotators agreed.
+        difficulty: advanced
+
+  - topic: rag-retrieval-metrics
+    # Source: Stanford NLP, Introduction to Information Retrieval - Evaluation of
+    # ranked retrieval results
+    questions:
+      - id: rag-rm-map-vs-precision-at-k
+        prompt: "Two systems return the same three relevant documents inside the top ten but at different positions. Which metric separates them, and why?"
+        options:
+          - "Mean average precision, since it averages precision measured at the rank of each relevant document found"
+          - "Precision at ten, since it counts the relevant documents that reached the top ten of each of the rankings"
+          - "Recall at ten, since the system placing them higher has retrieved a larger share of the relevant set"
+          - "The F score at ten, since it combines precision with recall and therefore reflects the ordering effects"
+        answer: "Mean average precision, since it averages precision measured at the rank of each relevant document found"
+        explanation: >-
+          Average precision recomputes precision at every rank where a relevant document appears, so moving
+          relevant results upward raises it directly. Precision and recall at a fixed cutoff are set-based
+          and identical for any permutation within that cutoff, and an F score built from those same
+          set-based quantities inherits their blindness to order.
+        difficulty: intermediate
+        mastery: true
+      - id: rag-rm-r-precision
+        prompt: "What is R-precision, and which convenient property does it have at that particular cutoff?"
+        options:
+          - "Precision at rank R where R is the number of known relevant documents, which makes it equal to recall at R"
+          - "Precision restricted to the documents a reranker rescored, which makes it independent of the first stage"
+          - "Precision averaged over every recall level, which makes it equal to the area under the precision-recall curve"
+          - "Precision at the rank where the curve is steepest, which makes it a robust single-number summary of quality"
+        answer: "Precision at rank R where R is the number of known relevant documents, which makes it equal to recall at R"
+        explanation: >-
+          Evaluating precision at a cutoff equal to the size of the relevant set makes the denominators of
+          precision and recall coincide, so the two are numerically equal there, the break-even point of the
+          curve. Averaging over recall levels describes average precision, and neither restricting to
+          reranked documents nor choosing the steepest point is how the measure is defined.
+        difficulty: advanced
+      - id: rag-rm-ndcg-graded
+        prompt: "What two things does NDCG add beyond a set-based metric, and what does its normalisation step accomplish?"
+        options:
+          - "Graded relevance and a rank discount, with normalisation against the ideal ranking making queries comparable"
+          - "Binary relevance and a linear discount, with normalisation turning the score into a probability of relevance"
+          - "Graded relevance and a recall term, with normalisation removing the dependence on the cutoff k entirely"
+          - "A rank discount and a length penalty, with normalisation adjusting for how long each retrieved document is"
+        answer: "Graded relevance and a rank discount, with normalisation against the ideal ranking making queries comparable"
+        explanation: >-
+          Discounted cumulative gain sums graded relevance divided by a function of rank, usually a
+          logarithm, and dividing by the ideal ordering's value places every query on a zero-to-one scale
+          despite differing numbers of relevant documents. It is not limited to binary judgements, the
+          normalised value is not a probability, the metric is still reported at a cutoff, and document
+          length plays no part in it.
+        difficulty: intermediate
+      - id: rag-rm-interpolated-precision
+        prompt: "Why is interpolated precision used when plotting or averaging precision-recall curves?"
+        options:
+          - "The raw curve is sawtoothed, so precision at a recall level is taken as the highest precision at any greater recall"
+          - "The raw curve is noisy, so precision is smoothed by averaging the neighbouring points on either side of a level"
+          - "The raw curve is undefined below the first relevant document, so the early recall levels are filled by interpolation"
+          - "The raw curve differs per query, so precision is rescaled to a common maximum before the queries are averaged"
+        answer: "The raw curve is sawtoothed, so precision at a recall level is taken as the highest precision at any greater recall"
+        explanation: >-
+          Precision dips as non-relevant documents arrive and jumps when a relevant one appears, so the raw
+          curve zigzags; taking the maximum precision at any recall at or above the level of interest gives
+          the monotone curve that eleven-point averaging needs. It is a maximum rather than a local average,
+          the undefined region is not what interpolation is for, and no per-query rescaling happens.
+        difficulty: advanced
+      - id: rag-rm-recall-needs-judgements
+        prompt: "Why is recall the awkward metric to report for a production retrieval system, and what bias does pooled judging introduce?"
+        options:
+          - "It needs every relevant document identified, and unjudged ones count as non-relevant, penalising a system finding new ones"
+          - "It needs a fixed cutoff, and pooling forces every system to be evaluated at the same k whatever its own ranking"
+          - "It needs graded labels, and pooling assigns each document the average grade given by the contributing systems"
+          - "It needs balanced classes, and pooling oversamples the documents that the strongest contributing system ranked first"
+        answer: "It needs every relevant document identified, and unjudged ones count as non-relevant, penalising a system finding new ones"
+        explanation: >-
+          The recall denominator is the complete set of relevant documents in the collection, which nobody
+          can enumerate at scale, so evaluations pool the top results of participating systems and judge only
+          those; anything outside the pool is treated as irrelevant, so a system surfacing genuinely relevant
+          unjudged documents is scored down. Cutoffs, grading scales and class balance are not where that
+          bias comes from.
+        difficulty: advanced
+        mastery: true
+
+  - topic: rag-ann-index-choice
+    # Source: FAISS wiki - Guidelines to choose an index, plus ANN-Benchmarks measured
+    # data. There is no vendor-neutral comparison of the products, so these questions ask
+    # about choosing an index from measured trade-offs rather than about which store wins.
+    questions:
+      - id: rag-ann-what-is-traded
+        prompt: "In precise terms, what does an approximate nearest neighbour index give up in exchange for its speed?"
+        options:
+          - "The guarantee that the returned list is the true top k, measured as recall against an exhaustive search"
+          - "The accuracy of the distance function, which is replaced by a cheaper metric that correlates with it"
+          - "Support for filtered queries, since the index has to visit every candidate before predicates apply"
+          - "Determinism, since results vary between identical queries as the structure rebalances itself online"
+        answer: "The guarantee that the returned list is the true top k, measured as recall against an exhaustive search"
+        explanation: >-
+          Approximation means the search examines part of the space and can miss true neighbours, so quality
+          is reported as recall against brute force at a given speed. The metric itself is not swapped for a
+          proxy, though compressed representations approximate distances as a separate matter, and filter
+          support or query determinism are implementation properties rather than the fundamental trade.
+        difficulty: intermediate
+        mastery: true
+      - id: rag-ann-pareto-reading
+        prompt: "On the measured recall against queries-per-second plots, one library sits highest at recall 0.9. What does that not tell you?"
+        options:
+          - "How it behaves at recall 0.99, plus its build time and memory footprint, which are separate measurements"
+          - "Whether the comparison used one distance metric, since those plots mix several metrics on one pair of axes"
+          - "Whether recall was computed against exhaustive search, since the plots report each library's own estimate"
+          - "How it scales to more vectors, since every point plotted was measured at a different dataset size"
+        answer: "How it behaves at recall 0.99, plus its build time and memory footprint, which are separate measurements"
+        explanation: >-
+          These curves cross: an index tuned for moderate recall often collapses when pushed towards exact
+          results, and throughput says nothing about the hours and gigabytes needed to build and hold the
+          index. The benchmarks fix the dataset and the metric per plot and compute recall against exact
+          ground truth, so those are not the missing pieces.
+        difficulty: advanced
+        mastery: true
+      - id: rag-ann-exact-small-corpus
+        prompt: "Two hundred thousand vectors, a hard requirement never to miss a true neighbour, and a handful of queries per second. Which index and why?"
+        options:
+          - "A flat index, since brute force is exact, needs no training, and is affordable at this size and query rate"
+          - "A graph index with a high search-effort setting, since that reaches recall close enough to exact in practice"
+          - "An inverted file index with many probes, since scanning most of the cells recovers the neighbours missed"
+          - "A product-quantized index, since the memory saved allows a wider candidate list and therefore accuracy"
+        answer: "A flat index, since brute force is exact, needs no training, and is affordable at this size and query rate"
+        explanation: >-
+          When exactness is a requirement the only index that provides it is the exhaustive one, and two
+          hundred thousand vectors scanned a few times per second is trivial work with no training step to
+          maintain. High search effort on a graph and many probes on an inverted file merely approach
+          exactness without guaranteeing it, and product quantization is lossy by design, which makes it the
+          wrong direction entirely.
+        difficulty: intermediate
+      - id: rag-ann-memory-budget
+        prompt: "Fifty million 768-dimension float32 vectors will not fit inside your memory budget. Which change addresses that, and what does it cost?"
+        options:
+          - "Compress the vectors with product quantization, accepting approximate distances and lower recall for a large saving"
+          - "Switch to a graph index, since its links let you store only a fraction of the vectors while keeping recall high"
+          - "Raise the number of partitions, since more and smaller cells reduce the total bytes that the index must hold"
+          - "Lower the number of probes per query, since visiting fewer cells means fewer vectors have to stay resident"
+        answer: "Compress the vectors with product quantization, accepting approximate distances and lower recall for a large saving"
+        explanation: >-
+          The raw vectors alone are around 150 GB, so the only real lever is representing each vector in
+          fewer bytes, which quantization does by encoding subspaces as codes and computing distances from
+          those codes with some loss. A graph index adds link overhead on top of the full vectors rather than
+          replacing them, and partition and probe counts change search cost rather than how much data is stored.
+        difficulty: advanced
+      - id: rag-ann-runtime-dial
+        prompt: "Recall in production is below your target. Which response moves you along the recall curve without rebuilding the index?"
+        options:
+          - "Raise the search-effort parameter, more probes or a wider candidate list, and accept the drop in queries per second"
+          - "Increase the number of partitions, which narrows each cell so the correct neighbours fall inside the one searched"
+          - "Retrain the quantizer on newer data, since drifted centroids are the usual cause of a shortfall in recall"
+          - "Request fewer results per query, since a shorter result list is easier for the index to fill correctly"
+        answer: "Raise the search-effort parameter, more probes or a wider candidate list, and accept the drop in queries per second"
+        explanation: >-
+          Every approximate index exposes a runtime knob deciding how much of the space to examine, and
+          turning it up trades throughput for recall immediately, which is why the answer is a curve rather
+          than a single number. Partition count is a structural parameter that requires rebuilding and
+          retraining, retraining addresses distribution drift rather than an ordinary shortfall, and asking
+          for fewer results does not make the search look in more places.
+        difficulty: intermediate
+
+  - topic: rag-when-postgres-is-enough
+    # Source: pgvector README - storing, querying, indexing, filtering, performance
+    questions:
+      - id: rag-pg-filter-underfill
+        prompt: "A query combining a WHERE clause with an approximate vector index asks for ten rows but returns three. What is happening and how do you fix it?"
+        options:
+          - "The index returns a bounded candidate set before the filter runs, so raise the search parameter or use a partial index"
+          - "The filter is applied first and cannot use the vector index, so the planner falls back to an incomplete table scan"
+          - "The distance operator does not match the index's operator class, so only the rows already in memory are considered"
+          - "Rows inserted after the index was built stay invisible to it, so the index must be rebuilt after every bulk load"
+        answer: "The index returns a bounded candidate set before the filter runs, so raise the search parameter or use a partial index"
+        explanation: >-
+          The approximate scan collects a bounded number of nearest candidates and the predicate then removes
+          most of them, so the result can fall short of the limit; raising search effort, building a partial
+          index per filter value, or enabling iterative index scans addresses it. Filters are not applied
+          before the index scan here, an operator-class mismatch gives a slow full scan rather than a short
+          result, and new rows are indexed as they are inserted.
+        difficulty: advanced
+        mastery: true
+      - id: rag-pg-operator-class-mismatch
+        prompt: "You added an index for L2 distance but the application orders by the cosine operator, and queries are still slow. Why?"
+        options:
+          - "An index serves only its own distance operator, so a different operator forces a sequential scan of the table"
+          - "Cosine distance is unsupported by these index types, so cosine queries always run as exact sequential scans"
+          - "The planner needs statistics gathered before it will consider a vector index, so it has not used it yet"
+          - "Cosine requires normalised vectors, and the index refuses any row whose norm is not exactly equal to one"
+        answer: "An index serves only its own distance operator, so a different operator forces a sequential scan of the table"
+        explanation: >-
+          Each index is built with an operator class tied to one distance function, so an ordering that uses
+          a different operator cannot use that index and the planner scans everything; the fix is an index
+          whose operator class matches the query. Cosine has its own supported operator class, statistics are
+          not the blocker, and no index rejects rows for their magnitude.
+        difficulty: intermediate
+      - id: rag-pg-hnsw-vs-ivfflat
+        prompt: "The table is empty today and rows will stream in over the coming weeks. Which pgvector index type suits that, and what is the trade?"
+        options:
+          - "The graph index, which can be created before any data exists, at the cost of slower builds and more memory"
+          - "The inverted file index, which adapts its lists as rows arrive and therefore needs no data at creation time"
+          - "Either one, since both cluster incrementally and simply reorganise themselves as the table continues to grow"
+          - "Neither, since an approximate index over a growing table has to be dropped and rebuilt after every load"
+        answer: "The graph index, which can be created before any data exists, at the cost of slower builds and more memory"
+        explanation: >-
+          The inverted-file index derives its lists by clustering the rows that already exist, so it needs a
+          populated table and goes stale as the distribution shifts, whereas the graph index builds
+          incrementally and can be created up front, paying in build time and memory per vector. Only one of
+          the two is distribution-dependent, and neither needs a drop-and-rebuild cycle for ordinary inserts.
+        difficulty: intermediate
+      - id: rag-pg-architecture-argument
+        prompt: "What is the strongest argument for keeping embeddings in Postgres when the source rows already live there?"
+        options:
+          - "Embeddings stay transactionally consistent with their rows and SQL predicates join them, so no sync service is needed"
+          - "Postgres searches vectors faster than dedicated stores, because the data never has to cross a network boundary"
+          - "Postgres holds the whole index in shared buffers, which removes the recall loss that other stores have to accept"
+          - "Postgres computes the embeddings inside the database, so the application never has to handle any vectors itself"
+        answer: "Embeddings stay transactionally consistent with their rows and SQL predicates join them, so no sync service is needed"
+        explanation: >-
+          The win is architectural: one transaction commits the row and its embedding together, filters and
+          joins are ordinary SQL, and the pipeline that would otherwise copy data into a second store and
+          reconcile drift disappears. Raw search speed is not the claim, buffering does not remove the
+          approximation an index makes, and embeddings are still produced by a model outside the database.
+        difficulty: intermediate
+      - id: rag-pg-when-to-leave
+        prompt: "Which observation is the honest signal that Postgres is no longer enough for your vector workload?"
+        options:
+          - "The index no longer fits in memory and its build and maintenance contend with the transactional workload"
+          - "The corpus passed one million vectors, which is the documented point where the extension stops scaling"
+          - "Recall dropped below one, which means the approximate index has degraded past what a database should accept"
+          - "Queries now need metadata filters, which the extension cannot combine with a vector ordering in one statement"
+        answer: "The index no longer fits in memory and its build and maintenance contend with the transactional workload"
+        explanation: >-
+          The real limits are operational: an index paged out of memory destroys latency, and building or
+          maintaining a large one competes for the same buffers, workers and IO as your transactions, which
+          is when a separate service starts to pay for itself. There is no documented vector count where it
+          stops working, recall below one is inherent to approximate search everywhere, and SQL filters
+          alongside a vector ordering are a strength of this option.
+        difficulty: advanced
+        mastery: true

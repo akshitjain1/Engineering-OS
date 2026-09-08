@@ -1,0 +1,347 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ml
+    name: Machine Learning Foundations
+    description: Machine Learning Foundations
+    order: 6
+    subjects:
+    - slug: ml-foundations
+      name: Machine Learning Foundations
+      description: Machine Learning Foundations
+      order: 0
+      modules:
+      - slug: mod-ml-data-quality
+        name: Data Quality for ML
+        description: 'Leakage, train/serve skew, missing values, outlier versus novelty detection and
+          class imbalance. Deliberately five topics: outside the scikit-learn user guide there is no authoritative
+          single page on data quality as a discipline, so the module is not padded to six.'
+        order: 1
+        topics:
+        - slug: dq-data-leakage
+          name: Data leakage
+          description: 'The most common cause of a model that scores well offline and fails in production,
+            taught with wrong-code and right-code pairs, and the fix: fit transformers inside the cross-validation
+            loop.'
+          order: 0
+          prerequisites:
+          - ml-train-test
+          - ml-sklearn-pipeline
+          learning_objective: Detect leakage in a training script and fix it by moving preprocessing inside
+            the pipeline.
+          mastery_criteria:
+          - Point at the exact line in a script that leaks when a scaler is fit on the full dataset before
+            splitting.
+          - State the rule that prevents preprocessing leakage in one sentence, and name the scikit-learn
+            construct that enforces it.
+          - Name one leakage source that a Pipeline does not fix, such as a feature computed from the
+            future or duplicate rows spanning the split.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: ml
+          lessons:
+          - slug: dq-data-leakage-core
+            title: Data leakage
+            description: 'WHY NOW: Detect leakage in a training script and fix it by moving preprocessing
+              inside the pipeline.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/common_pitfalls.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: take one existing notebook and rewrite its preprocessing into a Pipeline
+              evaluated with cross-validation, recording the score before and after. HOW MANY: 1 notebook.
+              WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: the corrected Pipeline with both scores printed and the gap between them
+              explained in a comment.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: dq-data-leakage-primary
+              title: Common pitfalls and recommended practices
+              type: documentation
+              url: https://scikit-learn.org/stable/common_pitfalls.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: §12.2 "Data leakage", including §12.2.1 "How to avoid data leakage" and §12.2.2
+                "Data leakage during pre-processing" (headings verified)
+              description: The single most common cause of a model that scores well and fails in production,
+                explained with wrong-code / right-code pairs by the library you already use. Nothing else
+                states the fix (fit transformers inside the CV loop) this unambiguously.
+        - slug: dq-inconsistent-preprocessing
+          name: Inconsistent preprocessing
+          description: 'Train/serve skew: transforms applied at training and forgotten at inference, and
+            the packaging discipline that removes the whole class of bug.'
+          order: 1
+          prerequisites:
+          - ml-sklearn-pipeline
+          - ds-pandas
+          - mlops-serving
+          learning_objective: Guarantee that inference applies exactly the transforms training applied.
+          mastery_criteria:
+          - Explain what breaks numerically when a scaler is fit at training time but not applied at inference.
+          - Say why serialising the fitted pipeline rather than the model alone removes the class of bug
+            rather than just this instance of it.
+          - Name one check you could run in CI that would catch the skew before it ships.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 10
+          domain_key: ml
+          lessons:
+          - slug: dq-inconsistent-preprocessing-core
+            title: Inconsistent preprocessing
+            description: 'WHY NOW: Guarantee that inference applies exactly the transforms training applied.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/common_pitfalls.html
+
+              TIME: ~10 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: serialise a fitted pipeline, load it in a separate script, and assert its
+              prediction on one row matches the training-time prediction. HOW MANY: 1 assertion. WHERE:
+              local IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a two-file save/load round trip with the equality assertion passing.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.17
+            resources:
+            - slug: dq-inconsistent-preprocessing-primary
+              title: Common pitfalls and recommended practices
+              type: documentation
+              url: https://scikit-learn.org/stable/common_pitfalls.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: §12.1 "Inconsistent preprocessing" (heading verified)
+              description: 'The train/serve skew failure: transforms applied at training and forgotten
+                at inference. Short, and it is the second-most-common reason a good offline model behaves
+                badly in production.'
+        - slug: dq-missing-values
+          name: Missing values and imputation
+          description: Univariate, multivariate and nearest-neighbour imputation, the missing-indicator
+            column, and imputation inside a Pipeline so it does not leak.
+          order: 2
+          prerequisites:
+          - ds-pandas
+          - ds-eda
+          - ml-sklearn-pipeline
+          learning_objective: Choose an imputation strategy and apply it without leaking.
+          mastery_criteria:
+          - Explain why adding a missing-indicator column can improve a model even when the imputed value
+            itself is crude.
+          - Say what differs between univariate and iterative imputation, and what iterative imputation
+            costs you.
+          - Show imputation inside a Pipeline and explain why fitting the imputer on the whole dataset
+            first would be leakage.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: ml
+          lessons:
+          - slug: dq-missing-values-core
+            title: Missing values and imputation
+            description: 'WHY NOW: Choose an imputation strategy and apply it without leaking.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/modules/impute.html
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: compare mean imputation, iterative imputation, and mean-plus-indicator on
+              one dataset with real missingness, under the same cross-validation. HOW MANY: 3 strategies.
+              WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: a Pipeline per strategy with the three cross-validated scores printed
+              together.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: dq-missing-values-primary
+              title: Imputation of missing values
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/impute.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Univariate vs multivariate vs nearest-neighbour imputation, and - the part
+                everyone misses - the missing-indicator column, because the fact that a value was missing
+                is often itself predictive. Also shows imputation inside a Pipeline, tying back to leakage.
+        - slug: dq-outliers
+          name: Outliers and novelty
+          description: 'The distinction that matters operationally: outlier detection on contaminated
+            training data versus novelty detection with clean training data and dirty inference input.'
+          order: 3
+          prerequisites:
+          - ds-eda
+          - math-stats-summary
+          learning_objective: Decide which of the two problems you actually have before choosing a detection
+            method.
+          mastery_criteria:
+          - State the difference between outlier and novelty detection in terms of what the training data
+            contains.
+          - Given a described situation, say which of the two it is and name a method family that fits.
+          - Read the method comparison figure and say what kind of data shape breaks a method that assumes
+            an elliptical distribution.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: ml
+          lessons:
+          - slug: dq-outliers-core
+            title: Outliers and novelty
+            description: 'WHY NOW: Decide which of the two problems you actually have before choosing
+              a detection method.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/modules/outlier_detection.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: describe two situations from your own work or data, classify each as outlier
+              or novelty detection, and name the method you would try. HOW MANY: 2 situations. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a two-row table of situation, problem type, method, and what evidence
+              would tell you the choice was wrong.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: dq-outliers-primary
+              title: Novelty and Outlier Detection
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/outlier_detection.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: The section intro plus "Overview of outlier detection methods" — the comparison
+                figure is the payload; skip the per-estimator maths on a first pass
+              description: 'Draws the distinction that matters operationally: outlier detection (contaminated
+                training data) vs novelty detection (clean training data, dirty inference input). Deciding
+                which problem you have comes before choosing a method.'
+        - slug: dq-class-imbalance
+          name: Class imbalance
+          description: Why accuracy is meaningless at 1:1000, downsampling with upweighting to keep calibration
+            intact, and SMOTE's variants with the warning that resampling belongs inside the cross-validation
+            fold.
+          order: 4
+          prerequisites:
+          - ml-classification
+          - ml-metrics
+          learning_objective: Handle an imbalanced dataset without destroying calibration or leaking through
+            resampling.
+          mastery_criteria:
+          - Say what accuracy a trivial always-negative classifier scores at 1:1000, and name the metric
+            you would report instead.
+          - Explain what upweighting restores after downsampling, and what is wrong with downsampling
+            on its own.
+          - State why resampling must happen inside the cross-validation fold, and describe what the score
+            looks like when it does not.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: ml
+          lessons:
+          - slug: dq-class-imbalance-core
+            title: Class imbalance
+            description: 'WHY NOW: Handle an imbalanced dataset without destroying calibration or leaking
+              through resampling.
+
+
+              LEARN: Google for Developers — https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: on one imbalanced dataset, compare a baseline, downsampling-with-upweighting,
+              and SMOTE applied inside the fold, reporting precision and recall rather than accuracy.
+              HOW MANY: 3 runs. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: an imbalanced-learn Pipeline so the resampler is fit per fold, with the
+              three precision/recall pairs printed together.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: dq-class-imbalance-primary
+              title: 'Datasets: Class-imbalanced datasets'
+              type: documentation
+              url: https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets
+              provider: Google for Developers
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Why accuracy is meaningless at 1:1000, and downsampling with upweighting -
+                the technique that keeps calibration intact, which naive resampling tutorials destroy.
+                Tight and correct.
+            - slug: dq-class-imbalance-reference
+              title: Over-sampling
+              type: documentation
+              url: https://imbalanced-learn.org/stable/over_sampling.html
+              provider: imbalanced-learn
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: SMOTE and its variants with the decision-boundary illustrations, plus the warning
+                that resampling must happen inside the CV fold - the leakage topic again, from the other
+                side.

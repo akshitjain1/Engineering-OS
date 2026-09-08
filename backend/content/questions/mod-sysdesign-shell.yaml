@@ -1,0 +1,130 @@
+# System Design awareness shell: orientation questions only.
+#
+# Both topics map to the System Design Primer's front page. These stay at the
+# level of the discipline and the study plan: the deep questions about caching,
+# partitioning, queues and monitoring live in mod-sysdesign instead.
+schema_version: 1
+kind: question_bank
+module: mod-sysdesign-shell
+topics:
+  - topic: sysdesign-awareness
+    # Source: System Design Primer README - overview, trade-offs, estimation tables
+    questions:
+      - id: sysdesign-aware-everything-trades
+        prompt: "What should you expect of any answer this primer gives to a design question?"
+        options:
+          - "It gives something up: latency, consistency, cost and complexity all pull against each other"
+          - "It is the one correct architecture for that problem, which experienced designers memorise"
+          - "It scales without limit, as long as every component is a managed cloud service"
+          - "It avoids trade-offs once enough machines are added to the weakest component"
+        answer: "It gives something up: latency, consistency, cost and complexity all pull against each other"
+        explanation: >-
+          The primer's framing is that every choice buys one property by spending another, so a design is
+          argued for rather than declared correct. There is no single canonical architecture, managed
+          services move the limits without removing them, and adding machines introduces coordination
+          costs of its own.
+        difficulty: beginner
+        mastery: true
+      - id: sysdesign-aware-availability-over-consistency
+        prompt: "In this primer's vocabulary, what does favouring availability over consistency mean during a network partition?"
+        options:
+          - "Every node keeps answering, and some answers may be out of date until the split heals"
+          - "Every node stops answering, so no client can read a value that might be out of date"
+          - "Writes are blocked while reads continue, which is what keeps the system available"
+          - "A new primary is elected, which removes the trade-off between the two properties"
+        answer: "Every node keeps answering, and some answers may be out of date until the split heals"
+        explanation: >-
+          Choosing availability means serving possibly stale data rather than refusing the request, and the
+          copies reconcile once the partition ends. Refusing to answer is the consistency-favouring
+          choice, blocking writes only is a different design point, and electing a primary does not
+          suspend the trade-off.
+        difficulty: intermediate
+      - id: sysdesign-aware-memorised-architecture
+        prompt: "A learner memorises one reference architecture and offers it for every question. Why does the primer warn against that?"
+        options:
+          - "The right design falls out of the requirements and constraints, and those differ each time"
+          - "Reference architectures are proprietary, so repeating one risks disclosing a design"
+          - "Memorised designs go out of date, because the named components are replaced yearly"
+          - "Only designs drawn from the primer's own worked examples are considered acceptable"
+        answer: "The right design falls out of the requirements and constraints, and those differ each time"
+        explanation: >-
+          The primer teaches a process that starts from requirements and scale estimates, so a fixed answer
+          skips the reasoning that makes it appropriate. Confidentiality is not the concern, component
+          churn is slower than yearly and beside the point, and no fixed set of acceptable
+          designs exists.
+        difficulty: intermediate
+      - id: sysdesign-aware-estimation-tables
+        prompt: "The primer includes tables of powers of two and typical latency figures. What are those for?"
+        options:
+          - "Back-of-the-envelope estimates, so a proposed design can be checked against reality"
+          - "Recall practice, since interviewers ask for those exact figures before any discussion"
+          - "Configuration defaults, giving values to set on your caches and load balancers"
+          - "Benchmarking records, since they list throughput each named component achieved"
+        answer: "Back-of-the-envelope estimates, so a proposed design can be checked against reality"
+        explanation: >-
+          The numbers exist so you can sanity-check storage, bandwidth and latency claims quickly while
+          designing. They are not a recitation exercise, they describe hardware and network orders of
+          magnitude rather than settings to configure, and they are reference figures rather than
+          measured benchmark results.
+        difficulty: beginner
+        mastery: true
+
+  - topic: sysdesign-path
+    # Source: System Design Primer README - study plans, index of topics, exercises and decks
+    questions:
+      - id: sysdesign-path-study-plans
+        prompt: "The primer offers short, medium and long study plans. What actually differs between them?"
+        options:
+          - "How broadly and how deeply you cover topics and worked examples, given your time"
+          - "Which answers are correct, since a short timeline needs a simplified set of them"
+          - "The order of the topics, which is reversed when only a week is available"
+          - "Whether the primer or an outside book is the source, depending on time available"
+        answer: "How broadly and how deeply you cover topics and worked examples, given your time"
+        explanation: >-
+          The plans vary coverage and depth against the calendar while the material stays the same.
+          Correctness does not depend on your schedule, reversing the topic order would break the
+          dependencies the path relies on, and the primer remains the source in every plan it offers.
+        difficulty: beginner
+        mastery: true
+      - id: sysdesign-path-components-first
+        prompt: "Why does this path cover basic components before topics such as partitioning and caching?"
+        options:
+          - "A trade-off between components is meaningless until you know what each component does"
+          - "Partitioning and caching are optional extras that most production systems never need"
+          - "The basic components are the harder material, so tackling them first builds stamina"
+          - "The caching topics assume you have already designed and shipped a system yourself"
+        answer: "A trade-off between components is meaningless until you know what each component does"
+        explanation: >-
+          Choosing between a replica and a shard presumes you know what each one is and costs, so the
+          vocabulary of components is a strict prerequisite. Both techniques are mainstream rather than
+          optional, the basics are the easier material, and no prior production experience is assumed
+          anywhere.
+        difficulty: intermediate
+      - id: sysdesign-path-exercises-add
+        prompt: "The primer pairs its reading with exercises and spaced-repetition decks. What does working the exercises add?"
+        options:
+          - "Practice at producing a design under constraints, which reading alone never gives you"
+          - "Faster reading, since the exercises restate each section in a more compact form"
+          - "Coverage of topics the reading leaves out, making the exercises the complete source"
+          - "A score you can quote, which is what an interviewer asks for before discussing"
+        answer: "Practice at producing a design under constraints, which reading alone never gives you"
+        explanation: >-
+          Design is a generative skill, so the exercises rehearse the act of producing and defending one
+          rather than recognising a finished answer. They are not summaries, the reading is the primary
+          material and they do not replace it, and no score comes out of them to report.
+        difficulty: intermediate
+      - id: sysdesign-path-memorising-solutions
+        prompt: "What is the failure mode of studying this primer's worked solutions by memorising them?"
+        options:
+          - "You can recall the diagram but cannot defend a choice once the requirements move"
+          - "You learn the components too deeply and lose sight of how they fit together"
+          - "You cover the topics in the wrong order, which the study plans exist to prevent"
+          - "You spend so long on estimation that the worked examples are never reached"
+        answer: "You can recall the diagram but cannot defend a choice once the requirements move"
+        explanation: >-
+          Memorisation stores the output of the reasoning and not the reasoning, so any variation in the
+          requirements leaves you stuck. Depth on components is not a hazard, ordering is handled by the
+          study plans regardless of how you study, and time lost to estimation is a different
+          problem entirely.
+        difficulty: advanced
+        mastery: true

@@ -1,0 +1,724 @@
+# Just-in-time calculus & probability self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to, and
+# stays inside that topic's scope. This module deliberately overlaps mod-math-ml
+# (vectors, derivatives, probability at a different depth), so each prompt here is
+# written so the neighbouring module's page alone would not answer it.
+schema_version: 1
+kind: question_bank
+module: mod-math-jit
+topics:
+  - topic: math-functions
+    # Source: Math is Fun - Functions introduction
+    questions:
+      - id: mjit-fn-single-output
+        prompt: "A relation maps the input 3 to both 7 and 9. Why does that stop it being a function?"
+        options:
+          - "A function must give exactly one output for each input it accepts"
+          - "A function must give exactly one input for each output it produces"
+          - "A function must accept only numbers, and pairing 3 with 7 breaks that"
+          - "A function must produce outputs larger than the inputs it is given"
+        answer: "A function must give exactly one output for each input it accepts"
+        explanation: >-
+          The defining rule is one output per input, so a split output disqualifies the
+          relation. One input per output is a stronger property that many useful functions
+          lack, since a classifier sends many images to the same label. Functions are not
+          restricted to numbers, and nothing requires outputs to exceed inputs.
+        difficulty: beginner
+        mastery: true
+      - id: mjit-fn-domain-range-sqrt
+        prompt: "For f(x) = sqrt(x) over the real numbers, what are the domain and the range?"
+        options:
+          - "Domain x >= 0 and range f(x) >= 0, since negatives have no real root"
+          - "Domain all real x and range f(x) >= 0, because roots are never negative"
+          - "Domain x >= 0 and range all real f(x), since both signs of root count"
+          - "Domain all real x and range all real f(x), as sqrt works everywhere"
+        answer: "Domain x >= 0 and range f(x) >= 0, since negatives have no real root"
+        explanation: >-
+          The domain is what you are allowed to feed in and the range is what can come out, so
+          both are restricted to non-negatives here. Allowing all real inputs ignores that the
+          root of a negative is not real, which is exactly the crash you hit when a variance
+          term drifts below zero in code. Allowing negative outputs adds a branch the function
+          does not have.
+        difficulty: beginner
+      - id: mjit-fn-model-as-mapping
+        prompt: "A digit classifier takes 784 pixel values and returns 10 class scores. Read as a function, what are its domain and codomain?"
+        options:
+          - "The domain is the 784 pixel values and the codomain is the 10 scores"
+          - "The domain is the 10 scores and the codomain is the 784 pixel values"
+          - "The domain is the model weights and the codomain is the training labels"
+          - "The domain and codomain are both the 784 pixel values being reshaped"
+        answer: "The domain is the 784 pixel values and the codomain is the 10 scores"
+        explanation: >-
+          Inputs form the domain and possible outputs form the codomain, so pixels in and
+          scores out. Swapping them describes an image generator instead. The weights are fixed
+          settings of the mapping rather than its inputs at inference time, and a mapping from
+          pixels back to pixels would be an autoencoder, not a classifier.
+        difficulty: beginner
+      - id: mjit-fn-many-to-one-allowed
+        prompt: "Two different images both make a model output the label cat. Does that break the rule that a model is a function?"
+        options:
+          - "No, different inputs may share an output; only split outputs are banned"
+          - "Yes, a function must send different inputs to different outputs always"
+          - "Yes, sharing an output means the mapping has become one-to-many here"
+          - "No, functions place no restriction at all on how inputs map to outputs"
+        answer: "No, different inputs may share an output; only split outputs are banned"
+        explanation: >-
+          Many-to-one is allowed and is the whole point of classification. Requiring distinct
+          outputs describes an injective function, a far stronger condition. Sharing an output
+          is many-to-one, not one-to-many, which reverses the direction of the problem, and
+          functions do carry one real restriction, so the last option overstates the freedom.
+        difficulty: intermediate
+      - id: mjit-fn-notation-substitution
+        prompt: "If f(x) = 2x + 1, what does the expression f(a + 1) stand for?"
+        options:
+          - "2(a + 1) + 1, substituting the whole input a + 1 wherever x appeared"
+          - "2a + 1 + 1, adding one to the finished result f(a) after computing it"
+          - "f(a) + f(1), splitting the input because f distributes over addition"
+          - "2a + 1, since the added one relabels the input but not the value"
+        answer: "2(a + 1) + 1, substituting the whole input a + 1 wherever x appeared"
+        explanation: >-
+          Function notation means substitute the entire argument, so every x becomes a + 1.
+          Adding one to f(a) afterwards confuses changing the input with changing the output.
+          Splitting into f(a) + f(1) assumes a linearity that even this affine function fails,
+          the same error as treating a layer with a bias as linear. Ignoring the added one
+          drops the substitution entirely.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: math-derivatives
+    # Source: Paul's Online Math Notes - Definition of the derivative and basic rules
+    questions:
+      - id: mjit-der-limit-definition
+        prompt: "The derivative is the limit of (f(x + h) - f(x)) / h as h approaches 0. What does that quotient measure before the limit is taken?"
+        options:
+          - "The average rate of change across an interval of width h, a secant slope"
+          - "The instantaneous rate of change at x already, so the limit adds nothing"
+          - "The height of f at the point x plus h, measured up from the input axis"
+          - "The area trapped under the curve f between the points x and x plus h"
+        answer: "The average rate of change across an interval of width h, a secant slope"
+        explanation: >-
+          For any positive h the quotient is rise over run between two points, which is a secant
+          slope and an average rate. The limit is what turns that average into an instantaneous
+          rate, so calling the quotient instantaneous removes the reason for the limit. The
+          expression is a ratio of a difference, not a height, and area under a curve is the
+          integral rather than the derivative.
+        difficulty: beginner
+        mastery: true
+      - id: mjit-der-power-rule
+        prompt: "Apply the basic power rule: what is the derivative of f(x) = 3x^4?"
+        options:
+          - "12x^3, since the exponent multiplies in front and then drops by one"
+          - "12x^4, since the exponent multiplies in front but the power is kept"
+          - "3x^3, since the power drops by one and the coefficient is untouched"
+          - "4x^3, since the exponent becomes the coefficient and the power drops"
+        answer: "12x^3, since the exponent multiplies in front and then drops by one"
+        explanation: >-
+          The power rule does two things at once: multiply by the old exponent and reduce it by
+          one, giving 3 times 4 times x^3. Keeping the power at 4 does only half the rule,
+          leaving the coefficient at 3 does only the other half, and replacing 3 with 4 throws
+          away the original coefficient instead of multiplying by it.
+        difficulty: beginner
+      - id: mjit-der-negative-slope-meaning
+        prompt: "At w = 2 a loss curve has derivative -5. What do the sign and the size tell you about the loss there?"
+        options:
+          - "It falls about 5 units per unit increase in w, so raising w lowers loss"
+          - "It falls about 5 units per unit decrease in w, so lowering w helps here"
+          - "The loss itself is -5 at that point, which is why the slope is negative"
+          - "The loss is at a minimum there, because a negative slope marks a bottom"
+        answer: "It falls about 5 units per unit increase in w, so raising w lowers loss"
+        explanation: >-
+          A derivative is output change per unit of input increase, so a negative value means
+          increasing w decreases the loss. Reading it as helped by decreasing w flips the
+          direction, and that is exactly the sign error that makes a hand-written update rule
+          climb the loss. The derivative is a slope, not a function value, and at a genuine
+          minimum the slope would be zero rather than negative.
+        difficulty: intermediate
+      - id: mjit-der-constant-term
+        prompt: "A term in your loss expression is the constant 7. What is its derivative, and what follows for training?"
+        options:
+          - "Zero, so the constant shifts the loss value but never moves a parameter"
+          - "Seven, so the constant adds a steady push to every parameter update"
+          - "Zero, so adding the constant leaves the loss value itself unchanged too"
+          - "One, so the constant contributes a unit slope in every direction at once"
+        answer: "Zero, so the constant shifts the loss value but never moves a parameter"
+        explanation: >-
+          A constant has no rate of change, so its derivative is zero and it cannot influence
+          any gradient step. Treating the value 7 as the derivative confuses a function with its
+          slope. The third option gets the derivative right but then wrongly claims the loss
+          number is unaffected, when the printed loss does shift by 7. A slope of one would
+          belong to the term x, not to a constant.
+        difficulty: beginner
+      - id: mjit-der-relu-corner
+        prompt: "ReLU has a corner at 0, with slope 0 just to the left and slope 1 just to the right. What does the limit definition say about its derivative at exactly 0?"
+        options:
+          - "It does not exist, because the two one-sided limits disagree at 0"
+          - "It equals 0.5, the average of the two one-sided limits at that point"
+          - "It equals 1, because the right-hand limit always wins over the left"
+          - "It exists and is 0, because the function value at exactly 0 is also 0"
+        answer: "It does not exist, because the two one-sided limits disagree at 0"
+        explanation: >-
+          A derivative exists only when the difference quotient has a single limit from both
+          sides, and 0 against 1 is not a single limit. Averaging the two sides invents a value
+          the definition does not give, and preferring one side is a convention frameworks pick
+          for convenience rather than a mathematical result. A function value says nothing about
+          the slope there, since continuity does not imply differentiability.
+        difficulty: advanced
+        mastery: true
+
+  - topic: math-partial-derivatives
+    # Source: OpenStax Calculus Volume 3 - 4.3 Partial Derivatives
+    questions:
+      - id: mjit-pd-partial-wrt-x
+        prompt: "For f(x, y) = x^2*y + 3y, what is the partial derivative with respect to x?"
+        options:
+          - "2xy, treating y as a fixed constant and differentiating x^2 only"
+          - "2xy + 3, differentiating both of the terms with respect to x here"
+          - "x^2 + 3, which is what differentiating with respect to y would give"
+          - "2x + 3y, differentiating each variable in place at the same time"
+        answer: "2xy, treating y as a fixed constant and differentiating x^2 only"
+        explanation: >-
+          Holding y constant makes x^2*y a constant multiple of x^2 and makes 3y a pure
+          constant, so only 2xy survives. Adding 3 differentiates the 3y term as though it
+          contained x. The third option answers the wrong question, and the last differentiates
+          both variables at once, which is not what a single partial derivative does.
+        difficulty: beginner
+      - id: mjit-pd-partial-wrt-y
+        prompt: "For the same surface f(x, y) = x^2*y + 3y, what is the partial derivative with respect to y?"
+        options:
+          - "x^2 + 3, since x^2 and 3 are both constant multipliers of y here"
+          - "x^2*y + 3, differentiating the second term but leaving the first alone"
+          - "2xy + 3y, applying the power rule to x while also handling the y"
+          - "3, because only the final term actually contains the variable y"
+        answer: "x^2 + 3, since x^2 and 3 are both constant multipliers of y here"
+        explanation: >-
+          With x held fixed, both terms are linear in y, so their coefficients x^2 and 3 add.
+          The second option forgets to differentiate the first term at all. The third mixes in
+          the derivative with respect to x, and the last overlooks that x^2*y contains y too,
+          which is the habit that loses whole gradient contributions in a manual backward pass.
+        difficulty: intermediate
+      - id: mjit-pd-hold-others-fixed
+        prompt: "In code, what does taking a partial derivative of the loss with respect to one weight correspond to?"
+        options:
+          - "Nudging that single weight while every other weight stays frozen in place"
+          - "Nudging every weight together and watching the total loss change once"
+          - "Nudging the input features while all of the weights are held constant"
+          - "Nudging that weight and rescaling the others to keep their sum fixed"
+        answer: "Nudging that single weight while every other weight stays frozen in place"
+        explanation: >-
+          A partial derivative is defined by varying one input and freezing the rest, which is
+          exactly a one-weight finite-difference gradient check. Moving everything at once gives
+          a directional or total change, not a partial. Varying the features asks a different
+          question, used for saliency rather than training, and constraining the other weights
+          to a fixed sum adds a condition the definition does not impose.
+        difficulty: intermediate
+      - id: mjit-pd-not-a-total-derivative
+        prompt: "The partial of L with respect to w1 is 0 at the current point. What may you conclude?"
+        options:
+          - "Only that L is flat along the w1 axis; other weights may still reduce L"
+          - "That L is at a minimum, since a zero derivative marks the lowest point"
+          - "That L cannot change from here at all, whichever weight you decide to move"
+          - "That w1 has no effect on L anywhere, so this weight can safely be removed"
+        answer: "Only that L is flat along the w1 axis; other weights may still reduce L"
+        explanation: >-
+          One partial describes one axis only, so the surface can still slope steeply in every
+          other coordinate. Calling it a minimum reads a single partial as if it were the whole
+          gradient. Claiming no change is possible generalises one direction to all of them, and
+          a partial is evaluated at one point, so it says nothing about w1 elsewhere.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-pd-count-of-partials
+        prompt: "A network has 1000 trainable parameters and one scalar loss. How many first-order partial derivatives are there, and what collects them?"
+        options:
+          - "1000 partials, collected into a single gradient vector of length 1000"
+          - "One partial in total, because the loss is a single scalar-valued number"
+          - "1000 partials, collected into a 1000 by 1000 matrix of second slopes"
+          - "Two partials, one for the weights as a block and one for the biases"
+        answer: "1000 partials, collected into a single gradient vector of length 1000"
+        explanation: >-
+          There is one partial per input variable, and stacking them is precisely how the
+          gradient is built, which is why a parameter tensor and its grad share a shape. The
+          count follows the parameters, not the single output, so one partial is wrong. A square
+          matrix of that size holds second-order partials, the Hessian, and grouping into two
+          blocks confuses tensor bookkeeping with the number of derivatives.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: math-conditional-probability
+    # Source: OpenStax Introductory Statistics 2e - 3.1 Terminology, conditional probability
+    questions:
+      - id: mjit-cp-from-counts
+        prompt: "Of 100 emails, 30 contain the word free and 12 of those 30 are spam. What is P(spam | contains free)?"
+        options:
+          - "0.40, the 12 spam emails divided by the 30 that contain the word"
+          - "0.12, the 12 spam emails divided by all 100 emails in the sample"
+          - "0.30, the share of emails containing the word, whether spam or not"
+          - "0.42, the counts 12 and 30 added together over the 100 emails"
+        answer: "0.40, the 12 spam emails divided by the 30 that contain the word"
+        explanation: >-
+          Conditioning replaces the denominator with the size of the given event, so you divide
+          by 30 rather than 100. Dividing by 100 gives the joint probability of spam and free, a
+          smaller and different quantity. The third option is just the probability of the word,
+          and the last adds counts that overlap, double counting the 12 spam emails.
+        difficulty: beginner
+        mastery: true
+      - id: mjit-cp-independence-equality
+        prompt: "Two events A and B satisfy P(A | B) = P(A). What does that equality say about them?"
+        options:
+          - "They are independent, so learning B occurred does not shift P(A) at all"
+          - "They are mutually exclusive, so the two events can never occur together"
+          - "They are equally likely, so P(A) and P(B) have to be the same number"
+          - "They are fully dependent, so B occurring guarantees that A occurs too"
+        answer: "They are independent, so learning B occurred does not shift P(A) at all"
+        explanation: >-
+          Independence is defined by the evidence leaving the probability unchanged, which is
+          this equality. Mutually exclusive events are the opposite case, since B occurring
+          forces the conditional to 0. Equal likelihood compares two different events rather
+          than a conditional with its unconditional version, and a guarantee would instead
+          make the conditional equal to 1.
+        difficulty: intermediate
+      - id: mjit-cp-exclusive-versus-independent
+        prompt: "Each example in a dataset is labelled either cat or dog, never both. Are those two label events independent?"
+        options:
+          - "No, they are mutually exclusive, and that makes them strongly dependent"
+          - "Yes, mutually exclusive events are independent because they never overlap"
+          - "Yes, because each label has a probability fixed before the other is seen"
+          - "No, they are neither exclusive nor independent, since both can occur"
+        answer: "No, they are mutually exclusive, and that makes them strongly dependent"
+        explanation: >-
+          Knowing the label is cat drives the probability of dog to 0, so the evidence changes
+          the probability and independence fails. The common slip is treating non-overlap as
+          independence, when non-overlap is a strong form of dependence. Fixed marginal
+          probabilities say nothing about the conditional, and the labels are exclusive here by
+          construction, so the last option contradicts the setup.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-cp-reduced-sample-space
+        prompt: "Conditioning on B changes which denominator you divide by. What is happening to the sample space?"
+        options:
+          - "It shrinks to the outcomes inside B, and probabilities rescale to that total"
+          - "It grows to include B alongside the original outcomes already counted"
+          - "It stays exactly the same size, and only the numerator of the ratio changes"
+          - "It shrinks to the outcomes inside A, whose total becomes the new base"
+        answer: "It shrinks to the outcomes inside B, and probabilities rescale to that total"
+        explanation: >-
+          Conditioning restricts attention to the world where B happened and renormalises so the
+          restricted probabilities still sum to one, which is why filtering a dataframe by B and
+          recomputing rates works. Conditioning never enlarges the space. An unchanged space
+          would give the joint probability instead, and the restriction is to the given event B,
+          not to the event A being asked about.
+        difficulty: intermediate
+      - id: mjit-cp-joint-from-conditional
+        prompt: "Given P(B) = 0.5 and P(A | B) = 0.4, what is P(A and B)?"
+        options:
+          - "0.20, because the joint probability is P(B) times P(A given B) here"
+          - "0.90, because the two supplied probabilities are added when both occur"
+          - "0.80, because P(A given B) is divided by P(B) to undo conditioning"
+          - "0.40, because P(A and B) equals P(A given B) whenever B is likely"
+        answer: "0.20, because the joint probability is P(B) times P(A given B) here"
+        explanation: >-
+          Rearranging the definition of conditional probability gives joint equals conditional
+          times the conditioning probability, so 0.4 times 0.5. Adding probabilities answers an
+          or question, not an and question. Dividing inverts the relationship in the wrong
+          direction, and equating the joint with the conditional drops the factor that made the
+          conditional the larger number in the first place.
+        difficulty: intermediate
+
+  - topic: math-bayes-theorem
+    # Source: Online StatBook - Bayes theorem
+    questions:
+      - id: mjit-bayes-base-rate
+        prompt: "A disease affects 1 percent of people. A test flags 99 percent of sick people and 5 percent of healthy people. Roughly what is P(disease | positive)?"
+        options:
+          - "About 17 percent, because the much larger healthy group supplies most flags"
+          - "About 99 percent, because that is how often the test flags a sick person"
+          - "About 95 percent, because only 5 percent of healthy people are flagged"
+          - "About 1 percent, because the prevalence of the disease fixes the answer"
+        answer: "About 17 percent, because the much larger healthy group supplies most flags"
+        explanation: >-
+          In 10000 people, 99 sick people test positive while 495 healthy people also do, so
+          about 99 of 594 positives are genuine. Quoting 99 percent reports the sensitivity,
+          which is the reversed conditional. Quoting 95 percent reports specificity, again the
+          wrong direction. Staying at 1 percent ignores the evidence, whereas Bayes updates the
+          prior rather than keeping it.
+        difficulty: advanced
+        mastery: true
+      - id: mjit-bayes-flip-conditioning
+        prompt: "Why can you not read P(positive | disease) as though it were P(disease | positive)?"
+        options:
+          - "They differ by the ratio of the prior for disease to the rate of positives"
+          - "They are equal whenever a test is accurate, so the swap is usually safe"
+          - "The swap fails only when the two events turn out to be truly independent"
+          - "They differ by the sum of the two priors, which Bayes rule adds back in"
+        answer: "They differ by the ratio of the prior for disease to the rate of positives"
+        explanation: >-
+          Bayes rule multiplies the reversed conditional by the prior over the evidence, so the
+          two agree only when that ratio is one. Accuracy does not remove the ratio, which is
+          why an accurate test for a rare condition still yields mostly false positives.
+          Independence would instead make a conditional equal its unconditional value, and the
+          correction is a multiplicative ratio rather than any sum of priors.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-bayes-identify-prior
+        prompt: "In the form P(H | E) = P(E | H) * P(H) / P(E), which factor is the prior belief about H?"
+        options:
+          - "P(H), the probability assigned to H before the evidence E is observed"
+          - "P(E | H), the chance of seeing this evidence when H happens to be true"
+          - "P(H | E), the belief in H that you hold once the evidence is accounted for"
+          - "P(E), the overall chance of the evidence across every hypothesis at hand"
+        answer: "P(H), the probability assigned to H before the evidence E is observed"
+        explanation: >-
+          The prior is the unconditional belief you start with, and it is the factor the
+          likelihood reweights. P(E | H) is the likelihood, a probability of data rather than of
+          the hypothesis. P(H | E) is the posterior, the output rather than the input, and P(E)
+          is the evidence or normalising constant that makes the posterior sum to one.
+        difficulty: beginner
+      - id: mjit-bayes-naive-assumption
+        prompt: "What does the word naive in a Naive Bayes classifier assume about the features?"
+        options:
+          - "That the features are conditionally independent of each other given the class"
+          - "That the features are independent of the class label they help to predict"
+          - "That every feature carries exactly equal weight in the final class decision"
+          - "That the features follow a normal distribution with one shared mean value"
+        answer: "That the features are conditionally independent of each other given the class"
+        explanation: >-
+          The simplification is that within a class the features contribute independently, which
+          lets the likelihood become a product of per-feature terms. Independence from the label
+          would make the features useless for prediction, so that reading destroys the model.
+          Equal weighting is false because learned likelihoods differ per feature, and the
+          normal assumption belongs to the Gaussian variant, not to the naive part.
+        difficulty: intermediate
+      - id: mjit-bayes-drop-denominator
+        prompt: "When a Bayes classifier only needs the most likely class, why can the denominator P(E) be dropped?"
+        options:
+          - "It is the same for every class, so it cannot change which class ranks first"
+          - "It is always equal to one, so dividing by it would never alter any number"
+          - "It is unknown in practice, so the resulting ranking is only approximate"
+          - "It cancels against the prior P(H), leaving just the likelihood to compare"
+        answer: "It is the same for every class, so it cannot change which class ranks first"
+        explanation: >-
+          The evidence term does not depend on the hypothesis, so it scales all class scores
+          equally and leaves the argmax untouched, though you must restore it to report a
+          calibrated probability. It is generally not one, being a weighted sum over classes.
+          Dropping it costs no accuracy in ranking, and it never cancels the prior, which stays
+          in the comparison and is what makes rare classes hard to predict.
+        difficulty: advanced
+
+  - topic: math-expectation-variance
+    # Source: OpenStax Introductory Statistics 2e - 4.2 Mean or expected value and standard deviation
+    questions:
+      - id: mjit-ev-expected-value-table
+        prompt: "A payout is 10 with probability 0.2, 0 with probability 0.5, and -4 with probability 0.3. What is its expected value?"
+        options:
+          - "0.8, from 10 times 0.2 plus 0 times 0.5 plus -4 times 0.3 summed"
+          - "2.0, the plain average of the three payouts with the weights ignored"
+          - "6.0, the sum of the three payout amounts before probabilities apply"
+          - "0.2, the probability attached to the single largest payout on the list"
+        answer: "0.8, from 10 times 0.2 plus 0 times 0.5 plus -4 times 0.3 summed"
+        explanation: >-
+          Expectation weights each outcome by its probability, giving 2 plus 0 minus 1.2. The
+          plain average treats the three outcomes as equally likely, which discards the
+          distribution. Summing raw payouts skips the weighting completely, and quoting 0.2
+          confuses a probability with a value of the variable, the same slip as reading a
+          softmax score as a predicted quantity.
+        difficulty: beginner
+      - id: mjit-ev-not-attainable
+        prompt: "A fair die roll has expected value 3.5, a number the die can never show. What does that reveal about expectation?"
+        options:
+          - "It is a weighted long-run average, not a value any single trial must take"
+          - "It is the most likely single outcome, rounded off to the nearest face"
+          - "It is an arithmetic mistake, since an expectation must be attainable"
+          - "It is only the midpoint of the range, and it ignores the probabilities"
+        answer: "It is a weighted long-run average, not a value any single trial must take"
+        explanation: >-
+          Expectation is where the probability mass balances, so it need not be an attainable
+          outcome, which is why an average loss of 0.7 is meaningful even when each error is 0
+          or 1. It is not the mode, since every face here is equally likely. It is not an error,
+          and although it coincides with the midpoint for a uniform die, that coincidence breaks
+          as soon as the probabilities are unequal.
+        difficulty: beginner
+        mastery: true
+      - id: mjit-ev-variance-units
+        prompt: "Your prediction errors are measured in dollars. What units do the variance and the standard deviation carry?"
+        options:
+          - "Variance in squared dollars, and standard deviation back in plain dollars"
+          - "Both in plain dollars, since both describe the spread of the same errors"
+          - "Both in squared dollars, because the standard deviation squares them too"
+          - "Variance in plain dollars, and standard deviation in squared dollars"
+        answer: "Variance in squared dollars, and standard deviation back in plain dollars"
+        explanation: >-
+          Variance averages squared deviations, so its units are squared, and the square root
+          returns to the original units, which is why a root mean squared error rather than a
+          mean squared error is quoted to stakeholders. Saying both are plain dollars forgets
+          the squaring in the definition, saying both are squared forgets that the root undoes
+          it, and the final option has the two the wrong way round.
+        difficulty: intermediate
+      - id: mjit-ev-minibatch-estimate
+        prompt: "A minibatch loss is an estimate of the expected loss over the data. What happens to that estimate as the batch size grows?"
+        options:
+          - "Its variance shrinks roughly with 1/n, so the gradient signal grows steadier"
+          - "Its variance grows with n, because more examples add more disagreement"
+          - "Its expected value shrinks with n, so larger batches report smaller losses"
+          - "Its variance stays fixed, since every example contributes the same amount"
+        answer: "Its variance shrinks roughly with 1/n, so the gradient signal grows steadier"
+        explanation: >-
+          Averaging independent samples divides the variance by the count, which is why large
+          batches give smooth loss curves and tiny batches look noisy. Variance falls rather
+          than rises with more data. The expected value is unchanged because the estimator is
+          unbiased, so bigger batches do not report systematically lower loss, and a fixed
+          variance would mean averaging bought you nothing.
+        difficulty: advanced
+        mastery: true
+      - id: mjit-ev-two-point-spread
+        prompt: "A variable takes the value 0 or 10, each with probability 0.5. What are its mean and standard deviation?"
+        options:
+          - "Mean 5 and standard deviation 5, as each value sits 5 away from the mean"
+          - "Mean 5 and standard deviation 25, which is the squared distance measure"
+          - "Mean 5 and standard deviation 0, because the two values are equally likely"
+          - "Mean 10 and standard deviation 5, taking the larger value as the centre"
+        answer: "Mean 5 and standard deviation 5, as each value sits 5 away from the mean"
+        explanation: >-
+          The mean is 5 and every outcome deviates by exactly 5, so the variance is 25 and the
+          standard deviation is its root, 5. Quoting 25 reports the variance under the wrong
+          name. A standard deviation of 0 would mean the variable never varies, which equal
+          probabilities do not imply, and taking 10 as the centre ignores the outcome 0 in the
+          weighted sum.
+        difficulty: intermediate
+
+  - topic: math-dot-product-norms
+    # Source: D2L.ai - Geometry and linear algebraic operations
+    questions:
+      - id: mjit-dot-orthogonal-embeddings
+        prompt: "Two unit-length embedding vectors have a dot product of 0.0. What does that tell you about them?"
+        options:
+          - "They are orthogonal, sharing no component along one another at all"
+          - "They are identical, since a dot product of zero means no gap remains"
+          - "They point in opposite directions, which is what a zero product shows"
+          - "They must both be zero vectors, as only that gives a zero dot product"
+        answer: "They are orthogonal, sharing no component along one another at all"
+        explanation: >-
+          For unit vectors the dot product is the cosine of the angle between them, and cosine is
+          zero at 90 degrees, so the two embeddings carry unrelated directions. Identical unit
+          vectors give 1, not 0, and opposite directions give -1. Unit vectors have length one by
+          assumption, so neither of them can be the zero vector.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-dot-compute-value
+        prompt: "Compute the dot product of the vectors [1, 2, 3] and [4, 0, -1]."
+        options:
+          - "1, from 1 times 4 plus 2 times 0 plus 3 times -1 all added up"
+          - "7, from adding those products after taking the size of each one"
+          - "[4, 0, -3], the elementwise product kept as a vector of three parts"
+          - "18, the sum of the first vector times the sum of the second vector"
+        answer: "1, from 1 times 4 plus 2 times 0 plus 3 times -1 all added up"
+        explanation: >-
+          A dot product multiplies matching entries and sums them, giving 4 plus 0 minus 3.
+          Taking absolute values first would destroy the cancellation that lets a dot product
+          signal disagreement. The third option stops before summing and returns a vector, which
+          is elementwise multiplication, and the last confuses summing entries with pairing them.
+        difficulty: beginner
+      - id: mjit-dot-l2-norm
+        prompt: "What is the L2 norm of the vector [3, 4], and what does that number mean?"
+        options:
+          - "5, the straight-line length of the vector from the origin to its tip"
+          - "7, the sum of the entries, showing how far the vector reaches out"
+          - "25, the sum of the squared entries left without a square root taken"
+          - "12, the product of the entries, giving the area the vector spans"
+        answer: "5, the straight-line length of the vector from the origin to its tip"
+        explanation: >-
+          The L2 norm is the square root of the sum of squares, so the root of 9 plus 16 is 5,
+          the Euclidean length used when normalising an embedding. Summing entries is the L1
+          norm, a different measure. Stopping at 25 gives the squared norm, which appears in
+          weight decay but is not a length, and multiplying entries is not a norm at all.
+        difficulty: beginner
+      - id: mjit-dot-cosine-versus-raw
+        prompt: "Why do retrieval systems compare document embeddings with cosine similarity rather than the raw dot product?"
+        options:
+          - "Cosine divides out both lengths, so a long document cannot score high alone"
+          - "Cosine is cheaper to compute, since it skips the elementwise multiplying"
+          - "Cosine can exceed one for close documents, giving a wider scoring range"
+          - "Cosine ignores direction and keeps magnitude, which is what relevance needs"
+        answer: "Cosine divides out both lengths, so a long document cannot score high alone"
+        explanation: >-
+          Dividing by both norms leaves only the angle, so similarity reflects direction rather
+          than magnitude, which otherwise grows with document length. Cosine is slightly more
+          expensive than a bare dot product because it adds two norms and a division. It is
+          bounded between -1 and 1, so it cannot exceed one, and the last option reverses the
+          roles: cosine keeps direction and discards magnitude.
+        difficulty: intermediate
+      - id: mjit-dot-negative-cosine
+        prompt: "Two normalised vectors give a dot product of -1. Where do they sit relative to each other?"
+        options:
+          - "Exactly opposite, at 180 degrees, so one is the negative of the other"
+          - "Exactly perpendicular, at 90 degrees, which is the least similar case"
+          - "Exactly aligned, at 0 degrees, with the minus sign carrying no meaning"
+          - "Impossibly placed, since a dot product can never drop below the value 0"
+        answer: "Exactly opposite, at 180 degrees, so one is the negative of the other"
+        explanation: >-
+          Cosine reaches its minimum of -1 at 180 degrees, the antipodal case a contrastive loss
+          pushes negative pairs towards. Perpendicular gives 0, and 0 is the neutral point rather
+          than the least similar one. Aligned gives plus 1, so the sign does carry meaning, and
+          dot products of real vectors are freely negative, so the last option is simply false.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: math-chain-rule
+    # Source: OpenStax Calculus Volume 3 - 4.5 The Chain Rule
+    questions:
+      - id: mjit-chain-outer-inner
+        prompt: "Differentiate h(x) = (3x + 1)^2 with respect to x using the chain rule."
+        options:
+          - "6(3x + 1), the outer power rule multiplied by the inner derivative 3"
+          - "2(3x + 1), the outer power rule with the inner derivative forgotten"
+          - "6x + 1, differentiating the inside and leaving the square untouched"
+          - "9(3x + 1), squaring the inner derivative before multiplying through"
+        answer: "6(3x + 1), the outer power rule multiplied by the inner derivative 3"
+        explanation: >-
+          The chain rule gives 2(3x + 1) times 3, so 6(3x + 1). Stopping at 2(3x + 1) is the
+          classic dropped inner factor, which in a network means a scale factor missing from
+          every gradient below that layer. Differentiating only the inside abandons the outer
+          function, and squaring the inner derivative confuses the outer exponent with the
+          factor the inner function contributes.
+        difficulty: beginner
+        mastery: true
+      - id: mjit-chain-multivariable-paths
+        prompt: "For z = f(x, y) where x and y both depend on t, how is dz/dt assembled?"
+        options:
+          - "Add the path terms: df/dx times dx/dt plus df/dy times dy/dt together"
+          - "Multiply the path terms: df/dx times dx/dt times df/dy times dy/dt"
+          - "Take only df/dx times dx/dt, since t reaches z through x directly"
+          - "Divide the path terms, because dy/dt offsets part of the dx/dt effect"
+        answer: "Add the path terms: df/dx times dx/dt plus df/dy times dy/dt together"
+        explanation: >-
+          The multivariable chain rule multiplies along each path from t to z and then sums the
+          paths, which is why a tensor used twice in a forward pass accumulates two gradient
+          contributions. Multiplying the paths mixes up along-path with across-path composition.
+          Keeping one path silently drops the influence flowing through y, and division has no
+          role in the rule at all.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-chain-vanishing-product
+        prompt: "Backpropagation multiplies many local derivatives together. What goes wrong when each factor is around 0.2?"
+        options:
+          - "The product shrinks fast with depth, so early layers get almost no gradient"
+          - "The product grows fast with depth, so early layers get an exploding update"
+          - "The product stays near 0.2, because multiplying small numbers is stable"
+          - "The product flips sign each layer, so the early weights oscillate in place"
+        answer: "The product shrinks fast with depth, so early layers get almost no gradient"
+        explanation: >-
+          Twenty factors of 0.2 give roughly one part in a hundred trillion, so the chain rule
+          leaves the earliest layers effectively frozen, which is the vanishing gradient problem.
+          Growth needs factors above one instead. The product cannot stay near 0.2, since each
+          extra layer multiplies it down again, and sign flipping would require negative factors,
+          which is a separate issue from magnitude decay.
+        difficulty: advanced
+      - id: mjit-chain-numeric-composition
+        prompt: "With L = (a - y)^2, a = 0.5, y = 1, and da/dz = 0.25, what is dL/dz?"
+        options:
+          - "-0.25, from 2 times (0.5 - 1) times 0.25 multiplied out in order"
+          - "-1.00, from 2 times (0.5 - 1) with the factor da/dz left out entirely"
+          - "-0.50, from (0.5 - 1) times 0.25 with the outer power rule skipped"
+          - "0.25, taking the size of the result and dropping the minus sign"
+        answer: "-0.25, from 2 times (0.5 - 1) times 0.25 multiplied out in order"
+        explanation: >-
+          dL/da is 2(a - y), which is -1, and multiplying by da/dz gives -0.25. Stopping at -1
+          omits the activation derivative, so the step would be four times too large. The third
+          option forgets the factor of 2 from the square, and dropping the sign loses the
+          direction of the update, which is the part that tells the optimiser which way to move.
+        difficulty: advanced
+      - id: mjit-chain-cache-activations
+        prompt: "Why must a framework keep the forward-pass activations in memory until the backward pass runs?"
+        options:
+          - "The chain rule evaluates each local derivative at the value that layer saw"
+          - "The backward pass recomputes the loss, so it needs the stored outputs again"
+          - "Activations are themselves the parameters being updated by the optimiser"
+          - "The optimiser averages the activations to choose the learning rate to use"
+        answer: "The chain rule evaluates each local derivative at the value that layer saw"
+        explanation: >-
+          Each factor in the chain rule is the outer derivative evaluated at the actual
+          intermediate value, so those values must survive until they are used, which is why
+          activation memory grows with depth and batch size. The backward pass does not
+          recompute the loss. Activations are data rather than trainable parameters, and
+          standard optimisers use gradients, not activation averages, to set step size.
+        difficulty: advanced
+
+  - topic: math-covariance-correlation
+    # Source: D2L.ai - Probability and statistics
+    questions:
+      - id: mjit-cov-scale-change
+        prompt: "You change a height feature from metres to centimetres. What happens to its covariance with weight, and to its correlation?"
+        options:
+          - "Covariance is multiplied by 100 while the correlation stays exactly the same"
+          - "Both are multiplied by 100, since each measures the same joint spread here"
+          - "Covariance stays the same while the correlation is multiplied by 100 instead"
+          - "Neither changes, since both are already divided by the standard deviations"
+        answer: "Covariance is multiplied by 100 while the correlation stays exactly the same"
+        explanation: >-
+          Covariance carries the units of both variables, so rescaling one by 100 scales it by
+          100, whereas correlation divides by both standard deviations and is therefore unitless
+          and unchanged. That is why correlation is comparable across features and raw covariance
+          is not. Correlation cannot be scaled by a unit change, and only correlation, not
+          covariance, is normalised by the spreads.
+        difficulty: intermediate
+        mastery: true
+      - id: mjit-cov-zero-not-independent
+        prompt: "A feature y equals x^2 where x is spread symmetrically around zero, and their correlation is about 0. Are they independent?"
+        options:
+          - "No, correlation only detects linear association and misses this curved link"
+          - "Yes, a correlation of zero is precisely the definition of independent features"
+          - "Yes, because independence follows whenever the covariance comes out at zero"
+          - "No, but only because the sample is finite; the true correlation is not zero"
+        answer: "No, correlation only detects linear association and misses this curved link"
+        explanation: >-
+          y is fully determined by x, so they are as dependent as possible, yet the linear
+          measure reports nothing because the rising and falling halves cancel. Zero correlation
+          is a much weaker statement than independence, so both yes options invert the
+          implication. The last option blames sampling noise, but the population correlation
+          here really is zero, which is the whole point of the example.
+        difficulty: advanced
+        mastery: true
+      - id: mjit-cov-sign-reading
+        prompt: "Two features rise and fall together across almost every row of your data. What sign does their covariance take?"
+        options:
+          - "Positive, because their deviations from their means share the same sign"
+          - "Negative, because paired movement subtracts one deviation from the other"
+          - "Zero, because moving together leaves no discrepancy left to be measured"
+          - "Undefined, because covariance requires the two features to move apart"
+        answer: "Positive, because their deviations from their means share the same sign"
+        explanation: >-
+          Covariance averages the product of the two deviations, and like signs multiply to a
+          positive, so co-movement gives a positive value. Negative would mean one sits above
+          its mean while the other sits below. Zero would need the products to cancel on
+          average, which co-movement prevents, and covariance is defined for any pair with
+          finite variance, so it is never undefined here.
+        difficulty: beginner
+      - id: mjit-cov-correlation-bounds
+        prompt: "A colleague reports a correlation coefficient of 1.4 between two input columns. What should you conclude?"
+        options:
+          - "The number is impossible, since correlation is bounded between -1 and 1"
+          - "The features are strongly linked, as anything above 1 signals tight coupling"
+          - "The number is really a covariance, and covariances are bounded by -1 and 1"
+          - "The number is valid but rare, arising when both columns have a large spread"
+        answer: "The number is impossible, since correlation is bounded between -1 and 1"
+        explanation: >-
+          Dividing covariance by both standard deviations forces the result into the range -1 to
+          1, so 1.4 means a bug or an unnormalised covariance was printed. Treating it as
+          extra-strong coupling accepts an out-of-range value as meaningful. Covariance is the
+          unbounded quantity, so the third option attaches the bounds to the wrong measure, and
+          a wide spread cannot push correlation past its ceiling.
+        difficulty: intermediate
+      - id: mjit-cov-multicollinearity
+        prompt: "Two input features have a correlation of 0.97. What is the practical consequence for a linear model?"
+        options:
+          - "Their individual coefficients turn unstable, since each explains the other"
+          - "Their individual coefficients turn more precise, since the signal is doubled"
+          - "One feature must be causing the other, so the weaker one becomes the target"
+          - "The model cannot be fitted at all, because correlated inputs are disallowed"
+        answer: "Their individual coefficients turn unstable, since each explains the other"
+        explanation: >-
+          Near-duplicate columns let the fit trade weight between them, so the coefficients swing
+          wildly between refits even while the predictions stay fine. Precision gets worse rather
+          than better, because the standard errors inflate. Correlation establishes neither
+          causation nor a choice of target, and the model still fits; only the interpretation of
+          individual weights becomes unreliable.
+        difficulty: advanced

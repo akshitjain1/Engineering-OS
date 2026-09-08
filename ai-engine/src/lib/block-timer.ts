@@ -2,10 +2,23 @@
  * Stopwatch arithmetic and persistence for a day block.
  *
  * Kept apart from the component so the rules are stated once and can be
- * exercised without a browser. The invariant: time only ever accrues while
- * the stopwatch is running in a live tab. Wall-clock time you spent away from
- * the desk is never counted, which is what the previous started_at-based
- * version got wrong.
+ * exercised without a browser.
+ *
+ * The invariant: **a running stopwatch stops only when you stop it.** Leaving
+ * the page, opening the recall queue, following the resource link, refreshing,
+ * reopening the tab later -- none of those pause it.
+ *
+ * This is a deliberate reversal. The previous rule was "time only accrues in a
+ * live tab", implemented by discarding any open window older than 15 seconds
+ * on the grounds that the tab must have died. In practice the tab had not
+ * died: leaving the Recall block to look at the recall queue is *doing the
+ * block*, and coming back to a stopwatch that had silently thrown the time
+ * away made the clock useless for the one thing it is for.
+ *
+ * The cost of the reversal is that a stopwatch left running overnight keeps
+ * counting. That is not hidden -- `looksLeftRunning` marks an implausibly long
+ * open window so the UI can say so and offer Reset. Telling you is honest;
+ * silently discarding your afternoon was not.
  * ---------------------------------------------------------------------- */
 
 export type TimerRecord = {
@@ -17,21 +30,35 @@ export type TimerRecord = {
 
 export const EMPTY_RECORD: TimerRecord = { accumulated: 0, runningSince: null };
 
-/** While running, the open window is folded into the total this often, so a
- *  crash or a closed laptop costs at most this much. */
+/** While running, the open window is folded into the total this often. No
+ *  longer load-bearing for correctness -- an open window is trusted however
+ *  old it is -- but it keeps the stored total close to the truth. */
 export const HEARTBEAT_MS = 5_000;
 
-/** An open window older than this was never closed by a heartbeat, meaning the
- *  tab died rather than kept ticking. The gap is dropped, not counted. Must
- *  stay comfortably above HEARTBEAT_MS so an ordinary refresh still resumes. */
-export const STALE_MS = 15_000;
+/** A single uninterrupted window longer than this is much more likely a timer
+ *  left on overnight than four hours of unbroken study. It is still counted;
+ *  the UI flags it so the choice to keep or reset it stays yours. */
+export const LONG_RUN_WARN_S = 4 * 60 * 60;
 
 export const TIMER_PREFIX = "eos-block-timer-";
 export const timerKey = (itemId: number) => `${TIMER_PREFIX}${itemId}`;
 
+/** Seconds in the window that is open right now, 0 when paused. */
+export function openWindowOf(rec: TimerRecord, now: number = Date.now()): number {
+  return rec.runningSince === null ? 0 : Math.max(0, (now - rec.runningSince) / 1000);
+}
+
 export function elapsedOf(rec: TimerRecord, now: number = Date.now()): number {
-  const open = rec.runningSince === null ? 0 : Math.max(0, (now - rec.runningSince) / 1000);
-  return rec.accumulated + open;
+  return rec.accumulated + openWindowOf(rec, now);
+}
+
+/** True when the open window is long enough to be a forgotten timer.
+ *
+ *  Nothing is changed on the strength of this. It exists so the page can say
+ *  "this has been running for nine hours" instead of either silently logging
+ *  nine hours or silently deleting them. */
+export function looksLeftRunning(rec: TimerRecord, now: number = Date.now()): boolean {
+  return openWindowOf(rec, now) >= LONG_RUN_WARN_S;
 }
 
 export const isRunning = (rec: TimerRecord) => rec.runningSince !== null;
@@ -67,10 +94,16 @@ export function parseRecord(raw: string | null, now: number = Date.now()): Timer
         ? Math.max(0, parsed.accumulated)
         : 0;
     const since = typeof parsed.runningSince === "number" ? parsed.runningSince : null;
-    // Trust an open window only if a heartbeat wrote it recently. Anything
-    // older means the tab was gone, so the gap is not work.
-    const live = since !== null && now - since < STALE_MS && since <= now;
-    return { accumulated, runningSince: live ? since : null };
+    // An open window is trusted however old it is. A running stopwatch stops
+    // only when you stop it, so being away from the page is not a reason to
+    // discard the time -- that discarding is exactly what made the clock
+    // reset every time the recall queue was opened.
+    //
+    // The one thing still rejected is a start time in the future, which can
+    // only come from a clock change or a corrupted record and would otherwise
+    // read as negative elapsed time.
+    const usable = since !== null && since <= now;
+    return { accumulated, runningSince: usable ? since : null };
   } catch {
     return EMPTY_RECORD;
   }

@@ -185,6 +185,7 @@ track:
                 and first programs.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-first-program-reference
               title: Getting Started with Java
               type: documentation
@@ -297,6 +298,7 @@ track:
               description: Modern java launcher, including running .java source files.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-compile-and-run-reference
               title: java launcher — Core JDK tools
               type: documentation
@@ -435,6 +437,7 @@ track:
                 declaration and first typed values.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-primitives-reference
               title: Creating primitive type variables
               type: documentation
@@ -677,6 +680,7 @@ track:
                 console input exercises.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-console-io-practice
               title: Helsinki Part 1 — Calculating with numbers
               type: interactive_tutorial
@@ -789,6 +793,7 @@ track:
               description: Authoritative operator tutorial.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-operators-reference
               title: Helsinki Part 1 — Calculating with numbers
               type: interactive_tutorial
@@ -1024,6 +1029,7 @@ track:
               description: Classic switch. Note break and fall-through.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-switch-reference
               title: Branching with switch expressions
               type: documentation
@@ -1140,6 +1146,7 @@ track:
                 exercises.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-loops-reference
               title: Control flow statements
               type: documentation
@@ -1620,6 +1627,7 @@ track:
               description: Variable naming and declaration; combine with block scope in this lesson.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-scope-reference
               title: Helsinki Part 2 — Methods
               type: interactive_tutorial
@@ -1739,6 +1747,7 @@ track:
                 use this language foundation. This topic is Java arrays, not the DSA module.'
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-arrays-reference
               title: Creating arrays
               type: documentation
@@ -2035,6 +2044,7 @@ track:
                 section mapped.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-stringbuilder-practice
               title: Helsinki Part 3 — Using strings
               type: interactive_tutorial
@@ -2147,6 +2157,7 @@ track:
                 classes and objects.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-classes-objects-reference
               title: Creating classes
               type: documentation
@@ -2279,6 +2290,7 @@ track:
                 for objects is the reference.'
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-references-reference
               title: Helsinki Part 5 — Primitive and reference variables
               type: interactive_tutorial
@@ -2382,15 +2394,19 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: java-references-q8
-              prompt: 'Stack vs heap at programmer level:'
+              prompt: In Java, what does a reference variable held in a method frame actually point at?
               options:
-              - References in method frames point at objects (typically on the heap).
-              - All objects live in CPU registers only.
-              - null is stored in the instruction cache.
-              - Java has no stack.
-              answer: References in method frames point at objects (typically on the heap).
-              explanation: Enough for DSA; JVM internals come later.
-              difficulty: medium
+              - An object on the heap, while the reference itself sits in the frame on the call stack
+              - A copy of the object stored inside the frame, so each method gets its own instance
+              - A CPU register holding the object, which is why passing references is inexpensive
+              - A slot in the constant pool, which is where the runtime keeps every live object
+              answer: An object on the heap, while the reference itself sits in the frame on the call
+                stack
+              explanation: The variable is a handle on the stack; the object it names lives on the heap,
+                which is why two references can see one another's mutations. Java never copies the object
+                on assignment or on a call. Registers may cache a reference transiently, and the constant
+                pool holds class literals rather than live objects.
+              difficulty: intermediate
               mastery_requirement: false
             exercises:
             - slug: java-references-ex1
@@ -2436,6 +2452,7 @@ track:
               description: Authoritative constructors tutorial.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-constructors-practice
               title: Helsinki Part 5 — Method and constructor overloading
               type: interactive_tutorial
@@ -2542,6 +2559,7 @@ track:
                 and object APIs.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-encapsulation-reference
               title: More on classes (this, access control)
               type: documentation
@@ -2780,6 +2798,7 @@ track:
                 exercises.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-polymorphism-reference
               title: Polymorphism
               type: documentation
@@ -2904,6 +2923,7 @@ track:
                 in Part 9.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-abstract-classes-practice
               title: Helsinki Part 9 — Inheritance
               type: interactive_tutorial
@@ -3015,6 +3035,7 @@ track:
                 exercises.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-interfaces-reference
               title: Defining interfaces
               type: documentation
@@ -3150,6 +3171,7 @@ track:
                 exercises.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-composition-reference
               title: Class design best practices
               type: documentation
@@ -3381,6 +3403,7 @@ track:
               description: Exception hierarchy and the idea of exceptional events.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-checked-unchecked-reference
               title: Throwing exceptions
               type: documentation
@@ -3775,6 +3798,7 @@ track:
                 verified Part 8 map; do not claim one.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-set-reference
               title: Collections Framework intro
               type: documentation
@@ -4049,6 +4073,7 @@ track:
               description: Authoritative iteration tutorial.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-iteration-practice
               title: Helsinki Part 3 — Lists
               type: interactive_tutorial
@@ -4157,6 +4182,7 @@ track:
                 for heaps.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-priority-queue-reference
               title: PriorityQueue API (Java 21)
               type: documentation
@@ -4415,6 +4441,7 @@ track:
                 wildcard theory.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-generic-bounds-practice
               title: Helsinki Part 12 — Type parameters
               type: interactive_tutorial
@@ -4526,6 +4553,7 @@ track:
                 C++ analogue: priority_queue.'
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-comparable-comparator-reference
               title: Writing comparators (lambdas)
               type: documentation
@@ -4658,6 +4686,7 @@ track:
               description: Authoritative functional interfaces. Not a DSA gate.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-functional-interfaces-practice
               title: Helsinki Part 10 — Collections as streams
               type: interactive_tutorial
@@ -4757,6 +4786,7 @@ track:
               description: Authoritative lambda intro. Not a DSA gate.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-lambdas-reference
               title: Method references
               type: documentation
@@ -4999,6 +5029,7 @@ track:
               description: Official map/filter/reduce. Not a DSA gate.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-stream-operations-reference
               title: Terminal operations
               type: documentation
@@ -5134,6 +5165,7 @@ track:
               description: Path and file-system operations. Modern reference.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-paths-files-reference
               title: The Java I/O API
               type: documentation
@@ -5245,6 +5277,7 @@ track:
               description: Official reading/writing tutorial. I/O streams ≠ Stream API.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-readers-writers-practice
               title: Helsinki Part 4 — Files and reading data
               type: interactive_tutorial
@@ -5368,7 +5401,7 @@ track:
             - slug: java-junit-basics-reference
               title: JUnit 5 User Guide
               type: documentation
-              url: https://junit.org/junit5/docs/current/user-guide/
+              url: https://docs.junit.org/current/user-guide/
               provider: JUnit
               role: REFERENCE
               description: Official JUnit 5 guide. Dev.java has no JUnit chapter; this is the canonical
@@ -5456,7 +5489,7 @@ track:
             - slug: java-assertions-primary
               title: JUnit 5 User Guide
               type: documentation
-              url: https://junit.org/junit5/docs/current/user-guide/
+              url: https://docs.junit.org/current/user-guide/
               provider: JUnit
               role: PRIMARY
               description: Assertions live in the official JUnit 5 user guide. Use the writing-tests /
@@ -5791,6 +5824,7 @@ track:
               description: Official javap page for inspecting class files.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-bytecode-reference
               title: javac
               type: documentation
@@ -6068,6 +6102,7 @@ track:
                 exercises. Not a DSA gate.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-packages-reference
               title: Packages
               type: documentation
@@ -6170,6 +6205,7 @@ track:
                 Gradle awareness is conceptual if you do not open a Gradle page here. No Spring Boot.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: java-api-hygiene-reference
               title: Class design best practices
               type: documentation

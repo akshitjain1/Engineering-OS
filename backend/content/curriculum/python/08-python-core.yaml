@@ -46,47 +46,36 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Create venv, install one package, run a script. HOW
-              MANY: 1. WHERE: local IDE.
+              PRACTICE: WHAT: Create venv, install one package, run a script. HOW MANY: 1. WHERE: local
+              IDE.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
             - slug: py-syntax-primary
-              title: 'Python Docs: Python syntax & tooling'
+              title: Virtual Environments and Packages
               type: documentation
-              url: https://docs.python.org/3/tutorial/index.html
-              provider: Python Docs
+              url: https://docs.python.org/3/tutorial/venv.html
+              provider: Python Software Foundation
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Python syntax & tooling. Content
-                inspection pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: py-syntax-q1
-              prompt: Core idea of Python syntax & tooling?
-              options:
-              - A vague buzzword
-              - Write and run Python scripts with venv and pip.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Write and run Python scripts with venv and pip.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Python syntax & tooling. Content inspection pending
+                upgrade to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: py-syntax-practice
               title: 'Practice: Python syntax & tooling'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Create venv, install one package, run a script.
-                HOW MANY: 1. WHERE: local IDE.'
+              instructions: 'WHAT: Create venv, install one package, run a script. HOW MANY: 1. WHERE:
+                local IDE.'
               difficulty: beginner
               order: 0
         - slug: py-data-structures
@@ -115,15 +104,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Solve 5 small structure drills. HOW MANY: 5. WHERE:
-              local IDE.
+              PRACTICE: WHAT: Solve 5 small structure drills. HOW MANY: 5. WHERE: local IDE.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -136,26 +123,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Python data structures. Content
-                inspection pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: py-data-structures-q1
-              prompt: Core idea of Python data structures?
-              options:
-              - A vague buzzword
-              - Use lists, dicts, sets, and comprehensions fluently.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Use lists, dicts, sets, and comprehensions fluently.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Python data structures. Content inspection pending
+                upgrade to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: py-data-structures-practice
               title: 'Practice: Python data structures'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Solve 5 small structure drills. HOW MANY: 5. WHERE:
-                local IDE.'
+              instructions: 'WHAT: Solve 5 small structure drills. HOW MANY: 5. WHERE: local IDE.'
               difficulty: beginner
               order: 0
         - slug: py-functions-modules
@@ -184,15 +160,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Split a script into 2 modules. HOW MANY: 1. WHERE: local
-              IDE.
+              PRACTICE: WHAT: Split a script into 2 modules. HOW MANY: 1. WHERE: local IDE.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -205,26 +179,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Functions & modules. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: py-functions-modules-q1
-              prompt: Core idea of Functions & modules?
-              options:
-              - A vague buzzword
-              - Organize code into functions and importable modules.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Organize code into functions and importable modules.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Functions & modules. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: py-functions-modules-practice
               title: 'Practice: Functions & modules'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Split a script into 2 modules. HOW MANY: 1. WHERE:
-                local IDE.'
+              instructions: 'WHAT: Split a script into 2 modules. HOW MANY: 1. WHERE: local IDE.'
               difficulty: beginner
               order: 0
         - slug: py-oop
@@ -253,15 +216,14 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Implement 2 classes with composition. HOW MANY: 1 mini
-              design. WHERE: local IDE.
+              PRACTICE: WHAT: Implement 2 classes with composition. HOW MANY: 1 mini design. WHERE: local
+              IDE.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -274,26 +236,16 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Python OOP. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: py-oop-q1
-              prompt: Core idea of Python OOP?
-              options:
-              - A vague buzzword
-              - Model problems with classes and composition.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Model problems with classes and composition.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Python OOP. Content inspection pending upgrade to
+                VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: py-oop-practice
               title: 'Practice: Python OOP'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Implement 2 classes with composition. HOW MANY:
-                1 mini design. WHERE: local IDE.'
+              instructions: 'WHAT: Implement 2 classes with composition. HOW MANY: 1 mini design. WHERE:
+                local IDE.'
               difficulty: beginner
               order: 0
         - slug: py-testing
@@ -331,8 +283,7 @@ track:
 
               BUILD: IMPLEMENT: small Python utility.
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -345,26 +296,14 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for pytest for Python. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: py-testing-q1
-              prompt: Core idea of pytest for Python?
-              options:
-              - A vague buzzword
-              - Write and run pytest unit tests.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Write and run pytest unit tests.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for pytest for Python. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+            questions: []
             exercises:
             - slug: py-testing-practice
               title: 'Practice: pytest for Python'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write 5 pytest tests. HOW MANY: 5. WHERE: local
-                IDE.'
+              instructions: 'WHAT: Write 5 pytest tests. HOW MANY: 5. WHERE: local IDE.'
               difficulty: beginner
               order: 0
             - slug: py-testing-build

@@ -1,0 +1,14 @@
+{
+  "added": [
+    "https://openstax.org/books/introductory-statistics-2e/pages/2-7-measures-of-the-spread-of-the-data"
+  ],
+  "planned": [
+    "https://openstax.org/books/introductory-statistics-2e/pages/2-7-measures-of-the-spread-of-the-data"
+  ],
+  "rejected": [],
+  "skipped": [
+    "cf-dependency-management: already has https://docs.astral.sh/uv/concepts/projects/sync/",
+    "cf-dev-package-manager: already has https://docs.astral.sh/uv/pip/",
+    "py-syntax: already has https://docs.astral.sh/uv/guides/projects/"
+  ]
+}

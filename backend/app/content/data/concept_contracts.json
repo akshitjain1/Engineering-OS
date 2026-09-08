@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "topic_count": 445,
+  "topic_count": 510,
   "preserved_domain0": 64,
   "generated": 256,
   "flagged_vague": [
@@ -14263,6 +14263,3266 @@
           ]
         }
       ]
+    },
+    "pytool-virtual-environments": {
+      "topic_slug": "pytool-virtual-environments",
+      "learning_objective": "Create and activate a per-project virtual environment and explain why global installs break projects.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-virtual-environments-create-venv-activate-install-package",
+          "description": "Create a venv, activate it, install one package, and show that package is absent from the global interpreter.",
+          "evidence_terms": [
+            "create",
+            "venv",
+            "activate",
+            "install",
+            "package",
+            "absent",
+            "global",
+            "interpreter."
+          ]
+        },
+        {
+          "slug": "pytool-virtual-environments-three-things-venv-actually-disk",
+          "description": "Name the three things a venv actually is on disk: a directory, a pyvenv.cfg, and a rewritten sys.prefix.",
+          "evidence_terms": [
+            "three",
+            "things",
+            "venv",
+            "actually",
+            "disk",
+            "directory",
+            "pyvenv.cfg",
+            "rewritten",
+            "sys.prefix."
+          ]
+        },
+        {
+          "slug": "pytool-virtual-environments-projects-pinned-different-versions-library",
+          "description": "Explain why two projects pinned to different versions of the same library cannot share one global site-packages.",
+          "evidence_terms": [
+            "projects",
+            "pinned",
+            "different",
+            "versions",
+            "library",
+            "cannot",
+            "share",
+            "global",
+            "site-packages."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "pytool-uv-projects": {
+      "topic_slug": "pytool-uv-projects",
+      "learning_objective": "Run a Python project end to end with uv, letting it manage the virtual environment and the lockfile.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-uv-projects-initialise-project-uv-init-script",
+          "description": "Initialise a project with uv init and run a script with uv run without activating a venv by hand.",
+          "evidence_terms": [
+            "initialise",
+            "project",
+            "init",
+            "script",
+            "without",
+            "activating",
+            "venv",
+            "hand."
+          ]
+        },
+        {
+          "slug": "pytool-uv-projects-files-uv-created-declaration-resolution",
+          "description": "Point at the files uv created and say which one is the declaration and which one is the resolution.",
+          "evidence_terms": [
+            "files",
+            "created",
+            "declaration",
+            "resolution."
+          ]
+        },
+        {
+          "slug": "pytool-uv-projects-distinguish-uv-s-project-workspace",
+          "description": "Distinguish uv's project from its workspace and from the environment it manages.",
+          "evidence_terms": [
+            "distinguish",
+            "project",
+            "workspace",
+            "environment",
+            "manages."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "pytool-pyproject-toml": {
+      "topic_slug": "pytool-pyproject-toml",
+      "learning_objective": "Read and write a pyproject.toml and know which fields are standard rather than tool-specific.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-pyproject-toml-pyproject-toml-declaring-version-dependencies",
+          "description": "Write a pyproject.toml declaring a name, version, dependencies and one console entry point that installs cleanly.",
+          "evidence_terms": [
+            "pyproject.toml",
+            "declaring",
+            "version",
+            "dependencies",
+            "console",
+            "entry",
+            "installs",
+            "cleanly."
+          ]
+        },
+        {
+          "slug": "pytool-pyproject-toml-any-field-meet-table-belongs",
+          "description": "For any field you meet, say which table it belongs to: [project], [build-system], or a [tool.*] table.",
+          "evidence_terms": [
+            "any",
+            "field",
+            "meet",
+            "table",
+            "belongs",
+            "project",
+            "build-system",
+            "tool.",
+            "table."
+          ]
+        },
+        {
+          "slug": "pytool-pyproject-toml-cite-pep-621-tie-breaker",
+          "description": "Cite PEP 621 as the tie-breaker when a tool's docs and a tutorial disagree about a [project] field.",
+          "evidence_terms": [
+            "cite",
+            "pep",
+            "tie-breaker",
+            "tool",
+            "docs",
+            "tutorial",
+            "disagree",
+            "about",
+            "project",
+            "field."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "pytool-dependency-pinning": {
+      "topic_slug": "pytool-dependency-pinning",
+      "learning_objective": "Declare dependencies with the narrowest constraint that is still honest, and separate dev from runtime.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-dependency-pinning-difference-1-4-1-4",
+          "description": "State the difference in what ~=1.4, >=1.4 and ==1.4.2 each permit at install time.",
+          "evidence_terms": [
+            "difference",
+            "each",
+            "permit",
+            "install",
+            "time."
+          ]
+        },
+        {
+          "slug": "pytool-dependency-pinning-move-test-only-package-out",
+          "description": "Move a test-only package out of runtime dependencies into a dev group and say who that helps.",
+          "evidence_terms": [
+            "move",
+            "test-only",
+            "package",
+            "out",
+            "runtime",
+            "dependencies",
+            "dev",
+            "group",
+            "who",
+            "helps."
+          ]
+        },
+        {
+          "slug": "pytool-dependency-pinning-add-dependency-git-reference-reproducibility",
+          "description": "Add one dependency from a git reference and explain why that is a reproducibility hazard unless it is pinned to a commit.",
+          "evidence_terms": [
+            "add",
+            "dependency",
+            "git",
+            "reference",
+            "reproducibility",
+            "hazard",
+            "unless",
+            "pinned",
+            "commit."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "pytool-lockfiles-reproducible": {
+      "topic_slug": "pytool-lockfiles-reproducible",
+      "learning_objective": "Explain what a lockfile guarantees that a declared dependency range does not, and produce one.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-lockfiles-reproducible-lockfile-guarantees-pinned-requirements-file",
+          "description": "State what a lockfile guarantees that a pinned requirements file written by hand does not.",
+          "evidence_terms": [
+            "lockfile",
+            "guarantees",
+            "pinned",
+            "requirements",
+            "file",
+            "written",
+            "hand",
+            "not."
+          ]
+        },
+        {
+          "slug": "pytool-lockfiles-reproducible-changes-uv-lock-add-dependency",
+          "description": "Say what changes in uv.lock when you add a dependency, and what does not change in pyproject.toml.",
+          "evidence_terms": [
+            "changes",
+            "uv.lock",
+            "add",
+            "dependency",
+            "change",
+            "pyproject.toml."
+          ]
+        },
+        {
+          "slug": "pytool-lockfiles-reproducible-produce-fully-pinned-requirements-txt",
+          "description": "Produce a fully pinned requirements.txt from a loose dependency list with uv pip compile, and say which artifact you would commit.",
+          "evidence_terms": [
+            "produce",
+            "fully",
+            "pinned",
+            "requirements.txt",
+            "loose",
+            "dependency",
+            "list",
+            "pip",
+            "compile",
+            "artifact",
+            "would",
+            "commit."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "pytool-python-versions": {
+      "topic_slug": "pytool-python-versions",
+      "learning_objective": "Pin the interpreter version a project runs on, not just the packages it installs.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "pytool-python-versions-pin-project-specific-python-minor",
+          "description": "Pin a project to a specific Python minor version and show which interpreter uv selects for uv run.",
+          "evidence_terms": [
+            "pin",
+            "project",
+            "specific",
+            "python",
+            "minor",
+            "version",
+            "interpreter",
+            "selects",
+            "run."
+          ]
+        },
+        {
+          "slug": "pytool-python-versions-failure-package-lockfile-cannot-prevent",
+          "description": "Name one failure that a package lockfile cannot prevent but an interpreter pin can.",
+          "evidence_terms": [
+            "failure",
+            "package",
+            "lockfile",
+            "cannot",
+            "prevent",
+            "but",
+            "interpreter",
+            "pin",
+            "can."
+          ]
+        },
+        {
+          "slug": "pytool-python-versions-where-python-version-sits-relative",
+          "description": "Say where .python-version sits relative to pyproject.toml's requires-python, and which of the two is a request versus a constraint.",
+          "evidence_terms": [
+            "where",
+            "python-version",
+            "sits",
+            "relative",
+            "pyproject.toml",
+            "requires-python",
+            "request",
+            "versus",
+            "constraint."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-mdp-fundamentals": {
+      "topic_slug": "rl-mdp-fundamentals",
+      "learning_objective": "Define the reinforcement learning problem in MDP terms and read the notation used in RL papers.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-mdp-fundamentals-down-objective-rl-agent-maximises",
+          "description": "Write down the objective an RL agent maximises and say why it is an expectation over trajectories.",
+          "evidence_terms": [
+            "down",
+            "objective",
+            "agent",
+            "maximises",
+            "expectation",
+            "over",
+            "trajectories."
+          ]
+        },
+        {
+          "slug": "rl-mdp-fundamentals-distinguish-reward-return-finite-horizon",
+          "description": "Distinguish reward from return, and finite-horizon undiscounted return from infinite-horizon discounted return.",
+          "evidence_terms": [
+            "distinguish",
+            "reward",
+            "return",
+            "finite-horizon",
+            "undiscounted",
+            "infinite-horizon",
+            "discounted",
+            "return."
+          ]
+        },
+        {
+          "slug": "rl-mdp-fundamentals-discount-factor-changes-about-agent",
+          "description": "Explain what the discount factor changes about the agent's behaviour, not just about the maths.",
+          "evidence_terms": [
+            "discount",
+            "factor",
+            "changes",
+            "about",
+            "agent",
+            "behaviour",
+            "just",
+            "maths."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-policy-vs-value": {
+      "topic_slug": "rl-policy-vs-value",
+      "learning_objective": "Explain how a value function is defined recursively and what separates a policy from a value estimate.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-policy-vs-value-bellman-equation-value-fixed-policy",
+          "description": "State the Bellman equation for the value of a fixed policy in words, and say which term makes it recursive.",
+          "evidence_terms": [
+            "bellman",
+            "equation",
+            "value",
+            "fixed",
+            "policy",
+            "words",
+            "term",
+            "makes",
+            "recursive."
+          ]
+        },
+        {
+          "slug": "rl-policy-vs-value-given-q-function-produce-greedy",
+          "description": "Given a Q function, produce the greedy policy; given a policy, say what its V function measures.",
+          "evidence_terms": [
+            "given",
+            "function",
+            "produce",
+            "greedy",
+            "policy",
+            "measures."
+          ]
+        },
+        {
+          "slug": "rl-policy-vs-value-difference-between-optimal-policy-value",
+          "description": "Explain the difference between the optimal and the on-policy value function, and why the optimal version needs a max rather than an expectation over actions.",
+          "evidence_terms": [
+            "difference",
+            "between",
+            "optimal",
+            "on-policy",
+            "value",
+            "function",
+            "version",
+            "needs",
+            "max",
+            "rather",
+            "expectation",
+            "over"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-q-learning": {
+      "topic_slug": "rl-q-learning",
+      "learning_objective": "Implement tabular Q-learning and explain why it is off-policy.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-q-learning-q-learning-update-rule-memory",
+          "description": "Write the Q-learning update rule from memory and name each term: target, TD error, learning rate.",
+          "evidence_terms": [
+            "q-learning",
+            "update",
+            "rule",
+            "memory",
+            "each",
+            "term",
+            "target",
+            "error",
+            "learning",
+            "rate."
+          ]
+        },
+        {
+          "slug": "rl-q-learning-off-policy-means-here-pointing",
+          "description": "Explain what off-policy means here by pointing at the max in the target.",
+          "evidence_terms": [
+            "off-policy",
+            "means",
+            "here",
+            "pointing",
+            "max",
+            "target."
+          ]
+        },
+        {
+          "slug": "rl-q-learning-epsilon-controls-goes-wrong-epsilon",
+          "description": "Say what epsilon controls, and what goes wrong at epsilon = 0 and at epsilon = 1.",
+          "evidence_terms": [
+            "epsilon",
+            "controls",
+            "goes",
+            "wrong"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-policy-gradients": {
+      "topic_slug": "rl-policy-gradients",
+      "learning_objective": "Derive the policy gradient and state the loss a REINFORCE implementation actually minimises.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-policy-gradients-policy-gradient-expression-log-probability",
+          "description": "Write the policy-gradient expression and explain why the log-probability term appears.",
+          "evidence_terms": [
+            "policy-gradient",
+            "expression",
+            "log-probability",
+            "term",
+            "appears."
+          ]
+        },
+        {
+          "slug": "rl-policy-gradients-reward-go-baseline-each-fix",
+          "description": "Explain what reward-to-go and a baseline each fix, and why neither changes the gradient in expectation.",
+          "evidence_terms": [
+            "reward-to-go",
+            "baseline",
+            "each",
+            "fix",
+            "neither",
+            "changes",
+            "gradient",
+            "expectation."
+          ]
+        },
+        {
+          "slug": "rl-policy-gradients-place-policy-optimisation-against-q",
+          "description": "Place policy optimisation against Q-learning on the taxonomy and state one trade-off in each direction.",
+          "evidence_terms": [
+            "place",
+            "policy",
+            "optimisation",
+            "against",
+            "q-learning",
+            "taxonomy",
+            "trade-off",
+            "each",
+            "direction."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-rlhf-mechanics": {
+      "topic_slug": "rl-rlhf-mechanics",
+      "learning_objective": "Explain the RLHF pipeline stage by stage, including what the KL penalty is protecting.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-rlhf-mechanics-three-stages-order-training-signal",
+          "description": "Name the three stages in order and say what the training signal is at each one.",
+          "evidence_terms": [
+            "three",
+            "stages",
+            "order",
+            "training",
+            "signal",
+            "each",
+            "one."
+          ]
+        },
+        {
+          "slug": "rl-rlhf-mechanics-reward-model-trained-preference-pairs",
+          "description": "Explain what the reward model is trained on, and why preference pairs are used rather than absolute scalar scores.",
+          "evidence_terms": [
+            "reward",
+            "model",
+            "trained",
+            "preference",
+            "pairs",
+            "used",
+            "rather",
+            "absolute",
+            "scalar",
+            "scores."
+          ]
+        },
+        {
+          "slug": "rl-rlhf-mechanics-drifts-kl-penalty-against-reference",
+          "description": "Say what drifts if the KL penalty against the reference model is removed.",
+          "evidence_terms": [
+            "drifts",
+            "penalty",
+            "against",
+            "reference",
+            "model",
+            "removed."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rl-bandits-for-ranking": {
+      "topic_slug": "rl-bandits-for-ranking",
+      "learning_objective": "Frame a recommendation problem as a contextual bandit and say how you would evaluate a policy offline.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rl-bandits-for-ranking-bandit-drops-full-mdp-omission",
+          "description": "Explain what a bandit drops from the full MDP, and why that omission is what makes it usable in production.",
+          "evidence_terms": [
+            "bandit",
+            "drops",
+            "full",
+            "mdp",
+            "omission",
+            "makes",
+            "usable",
+            "production."
+          ]
+        },
+        {
+          "slug": "rl-bandits-for-ranking-read-regret-curve-policies-explored",
+          "description": "Read a regret curve and say which of two policies explored too little.",
+          "evidence_terms": [
+            "read",
+            "regret",
+            "curve",
+            "policies",
+            "explored",
+            "too",
+            "little."
+          ]
+        },
+        {
+          "slug": "rl-bandits-for-ranking-logged-data-old-policy-cannot",
+          "description": "State why logged data from an old policy cannot be used naively to score a new one.",
+          "evidence_terms": [
+            "logged",
+            "data",
+            "old",
+            "policy",
+            "cannot",
+            "used",
+            "naively",
+            "score",
+            "new",
+            "one."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-service-models": {
+      "topic_slug": "cloud-service-models",
+      "learning_objective": "Classify any cloud offering as IaaS, PaaS or SaaS and name what the provider takes responsibility for.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-service-models-list-five-essential-characteristics-nist",
+          "description": "List the five essential characteristics from NIST SP 800-145 without looking them up.",
+          "evidence_terms": [
+            "list",
+            "five",
+            "essential",
+            "characteristics",
+            "nist",
+            "without",
+            "looking",
+            "them",
+            "up."
+          ]
+        },
+        {
+          "slug": "cloud-service-models-given-offering-such-ec2-sagemaker",
+          "description": "Given an offering such as EC2, a SageMaker endpoint or a hosted chat product, say which service model it is and where the responsibility boundary sits.",
+          "evidence_terms": [
+            "given",
+            "offering",
+            "such",
+            "ec2",
+            "sagemaker",
+            "endpoint",
+            "hosted",
+            "chat",
+            "product",
+            "service",
+            "model",
+            "where"
+          ]
+        },
+        {
+          "slug": "cloud-service-models-something-vendor-calls-cloud-may",
+          "description": "Explain why something a vendor calls cloud may fail the on-demand self-service characteristic.",
+          "evidence_terms": [
+            "something",
+            "vendor",
+            "calls",
+            "cloud",
+            "may",
+            "fail",
+            "on-demand",
+            "self-service",
+            "characteristic."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-object-storage": {
+      "topic_slug": "cloud-object-storage",
+      "learning_objective": "Explain how object storage differs from a filesystem and decide where ML artifacts belong.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-object-storage-three-things-bucket-posix-filesystem",
+          "description": "Name three things a bucket does not give you that a POSIX filesystem does, such as rename, partial write, or real directories.",
+          "evidence_terms": [
+            "three",
+            "things",
+            "bucket",
+            "posix",
+            "filesystem",
+            "such",
+            "rename",
+            "partial",
+            "real",
+            "directories."
+          ]
+        },
+        {
+          "slug": "cloud-object-storage-key-prefix-directory",
+          "description": "Explain what a key prefix is and why it is not a directory.",
+          "evidence_terms": [
+            "key",
+            "prefix",
+            "directory."
+          ]
+        },
+        {
+          "slug": "cloud-object-storage-pick-storage-class-training-dataset",
+          "description": "Pick a storage class for a training dataset read once a month, and justify the choice against one read once an hour.",
+          "evidence_terms": [
+            "pick",
+            "storage",
+            "class",
+            "training",
+            "dataset",
+            "read",
+            "once",
+            "month",
+            "justify",
+            "choice",
+            "against",
+            "hour."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-gpu-instances": {
+      "topic_slug": "cloud-gpu-instances",
+      "learning_objective": "Turn a requirement like \"one GPU with 24 GB\" into a specific instance type.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-gpu-instances-p-g-families-each-intended",
+          "description": "Say what the P and G families are each intended for on EC2 and name one instance from each.",
+          "evidence_terms": [
+            "families",
+            "each",
+            "intended",
+            "ec2",
+            "instance",
+            "each."
+          ]
+        },
+        {
+          "slug": "cloud-gpu-instances-read-gpu-count-gpu-memory",
+          "description": "Read GPU count and GPU memory off a table row without reading the surrounding prose.",
+          "evidence_terms": [
+            "read",
+            "gpu",
+            "count",
+            "memory",
+            "off",
+            "table",
+            "row",
+            "without",
+            "reading",
+            "surrounding",
+            "prose."
+          ]
+        },
+        {
+          "slug": "cloud-gpu-instances-given-aws-instance-must-look",
+          "description": "Given an AWS instance name, say what you must look up to find its Google Cloud equivalent - and why the GPU model, not the instance name, is the thing that transfers.",
+          "evidence_terms": [
+            "given",
+            "aws",
+            "instance",
+            "must",
+            "look",
+            "find",
+            "google",
+            "cloud",
+            "equivalent",
+            "gpu",
+            "model",
+            "thing"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-gpu-memory-sizing": {
+      "topic_slug": "cloud-gpu-memory-sizing",
+      "learning_objective": "Estimate the GPU memory a training or inference run needs and compare it to an instance's capacity.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-gpu-memory-sizing-list-four-consumers-gpu-memory",
+          "description": "List the four consumers of GPU memory during training and say which one scales with batch size.",
+          "evidence_terms": [
+            "list",
+            "four",
+            "consumers",
+            "gpu",
+            "memory",
+            "during",
+            "training",
+            "scales",
+            "batch",
+            "size."
+          ]
+        },
+        {
+          "slug": "cloud-gpu-memory-sizing-estimate-bytes-weights-7b-parameter",
+          "description": "Estimate the bytes of weights for a 7B-parameter model at fp16 and at int8, and say why an Adam optimiser multiplies the training figure.",
+          "evidence_terms": [
+            "estimate",
+            "bytes",
+            "weights",
+            "b-parameter",
+            "model",
+            "fp16",
+            "int8",
+            "adam",
+            "optimiser",
+            "multiplies",
+            "training",
+            "figure."
+          ]
+        },
+        {
+          "slug": "cloud-gpu-memory-sizing-inference-memory-far-smaller-training",
+          "description": "Explain why inference memory is far smaller than training memory for the same model.",
+          "evidence_terms": [
+            "inference",
+            "memory",
+            "far",
+            "smaller",
+            "training",
+            "model."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-managed-inference": {
+      "topic_slug": "cloud-managed-inference",
+      "learning_objective": "Decide between a managed endpoint and self-hosted serving for a given workload.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-managed-inference-things-managed-endpoint-would-otherwise",
+          "description": "Name two things a managed endpoint does for you that you would otherwise have to build.",
+          "evidence_terms": [
+            "things",
+            "managed",
+            "endpoint",
+            "would",
+            "otherwise",
+            "have",
+            "build."
+          ]
+        },
+        {
+          "slug": "cloud-managed-inference-cost-model-always-real-time",
+          "description": "State the cost model of an always-on real-time endpoint and name one workload shape where it is the wrong choice.",
+          "evidence_terms": [
+            "cost",
+            "model",
+            "always-on",
+            "real-time",
+            "endpoint",
+            "workload",
+            "shape",
+            "where",
+            "wrong",
+            "choice."
+          ]
+        },
+        {
+          "slug": "cloud-managed-inference-traffic-variant-used-would-use",
+          "description": "Explain what a traffic variant is used for and how you would use one to ship a model change safely.",
+          "evidence_terms": [
+            "traffic",
+            "variant",
+            "used",
+            "would",
+            "use",
+            "ship",
+            "model",
+            "change",
+            "safely."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "cloud-cost-control": {
+      "topic_slug": "cloud-cost-control",
+      "learning_objective": "Choose a purchasing and right-sizing strategy for a GPU workload from mechanisms rather than price lists.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "cloud-cost-control-spot-interruption-notice-training-job",
+          "description": "Explain what a spot interruption notice is and what a training job must do to survive one.",
+          "evidence_terms": [
+            "spot",
+            "interruption",
+            "notice",
+            "training",
+            "job",
+            "must",
+            "survive",
+            "one."
+          ]
+        },
+        {
+          "slug": "cloud-cost-control-workloads-safe-spot-capacity-reason",
+          "description": "Say which workloads are safe on spot capacity and which are not, and give the reason rather than the rule.",
+          "evidence_terms": [
+            "workloads",
+            "safe",
+            "spot",
+            "capacity",
+            "reason",
+            "rather",
+            "rule."
+          ]
+        },
+        {
+          "slug": "cloud-cost-control-cost-optimisation-goals-listed-well",
+          "description": "Name the cost-optimisation goals listed in the Well-Architected cost pillar's introduction, and pick the one you would act on first.",
+          "evidence_terms": [
+            "cost-optimisation",
+            "goals",
+            "listed",
+            "well-architected",
+            "cost",
+            "pillar",
+            "introduction",
+            "pick",
+            "would",
+            "act",
+            "first."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-owasp-llm-top-10": {
+      "topic_slug": "aisec-owasp-llm-top-10",
+      "learning_objective": "Recognise and name the ten OWASP LLM risks in a design review.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-owasp-llm-top-10-risk-behind-llm01-llm02-llm05",
+          "description": "Name the risk behind LLM01, LLM02, LLM05 and LLM06 without looking them up.",
+          "evidence_terms": [
+            "risk",
+            "behind",
+            "llm01",
+            "llm02",
+            "llm05",
+            "llm06",
+            "without",
+            "looking",
+            "them",
+            "up."
+          ]
+        },
+        {
+          "slug": "aisec-owasp-llm-top-10-given-described-feature-owasp-risk",
+          "description": "Given a described feature, point at the one or two OWASP risk IDs it most exposes.",
+          "evidence_terms": [
+            "given",
+            "described",
+            "feature",
+            "owasp",
+            "risk",
+            "ids",
+            "most",
+            "exposes."
+          ]
+        },
+        {
+          "slug": "aisec-owasp-llm-top-10-excessive-agency-risk-about-permissions",
+          "description": "Explain why excessive agency is a risk about permissions rather than about the model.",
+          "evidence_terms": [
+            "excessive",
+            "agency",
+            "risk",
+            "about",
+            "permissions",
+            "rather",
+            "model."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-prompt-injection": {
+      "topic_slug": "aisec-prompt-injection",
+      "learning_objective": "Explain indirect prompt injection and state honestly what the available mitigations do and do not achieve.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-prompt-injection-distinguish-direct-indirect-injection-concrete",
+          "description": "Distinguish direct from indirect injection with one concrete example of each.",
+          "evidence_terms": [
+            "distinguish",
+            "direct",
+            "indirect",
+            "injection",
+            "concrete",
+            "example",
+            "each."
+          ]
+        },
+        {
+          "slug": "aisec-prompt-injection-input-filtering-instruction-hierarchy-reduce",
+          "description": "Explain why input filtering and instruction hierarchy reduce but do not eliminate the risk, and cite the source that admits it.",
+          "evidence_terms": [
+            "input",
+            "filtering",
+            "instruction",
+            "hierarchy",
+            "reduce",
+            "but",
+            "eliminate",
+            "risk",
+            "cite",
+            "source",
+            "admits",
+            "it."
+          ]
+        },
+        {
+          "slug": "aisec-prompt-injection-place-system-have-seen-where",
+          "description": "Name one place in a system you have seen where untrusted text reaches the model without being labelled as untrusted.",
+          "evidence_terms": [
+            "place",
+            "system",
+            "have",
+            "seen",
+            "where",
+            "untrusted",
+            "text",
+            "reaches",
+            "model",
+            "without",
+            "being",
+            "labelled"
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-data-exfiltration-tools": {
+      "topic_slug": "aisec-data-exfiltration-tools",
+      "learning_objective": "Audit a tool-using agent for the three legs of the exfiltration trifecta and remove one of them.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-data-exfiltration-tools-three-legs-removing-any-them",
+          "description": "State the three legs and explain why removing any one of them makes exfiltration impossible rather than merely harder.",
+          "evidence_terms": [
+            "three",
+            "legs",
+            "removing",
+            "any",
+            "them",
+            "makes",
+            "exfiltration",
+            "impossible",
+            "rather",
+            "merely",
+            "harder."
+          ]
+        },
+        {
+          "slug": "aisec-data-exfiltration-tools-given-agent-s-tool-list",
+          "description": "Given an agent's tool list, identify which tool supplies each leg.",
+          "evidence_terms": [
+            "given",
+            "agent",
+            "tool",
+            "list",
+            "identify",
+            "supplies",
+            "each",
+            "leg."
+          ]
+        },
+        {
+          "slug": "aisec-data-exfiltration-tools-excessive-agency-controls-would-apply",
+          "description": "Name two excessive-agency controls you would apply to a tool that can send email or make outbound HTTP requests.",
+          "evidence_terms": [
+            "excessive-agency",
+            "controls",
+            "would",
+            "apply",
+            "tool",
+            "send",
+            "email",
+            "make",
+            "outbound",
+            "http",
+            "requests."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-improper-output-handling": {
+      "topic_slug": "aisec-improper-output-handling",
+      "learning_objective": "Treat model output as untrusted and place the right validation at each downstream consumer.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-improper-output-handling-three-downstream-consumers-model-output",
+          "description": "Name three downstream consumers of model output and the injection class each one is vulnerable to.",
+          "evidence_terms": [
+            "three",
+            "downstream",
+            "consumers",
+            "model",
+            "output",
+            "injection",
+            "class",
+            "each",
+            "vulnerable",
+            "to."
+          ]
+        },
+        {
+          "slug": "aisec-improper-output-handling-validating-output-against-json-schema",
+          "description": "Explain why validating output against a JSON schema is not the same as making it safe to execute or render.",
+          "evidence_terms": [
+            "validating",
+            "output",
+            "against",
+            "json",
+            "schema",
+            "making",
+            "safe",
+            "execute",
+            "render."
+          ]
+        },
+        {
+          "slug": "aisec-improper-output-handling-where-escaping-parameterisation-belongs-model",
+          "description": "State where the escaping or parameterisation belongs for model-generated SQL, and why it is not in the prompt.",
+          "evidence_terms": [
+            "where",
+            "escaping",
+            "parameterisation",
+            "belongs",
+            "model-generated",
+            "sql",
+            "prompt."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-model-supply-chain": {
+      "topic_slug": "aisec-model-supply-chain",
+      "learning_objective": "Load third-party model weights safely and explain the risk you are avoiding.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-model-supply-chain-sentence-torch-load-untrusted-file",
+          "description": "Explain in one sentence why torch.load on an untrusted file can execute arbitrary code.",
+          "evidence_terms": [
+            "sentence",
+            "torch.load",
+            "untrusted",
+            "file",
+            "execute",
+            "arbitrary",
+            "code."
+          ]
+        },
+        {
+          "slug": "aisec-model-supply-chain-safetensors-removes-format-makes-attack",
+          "description": "Say what safetensors removes from the format that makes the attack impossible, rather than merely detectable.",
+          "evidence_terms": [
+            "safetensors",
+            "removes",
+            "format",
+            "makes",
+            "attack",
+            "impossible",
+            "rather",
+            "merely",
+            "detectable."
+          ]
+        },
+        {
+          "slug": "aisec-model-supply-chain-check-hub-repo-s-pickle",
+          "description": "Check a Hub repo's pickle-scan result and state what a clean scan does and does not prove.",
+          "evidence_terms": [
+            "check",
+            "hub",
+            "repo",
+            "pickle-scan",
+            "result",
+            "clean",
+            "scan",
+            "prove."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "aisec-pii-and-disclosure": {
+      "topic_slug": "aisec-pii-and-disclosure",
+      "learning_objective": "Find the paths PII takes out of an LLM system and choose a de-identification technique per path.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "aisec-pii-and-disclosure-five-places-pii-persist-llm",
+          "description": "Name five places PII can persist in an LLM system, including at least one that is not the prompt.",
+          "evidence_terms": [
+            "five",
+            "places",
+            "pii",
+            "persist",
+            "llm",
+            "system",
+            "including",
+            "least",
+            "prompt."
+          ]
+        },
+        {
+          "slug": "aisec-pii-and-disclosure-distinguish-reversible-irreversible-de-identification",
+          "description": "Distinguish reversible from irreversible de-identification and give one technique of each.",
+          "evidence_terms": [
+            "distinguish",
+            "reversible",
+            "irreversible",
+            "de-identification",
+            "technique",
+            "each."
+          ]
+        },
+        {
+          "slug": "aisec-pii-and-disclosure-redacting-prompt-protect-embedding-index",
+          "description": "Explain why redacting the prompt does not protect the embedding index or the request logs.",
+          "evidence_terms": [
+            "redacting",
+            "prompt",
+            "protect",
+            "embedding",
+            "index",
+            "request",
+            "logs."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-quantization-concepts": {
+      "topic_slug": "infra-quantization-concepts",
+      "learning_objective": "Explain what a quantized weight stores and evaluate a new quantization method on its own terms.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-quantization-concepts-scale-zero-per-channel-quantization",
+          "description": "Explain what scale and zero-point do, and why per-channel quantization beats per-tensor for weights.",
+          "evidence_terms": [
+            "scale",
+            "zero-point",
+            "per-channel",
+            "quantization",
+            "beats",
+            "per-tensor",
+            "weights."
+          ]
+        },
+        {
+          "slug": "infra-quantization-concepts-where-accuracy-lost-distribution-has",
+          "description": "Say where accuracy is lost when a distribution has outliers, and what that implies for activations versus weights.",
+          "evidence_terms": [
+            "where",
+            "accuracy",
+            "lost",
+            "distribution",
+            "has",
+            "outliers",
+            "implies",
+            "activations",
+            "versus",
+            "weights."
+          ]
+        },
+        {
+          "slug": "infra-quantization-concepts-nf4-double-quantization-each-add",
+          "description": "Name what NF4 and double quantization each add over plain 4-bit.",
+          "evidence_terms": [
+            "nf4",
+            "double",
+            "quantization",
+            "each",
+            "add",
+            "over",
+            "plain",
+            "bit."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-ptq-gptq-awq": {
+      "topic_slug": "infra-ptq-gptq-awq",
+      "learning_objective": "Choose between a GPTQ and an AWQ checkpoint and say what the calibration knobs mean.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-ptq-gptq-awq-gptq-needs-calibration-dataset-badly",
+          "description": "Explain why GPTQ needs a calibration dataset, and what a badly chosen calibration set does to the result.",
+          "evidence_terms": [
+            "gptq",
+            "needs",
+            "calibration",
+            "dataset",
+            "badly",
+            "chosen",
+            "set",
+            "result."
+          ]
+        },
+        {
+          "slug": "infra-ptq-gptq-awq-awq-s-core-claim-about",
+          "description": "State AWQ's core claim about which weights matter, and how that differs from GPTQ's objective.",
+          "evidence_terms": [
+            "awq",
+            "core",
+            "claim",
+            "about",
+            "weights",
+            "matter",
+            "differs",
+            "gptq",
+            "objective."
+          ]
+        },
+        {
+          "slug": "infra-ptq-gptq-awq-given-pre-quantized-checkpoints-base",
+          "description": "Given two pre-quantized checkpoints of the same base model, name the three things you would compare before choosing.",
+          "evidence_terms": [
+            "given",
+            "pre-quantized",
+            "checkpoints",
+            "base",
+            "model",
+            "three",
+            "things",
+            "would",
+            "compare",
+            "before",
+            "choosing."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-kv-cache": {
+      "topic_slug": "infra-kv-cache",
+      "learning_objective": "Explain what the KV cache stores, estimate its size, and name a strategy for when it exceeds memory.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-kv-cache-cached-recomputed-each-decode-step",
+          "description": "Say what is cached and what is recomputed at each decode step.",
+          "evidence_terms": [
+            "cached",
+            "recomputed",
+            "each",
+            "decode",
+            "step."
+          ]
+        },
+        {
+          "slug": "infra-kv-cache-estimate-kv-cache-bytes-layers",
+          "description": "Estimate KV cache bytes from layers, heads, head dimension, dtype and sequence length.",
+          "evidence_terms": [
+            "estimate",
+            "cache",
+            "bytes",
+            "layers",
+            "heads",
+            "head",
+            "dimension",
+            "dtype",
+            "sequence",
+            "length."
+          ]
+        },
+        {
+          "slug": "infra-kv-cache-cache-strategies-among-static-offloaded",
+          "description": "Name two cache strategies among static, offloaded, quantized and sliding-window, and the case each one is for.",
+          "evidence_terms": [
+            "cache",
+            "strategies",
+            "among",
+            "static",
+            "offloaded",
+            "quantized",
+            "sliding-window",
+            "case",
+            "each",
+            "for."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-continuous-batching": {
+      "topic_slug": "infra-continuous-batching",
+      "learning_objective": "Explain iteration-level batching and why it beats request-level batching for generation.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-continuous-batching-static-batch-wastes-requests-finish",
+          "description": "Explain what a static batch wastes when requests finish at different output lengths.",
+          "evidence_terms": [
+            "static",
+            "batch",
+            "wastes",
+            "requests",
+            "finish",
+            "different",
+            "output",
+            "lengths."
+          ]
+        },
+        {
+          "slug": "infra-continuous-batching-iteration-level-scheduling-changes-about",
+          "description": "State what iteration-level scheduling changes about when a new request can join a running batch.",
+          "evidence_terms": [
+            "iteration-level",
+            "scheduling",
+            "changes",
+            "about",
+            "new",
+            "request",
+            "join",
+            "running",
+            "batch."
+          ]
+        },
+        {
+          "slug": "infra-continuous-batching-paged-attention-about-kv-cache",
+          "description": "Say what paged attention does about KV cache fragmentation, and why that raises the achievable batch size.",
+          "evidence_terms": [
+            "paged",
+            "attention",
+            "about",
+            "cache",
+            "fragmentation",
+            "raises",
+            "achievable",
+            "batch",
+            "size."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-latency-vs-throughput": {
+      "topic_slug": "infra-latency-vs-throughput",
+      "learning_objective": "State an inference SLO in the right metrics instead of saying \"make it faster\".",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-latency-vs-throughput-define-time-first-token-inter",
+          "description": "Define time to first token, inter-token latency, end-to-end request latency, tokens per second and requests per second, and say which of them a user actually feels.",
+          "evidence_terms": [
+            "define",
+            "time",
+            "first",
+            "token",
+            "inter-token",
+            "latency",
+            "end-to-end",
+            "request",
+            "tokens",
+            "per",
+            "second",
+            "requests"
+          ]
+        },
+        {
+          "slug": "infra-latency-vs-throughput-raising-batch-size-throughput-inter",
+          "description": "Explain what raising batch size does to throughput and to inter-token latency, in opposite directions.",
+          "evidence_terms": [
+            "raising",
+            "batch",
+            "size",
+            "throughput",
+            "inter-token",
+            "latency",
+            "opposite",
+            "directions."
+          ]
+        },
+        {
+          "slug": "infra-latency-vs-throughput-slo-interactive-chat-feature-batch",
+          "description": "Write one SLO for an interactive chat feature and one for a batch summarisation job, and say why they use different metrics.",
+          "evidence_terms": [
+            "slo",
+            "interactive",
+            "chat",
+            "feature",
+            "batch",
+            "summarisation",
+            "job",
+            "they",
+            "use",
+            "different",
+            "metrics."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "infra-memory-bound-decoding": {
+      "topic_slug": "infra-memory-bound-decoding",
+      "learning_objective": "Argue from arithmetic why decoding is memory-bandwidth bound, and what that predicts about batching, quantization and CPU inference.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "infra-memory-bound-decoding-compute-arithmetic-intensity-single-token",
+          "description": "Compute the arithmetic intensity of a single-token decode step and compare it to a GPU's FLOP-to-bandwidth ratio.",
+          "evidence_terms": [
+            "compute",
+            "arithmetic",
+            "intensity",
+            "single-token",
+            "decode",
+            "step",
+            "compare",
+            "gpu",
+            "flop-to-bandwidth",
+            "ratio."
+          ]
+        },
+        {
+          "slug": "infra-memory-bound-decoding-use-result-predict-larger-batches",
+          "description": "Use that result to predict why larger batches raise throughput at almost no cost in per-token latency.",
+          "evidence_terms": [
+            "use",
+            "result",
+            "predict",
+            "larger",
+            "batches",
+            "raise",
+            "throughput",
+            "almost",
+            "cost",
+            "per-token",
+            "latency."
+          ]
+        },
+        {
+          "slug": "infra-memory-bound-decoding-cpu-decoding-slow-bandwidth-terms",
+          "description": "Explain why CPU decoding is slow in bandwidth terms, and state what dynamic int8 quantization recovers and what it does not.",
+          "evidence_terms": [
+            "cpu",
+            "decoding",
+            "slow",
+            "bandwidth",
+            "terms",
+            "dynamic",
+            "int8",
+            "quantization",
+            "recovers",
+            "not."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-reranking-cross-encoders": {
+      "topic_slug": "rag-reranking-cross-encoders",
+      "learning_objective": "Add a reranking stage to a retrieval pipeline and explain the recall/precision division of labour.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-reranking-cross-encoders-bi-encoder-indexed-offline-cross",
+          "description": "Explain why a bi-encoder can be indexed offline and a cross-encoder cannot.",
+          "evidence_terms": [
+            "bi-encoder",
+            "indexed",
+            "offline",
+            "cross-encoder",
+            "cannot."
+          ]
+        },
+        {
+          "slug": "rag-reranking-cross-encoders-many-candidates-would-retrieve-before",
+          "description": "Say how many candidates you would retrieve before reranking, and what determines that number.",
+          "evidence_terms": [
+            "many",
+            "candidates",
+            "would",
+            "retrieve",
+            "before",
+            "reranking",
+            "determines",
+            "number."
+          ]
+        },
+        {
+          "slug": "rag-reranking-cross-encoders-latency-cost-reranker-adds-where",
+          "description": "State the latency cost a reranker adds and where it lands in the request path.",
+          "evidence_terms": [
+            "latency",
+            "cost",
+            "reranker",
+            "adds",
+            "where",
+            "lands",
+            "request",
+            "path."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-hybrid-search": {
+      "topic_slug": "rag-hybrid-search",
+      "learning_objective": "Fuse keyword and vector retrieval, and treat the fusion step as a formula rather than a magic dial.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-hybrid-search-query-class-dense-retrieval-fails",
+          "description": "Name a query class that dense retrieval fails on and say why BM25 catches it.",
+          "evidence_terms": [
+            "query",
+            "class",
+            "dense",
+            "retrieval",
+            "fails",
+            "bm25",
+            "catches",
+            "it."
+          ]
+        },
+        {
+          "slug": "rag-hybrid-search-reciprocal-rank-fusion-formula-constant",
+          "description": "Write the reciprocal rank fusion formula and say what its constant damps.",
+          "evidence_terms": [
+            "reciprocal",
+            "rank",
+            "fusion",
+            "formula",
+            "constant",
+            "damps."
+          ]
+        },
+        {
+          "slug": "rag-hybrid-search-alpha-0-alpha-1-each",
+          "description": "Explain what alpha = 0 and alpha = 1 each reduce hybrid search to.",
+          "evidence_terms": [
+            "alpha",
+            "each",
+            "reduce",
+            "hybrid",
+            "search",
+            "to."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-chunking-evaluation": {
+      "topic_slug": "rag-chunking-evaluation",
+      "learning_objective": "Measure a chunking strategy instead of choosing one by convention.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-chunking-evaluation-token-level-precision-measures-document",
+          "description": "Explain what token-level precision measures that document-level recall does not.",
+          "evidence_terms": [
+            "token-level",
+            "precision",
+            "measures",
+            "document-level",
+            "recall",
+            "not."
+          ]
+        },
+        {
+          "slug": "rag-chunking-evaluation-describe-experiment-design-held-fixed",
+          "description": "Describe the experiment design: what is held fixed and what varies when comparing two chunkers.",
+          "evidence_terms": [
+            "describe",
+            "experiment",
+            "design",
+            "held",
+            "fixed",
+            "varies",
+            "comparing",
+            "chunkers."
+          ]
+        },
+        {
+          "slug": "rag-chunking-evaluation-chunk-size-overlap-would-start",
+          "description": "State the chunk size and overlap you would start from, and name the evidence that would move you off it.",
+          "evidence_terms": [
+            "chunk",
+            "size",
+            "overlap",
+            "would",
+            "start",
+            "evidence",
+            "move",
+            "off",
+            "it."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-retrieval-metrics": {
+      "topic_slug": "rag-retrieval-metrics",
+      "learning_objective": "Choose and compute the right ranked-retrieval metric for a RAG system.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-retrieval-metrics-compute-precision-5-recall-5",
+          "description": "Compute precision@5 and recall@5 by hand from a ranked list with known relevant documents.",
+          "evidence_terms": [
+            "compute",
+            "precision",
+            "recall",
+            "hand",
+            "ranked",
+            "list",
+            "known",
+            "relevant",
+            "documents."
+          ]
+        },
+        {
+          "slug": "rag-retrieval-metrics-ndcg-adds-over-map-graded",
+          "description": "Explain what NDCG adds over MAP, and when graded relevance is worth the labelling cost.",
+          "evidence_terms": [
+            "ndcg",
+            "adds",
+            "over",
+            "map",
+            "graded",
+            "relevance",
+            "worth",
+            "labelling",
+            "cost."
+          ]
+        },
+        {
+          "slug": "rag-retrieval-metrics-single-metric-would-report-decide",
+          "description": "Say which single metric you would report to decide whether a reranker helped, and why that one.",
+          "evidence_terms": [
+            "single",
+            "metric",
+            "would",
+            "report",
+            "decide",
+            "whether",
+            "reranker",
+            "helped",
+            "one."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-ann-index-choice": {
+      "topic_slug": "rag-ann-index-choice",
+      "learning_objective": "Pick an ANN index from dataset size, memory budget and recall target, and read a recall/QPS curve.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-ann-index-choice-flat-exact-index-right-answer",
+          "description": "Say when a flat exact index is the right answer, and roughly where that stops being true.",
+          "evidence_terms": [
+            "flat",
+            "exact",
+            "index",
+            "right",
+            "answer",
+            "roughly",
+            "where",
+            "stops",
+            "being",
+            "true."
+          ]
+        },
+        {
+          "slug": "rag-ann-index-choice-ivf-hnsw-product-quantization-each",
+          "description": "Explain what IVF, HNSW and product quantization each trade away, and which of them costs recall.",
+          "evidence_terms": [
+            "ivf",
+            "hnsw",
+            "product",
+            "quantization",
+            "each",
+            "trade",
+            "away",
+            "them",
+            "costs",
+            "recall."
+          ]
+        },
+        {
+          "slug": "rag-ann-index-choice-read-ann-benchmarks-recall-qps",
+          "description": "Read an ANN-Benchmarks recall/QPS Pareto plot and state why there is no single winning library.",
+          "evidence_terms": [
+            "read",
+            "ann-benchmarks",
+            "recall",
+            "qps",
+            "pareto",
+            "plot",
+            "there",
+            "single",
+            "winning",
+            "library."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "rag-when-postgres-is-enough": {
+      "topic_slug": "rag-when-postgres-is-enough",
+      "learning_objective": "Justify using, or not using, Postgres as the vector store for a given project.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "rag-when-postgres-is-enough-ddl-vector-column-hnsw-index",
+          "description": "Write the DDL for a vector column and an HNSW index, plus the query that uses the index.",
+          "evidence_terms": [
+            "ddl",
+            "vector",
+            "column",
+            "hnsw",
+            "index",
+            "plus",
+            "query",
+            "uses",
+            "index."
+          ]
+        },
+        {
+          "slug": "rag-when-postgres-is-enough-pgvector-handles-metadata-filtering-strongest",
+          "description": "Explain how pgvector handles metadata filtering, and why that is the strongest argument for keeping vectors next to the rows.",
+          "evidence_terms": [
+            "pgvector",
+            "handles",
+            "metadata",
+            "filtering",
+            "strongest",
+            "argument",
+            "keeping",
+            "vectors",
+            "next",
+            "rows."
+          ]
+        },
+        {
+          "slug": "rag-when-postgres-is-enough-pgvector-stops-being-right-answer",
+          "description": "Name the point at which pgvector stops being the right answer, stated in row count or recall target rather than in feelings.",
+          "evidence_terms": [
+            "pgvector",
+            "stops",
+            "being",
+            "right",
+            "answer",
+            "stated",
+            "row",
+            "count",
+            "recall",
+            "target",
+            "rather",
+            "feelings."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dq-data-leakage": {
+      "topic_slug": "dq-data-leakage",
+      "learning_objective": "Detect leakage in a training script and fix it by moving preprocessing inside the pipeline.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "dq-data-leakage-exact-line-script-leaks-scaler",
+          "description": "Point at the exact line in a script that leaks when a scaler is fit on the full dataset before splitting.",
+          "evidence_terms": [
+            "exact",
+            "line",
+            "script",
+            "leaks",
+            "scaler",
+            "fit",
+            "full",
+            "dataset",
+            "before",
+            "splitting."
+          ]
+        },
+        {
+          "slug": "dq-data-leakage-rule-prevents-preprocessing-leakage-sentence",
+          "description": "State the rule that prevents preprocessing leakage in one sentence, and name the scikit-learn construct that enforces it.",
+          "evidence_terms": [
+            "rule",
+            "prevents",
+            "preprocessing",
+            "leakage",
+            "sentence",
+            "scikit-learn",
+            "construct",
+            "enforces",
+            "it."
+          ]
+        },
+        {
+          "slug": "dq-data-leakage-leakage-source-pipeline-fix-such",
+          "description": "Name one leakage source that a Pipeline does not fix, such as a feature computed from the future or duplicate rows spanning the split.",
+          "evidence_terms": [
+            "leakage",
+            "source",
+            "pipeline",
+            "fix",
+            "such",
+            "feature",
+            "computed",
+            "future",
+            "duplicate",
+            "rows",
+            "spanning",
+            "split."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dq-inconsistent-preprocessing": {
+      "topic_slug": "dq-inconsistent-preprocessing",
+      "learning_objective": "Guarantee that inference applies exactly the transforms training applied.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "dq-inconsistent-preprocessing-breaks-numerically-scaler-fit-training",
+          "description": "Explain what breaks numerically when a scaler is fit at training time but not applied at inference.",
+          "evidence_terms": [
+            "breaks",
+            "numerically",
+            "scaler",
+            "fit",
+            "training",
+            "time",
+            "but",
+            "applied",
+            "inference."
+          ]
+        },
+        {
+          "slug": "dq-inconsistent-preprocessing-serialising-fitted-pipeline-rather-model",
+          "description": "Say why serialising the fitted pipeline rather than the model alone removes the class of bug rather than just this instance of it.",
+          "evidence_terms": [
+            "serialising",
+            "fitted",
+            "pipeline",
+            "rather",
+            "model",
+            "alone",
+            "removes",
+            "class",
+            "bug",
+            "just",
+            "instance",
+            "it."
+          ]
+        },
+        {
+          "slug": "dq-inconsistent-preprocessing-check-could-ci-would-catch",
+          "description": "Name one check you could run in CI that would catch the skew before it ships.",
+          "evidence_terms": [
+            "check",
+            "could",
+            "would",
+            "catch",
+            "skew",
+            "before",
+            "ships."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dq-missing-values": {
+      "topic_slug": "dq-missing-values",
+      "learning_objective": "Choose an imputation strategy and apply it without leaking.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "dq-missing-values-adding-missing-indicator-column-improve",
+          "description": "Explain why adding a missing-indicator column can improve a model even when the imputed value itself is crude.",
+          "evidence_terms": [
+            "adding",
+            "missing-indicator",
+            "column",
+            "improve",
+            "model",
+            "even",
+            "imputed",
+            "value",
+            "itself",
+            "crude."
+          ]
+        },
+        {
+          "slug": "dq-missing-values-differs-between-univariate-iterative-imputation",
+          "description": "Say what differs between univariate and iterative imputation, and what iterative imputation costs you.",
+          "evidence_terms": [
+            "differs",
+            "between",
+            "univariate",
+            "iterative",
+            "imputation",
+            "costs",
+            "you."
+          ]
+        },
+        {
+          "slug": "dq-missing-values-imputation-inside-pipeline-fitting-imputer",
+          "description": "Show imputation inside a Pipeline and explain why fitting the imputer on the whole dataset first would be leakage.",
+          "evidence_terms": [
+            "imputation",
+            "inside",
+            "pipeline",
+            "fitting",
+            "imputer",
+            "whole",
+            "dataset",
+            "first",
+            "would",
+            "leakage."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dq-outliers": {
+      "topic_slug": "dq-outliers",
+      "learning_objective": "Decide which of the two problems you actually have before choosing a detection method.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "dq-outliers-difference-between-outlier-novelty-detection",
+          "description": "State the difference between outlier and novelty detection in terms of what the training data contains.",
+          "evidence_terms": [
+            "difference",
+            "between",
+            "outlier",
+            "novelty",
+            "detection",
+            "terms",
+            "training",
+            "data",
+            "contains."
+          ]
+        },
+        {
+          "slug": "dq-outliers-given-described-situation-method-family",
+          "description": "Given a described situation, say which of the two it is and name a method family that fits.",
+          "evidence_terms": [
+            "given",
+            "described",
+            "situation",
+            "method",
+            "family",
+            "fits."
+          ]
+        },
+        {
+          "slug": "dq-outliers-read-method-comparison-figure-kind",
+          "description": "Read the method comparison figure and say what kind of data shape breaks a method that assumes an elliptical distribution.",
+          "evidence_terms": [
+            "read",
+            "method",
+            "comparison",
+            "figure",
+            "kind",
+            "data",
+            "shape",
+            "breaks",
+            "assumes",
+            "elliptical",
+            "distribution."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dq-class-imbalance": {
+      "topic_slug": "dq-class-imbalance",
+      "learning_objective": "Handle an imbalanced dataset without destroying calibration or leaking through resampling.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "dq-class-imbalance-accuracy-trivial-always-negative-classifier",
+          "description": "Say what accuracy a trivial always-negative classifier scores at 1:1000, and name the metric you would report instead.",
+          "evidence_terms": [
+            "accuracy",
+            "trivial",
+            "always-negative",
+            "classifier",
+            "scores",
+            "metric",
+            "would",
+            "report",
+            "instead."
+          ]
+        },
+        {
+          "slug": "dq-class-imbalance-upweighting-restores-after-downsampling-wrong",
+          "description": "Explain what upweighting restores after downsampling, and what is wrong with downsampling on its own.",
+          "evidence_terms": [
+            "upweighting",
+            "restores",
+            "after",
+            "downsampling",
+            "wrong",
+            "own."
+          ]
+        },
+        {
+          "slug": "dq-class-imbalance-resampling-must-happen-inside-cross",
+          "description": "State why resampling must happen inside the cross-validation fold, and describe what the score looks like when it does not.",
+          "evidence_terms": [
+            "resampling",
+            "must",
+            "happen",
+            "inside",
+            "cross-validation",
+            "fold",
+            "describe",
+            "score",
+            "looks",
+            "like",
+            "not."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "gbm-boosted-trees-theory": {
+      "topic_slug": "gbm-boosted-trees-theory",
+      "learning_objective": "Derive the split-gain formula and explain what the regularisation terms control.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "gbm-boosted-trees-theory-regularised-objective-leaf-weight-penalty",
+          "description": "Write the regularised objective and name what the leaf-weight penalty and the per-leaf cost each penalise.",
+          "evidence_terms": [
+            "regularised",
+            "objective",
+            "leaf-weight",
+            "penalty",
+            "per-leaf",
+            "cost",
+            "each",
+            "penalise."
+          ]
+        },
+        {
+          "slug": "gbm-boosted-trees-theory-second-order-taylor-expansion-used",
+          "description": "Explain why a second-order Taylor expansion is used, and what the Hessian contributes to the optimal leaf weight.",
+          "evidence_terms": [
+            "second-order",
+            "taylor",
+            "expansion",
+            "used",
+            "hessian",
+            "contributes",
+            "optimal",
+            "leaf",
+            "weight."
+          ]
+        },
+        {
+          "slug": "gbm-boosted-trees-theory-split-gain-formula-compares-per",
+          "description": "Say what the split-gain formula compares, and what the per-leaf cost term does to a marginal split.",
+          "evidence_terms": [
+            "split-gain",
+            "formula",
+            "compares",
+            "per-leaf",
+            "cost",
+            "term",
+            "marginal",
+            "split."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "gbm-xgboost-tuning": {
+      "topic_slug": "gbm-xgboost-tuning",
+      "learning_objective": "Tune a boosted-tree model by choosing parameters that address a diagnosed problem.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "gbm-xgboost-tuning-parameters-reduce-model-complexity-directly",
+          "description": "Name two parameters that reduce model complexity directly and two that add randomness, and say which you would reach for first when train and validation scores diverge.",
+          "evidence_terms": [
+            "parameters",
+            "reduce",
+            "model",
+            "complexity",
+            "directly",
+            "add",
+            "randomness",
+            "would",
+            "reach",
+            "first",
+            "train",
+            "validation"
+          ]
+        },
+        {
+          "slug": "gbm-xgboost-tuning-interaction-between-learning-rate-number",
+          "description": "Explain the interaction between learning rate and number of boosting rounds, and why early stopping is the honest way to set the latter.",
+          "evidence_terms": [
+            "interaction",
+            "between",
+            "learning",
+            "rate",
+            "number",
+            "boosting",
+            "rounds",
+            "early",
+            "stopping",
+            "honest",
+            "way",
+            "set"
+          ]
+        },
+        {
+          "slug": "gbm-xgboost-tuning-parameter-would-move-1-100",
+          "description": "Say which parameter you would move for a 1:100 imbalanced target, and what it changes in the objective.",
+          "evidence_terms": [
+            "parameter",
+            "would",
+            "move",
+            "imbalanced",
+            "target",
+            "changes",
+            "objective."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "gbm-lightgbm-mechanics": {
+      "topic_slug": "gbm-lightgbm-mechanics",
+      "learning_objective": "Explain why LightGBM is fast and what its growth strategy costs you.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "gbm-lightgbm-mechanics-histogram-binning-replaces-reduces-cost",
+          "description": "Explain what histogram binning replaces, and why it reduces the cost of split finding.",
+          "evidence_terms": [
+            "histogram",
+            "binning",
+            "replaces",
+            "reduces",
+            "cost",
+            "split",
+            "finding."
+          ]
+        },
+        {
+          "slug": "gbm-lightgbm-mechanics-contrast-leaf-wise-level-wise",
+          "description": "Contrast leaf-wise with level-wise growth and name the parameters you must set to stop leaf-wise growth overfitting.",
+          "evidence_terms": [
+            "contrast",
+            "leaf-wise",
+            "level-wise",
+            "growth",
+            "parameters",
+            "must",
+            "set",
+            "stop",
+            "overfitting."
+          ]
+        },
+        {
+          "slug": "gbm-lightgbm-mechanics-lightgbm-categorical-column-natively-differs",
+          "description": "Say what LightGBM does with a categorical column natively, and how that differs from one-hot encoding it.",
+          "evidence_terms": [
+            "lightgbm",
+            "categorical",
+            "column",
+            "natively",
+            "differs",
+            "one-hot",
+            "encoding",
+            "it."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "gbm-categorical-features": {
+      "topic_slug": "gbm-categorical-features",
+      "learning_objective": "Encode a high-cardinality categorical column for a tree model without leaking the target.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "gbm-categorical-features-hot-encoding-10-000-level",
+          "description": "Explain why one-hot encoding a 10,000-level column is the wrong move for a tree model.",
+          "evidence_terms": [
+            "one-hot",
+            "encoding",
+            "level",
+            "column",
+            "wrong",
+            "move",
+            "tree",
+            "model."
+          ]
+        },
+        {
+          "slug": "gbm-categorical-features-describe-partition-based-categorical-split",
+          "description": "Describe what a partition-based categorical split can do that a set of one-hot splits cannot.",
+          "evidence_terms": [
+            "describe",
+            "partition-based",
+            "categorical",
+            "split",
+            "set",
+            "one-hot",
+            "splits",
+            "cannot."
+          ]
+        },
+        {
+          "slug": "gbm-categorical-features-exactly-naive-target-encoding-leaks",
+          "description": "State exactly how naive target encoding leaks, and what ordered target statistics change about it.",
+          "evidence_terms": [
+            "exactly",
+            "naive",
+            "target",
+            "encoding",
+            "leaks",
+            "ordered",
+            "statistics",
+            "change",
+            "about",
+            "it."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "gbm-tabular-vs-deep-learning": {
+      "topic_slug": "gbm-tabular-vs-deep-learning",
+      "learning_objective": "Argue from published evidence why to reach for boosted trees on tabular data.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "gbm-tabular-vs-deep-learning-three-inductive-bias-explanations-paper",
+          "description": "Name the three inductive-bias explanations the paper gives, without falling back on \"deep learning needs more data\".",
+          "evidence_terms": [
+            "three",
+            "inductive-bias",
+            "explanations",
+            "paper",
+            "gives",
+            "without",
+            "falling",
+            "back",
+            "deep",
+            "learning",
+            "needs",
+            "more"
+          ]
+        },
+        {
+          "slug": "gbm-tabular-vs-deep-learning-rotation-non-invariance-buys-tree",
+          "description": "Explain what rotation non-invariance buys a tree model when many features are uninformative.",
+          "evidence_terms": [
+            "rotation",
+            "non-invariance",
+            "buys",
+            "tree",
+            "model",
+            "many",
+            "features",
+            "uninformative."
+          ]
+        },
+        {
+          "slug": "gbm-tabular-vs-deep-learning-condition-under-would-still-choose",
+          "description": "State one condition under which you would still choose a neural network for tabular data.",
+          "evidence_terms": [
+            "condition",
+            "under",
+            "would",
+            "still",
+            "choose",
+            "neural",
+            "network",
+            "tabular",
+            "data."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-why-random-splits-fail": {
+      "topic_slug": "ts-why-random-splits-fail",
+      "learning_objective": "Replace random splitting with a temporal split and explain what the random split was actually measuring.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-why-random-splits-fail-sentence-k-fold-temporal-data",
+          "description": "Explain in one sentence why K-fold on temporal data leaks, naming autocorrelation as the mechanism.",
+          "evidence_terms": [
+            "sentence",
+            "k-fold",
+            "temporal",
+            "data",
+            "leaks",
+            "naming",
+            "autocorrelation",
+            "mechanism."
+          ]
+        },
+        {
+          "slug": "ts-why-random-splits-fail-describe-time-series-split-differently",
+          "description": "Describe what a time-series split does differently, fold by fold.",
+          "evidence_terms": [
+            "describe",
+            "time-series",
+            "split",
+            "differently",
+            "fold",
+            "fold."
+          ]
+        },
+        {
+          "slug": "ts-why-random-splits-fail-gap-parameter-set-stated-forecast",
+          "description": "Say what the gap parameter is for, and set it from a stated forecast horizon.",
+          "evidence_terms": [
+            "gap",
+            "parameter",
+            "set",
+            "stated",
+            "forecast",
+            "horizon."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-rolling-origin-validation": {
+      "topic_slug": "ts-rolling-origin-validation",
+      "learning_objective": "Design a rolling-origin evaluation for a stated forecast horizon.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-rolling-origin-validation-draw-rolling-origin-scheme-five",
+          "description": "Draw the rolling-origin scheme for five origins and a horizon of three, marking the training and test points of each fold.",
+          "evidence_terms": [
+            "draw",
+            "rolling-origin",
+            "scheme",
+            "five",
+            "origins",
+            "horizon",
+            "three",
+            "marking",
+            "training",
+            "test",
+            "points",
+            "each"
+          ]
+        },
+        {
+          "slug": "ts-rolling-origin-validation-held-out-tail-worse-estimate",
+          "description": "Explain why one held-out tail is a worse estimate of forecast error than many origins.",
+          "evidence_terms": [
+            "held-out",
+            "tail",
+            "worse",
+            "estimate",
+            "forecast",
+            "error",
+            "many",
+            "origins."
+          ]
+        },
+        {
+          "slug": "ts-rolling-origin-validation-changes-scheme-horizon-twelve-steps",
+          "description": "Say what changes in the scheme when the horizon is twelve steps rather than one.",
+          "evidence_terms": [
+            "changes",
+            "scheme",
+            "horizon",
+            "twelve",
+            "steps",
+            "rather",
+            "one."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-forecasting-baselines": {
+      "topic_slug": "ts-forecasting-baselines",
+      "learning_objective": "Produce the four simple baselines and use them as the bar any model has to beat.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-forecasting-baselines-define-naive-seasonal-naive-mean",
+          "description": "Define the naive, seasonal-naive, mean and drift forecasts, each in one line.",
+          "evidence_terms": [
+            "define",
+            "naive",
+            "seasonal-naive",
+            "mean",
+            "drift",
+            "forecasts",
+            "each",
+            "line."
+          ]
+        },
+        {
+          "slug": "ts-forecasting-baselines-baseline-right-daily-series-weekly",
+          "description": "Say which baseline is the right one for a daily series with a weekly cycle, and why.",
+          "evidence_terms": [
+            "baseline",
+            "right",
+            "daily",
+            "series",
+            "weekly",
+            "cycle",
+            "why."
+          ]
+        },
+        {
+          "slug": "ts-forecasting-baselines-rule-will-hold-yourself-no",
+          "description": "State the rule you will hold yourself to: no model ships without beating a named baseline on the same evaluation.",
+          "evidence_terms": [
+            "rule",
+            "will",
+            "hold",
+            "yourself",
+            "model",
+            "ships",
+            "without",
+            "beating",
+            "named",
+            "baseline",
+            "evaluation."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-forecast-accuracy-metrics": {
+      "topic_slug": "ts-forecast-accuracy-metrics",
+      "learning_objective": "Choose a forecast error metric that survives comparison across series.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-forecast-accuracy-metrics-mape-actual-value-zero-near",
+          "description": "Say what MAPE does when an actual value is zero or near zero, and name a real series where that happens.",
+          "evidence_terms": [
+            "mape",
+            "actual",
+            "value",
+            "zero",
+            "near",
+            "real",
+            "series",
+            "where",
+            "happens."
+          ]
+        },
+        {
+          "slug": "ts-forecast-accuracy-metrics-mase-divides-division-makes-comparable",
+          "description": "Explain what MASE divides by, and why that division is what makes it comparable across series.",
+          "evidence_terms": [
+            "mase",
+            "divides",
+            "division",
+            "makes",
+            "comparable",
+            "across",
+            "series."
+          ]
+        },
+        {
+          "slug": "ts-forecast-accuracy-metrics-given-series-different-scales-pick",
+          "description": "Given two series on different scales, pick the metric you would average across them and justify the choice.",
+          "evidence_terms": [
+            "given",
+            "series",
+            "different",
+            "scales",
+            "pick",
+            "metric",
+            "would",
+            "average",
+            "across",
+            "them",
+            "justify",
+            "choice."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-stationarity-differencing": {
+      "topic_slug": "ts-stationarity-differencing",
+      "learning_objective": "Diagnose non-stationarity and apply the right differencing.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-stationarity-differencing-properties-stationary-series-has-ways",
+          "description": "State the properties a stationary series has, and name two ways a real series violates them.",
+          "evidence_terms": [
+            "properties",
+            "stationary",
+            "series",
+            "has",
+            "ways",
+            "real",
+            "violates",
+            "them."
+          ]
+        },
+        {
+          "slug": "ts-stationarity-differencing-read-acf-plot-whether-series",
+          "description": "Read an ACF plot and say whether the series needs differencing, seasonal differencing, or neither.",
+          "evidence_terms": [
+            "read",
+            "acf",
+            "plot",
+            "whether",
+            "series",
+            "needs",
+            "differencing",
+            "seasonal",
+            "neither."
+          ]
+        },
+        {
+          "slug": "ts-stationarity-differencing-first-difference-trend-seasonal-difference",
+          "description": "Explain what a first difference does to a trend and what a seasonal difference does to a yearly cycle.",
+          "evidence_terms": [
+            "first",
+            "difference",
+            "trend",
+            "seasonal",
+            "yearly",
+            "cycle."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ts-lag-and-calendar-features": {
+      "topic_slug": "ts-lag-and-calendar-features",
+      "learning_objective": "Build a correctly-validated ML forecasting pipeline out of timestamp features.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "ts-lag-and-calendar-features-sine-cosine-pair-encodes-about",
+          "description": "Explain what a sine/cosine pair encodes about hour-of-day that an integer column does not.",
+          "evidence_terms": [
+            "sine",
+            "cosine",
+            "pair",
+            "encodes",
+            "about",
+            "hour-of-day",
+            "integer",
+            "column",
+            "not."
+          ]
+        },
+        {
+          "slug": "ts-lag-and-calendar-features-engineered-features-would-leak-were",
+          "description": "Say which of your engineered features would leak if it were computed before the temporal split.",
+          "evidence_terms": [
+            "engineered",
+            "features",
+            "would",
+            "leak",
+            "were",
+            "computed",
+            "before",
+            "temporal",
+            "split."
+          ]
+        },
+        {
+          "slug": "ts-lag-and-calendar-features-report-model-family-won-series",
+          "description": "Report which model family won on your series and name the feature encoding that made the difference.",
+          "evidence_terms": [
+            "report",
+            "model",
+            "family",
+            "won",
+            "series",
+            "feature",
+            "encoding",
+            "made",
+            "difference."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlcicd-cd4ml": {
+      "topic_slug": "mlcicd-cd4ml",
+      "learning_objective": "Describe an end-to-end CD4ML pipeline and place a team on the MLOps maturity ladder.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "mlcicd-cd4ml-three-versioned-artifacts-breaks-any",
+          "description": "Name the three versioned artifacts and say what breaks if any one of them is unversioned.",
+          "evidence_terms": [
+            "three",
+            "versioned",
+            "artifacts",
+            "breaks",
+            "any",
+            "them",
+            "unversioned."
+          ]
+        },
+        {
+          "slug": "mlcicd-cd4ml-walk-technical-components-cd4ml-pipeline",
+          "description": "Walk the technical components of a CD4ML pipeline in order, from data pipeline through to production monitoring.",
+          "evidence_terms": [
+            "walk",
+            "technical",
+            "components",
+            "cd4ml",
+            "pipeline",
+            "order",
+            "data",
+            "through",
+            "production",
+            "monitoring."
+          ]
+        },
+        {
+          "slug": "mlcicd-cd4ml-place-team-know-mlops-level",
+          "description": "Place a team you know at MLOps level 0, 1 or 2 and name the specific automation that would move it up one level.",
+          "evidence_terms": [
+            "place",
+            "team",
+            "know",
+            "mlops",
+            "level",
+            "specific",
+            "automation",
+            "would",
+            "move",
+            "level."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlcicd-testing-ml-systems": {
+      "topic_slug": "mlcicd-testing-ml-systems",
+      "learning_objective": "Write ML tests that run in CI and say what each one would catch.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "mlcicd-testing-ml-systems-classify-given-test-pre-train",
+          "description": "Classify a given test as pre-train or post-train, and say which of the two can run without a trained model.",
+          "evidence_terms": [
+            "classify",
+            "given",
+            "test",
+            "pre-train",
+            "post-train",
+            "without",
+            "trained",
+            "model."
+          ]
+        },
+        {
+          "slug": "mlcicd-testing-ml-systems-invariance-test-directional-expectation-test",
+          "description": "Write one invariance test and one directional-expectation test for a model you know, stating the expected relation explicitly.",
+          "evidence_terms": [
+            "invariance",
+            "test",
+            "directional-expectation",
+            "model",
+            "know",
+            "stating",
+            "expected",
+            "relation",
+            "explicitly."
+          ]
+        },
+        {
+          "slug": "mlcicd-testing-ml-systems-pre-train-test-would-have",
+          "description": "Name a pre-train test that would have caught a leakage bug before any training ran.",
+          "evidence_terms": [
+            "pre-train",
+            "test",
+            "would",
+            "have",
+            "caught",
+            "leakage",
+            "bug",
+            "before",
+            "any",
+            "training",
+            "ran."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlcicd-production-readiness": {
+      "topic_slug": "mlcicd-production-readiness",
+      "learning_objective": "Score an ML system against the ML Test Score rubric and name its lowest-scoring section.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "mlcicd-production-readiness-four-rubric-sections-test-each",
+          "description": "Name the four rubric sections and one test from each.",
+          "evidence_terms": [
+            "four",
+            "rubric",
+            "sections",
+            "test",
+            "each."
+          ]
+        },
+        {
+          "slug": "mlcicd-production-readiness-score-system-know-across-all",
+          "description": "Score one system you know across all 28 items and state the final rubric score the scoring scheme produces.",
+          "evidence_terms": [
+            "score",
+            "system",
+            "know",
+            "across",
+            "all",
+            "items",
+            "final",
+            "rubric",
+            "scoring",
+            "scheme",
+            "produces."
+          ]
+        },
+        {
+          "slug": "mlcicd-production-readiness-cheapest-items-would-raise-score",
+          "description": "Name the two cheapest items that would raise that score, and say why they are cheap.",
+          "evidence_terms": [
+            "cheapest",
+            "items",
+            "would",
+            "raise",
+            "score",
+            "they",
+            "cheap."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlcicd-training-in-ci": {
+      "topic_slug": "mlcicd-training-in-ci",
+      "learning_objective": "Add a CI job that trains on a branch and reports metrics back into the pull request.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "mlcicd-training-in-ci-metrics-pr-comment-workflow-changes",
+          "description": "Explain what a metrics-in-the-PR-comment workflow changes about how a model change gets reviewed.",
+          "evidence_terms": [
+            "metrics-in-the-pr-comment",
+            "workflow",
+            "changes",
+            "about",
+            "model",
+            "change",
+            "gets",
+            "reviewed."
+          ]
+        },
+        {
+          "slug": "mlcicd-training-in-ci-workflow-permission-token-report-step",
+          "description": "Name the workflow permission and token the report step needs, and say why it needs them.",
+          "evidence_terms": [
+            "workflow",
+            "permission",
+            "token",
+            "report",
+            "step",
+            "needs",
+            "them."
+          ]
+        },
+        {
+          "slug": "mlcicd-training-in-ci-would-move-job-self-hosted",
+          "description": "Say when you would move the job to a self-hosted GPU runner, and what that costs you in operations.",
+          "evidence_terms": [
+            "would",
+            "move",
+            "job",
+            "self-hosted",
+            "gpu",
+            "runner",
+            "costs",
+            "operations."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "mlcicd-model-registry": {
+      "topic_slug": "mlcicd-model-registry",
+      "learning_objective": "Promote a model to production as a recorded, reversible decision rather than a file copy.",
+      "source": "AUTHORED_MASTERY_CRITERIA",
+      "required": [
+        {
+          "slug": "mlcicd-model-registry-alias-gives-bare-version-number",
+          "description": "Explain what an alias gives you that a bare version number does not, in deployment terms.",
+          "evidence_terms": [
+            "alias",
+            "gives",
+            "bare",
+            "version",
+            "number",
+            "deployment",
+            "terms."
+          ]
+        },
+        {
+          "slug": "mlcicd-model-registry-describe-would-roll-back-bad",
+          "description": "Describe how you would roll back a bad production model in the registry, and what record that rollback leaves behind.",
+          "evidence_terms": [
+            "describe",
+            "would",
+            "roll",
+            "back",
+            "bad",
+            "production",
+            "model",
+            "registry",
+            "record",
+            "rollback",
+            "leaves",
+            "behind."
+          ]
+        },
+        {
+          "slug": "mlcicd-model-registry-dvc-versions-model-registry-would",
+          "description": "Say what DVC versions that a model registry does not, and when you would want both.",
+          "evidence_terms": [
+            "dvc",
+            "versions",
+            "model",
+            "registry",
+            "would",
+            "want",
+            "both."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-awareness": {
+      "topic_slug": "dl-awareness",
+      "learning_objective": "Neural nets stack differentiable layers to learn representations.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "dl-awareness-differentiable-layer-stacking-them-lets",
+          "description": "Say what a differentiable layer is, and why stacking them lets a network learn features instead of being given them.",
+          "evidence_terms": [
+            "differentiable",
+            "layer",
+            "stacking",
+            "them",
+            "lets",
+            "network",
+            "learn",
+            "features",
+            "instead",
+            "being",
+            "given",
+            "them."
+          ]
+        },
+        {
+          "slug": "dl-awareness-problem-where-deep-learning-wrong",
+          "description": "Name one problem where deep learning is the wrong tool and a simpler model is the right one.",
+          "evidence_terms": [
+            "problem",
+            "where",
+            "deep",
+            "learning",
+            "wrong",
+            "tool",
+            "simpler",
+            "model",
+            "right",
+            "one."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-path": {
+      "topic_slug": "dl-path",
+      "learning_objective": "Sketch a personal learning path into Deep Learning after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "dl-path-order-these-justify-order-linear",
+          "description": "Order these and justify the order: linear models, gradient descent, backpropagation, CNNs, transformers.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "linear",
+            "models",
+            "gradient",
+            "descent",
+            "backpropagation",
+            "cnns",
+            "transformers."
+          ]
+        },
+        {
+          "slug": "dl-path-part-maths-need-before-backpropagation",
+          "description": "Say which part of the maths you need before backpropagation makes sense, and which parts can wait.",
+          "evidence_terms": [
+            "part",
+            "maths",
+            "need",
+            "before",
+            "backpropagation",
+            "makes",
+            "sense",
+            "parts",
+            "wait."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "nlp-awareness": {
+      "topic_slug": "nlp-awareness",
+      "learning_objective": "NLP turns text into tokens and models meaning.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "nlp-awareness-trace-text-through-tokenisation-vector",
+          "description": "Trace text through tokenisation to a vector, and say what is lost at each step.",
+          "evidence_terms": [
+            "trace",
+            "text",
+            "through",
+            "tokenisation",
+            "vector",
+            "lost",
+            "each",
+            "step."
+          ]
+        },
+        {
+          "slug": "nlp-awareness-task-where-word-order-changes",
+          "description": "Name a task where word order changes the answer, and one where it does not.",
+          "evidence_terms": [
+            "task",
+            "where",
+            "word",
+            "order",
+            "changes",
+            "answer",
+            "not."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "nlp-path": {
+      "topic_slug": "nlp-path",
+      "learning_objective": "Sketch a personal learning path into NLP after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "nlp-path-order-these-justify-order-bag",
+          "description": "Order these and justify the order: bag of words, TF-IDF, embeddings, attention, transformers.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "bag",
+            "words",
+            "tf-idf",
+            "embeddings",
+            "attention",
+            "transformers."
+          ]
+        },
+        {
+          "slug": "nlp-path-classical-text-representations-still-worth",
+          "description": "Say why classical text representations are still worth learning after transformers exist.",
+          "evidence_terms": [
+            "classical",
+            "text",
+            "representations",
+            "still",
+            "worth",
+            "learning",
+            "after",
+            "transformers",
+            "exist."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "genai-awareness": {
+      "topic_slug": "genai-awareness",
+      "learning_objective": "Generative models produce text/images from prompts and training data.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "genai-awareness-generative-model-doing-inference-terms",
+          "description": "Say what a generative model is doing at inference, in terms of a distribution over next tokens.",
+          "evidence_terms": [
+            "generative",
+            "model",
+            "doing",
+            "inference",
+            "terms",
+            "distribution",
+            "over",
+            "next",
+            "tokens."
+          ]
+        },
+        {
+          "slug": "genai-awareness-task-where-generative-model-wrong",
+          "description": "Name a task where a generative model is the wrong choice because the answer must be exactly right.",
+          "evidence_terms": [
+            "task",
+            "where",
+            "generative",
+            "model",
+            "wrong",
+            "choice",
+            "because",
+            "answer",
+            "must",
+            "exactly",
+            "right."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "genai-path": {
+      "topic_slug": "genai-path",
+      "learning_objective": "Sketch a personal learning path into Generative AI after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "genai-path-order-these-justify-order-prompting",
+          "description": "Order these and justify the order: prompting, retrieval, evaluation, fine-tuning.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "prompting",
+            "retrieval",
+            "evaluation",
+            "fine-tuning."
+          ]
+        },
+        {
+          "slug": "genai-path-fine-tuning-usually-last-thing",
+          "description": "Say why fine-tuning is usually the last thing to reach for rather than the first.",
+          "evidence_terms": [
+            "fine-tuning",
+            "usually",
+            "last",
+            "thing",
+            "reach",
+            "rather",
+            "first."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ai-eng-awareness": {
+      "topic_slug": "ai-eng-awareness",
+      "learning_objective": "AI engineering ships reliable LLM features with evals and ops.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "ai-eng-awareness-ai-engineer-responsible-model-researcher",
+          "description": "Say what an AI engineer is responsible for that a model researcher is not.",
+          "evidence_terms": [
+            "engineer",
+            "responsible",
+            "model",
+            "researcher",
+            "not."
+          ]
+        },
+        {
+          "slug": "ai-eng-awareness-things-make-llm-feature-shippable",
+          "description": "Name the two things that make an LLM feature shippable rather than a demo: evaluation, and knowing what it does when it fails.",
+          "evidence_terms": [
+            "things",
+            "make",
+            "llm",
+            "feature",
+            "shippable",
+            "rather",
+            "demo",
+            "evaluation",
+            "knowing",
+            "fails."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ai-eng-path": {
+      "topic_slug": "ai-eng-path",
+      "learning_objective": "Sketch a personal learning path into AI Engineering after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "ai-eng-path-order-these-justify-order-prompting",
+          "description": "Order these and justify the order: prompting, structured output, tool calling, retrieval, evaluation, monitoring.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "prompting",
+            "structured",
+            "output",
+            "tool",
+            "calling",
+            "retrieval",
+            "evaluation",
+            "monitoring."
+          ]
+        },
+        {
+          "slug": "ai-eng-path-those-skip-prototype-cannot-skip",
+          "description": "Say which of those you can skip for a prototype and which you cannot skip for production.",
+          "evidence_terms": [
+            "those",
+            "skip",
+            "prototype",
+            "cannot",
+            "production."
+          ]
+        }
+      ],
+      "optional": []
     }
-  }
+  },
+  "generated_from_mastery": 8
 }

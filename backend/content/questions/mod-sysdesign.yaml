@@ -1,0 +1,311 @@
+# System Design self-check questions.
+#
+# Grounded in the System Design Primer sections each topic maps to, plus the
+# Google SRE monitoring chapter for observability. Every question stays inside
+# its own topic and leans on the trade-off the resource actually argues about.
+schema_version: 1
+kind: question_bank
+module: mod-sysdesign
+topics:
+  - topic: sys-scalability
+    # Source: System Design Primer - performance vs scalability, latency vs throughput, scaling
+    questions:
+      - id: sys-scal-perf-vs-scale
+        prompt: "A page loads in 200 ms for a single user but takes 8 seconds once a thousand users are on it. Which problem is that?"
+        options:
+          - "A scalability problem: it is fast when idle and degrades as load is added"
+          - "A performance problem: the service is simply slow, and extra capacity cannot help"
+          - "A latency problem only, so moving servers closer to the users is the fix"
+          - "An availability problem, since the service is failing to answer some requests"
+        answer: "A scalability problem: it is fast when idle and degrades as load is added"
+        explanation: >-
+          The primer splits the two: slow for one user is a performance problem, fast for one
+          and slow under load is a scalability problem. Nothing here is slow when idle, so it is
+          not raw performance. Geography does not explain load-dependent slowness, and
+          availability describes requests that fail rather than requests that crawl.
+        difficulty: beginner
+        mastery: true
+      - id: sys-scal-latency-throughput
+        prompt: "You must handle far more requests per second without making any single request feel slower. How is that goal framed?"
+        options:
+          - "Maximise throughput while holding latency inside an acceptable bound per request"
+          - "Minimise latency first and accept whatever throughput the current hardware gives"
+          - "Maximise throughput and treat per-request latency as a figure you cannot influence"
+          - "Treat latency and throughput as one measurement expressed in two different units"
+        answer: "Maximise throughput while holding latency inside an acceptable bound per request"
+        explanation: >-
+          The primer's aim is maximum throughput with acceptable latency, because the two are
+          separate and pull against each other. Chasing latency alone leaves capacity unused,
+          ignoring latency ships a system nobody wants to use, and the two are not interchangeable:
+          latency is time per request, throughput is requests per unit of time.
+        difficulty: intermediate
+      - id: sys-scal-writes-replicas-shards
+        prompt: "Writes are saturating your single database. Do read replicas or partitioning address that, and why?"
+        options:
+          - "Partitioning: each shard absorbs part of the writes, while every replica applies all of them"
+          - "Read replicas: moving queries off the primary frees it to absorb far more writes"
+          - "Read replicas: each replica accepts writes directly, so write load divides between them"
+          - "Neither: write throughput is fixed by the storage engine, so only faster disks help"
+        answer: "Partitioning: each shard absorbs part of the writes, while every replica applies all of them"
+        explanation: >-
+          Replication copies every write to every replica, so replicas raise read capacity and leave
+          write capacity untouched. Sharding splits the keyspace, which is what divides write volume.
+          Standard replicas are read-only, so they cannot take writes directly, and faster disks only
+          raise the ceiling on one machine rather than removing it.
+        difficulty: advanced
+        mastery: true
+      - id: sys-scal-replication-lag
+        prompt: "A user saves a profile change, the next page is served by a read replica, and the old value appears. What is happening?"
+        options:
+          - "Replication lag: the write landed on the primary and has not reached that replica yet"
+          - "The write failed silently, because a primary rejects writes while replicas catch up"
+          - "The replica holds an independent copy refreshed only when its own entry expires"
+          - "The read came from the content delivery network, the one layer that can be stale"
+        answer: "Replication lag: the write landed on the primary and has not reached that replica yet"
+        explanation: >-
+          Asynchronous replication means a replica can serve data that is a moment behind the primary,
+          which is exactly the read-after-write symptom described. The primary does not reject writes
+          during replication, replicas are fed by the replication stream rather than by expiry, and a
+          database replica is stale here whether or not any cache sits in front of it.
+        difficulty: intermediate
+      - id: sys-scal-horizontal-cost
+        prompt: "You pick horizontal scaling over one much larger machine. Which cost does that choice bring?"
+        options:
+          - "Complexity: cloned servers must stay stateless and sit behind a load balancer"
+          - "A hard capacity ceiling, since commodity machines cannot be added past a limit"
+          - "Losing relational databases entirely, as they cannot run behind a load balancer"
+          - "Higher hardware cost per machine, since commodity boxes are priced above big ones"
+        answer: "Complexity: cloned servers must stay stateless and sit behind a load balancer"
+        explanation: >-
+          The primer's trade is that horizontal scaling is cheaper per unit of capacity but adds
+          operational complexity, and session state has to move out of the application servers.
+          The hard ceiling and the higher per-machine price belong to vertical scaling, and
+          relational databases run behind load balancers routinely.
+        difficulty: intermediate
+
+  - topic: sys-caching
+    # Source: System Design Primer - cache, cache-aside, write-through, write-behind, refresh-ahead
+    questions:
+      - id: sys-cache-buys-and-costs
+        prompt: "Putting a cache in front of your database cuts read latency sharply. Which new problem have you taken on?"
+        options:
+          - "Keeping the cached copy in step with the database, which is the invalidation problem"
+          - "Losing analytical queries, because reads no longer arrive at the database at all"
+          - "A permanent rise in write latency, since writes are now acknowledged twice over"
+          - "Slower reads on a hit, because two systems are consulted rather than only one"
+        answer: "Keeping the cached copy in step with the database, which is the invalidation problem"
+        explanation: >-
+          A cache buys latency and load relief by holding a second copy, and a second copy has to be
+          invalidated when the first changes. Analytical queries still reach the database directly, a
+          read cache does not touch the write path unless you choose write-through, and a cache hit is
+          faster than a database read, which is the entire point.
+        difficulty: beginner
+        mastery: true
+      - id: sys-cache-aside-stale
+        prompt: "Under cache-aside your code writes to the database and leaves the cached entry alone. What does the next reader see?"
+        options:
+          - "The stale cached value, until that key expires or your code evicts it explicitly"
+          - "The fresh row, because a cache-aside read consults the database before the cache"
+          - "An error, since a cache-aside client refuses a key whose row has just changed"
+          - "The fresh row, because the database pushes an invalidation on every write it takes"
+        answer: "The stale cached value, until that key expires or your code evicts it explicitly"
+        explanation: >-
+          Cache-aside puts invalidation in the application's hands, so a write that skips the eviction
+          leaves a stale entry serving reads. Reads check the cache first, which is what makes it a
+          cache. Nothing errors on a changed row, and an ordinary database publishes no invalidation
+          messages to the cache on your behalf.
+        difficulty: intermediate
+      - id: sys-cache-write-through-tradeoff
+        prompt: "What does write-through caching buy you, and what do you pay for it?"
+        options:
+          - "Reads never see a stale entry, but each write must update two stores in turn"
+          - "Writes finish faster, though a crash loses entries that were never flushed on"
+          - "Cache misses vanish completely, at the price of holding all data in memory"
+          - "Reads speed up over time, but the first read of a key rebuilds the whole cache"
+        answer: "Reads never see a stale entry, but each write must update two stores in turn"
+        explanation: >-
+          Write-through updates cache and database together, so the copies agree and writes carry the
+          extra hop. Faster writes with a loss window describe write-behind instead. Misses still occur
+          for keys never written through, and a single miss repopulates one key rather than the
+          entire cache.
+        difficulty: intermediate
+      - id: sys-cache-write-behind-risk
+        prompt: "Write-behind caching acknowledges a write as soon as the cache accepts it. Which failure are you accepting?"
+        options:
+          - "A cache node dying before it flushes takes the unpersisted writes down with it"
+          - "Reads returning values older than the cache, since the database holds the newer copy"
+          - "Write latency climbing, because pending writes are drained before each response"
+          - "The database refusing the batch, since it cannot accept writes that arrive late"
+        answer: "A cache node dying before it flushes takes the unpersisted writes down with it"
+        explanation: >-
+          Write-behind trades durability for write latency: the acknowledged data lives only in the
+          cache until the asynchronous flush completes. The cache holds the newer copy, not the older
+          one, latency is low precisely because the drain is deferred, and databases accept
+          late-arriving batched writes without complaint.
+        difficulty: advanced
+      - id: sys-cache-hot-key-expiry
+        prompt: "One very popular key expires and thousands of concurrent requests miss at the same instant. What follows, and what helps?"
+        options:
+          - "They all reach the database together; refreshing hot keys before expiry avoids the pile-up"
+          - "They all return empty results; a longer time to live on every key removes the risk"
+          - "They queue inside the cache client; adding cache nodes lets that queue drain faster"
+          - "They each store a different value; excluding hot keys from the cache is the only fix"
+        answer: "They all reach the database together; refreshing hot keys before expiry avoids the pile-up"
+        explanation: >-
+          Simultaneous misses on one hot key send the whole burst to the origin, which is why the primer
+          suggests refresh-ahead for keys you know are hot. A miss triggers a database read rather than
+          an empty answer, extra cache nodes do not stop a synchronised expiry, and abandoning the
+          cache for your hottest keys gives up the benefit you most need.
+        difficulty: advanced
+        mastery: true
+
+  - topic: sys-queues
+    # Source: System Design Primer - message queues, task queues, back pressure
+    questions:
+      - id: sys-queue-changes-failure-mode
+        prompt: "Adding a queue between a web request and slow image processing does not make the processing faster. What does it change?"
+        options:
+          - "The request returns once the job is enqueued, so overload appears as delay not errors"
+          - "The processing itself runs faster, because the queue batches jobs into larger units"
+          - "Failures disappear, since the queue retries each job until it eventually succeeds"
+          - "The user receives the finished image sooner, as queued work is given priority"
+        answer: "The request returns once the job is enqueued, so overload appears as delay not errors"
+        explanation: >-
+          A queue decouples the request from the work, so a backlog shows up as growing latency on the
+          result instead of timeouts on the request. It does not speed up the worker or batch anything by
+          itself, retries can still exhaust and dead-letter, and the finished image arrives later than it
+          would from a synchronous call, not sooner.
+        difficulty: intermediate
+        mastery: true
+      - id: sys-queue-back-pressure
+        prompt: "Producers are enqueuing faster than consumers drain and the backlog keeps growing. What is the recommended response?"
+        options:
+          - "Apply back pressure: bound the queue so producers slow down or shed work"
+          - "Add consumers without limit, since any queue that grows can be drained later"
+          - "Remove the queue and call the consumer directly, so pressure is felt at once"
+          - "Raise the size limit whenever it fills, so that no job is ever turned away"
+        answer: "Apply back pressure: bound the queue so producers slow down or shed work"
+        explanation: >-
+          An unbounded queue converts overload into unbounded latency and eventual memory exhaustion,
+          so the primer bounds it and pushes back on producers. More consumers help only if the
+          bottleneck is consumer capacity rather than a downstream limit, a direct call trades the
+          backlog for outright failures, and raising the ceiling each time simply defers the collapse.
+        difficulty: advanced
+      - id: sys-queue-at-least-once
+        prompt: "Your worker occasionally processes the same message twice. What does that say about the delivery guarantee and your handler?"
+        options:
+          - "Delivery is at-least-once, so the handler must be idempotent to survive redelivery"
+          - "Delivery is broken, so acknowledge each message before doing any of the work"
+          - "The producer is enqueuing duplicates, so deduplicating at the producer suffices"
+          - "Delivery is exactly-once, so a duplicate means two workers share one queue name"
+        answer: "Delivery is at-least-once, so the handler must be idempotent to survive redelivery"
+        explanation: >-
+          Redelivery after a lost acknowledgement is normal in at-least-once systems, and the fix lives
+          in the consumer as an idempotency key or a conditional write. Acknowledging first converts
+          duplicates into lost work. The duplicate originates in redelivery rather than the producer, and
+          sharing a queue is how consumers scale, not a bug.
+        difficulty: advanced
+      - id: sys-queue-ordering-loss
+        prompt: "Ten workers consume a single task queue in parallel. Which assumption must you give up?"
+        options:
+          - "That related jobs complete in the order they were enqueued, since workers run concurrently"
+          - "That any job runs at all, because a shared queue delivers each message to every consumer"
+          - "That jobs are durable, because a queue retains a message only while a worker sits idle"
+          - "That a job runs once, because concurrent workers always pull the same message together"
+        answer: "That related jobs complete in the order they were enqueued, since workers run concurrently"
+        explanation: >-
+          Parallel consumers finish at different times, so global ordering is the casualty and ordering
+          needs a per-key partition or a single consumer. A work queue delivers each message to one
+          consumer rather than to all of them, durability comes from the broker's storage regardless of
+          worker state, and brokers hand a given message to one worker at a time.
+        difficulty: intermediate
+      - id: sys-queue-wrong-fit
+        prompt: "Which piece of work is a poor candidate for pushing onto an asynchronous queue?"
+        options:
+          - "A password check the caller needs answered before the page can render at all"
+          - "Resizing an uploaded photograph into four thumbnail sizes for later display"
+          - "Sending a welcome email once an account has been created for the caller"
+          - "Rebuilding a search index after a batch of documents is imported overnight"
+        answer: "A password check the caller needs answered before the page can render at all"
+        explanation: >-
+          Queues suit work whose result the caller does not need immediately. Authentication blocks the
+          response, so deferring it buys nothing and adds a hop. Thumbnailing, transactional email and
+          index rebuilds all tolerate seconds or minutes of delay, which is precisely the property that
+          makes them good queue candidates.
+        difficulty: beginner
+
+  - topic: sys-observability-design
+    # Source: Google SRE Book - Monitoring Distributed Systems
+    questions:
+      - id: sys-obs-metric-over-log
+        prompt: "Latency has doubled and you hold a log line for every request. What does a time-series metric add that those logs do not?"
+        options:
+          - "An aggregate you can graph and alert on, without reading individual request records"
+          - "The exact sequence of calls one slow request made, with time spent in each service"
+          - "The stack trace of the failing call, which makes the underlying cause obvious"
+          - "A guarantee that every request is recorded, which sampled logging cannot offer"
+        answer: "An aggregate you can graph and alert on, without reading individual request records"
+        explanation: >-
+          Metrics are cheap pre-aggregated time series, so they answer how the system is behaving overall
+          and can drive alerts. The per-request call sequence is what a trace provides, a stack trace is
+          a log or exception artefact, and completeness is a property of your logging configuration
+          rather than something metrics supply.
+        difficulty: intermediate
+        mastery: true
+      - id: sys-obs-trace-localises
+        prompt: "One user request crosses six services and something in the chain is slow. Which signal isolates the slow hop?"
+        options:
+          - "A distributed trace, which records the span each service contributed to that request"
+          - "A chart of per-service error rates, showing which service returns failures now"
+          - "A saturation metric per host, reporting how full the busiest resource has become"
+          - "The entry-point service log, which records the total time that service observed"
+        answer: "A distributed trace, which records the span each service contributed to that request"
+        explanation: >-
+          Only a trace stitches one request's spans together with per-hop timings, which is what
+          localises latency across services. Error rates say nothing about a slow but successful call,
+          saturation hints at a cause without attributing the request, and the entry-point log gives the
+          total without the breakdown.
+        difficulty: intermediate
+      - id: sys-obs-golden-signals
+        prompt: "The chapter names four golden signals to monitor. Which of these is one of them, and what does it measure?"
+        options:
+          - "Saturation: how full the most constrained resource of the service has become"
+          - "Deploy frequency: how often new code reaches production in a working week"
+          - "Code coverage: how much of the service its automated test suite exercises"
+          - "Ticket volume: how many support requests the service produced in a day"
+        answer: "Saturation: how full the most constrained resource of the service has become"
+        explanation: >-
+          The four signals are latency, traffic, errors and saturation, all measured on the serving path.
+          Deploy frequency and code coverage describe your delivery process rather than the running
+          service, and ticket volume is a lagging business indicator that tells you nothing about which
+          resource is close to its limit.
+        difficulty: beginner
+      - id: sys-obs-tail-percentiles
+        prompt: "Mean latency looks flat on the dashboard while users insist the service is slow. Where does the chapter send you?"
+        options:
+          - "To the tail percentiles, because an average conceals a slow minority of requests"
+          - "To the request count, because heavier traffic always explains a felt slowdown"
+          - "To a longer averaging window, because short windows make means look unstable"
+          - "To the error rate alone, because a slow request eventually fails with a timeout"
+        answer: "To the tail percentiles, because an average conceals a slow minority of requests"
+        explanation: >-
+          A mean is dominated by the fast majority, so the chapter insists on distributions and high
+          percentiles where user pain lives. Traffic volume is not itself a latency measurement,
+          a longer window smooths the tail away even further, and many slow requests succeed and so
+          never appear in the error rate.
+        difficulty: advanced
+      - id: sys-obs-page-on-symptoms
+        prompt: "Which alert matches the chapter's guidance about what deserves to wake a human?"
+        options:
+          - "Serving latency beyond its objective for ten minutes, because users feel it now"
+          - "A replica at eighty percent memory, because that condition will cause trouble soon"
+          - "A nightly batch finishing later than usual, because the trend may keep growing"
+          - "Any single request returning a server error, because errors must be examined"
+        answer: "Serving latency beyond its objective for ten minutes, because users feel it now"
+        explanation: >-
+          The chapter pages on symptoms that users experience and leaves causes on dashboards for
+          diagnosis. Replica memory is a cause that may never turn into a symptom, a late batch job is
+          not user-visible urgency, and paging on one error trains the on-call engineer to ignore the
+          pager entirely.
+        difficulty: advanced
+        mastery: true

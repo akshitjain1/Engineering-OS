@@ -1,0 +1,447 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-devops
+    name: DevOps & Platform
+    description: DevOps & Platform
+    order: 10
+    subjects:
+    - slug: devops-platform
+      name: DevOps and Platform Engineering
+      order: 0
+      modules:
+      - slug: mod-cloud
+        name: Cloud for AI workloads
+        description: Service models, object storage, GPU instances, memory sizing, managed inference and
+          cost control.
+        order: 1
+        topics:
+        - slug: cloud-service-models
+          name: Cloud service models
+          description: The vendor-neutral definitions of IaaS, PaaS and SaaS and the five essential characteristics
+            of cloud computing.
+          order: 0
+          prerequisites:
+          - net-internet-basics
+          - net-http
+          - devops-awareness
+          learning_objective: Classify any cloud offering as IaaS, PaaS or SaaS and name what the provider
+            takes responsibility for.
+          mastery_criteria:
+          - List the five essential characteristics from NIST SP 800-145 without looking them up.
+          - Given an offering such as EC2, a SageMaker endpoint or a hosted chat product, say which service
+            model it is and where the responsibility boundary sits.
+          - Explain why something a vendor calls cloud may fail the on-demand self-service characteristic.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: AWARENESS
+          parallel_eligible: false
+          estimated_minutes: 15
+          domain_key: devops
+          lessons:
+          - slug: cloud-service-models-core
+            title: Cloud service models
+            description: 'WHY NOW: Classify any cloud offering as IaaS, PaaS or SaaS and name what the
+              provider takes responsibility for.
+
+
+              LEARN: NIST — https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
+
+              TIME: ~15 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: classify five services you already use against the three models and the
+              five characteristics. HOW MANY: 5 services. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 5
+
+              BUILD: IMPLEMENT: a five-row table of service, service model, and who operates what.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.25
+            resources:
+            - slug: cloud-service-models-primary
+              title: The NIST Definition of Cloud Computing (SP 800-145)
+              type: specification
+              url: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
+              provider: NIST
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE (7 pp., ~2 pp. of substance)
+              description: The genuinely vendor-neutral definition of IaaS/PaaS/SaaS and the five essential
+                characteristics - three pages that immunise you against every vendor's redefinition of
+                the same words.
+            - slug: cloud-service-models-reference
+              title: SP 800-145, The NIST Definition of Cloud Computing | CSRC
+              type: documentation
+              url: https://csrc.nist.gov/pubs/sp/800/145/final
+              provider: NIST
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Landing page with abstract and citation, to confirm the document's status.
+        - slug: cloud-object-storage
+          name: Object storage
+          description: Buckets, keys, regions, durability and storage classes - the mental model for where
+            datasets, checkpoints and model artifacts live.
+          order: 1
+          prerequisites:
+          - cloud-service-models
+          - cf-filesystems
+          - net-http
+          learning_objective: Explain how object storage differs from a filesystem and decide where ML
+            artifacts belong.
+          mastery_criteria:
+          - Name three things a bucket does not give you that a POSIX filesystem does, such as rename,
+            partial write, or real directories.
+          - Explain what a key prefix is and why it is not a directory.
+          - Pick a storage class for a training dataset read once a month, and justify the choice against
+            one read once an hour.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 15
+          domain_key: devops
+          lessons:
+          - slug: cloud-object-storage-core
+            title: Object storage
+            description: 'WHY NOW: Explain how object storage differs from a filesystem and decide where
+              ML artifacts belong.
+
+
+              LEARN: Amazon Web Services — https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+
+              TIME: ~15 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write the object-storage URI, region and storage class you would use for
+              a raw dataset, a training checkpoint and a served model artifact. HOW MANY: 3 URIs. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: a three-line artifact layout for one project with the key prefixes chosen
+              deliberately.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.25
+            resources:
+            - slug: cloud-object-storage-primary
+              title: What is Amazon S3?
+              type: documentation
+              url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+              provider: Amazon Web Services
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Buckets, keys, regions, durability and storage classes - the mental model for
+                where datasets, checkpoints and model artifacts live in every ML system you will join.
+                S3's vocabulary is the de facto standard even on other clouds.
+        - slug: cloud-gpu-instances
+          name: GPU instance types
+          description: 'Reading an accelerated-computing instance table on two clouds: family letters,
+            GPU model, GPU count and GPU memory per row.'
+          order: 2
+          prerequisites:
+          - cloud-service-models
+          - cf-ram
+          learning_objective: Turn a requirement like "one GPU with 24 GB" into a specific instance type.
+          mastery_criteria:
+          - Say what the P and G families are each intended for on EC2 and name one instance from each.
+          - Read GPU count and GPU memory off a table row without reading the surrounding prose.
+          - Given an AWS instance name, say what you must look up to find its Google Cloud equivalent
+            - and why the GPU model, not the instance name, is the thing that transfers.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: devops
+          lessons:
+          - slug: cloud-gpu-instances-core
+            title: GPU instance types
+            description: 'WHY NOW: Turn a requirement like "one GPU with 24 GB" into a specific instance
+              type.
+
+
+              LEARN: Amazon Web Services — https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: find the smallest instance on each of the two clouds that gives you a single
+              GPU with at least 24 GB of GPU memory. HOW MANY: 2 instances. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a two-row table of instance name, GPU model, GPU count and GPU memory.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: cloud-gpu-instances-primary
+              title: Specifications for Amazon EC2 accelerated computing instances
+              type: documentation
+              url: https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html
+              provider: Amazon Web Services
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: 'FULL_SINGLE_PAGE — reference tables; skim, do not memorise. Goal: learn the family
+                letters (P = training, G = inference/graphics) and read GPU count + GPU memory off a row'
+              description: Turns "I need a GPU" into "I need 1xA10G with 24 GB, so g5.xlarge". This is
+                the actual menu you order from, not a marketing page.
+            - slug: cloud-gpu-instances-reference
+              title: GPU machine types
+              type: documentation
+              url: https://docs.cloud.google.com/compute/docs/gpus
+              provider: Google Cloud
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE (skim)
+              description: 'The same menu with different names; reading both is how you learn that the
+                GPU model matters and the instance name does not. Note the docs. host: cloud.google.com
+                now 301s to docs.cloud.google.com, so the docs. form is stored here.'
+        - slug: cloud-gpu-memory-sizing
+          name: GPU memory sizing
+          description: Breaking GPU memory into weights, optimiser state, gradients and activations, with
+            real measurements, so you can answer "will this fit?" before paying for the instance.
+          order: 3
+          prerequisites:
+          - cloud-gpu-instances
+          - cf-bits-and-bytes
+          learning_objective: Estimate the GPU memory a training or inference run needs and compare it
+            to an instance's capacity.
+          mastery_criteria:
+          - List the four consumers of GPU memory during training and say which one scales with batch
+            size.
+          - Estimate the bytes of weights for a 7B-parameter model at fp16 and at int8, and say why an
+            Adam optimiser multiplies the training figure.
+          - Explain why inference memory is far smaller than training memory for the same model.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: devops
+          lessons:
+          - slug: cloud-gpu-memory-sizing-core
+            title: GPU memory sizing
+            description: 'WHY NOW: Estimate the GPU memory a training or inference run needs and compare
+              it to an instance''s capacity.
+
+
+              LEARN: Hugging Face — https://huggingface.co/docs/transformers/en/model_memory_anatomy
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: estimate training and inference memory for one model you care about, then
+              check your figure against the model memory estimator. HOW MANY: 2 estimates. WHERE: notes
+              plus browser.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: an arithmetic breakdown of weights, optimiser state, gradients and activations,
+              with your instance choice written at the bottom.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: cloud-gpu-memory-sizing-primary
+              title: GPU memory usage
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/model_memory_anatomy
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Breaks GPU memory into weights + optimiser state + gradients + activations
+                with real measurements - the only way to answer "will this fit?" before you pay for the
+                instance.
+            - slug: cloud-gpu-memory-sizing-reference
+              title: Model memory estimator
+              type: documentation
+              url: https://huggingface.co/docs/accelerate/en/usage_guides/model_size_estimator
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The tool that does the arithmetic for a specific checkpoint, once you understand
+                the arithmetic.
+        - slug: cloud-managed-inference
+          name: Managed inference endpoints
+          description: What a managed real-time endpoint gives you (an endpoint, autoscaling, traffic
+            variants for A/B) and what it costs you (always-on instances), at two very different ceremony
+            levels.
+          order: 4
+          prerequisites:
+          - mlops-serving
+          - be-rest
+          learning_objective: Decide between a managed endpoint and self-hosted serving for a given workload.
+          mastery_criteria:
+          - Name two things a managed endpoint does for you that you would otherwise have to build.
+          - State the cost model of an always-on real-time endpoint and name one workload shape where
+            it is the wrong choice.
+          - Explain what a traffic variant is used for and how you would use one to ship a model change
+            safely.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: devops
+          lessons:
+          - slug: cloud-managed-inference-core
+            title: Managed inference endpoints
+            description: 'WHY NOW: Decide between a managed endpoint and self-hosted serving for a given
+              workload.
+
+
+              LEARN: Amazon SageMaker AI — https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write the build-versus-rent argument for one model you would deploy, with
+              the monthly always-on instance cost as the number that decides it. HOW MANY: 1 decision
+              note. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a short decision note naming the endpoint type, the instance, and the
+              request rate at which self-hosting starts to win.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: cloud-managed-inference-primary
+              title: Real-time inference
+              type: documentation
+              url: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html
+              provider: Amazon SageMaker AI
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: What managed inference gives you (endpoint, autoscaling, variants for A/B)
+                and what it costs you (always-on instances) - the build-vs-rent decision in concrete terms.
+            - slug: cloud-managed-inference-reference
+              title: Inference Endpoints
+              type: documentation
+              url: https://huggingface.co/docs/inference-endpoints/index
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The same idea at a much lower ceremony level, which is what an AI engineer
+                prototyping an LLM feature would actually reach for.
+        - slug: cloud-cost-control
+          name: Cost control for GPU workloads
+          description: 'Spot instances and interruption handling as the biggest lever on GPU cost, plus
+            the vocabulary of cost discipline. Honest gap from the research: GPU prices move monthly and
+            no authoritative vendor-neutral page states what an AI workload costs, so this topic teaches
+            mechanisms rather than numbers.'
+          order: 5
+          prerequisites:
+          - cloud-gpu-instances
+          - cloud-managed-inference
+          learning_objective: Choose a purchasing and right-sizing strategy for a GPU workload from mechanisms
+            rather than price lists.
+          mastery_criteria:
+          - Explain what a spot interruption notice is and what a training job must do to survive one.
+          - Say which workloads are safe on spot capacity and which are not, and give the reason rather
+            than the rule.
+          - Name the cost-optimisation goals listed in the Well-Architected cost pillar's introduction,
+            and pick the one you would act on first.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: devops
+          lessons:
+          - slug: cloud-cost-control-core
+            title: Cost control for GPU workloads
+            description: 'WHY NOW: Choose a purchasing and right-sizing strategy for a GPU workload from
+              mechanisms rather than price lists.
+
+
+              LEARN: Amazon Web Services — https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: describe how you would checkpoint one training job so it can resume after
+              a spot interruption - what is saved, how often, and where. HOW MANY: 1 checkpointing plan.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a checkpoint-and-resume plan naming the saved state, the interval, and
+              the storage location.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: cloud-cost-control-primary
+              title: Spot Instances
+              type: documentation
+              url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html
+              provider: Amazon Web Services
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The single biggest lever on GPU cost, and the mechanism (interruption notices,
+                checkpointing) that decides whether your training job can use it. Mechanisms outlast prices,
+                which is why this beats any pricing page.
+            - slug: cloud-cost-control-reference
+              title: Cost Optimization Pillar - AWS Well-Architected Framework
+              type: documentation
+              url: https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html
+              provider: Amazon Web Services
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: '"Abstract" and "Introduction" only (headings verified) — the five-goals list is
+                the whole takeaway'
+              description: 'The vocabulary of cost discipline: usage awareness, cost-effective resources,
+                right-sizing, optimising over time. It is a whitepaper; do not read past the introduction.'

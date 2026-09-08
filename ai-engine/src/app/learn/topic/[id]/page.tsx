@@ -31,6 +31,7 @@ type StudyContract = {
     exactness?: string | null;
     estimated_minutes?: number | null;
     estimate_confidence?: string | null;
+    link_checked_at?: string | null;
   };
   focus_concepts?: string[];
   practice?: {
@@ -59,7 +60,7 @@ function StudyContractPanel({ contract }: { contract: StudyContract }) {
         : readiness === "RESOURCE_GAP"
           ? "Verified learning resource still missing"
           : readiness === "NEEDS_REVIEW"
-            ? "Needs review — not learner-verified"
+            ? "Link checked · content review pending"
             : readiness === "PRACTICE_GAP" || readiness === "PRACTICE_UNVERIFIED"
               ? "Practice contract incomplete"
               : readiness === "TIME_UNVERIFIED"
@@ -92,9 +93,18 @@ function StudyContractPanel({ contract }: { contract: StudyContract }) {
           Do not treat this as a normal study recommendation until an exact verified resource is mapped.
         </p>
       ) : null}
+      {/* This used to read "Prefer READY topics for daily study", which was
+          advice 188 of 449 topics could not follow -- it covered the whole of
+          computer vision and deep learning. Two different facts were being
+          conflated: whether the link works, and whether anyone has read the
+          page against this topic's concept list. Say both. */}
       {readiness === "NEEDS_REVIEW" ? (
-        <p className="text-sm text-[var(--warn)]">
-          Resource exists but content verification is not trusted yet. Prefer READY topics for daily study.
+        <p className="text-sm text-[var(--muted)]">
+          The link below was fetched and confirmed to open the page it names
+          {learn?.link_checked_at ? ` on ${learn.link_checked_at.slice(0, 10)}` : ""}. What has
+          not been done is a read-through confirming it covers every concept listed under Focus.
+          Study it as normal. If a Focus concept turns out to be missing from the page, that is
+          worth recording rather than working around.
         </p>
       ) : null}
       {contract.why_now ? (

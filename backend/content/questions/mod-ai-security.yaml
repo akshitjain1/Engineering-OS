@@ -1,0 +1,494 @@
+# AI/ML security self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to and
+# stays inside that topic's scope. The module is adjacent to mod-genai (which
+# covers guardrails at awareness level) and mod-mlops (tool calling, agent
+# loops), so nothing here restates those: the OWASP block asks about naming
+# risks in a design review, injection about the direct/indirect distinction and
+# the honest limits of mitigation, exfiltration about the trifecta and
+# permission minimisation, output handling about per-consumer validation,
+# supply chain about serialisation, and PII about the paths data takes out plus
+# the de-identification technique taxonomy. Gates in
+# app/content/question_bank.py refuse a prompt already used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-ai-security
+topics:
+  - topic: aisec-owasp-llm-top-10
+    # Source: OWASP Gen AI Security Project - OWASP Top 10 for LLM Applications 2025
+    questions:
+      - id: aisec-top10-vector-weaknesses
+        prompt: "A design review finds one shared RAG index serving every tenant with no per-document access filter. Which 2025 OWASP LLM entry names that specific weakness?"
+        options:
+          - "LLM08 Vector and Embedding Weaknesses, added in 2025 for retrieval and embedding store flaws"
+          - "LLM04 Data and Model Poisoning, since a shared index lets one tenant corrupt the corpus"
+          - "LLM06 Excessive Agency, since the retrieval tool holds broader permissions than it needs"
+          - "LLM09 Misinformation, since the model will answer from documents it should not have seen"
+        answer: "LLM08 Vector and Embedding Weaknesses, added in 2025 for retrieval and embedding store flaws"
+        explanation: >-
+          The 2025 revision added LLM08 to cover vector stores and embeddings, and cross-tenant leakage
+          from one shared index is its headline example. Poisoning is about attacker-controlled training
+          or corpus content changing behaviour, not about a missing access filter. Excessive agency
+          concerns what actions a tool may take, and misinformation describes wrong output, which is a
+          downstream symptom rather than the flaw being named.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-top10-unbounded-consumption
+        prompt: "A token-metered assistant is hit by a script submitting maximum-length inputs in a loop. Which 2025 entry covers it, and what did the revision change about the name?"
+        options:
+          - "LLM10 Unbounded Consumption, broadened from denial of service to include cost and resource abuse"
+          - "LLM10 Denial of Service, still named that way because availability is the only property at risk"
+          - "LLM01 Prompt Injection, because oversized attacker-authored inputs are the injection channel here"
+          - "LLM03 Supply Chain, because pay-per-token capacity is a third-party dependency being drained"
+        answer: "LLM10 Unbounded Consumption, broadened from denial of service to include cost and resource abuse"
+        explanation: >-
+          The 2025 list renamed the availability risk to Unbounded Consumption so it also covers economic
+          denial of service, wallet drain and model extraction rather than downtime alone, and that old
+          label is exactly what changed. Prompt injection is about instructions that hijack behaviour, and
+          supply chain covers compromised models, data and dependencies rather than runaway spend.
+        difficulty: intermediate
+      - id: aisec-top10-system-prompt-leakage
+        prompt: "A team plans to handle LLM07 System Prompt Leakage by appending an instruction that forbids revealing the system prompt. Why is that the wrong fix?"
+        options:
+          - "The entry's point is that the prompt should hold no secrets, since any instruction to hide it is bypassable"
+          - "The entry requires the system prompt to be encrypted at rest so that any leaked text is unreadable"
+          - "The entry says leakage matters only for open-weight models, where the prompt is recoverable offline"
+          - "The entry treats the leak as harmless, since a system prompt holds no data an attacker could use"
+        answer: "The entry's point is that the prompt should hold no secrets, since any instruction to hide it is bypassable"
+        explanation: >-
+          LLM07 says the real risk is that credentials, connection strings or access rules were placed in
+          the prompt at all, and instructions not to disclose them are unreliable, so sensitive material
+          belongs outside the prompt behind real authorisation checks. Encryption at rest cannot help
+          because the model must read the plaintext, the risk is not limited to open weights, and a system
+          prompt very often carries exploitable detail.
+        difficulty: advanced
+      - id: aisec-top10-hallucinated-package
+        prompt: "A coding assistant keeps recommending a library that does not exist, and an attacker registers that name on the package registry. Which entry covers the model's contribution?"
+        options:
+          - "LLM09 Misinformation, which names package hallucination and pairs it with cross-verification of output"
+          - "LLM03 Supply Chain, which is the only entry that covers anything to do with third-party packages"
+          - "LLM04 Data and Model Poisoning, since the fake package name must have been planted in training data"
+          - "LLM05 Improper Output Handling, since the assistant's text is consumed without any validation step"
+        answer: "LLM09 Misinformation, which names package hallucination and pairs it with cross-verification of output"
+        explanation: >-
+          The 2025 list puts confidently invented facts, hallucinated package names included, under LLM09
+          and recommends cross-verification and human review. Supply chain describes the compromised
+          dependency once installed, which is the second half of the attack. Poisoning needs
+          attacker-controlled training data, which hallucination does not require, and improper output
+          handling is about unsafe execution of output rather than about it being false.
+        difficulty: advanced
+      - id: aisec-top10-injection-vs-output
+        prompt: "In a design review, what boundary separates LLM01 Prompt Injection from LLM05 Improper Output Handling?"
+        options:
+          - "LLM01 is untrusted text reaching the model; LLM05 is the model's text reaching a downstream consumer"
+          - "LLM01 covers attacks by end users; LLM05 covers those same attacks when they arrive from a third party"
+          - "LLM01 applies to chat products; LLM05 applies only to agents that can call tools and write files"
+          - "LLM01 describes the vulnerability class; LLM05 lists the mitigations a design review must verify"
+        answer: "LLM01 is untrusted text reaching the model; LLM05 is the model's text reaching a downstream consumer"
+        explanation: >-
+          The two entries sit on opposite sides of the model: injection is about what influences its
+          behaviour, while improper output handling is about trusting what it emits in a browser, shell,
+          database or HTTP client. Direct and indirect injection both live in LLM01 whoever sends the text,
+          neither entry is limited to one product shape, and both carry their own mitigation lists.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: aisec-prompt-injection
+    # Source: OWASP LLM01:2025 Prompt Injection, plus the indirect injection paper
+    questions:
+      - id: aisec-pi-indirect-definition
+        prompt: "What makes an injection indirect rather than direct, and why does that change who the attacker has to be?"
+        options:
+          - "The payload arrives inside content the model retrieves or fetches, so the attacker never touches your app"
+          - "The payload is split across several user turns, so no single message ever contains the whole instruction"
+          - "The payload targets the system prompt rather than the user turn, so it needs privileged API access"
+          - "The payload is encoded rather than plain text, so a filter reading the request body cannot see it"
+        answer: "The payload arrives inside content the model retrieves or fetches, so the attacker never touches your app"
+        explanation: >-
+          Indirect injection is delivered through third-party data the application pulls in, such as a web
+          page, an email or a retrieved document, so the attacker only needs to control something your
+          pipeline will read. A multi-turn or encoded payload sent by the user is still direct injection.
+          Targeting the system prompt is not the distinction, and the indirect case needs no privileged
+          access at all.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-pi-input-filtering-limit
+        prompt: "Why does filtering the incoming user message for injection strings fail to address indirect injection at all?"
+        options:
+          - "The hostile text enters later through retrieved content, which never passes through that request filter"
+          - "Filters run after the model has already produced its first tokens, so the decision arrives too late"
+          - "Filters cannot read tool output, because results come back as structured JSON rather than as text"
+          - "Filters match exact strings, so any injection phrased as a polite question slips past them unchanged"
+        answer: "The hostile text enters later through retrieved content, which never passes through that request filter"
+        explanation: >-
+          The user's request can be entirely benign while the attack sits in a document the retriever
+          fetches mid-conversation, so a boundary check on the request body is inspecting the wrong data.
+          Request filters do run before generation, JSON tool results are readable text that a filter could
+          scan, and weak exact matching is a real problem that applies equally to direct injection, so it
+          is not what makes the indirect case invisible.
+        difficulty: advanced
+      - id: aisec-pi-no-complete-mitigation
+        prompt: "A guardrail vendor states that their classifier eliminates prompt injection. How does LLM01:2025 frame the state of the available mitigations?"
+        options:
+          - "No mitigation is complete, so the entry asks for layered controls such as least privilege and human approval"
+          - "Detection is complete once a classifier is fine-tuned on the published corpus of known injection payloads"
+          - "Instruction hierarchy in current models solves it, so the entry now treats injection as a legacy risk"
+          - "Output filtering is sufficient, because an injection is only harmful once its effect reaches the user"
+        answer: "No mitigation is complete, so the entry asks for layered controls such as least privilege and human approval"
+        explanation: >-
+          The entry is explicit that injection cannot be fully prevented while a model processes
+          instructions and data in one channel, so it recommends defence in depth: privilege control,
+          segregation of untrusted content, human approval for consequential actions and adversarial
+          testing. A classifier trained on known payloads misses novel phrasings, instruction hierarchies
+          raise the bar without closing the gap, and output filtering leaves tool-side damage already done.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-pi-why-no-parameterisation
+        prompt: "Parameterised queries removed most SQL injection. Why is there no equivalent structural fix for prompt injection?"
+        options:
+          - "A prompt is one token sequence with no parser separating instructions from data, so nothing can be escaped"
+          - "Model vendors have not yet shipped the escaping API, although the technique itself is already standardised"
+          - "Prompts are natural language, so the escape characters this would need would be visible to the end user"
+          - "Parameterisation would work but costs too many tokens, so providers leave it to application authors"
+        answer: "A prompt is one token sequence with no parser separating instructions from data, so nothing can be escaped"
+        explanation: >-
+          SQL parameterisation works because the database parses structure and values separately, so
+          hostile text can only ever land in a value slot. A transformer sees one flat sequence and infers
+          intent statistically, so there is no boundary to enforce and no escape sequence with defined
+          meaning. The gap is architectural rather than a missing API, a cosmetic concern or a token budget
+          decision.
+        difficulty: advanced
+      - id: aisec-pi-paper-threat-model
+        prompt: "In the indirect prompt injection paper, what capability does the attacker actually need to compromise a real LLM-integrated application?"
+        options:
+          - "Only the ability to place text where the application will later retrieve it, with no access to the model"
+          - "Query access to the deployed model, so that payloads can be tuned against its refusal behaviour"
+          - "A copy of the model weights, because the demonstrated attacks are gradient-based adversarial suffixes"
+          - "A compromised account inside the target organisation to seed the payload in an internal document"
+        answer: "Only the ability to place text where the application will later retrieve it, with no access to the model"
+        explanation: >-
+          The paper's threat model is deliberately weak on attacker capability: publishing a poisoned page
+          or sending an email is enough, because the application itself carries the payload into the prompt.
+          The demonstrated attacks are written in natural language rather than optimised against weights, so
+          neither white-box access nor iterative query tuning is needed, and an internal foothold is one
+          delivery route among several rather than a precondition.
+        difficulty: advanced
+
+  - topic: aisec-data-exfiltration-tools
+    # Source: simonwillison.net - the lethal trifecta, plus OWASP LLM06 Excessive Agency
+    questions:
+      - id: aisec-trifecta-break-one-leg
+        prompt: "An assistant reads a private mailbox, summarises arbitrary web pages on request, and can send mail. Which single change removes a leg of the lethal trifecta?"
+        options:
+          - "Drop the send-mail tool, which removes the external communication leg the attacker needs to exfiltrate"
+          - "Add a system prompt telling the model to ignore any instructions found inside fetched web pages"
+          - "Log every tool call with its arguments so an exfiltration attempt can be reconstructed afterwards"
+          - "Ask the model to summarise pages in its own words, so hostile text is paraphrased before it is used"
+        answer: "Drop the send-mail tool, which removes the external communication leg the attacker needs to exfiltrate"
+        explanation: >-
+          The trifecta is private data, exposure to untrusted content and a way to talk to the outside
+          world, and removing any one leg makes exfiltration impossible rather than merely unlikely.
+          Instructions in the system prompt are advice the model may abandon under attack, logging is
+          detection after the fact, and paraphrasing still routes attacker text through the same model with
+          the same tools bound.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-trifecta-markdown-image-channel
+        prompt: "An agent has no network tool at all, but the chat interface renders markdown images from its answers. Why is the exfiltration leg still present?"
+        options:
+          - "The rendered image URL is fetched by the client, so data placed in its query string leaves the system"
+          - "Markdown is parsed by the model, so any URL in the answer is resolved during generation itself"
+          - "Image rendering requires the model to download the file first, which counts as an outbound request"
+          - "The interface caches rendered answers on a shared CDN, so the private data becomes publicly readable"
+        answer: "The rendered image URL is fetched by the client, so data placed in its query string leaves the system"
+        explanation: >-
+          Anything that makes a browser issue a request the attacker controls is an exfiltration channel,
+          and a markdown image whose path encodes stolen text is the classic example, needing no HTTP tool
+          at all. The model does not fetch URLs while generating, the download happens in the viewer's
+          browser rather than in the model, and CDN caching is a separate concern that is not what leaks
+          the data.
+        difficulty: advanced
+      - id: aisec-trifecta-model-cannot-judge
+        prompt: "Why can you not close the trifecta by having the model detect and refuse malicious instructions in the content it reads?"
+        options:
+          - "The model cannot reliably tell attacker text from legitimate data, so detection close to perfect is not enough"
+          - "Detection would double token cost, which makes the control uneconomic for any high-volume agent"
+          - "Refusals are recorded as errors, so operators end up disabling the check within days of shipping it"
+          - "The model can detect such instructions but has no mechanism to report them to the calling application"
+        answer: "The model cannot reliably tell attacker text from legitimate data, so detection close to perfect is not enough"
+        explanation: >-
+          A control that fails a small fraction of the time is useless against an attacker who can retry
+          with fresh phrasings, so a probabilistic judgement inside the model is not a security boundary.
+          The objection is about reliability rather than cost or operator behaviour, and a model can
+          certainly surface a suspicion, it simply cannot be trusted to catch every case.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-trifecta-excessive-permission-flavour
+        prompt: "A reporting agent connects to the database with an account that can also write and drop tables, though it only ever reads. Which flavour of excessive agency is that?"
+        options:
+          - "Excessive permission, fixed by giving the tool a read-only account scoped to the rows it needs"
+          - "Excessive autonomy, fixed by requiring a human to approve each query before it is executed"
+          - "Excessive functionality, fixed by deleting the unused tools from the agent's declared tool list"
+          - "Excessive agency in general, fixed by rate limiting the agent so damage per hour stays bounded"
+        answer: "Excessive permission, fixed by giving the tool a read-only account scoped to the rows it needs"
+        explanation: >-
+          LLM06 separates excessive functionality, excessive permissions and excessive autonomy, and unused
+          write and schema rights on a credential are squarely the permissions case, whose control is a
+          least-privilege identity per tool. Human approval addresses autonomy over consequential actions,
+          removing unused tools addresses functionality, and rate limiting caps blast radius while leaving
+          the unnecessary rights in place.
+        difficulty: intermediate
+      - id: aisec-trifecta-approval-limits
+        prompt: "Your agent now asks a human to approve every outbound request. What does that control genuinely stop, and where does it still fail?"
+        options:
+          - "It stops unattended exfiltration, but a reviewer approving dozens of opaque URLs will wave a crafted one through"
+          - "It stops all exfiltration, since a human reviewer sees the private data itself before it can be transmitted"
+          - "It stops nothing, because the model can complete the request before the approval prompt is even displayed"
+          - "It stops injection outright, since the attacker's instructions never reach the model until after the review"
+        answer: "It stops unattended exfiltration, but a reviewer approving dozens of opaque URLs will wave a crafted one through"
+        explanation: >-
+          Approval is a real control against silent automated leaks, and its weakness is human: volume,
+          fatigue, and payloads hidden in query strings or base64 that nobody can evaluate at a glance. It
+          is not airtight, because the reviewer sees a request rather than decoded intent. Approval gates do
+          block execution until answered, and they do nothing to keep hostile text out of the prompt.
+        difficulty: advanced
+
+  - topic: aisec-improper-output-handling
+    # Source: OWASP LLM05:2025 Improper Output Handling
+    questions:
+      - id: aisec-output-encode-per-consumer
+        prompt: "A model's answer is rendered as HTML, stored in a database and also passed to a shell command. Where does LLM05 place the validation?"
+        options:
+          - "At each consumer, encoded for that context, because escaping that is safe for HTML means nothing to a shell"
+          - "In one central sanitiser before the answer is returned, so that every consumer receives clean text"
+          - "In the prompt, by instructing the model to emit only characters the downstream consumers accept"
+          - "At the model provider's moderation layer, which strips executable content before delivery to you"
+        answer: "At each consumer, encoded for that context, because escaping that is safe for HTML means nothing to a shell"
+        explanation: >-
+          LLM05 treats output as untrusted input to whatever consumes it, and untrusted input is made safe
+          by context-specific encoding: HTML escaping for the browser, parameter binding for the database,
+          an argument array rather than a shell string. One upstream sanitiser cannot know each context and
+          tends to mangle legitimate content, prompt instructions are not enforcement, and provider
+          moderation targets harmful content rather than injection into your sinks.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-output-generated-sql-not-parameterisable
+        prompt: "The model writes a whole SQL statement that your service then executes. Why does parameterisation not protect you here, and what does?"
+        options:
+          - "The generated text is the statement, not a value, so protection comes from a read-only least-privilege role"
+          - "Parameterisation works fine here, once you bind the generated statement itself as a single query parameter"
+          - "The database refuses model-generated SQL unless it is prepared, so the risk has already been handled"
+          - "Escaping quotes in the generated statement is enough, since injection needs a quote to break out of context"
+        answer: "The generated text is the statement, not a value, so protection comes from a read-only least-privilege role"
+        explanation: >-
+          Parameter binding protects values inside a statement you wrote, so when the model authors the
+          statement there is no trusted skeleton left and the defence moves to the database identity plus
+          allowlisted query shapes. A statement cannot be bound as a parameter and executed, databases do
+          not know who wrote a query, and escaping quotes does nothing about a generated drop or a
+          cross-schema read.
+        difficulty: advanced
+        mastery: true
+      - id: aisec-output-untrusted-without-injection
+        prompt: "Nobody has injected anything and the request came from a trusted internal user. Why does LLM05 still require output validation?"
+        options:
+          - "Models emit unsafe constructs unprompted, so the control is about the sink rather than about an attacker"
+          - "Trusted users are the most common source of injection, so their input needs the strictest checks of all"
+          - "Validation is needed only for compliance reporting, since a fully trusted path carries no technical risk"
+          - "The provider may swap the model, and only an unfamiliar model version can produce unsafe output"
+        answer: "Models emit unsafe constructs unprompted, so the control is about the sink rather than about an attacker"
+        explanation: >-
+          Output handling is a property of the consumer: a database write, a rendered page or an eval call is
+          unsafe if it accepts arbitrary text, whatever the provenance, and hallucinated markup or stray
+          shell metacharacters arrive with no attacker involved. Trusted users are not the main injection
+          vector, the risk is technical rather than paperwork, and a model swap changes likelihood, not the
+          need for a boundary.
+        difficulty: intermediate
+      - id: aisec-output-schema-not-safety
+        prompt: "Your service validates the model's JSON against a schema before acting on it. Which class of problem does that leave open?"
+        options:
+          - "Schema checks shape and types, so a well-formed string field can still carry a payload aimed at its sink"
+          - "Schema validation rejects valid answers, so the remaining problem is availability rather than security"
+          - "Schema validation is bypassed whenever the model streams its answer token by token to the client"
+          - "Schema checks the values but not the field names, so an attacker renames a key to reach another handler"
+        answer: "Schema checks shape and types, so a well-formed string field can still carry a payload aimed at its sink"
+        explanation: >-
+          A schema says a field is a string of some length, and cannot say the string is a safe file path, a
+          permitted URL or markup-free text, so each sink still needs its own validation. Rejecting
+          malformed output is a robustness matter rather than the gap named here, streaming does not prevent
+          validating before you act, and schema validation does constrain which keys are accepted.
+        difficulty: advanced
+      - id: aisec-output-ssrf-url
+        prompt: "The model returns a URL and your backend fetches it to enrich the answer. Which control actually removes the server-side request forgery risk?"
+        options:
+          - "Resolve and allowlist the destination host and refuse internal address ranges before the fetch happens"
+          - "Require the URL to use HTTPS, since transport encryption prevents any access to internal services"
+          - "Fetch the URL from the browser instead, which moves the request outside your trust boundary entirely"
+          - "Strip query parameters from the URL, since the payload of a forged request always lives in there"
+        answer: "Resolve and allowlist the destination host and refuse internal address ranges before the fetch happens"
+        explanation: >-
+          A server-side fetch inherits your network position, so the control is destination policy:
+          allowlist hosts, resolve names before connecting, and block link-local and private ranges. HTTPS
+          says nothing about which host you reach and an internal metadata endpoint may well serve TLS,
+          moving the fetch to the browser creates a different problem and usually breaks the feature, and a
+          bare host URL is already enough to hit an internal service.
+        difficulty: intermediate
+
+  - topic: aisec-model-supply-chain
+    # Source: Hugging Face - Pickle Scanning, plus Safetensors
+    questions:
+      - id: aisec-supply-pickle-rce
+        prompt: "Explain precisely why loading an untrusted pickle checkpoint is arbitrary code execution rather than merely risky data parsing."
+        options:
+          - "Pickle streams carry opcodes that import a module and call it during unpickling, before any weight is touched"
+          - "The checkpoint carries a compiled shared library that the loader links into the process when it opens the file"
+          - "Tensor shapes in the file are trusted, so a crafted shape overflows the buffer that the loader allocates"
+          - "The loader executes the model's forward pass to validate it, running whatever layer code the author defined"
+        answer: "Pickle streams carry opcodes that import a module and call it during unpickling, before any weight is touched"
+        explanation: >-
+          Pickle is a small stack language whose global and reduce opcodes resolve an arbitrary callable and
+          invoke it with attacker-chosen arguments while the stream is read, so the payload runs at load
+          time and the tensors are irrelevant. There is no linked binary in a checkpoint, the danger is not
+          a memory-safety bug in shape handling, and no loader runs a forward pass to validate a file.
+        difficulty: advanced
+        mastery: true
+      - id: aisec-supply-scan-limits
+        prompt: "The Hub's pickle scanner reports no issue for a checkpoint you want to use. What has actually been established?"
+        options:
+          - "That the imports the file would perform matched no known-dangerous entry, which is evidence rather than proof"
+          - "That the file was executed inside a sandbox and performed no filesystem or network activity at all"
+          - "That the file contains no pickle opcodes and is therefore equivalent to a safetensors file in safety"
+          - "That the uploader's identity was verified, so responsibility for any payload is now clearly attributable"
+        answer: "That the imports the file would perform matched no known-dangerous entry, which is evidence rather than proof"
+        explanation: >-
+          Scanning extracts the imports a pickle would resolve and compares them against a maintained list
+          of dangerous ones, so a clean result means nothing recognised was found and a novel gadget chain
+          can still pass. The scanner does not execute the file, a scanned pickle remains a pickle rather
+          than a data-only format, and identity checks are a separate matter from what the bytes will do.
+        difficulty: intermediate
+      - id: aisec-supply-safetensors-by-construction
+        prompt: "Which property of the safetensors format makes it safe to load from an untrusted source by construction?"
+        options:
+          - "It stores a JSON header of dtypes, shapes and offsets followed by raw tensor bytes, with no callable to invoke"
+          - "It signs the tensor payload, so that a loader refuses any file whose signature does not verify correctly"
+          - "It encrypts the weights, so that a payload embedded in the file can never be interpreted by the loader"
+          - "It validates every tensor against the model config, rejecting any array that the architecture does not expect"
+        answer: "It stores a JSON header of dtypes, shapes and offsets followed by raw tensor bytes, with no callable to invoke"
+        explanation: >-
+          The format is pure data: a length-prefixed header describing each tensor, then the buffers, so
+          deserialising it can allocate and copy but never call anything. Zero-copy loading is a performance
+          bonus rather than the safety property. There is no signature or encryption in the format, and the
+          file carries no knowledge of your architecture to validate against.
+        difficulty: intermediate
+      - id: aisec-supply-restricted-unpickler
+        prompt: "A colleague proposes keeping the pickle format but loading it through a restricted unpickler that allowlists permitted globals. How should you characterise that?"
+        options:
+          - "A real reduction in attack surface that still depends on the allowlist being complete, unlike a data-only format"
+          - "A guarantee equivalent to safetensors, since a blocked import simply cannot execute under any circumstance"
+          - "No improvement at all, because the opcodes have already run by the time the unpickler's checks are consulted"
+          - "A performance optimisation only, since the restriction can be applied after the whole stream has been read"
+        answer: "A real reduction in attack surface that still depends on the allowlist being complete, unlike a data-only format"
+        explanation: >-
+          Restricting which globals may be resolved blocks the well-known gadgets and is worth doing, but it
+          is a denylist problem in disguise: safety rests on nobody finding a permitted callable with useful
+          side effects, whereas a format with no call mechanism needs no such judgement. The checks are
+          consulted as each global is resolved, so they are neither ineffective nor merely cosmetic.
+        difficulty: advanced
+      - id: aisec-supply-poisoning-vs-serialisation
+        prompt: "Which risk does checkpoint scanning leave entirely untouched, and how would you address that one instead?"
+        options:
+          - "Weights trained to misbehave on a trigger input, which needs behavioural evaluation rather than file inspection"
+          - "Pickle opcodes hidden inside a nested archive member, which needs the archive unpacked before scanning runs"
+          - "A tampered download in transit, which needs the per-file checksum that the scanner already publishes for you"
+          - "An oversized checkpoint that exhausts host memory, which needs a file size limit enforced at load time"
+        answer: "Weights trained to misbehave on a trigger input, which needs behavioural evaluation rather than file inspection"
+        explanation: >-
+          Scanning addresses the serialisation layer, so a perfectly clean file can still hold weights with
+          a backdoor that fires on a chosen input, and catching that means evaluating behaviour rather than
+          parsing bytes. Nested archive members fall within the scanner's remit, transit integrity is
+          covered by hashes and TLS, and memory exhaustion is an operational limit rather than the risk
+          scanning misses.
+        difficulty: advanced
+        mastery: true
+
+  - topic: aisec-pii-and-disclosure
+    # Source: OWASP LLM02:2025 Sensitive Information Disclosure, plus the Google Cloud
+    # de-identification technique taxonomy. Deliberately scoped to what those two pages
+    # cover - no tooling questions, since the obvious tool anchor is orphaned and unlinked.
+    questions:
+      - id: aisec-pii-paths-out
+        prompt: "You scrub personal data from user messages at the API boundary. Which disclosure path listed in LLM02 does that leave completely open?"
+        options:
+          - "Personal data already sitting in the fine-tuning set and in the retrieval corpus the model answers from"
+          - "Personal data in the user's later messages, since scrubbing runs only on the first turn of a session"
+          - "Personal data in the model's own output, which that same boundary scrubber cannot inspect on the way out"
+          - "Personal data in transport metadata such as headers, which the scrubber is unable to read or rewrite"
+        answer: "Personal data already sitting in the fine-tuning set and in the retrieval corpus the model answers from"
+        explanation: >-
+          LLM02 enumerates several exits: prompts, logs, training data, retrieval corpora and model output.
+          An input scrubber addresses one of them, so records the model was trained on or retrieves are
+          untouched and will surface in answers. Scrubbing is not restricted to a first turn, output is a
+          path the same component can also cover, and header metadata is not what makes a model disclose
+          personal data.
+        difficulty: intermediate
+        mastery: true
+      - id: aisec-pii-preserve-join
+        prompt: "Analysts must still join records on a customer identifier, but the real value cannot appear in the dataset. Which de-identification technique fits?"
+        options:
+          - "Deterministic tokenisation, which maps each identifier to a stable surrogate so that joins survive the transform"
+          - "Redaction of the identifier column, which removes the value while leaving all of the remaining fields intact"
+          - "Masking all but the final four characters, which shortens the value while keeping each record readable"
+          - "Generalisation into buckets, which replaces the identifier with the group of records it belongs to"
+        answer: "Deterministic tokenisation, which maps each identifier to a stable surrogate so that joins survive the transform"
+        explanation: >-
+          A deterministic surrogate returns the same output for the same input, which is exactly what a join
+          key needs, and it can be reversible with a key or one-way through a cryptographic hash. Redaction
+          destroys the key entirely, partial masking often leaves a value that is still unique and
+          re-identifiable, and bucketing collapses distinct customers into groups so per-record joins are
+          lost.
+        difficulty: intermediate
+      - id: aisec-pii-date-shifting
+        prompt: "A clinical dataset is de-identified by date shifting. What does that technique preserve, and what does it destroy?"
+        options:
+          - "It preserves intervals between one entity's own events, and destroys the ability to align events across entities"
+          - "It preserves the calendar date and destroys only the time of day, which is the identifying component here"
+          - "It preserves everything and stays fully reversible, since the offset is stored alongside each shifted record"
+          - "It preserves the ordering of records and destroys their durations, so trends remain but gaps do not"
+        answer: "It preserves intervals between one entity's own events, and destroys the ability to align events across entities"
+        explanation: >-
+          Date shifting moves all dates within a given context by the same random offset, so day counts
+          between that entity's events survive while absolute dates no longer identify anyone, and
+          comparison against a shared external timeline stops working. It shifts whole dates rather than
+          clock time, storing the offset next to the record would defeat the purpose, and durations are
+          exactly what it keeps.
+        difficulty: advanced
+      - id: aisec-pii-format-preserving-encryption
+        prompt: "Why would you choose format-preserving encryption over a cryptographic hash for a card number in a test dataset?"
+        options:
+          - "It returns a value of the same alphabet and length, so downstream validation still passes, and it is reversible"
+          - "It is faster than hashing, which matters when the pipeline has to transform billions of rows every night"
+          - "It removes the need to manage a key, since the format itself determines how the ciphertext is derived"
+          - "It guarantees that no two inputs share an output, which a hash function cannot promise for short values"
+        answer: "It returns a value of the same alphabet and length, so downstream validation still passes, and it is reversible"
+        explanation: >-
+          Format-preserving encryption produces ciphertext in the same character set and length as the
+          input, so length checks and checksum validation keep working, and whoever holds the key can
+          recover the original. Speed is not why you would pick it, it depends entirely on a managed key,
+          and injectivity is a property of the cipher rather than the advantage over a hash, which is
+          collision-resistant in practice.
+        difficulty: intermediate
+      - id: aisec-pii-fine-tune-deletion-request
+        prompt: "A customer demands deletion of personal data that was included in a fine-tuning set. What is the honest answer under the LLM02 framing?"
+        options:
+          - "Remove it from the dataset and retrain, since data absorbed into existing weights cannot be reliably excised"
+          - "Add an output filter for that customer's details, which satisfies deletion because the data becomes unreachable"
+          - "Delete the row from the training store, which suffices because weights hold statistics rather than records"
+          - "Nothing is required, since fine-tuning aggregates examples and cannot reproduce any individual record"
+        answer: "Remove it from the dataset and retrain, since data absorbed into existing weights cannot be reliably excised"
+        explanation: >-
+          LLM02 pushes the controls upstream into data governance and into what you allow near training,
+          precisely because a trained model can memorise and regurgitate examples and no supported operation
+          deletes one from the weights. A filter fails on paraphrase, removing the source row leaves the
+          trained artefact unchanged, and memorisation of rare records by fine-tuned models is well
+          documented.
+        difficulty: advanced
+        mastery: true

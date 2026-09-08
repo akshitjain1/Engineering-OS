@@ -1,0 +1,945 @@
+# Dynamic Programming self-check questions.
+#
+# Twelve topics, twelve genuinely different question sets. The previous bank
+# attached one generic set of eleven DP questions to all twelve DP topics, so
+# the Knapsack page asked about memoisation versus tabulation. Gates in
+# app/content/question_bank.py now refuse a prompt reused on a second topic.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to and
+# is about that topic only. Java is the implementation language.
+schema_version: 1
+kind: question_bank
+module: mod-dsa-dp
+topics:
+  - topic: dsa-dp-mindset
+    # Source: MIT OCW - Dynamic Programming; MIT 6.006 SRTBOT
+    questions:
+      - id: dp-mindset-no-overlap
+        prompt: "You sketch the recursion tree for a problem and every branch reaches a distinct state exactly once. What does adding a memo table buy you?"
+        options:
+          - "Nothing but overhead, since no state is ever recomputed for the cache to return"
+          - "Roughly half the runtime, because caching always removes a constant factor of work"
+          - "Correctness, because a memo is what gives a recursion its optimal substructure"
+          - "A polynomial bound, because any exponential recursion becomes polynomial once cached"
+        answer: "Nothing but overhead, since no state is ever recomputed for the cache to return"
+        explanation: >-
+          Memoisation only pays when the same subproblem recurs, so distinct states mean pure
+          overhead. The half-runtime option assumes caching helps unconditionally. Optimal
+          substructure is a property of the problem and no table can install it. And the
+          polynomial claim is backwards: caching helps only when distinct states are few.
+        difficulty: intermediate
+      - id: dp-mindset-substructure-test
+        prompt: "Which observation is the strongest evidence that a problem fails the optimal-substructure test?"
+        options:
+          - "An optimal whole solution can contain a piece that is not optimal for its own subproblem"
+          - "The recursion tree is very deep, so the call stack may overflow before it unwinds"
+          - "The same subproblem argument turns up in many different branches of the recursion"
+          - "The count of distinct subproblem states grows faster than the input length grows"
+        answer: "An optimal whole solution can contain a piece that is not optimal for its own subproblem"
+        explanation: >-
+          Optimal substructure means optimal solutions are assembled from optimal sub-solutions, so
+          a counterexample to that is exactly the failure. Deep recursion is an implementation
+          concern that tabulation fixes. Repeated arguments are the overlapping-subproblems signal,
+          which is the other test entirely. A large state count costs memory but never breaks composition.
+        difficulty: advanced
+        mastery: true
+      - id: dp-mindset-srtbot-time
+        prompt: "Under the SRTBOT framing, how do you read the running time off a DP once the subproblems and the relation are written down?"
+        options:
+          - "Multiply the number of distinct subproblems by the cost of evaluating one relation"
+          - "Count the nodes of the unmemoised recursion tree, which is the real work performed"
+          - "Take the depth of the recursion, since each level of it costs constant total time"
+          - "Multiply the input length by the number of parameters the subproblem signature has"
+        answer: "Multiply the number of distinct subproblems by the cost of evaluating one relation"
+        explanation: >-
+          Each distinct subproblem is evaluated once, so time is states times work per state. The
+          unmemoised tree counts the exponential work the memo exists to remove. Recursion depth
+          undercounts badly, since a shallow recursion can still have very many states. Parameter
+          count shapes the state space but is not itself a factor in the running time.
+        difficulty: intermediate
+      - id: dp-mindset-greedy-fails
+        prompt: "Coins of 1, 3 and 4 with a target amount of 6: what does running greedy largest-coin-first tell you about this problem?"
+        options:
+          - "Greedy uses three coins where two suffice, so every local choice must be compared"
+          - "Greedy finds the optimal two coins here, so change-making never actually needs DP"
+          - "Greedy fails only because the coin list happens to be unsorted on the way in"
+          - "Greedy is correct but slower than DP, so DP is preferred purely for its speed"
+        answer: "Greedy uses three coins where two suffice, so every local choice must be compared"
+        explanation: >-
+          Greedy takes 4 then 1 then 1, three coins, while 3 plus 3 needs only two. That gap is the
+          evidence that the locally largest coin is not globally safe, so the choice has to be
+          explored. Greedy did not find the optimum here, sorting changes nothing since it already
+          picks the largest available, and greedy is the faster of the two rather than the slower.
+        difficulty: beginner
+        mastery: true
+      - id: dp-mindset-vs-divide-conquer
+        prompt: "Merge sort recurses on two halves and combines the results. Why is it not usually classed as dynamic programming?"
+        options:
+          - "Its subproblems are disjoint slices, so no subproblem is ever solved a second time"
+          - "It has no base case, so a memo table would have nothing to store and hand back"
+          - "Its subproblems overlap heavily, but the merge step already caches all the results"
+          - "It optimises nothing, and DP is defined only for problems that count arrangements"
+        answer: "Its subproblems are disjoint slices, so no subproblem is ever solved a second time"
+        explanation: >-
+          Divide and conquer partitions the input, so the halves share no work and there is nothing
+          to cache. Merge sort does have a base case, namely a single element. Its subproblems do
+          not overlap, so the third option has the premise backwards. And DP covers counting,
+          feasibility and optimisation alike, so the last option restricts the definition wrongly.
+        difficulty: intermediate
+
+  - topic: dsa-memoization
+    # Source: GFG - Memoization (1D, 2D and 3D)
+    questions:
+      - id: memo-key-underspecified
+        prompt: "You memoise a helper called as helper(i, remaining) but key the HashMap on i alone. What is the concrete failure?"
+        options:
+          - "A hit returns an answer computed for a different remaining value, so results go stale"
+          - "The map grows without bound, because boxed Integer keys are never collected in Java"
+          - "Nothing breaks, since remaining is always implied by i in every recursive call made"
+          - "Every lookup misses, so the recursion silently degrades to its exponential version"
+        answer: "A hit returns an answer computed for a different remaining value, so results go stale"
+        explanation: >-
+          The key must name the whole state, so dropping remaining collapses distinct subproblems
+          into one cell and hands back the wrong one. Memory is not the issue, since the map is
+          smaller than it should be. remaining varies independently of i, which is why it is a
+          parameter at all. And lookups hit more often than they should, not less.
+        difficulty: intermediate
+        mastery: true
+      - id: memo-stack-depth
+        prompt: "A top-down DP over 200000 array elements throws StackOverflowError even though the memo works. What fix keeps the same recurrence?"
+        options:
+          - "Rewrite it bottom-up as a table, so no stack frame is needed per index visited"
+          - "Swap the memo from a HashMap to an int array, which shrinks each stack frame down"
+          - "Return early once the memo is full, since the remaining calls are all cache hits"
+          - "Enlarge the memo so that fewer recursive calls happen before the first hit occurs"
+        answer: "Rewrite it bottom-up as a table, so no stack frame is needed per index visited"
+        explanation: >-
+          The overflow comes from recursion depth, which a memo does not shorten, so tabulation is
+          the fix that preserves the recurrence. The memo's data structure does not change frame
+          size meaningfully. There is no moment at which the memo is full before the deepest chain
+          is entered, and a bigger memo cannot shorten the first descent that overflows.
+        difficulty: intermediate
+      - id: memo-sentinel-value
+        prompt: "Your memo is an int[] that Java zero-fills, and 0 is also a legal answer. How do you mark a cell as not yet computed?"
+        options:
+          - "Fill the array with -1 up front and treat -1 as uncomputed, as answers are non-negative"
+          - "Test whether the cell equals 0 and recompute it, which costs only one extra call"
+          - "Use a long[] instead, since its default value is distinguishable from a real zero"
+          - "Rely on the call order, so any cell holding zero has genuinely been computed already"
+        answer: "Fill the array with -1 up front and treat -1 as uncomputed, as answers are non-negative"
+        explanation: >-
+          The sentinel has to be a value the answer can never take, and Arrays.fill with -1 gives
+          exactly that. Recomputing every zero cell reintroduces the exponential blow-up on inputs
+          whose real answers are zero. A long also defaults to zero, so it distinguishes nothing.
+          And top-down call order is precisely the thing you cannot predict in advance.
+        difficulty: beginner
+      - id: memo-when-preferred
+        prompt: "In which situation is top-down memoisation genuinely the better choice over filling a complete table?"
+        options:
+          - "When only a small share of the state space is ever reached from the original input"
+          - "When the state space is dense and every cell is needed, so the fill order is obvious"
+          - "When recursion depth is near the state count, since frames are cheaper than cells"
+          - "When the transition is costly, since a cache skips the transition and not the state"
+        answer: "When only a small share of the state space is ever reached from the original input"
+        explanation: >-
+          Top-down solves only reachable states, which wins when the table would be mostly empty or
+          awkward to order. A dense state space is the case that favours tabulation instead. Deep
+          recursion argues against top-down, because frames risk overflow. And a cache stores a
+          state's answer, so an expensive transition is saved by either approach equally.
+        difficulty: advanced
+        mastery: true
+      - id: memo-fib-cost
+        prompt: "Memoised fib(n) over an int array: how many times does the body past the cache check run, and what does the whole call cost?"
+        options:
+          - "Once per distinct n, giving O(n) time and O(n) space for the array plus the stack"
+          - "Twice per distinct n, one per branch, giving O(2n) time and O(n) recursion space"
+          - "O(log n) times, because each recursive level halves the argument that is left to do"
+          - "Still O(2^n) times, because both recursive calls are issued before the cache is read"
+        answer: "Once per distinct n, giving O(n) time and O(n) space for the array plus the stack"
+        explanation: >-
+          The guard at the top of the function means each of the n states is computed exactly once,
+          and each does constant work. The two-per-state option double counts, since the second
+          visit is a hit that never enters the body. The argument decreases by one or two and never
+          halves. And the cache is read first, which is what removes the exponential behaviour.
+        difficulty: beginner
+
+  - topic: dsa-tabulation
+    # Source: NeetCode - Coin Change, bottom-up tabulation
+    questions:
+      - id: tab-fill-direction-amount
+        prompt: "Bottom-up coin change fills dp[a] for a from 1 up to amount. Why must that loop run upward rather than downward?"
+        options:
+          - "dp[a] reads dp[a - coin], a smaller amount that has to be final before it is used"
+          - "Downward order would index past the end of the array and raise an out-of-bounds error"
+          - "Upward is only a convention; downward computes the same values in the reverse order"
+          - "Upward order is what keeps the coin loop outermost, needed to use each coin only once"
+        answer: "dp[a] reads dp[a - coin], a smaller amount that has to be final before it is used"
+        explanation: >-
+          The recurrence depends on strictly smaller amounts, so those cells must already be
+          finished, which only ascending order guarantees. Descending order stays inside the array,
+          so bounds are not the issue. The values produced are genuinely different rather than
+          reversed. And loop nesting is a separate question from this loop's direction.
+        difficulty: intermediate
+      - id: tab-base-case-sentinel
+        prompt: "Bottom-up minimum-coin change sets dp[0] to 0 and every other cell to a large sentinel. What does that sentinel encode?"
+        options:
+          - "That the amount is unreachable so far, so it can never win the min spuriously"
+          - "That the amount is reachable with a single coin, which the loop later refines down"
+          - "That the array was allocated but Java did not manage to zero it before the fill"
+          - "That the amount needs at least one coin, which the base case then subtracts back off"
+        answer: "That the amount is unreachable so far, so it can never win the min spuriously"
+        explanation: >-
+          A minimisation needs an identity value that loses every comparison, and that is what the
+          large sentinel is; dp[0] equal to 0 is the one genuinely free amount. One coin is a real
+          reachability claim the sentinel must not make. Java does zero-fill int arrays, which is
+          precisely why the explicit fill is needed. And nothing is subtracted back later.
+        difficulty: intermediate
+      - id: tab-sentinel-overflow
+        prompt: "You seed the coin-change table with Integer.MAX_VALUE and then evaluate dp[a - coin] + 1. What breaks in Java?"
+        options:
+          - "Adding one to Integer.MAX_VALUE wraps to a negative number, which then wins the min"
+          - "Integer.MAX_VALUE will not fit in an int array, so the fill truncates it silently"
+          - "The comparison is fine, but Java boxes each int and the loop becomes far too slow"
+          - "Java raises an ArithmeticException on overflow, so the run aborts on the first add"
+        answer: "Adding one to Integer.MAX_VALUE wraps to a negative number, which then wins the min"
+        explanation: >-
+          Signed int overflow wraps silently in Java, so the unreachable sentinel turns into the
+          smallest value in the comparison and poisons the table; using amount plus one as the
+          sentinel avoids it. MAX_VALUE is exactly an int, so nothing truncates. A primitive int[]
+          does no boxing. And plain int arithmetic never throws on overflow.
+        difficulty: advanced
+        mastery: true
+      - id: tab-order-property
+        prompt: "What single property must the loop order of any tabulated DP satisfy for the finished table to be correct?"
+        options:
+          - "Every state is written only after all the states its recurrence reads are final"
+          - "Every state is written in increasing index order along the first dimension only"
+          - "Every state is visited exactly twice, once to seed it and once to relax it later"
+          - "Every state is written before the base cases, which get patched in at the very end"
+        answer: "Every state is written only after all the states its recurrence reads are final"
+        explanation: >-
+          That is topological order on the dependency graph, and it is the whole content of the T in
+          SRTBOT. Increasing first-dimension order is one instance of it rather than the rule, and
+          suffix states need the opposite direction. Two visits per state describes edge relaxation
+          in shortest paths. Base cases must be written first, since everything else reads them.
+        difficulty: intermediate
+        mastery: true
+      - id: tab-from-memo-first-row
+        prompt: "You convert a working memoised solution to a table and the answers are wrong only near the smallest indices. Where do you look first?"
+        options:
+          - "At the base cases, which the recursion returned directly but the table has to store"
+          - "At the memo key, which the table replaces with an index and therefore cannot get wrong"
+          - "At the recursion depth, which no longer caps how many of the states can be filled"
+          - "At the option order inside the min, which changes which value the table ends up keeping"
+        answer: "At the base cases, which the recursion returned directly but the table has to store"
+        explanation: >-
+          Recursion handles small inputs with early returns, whereas a table must write those cells
+          and size itself to hold them, so that is the usual site of a smallest-index bug. A memo
+          key can absolutely be mistranslated into an index, so the second option is false
+          reassurance. Depth is not a correctness limit, and min is commutative so argument order
+          cannot change the result.
+        difficulty: intermediate
+
+  - topic: dsa-dp-state
+    # Source: GFG - Steps to solve a Dynamic Programming Problem, step 2
+    questions:
+      - id: state-cooldown-missing-holding
+        prompt: "House Robber works with dp[i] as the best loot from the first i houses, but the same one-index state fails on stock trading with a cooldown. What is missing?"
+        options:
+          - "Whether you currently hold a share, since the legal moves at i depend on that fact"
+          - "The index of the previous transaction, which a one-dimensional array cannot store"
+          - "The profit accumulated so far, which has to ride along in the state to be maximised"
+          - "The count of days remaining, which the length of the price array already tells you"
+        answer: "Whether you currently hold a share, since the legal moves at i depend on that fact"
+        explanation: >-
+          Two visits to day i with different holdings admit different futures, so the state stays
+          under-specified until holding is part of it; that is why the standard solution keeps hold,
+          sold and rest. The previous transaction index is more than you need once holding is
+          tracked. Accumulated profit is the value being optimised rather than part of the state,
+          and remaining days are already implied by i.
+        difficulty: advanced
+        mastery: true
+      - id: state-redundant-dimension
+        prompt: "Your state is dp[i][sum][count] but count is always derivable from i and the choices already made. What does keeping it cost?"
+        options:
+          - "A larger and slower table, though every answer it stores is still perfectly correct"
+          - "Wrong answers, because one subproblem now lives under two different keys at once"
+          - "Non-termination, because the extra dimension has no base case of its own to stop at"
+          - "Nothing at all, since Java allocates the innermost dimension only when it is written"
+        answer: "A larger and slower table, though every answer it stores is still perfectly correct"
+        explanation: >-
+          A redundant dimension multiplies states and therefore time and memory, but it never merges
+          distinct subproblems, so correctness survives; over-specified states cause TLE or MLE, not
+          wrong answers. Splitting one subproblem across keys loses sharing, which is a slowdown
+          rather than an error. Termination is unaffected, and Java allocates every row of the
+          int[][] you create.
+        difficulty: intermediate
+      - id: state-sufficiency-test
+        prompt: "What is the test that tells you a candidate DP state is specified finely enough to be correct?"
+        options:
+          - "Two inputs sharing the same state must always admit the same set of optimal continuations"
+          - "The state must carry fewer parameters than the input has elements, or it will not fit"
+          - "The state must be a plain integer index so it can address a Java array without hashing"
+          - "Every state must be reachable from the original problem by exactly one transition step"
+        answer: "Two inputs sharing the same state must always admit the same set of optimal continuations"
+        explanation: >-
+          A state is sufficient when it screens off the past, so everything the future needs is in
+          it. Parameter counts are about efficiency, not sufficiency, and plenty of correct states
+          use several. Tuples keyed in a HashMap are states too, so the array-index rule is only an
+          implementation habit. And most states are reachable by many transitions, which is exactly
+          why subproblems overlap.
+        difficulty: advanced
+        mastery: true
+      - id: state-knapsack-capacity
+        prompt: "Why does 0/1 knapsack need remaining capacity as a dimension of the state rather than one running total?"
+        options:
+          - "The best value from item i onward depends on the room left, not on what was packed"
+          - "Capacity shifts on every step and Java arrays cannot be resized while looping"
+          - "A running total would overflow int for large weights, so a dimension is much safer"
+          - "Without it the items cannot be sorted, and knapsack needs sorted input to be correct"
+        answer: "The best value from item i onward depends on the room left, not on what was packed"
+        explanation: >-
+          Two different packings with equal remaining capacity have identical futures, so capacity is
+          precisely the information the state must keep. Array resizing is irrelevant, since the
+          dimension is fixed at W plus one. Overflow is a data-type question a dimension does not
+          address. And 0/1 knapsack is correct on unsorted items; sorting is a greedy habit carried
+          over from the fractional version.
+        difficulty: intermediate
+      - id: state-circular-street
+        prompt: "House Robber II makes the street circular. Which reformulation keeps the state one-dimensional?"
+        options:
+          - "Run the linear solver twice, once excluding the first house and once excluding the last"
+          - "Add a boolean to the state recording whether the first house was robbed on this path"
+          - "Rob every second house, starting at whichever of the two ends holds more money"
+          - "Concatenate the array with itself and run the plain linear solver over the doubled input"
+        answer: "Run the linear solver twice, once excluding the first house and once excluding the last"
+        explanation: >-
+          The only new constraint is that the first and last houses clash, so dropping one of them in
+          each of two linear runs and taking the max covers both cases with the same 1D state. The
+          boolean flag is also correct but adds a dimension, which the question rules out.
+          Every-second-house is a greedy rule that fails on 2, 1, 1, 2, and doubling the array lets
+          one house be robbed twice.
+        difficulty: advanced
+
+  - topic: dsa-dp-transition
+    # Source: GFG - Steps to solve a Dynamic Programming Problem, step 3
+    questions:
+      - id: transition-decode-ways
+        prompt: "Decode Ways: dp[i] counts the decodings of the first i characters. Which recurrence is right?"
+        options:
+          - "dp[i-1] when the last digit is not zero, plus dp[i-2] when the last two form 10 to 26"
+          - "dp[i-1] plus dp[i-2] unconditionally, since each step consumes either one or two digits"
+          - "dp[i-1] times dp[i-2], because the one-digit and two-digit choices are independent"
+          - "The max of dp[i-1] and dp[i-2], because you want the longest valid decoding of a prefix"
+        answer: "dp[i-1] when the last digit is not zero, plus dp[i-2] when the last two form 10 to 26"
+        explanation: >-
+          Each option is a way of consuming the tail, so the counts add, but only when that tail is
+          actually decodable; a lone zero and a pair outside 10 to 26 contribute nothing. The
+          unconditional sum is Fibonacci and overcounts strings containing zeros. Multiplying counts
+          choices that are alternatives, not independent stages. And the problem counts decodings
+          rather than maximising a length, so a max is the wrong operator.
+        difficulty: intermediate
+        mastery: true
+      - id: transition-offset-index
+        prompt: "You size the table as dp of length n+1 so that dp[i] means the first i characters. Which expression reads the character the transition consumes?"
+        options:
+          - "s.charAt(i - 1), because dp counts characters while string indices start at zero"
+          - "s.charAt(i), because the table and the string are indexed from the same origin"
+          - "s.charAt(i + 1), because the table is one longer and the string must be offset up"
+          - "s.charAt(n - i), because the table is filled forward while the string is read backward"
+        answer: "s.charAt(i - 1), because dp counts characters while string indices start at zero"
+        explanation: >-
+          With dp[i] meaning a prefix length, the newest character sits at index i minus one, and
+          that single offset is the most common off-by-one in this family. Using i reads one past the
+          character just added and throws at i equal to n. Adding one skips a character entirely.
+          Reading from the far end computes an answer for the reversed string.
+        difficulty: intermediate
+      - id: transition-min-versus-sum
+        prompt: "Coin Change asks for the fewest coins while Coin Change II asks for the number of ways. What changes in the transition?"
+        options:
+          - "Fewest coins takes a min and adds one per coin used; counting ways sums over the choices"
+          - "Fewest coins sums over the choices; counting ways takes a max, since ways can be skipped"
+          - "Both take a min, but the counting version starts its table at one instead of at zero"
+          - "Only the loop bounds change, since the recurrence itself is identical in the two problems"
+        answer: "Fewest coins takes a min and adds one per coin used; counting ways sums over the choices"
+        explanation: >-
+          The operator over the choices carries the semantics: min for an optimum and plus one for
+          the coin spent, versus a sum for counting, where every distinct completion is its own way.
+          Summing for the optimum returns a total rather than a best. A max cannot count anything.
+          And identical recurrences would give identical answers, which these two clearly do not.
+        difficulty: intermediate
+      - id: transition-lis-recurrence
+        prompt: "LIS with dp[i] as the longest increasing subsequence ending exactly at index i: what is the transition?"
+        options:
+          - "One plus the max of dp[j] over all j below i with a[j] less than a[i], else just one"
+          - "One plus dp[i-1] whenever a[i-1] is less than a[i], and otherwise one for this index"
+          - "The max of dp[i-1] and one plus dp[i-2], as in house robber, since elements are skipped"
+          - "One plus the max of dp[j] over all j below i, checking the value comparison at the end"
+        answer: "One plus the max of dp[j] over all j below i with a[j] less than a[i], else just one"
+        explanation: >-
+          A subsequence may skip freely, so every earlier index is a candidate predecessor provided
+          its value is smaller, which makes the scan O(n) per index and the whole thing O(n^2). Only
+          looking at i minus one computes the longest increasing run, a contiguous notion. The house
+          robber shape hard-codes a gap of one and ignores values. Dropping the comparison returns i
+          plus one for every index.
+        difficulty: intermediate
+        mastery: true
+      - id: transition-forward-dependency
+        prompt: "Your transition for dp[i] reads dp[i+1] while the loop drives i upward. What has to change?"
+        options:
+          - "Reverse the loop so i decreases, or redefine the state as a suffix instead of a prefix"
+          - "Initialise dp[i+1] to zero before the loop so the read returns a usable neutral value"
+          - "Copy dp into a second array and read the copy, which keeps every value consistent"
+          - "Nothing, because Java zero-fills arrays and the missing term contributes no value"
+        answer: "Reverse the loop so i decreases, or redefine the state as a suffix instead of a prefix"
+        explanation: >-
+          A recurrence reading forward needs those cells finished first, so the fill order must run
+          the other way; a suffix state definition makes that natural. Zeroing the cell reads an
+          unwritten value that happens to be zero, which is a wrong answer rather than a neutral
+          one. Copying preserves the same unwritten zeros. And relying on the default is the same
+          bug stated as a feature.
+        difficulty: advanced
+
+  - topic: dsa-dp-1d
+    # Source: GFG - Dynamic Programming Introduction, 1D DP
+    questions:
+      - id: dp1d-rolling-two-vars
+        prompt: "Climbing Stairs with two rolling ints instead of an array: which update sequence inside the loop is correct?"
+        options:
+          - "temp = a + b, then a = b, then b = temp, so a and b hold the previous two answers"
+          - "a = b, then b = a + b, updating in place because the two assignments are independent"
+          - "b = a + b, then a = b, so both variables advance together in one pass per step"
+          - "a = a + b, then b = a, keeping the newest value in b and the older sum in a instead"
+        answer: "temp = a + b, then a = b, then b = temp, so a and b hold the previous two answers"
+        explanation: >-
+          Rolling variables need the old value of a preserved until the new pair is formed, which is
+          what the temporary does. The second option overwrites a first, so the sum uses the new a
+          twice. The third assigns b then copies it into a, losing the older term and making both
+          variables equal. The fourth has the same aliasing bug with the roles swapped.
+        difficulty: beginner
+        mastery: true
+      - id: dp1d-house-robber-recurrence
+        prompt: "House Robber: which recurrence over one index expresses that adjacent houses cannot both be robbed?"
+        options:
+          - "max of dp[i-1] and dp[i-2] plus nums[i], so you either skip house i or take it"
+          - "max of dp[i-1] plus nums[i] and dp[i-2], taking house i on top of its neighbour"
+          - "dp[i-1] plus the larger of nums[i] and nums[i-1], choosing the richer of two houses"
+          - "The larger of nums[i] and nums[i-1] plus dp[i-3], leaving a gap of two each time"
+        answer: "max of dp[i-1] and dp[i-2] plus nums[i], so you either skip house i or take it"
+        explanation: >-
+          Skipping house i inherits dp[i-1]; taking it forbids house i minus one, so it builds on
+          dp[i-2]. The second option adds nums[i] to dp[i-1], which is the adjacency violation
+          itself. The third takes money from two neighbouring houses at once. The fourth enforces a
+          gap of two, which is stricter than the problem asks and loses valid loot.
+        difficulty: intermediate
+      - id: dp1d-not-single-index
+        prompt: "Which of these problems cannot be expressed with a state that is a single array index or amount?"
+        options:
+          - "Edit distance between two strings, since progress in each string advances separately"
+          - "Coin change for a minimum count, where the state is the remaining amount to make"
+          - "Decode Ways over a digit string, where the state is how much of the prefix is decoded"
+          - "Min Cost Climbing Stairs, where the state is which step you are standing on right now"
+        answer: "Edit distance between two strings, since progress in each string advances separately"
+        explanation: >-
+          Two independent cursors need two dimensions, because knowing the position in one string
+          says nothing about the other. Coin change is indexed by the remaining amount alone, Decode
+          Ways by the prefix length, and Min Cost Climbing Stairs by the step, so each of those three
+          is genuinely one-dimensional and none of them needs a second axis.
+        difficulty: intermediate
+        mastery: true
+      - id: dp1d-coin-change-size
+        prompt: "In minimum-coin change the natural state is the amount rather than the coin index. What are the table size and the running time?"
+        options:
+          - "amount+1 cells and O(amount * coins) time, which is pseudopolynomial in the input size"
+          - "coins+1 cells and O(coins log coins) time, because the coin list gets sorted just once"
+          - "amount+1 cells and O(amount) time, because every amount is touched exactly one time"
+          - "amount * coins cells and O(amount) time, trading extra memory for a single fast pass"
+        answer: "amount+1 cells and O(amount * coins) time, which is pseudopolynomial in the input size"
+        explanation: >-
+          One cell per amount, and each cell tries every coin, so the work is the product; it is
+          pseudopolynomial because amount is written in binary in the input. A table indexed by coins
+          cannot express partial amounts. O(amount) alone forgets the inner loop over coins. And a
+          two-dimensional table does not remove that inner loop, it only stores more.
+        difficulty: intermediate
+      - id: dp1d-word-break
+        prompt: "Word Break with dp[i] true when the first i characters split into dictionary words: what is the transition?"
+        options:
+          - "True if some j below i has dp[j] true and the substring from j to i is in the dictionary"
+          - "True if dp[i-1] is true and the single character at index i minus one is itself a word"
+          - "True if the whole prefix of length i appears in the dictionary as one complete word"
+          - "True if any dictionary word is a prefix of the string, which is checked once per index"
+        answer: "True if some j below i has dp[j] true and the substring from j to i is in the dictionary"
+        explanation: >-
+          The last word can have any length, so you scan every split point j and need both a valid
+          prefix and a valid final word, giving O(n^2) substring checks. Only testing j equal to i
+          minus one restricts words to a single character. The third option forbids splitting at all.
+          And the fourth ignores which prefix has actually been consumed, so it says nothing about i.
+        difficulty: intermediate
+
+  - topic: dsa-dp-2d
+    # Source: GFG - Dynamic Programming on Grids, filling the DP table
+    questions:
+      - id: dp2d-edit-distance-axes
+        prompt: "Edit distance builds dp[i][j]. What do the two axes mean, and what does the first column hold?"
+        options:
+          - "Characters consumed of each string; dp[i][0] is i, the deletions that empty a prefix"
+          - "Characters consumed of each string; dp[i][0] is 0, since an empty target needs no edits"
+          - "Operations used and characters matched; dp[i][0] is the cheapest first operation to use"
+          - "Positions in the longer string only; dp[i][0] stores the alignment offset chosen so far"
+        answer: "Characters consumed of each string; dp[i][0] is i, the deletions that empty a prefix"
+        explanation: >-
+          Each axis counts how much of one string has been consumed, so turning an i-character prefix
+          into the empty string costs i deletions. Zero would claim a prefix already matches nothing
+          for free. Operations are the value stored, never an axis. And a single-string index cannot
+          describe a pair of prefixes at all.
+        difficulty: intermediate
+        mastery: true
+      - id: dp2d-lcs-mismatch
+        prompt: "Longest common subsequence: what does the recurrence do when the two current characters differ?"
+        options:
+          - "Takes the max of dropping one character from either string, since only one can be skipped"
+          - "Takes the sum of dropping one character from either string, counting both alternatives"
+          - "Resets the cell to zero, because the common run has been broken at this position"
+          - "Adds one and advances both indices, treating a mismatch as a substitution of equal cost"
+        answer: "Takes the max of dropping one character from either string, since only one can be skipped"
+        explanation: >-
+          On a mismatch at most one of the two characters can be part of the answer, so you try
+          skipping each and keep the better, which is why earlier progress survives. Summing counts
+          the same subsequence many times over. Resetting to zero is the longest common substring
+          recurrence, not the subsequence one. And adding one on a mismatch credits a match that
+          never happened.
+        difficulty: intermediate
+      - id: dp2d-loop-order
+        prompt: "dp[i][j] depends on dp[i-1][j], dp[i][j-1] and dp[i-1][j-1]. Which nested loop order fills it safely?"
+        options:
+          - "Rows increasing on the outside and columns increasing on the inside of the nest"
+          - "Rows decreasing on the outside and columns increasing on the inside of the nest"
+          - "Columns decreasing outside and rows decreasing inside, mirroring the dependency arrows"
+          - "Either direction works, since all three predecessors get written during the same pass"
+        answer: "Rows increasing on the outside and columns increasing on the inside of the nest"
+        explanation: >-
+          All three predecessors sit above or to the left, so both indices must ascend for those
+          cells to be final when read. Decreasing rows reads the row above before writing it.
+          Decreasing both indices reads cells that no longer exist as finished values. And being in
+          the same pass is not enough; order inside the pass is exactly what matters.
+        difficulty: beginner
+      - id: dp2d-memory-two-rows
+        prompt: "For two strings of length 5000 you allocate int[5001][5001]. Roughly how much memory is that, and what is the standard remedy?"
+        options:
+          - "About 100 MB of ints; keep only the previous and current rows for O(min(m, n)) space"
+          - "About 25 MB of ints; nothing needs changing, because Java stores arrays compressed"
+          - "About 100 KB of ints; the jagged array allocates each row only as it is first written"
+          - "About 100 MB of ints; the remedy is a HashMap keyed on the pair of the two indices"
+        answer: "About 100 MB of ints; keep only the previous and current rows for O(min(m, n)) space"
+        explanation: >-
+          Twenty-five million ints at four bytes each is roughly 100 MB, and since each row reads
+          only the row above, two rows suffice. Java does not compress arrays, so 25 MB understates
+          it fourfold. new int[5001][5001] allocates every row immediately, so nothing is lazy. And
+          a HashMap of boxed pairs uses far more memory per entry, not less.
+        difficulty: advanced
+        mastery: true
+      - id: dp2d-which-axis-shorter
+        prompt: "When you reduce a two-string DP to two rows, which string should index the rows and which the columns?"
+        options:
+          - "Sweep over the longer string by rows and let the shorter one set the row width"
+          - "Sweep over the shorter string by rows so each row is longer and caches behave better"
+          - "It makes no difference, because the number of cells visited is identical either way"
+          - "The first argument must index the columns, since the recurrence is not symmetric here"
+        answer: "Sweep over the longer string by rows and let the shorter one set the row width"
+        explanation: >-
+          You keep two rows, so the space you pay is the row width, and making that the shorter
+          string gives O(min(m, n)). Sweeping the shorter string leaves wide rows and the worse
+          bound. Cell visits are indeed the same, but the question is about retained space, so that
+          option answers the wrong thing. And these recurrences are symmetric under swapping the
+          two strings.
+        difficulty: advanced
+
+  - topic: dsa-subsequence-dp
+    # Source: GFG - Longest Increasing Subsequence
+    questions:
+      - id: subseq-versus-substring
+        prompt: "Longest common substring and longest common subsequence share a table shape. What is the one recurrence difference?"
+        options:
+          - "Substring zeroes a mismatched cell; subsequence carries the best value across mismatches"
+          - "Subsequence zeroes a mismatched cell; substring carries the best value across mismatches"
+          - "Substring takes a min at every cell where subsequence takes a max over the same cells"
+          - "Substring needs a third dimension, because the current run length must be stored too"
+        answer: "Substring zeroes a mismatched cell; subsequence carries the best value across mismatches"
+        explanation: >-
+          A substring must be contiguous, so a mismatch destroys the run and the cell restarts at
+          zero, whereas a subsequence may skip, so it inherits the better neighbour. The second
+          option swaps the two and is the mistake that turns one problem into the other. Neither
+          problem minimises anything. And the run length is already what the substring cell stores,
+          so no extra axis is needed.
+        difficulty: intermediate
+        mastery: true
+      - id: subseq-substring-answer-cell
+        prompt: "For longest common substring, why is the answer not simply the bottom-right cell of the completed table?"
+        options:
+          - "The best run can end at any cell, so you track a maximum while filling the table"
+          - "The bottom-right cell is reserved for a base case, so it never holds a real value"
+          - "The table is filled diagonally, so the bottom-right cell is written before the rest"
+          - "The bottom-right cell holds the subsequence answer, which is one larger than the run"
+        answer: "The best run can end at any cell, so you track a maximum while filling the table"
+        explanation: >-
+          Each cell describes a run ending exactly there, so the answer is the max over all cells,
+          while the subsequence version's bottom-right cell really is the answer. Base cases live in
+          row zero and column zero, not the far corner. The standard fill is row major, not diagonal.
+          And the corner cell of a substring table means only a run ending at both string ends.
+        difficulty: intermediate
+      - id: subseq-lis-tails-meaning
+        prompt: "LIS in O(n log n) keeps an array of tail values and binary searches it. What does each entry of that array mean?"
+        options:
+          - "The smallest tail achievable by an increasing subsequence of that length seen so far"
+          - "The largest tail achievable by an increasing subsequence of that length, for headroom"
+          - "The element at that position of the actual longest increasing subsequence found so far"
+          - "The count of increasing subsequences of that length, used to break ties on equal values"
+        answer: "The smallest tail achievable by an increasing subsequence of that length seen so far"
+        explanation: >-
+          Keeping the smallest possible tail per length leaves the most room to extend later, and it
+          is what makes the array sorted and so binary searchable. Largest tails would be the least
+          extensible choice. The array is not itself a valid subsequence, which is why reconstruction
+          needs extra parent links. And no counting happens in this algorithm at all.
+        difficulty: advanced
+        mastery: true
+      - id: subseq-distinct-count
+        prompt: "Distinct Subsequences counts occurrences of t inside s as a subsequence. When the two current characters match, what does dp[i][j] add up?"
+        options:
+          - "dp[i-1][j-1] for using the match, plus dp[i-1][j] for skipping this character of s"
+          - "dp[i-1][j-1] only, because a matching character must always be consumed by the pair"
+          - "dp[i][j-1] plus dp[i-1][j], the two neighbours, exactly as in a grid path count"
+          - "One plus dp[i-1][j-1], since a match extends every earlier occurrence by a single step"
+        answer: "dp[i-1][j-1] for using the match, plus dp[i-1][j] for skipping this character of s"
+        explanation: >-
+          A matching character in s may either be used or ignored, and those give disjoint families
+          of occurrences, so the counts add. Forcing the match drops every occurrence that skips this
+          character. The grid-path pair advances t without consuming s, which is not a legal move.
+          And adding one counts occurrences as if there were only ever a single new one.
+        difficulty: advanced
+      - id: subseq-strict-comparison
+        prompt: "Your LIS inner comparison uses a[j] less than or equal to a[i] rather than strictly less. What does the code now compute?"
+        options:
+          - "The longest non-decreasing subsequence, which overcounts whenever duplicates appear"
+          - "The same answer, because equal elements can never extend a subsequence in any case"
+          - "The longest strictly decreasing subsequence, since the comparison has been inverted"
+          - "Nothing meaningful, because the inner loop stops terminating once duplicates are found"
+        answer: "The longest non-decreasing subsequence, which overcounts whenever duplicates appear"
+        explanation: >-
+          Allowing equality lets repeated values chain, so on input like 2, 2, 2 it answers three
+          instead of one. Equal elements do extend under that comparison, which is the whole bug.
+          Nothing was inverted, so decreasing subsequences are not involved. And the loop still runs
+          over j below i, so termination is never in question.
+        difficulty: intermediate
+
+  - topic: dsa-knapsack
+    # Source: GFG - 0/1 Knapsack Problem; NeetCode - Unbounded Knapsack
+    questions:
+      - id: knapsack-loop-direction
+        prompt: "With one 1D array over capacity, why does 0/1 knapsack iterate capacity downward while unbounded knapsack iterates upward?"
+        options:
+          - "Downward reads the previous item's values, so an item is used once; upward reuses it"
+          - "Downward is faster in Java, because the array writes stay inside one cache line"
+          - "Downward avoids negative indices, which the unbounded version handles by clamping"
+          - "Direction never affects correctness; it only changes which optimum is reported on ties"
+        answer: "Downward reads the previous item's values, so an item is used once; upward reuses it"
+        explanation: >-
+          Descending capacity guarantees dp[c - w] still holds the value from before this item, which
+          is exactly the 0/1 constraint, while ascending lets a cell already updated with this item be
+          read again, which is exactly what unbounded wants. Cache behaviour is a micro detail with no
+          bearing on the answer. Neither direction produces a negative index once c is at least w. And
+          the two directions solve different problems, so correctness very much depends on it.
+        difficulty: advanced
+        mastery: true
+      - id: knapsack-wrong-direction-symptom
+        prompt: "You solve Partition Equal Subset Sum with a 1D boolean array but sweep the capacity upward. What is the observed failure?"
+        options:
+          - "It reports true for target sums that need one element counted several times over"
+          - "It reports false for every sum, because the array is cleared between the item passes"
+          - "It throws an index exception once the running capacity passes the target sum value"
+          - "It stays correct but doubles the runtime, revisiting every capacity twice per item"
+        answer: "It reports true for target sums that need one element counted several times over"
+        explanation: >-
+          Sweeping upward turns the array into the unbounded solver, so on numbers like 3 and target
+          6 it happily uses the single 3 twice and answers true. Nothing clears the array between
+          passes, since it is reused deliberately. The indices stay in range throughout the sweep.
+          And the bug is a wrong answer, not a slow one.
+        difficulty: advanced
+      - id: knapsack-pseudopolynomial
+        prompt: "0/1 knapsack with n items and capacity W runs in O(n*W). Why is that not polynomial in the input size?"
+        options:
+          - "W is written in binary, so input length is about log W and the time is exponential in it"
+          - "W is a constant factor, so the honest bound is O(n) and the W term should be dropped"
+          - "The bound omits the time to read the items, which dominates for large capacities"
+          - "A product of two input quantities is never counted as polynomial by long convention"
+        answer: "W is written in binary, so input length is about log W and the time is exponential in it"
+        explanation: >-
+          Complexity is measured against the number of bits of input, and W contributes only its
+          digits, so O(n*W) is exponential in that length, which is what pseudopolynomial means. W is
+          part of the input rather than a constant. Reading the items is O(n) and cannot dominate n
+          times W. And products of input sizes, like m times n, are perfectly polynomial in general.
+        difficulty: advanced
+      - id: knapsack-combinations-nesting
+        prompt: "Coin Change II counts combinations with unlimited coins. Which loop nesting counts combinations rather than permutations?"
+        options:
+          - "Coins in the outer loop and amount ascending inside, so each coin is offered once"
+          - "Amount in the outer loop and coins inside, so each amount is finished before moving on"
+          - "Either nesting, because addition commutes and the totals come out the same regardless"
+          - "Coins outside and amount descending inside, matching the 0/1 knapsack sweep exactly"
+        answer: "Coins in the outer loop and amount ascending inside, so each coin is offered once"
+        explanation: >-
+          Fixing a coin order in the outer loop means 1 then 2 and 2 then 1 are never counted
+          separately, which is what a combination is; ascending amount keeps the coin reusable. Amount
+          outside with coins inside counts ordered sequences, the permutation answer. The two nestings
+          give different numbers, so commutativity does not save you. And descending amount forbids
+          reuse, which contradicts unlimited coins.
+        difficulty: advanced
+        mastery: true
+      - id: knapsack-target-sum-reduction
+        prompt: "Target Sum assigns a plus or a minus to every number. Which reduction turns it into a subset-sum count?"
+        options:
+          - "Count subsets summing to half of total plus target, which is the set of positives"
+          - "Count subsets summing to total minus target, the negatives, and then double each one"
+          - "Sort the numbers and greedily assign a minus to the largest until the target is met"
+          - "Count subsets summing to the target itself, since the signs cancel over the whole array"
+        answer: "Count subsets summing to half of total plus target, which is the set of positives"
+        explanation: >-
+          If P is the positive part then P minus the rest equals target and P plus the rest equals
+          total, so P is half of total plus target, and counting such subsets is plain 0/1 subset sum.
+          The second option gets the algebra wrong and the doubling is meaningless. Greedy assignment
+          cannot count anything. And the signs do not cancel, which is why the halving step exists.
+        difficulty: advanced
+
+  - topic: dsa-grid-dp
+    # Source: GFG - Dynamic Programming on Grids, use cases
+    questions:
+      - id: grid-obstacle-cell
+        prompt: "Unique Paths II contains obstacle cells. What must the transition write at an obstacle?"
+        options:
+          - "Zero, which makes every cell reachable only through it unreachable as well"
+          - "One, so that paths can still route around it from the cell directly above"
+          - "Nothing at all, leaving whatever value the array happened to hold beforehand"
+          - "The value on its left, which forwards the incoming count around the blockage"
+        answer: "Zero, which makes every cell reachable only through it unreachable as well"
+        explanation: >-
+          Zero ways to stand on a blocked cell is the truthful value, and it propagates correctly
+          because later cells sum their predecessors. Writing one invents a path through the
+          obstacle. Skipping the cell leaves stale data that later cells will add in. And copying the
+          left neighbour routes paths straight through the obstacle, which is the same error dressed up.
+        difficulty: beginner
+      - id: grid-in-place-safety
+        prompt: "Minimum Path Sum overwrites the input grid in place during a row-major sweep. Why is that safe?"
+        options:
+          - "The cell is later read only by its right and lower neighbours, both visited after it"
+          - "The grid is copied lazily by the JVM, so the original values remain available anyway"
+          - "The cell is later read only by its upper and left neighbours, which are already final"
+          - "Overwriting is unsafe in general but tolerated here because the values only increase"
+        answer: "The cell is later read only by its right and lower neighbours, both visited after it"
+        explanation: >-
+          A cell's original value is consumed the moment that cell is computed, and afterwards only
+          cells below and to the right read it, by which time the stored value is the one they want.
+          The JVM copies nothing. The third option confuses who reads the cell with what the cell
+          reads. And in-place is genuinely correct here, not merely tolerated.
+        difficulty: intermediate
+        mastery: true
+      - id: grid-maximal-square
+        prompt: "Maximal Square: dp[i][j] is the side of the largest all-ones square ending at that cell. What is the transition on a one?"
+        options:
+          - "One plus the min of the top, left and top-left cells, since all three must support it"
+          - "One plus the max of the top, left and top-left cells, taking the best supporting side"
+          - "One plus the sum of the top and left cells, counting the rows and columns separately"
+          - "One plus the top-left cell alone, because a square only ever grows along its diagonal"
+        answer: "One plus the min of the top, left and top-left cells, since all three must support it"
+        explanation: >-
+          A square of side k at this corner requires squares of side k minus one at all three
+          neighbours, so the weakest of them caps the size, which is why it is a min. A max claims a
+          square that is not filled on its short side. A sum is not a side length at all. And the
+          diagonal cell alone ignores the two edges the square also needs.
+        difficulty: advanced
+        mastery: true
+      - id: grid-rolling-row-paths
+        prompt: "Counting grid paths with a single row of length n and the in-place update row[j] += row[j-1]: what does that compute?"
+        options:
+          - "The current row, because row[j] before the add is still the cell directly above it"
+          - "The previous row, because the addition is applied one full step too early here"
+          - "A prefix sum of the current row, which is not the path count for that cell at all"
+          - "The right answer only if the row is swept rightward to leftward, keeping old values"
+        answer: "The current row, because row[j] before the add is still the cell directly above it"
+        explanation: >-
+          Sweeping left to right, row[j] not yet updated is last row's value, the cell above, and
+          row[j-1] is already this row's left neighbour, so the add is exactly the recurrence. It is
+          not off by a row. It coincidentally looks like a prefix sum but the operand is the row
+          above, so it is genuinely the path count. And a right-to-left sweep would read a stale left
+          neighbour instead.
+        difficulty: advanced
+      - id: grid-four-directions
+        prompt: "A grid problem allows moves in all four directions with arbitrary positive costs. Why does the row-major DP sweep stop working?"
+        options:
+          - "The dependencies contain cycles, so no valid fill order exists and you need Dijkstra"
+          - "The table becomes three-dimensional, so two nested index loops cannot address a state"
+          - "The costs may be negative, and a DP table in Java cannot hold negative values safely"
+          - "The number of distinct paths becomes infinite, so the counting recurrence never ends"
+        answer: "The dependencies contain cycles, so no valid fill order exists and you need Dijkstra"
+        explanation: >-
+          Down-and-right movement makes the dependency graph acyclic, which is what a sweep needs;
+          allowing up and left creates cycles, so the problem becomes shortest path and wants
+          Dijkstra. The state is still the cell, so no third axis appears. The premise says positive
+          costs, and int arrays hold negatives fine anyway. And the issue is cyclic dependency, not an
+          unbounded path count.
+        difficulty: advanced
+
+  - topic: dsa-interval-dp
+    # Source: GFG - Matrix Chain Multiplication, bottom-up tabulation
+    questions:
+      - id: interval-length-outer-loop
+        prompt: "Matrix chain multiplication fills dp[i][j] over ranges. Why is the outer loop over interval length rather than over the left endpoint?"
+        options:
+          - "Every split of a range needs strictly shorter ranges, which only length order guarantees"
+          - "Length order keeps the table lower triangular, which halves what Java has to allocate"
+          - "Iterating the left endpoint first would visit each range twice and so double the work"
+          - "Length order is what lets the split point be located by a binary search inside the range"
+        answer: "Every split of a range needs strictly shorter ranges, which only length order guarantees"
+        explanation: >-
+          Splitting i..j at k reads i..k and k+1..j, both strictly shorter, so ordering by length is
+          the topological order for this dependency. Triangularity is a consequence of i being at
+          most j, not the reason for the loop. Left-endpoint order visits each range once too, it
+          just visits some before their parts. And the split point is found by trying every k, never
+          by binary search.
+        difficulty: advanced
+        mastery: true
+      - id: interval-mcm-complexity
+        prompt: "Matrix chain multiplication over n matrices: what are the state count, the work per state, and the total?"
+        options:
+          - "About n^2 ranges with O(n) split points each, so O(n^3) time and O(n^2) space"
+          - "About n ranges with O(n) split points each, so O(n^2) time and O(n) space overall"
+          - "About n^2 ranges with O(1) work each, so O(n^2) time and O(n^2) space overall"
+          - "About n^3 ranges with O(n) split points each, so O(n^4) time and O(n^3) space"
+        answer: "About n^2 ranges with O(n) split points each, so O(n^3) time and O(n^2) space"
+        explanation: >-
+          A range is a pair of endpoints, giving roughly n squared states, and each tries up to n
+          split points, so the classic bound is n cubed time on an n squared table. One range per
+          index undercounts the states. Constant work per state ignores the loop over k, which is the
+          defining feature of interval DP. And a state is a pair, never a triple, so n cubed states
+          is too many.
+        difficulty: intermediate
+      - id: interval-burst-balloons-last
+        prompt: "Burst Balloons is solved by asking which balloon in a range is burst last. What goes wrong if you ask which is burst first?"
+        options:
+          - "The two sides stop being independent, since that burst changes the neighbours later on"
+          - "The recursion loses its base case, because an empty range still has a first balloon"
+          - "The state needs a third dimension to record the order the earlier bursts happened in"
+          - "The answer is unchanged but ranges get revisited, so the memo stops helping at all"
+        answer: "The two sides stop being independent, since that burst changes the neighbours later on"
+        explanation: >-
+          If a balloon goes first, the remaining left and right pieces become adjacent and their
+          scores interact, so they are not separate subproblems; taking it last means the range
+          boundaries are still intact when it pops, which is what makes the split clean. An empty
+          range has no first balloon, so the base case is fine. No extra dimension rescues the
+          coupling. And the answer really does come out wrong, not merely slower.
+        difficulty: advanced
+        mastery: true
+      - id: interval-palindromic-subsequence
+        prompt: "Longest Palindromic Subsequence uses dp[i][j] over the range i to j. What is the transition when the two endpoint characters are equal?"
+        options:
+          - "Two plus dp[i+1][j-1], because the matching pair wraps whatever is best strictly inside"
+          - "One plus dp[i+1][j-1], because a palindrome grows one character at a time from inside"
+          - "The max of dp[i+1][j] and dp[i][j-1], which is the same formula used on a mismatch"
+          - "Two plus the max of dp[i+1][j] and dp[i][j-1], keeping the pair and the better side"
+        answer: "Two plus dp[i+1][j-1], because the matching pair wraps whatever is best strictly inside"
+        explanation: >-
+          Equal endpoints contribute two characters and the rest of the palindrome must live strictly
+          between them. Adding one forgets that a matched pair is two characters. The mismatch formula
+          throws away a free match and undercounts. And the last option double counts, because those
+          two ranges each already contain one of the endpoints.
+        difficulty: intermediate
+      - id: interval-recognition-signal
+        prompt: "Which signal most reliably says a problem wants a state over a contiguous range rather than over a prefix?"
+        options:
+          - "The cost of a choice depends on both endpoints of the piece the choice is made inside"
+          - "The input is an array of integers and the quantity being asked for is a minimum cost"
+          - "The wording mentions cutting or merging, which always implies a range-based state"
+          - "The recursion tree is deep, so a range state is needed to bound how deep it can get"
+        answer: "The cost of a choice depends on both endpoints of the piece the choice is made inside"
+        explanation: >-
+          When a cut or a merge is priced by the surrounding boundaries, a prefix index cannot carry
+          enough context, and that endpoint dependence is the real test. Arrays with minimum costs
+          describe most 1D DP too. Cutting and merging are suggestive words but not decisive, since
+          plenty of merge problems are greedy or heap based. And range states do not bound recursion
+          depth in any way.
+        difficulty: advanced
+
+  - topic: dsa-dp-optimization
+    # Source: GFG - Count Unique Paths in a Grid, DP then combinatorics
+    questions:
+      - id: opt-when-rolling-invalid
+        prompt: "Which condition makes it invalid to collapse a 2D DP table down to two rows?"
+        options:
+          - "The recurrence reads rows further back than one, or you must reconstruct the path taken"
+          - "The recurrence reads the cell to its left, whose value is overwritten in the same row"
+          - "The table has more columns than rows, so the two kept rows cannot cover every state"
+          - "The values are combined with a min instead of a sum, which needs the whole history"
+        answer: "The recurrence reads rows further back than one, or you must reconstruct the path taken"
+        explanation: >-
+          Two rows are enough exactly when the dependency reaches back one row and you only need the
+          final value; deeper reach or path recovery both require the full table. A left neighbour in
+          the same row is fine, since it is already final when read. Table shape has no bearing on how
+          many rows must be retained. And min and sum are equally local operators.
+        difficulty: advanced
+        mastery: true
+      - id: opt-kadane-variable
+        prompt: "Maximum Subarray in O(1) space keeps one running value alongside the best seen. What does that running value represent?"
+        options:
+          - "The best subarray sum ending exactly at the current index, restarted when it goes negative"
+          - "The best subarray sum seen anywhere so far, which is also what the function returns"
+          - "The running total of the whole prefix, from which the answer is a suffix subtraction"
+          - "The length of the current subarray, used to decide when to restart the accumulation"
+        answer: "The best subarray sum ending exactly at the current index, restarted when it goes negative"
+        explanation: >-
+          That per-index best is the DP state, and dropping a negative prefix is the transition; the
+          overall answer is a separate max kept alongside it. Conflating the two variables loses the
+          ability to extend, since the global best does not know where the current run ends. A prefix
+          total needs a stored minimum to become an answer. And length plays no part in the decision.
+        difficulty: intermediate
+        mastery: true
+      - id: opt-knapsack-space-cost
+        prompt: "Reducing 0/1 knapsack from a full n by W table to a single array of length W+1 changes the space bound to what, and at what price?"
+        options:
+          - "O(W) space, but you can no longer recover which items were chosen without extra work"
+          - "O(n) space, and the chosen items stay recoverable by re-running just the inner loop"
+          - "O(1) space, because the array is reused, and item recovery is unaffected by the change"
+          - "Still O(n*W) space, since the array is reallocated once per item inside the outer loop"
+        answer: "O(W) space, but you can no longer recover which items were chosen without extra work"
+        explanation: >-
+          One row of W plus one cells is O(W), and discarding the earlier rows discards the decisions
+          you would walk backwards to list the items. The bound is in W, not n, since the array is
+          indexed by capacity. A single array of W plus one cells is not O(1). And the array is
+          allocated once and reused, which is the entire point of the reduction.
+        difficulty: intermediate
+      - id: opt-unique-paths-closed-form
+        prompt: "Unique Paths on an m by n grid has a closed form. What is it, and how does its cost compare with the O(m*n) table?"
+        options:
+          - "A binomial in m+n-2 choose m-1, computable in O(min(m, n)) time and O(1) extra space"
+          - "A binomial in m*n choose m, computable in O(m+n) time and O(1) space, though it overflows"
+          - "Two to the power m+n-2, computable in O(log(m+n)) time, as each step is a free choice"
+          - "Simply m times n, computable in constant time, since each cell ends exactly one path"
+        answer: "A binomial in m+n-2 choose m-1, computable in O(min(m, n)) time and O(1) extra space"
+        explanation: >-
+          Every path is m-1 downs and n-1 rights in some order, so the count is that binomial
+          coefficient, which a running product computes in O(min(m, n)) steps and no table, using
+          long to survive the intermediate values. The second binomial counts the wrong objects.
+          Two to the power ignores that the numbers of each move are fixed. And m times n is the cell
+          count, not the path count.
+        difficulty: intermediate
+      - id: opt-lis-time-not-space
+        prompt: "Which optimisation actually lowers the time bound of LIS rather than only shrinking its memory?"
+        options:
+          - "Replacing the inner scan with a binary search over tails, giving O(n log n) overall"
+          - "Storing the table as one rolling row, which removes the second array dimension"
+          - "Using int instead of long per cell, which halves the bytes the whole table occupies"
+          - "Reversing the loop direction so each cell is written once rather than being relaxed"
+        answer: "Replacing the inner scan with a binary search over tails, giving O(n log n) overall"
+        explanation: >-
+          The O(n^2) cost is the inner scan over earlier indices, and a sorted tails array lets a
+          binary search replace it, which is a genuine change of asymptotic time. LIS already uses a
+          single dimension, so there is no row to roll. Narrower cells change constants only.
+          And reversing the loop rearranges the same amount of work.
+        difficulty: advanced

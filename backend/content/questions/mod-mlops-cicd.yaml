@@ -1,0 +1,391 @@
+# CI/CD for ML - self-check questions.
+#
+# Grounded in the CD4ML article, the effective-testing-for-ML write-up, the ML
+# Test Score paper, the CML getting-started guide and the MLflow model registry
+# docs. The line these questions hold is what you can actually assert about a
+# model in a pipeline, and why shipping a model is not shipping code.
+schema_version: 1
+kind: question_bank
+module: mod-mlops-cicd
+topics:
+  - topic: mlcicd-cd4ml
+    # Source: martinfowler.com - Continuous Delivery for Machine Learning
+    questions:
+      - id: mlcicd-cd4ml-three-artifacts
+        prompt: "CD4ML treats an ML system as having three axes of change rather than one. Which are they, and what follows from that?"
+        options:
+          - "Code, data and model, so a reproducible release has to pin a version of each of the three together"
+          - "Code, tests and infrastructure, so a release becomes reproducible as soon as the container image is pinned"
+          - "Training, serving and monitoring, so a release is defined by which of those three environments it targets"
+          - "Features, labels and metrics, so a release is reproducible once the metric definitions are version controlled"
+        answer: "Code, data and model, so a reproducible release has to pin a version of each of the three together"
+        explanation: >-
+          The article's premise is that behaviour comes from all three, so a release identity that names only the
+          commit is incomplete. Tests and infrastructure are part of the code axis and pinning an image still
+          leaves the data unnamed. The three environments are places a release goes rather than things that vary
+          independently. And metric definitions matter but they describe evaluation, not the artifacts that
+          determine behaviour.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-cd4ml-not-code-deploy
+        prompt: "Why is releasing a model not the same event as releasing code, even when the serving code has not been touched?"
+        options:
+          - "The behaviour came out of data, so identical code can act differently and needs an evaluation gate of its own"
+          - "Model files are larger than code, so the release differs only in how the artifact reaches the serving hosts"
+          - "Models are interpreted rather than compiled, so their release can skip the build stage a code release needs"
+          - "A model release is always a rollback of the previous one, so it never needs a forward-looking quality gate"
+        answer: "The behaviour came out of data, so identical code can act differently and needs an evaluation gate of its own"
+        explanation: >-
+          A new model is a new function even with byte-identical serving code, so the thing to gate is measured
+          behaviour on held-out and sliced data rather than a green unit-test run. Artifact size is a delivery
+          detail with no bearing on risk. Compilation is irrelevant, since the risk is not in the build. And a
+          promotion is a forward change that needs justifying, not a rollback.
+        difficulty: intermediate
+      - id: mlcicd-cd4ml-promotion-stage
+        prompt: "Which pipeline stage does the CD4ML walkthrough place between a reproducible training run and a live endpoint?"
+        options:
+          - "A model evaluation and promotion step, where the candidate is scored and recorded before anything ships"
+          - "A manual notebook review, where a data scientist reruns the training cells to confirm the numbers again"
+          - "A schema migration step, where the production feature tables are rewritten to match the new model input"
+          - "A load test, where measured throughput alone decides whether the candidate is allowed into production"
+        answer: "A model evaluation and promotion step, where the candidate is scored and recorded before anything ships"
+        explanation: >-
+          The pipeline's job is to turn a trained candidate into a recorded, comparable decision, so evaluation
+          against a threshold or the incumbent sits between training and deployment. Rerunning notebooks by hand
+          is the manual practice the article is replacing. Schema changes are occasional and are not a standing
+          stage. And throughput matters for serving but says nothing about whether the model is any good.
+        difficulty: intermediate
+      - id: mlcicd-cd4ml-maturity-ladder
+        prompt: "A team retrains by hand each quarter, ships by copying the model file, and has no automated pipeline. Where does the maturity ladder place them?"
+        options:
+          - "At the manual process level, where the next step is automating the training pipeline itself end to end"
+          - "At the automated pipeline level, since retraining on a regular schedule is what continuous training means"
+          - "At the full continuous delivery level, since a quarterly cadence is a release train like any other one"
+          - "Off the ladder entirely, because a team with no automation cannot be scored against these levels at all"
+        answer: "At the manual process level, where the next step is automating the training pipeline itself end to end"
+        explanation: >-
+          Level zero is exactly this picture: script-driven, manually triggered, with a handover of the artifact,
+          and the prescribed next move is an automated pipeline that retrains on demand. A calendar reminder is
+          not automation, so the second option confuses cadence with pipeline maturity. Full continuous delivery
+          also requires automated CI/CD of the pipeline itself. And the ladder's bottom rung exists precisely to
+          describe teams like this.
+        difficulty: beginner
+      - id: mlcicd-cd4ml-data-versioning
+        prompt: "How does CD4ML suggest bringing a multi-gigabyte training dataset under version control beside the code?"
+        options:
+          - "Commit a small pointer file that names the immutable data location, keeping the bytes in object storage"
+          - "Commit the dataset itself, since a repository is the only place a version can be recorded reliably"
+          - "Commit a script that regenerates the dataset, and accept that reruns may produce slightly different rows"
+          - "Commit nothing about the data, and record the training date instead so the snapshot can be inferred later"
+        answer: "Commit a small pointer file that names the immutable data location, keeping the bytes in object storage"
+        explanation: >-
+          A hash or path committed alongside the code gives one commit that identifies code and data together
+          while the bulk stays where bulk belongs. Committing the bytes makes the repository unusable and history
+          unclonable. A regeneration script that is not deterministic identifies no particular dataset. And a
+          date is not a version, because whatever the source table held then may no longer be recoverable.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: mlcicd-testing-ml-systems
+    # Source: jeremyjordan.me - Effective testing for machine learning systems
+    questions:
+      - id: mlcicd-testing-pretrain-checks
+        prompt: "Which checks can a continuous integration job run before any training happens, and what do they catch?"
+        options:
+          - "Schema, shape and label-distribution assertions, which catch a broken data change before compute is spent"
+          - "Invariance and directional expectation assertions, which need only the raw data and no fitted model at all"
+          - "Latency and throughput assertions, which catch a slow model before it can reach a production environment"
+          - "Accuracy threshold assertions, which catch a quality regression as soon as the input data has been read"
+        answer: "Schema, shape and label-distribution assertions, which catch a broken data change before compute is spent"
+        explanation: >-
+          Pre-train tests only inspect data and model wiring, so they are fast, need no accelerator, and fail
+          before an expensive run begins. The behavioural tests in the second option require a fitted model to
+          query. Latency tests need a built artifact to serve. And accuracy cannot be asserted before the model
+          that produces it exists.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-testing-invariance
+        prompt: "An invariance test on a sentiment model does what to the input, and what does it then assert?"
+        options:
+          - "Changes something that should not matter, such as a person's name, and asserts the prediction stays put"
+          - "Changes something that should matter, such as a negation, and asserts the prediction moves accordingly"
+          - "Removes a feature entirely, and asserts the model raises an error rather than guessing a replacement"
+          - "Repeats the same input twice, and asserts the two predictions agree to within a small numeric tolerance"
+        answer: "Changes something that should not matter, such as a person's name, and asserts the prediction stays put"
+        explanation: >-
+          Invariance encodes a perturbation the label is known to be insensitive to, so the assertion is that the
+          output does not move, which is how bias to irrelevant tokens gets caught. Perturbing something that
+          should matter is the directional expectation test instead. Asserting an error on a missing feature is an
+          input-validation test. And repeating an identical input tests determinism, not invariance.
+        difficulty: intermediate
+      - id: mlcicd-testing-directional-expectation
+        prompt: "You add a bedroom to a house-price input and the predicted price falls. Which kind of test caught that?"
+        options:
+          - "A directional expectation test, which asserts the sign of the change a known perturbation should produce"
+          - "An invariance test, which asserts that a change of this particular kind should leave the prediction alone"
+          - "A minimum functionality test, which asserts a floor on accuracy over one named slice of the evaluation set"
+          - "A pre-train test, which asserts the training columns all fall inside the ranges recorded in the schema"
+        answer: "A directional expectation test, which asserts the sign of the change a known perturbation should produce"
+        explanation: >-
+          Domain knowledge says more bedrooms should not reduce the price, so the test asserts the direction of
+          movement rather than an exact value. An invariance test would demand no change, which is the wrong
+          expectation for a feature that genuinely matters. Minimum functionality is about simple cases and
+          slices. And a pre-train test never queries the fitted model at all.
+        difficulty: intermediate
+      - id: mlcicd-testing-min-functionality
+        prompt: "What is a minimum functionality test for, and how does it differ from an overall accuracy number?"
+        options:
+          - "It checks easy known cases and specific slices, so a failure on one subgroup cannot hide inside an average"
+          - "It checks the hardest cases in the dataset, so the number it reports is a strict lower bound on accuracy"
+          - "It checks that the model beats a random guess, so a completely broken training run cannot pass a review"
+          - "It checks the whole evaluation set at a stricter threshold, so borderline regressions get blocked as well"
+        answer: "It checks easy known cases and specific slices, so a failure on one subgroup cannot hide inside an average"
+        explanation: >-
+          These behave like unit tests: a handful of cases whose right answer is obvious, plus per-slice
+          expectations, so a subgroup regression surfaces even when the aggregate looks fine. Deliberately hard
+          cases are not the target, and no bound is being computed. Beating random is far too weak a bar to catch
+          anything real. And a stricter global threshold is still an aggregate that averages the subgroup away.
+        difficulty: intermediate
+      - id: mlcicd-testing-what-ci-cannot-assert
+        prompt: "Why is a hard assertion that accuracy exceeds 0.91 a poor gate on a retrained model in continuous integration?"
+        options:
+          - "Training is stochastic and the data moves, so the number varies for reasons unrelated to the change made"
+          - "Accuracy cannot be computed inside a pipeline, because the evaluation set only exists in production"
+          - "A threshold gate always passes, since the retrained model is scored on the data it was just fitted on"
+          - "Thresholds belong inside the model file rather than the pipeline, so the runner cannot read the gate"
+        answer: "Training is stochastic and the data moves, so the number varies for reasons unrelated to the change made"
+        explanation: >-
+          A fixed absolute bar turns ordinary run-to-run variation and natural data change into build failures,
+          which is why comparison against the current production model with a tolerance is the usable form.
+          Accuracy is perfectly computable on a versioned evaluation set. A gate on held-out data does not
+          automatically pass. And where the number is stored is a plumbing detail rather than the objection.
+        difficulty: advanced
+        mastery: true
+
+  - topic: mlcicd-production-readiness
+    # Source: Google Research - The ML Test Score rubric
+    questions:
+      - id: mlcicd-readiness-four-sections
+        prompt: "The ML Test Score rubric groups its twenty-eight tests into which four areas?"
+        options:
+          - "Features and data, model development, machine learning infrastructure, and monitoring of the live system"
+          - "Unit tests, integration tests, end-to-end tests, and manual acceptance testing carried out before release"
+          - "Accuracy, latency, cost and fairness, each scored separately and then combined into one overall figure"
+          - "Data collection, labelling, training and serving, following the order in which the pipeline runs them"
+        answer: "Features and data, model development, machine learning infrastructure, and monitoring of the live system"
+        explanation: >-
+          The four sections cover the data going in, the modelling process, the pipeline that trains and serves,
+          and what watches the system afterwards, which is why monitoring gets equal weight with modelling. The
+          classic test pyramid is a software taxonomy the rubric deliberately does not use. Accuracy and latency
+          are outcomes rather than sections. And the pipeline stages are not how the tests are grouped.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-readiness-min-not-sum
+        prompt: "How does the rubric turn the per-section point totals into a single ML Test Score?"
+        options:
+          - "It takes the lowest section total, so a strong section cannot compensate for one that was neglected"
+          - "It adds the four section totals, so an improvement anywhere raises the score by the same amount"
+          - "It averages the four section totals, so a single weak section barely moves the overall figure at all"
+          - "It weights monitoring double, so the score ends up dominated by how well the live system is watched"
+        answer: "It takes the lowest section total, so a strong section cannot compensate for one that was neglected"
+        explanation: >-
+          Scoring by the minimum makes the weakest area the score, which is the point: excellent modelling with
+          no monitoring is still a fragile system. Summing or averaging would let a strong section mask a missing
+          one, which is the failure the rubric is designed to expose. And no section carries a doubled weight;
+          they are treated as equally necessary.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-readiness-manual-vs-automated
+        prompt: "The rubric awards half a point and a full point for the same test. What is the distinction between them?"
+        options:
+          - "Half for a check performed manually with the result documented, full for one automated and run repeatedly"
+          - "Half for a check that passes some of the time, full for one that passes on every single pipeline run"
+          - "Half for a check that is written but unreviewed, full for one a second engineer has signed off on"
+          - "Half for a check on the training data, full for the very same check applied to production data as well"
+        answer: "Half for a check performed manually with the result documented, full for one automated and run repeatedly"
+        explanation: >-
+          The rubric rewards a check being done at all, then rewards it again for being automated and repeated,
+          because a one-off manual inspection decays as the system changes. A flaky check is not half credit; it
+          is a broken check. Review status is not what the half point tracks. And where the check is applied is
+          the subject of separate items rather than the half-point rule.
+        difficulty: intermediate
+      - id: mlcicd-readiness-example-tests
+        prompt: "Which of these appears in the rubric as an actual scored test rather than as general good advice?"
+        options:
+          - "That a simpler model has been tried and shown not to be better than the one being put into production"
+          - "That the team holds a weekly review of model performance with the product stakeholders all present"
+          - "That the training code has been run through a linter and carries type annotations right the way through"
+          - "That the serving container image is smaller than a stated limit so that deployments finish quickly"
+        answer: "That a simpler model has been tried and shown not to be better than the one being put into production"
+        explanation: >-
+          The rubric includes a scored item on comparing against a simpler baseline, because an unbeaten simple
+          model means the complexity is unjustified. A recurring meeting is a process habit with no artifact to
+          score. Linting and typing are general code hygiene that the rubric does not enumerate. And image size
+          is an operational preference rather than a readiness test.
+        difficulty: intermediate
+      - id: mlcicd-readiness-staleness-and-skew
+        prompt: "Two rubric items concern how a model ages and how its inputs differ between environments. What are those checking?"
+        options:
+          - "Whether the model has gone stale relative to fresher data, and whether training and serving inputs agree"
+          - "Whether the model file carries a version tag, and whether the serving host runs identical library builds"
+          - "Whether the training run is reproducible, and whether the evaluation set has been refreshed recently"
+          - "Whether inference latency has grown over time, and whether the feature store retains enough history"
+        answer: "Whether the model has gone stale relative to fresher data, and whether training and serving inputs agree"
+        explanation: >-
+          Staleness asks how much is lost by not retraining, and the skew item asks whether the features computed
+          at serving time match those computed in training, which is the defect that silently degrades a live
+          model. Version tags and library builds are configuration concerns covered elsewhere. Reproducibility is
+          a separate item. And latency and retention are operational rather than these two items.
+        difficulty: intermediate
+
+  - topic: mlcicd-training-in-ci
+    # Source: CML (Iterative) - Get Started with CML on GitHub
+    questions:
+      - id: mlcicd-ci-cml-report
+        prompt: "What does CML add to an ordinary GitHub Actions workflow that already ran a training script?"
+        options:
+          - "It publishes the metrics and plots the run produced as a comment on the pull request that triggered it"
+          - "It replaces the runner with a managed training service so that the workflow needs no compute of its own"
+          - "It rewrites the training script into a pipeline definition so that the steps can be cached between runs"
+          - "It stores the trained model in a registry and marks it as the production version automatically on merge"
+        answer: "It publishes the metrics and plots the run produced as a comment on the pull request that triggered it"
+        explanation: >-
+          The tool's core function is turning run output into a report posted back into the pull request, so the
+          numbers land where the change is discussed. It does not supply managed training; you still choose a
+          runner. It does not restructure your script into a pipeline, which is a different tool's job. And it
+          does not decide promotions, which stay a registry and review concern.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-ci-review-as-diff
+        prompt: "Why post the training results into the pull request instead of into a dashboard the team can visit?"
+        options:
+          - "The evidence then sits beside the diff under review, so a model change gets approved the way code does"
+          - "A dashboard cannot render plots produced inside a continuous integration runner without extra services"
+          - "Pull request comments are immutable, which makes them the only durable place metrics can be recorded"
+          - "It removes the need for experiment tracking, since every historical run stays retrievable from comments"
+        answer: "The evidence then sits beside the diff under review, so a model change gets approved the way code does"
+        explanation: >-
+          Putting the metrics next to the change makes review a single act with the evidence attached, which is
+          the practice being bought. Dashboards can certainly display artifacts from a runner. Comments are
+          editable and deletable, so immutability is not the argument. And this complements experiment tracking
+          rather than replacing it, since comments are a poor query surface.
+        difficulty: intermediate
+      - id: mlcicd-ci-token-permissions
+        prompt: "Your CML step trains fine but fails at the moment it tries to comment. What is the usual cause?"
+        options:
+          - "The workflow token lacks write permission on pull requests, so the call posting the comment is rejected"
+          - "The training step consumed the token, so it is no longer valid by the time the comment step runs"
+          - "Comments require a paid runner tier, and the free hosted runners cannot write back to a repository"
+          - "The report file has to be committed to the branch first, and only then can it be posted as a comment"
+        answer: "The workflow token lacks write permission on pull requests, so the call posting the comment is rejected"
+        explanation: >-
+          Posting a comment is an authenticated write, so the workflow needs a token granted that scope, which is
+          the documented setup step people skip. Tokens are not consumed by earlier steps. Commenting is not
+          gated behind a runner tier. And the report is passed to the command directly rather than needing a
+          commit first.
+        difficulty: intermediate
+      - id: mlcicd-ci-self-hosted-runner
+        prompt: "When does launching a self-hosted runner earn its keep over the hosted runners GitHub provides?"
+        options:
+          - "When the job needs a GPU, or more time and disk than the hosted runners are willing to give it"
+          - "When the repository is private, since hosted runners are only available to public repositories"
+          - "When the workflow has to post a comment, since a hosted runner cannot reach the repository API"
+          - "When the training data is small, since a self-hosted machine starts faster on a lightweight job"
+        answer: "When the job needs a GPU, or more time and disk than the hosted runners are willing to give it"
+        explanation: >-
+          Hosted runners have fixed CPU, memory, disk and wall-clock limits and no accelerator, so a real training
+          job is the case for provisioning your own. Private repositories get hosted runners too. Commenting from
+          a hosted runner works fine, which is the default path. And a small job is exactly where a hosted runner
+          wins, since there is nothing to provision.
+        difficulty: intermediate
+      - id: mlcicd-ci-scope-of-training-job
+        prompt: "Why is a full production retrain on every push a poor default for a training job in continuous integration?"
+        options:
+          - "It costs hours and real money per commit, so the job usually runs on a subset or on a deliberate trigger"
+          - "It produces a model that cannot be compared with the previous one, because the data has moved on since"
+          - "It is forbidden by the runner, which terminates any job writing a file larger than the repository itself"
+          - "It leaks the training data into the build logs, which is why full runs must stay off shared runners"
+        answer: "It costs hours and real money per commit, so the job usually runs on a subset or on a deliberate trigger"
+        explanation: >-
+          Every push would queue an expensive job, so teams train on a sample for fast feedback and reserve the
+          full run for a labelled trigger or a schedule. Comparability is not lost by retraining; that is what a
+          pinned evaluation set is for. No runner rule about file size applies here. And logs contain metrics
+          rather than the dataset, unless you print it yourself.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: mlcicd-model-registry
+    # Source: MLflow - ML Model Registry; DVC - versioning data and models
+    questions:
+      - id: mlcicd-registry-model-vs-version
+        prompt: "In a model registry, what is the relationship between a registered model, a model version and the run that produced it?"
+        options:
+          - "A named model holds numbered versions, and each version points back at the run whose artifact produced it"
+          - "A named model holds one version at a time, and each new run overwrites whatever had been registered before"
+          - "A run holds several registered models, one for each metric that the training job happened to log for it"
+          - "A version holds several named models, grouped so that one deployment is able to serve all of them at once"
+        answer: "A named model holds numbered versions, and each version points back at the run whose artifact produced it"
+        explanation: >-
+          The registry adds a stable name and an incrementing version list on top of run artifacts, and the link
+          back to the run is what makes lineage answerable later. Versions accumulate rather than overwrite,
+          which is what makes rollback possible. Metrics do not create models. And the containment in the last
+          option is inverted relative to how the registry is organised.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-registry-alias-indirection
+        prompt: "Serving is configured to load an alias such as champion rather than version fourteen. What does that indirection buy you?"
+        options:
+          - "Promotion becomes a registry change, so no deployment configuration has to be edited or shipped again"
+          - "The alias caches the model weights, so serving no longer has to download the artifact on each restart"
+          - "Version numbers become unnecessary, so old versions can be deleted once the alias has moved past them"
+          - "The registry validates the alias against the model signature, which a plain version number would skip"
+        answer: "Promotion becomes a registry change, so no deployment configuration has to be edited or shipped again"
+        explanation: >-
+          A mutable pointer separates the decision about which model is current from the code and config that
+          consume it, so promoting means moving the alias rather than releasing a new deployment. An alias is a
+          name, not a cache. Versions remain essential, since the alias has to point at one and rollback needs
+          the old ones kept. And signature validation is unrelated to how the model was addressed.
+        difficulty: intermediate
+      - id: mlcicd-registry-promotion-record
+        prompt: "What makes promoting a model through a registry a recorded decision rather than a file copy?"
+        options:
+          - "The registry keeps who moved which version and when, together with the lineage back to the producing run"
+          - "The registry recomputes the model's metrics at promotion time, so that the decision is re-justified then"
+          - "The registry refuses a promotion until a second person approves it, which a plain file copy cannot require"
+          - "The registry rewrites the artifact with a promotion marker inside it, so the file itself carries the record"
+        answer: "The registry keeps who moved which version and when, together with the lineage back to the producing run"
+        explanation: >-
+          The value is the audit trail: an identified version, an actor, a timestamp and a path back to the
+          training run, none of which a copied file preserves. The registry does not rerun evaluation on its own.
+          Approval workflows can be layered on but are not what makes the event recorded. And the stored artifact
+          is left byte-identical, with the metadata held beside it.
+        difficulty: intermediate
+      - id: mlcicd-registry-rollback
+        prompt: "A newly promoted model is misbehaving in production. Why is the rollback fast in a registry-based setup?"
+        options:
+          - "The previous version is still stored, so pointing the alias back at it restores the old behaviour at once"
+          - "The registry keeps a shadow copy of production traffic, which it replays through the previous version"
+          - "Promotion is transactional, so the registry reverts automatically once error rates cross a threshold"
+          - "Rollback rebuilds the previous model from its recorded parameters, which takes only a single retrain"
+        answer: "The previous version is still stored, so pointing the alias back at it restores the old behaviour at once"
+        explanation: >-
+          Because versions are immutable and retained, the last good model is already sitting there and recovery
+          is a pointer move rather than a rebuild. Traffic replay is a separate testing capability. Automatic
+          reversion on error rates is something a deployment platform might do, not the registry. And retraining
+          would be slow and would not reproduce the old model exactly.
+        difficulty: intermediate
+        mastery: true
+      - id: mlcicd-registry-dvc-alternative
+        prompt: "The git-native alternative versions data and model files how, and what does checking out an old commit then give you?"
+        options:
+          - "Small metadata files tracked in git beside the code, so one checkout restores code, data and model together"
+          - "The full binaries committed into git history, so a checkout restores them without needing any extra tooling"
+          - "A database of hashes outside the repository, so an old checkout gives the code but neither data nor model"
+          - "Symbolic links into a shared drive, so an old checkout gives whatever that drive happens to contain today"
+        answer: "Small metadata files tracked in git beside the code, so one checkout restores code, data and model together"
+        explanation: >-
+          Content hashes are committed while the bytes live in a cache or remote, so a commit names an exact
+          triple and a checkout plus a pull reconstructs it. Committing binaries directly is what the approach
+          exists to avoid. The hashes are deliberately inside the repository, which is what makes the checkout
+          complete. And mutable shared links give no historical guarantee whatsoever.
+        difficulty: intermediate

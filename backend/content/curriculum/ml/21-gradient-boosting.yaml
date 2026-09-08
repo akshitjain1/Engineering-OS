@@ -1,0 +1,376 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ml
+    name: Machine Learning Foundations
+    description: Machine Learning Foundations
+    order: 6
+    subjects:
+    - slug: ml-foundations
+      name: Machine Learning Foundations
+      description: Machine Learning Foundations
+      order: 0
+      modules:
+      - slug: mod-ml-boosting
+        name: Gradient Boosting in Practice
+        description: 'Library-specific depth on boosted trees: the regularised objective, XGBoost tuning,
+          LightGBM mechanics, categorical features, and why trees still beat deep nets on tabular data.'
+        order: 2
+        topics:
+        - slug: gbm-boosted-trees-theory
+          name: Boosted trees theory
+          description: The regularised objective, the second-order (gradient plus Hessian) approximation
+            and the split-gain formula - why XGBoost is not "just gradient boosting".
+          order: 0
+          prerequisites:
+          - ml-overfitting
+          learning_objective: Derive the split-gain formula and explain what the regularisation terms
+            control.
+          mastery_criteria:
+          - Write the regularised objective and name what the leaf-weight penalty and the per-leaf cost
+            each penalise.
+          - Explain why a second-order Taylor expansion is used, and what the Hessian contributes to the
+            optimal leaf weight.
+          - Say what the split-gain formula compares, and what the per-leaf cost term does to a marginal
+            split.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 50
+          domain_key: ml
+          lessons:
+          - slug: gbm-boosted-trees-theory-core
+            title: Boosted trees theory
+            description: 'WHY NOW: Derive the split-gain formula and explain what the regularisation terms
+              control.
+
+
+              LEARN: XGBoost — https://xgboost.readthedocs.io/en/stable/tutorials/model.html
+
+              TIME: ~50 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: hand-compute the optimal leaf weight and the gain for one candidate split
+              on five rows with given gradients and Hessians. HOW MANY: 1 split. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: the leaf-weight and gain arithmetic written out, with the regularisation
+              terms varied once each to show their effect.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.83
+            resources:
+            - slug: gbm-boosted-trees-theory-primary
+              title: Introduction to Boosted Trees
+              type: documentation
+              url: https://xgboost.readthedocs.io/en/stable/tutorials/model.html
+              provider: XGBoost
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Derives the regularised objective, the second-order (gradient + Hessian) approximation
+                and the split-gain formula. This is why XGBoost is not "just gradient boosting", and it
+                is written by the authors.
+            - slug: gbm-boosted-trees-theory-reference
+              title: 'Gradient Boost Part 1 (of 4): Regression Main Ideas'
+              type: youtube_video
+              url: https://www.youtube.com/watch?v=3CC4N4z3GJc
+              provider: StatQuest (YouTube)
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Builds the residual-fitting intuition with a worked numeric example before
+                the maths; watch first if the objective derivation feels abstract. Title confirmed on
+                the live page; YouTube serves its title via JS, so a plain fetch reports it blank.
+        - slug: gbm-xgboost-tuning
+          name: XGBoost tuning
+          description: The bias-variance dial for boosted trees stated as parameter groups - control overfitting,
+            handle imbalance, speed up - so tuning stops being a random grid search.
+          order: 1
+          prerequisites:
+          - gbm-boosted-trees-theory
+          learning_objective: Tune a boosted-tree model by choosing parameters that address a diagnosed
+            problem.
+          mastery_criteria:
+          - Name two parameters that reduce model complexity directly and two that add randomness, and
+            say which you would reach for first when train and validation scores diverge.
+          - Explain the interaction between learning rate and number of boosting rounds, and why early
+            stopping is the honest way to set the latter.
+          - Say which parameter you would move for a 1:100 imbalanced target, and what it changes in the
+            objective.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: ml
+          lessons:
+          - slug: gbm-xgboost-tuning-core
+            title: XGBoost tuning
+            description: 'WHY NOW: Tune a boosted-tree model by choosing parameters that address a diagnosed
+              problem.
+
+
+              LEARN: XGBoost — https://xgboost.readthedocs.io/en/stable/tutorials/param_tuning.html
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: diagnose one overfitting boosted-tree model and fix it by moving two parameters,
+              recording train and validation scores at each step. HOW MANY: 2 parameter changes. WHERE:
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a before/after run with early stopping enabled and the chosen round count
+              reported.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: gbm-xgboost-tuning-primary
+              title: Notes on Parameter Tuning
+              type: documentation
+              url: https://xgboost.readthedocs.io/en/stable/tutorials/param_tuning.html
+              provider: XGBoost
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The bias-variance dial for boosted trees stated as parameter groups (control
+                overfitting, handle imbalance, speed up), by the authors. Short, opinionated, and it stops
+                random grid-searching.
+            - slug: gbm-xgboost-tuning-reference
+              title: 'XGBoost Part 1 (of 4): Regression'
+              type: youtube_video
+              url: https://www.youtube.com/watch?v=OtD8wVaFm6E
+              provider: StatQuest (YouTube)
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Walks the similarity-score, gain, lambda and gamma machinery numerically, which
+                makes the tuning parameters mean something. Title confirmed on the live page; the plain
+                fetch reports a blank title, as above.
+        - slug: gbm-lightgbm-mechanics
+          name: LightGBM mechanics
+          description: Histogram binning, leaf-wise growth and native categorical splits - the three ideas
+            that make LightGBM the default on large tabular data - plus the overfitting warning that comes
+            with leaf-wise growth.
+          order: 2
+          prerequisites:
+          - gbm-boosted-trees-theory
+          learning_objective: Explain why LightGBM is fast and what its growth strategy costs you.
+          mastery_criteria:
+          - Explain what histogram binning replaces, and why it reduces the cost of split finding.
+          - Contrast leaf-wise with level-wise growth and name the parameters you must set to stop leaf-wise
+            growth overfitting.
+          - Say what LightGBM does with a categorical column natively, and how that differs from one-hot
+            encoding it.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: ml
+          lessons:
+          - slug: gbm-lightgbm-mechanics-core
+            title: LightGBM mechanics
+            description: 'WHY NOW: Explain why LightGBM is fast and what its growth strategy costs you.
+
+
+              LEARN: LightGBM — https://lightgbm.readthedocs.io/en/stable/Features.html
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: train LightGBM on one tabular dataset with default leaf settings and again
+              with the leaf count and depth capped, comparing train and validation scores. HOW MANY: 2
+              runs. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two runs with the train/validation gap printed for each.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: gbm-lightgbm-mechanics-primary
+              title: Features
+              type: documentation
+              url: https://lightgbm.readthedocs.io/en/stable/Features.html
+              provider: LightGBM
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: Sections "Optimization in Speed and Memory Usage", "Sparse Optimization", "Optimization
+                in Accuracy", "Leaf-wise (Best-first) Tree Growth", "Optimal Split for Categorical Features"
+                (headings verified; skip everything from "Optimization in Network Communication" onward)
+              description: Explains the three ideas that make LightGBM the default on large tabular data
+                - histogram binning, leaf-wise growth, native categorical splits - and warns that leaf-wise
+                growth overfits without num_leaves/max_depth limits.
+            - slug: gbm-lightgbm-mechanics-reference
+              title: Parameters Tuning
+              type: documentation
+              url: https://lightgbm.readthedocs.io/en/stable/Parameters-Tuning.html
+              provider: LightGBM
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: 'The practical counterpart: which parameters to move for accuracy, for speed,
+                and against overfitting.'
+        - slug: gbm-categorical-features
+          name: Categorical features in tree models
+          description: Native categorical support and the partition-based split, plus ordered target statistics
+            as the third approach - including exactly how target encoding leaks unless it is done ordered.
+          order: 3
+          prerequisites:
+          - gbm-lightgbm-mechanics
+          - dq-data-leakage
+          learning_objective: Encode a high-cardinality categorical column for a tree model without leaking
+            the target.
+          mastery_criteria:
+          - Explain why one-hot encoding a 10,000-level column is the wrong move for a tree model.
+          - Describe what a partition-based categorical split can do that a set of one-hot splits cannot.
+          - State exactly how naive target encoding leaks, and what ordered target statistics change about
+            it.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: ml
+          lessons:
+          - slug: gbm-categorical-features-core
+            title: Categorical features in tree models
+            description: 'WHY NOW: Encode a high-cardinality categorical column for a tree model without
+              leaking the target.
+
+
+              LEARN: XGBoost — https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: encode one high-cardinality column three ways - one-hot, native categorical,
+              and target encoding computed inside the fold - and compare cross-validated scores. HOW MANY:
+              3 encodings. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: the three encodings with the target encoder fit inside the cross-validation
+              fold, scores printed together.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: gbm-categorical-features-primary
+              title: Categorical Data
+              type: documentation
+              url: https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html
+              provider: XGBoost
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Native categorical support and the partition-based split - why one-hot encoding
+                a 10,000-level column is the wrong move for a tree model. Directly upgrades the existing
+                ml-encoding-categorical topic.
+            - slug: gbm-categorical-features-reference
+              title: Transforming categorical features to numerical features
+              type: documentation
+              url: https://catboost.ai/docs/en/concepts/algorithm-main-stages_cat-to-numberic
+              provider: CatBoost
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Ordered target statistics - the third approach, and the clearest illustration
+                of how target encoding leaks unless it is done ordered.
+        - slug: gbm-tabular-vs-deep-learning
+          name: Tabular data versus deep learning
+          description: 'The evidence-based answer to why boosted trees still win on typical tabular data:
+            specific inductive biases, not a data-volume argument.'
+          order: 4
+          prerequisites:
+          - gbm-boosted-trees-theory
+          learning_objective: Argue from published evidence why to reach for boosted trees on tabular
+            data.
+          mastery_criteria:
+          - Name the three inductive-bias explanations the paper gives, without falling back on "deep
+            learning needs more data".
+          - Explain what rotation non-invariance buys a tree model when many features are uninformative.
+          - State one condition under which you would still choose a neural network for tabular data.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: ml
+          lessons:
+          - slug: gbm-tabular-vs-deep-learning-core
+            title: Tabular data versus deep learning
+            description: 'WHY NOW: Argue from published evidence why to reach for boosted trees on tabular
+              data.
+
+
+              LEARN: arXiv — https://arxiv.org/abs/2207.08815
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write the three-bullet answer you would give in an interview, each bullet
+              naming a property of the data rather than a property of the model. HOW MANY: 3 bullets.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: a three-bullet written answer with one dataset property cited per bullet.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: gbm-tabular-vs-deep-learning-primary
+              title: Why do tree-based models still outperform deep learning on typical tabular data?
+              type: article
+              url: https://arxiv.org/abs/2207.08815
+              provider: arXiv
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: Abstract and Introduction first, then skim the empirical findings and figures —
+                the three inductive-bias explanations are the payload. PDF at https://arxiv.org/pdf/2207.08815
+              description: 'The evidence-based answer to a question you will be asked in interviews: boosted
+                trees win on tabular data because of specific inductive biases (robustness to uninformative
+                features, non-smooth target functions, rotation non-invariance) - not because "deep learning
+                needs more data".'

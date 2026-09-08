@@ -328,7 +328,7 @@ def test_revision_mode_shifts_minutes_from_learn_to_dsa(client, budget):
     assert revised_dsa > normal_dsa, "revision mode did not grow DSA"
 
 
-def test_revision_mode_leaves_practice_and_reflect_alone(client):
+def test_revision_mode_leaves_practice_alone(client):
     _seed_curriculum()
 
     _set_revision_weighted(False)
@@ -339,7 +339,8 @@ def test_revision_mode_leaves_practice_and_reflect_alone(client):
     def targets(day, activity):
         return [i["planned_minutes"] for i in day["items"] if i["activity_type"] == activity]
 
-    assert targets(revised, "REFLECT") == targets(normal, "REFLECT")
+    # No REFLECT block exists any more, in either mode.
+    assert targets(revised, "REFLECT") == targets(normal, "REFLECT") == []
     # The topic-bound PRACTICE block keeps its own budget; only LEARN and DSA move.
     assert targets(revised, "PRACTICE")[:1] == targets(normal, "PRACTICE")[:1]
 
@@ -444,15 +445,18 @@ def test_extend_advances_even_when_topic_never_marked_complete(client):
     assert not (new_topics & covered), "extend re-served a topic already covered today"
 
 
-def test_extend_keeps_reflect_last_and_never_duplicates_it(client):
+def test_extend_adds_work_and_never_invents_a_reflect_block(client):
+    """Extending a finished day buys more study, and no closing signpost."""
     _seed_curriculum()
     day = _generate(150)
     _settle_everything(day)
 
     result = _extend(60)
-    reflects = [i for i in result["items"] if i["activity_type"] == "REFLECT"]
-    assert len(reflects) == 1
-    assert reflects[0]["position"] == max(i["position"] for i in result["items"])
+    assert [i for i in result["items"] if i["activity_type"] == "REFLECT"] == []
+
+    positions = [i["position"] for i in result["items"]]
+    assert len(positions) == len(set(positions)), "extend produced duplicate positions"
+    assert len(result["items"]) > len(day["items"]), "extend added nothing"
 
 
 def test_two_extends_yield_four_distinct_topics(client):
@@ -669,12 +673,17 @@ def test_complete_topic_false_enqueues_nothing(client):
     assert _revisions() == []
 
 
-def test_practice_and_reflect_blocks_enqueue_nothing(client):
+def test_practice_blocks_enqueue_nothing(client):
+    """Practice is retrieval on material a LEARN block already queued.
+
+    This used to cover the REFLECT block too. That block no longer exists --
+    the written recap is on the finish screen -- so there is nothing to assert
+    about it here.
+    """
     _seed_curriculum()
     day = _generate(150)
 
     _complete(_block(day, "PRACTICE")["id"], complete_topic=True)
-    _complete(_block(day, "REFLECT")["id"], complete_topic=True)
 
     assert _revisions() == []
 

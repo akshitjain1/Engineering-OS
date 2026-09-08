@@ -1,0 +1,468 @@
+# Python environment and project tooling self-check questions.
+#
+# Anchored on packaging.python.org for the standards and Astral's uv docs for
+# the workflow. mod-py-core already covers venv creation and pip install at a
+# shallower level, so these questions go at the mechanism: what a venv is on
+# disk, what pyproject.toml declares, and the difference between a declared
+# dependency range and a locked resolution.
+schema_version: 1
+kind: question_bank
+module: mod-py-tooling
+topics:
+  - topic: pytool-virtual-environments
+    # Source: Python Packaging - Install packages in a virtual environment using pip and venv
+    questions:
+      - id: pytool-venv-on-disk
+        prompt: "Setting aside what it does, what is a virtual environment physically, on disk?"
+        options:
+          - "A directory holding an interpreter, a site-packages tree and a pyvenv.cfg naming the base install"
+          - "A per-user configuration file telling the system interpreter which package versions to import"
+          - "A lightweight container image with its own filesystem and process namespace for that project"
+          - "A registry entry recording the packages a project needs, resolved freshly at each program start"
+        answer: "A directory holding an interpreter, a site-packages tree and a pyvenv.cfg naming the base install"
+        explanation: >-
+          A venv is an ordinary directory tree you can inspect and delete, containing scripts, a
+          site-packages directory and a small config file. It is not a single config file consulted by
+          a shared interpreter, which is what makes isolation real rather than advisory. It shares the
+          host kernel and filesystem so it is nothing like a container, and no registry is involved.
+        difficulty: intermediate
+        mastery: true
+      - id: pytool-pyvenv-cfg-contents
+        prompt: "What does the pyvenv.cfg file at the root of a virtual environment record?"
+        options:
+          - "The path to the base interpreter it was built from, and whether that install's packages are visible"
+          - "The list of packages installed into the environment, with the exact version of each one pinned"
+          - "The shell commands the activate script must run, generated for whichever shell created the venv"
+          - "A hash of the project source tree, checked at activation to detect that project files changed"
+        answer: "The path to the base interpreter it was built from, and whether that install's packages are visible"
+        explanation: >-
+          pyvenv.cfg points back at the base installation and carries flags such as
+          include-system-site-packages, which is how the environment locates the standard library.
+          Installed packages are recorded by their metadata in site-packages, not there. Activation
+          scripts are generated files of their own, and nothing hashes your source tree.
+        difficulty: advanced
+      - id: pytool-activation-effect
+        prompt: "Activating a virtual environment changes nothing inside the interpreter binary. What does it actually change?"
+        options:
+          - "Your PATH, so a plain python and pip resolve inside the environment and sys.prefix points at it"
+          - "The system interpreter's import path, so every Python process on the machine follows the change"
+          - "Only PYTHONPATH, which is why installed console scripts still come from the global installation"
+          - "The interpreter's compiled bytecode cache, so modules from the environment are imported faster"
+        answer: "Your PATH, so a plain python and pip resolve inside the environment and sys.prefix points at it"
+        explanation: >-
+          Activation is a shell convenience that puts the environment's script directory first on PATH;
+          the isolation itself comes from the interpreter finding pyvenv.cfg and setting sys.prefix to
+          the venv. It affects one shell session, not every process on the machine. PYTHONPATH is not
+          how venvs work, and the bytecode cache is unrelated to isolation.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-global-install-conflict
+        prompt: "Two projects on one machine need different, incompatible versions of the same library. Why does installing into the system interpreter fail here?"
+        options:
+          - "There is one shared site-packages, so the second install replaces the version the first project needs"
+          - "The system interpreter refuses any install that is not the newest release available on the index"
+          - "Libraries are compiled against the project directory, so only one project can ever import them"
+          - "Package names have to be unique per machine, so the second project cannot install its copy at all"
+        answer: "There is one shared site-packages, so the second install replaces the version the first project needs"
+        explanation: >-
+          One interpreter has one site-packages directory and one version of each distribution in it,
+          so the projects overwrite each other - that is the whole motivation for per-project
+          environments. Nothing forces installs to be the newest release. Wheels are not compiled
+          against your project directory, and installing a second copy is refused by version collision
+          rather than by name uniqueness.
+        difficulty: beginner
+      - id: pytool-install-without-activating
+        prompt: "A script cannot run the activate step but still needs to install into a project's environment. What is the equivalent?"
+        options:
+          - "Invoke that environment's own interpreter by path and use it to run pip as a module"
+          - "Set PYTHONHOME to the environment directory, which makes the global pip install into it"
+          - "Copy the environment directory next to the script, since environments relocate cleanly"
+          - "Run pip from the project directory, since pip detects a nearby environment on its own"
+        answer: "Invoke that environment's own interpreter by path and use it to run pip as a module"
+        explanation: >-
+          Activation only arranges for the right interpreter to be found, so naming it explicitly and
+          running pip through it achieves the same install. PYTHONHOME points at a standard library
+          location and misusing it breaks imports. Venvs embed absolute paths and do not relocate
+          reliably, and pip installs into the interpreter running it rather than sniffing the directory.
+        difficulty: intermediate
+
+  - topic: pytool-uv-projects
+    # Source: Astral - Working on projects
+    questions:
+      - id: pytool-uv-init-scaffold
+        prompt: "Running uv init in an empty directory produces a project scaffold. What does that scaffold consist of?"
+        options:
+          - "A pyproject.toml, a file pinning the Python version, a README and a small module to run"
+          - "A .venv directory with the interpreter installed and every dependency already resolved into it"
+          - "A uv.lock holding the full resolution, from which the pyproject.toml is generated afterwards"
+          - "A requirements.txt and a setup.py, since those remain the formats uv reads and writes today"
+        answer: "A pyproject.toml, a file pinning the Python version, a README and a small module to run"
+        explanation: >-
+          uv init writes the project manifest and supporting files but creates no environment yet; the
+          environment and lockfile appear on the first uv run or uv sync. A lockfile cannot come before
+          the manifest, since it is a resolution of what the manifest declares, and uv projects are
+          built on pyproject.toml rather than the older setup.py and requirements.txt pair.
+        difficulty: beginner
+      - id: pytool-uv-run-behaviour
+        prompt: "What does uv run do before it executes your command that invoking python directly does not?"
+        options:
+          - "It resolves and locks dependencies if needed, syncs the project environment, then runs the command"
+          - "It installs the command's dependencies globally so that the project environment can stay empty"
+          - "It rebuilds the project as a wheel and installs that, which is why the first run is always slow"
+          - "It activates your shell's virtual environment, so later plain python calls in that shell use it"
+        answer: "It resolves and locks dependencies if needed, syncs the project environment, then runs the command"
+        explanation: >-
+          uv run guarantees the environment matches the manifest and lockfile before your code starts,
+          which is why you never activate anything by hand in a uv project. Nothing is installed
+          globally. A wheel build is not part of running a script, and uv run changes no state in your
+          shell, so subsequent plain python calls are unaffected.
+        difficulty: intermediate
+        mastery: true
+      - id: pytool-uv-add-versus-pip-install
+        prompt: "How does uv add requests differ from activating the project environment and running pip install requests?"
+        options:
+          - "uv add records the dependency in pyproject.toml and refreshes the lockfile as well as installing it"
+          - "uv add installs into a shared cache rather than the environment, saving disk space across projects"
+          - "uv add installs the newest release without resolving it against the project's other constraints"
+          - "uv add writes the package into requirements.txt, which uv consults instead of the pyproject file"
+        answer: "uv add records the dependency in pyproject.toml and refreshes the lockfile as well as installing it"
+        explanation: >-
+          The point of uv add is that the manifest, the lockfile and the environment stay in agreement;
+          a bare pip install changes only the environment and is silently lost on the next sync. uv does
+          use a shared cache, but packages are still materialised into the project environment. The
+          resolution respects existing constraints, and uv projects read pyproject.toml.
+        difficulty: intermediate
+      - id: pytool-uv-workspace-meaning
+        prompt: "In uv's vocabulary, what does the term workspace refer to?"
+        options:
+          - "Several packages developed together, sharing one lockfile and one environment across them"
+          - "The directory uv caches downloaded wheels in, shared by every project on that machine"
+          - "A named set of dependency groups you can switch between without re-resolving anything"
+          - "A remote build environment uv provisions whenever a package must be compiled from source"
+        answer: "Several packages developed together, sharing one lockfile and one environment across them"
+        explanation: >-
+          A workspace is a multi-package repository whose members are resolved as one unit, which is why
+          there is a single lockfile at the root. The shared wheel cache is a separate concept with its
+          own location. Dependency groups are declared in the manifest rather than being workspaces, and
+          uv builds locally rather than provisioning remote builders.
+        difficulty: intermediate
+      - id: pytool-uv-dotvenv-status
+        prompt: "Your uv project contains a .venv directory you never created by hand. How should you treat it?"
+        options:
+          - "As state uv derives from pyproject.toml and the lockfile, safe to delete and have recreated"
+          - "As the source of truth for the project's dependencies, which is why it belongs in version control"
+          - "As a cache shared with your other uv projects, so deleting it would break unrelated projects"
+          - "As an ordinary venv you must activate before uv run can find the project's installed packages"
+        answer: "As state uv derives from pyproject.toml and the lockfile, safe to delete and have recreated"
+        explanation: >-
+          The environment is a build product of the manifest plus the lockfile, so it is disposable and
+          excluded from version control - the lockfile is what you commit. It is per-project rather than
+          shared, so removing it affects nothing else. And uv run manages the environment itself, so no
+          manual activation is required.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: pytool-pyproject-toml
+    # Source: Python Packaging - Writing your pyproject.toml
+    questions:
+      - id: pytool-project-table-role
+        prompt: "Which table in pyproject.toml carries the standardised project metadata, as opposed to tool-specific settings?"
+        options:
+          - "The [project] table, with tool-specific configuration confined to tables under [tool]"
+          - "The [tool.setuptools] table, since every build backend reads its metadata from that place"
+          - "The [metadata] table, which replaced setup.cfg and is read by all build backends today"
+          - "The [build-system] table, which carries the backend choice and the project's own fields too"
+        answer: "The [project] table, with tool-specific configuration confined to tables under [tool]"
+        explanation: >-
+          The [project] table is the standardised set of fields every backend understands, which is what
+          makes a manifest portable between them. Backend-specific tables under [tool] are the escape
+          hatch, not the home of standard metadata. There is no [metadata] table in this specification,
+          and [build-system] only declares how to build.
+        difficulty: beginner
+      - id: pytool-build-system-purpose
+        prompt: "What does the [build-system] table tell a tool that is installing your project from source?"
+        options:
+          - "Which build backend to invoke and what has to be installed in order to run that backend"
+          - "Which Python versions the finished package will support once it has been built and published"
+          - "Which dependencies the project needs at runtime, resolved before the build begins running"
+          - "Which directory the built wheel should be written into once the backend has finished its work"
+        answer: "Which build backend to invoke and what has to be installed in order to run that backend"
+        explanation: >-
+          The table names the backend and its build-time requirements so the installer can create an
+          isolated build environment before anything is compiled. Supported interpreter versions are
+          declared by requires-python in [project]. Runtime dependencies are the dependencies field, and
+          the output directory is decided by the tool invoking the build.
+        difficulty: intermediate
+        mastery: true
+      - id: pytool-tool-table-for-linters
+        prompt: "Where do the settings for a code formatter or type checker belong inside pyproject.toml?"
+        options:
+          - "Under a table named for the tool below [tool], which the specification reserves for that purpose"
+          - "Under [project.optional-dependencies], keyed by the name of the tool being configured there"
+          - "In the [project] table beside name and version, since the standard covers the common tools"
+          - "Nowhere - the file is only for build metadata, so such tools need configuration files of their own"
+        answer: "Under a table named for the tool below [tool], which the specification reserves for that purpose"
+        explanation: >-
+          The [tool] namespace exists so any tool can claim a subtable without colliding with the
+          standard fields, which is how one file ends up configuring the whole project. Optional
+          dependencies declare installable extras rather than settings. The [project] table is a closed
+          set of standard keys, and tools are explicitly invited into this file rather than excluded.
+        difficulty: beginner
+      - id: pytool-optional-dependencies-meaning
+        prompt: "What does declaring packages under [project.optional-dependencies] rather than [project.dependencies] mean for someone installing your package?"
+        options:
+          - "They arrive only if the consumer asks for that extra by name alongside the package itself"
+          - "They are installed last, after the required ones, but still always end up in the environment"
+          - "They are treated as suggestions the resolver may skip whenever a version conflict comes up"
+          - "They are installed only when building from source and never when a published wheel is used"
+        answer: "They arrive only if the consumer asks for that extra by name alongside the package itself"
+        explanation: >-
+          Optional dependencies define named extras that consumers opt into, which is how one package
+          offers heavier features without forcing them on everyone. They are not merely reordered
+          installs. A resolver never silently drops a declared requirement to dodge a conflict, and
+          extras behave identically for wheels and source installs.
+        difficulty: intermediate
+      - id: pytool-console-script-field
+        prompt: "You want a command named mytool to be available on PATH after your package is installed. Which pyproject.toml field declares it?"
+        options:
+          - "[project.scripts], mapping the command name to the module and callable that implements it"
+          - "[project.dependencies], listing the command name beside the packages the project requires"
+          - "[tool.uv.scripts], since command entry points are a tool concern rather than a standard one"
+          - "[build-system.backend-path], which the installer scans for callables to expose as commands"
+        answer: "[project.scripts], mapping the command name to the module and callable that implements it"
+        explanation: >-
+          Console script entry points are standard metadata, and the installer generates a wrapper on
+          PATH from that mapping. The dependencies field lists distributions to install, not commands to
+          expose. Entry points are standardised rather than tool-specific, and backend-path only tells
+          the installer where an in-tree build backend lives.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: pytool-dependency-pinning
+    # Source: Astral - Managing dependencies
+    questions:
+      - id: pytool-lower-bound-promise
+        prompt: "You declare a dependency as >=2.1 in your project manifest. What does that promise about the version installed?"
+        options:
+          - "Any release at or above 2.1, including future major versions that may break your code"
+          - "Exactly 2.1, since the operator sets a floor the resolver then treats as its target version"
+          - "Any 2.x release but nothing from 3.x, because a major bump is excluded by this operator"
+          - "The newest release existing when the constraint was written, recorded for all later installs"
+        answer: "Any release at or above 2.1, including future major versions that may break your code"
+        explanation: >-
+          A bare lower bound admits everything newer, which is why an upper bound or a compatible-release
+          operator is added when a major bump would break you. A floor is not a target. Major versions
+          are not excluded implicitly by >=, and a specifier is evaluated at install time rather than
+          freezing whatever was newest on the day it was typed.
+        difficulty: beginner
+      - id: pytool-compatible-release-operator
+        prompt: "What does the specifier ~=1.4.2 allow that ==1.4.2 does not?"
+        options:
+          - "Patch releases above 1.4.2 inside the 1.4 series, while holding the major and minor fixed"
+          - "Any 1.x release at all, since this operator only constrains the major version component"
+          - "Pre-release and development builds of 1.4.2, which the equality operator excludes by default"
+          - "Nothing extra - the two operators are aliases and differ only in how tools display them"
+        answer: "Patch releases above 1.4.2 inside the 1.4 series, while holding the major and minor fixed"
+        explanation: >-
+          The compatible-release operator keeps every component but the last one fixed, so ~=1.4.2 means
+          at least 1.4.2 and less than 1.5. Allowing any 1.x would be ~=1.4 written with one fewer
+          component. Pre-release handling is a separate flag rather than what this operator changes, and
+          the two operators are genuinely different in what they admit.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-dev-group-separation
+        prompt: "Why do pytest and ruff belong in a development dependency group rather than in the project's runtime dependencies?"
+        options:
+          - "They are needed to develop the project, not to run it, so consumers should not have to install them"
+          - "They come from a different package index, and only dependency groups are able to point at one"
+          - "They must be resolved separately, because test tooling is not permitted to appear in a lockfile"
+          - "They change too often to be locked, so a group lets the resolver skip pinning them altogether"
+        answer: "They are needed to develop the project, not to run it, so consumers should not have to install them"
+        explanation: >-
+          Dependency groups keep the published runtime requirements honest while still letting a
+          contributor install everything with one command. Index configuration is orthogonal and applies
+          to any dependency. Development dependencies are locked like the rest, which is what makes CI
+          reproducible, so the last two options invert how groups actually work.
+        difficulty: intermediate
+      - id: pytool-library-overpinning-harm
+        prompt: "You are publishing a library and pin one of its dependencies to ==2.4.1. What does that do to the people who install it?"
+        options:
+          - "It can make your library uninstallable beside anything else that needs a different 2.x release"
+          - "It guarantees their whole environment is reproducible, which is what a published library should do"
+          - "It has no effect, because an installer always ignores exact pins that come from a dependency"
+          - "It forces them to upgrade to 2.4.1 first, after which any later version will resolve normally"
+        answer: "It can make your library uninstallable beside anything else that needs a different 2.x release"
+        explanation: >-
+          A library states the range it can work with; an exact pin turns any other requirement on that
+          package into an unsolvable conflict for your consumers. Reproducibility is the job of a
+          lockfile in an application, not of a library's metadata. Installers honour dependency
+          specifiers rather than ignoring them, and the pin keeps applying after the first install.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-git-source-dependency
+        prompt: "You add a dependency pointing at a git repository and a specific commit. How does that differ from a plain version specifier?"
+        options:
+          - "The requirement names a repository and revision rather than a released version found on an index"
+          - "The package is rebuilt from source at every import, so the environment stays permanently editable"
+          - "The dependency is left out of the lockfile, since a commit hash is already fully reproducible"
+          - "The resolver drops the project's other constraints on that package and takes the commit as given"
+        answer: "The requirement names a repository and revision rather than a released version found on an index"
+        explanation: >-
+          Git, path and editable requirements replace index lookup with a source location, which is how
+          you depend on unreleased work. Building happens at install time, not at import. The source is
+          still recorded in the lockfile so others resolve the same revision, and other constraints on
+          that package continue to be checked.
+        difficulty: intermediate
+
+  - topic: pytool-lockfiles-reproducible
+    # Source: Astral - Locking and syncing
+    questions:
+      - id: pytool-lockfile-contents
+        prompt: "What does uv.lock hold that the dependency ranges in pyproject.toml do not?"
+        options:
+          - "One exact resolved version per package, with hashes, covering the whole transitive dependency tree"
+          - "The declared ranges rewritten as narrower ranges, so the resolver has less work to do next time"
+          - "The names of the direct dependencies only, kept as a fast index for the resolver to consult"
+          - "Copies of the wheels themselves, so that an install can proceed without contacting any index"
+        answer: "One exact resolved version per package, with hashes, covering the whole transitive dependency tree"
+        explanation: >-
+          A lockfile is the recorded output of one resolution: every package including indirect ones,
+          pinned, with hashes for verification. Narrowed ranges would still leave the choice open at
+          install time. Direct dependencies alone would say nothing about the transitive tree, and the
+          artifacts themselves live in the cache rather than in the lockfile.
+        difficulty: intermediate
+        mastery: true
+      - id: pytool-repeatable-versus-reproducible
+        prompt: "Your manifest declares ranges and installs succeed on your machine every time. Why is that repeatable but not reproducible?"
+        options:
+          - "The ranges resolve to whatever is newest whenever an install runs, so another machine can differ"
+          - "Repeatability needs a lockfile too, whereas reproducibility only ever needs the declared ranges"
+          - "Your machine caches the wheels, and a cache stays reproducible only until somebody clears it"
+          - "Ranges are resolved per platform, so the same machine is fine but the same date never is"
+        answer: "The ranges resolve to whatever is newest whenever an install runs, so another machine can differ"
+        explanation: >-
+          Ranges describe what is acceptable; the resolution that satisfies them depends on when and
+          where you install, so a colleague next month gets a different environment from the same file.
+          The second option swaps the two terms around. A local cache is an accident of your machine
+          rather than a guarantee, and the platform point is real but does not explain the drift over time.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-uv-sync-exactness
+        prompt: "What does uv sync do to an environment that already contains an extra package somebody installed by hand?"
+        options:
+          - "It makes the environment match the lockfile exactly, so the unmanaged package is removed again"
+          - "It leaves the extra package in place and installs only whatever the lockfile adds on top of it"
+          - "It adds the extra package into the lockfile so that environment and lockfile agree afterwards"
+          - "It stops with a conflict error until the unmanaged package has been uninstalled by the user"
+        answer: "It makes the environment match the lockfile exactly, so the unmanaged package is removed again"
+        explanation: >-
+          Syncing is declarative: the lockfile is the specification and the environment is made to match
+          it, which is what stops hand-installed drift from surviving. Leaving extras in place would let
+          code depend on something undeclared. Nothing is promoted into the lockfile automatically, and
+          the operation succeeds rather than erroring.
+        difficulty: intermediate
+      - id: pytool-ci-frozen-install
+        prompt: "A CI job should fail rather than quietly resolve new versions when the lockfile is out of date. Which behaviour do you want it to use?"
+        options:
+          - "Install strictly from the existing lockfile and error if the manifest no longer agrees with it"
+          - "Delete the lockfile as the job starts, so the resolution always reflects the current manifest"
+          - "Resolve afresh and commit the updated lockfile back to the branch from inside the CI job itself"
+          - "Skip locking in CI altogether, since the test suite would catch an incompatible version anyway"
+        answer: "Install strictly from the existing lockfile and error if the manifest no longer agrees with it"
+        explanation: >-
+          A frozen install makes CI test the exact resolution you committed and turns a stale lockfile
+          into a visible failure. Deleting the lockfile throws away the guarantee the job exists to
+          check. Committing from CI hides the drift instead of surfacing it, and trusting the test suite
+          means every build silently runs different dependency versions.
+        difficulty: advanced
+      - id: pytool-compiled-requirements-benefit
+        prompt: "A repository that is not a uv project needs a pinned install list. What does compiling a requirements file give you beyond hand-listing the direct dependencies?"
+        options:
+          - "Every transitive dependency pinned to the version the resolver picked, not just the direct ones"
+          - "A file that resolves the ranges again at install time, which keeps the pins current per machine"
+          - "A guarantee that the same interpreter version is used, because the file records that as well"
+          - "A per-platform file that switches its pins automatically based on the operating system in use"
+        answer: "Every transitive dependency pinned to the version the resolver picked, not just the direct ones"
+        explanation: >-
+          Compiling turns an abstract list into a complete pinned resolution, and the indirect
+          dependencies are usually where surprise upgrades come from. Re-resolving at install time is
+          exactly the behaviour a compiled file removes. The interpreter version is a separate pin, and
+          one compiled file targets the platform it was compiled for.
+        difficulty: intermediate
+
+  - topic: pytool-python-versions
+    # Source: Astral - Installing and managing Python
+    questions:
+      - id: pytool-python-version-file
+        prompt: "What does a .python-version file sitting in a project directory do for uv?"
+        options:
+          - "It records the interpreter version uv should use for that project's environment and commands"
+          - "It records the version of uv itself the project was created with, for compatibility checking"
+          - "It pins every dependency to the wheels built for that interpreter, replacing the lockfile"
+          - "It tells the system package manager which interpreter to install at its next upgrade run"
+        answer: "It records the interpreter version uv should use for that project's environment and commands"
+        explanation: >-
+          The file is a per-directory interpreter request, so anyone in the project gets the same Python
+          without remembering a flag. It says nothing about the version of uv. Dependency pinning is the
+          lockfile's job, and uv manages its own interpreters rather than instructing the operating
+          system's package manager.
+        difficulty: beginner
+      - id: pytool-pinning-packages-insufficient
+        prompt: "Your lockfile pins every package exactly, yet the project fails on a colleague's machine with a syntax error at import. What does that point at?"
+        options:
+          - "A different Python interpreter version, which no amount of package pinning is able to constrain"
+          - "A corrupted lockfile, since a correct one records the interpreter alongside all of the packages"
+          - "A missing dependency group, since development-only packages are the ones affecting import time"
+          - "A platform difference in the wheels, which is resolved by reinstalling everything from source"
+        answer: "A different Python interpreter version, which no amount of package pinning is able to constrain"
+        explanation: >-
+          Syntax is a property of the interpreter, so newer language features fail on an older Python no
+          matter how exact the package pins are - this is the failure the interpreter pin exists for. A
+          lockfile records a required range rather than installing an interpreter. Dev groups do not
+          change the language, and a wheel mismatch produces import or ABI errors, not syntax errors.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-uv-python-install-effect
+        prompt: "On a machine whose system Python is 3.10, what does uv python install 3.12 actually do?"
+        options:
+          - "Downloads a managed 3.12 build for uv to use, leaving the system interpreter untouched"
+          - "Upgrades the system interpreter to 3.12, which is why the command needs administrator rights"
+          - "Adds 3.12 to the project lockfile so environments are created against it on every machine"
+          - "Compiles 3.12 from source inside the project directory, which is why the first run is slow"
+        answer: "Downloads a managed 3.12 build for uv to use, leaving the system interpreter untouched"
+        explanation: >-
+          uv fetches a standalone interpreter build into its own managed location, which is what makes
+          per-project versions safe on a machine you do not want to disturb. It never replaces the
+          system Python or needs administrator rights for that. The lockfile is not where interpreters
+          are recorded, and nothing is compiled locally.
+        difficulty: intermediate
+      - id: pytool-requires-python-versus-pin
+        prompt: "How does requires-python in pyproject.toml differ in purpose from a .python-version file?"
+        options:
+          - "requires-python states the range the project supports; .python-version picks one to use locally"
+          - "requires-python is read only by uv, while .python-version is the standard field installers read"
+          - "requires-python pins one exact interpreter build, while .python-version declares a supported range"
+          - "They are two spellings of one setting, and tools raise an error if the two ever disagree"
+        answer: "requires-python states the range the project supports; .python-version picks one to use locally"
+        explanation: >-
+          One is published compatibility metadata that constrains who can install your package; the
+          other is a local development choice of a concrete version. The roles in the second option are
+          swapped, since requires-python is the standardised field. The third inverts range and exact
+          pin, and they are separate mechanisms that can legitimately differ.
+        difficulty: advanced
+        mastery: true
+      - id: pytool-interpreter-affects-resolution
+        prompt: "Why is fixing the interpreter version part of making an install reproducible at all, rather than a separate concern?"
+        options:
+          - "The resolver chooses different package versions and wheels depending on the interpreter in use"
+          - "The interpreter version is embedded in each wheel's hash, so a mismatch fails verification"
+          - "Package indexes serve a different set of releases to each interpreter version that asks them"
+          - "Lockfiles cannot be written at all until the interpreter version has been fixed by the project"
+        answer: "The resolver chooses different package versions and wheels depending on the interpreter in use"
+        explanation: >-
+          Requirements carry Python version markers and wheels are tagged per interpreter, so the same
+          manifest legitimately resolves differently on 3.10 and 3.12 - which is why the interpreter is
+          part of the reproducible unit. Hashes cover file contents rather than encoding an interpreter.
+          Indexes serve the same releases to everyone, and a lockfile can be produced for a range of
+          interpreter versions.
+        difficulty: advanced

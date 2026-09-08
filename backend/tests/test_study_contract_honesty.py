@@ -89,7 +89,15 @@ def test_done_when_matches_the_replaced_practice(client):
     assert "PRACTICE quantity/destination" not in joined, (
         "the checklist still points at a quantity that was withdrawn"
     )
-    assert "recall questions" in joined
+    # The replacement is the practice the learner makes for themselves.
+    assert "practice prompt you generate" in joined
+
+    # The recall line is listed only when the topic has questions, so it is
+    # absent here: this fixture has none. A checklist that names work which
+    # does not exist is the fault this whole module is about -- 57 topics were
+    # told to "Complete the PRACTICE quantity/destination" with no exercises
+    # behind it at all.
+    assert "recall questions" not in joined
 
 
 def test_a_claim_the_topic_can_meet_is_left_alone(client):

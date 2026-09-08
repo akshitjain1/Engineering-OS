@@ -1,0 +1,508 @@
+# HTTP & APIs self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to, and
+# stays inside that topic's scope. Gates in app/content/question_bank.py enforce
+# both: a prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-be-http
+topics:
+  - topic: be-http
+    # Source: MDN - An overview of HTTP (methods, status codes, headers, idempotency)
+    questions:
+      - id: http-post-retry-duplicate
+        prompt: "A client posts a payment, the connection times out before any response arrives, and the client retries the same POST. What is the risk?"
+        options:
+          - "The server may create a second payment, because POST is not idempotent and carries no de-duplication key"
+          - "Nothing, because HTTP guarantees at-most-once delivery for any request that received no response"
+          - "Nothing, because POST is defined as idempotent, so repeating it can only overwrite the first payment"
+          - "The retry is refused automatically, because servers must reject a request whose body they already saw"
+        answer: "The server may create a second payment, because POST is not idempotent and carries no de-duplication key"
+        explanation: >-
+          POST is neither safe nor idempotent, so a retry the server already processed creates a second
+          resource. HTTP makes no delivery guarantee, PUT and DELETE are the idempotent methods rather
+          than POST, and nothing in the protocol de-duplicates bodies, which is why you send an explicit
+          idempotency key.
+        difficulty: intermediate
+        mastery: true
+      - id: http-400-vs-500-choice
+        prompt: "One request body fails schema validation and another trips an unhandled exception in your own code. Which status code belongs to each, and why does the split matter?"
+        options:
+          - "400 for the invalid body and 500 for the exception, because 4xx blames the request and 5xx the server"
+          - "500 for both, because either way the request could not be completed and the caller has to retry it"
+          - "400 for both, because the caller ultimately triggered each failure by sending the request at all"
+          - "500 for the invalid body and 400 for the exception, because validation runs inside your server code"
+        answer: "400 for the invalid body and 500 for the exception, because 4xx blames the request and 5xx the server"
+        explanation: >-
+          The 4xx class says the request was faulty and resending it unchanged will fail again, while 5xx
+          says the server broke and a retry may succeed. Collapsing both into 500 makes clients retry
+          hopeless requests forever, and labelling your own crash 400 hides real outages from monitoring.
+        difficulty: beginner
+      - id: http-401-vs-403-meaning
+        prompt: "A caller receives 401 from one endpoint and 403 from another. What does the 401 tell them that the 403 does not?"
+        options:
+          - "That authentication itself failed or was missing, so presenting valid credentials could change the outcome"
+          - "That the endpoint does not exist for this account, so the path should be dropped from the client"
+          - "That the server is rate limiting them, so the same credentials will work again after a short wait"
+          - "That their credentials were accepted but their role lacks permission for the resource they asked for"
+        answer: "That authentication itself failed or was missing, so presenting valid credentials could change the outcome"
+        explanation: >-
+          401 is about identity: credentials are absent, expired or invalid, and retrying with good ones may
+          work. 403 means the request was authenticated but the principal is not allowed, so fresh
+          credentials for the same account will not help. A missing path is 404 and rate limiting is 429.
+        difficulty: intermediate
+        mastery: true
+      - id: http-put-patch-idempotency
+        prompt: "Which repeated request leaves the server in the same state as sending it once, and why does that decide your retry policy?"
+        options:
+          - "PUT with a full representation, because it sets the resource to a given state rather than changing it relatively"
+          - "PATCH that increments a counter field, because patches are applied atomically and therefore only once"
+          - "POST to a collection endpoint, because the server assigns the identifier and can reuse it on repeats"
+          - "Any request at all, because idempotency is a property of the network transport rather than of the method"
+        answer: "PUT with a full representation, because it sets the resource to a given state rather than changing it relatively"
+        explanation: >-
+          PUT is idempotent because it describes the final state, so a client may safely resend it after a
+          timeout. An incrementing PATCH changes state relative to what is there and doubles on retry, POST
+          creates a new resource each time, and idempotency is a method contract, not something TCP provides.
+        difficulty: intermediate
+      - id: http-get-safe-cacheable
+        prompt: "A teammate exposes an endpoint as GET /orders/42/cancel because it was easier to call from a browser. What breaks?"
+        options:
+          - "Caches, prefetchers and crawlers may replay the GET, cancelling the order with no user action"
+          - "Nothing functionally, though browsers ignore the response body of a GET request in every case"
+          - "The order is cancelled twice per call, because GET responses are always revalidated by proxies"
+          - "The request fails outright, because HTTP forbids a GET handler from writing to server-side state"
+        answer: "Caches, prefetchers and crawlers may replay the GET, cancelling the order with no user action"
+        explanation: >-
+          GET is defined as safe, so intermediaries and browsers feel free to issue it speculatively and to
+          cache the result, which turns a mutating GET into data loss. Browsers do read GET bodies, proxies
+          do not double requests, and the protocol cannot stop a handler from writing, which is why the
+          convention matters.
+        difficulty: beginner
+
+  - topic: be-rest
+    # Source: restfulapi.net - REST architectural constraints
+    questions:
+      - id: rest-resource-naming-verbs
+        prompt: "Which URL and method pair follows the uniform interface REST asks for when a client needs one customer's invoices?"
+        options:
+          - "GET /customers/42/invoices, with the collection named by a plural noun and the action carried by the method"
+          - "POST /getCustomerInvoices, with the operation name in the path and the customer id inside the request body"
+          - "GET /fetchInvoicesForCustomer?id=42, with the verb in the path so intent is readable from the URL alone"
+          - "GET /invoice_service/customer/42/get, with a trailing action segment so more actions can be added there"
+        answer: "GET /customers/42/invoices, with the collection named by a plural noun and the action carried by the method"
+        explanation: >-
+          REST identifies resources with URLs and expresses the operation with the HTTP method, so nouns
+          belong in the path and verbs do not. The others encode the action in the path, which forces a new
+          endpoint per operation, defeats method-based caching, and buries cacheable reads inside POST.
+        difficulty: beginner
+      - id: rest-statelessness-scaling
+        prompt: "REST requires each request to be self-contained. What does honouring that constraint buy you once the service sits behind a load balancer?"
+        options:
+          - "Any replica can serve any request, so you can add instances and lose one without stranding sessions"
+          - "Requests get smaller on the wire, because shared server state removes the need to resend context"
+          - "Every response becomes cacheable indefinitely, since no request depends on the identity of the caller"
+          - "Clients stop needing credentials, because the balancer holds the session and authenticates for them"
+        answer: "Any replica can serve any request, so you can add instances and lose one without stranding sessions"
+        explanation: >-
+          Statelessness means no server-side session is needed to interpret a request, so traffic can be
+          spread or failed over freely. Self-contained requests are larger rather than smaller because
+          context travels with each one, responses are not automatically cacheable, and every request still
+          carries its own credentials.
+        difficulty: intermediate
+        mastery: true
+      - id: rest-offset-pagination-drift
+        prompt: "A collection endpoint pages with offset=100 and limit=20 while new rows keep arriving at the top of the ordering. What does the client end up seeing?"
+        options:
+          - "Rows shift between pages, so some items come back twice while others are skipped entirely"
+          - "Exactly the same window each time, because the offset resolves against a snapshot of the table"
+          - "An error on the second page, since offset paging is only valid on an immutable collection"
+          - "Only the newest rows, because the offset counts from the end of the collection as it grows"
+        answer: "Rows shift between pages, so some items come back twice while others are skipped entirely"
+        explanation: >-
+          Offset counts rows at query time, so an insert ahead of the window pushes an unseen item past the
+          boundary and repeats one already delivered. No snapshot spans requests, the server raises no
+          error, and offset counts from the start of the ordering rather than the end; key-based paging
+          avoids the drift.
+        difficulty: intermediate
+      - id: rest-breaking-change-boundary
+        prompt: "You need to change a published response body. Which change forces a new API version instead of shipping safely in place?"
+        options:
+          - "Renaming an existing field, because every client reading the old name suddenly finds it missing"
+          - "Adding a new optional field, because clients that ignore unknown keys carry on working unchanged"
+          - "Adding a new endpoint beside the old one, because existing callers never request the new path"
+          - "Documenting an existing field more precisely, because the bytes on the wire do not change at all"
+        answer: "Renaming an existing field, because every client reading the old name suddenly finds it missing"
+        explanation: >-
+          Removing or renaming a field breaks any consumer that reads it, which is exactly what versioning
+          exists to absorb. Additive changes are backward compatible for clients that tolerate unknown keys,
+          a brand new endpoint is invisible to old callers, and clearer prose changes no payload.
+        difficulty: intermediate
+      - id: rest-cacheability-declaration
+        prompt: "The cacheability constraint says a response should state whether it may be reused. What goes wrong when a service never says?"
+        options:
+          - "Intermediaries guess, so a response may be reused while stale or refetched when it was still fine"
+          - "Everything is treated as private and uncacheable, which is always the safest possible default"
+          - "The client library must inspect the body to decide, because caching is a payload concern in REST"
+          - "Caching is disabled for the whole connection until the server sends an explicit cache directive"
+        answer: "Intermediaries guess, so a response may be reused while stale or refetched when it was still fine"
+        explanation: >-
+          Without explicit directives caches fall back on heuristics, which is how stale data reaches users
+          and how cheap wins are lost. The default is not universally private, caching is decided from
+          headers rather than the body, and nothing suspends a connection's caching pending a directive.
+        difficulty: advanced
+        mastery: true
+
+  - topic: be-json
+    # Source: MDN - Working with JSON, with JSON.org for the grammar
+    questions:
+      - id: json-parse-succeeds-shape-wrong
+        prompt: "A request body parses as valid JSON, but the field your handler needs arrives as a string where a number was expected. Where must that be caught?"
+        options:
+          - "In an explicit validation step after parsing, because a parser checks syntax and never your schema"
+          - "In the parser itself, since JSON is a typed format and rejects a string given where a number belongs"
+          - "Nowhere, because JSON numbers and numeric strings are interchangeable once the value is compared"
+          - "In the client only, since a server can trust the shape of anything that arrived as well-formed JSON"
+        answer: "In an explicit validation step after parsing, because a parser checks syntax and never your schema"
+        explanation: >-
+          Parsing answers only whether the text is well formed; nothing in JSON declares that a field must be
+          a number, so shape checking is a separate layer. JSON carries no schema, quoted digits are a
+          different type from a number, and trusting client-supplied shapes is how handlers crash on real
+          traffic.
+        difficulty: beginner
+        mastery: true
+      - id: json-missing-native-types
+        prompt: "You want to put a timestamp and a NaN score into a JSON response body. What does the format actually let you send?"
+        options:
+          - "A string or number for the timestamp, and no NaN at all, since JSON has neither literal available"
+          - "A native date literal and NaN, because JSON inherits every scalar type from JavaScript expressions"
+          - "A date literal but not NaN, because dates are part of the grammar while NaN was left out of it"
+          - "Both, provided you add a comment in the payload declaring which encoding the consumer should use"
+        answer: "A string or number for the timestamp, and no NaN at all, since JSON has neither literal available"
+        explanation: >-
+          JSON values are objects, arrays, strings, numbers, true, false and null, so dates travel as strings
+          by convention and NaN has to become null or be omitted. There is no date literal, NaN is valid
+          JavaScript but not valid JSON, and comments are outside the grammar too.
+        difficulty: intermediate
+      - id: json-large-integer-precision
+        prompt: "Your API returns an id of 9007199254740993 and a JavaScript client reads back a slightly different number. What is happening?"
+        options:
+          - "The client parses JSON numbers as doubles, which cannot hold that integer exactly, so it rounds"
+          - "The server truncated the id while serialising, because JSON caps integer literals at sixteen digits"
+          - "The transport corrupted the digits, which is why a large numeric id must travel as an array of digits"
+          - "The client is comparing the id as a string, and string ordering differs from numeric ordering here"
+        answer: "The client parses JSON numbers as doubles, which cannot hold that integer exactly, so it rounds"
+        explanation: >-
+          The JSON number grammar has no precision limit, but most parsers land the value in a 64-bit float,
+          which loses integers above 2^53. Nothing was truncated on the way out, the transport delivers bytes
+          intact, and this is a precision fault rather than a comparison one; send such ids as strings.
+        difficulty: advanced
+      - id: json-invalid-literal-syntax
+        prompt: "Which of these bodies would a strict JSON parser reject before your handler ever runs?"
+        options:
+          - "An object whose keys are wrapped in single quotes, because JSON needs double quotes around keys"
+          - "An object holding a nested array of objects, because JSON permits only one level of nesting"
+          - "An object with a numeric value in exponent form, because JSON numbers must be plain decimals"
+          - "An object with null assigned to a key, because JSON has no way to express a missing value"
+        answer: "An object whose keys are wrapped in single quotes, because JSON needs double quotes around keys"
+        explanation: >-
+          JSON strings and keys are always double quoted, so single quotes fail at parse time and should
+          surface to the caller as a client error. Nesting is unlimited, exponent notation is part of the
+          number grammar, and null is a first-class JSON value used precisely to express emptiness.
+        difficulty: beginner
+      - id: json-serialise-content-type
+        prompt: "Your handler builds a dictionary that must reach the caller as a JSON response. What has to happen beyond having the data?"
+        options:
+          - "It is serialised to JSON text and sent with a Content-Type that tells the client how to parse it"
+          - "It is sent as the language's native object, since HTTP bodies preserve in-memory types on the wire"
+          - "It is serialised, but Content-Type is optional because clients detect JSON from the leading brace"
+          - "It is base64 encoded first, because JSON text is not safe to place directly in an HTTP message body"
+        answer: "It is serialised to JSON text and sent with a Content-Type that tells the client how to parse it"
+        explanation: >-
+          HTTP bodies are bytes, so the object must become JSON text and be labelled application/json for a
+          client to decode it reliably. Native objects cannot cross the wire, sniffing the first character is
+          a guess that breaks on empty or non-object payloads, and JSON needs no base64 wrapper.
+        difficulty: beginner
+        mastery: true
+
+  - topic: be-fastapi-intro
+    # Source: FastAPI tutorial - First Steps
+    questions:
+      - id: fastapi-decorator-declares-route
+        prompt: "In a first FastAPI app, what does the decorator @app.get('/items') above a function actually declare?"
+        options:
+          - "That FastAPI should call this function for GET requests whose path matches /items"
+          - "That the function runs once at startup and caches its return value for the /items path"
+          - "That any HTTP method arriving at /items is routed here, with the method passed as an argument"
+          - "That the function is registered as a background task which the /items path can later trigger"
+        answer: "That FastAPI should call this function for GET requests whose path matches /items"
+        explanation: >-
+          The decorator binds one method and one path to a path operation function, which FastAPI invokes per
+          matching request. It is not a startup hook, it does not capture other methods such as POST, and it
+          defers nothing to a background task; each of those needs a different declaration.
+        difficulty: beginner
+      - id: fastapi-uvicorn-app-reference
+        prompt: "You start the app with the command uvicorn main:app --reload. What do the two halves of main:app refer to?"
+        options:
+          - "The module named main, and the FastAPI instance called app that is defined inside it"
+          - "The package named main, and the name of the first path operation function declared in it"
+          - "The host interface called main, and the port alias app configured in the settings file"
+          - "The entry script main, and the ASGI worker class named app that is going to serve it"
+        answer: "The module named main, and the FastAPI instance called app that is defined inside it"
+        explanation: >-
+          Uvicorn imports the module named before the colon and looks up the ASGI application object named
+          after it, so renaming either half breaks startup. It is not a package-and-function pair, nothing
+          there names a host or port, and the worker class is chosen with its own flag.
+        difficulty: beginner
+      - id: fastapi-openapi-from-hints
+        prompt: "Opening /docs on a fresh FastAPI app shows an interactive page you never wrote. Where does that page come from?"
+        options:
+          - "FastAPI builds an OpenAPI schema from your routes and type hints, and the page renders that schema"
+          - "FastAPI ships a static documentation page that lists whatever endpoints it finds at request time"
+          - "The browser builds the page by probing every path on the server and recording which ones respond"
+          - "Uvicorn serves a built-in console for any ASGI app, independent of the framework behind it"
+        answer: "FastAPI builds an OpenAPI schema from your routes and type hints, and the page renders that schema"
+        explanation: >-
+          Declared paths, parameters and annotated types become an OpenAPI document at /openapi.json, and the
+          docs page is a viewer over it, which is why sloppy type hints produce sloppy docs. It is not a
+          static list, nothing probes paths from the browser, and Uvicorn knows nothing about your endpoints.
+        difficulty: intermediate
+        mastery: true
+      - id: fastapi-async-def-blocking-call
+        prompt: "You declare a path operation with async def and then call a synchronous database driver inside it. What is the consequence under load?"
+        options:
+          - "The blocking call holds the event loop, so unrelated requests queue behind it instead of interleaving"
+          - "FastAPI detects the blocking call and moves the whole function to a worker thread automatically"
+          - "Only the calling request slows down, because every async request is given its own operating system thread"
+          - "The call raises at runtime, because synchronous code cannot be executed inside an async def function"
+        answer: "The blocking call holds the event loop, so unrelated requests queue behind it instead of interleaving"
+        explanation: >-
+          Everything in an async path operation runs on the event loop, so a synchronous wait stalls every
+          other request on that worker. FastAPI only offloads plain def functions to a threadpool, async
+          requests share one loop rather than a thread each, and blocking code inside async def is legal.
+        difficulty: advanced
+      - id: fastapi-return-dict-response
+        prompt: "A path operation function returns a plain Python dictionary. What does the client actually receive?"
+        options:
+          - "A JSON body, because FastAPI converts the returned value and sets the JSON content type for you"
+          - "An empty body with status 200, since only an explicit Response object produces content in FastAPI"
+          - "A plain-text rendering of the dictionary, using the same repr you would see in a Python console"
+          - "A server error, because a path operation must return a response model instance to be serialised"
+        answer: "A JSON body, because FastAPI converts the returned value and sets the JSON content type for you"
+        explanation: >-
+          FastAPI encodes returned dicts, lists and models to JSON and labels the response accordingly, so a
+          simple handler needs no serialisation code. The body is not dropped, it is not Python repr text,
+          and a response model is an optional declaration for filtering and documentation.
+        difficulty: beginner
+
+  - topic: be-auth-basics
+    # Source: FastAPI tutorial - Security
+    questions:
+      - id: auth-authentication-vs-authorization
+        prompt: "A dependency validates the bearer token and loads the user. Which question is still unanswered before the handler may act?"
+        options:
+          - "Whether that user is permitted to perform this operation on this resource, which is authorisation"
+          - "Whether the token was really issued by your server, which the handler must re-verify per request"
+          - "Whether the user exists in the database, which token validation alone can never establish at all"
+          - "Whether the connection used TLS, since permission is decided by the transport rather than the user"
+        answer: "Whether that user is permitted to perform this operation on this resource, which is authorisation"
+        explanation: >-
+          Authentication establishes who is calling; authorisation decides what that caller may do, and
+          skipping it is how one user reads another's records. Signature checking and the user lookup are
+          part of authentication and already done, and transport security grants no permission at all.
+        difficulty: intermediate
+        mastery: true
+      - id: auth-hash-versus-encrypt-passwords
+        prompt: "Why do you store a password hash rather than the password encrypted with a key that you hold?"
+        options:
+          - "Encryption is reversible, so one leaked key exposes every password, while a hash cannot be undone"
+          - "Encryption is slower than hashing, so login latency would grow noticeably under production traffic"
+          - "Hashes are shorter than ciphertext, which keeps the user table small enough to stay fully cached"
+          - "Hashing is required to compare passwords, because ciphertext cannot be compared for equality"
+        answer: "Encryption is reversible, so one leaked key exposes every password, while a hash cannot be undone"
+        explanation: >-
+          A verifier never needs the original password, so a one-way hash removes the key that would turn a
+          database leak into plaintext credentials. Speed and storage are not the reason and password hashes
+          are deliberately slow; ciphertext can be compared, which is part of why encryption is wrong here.
+        difficulty: intermediate
+        mastery: true
+      - id: auth-bearer-token-in-logs
+        prompt: "An access log records the full Authorization header for every request. What has an attacker with read access to those logs obtained?"
+        options:
+          - "A usable credential they can replay until it expires, without ever learning the user's password"
+          - "Only an opaque identifier, since a bearer token means nothing away from the session that issued it"
+          - "A hash of the password, which still has to be cracked offline before any account can be reached"
+          - "Nothing exploitable, because tokens are bound to the client address that originally requested them"
+        answer: "A usable credential they can replay until it expires, without ever learning the user's password"
+        explanation: >-
+          A bearer token is the credential: whoever presents it is treated as the user, which is why it must
+          never be logged. It is not a mere identifier, it holds no password hash to crack, and plain bearer
+          tokens carry no address binding unless you add one, so possession alone is enough.
+        difficulty: intermediate
+      - id: auth-password-salt-purpose
+        prompt: "Two users pick the same password and their stored hashes come out identical. Which defence is missing, and what does it stop?"
+        options:
+          - "A per-user salt, which makes identical passwords hash differently and defeats precomputed tables"
+          - "A longer hash output, which raises the cost of guessing each individual password by brute force"
+          - "Encryption of the hash column, which stops an attacker reading any stored value in the table"
+          - "A uniqueness constraint on the hash column, which would stop two users sharing one password"
+        answer: "A per-user salt, which makes identical passwords hash differently and defeats precomputed tables"
+        explanation: >-
+          A random salt per record makes rainbow tables useless and hides the fact that two accounts share a
+          password. Output length does little against dictionary attacks, encrypting the column reintroduces
+          a key to steal, and forbidding duplicate hashes would leak which passwords are taken.
+        difficulty: advanced
+      - id: auth-bearer-requires-tls
+        prompt: "Your token endpoint and protected routes are served over plain HTTP inside a private network. Why is that still a problem?"
+        options:
+          - "The token travels in a readable header, so anyone able to observe the traffic can capture and reuse it"
+          - "The token cannot be parsed without TLS, because its signature is computed over the encrypted channel"
+          - "Browsers refuse to attach an Authorization header to any request that was not made over HTTPS"
+          - "The scheme forces re-authentication on every call, which makes the private network slower than needed"
+        answer: "The token travels in a readable header, so anyone able to observe the traffic can capture and reuse it"
+        explanation: >-
+          Bearer tokens have no transport binding, so the header is plaintext to any sniffer or misrouted
+          proxy on the path and replay is trivial. Signatures cover the token contents rather than the
+          channel, browsers do send the header over HTTP, and the scheme forces no re-authentication.
+        difficulty: intermediate
+
+  - topic: be-errors
+    # Source: FastAPI tutorial - Handling Errors
+    questions:
+      - id: errors-stack-trace-in-body
+        prompt: "A crash returns the full Python traceback in the response body. What does that hand an attacker beyond the fact that something failed?"
+        options:
+          - "File paths, library versions and internal function names that map out the stack worth attacking"
+          - "Nothing of value, since a traceback only describes code that already exists in a public repository"
+          - "The ability to execute code remotely, because tracebacks include the live values of local variables"
+          - "A copy of the request that failed, which is the only sensitive part of a traceback in practice"
+        answer: "File paths, library versions and internal function names that map out the stack worth attacking"
+        explanation: >-
+          Tracebacks disclose your layout, dependencies and versions, which turns blind probing into targeted
+          work against known vulnerabilities. Assuming the code is public is not a safe default, a printed
+          frame is not code execution, and the leak reaches far past the offending request.
+        difficulty: intermediate
+        mastery: true
+      - id: errors-status-must-signal-failure
+        prompt: "A handler catches its own exception and returns a body describing the error while the status stays 200. What breaks downstream?"
+        options:
+          - "Clients, proxies and monitors read success, so failures get cached, never retried and never alerted"
+          - "Nothing, provided the body carries an error field, since callers are expected to inspect the payload"
+          - "Only logging, because status codes are recorded separately from the response body on the server"
+          - "The connection closes early, because a 200 response may not describe a failed operation at all"
+        answer: "Clients, proxies and monitors read success, so failures get cached, never retried and never alerted"
+        explanation: >-
+          The status line is the machine-readable verdict, so a 200 makes generic clients, caches and
+          dashboards treat a failure as fine. Expecting every caller to parse your body is unrealistic, the
+          damage goes well past logging, and nothing in HTTP closes a connection over a mislabelled result.
+        difficulty: beginner
+      - id: errors-raise-httpexception-status
+        prompt: "A lookup finds no matching row for the requested id. What should the route do so the caller can act on the result?"
+        options:
+          - "Raise an HTTPException with status 404 and a short detail naming what was not found"
+          - "Return None and let the framework pick whichever status best fits an empty return value"
+          - "Raise the underlying database exception so the caller sees exactly which query failed"
+          - "Return an empty list with status 200, since the caller can simply check the length itself"
+        answer: "Raise an HTTPException with status 404 and a short detail naming what was not found"
+        explanation: >-
+          A missing single resource is a 404 with a brief detail, which is exactly what HTTPException
+          produces. Returning None yields a null body under 200, letting the database exception escape
+          becomes a 500 that leaks internals, and an empty list misreports one item as a collection read.
+        difficulty: beginner
+      - id: errors-validation-422-body
+        prompt: "A request body fails FastAPI validation and the caller gets 422 with a list of field locations. Why is that better for them than a 500?"
+        options:
+          - "It tells the caller their input was wrong and exactly where, so they can fix it and resend"
+          - "It hides the failure from monitoring, which keeps error dashboards clean during client mistakes"
+          - "It guarantees an automatic retry as soon as the caller's client library sees the status code"
+          - "It means the server repaired the body itself, so the request ran with corrected default values"
+        answer: "It tells the caller their input was wrong and exactly where, so they can fix it and resend"
+        explanation: >-
+          Validation failures belong to the client, and a located field list replaces guesswork with a fix.
+          A 4xx is not about hiding anything from monitoring, nothing retries a 422 because the same body
+          fails again, and nothing was repaired since the request never reached your handler.
+        difficulty: intermediate
+      - id: errors-central-exception-handler
+        prompt: "Every route repeats the same try and except block that converts one domain error into a response. What does registering an exception handler change?"
+        options:
+          - "One registered handler maps that exception to a status and body everywhere, so routes stay clean"
+          - "Each route still needs its own block, and the handler only adds a response for uncaught cases"
+          - "The exception stops propagating, so callers receive an empty 200 whenever it is raised anywhere"
+          - "Handlers cover validation errors only, so domain exceptions keep their per-route except blocks"
+        answer: "One registered handler maps that exception to a status and body everywhere, so routes stay clean"
+        explanation: >-
+          A registered handler catches its exception type wherever it is raised and renders one consistent
+          error shape, which is how error formats stop drifting per route. The per-route blocks become
+          unnecessary, the exception still yields a real error status, and any exception class can be handled.
+        difficulty: advanced
+
+  - topic: be-persistence
+    # Source: FastAPI tutorial - SQL (Relational) Databases
+    questions:
+      - id: persistence-session-per-request
+        prompt: "The tutorial opens a database session in a dependency and closes it after the response. Why not share one module-level session across all requests?"
+        options:
+          - "A session holds per-transaction state, so concurrent requests would see each other's uncommitted rows"
+          - "A session cannot be imported from another module, so the dependency exists purely to work around that"
+          - "Sessions are cheap to create but expensive to close, so per-request creation cuts total shutdown cost"
+          - "A shared session would open a fresh connection per query anyway, so nothing would actually be reused"
+        answer: "A session holds per-transaction state, so concurrent requests would see each other's uncommitted rows"
+        explanation: >-
+          A session carries an identity map and an open transaction, so sharing one lets requests read each
+          other's pending work and turns one failure into a poisoned session for everybody. Imports are not
+          the obstacle, closing is not the costly part, and a shared session deliberately reuses connections.
+        difficulty: advanced
+        mastery: true
+      - id: persistence-n-plus-one-loop
+        prompt: "A route loads two hundred orders and then reads order.customer inside the rendering loop. What does the database actually see?"
+        options:
+          - "One query for the orders plus one per order for its customer, which is the N plus one pattern"
+          - "A single query, because a relationship attribute is always fetched together with the parent row"
+          - "Two queries in total, since the driver batches every lazy load performed within one request"
+          - "No extra queries, because attribute access reads from the connection pool rather than the database"
+        answer: "One query for the orders plus one per order for its customer, which is the N plus one pattern"
+        explanation: >-
+          Each lazy attribute access on a loaded row issues its own SELECT, so latency scales with row count
+          and a fast page collapses on real data. Relationships are not eager by default, nothing batches
+          lazy loads for you, and the pool hands out connections rather than caching row data.
+        difficulty: intermediate
+      - id: persistence-response-model-filters
+        prompt: "Your user table has a hashed_password column and the route returns the ORM object straight back. What is the risk, and what is the fix?"
+        options:
+          - "Every attribute is serialised, hash included, so declare a response model listing only public fields"
+          - "The object fails to serialise at all, so you must convert it to a dictionary before returning it"
+          - "Only the primary key is serialised, so a response model is needed to expose the remaining fields"
+          - "The hash is redacted automatically by the framework, so nothing is needed beyond documenting it"
+        answer: "Every attribute is serialised, hash included, so declare a response model listing only public fields"
+        explanation: >-
+          Serialisation reflects whatever attributes the object exposes, so secrets ride along unless a
+          response model narrows the output. Serialising ORM objects does work, it does not stop at the
+          primary key, and nothing redacts a column merely because its name mentions a password.
+        difficulty: intermediate
+        mastery: true
+      - id: persistence-commit-then-refresh
+        prompt: "After adding a new row you call commit and then refresh on the same object. What does the refresh step give you?"
+        options:
+          - "The database-generated values, such as the new primary key and any server-side default columns"
+          - "A second attempt at the commit, in case the first was rolled back by a concurrent transaction"
+          - "A copy of the object detached from the session, which is safe to return after the session closes"
+          - "A validation pass over the row, confirming that all declared column constraints were satisfied"
+        answer: "The database-generated values, such as the new primary key and any server-side default columns"
+        explanation: >-
+          Commit writes the row but leaves the in-memory object stale, so refresh re-reads it to pick up the
+          identifier and defaults the server assigned. It does not retry the commit, refreshing keeps the
+          object attached rather than detaching it, and constraint checks already happened at flush time.
+        difficulty: intermediate
+      - id: persistence-parameterise-not-interpolate
+        prompt: "A route builds SQL by pasting a query-string value into the WHERE clause with an f-string. Why is a bound parameter the only acceptable version?"
+        options:
+          - "Interpolated text is parsed as SQL, so a crafted value can end the clause and append its own statement"
+          - "Bound parameters are faster to transmit, so interpolation is a performance mistake rather than a risk"
+          - "Interpolation fails on values containing spaces, so parameters exist to quote multi-word input safely"
+          - "Bound parameters encrypt the value in transit, which an interpolated literal in the statement cannot"
+        answer: "Interpolated text is parsed as SQL, so a crafted value can end the clause and append its own statement"
+        explanation: >-
+          A bound parameter is sent as data and never re-parsed, while interpolation lets caller input become
+          syntax, which is SQL injection. The gap is a security hole rather than a speed one, quoting spaces
+          is not the problem being solved, and parameters change nothing about transport encryption.
+        difficulty: intermediate

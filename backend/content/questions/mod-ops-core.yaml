@@ -1,0 +1,518 @@
+# Containers and delivery self-check questions.
+#
+# Every question here is answerable from the PRIMARY resource its topic maps to,
+# and stays inside that topic only. The bias is towards packaging and running a
+# model service, which is what the owner will actually be shipping.
+schema_version: 1
+kind: question_bank
+module: mod-ops-core
+topics:
+  - topic: ops-docker-intro
+    # Source: Docker docs - Get started (images, layers, Dockerfile, containers)
+    questions:
+      - id: ops-docker-layer-order
+        prompt: >-
+          A Dockerfile runs COPY . /app and then RUN pip install -r /app/requirements.txt, and
+          every source edit reinstalls all dependencies. What fixes it?
+        options:
+          - "Copy requirements.txt and install first, then copy the source in a later instruction"
+          - "Combine both instructions into one RUN line so the cache sees only a single step"
+          - "Add --no-cache-dir to pip so the install stops depending on the copied files"
+          - "Move both instructions after CMD so they run at container start instead of build"
+        answer: "Copy requirements.txt and install first, then copy the source in a later instruction"
+        explanation: >-
+          Each instruction produces a layer keyed on its inputs, so copying all source before the
+          install invalidates the install layer on any edit; ordering by change frequency keeps the
+          expensive layer cached. Merging the steps still invalidates on every edit, --no-cache-dir
+          controls pip's own download cache, and instructions after CMD still execute at build time.
+        difficulty: intermediate
+        mastery: true
+      - id: ops-docker-layer-nature
+        prompt: >-
+          What is a Docker image layer, and why does it make instruction order a build-time
+          decision rather than a matter of taste?
+        options:
+          - "A filesystem diff produced by one instruction, reused from cache until its inputs change"
+          - "A compressed copy of the whole image at that point, rebuilt whenever the image builds"
+          - "A running process started by that instruction, kept alive for later instructions to use"
+          - "A named volume created per instruction, so ordering only affects where data is stored"
+        answer: "A filesystem diff produced by one instruction, reused from cache until its inputs change"
+        explanation: >-
+          Layers are stacked diffs, and the build cache reuses a layer only while every layer before
+          it and its own inputs are unchanged, so a volatile instruction placed early invalidates
+          everything after it. Layers are not full image snapshots, no process stays running between
+          instructions, and layers are image content rather than volumes.
+        difficulty: intermediate
+      - id: ops-docker-slim-base
+        prompt: >-
+          Your model service image drops from 1.2 GB to 300 MB when you move from a full base
+          image to a slim one. What cost should you expect in exchange?
+        options:
+          - "Missing compilers and system libraries, so some wheels fail to build or to import"
+          - "Slower container start, because a smaller image must decompress more layers at run"
+          - "Loss of the writable layer, so the container can no longer write any file at all"
+          - "A different kernel version, since the base image supplies the kernel to containers"
+        answer: "Missing compilers and system libraries, so some wheels fail to build or to import"
+        explanation: >-
+          Slim bases strip build toolchains and shared libraries that native wheels link against,
+          and they also strip the shell utilities you want when debugging a live container. Fewer
+          and smaller layers start faster rather than slower, the writable layer is a property of
+          the container, and the kernel always comes from the host.
+        difficulty: intermediate
+      - id: ops-docker-vs-vm
+        prompt: >-
+          What does a container share with the host that a virtual machine does not, and what
+          follows from that sharing?
+        options:
+          - "The kernel, so start-up is fast but the container cannot run a different kernel version"
+          - "The filesystem, so any write inside a container lands directly on the host root disk"
+          - "The process identifiers, so host and container always see the same PID for a process"
+          - "The network stack entirely, so a container cannot be given a port mapping of its own"
+        answer: "The kernel, so start-up is fast but the container cannot run a different kernel version"
+        explanation: >-
+          A container is host processes under namespaces and cgroups, so there is no guest kernel to
+          boot and no hypervisor overhead, but kernel-level requirements must be met by the host. The
+          filesystem is isolated unless you mount it, PIDs are namespaced and differ inside, and
+          containers get their own network namespace with published ports.
+        difficulty: intermediate
+        mastery: true
+      - id: ops-docker-secrets-in-image
+        prompt: >-
+          A teammate adds ENV HF_TOKEN=hf_abc123 to the Dockerfile so weights download during
+          build. Why is that still a problem after the line is deleted in a later commit?
+        options:
+          - "The layer carrying that value stays in the image history for anyone who pulls it"
+          - "Deleting an ENV line corrupts the layer cache, so later builds silently reuse it"
+          - "Variables set at build time are ignored at run time, so the download never worked"
+          - "The token is written to the container writable layer, which is shared across hosts"
+        answer: "The layer carrying that value stays in the image history for anyone who pulls it"
+        explanation: >-
+          Layers are additive, so a value baked into an earlier layer is recoverable from image
+          history and metadata even when a later layer removes it; secrets belong in run-time
+          environment, a mounted secret or a build secret that leaves no layer. The cache is not
+          corrupted, build-time ENV does persist into run time, and no writable layer is shared.
+        difficulty: advanced
+      - id: ops-docker-cmd-vs-entrypoint
+        prompt: >-
+          You want docker run yourimage --workers 4 to append flags to a fixed server command.
+          Which Dockerfile pairing gives you that?
+        options:
+          - "ENTRYPOINT for the fixed command, with CMD holding default flags that run replaces"
+          - "CMD for the fixed command, with ENTRYPOINT supplying flags appended to it at run time"
+          - "Two CMD instructions, the first holding the command and the second the default flags"
+          - "ENTRYPOINT for the flags and CMD for the binary, since CMD is evaluated last at start"
+        answer: "ENTRYPOINT for the fixed command, with CMD holding default flags that run replaces"
+        explanation: >-
+          In exec form the ENTRYPOINT is the executable and CMD supplies default arguments, which
+          arguments passed to docker run replace. Reversing the two means your run arguments replace
+          the whole command instead, only the last CMD in a file takes effect so the pair is
+          pointless, and putting flags in ENTRYPOINT tries to execute a flag as the program.
+        difficulty: advanced
+      - id: ops-docker-writable-layer
+        prompt: >-
+          Your container writes fine-tuning checkpoints under /app/checkpoints and they vanish
+          once the container is replaced by a new one. What happened?
+        options:
+          - "The writes went to the container writable layer, which is deleted with the container"
+          - "The writes went into the image, which is immutable, so they were rejected on write"
+          - "The writes were buffered in memory and lost because the process never stopped cleanly"
+          - "The writes landed on the host, but under a path only the removed container could read"
+        answer: "The writes went to the container writable layer, which is deleted with the container"
+        explanation: >-
+          A container gets a thin copy-on-write layer over the read-only image, and its lifetime is
+          the container's lifetime, so durable data needs a volume or bind mount. Nothing was
+          rejected because copy-on-write accepts the write, this is not a flushing problem, and no
+          host path was involved without a mount.
+        difficulty: intermediate
+      - id: ops-docker-gpu
+        prompt: >-
+          Your training container starts but torch.cuda.is_available() returns False on a GPU
+          host. What is actually required to get the GPU into the container?
+        options:
+          - "The runtime must expose the host GPU and driver, with matching CUDA libraries in the image"
+          - "The NVIDIA driver must be installed inside the image, because the container has its own kernel"
+          - "The image must be built on a GPU machine, so its compiled CUDA kernels match the card"
+          - "The GPU must be passed as a mounted volume, because devices are exposed as filesystems"
+        answer: "The runtime must expose the host GPU and driver, with matching CUDA libraries in the image"
+        explanation: >-
+          The kernel driver stays on the host because the kernel is shared, the container toolkit
+          injects the device and driver libraries when you request a GPU, and the CUDA user-space
+          runtime in the image must be supported by that host driver. Installing a driver in the
+          image is the classic mistake, the build host is irrelevant, and a volume grants no device.
+        difficulty: advanced
+
+  - topic: ops-compose
+    # Source: Docker docs - Docker Compose
+    questions:
+      - id: ops-compose-service-dns
+        prompt: >-
+          In a Compose stack your API container must reach a Redis container. What address does
+          it use?
+        options:
+          - "The service name from the Compose file, which resolves on the shared project network"
+          - "localhost with the Redis port, since Compose services share one network namespace"
+          - "The host machine IP with the published port, as containers cannot address each other"
+          - "The container ID, which is the only stable name Compose assigns to a running service"
+        answer: "The service name from the Compose file, which resolves on the shared project network"
+        explanation: >-
+          Compose puts the services on a project network and registers each service name in its DNS,
+          so the name is the stable address. Each container has its own localhost, routing through
+          the host and a published port is an unnecessary detour that breaks when ports are not
+          published, and container IDs change on every recreate.
+        difficulty: beginner
+      - id: ops-compose-depends-on
+        prompt: >-
+          Your API declares depends_on for the db service, yet it still crashes at start with a
+          connection refused error. Why?
+        options:
+          - "depends_on orders container start only, and does not wait for the database to accept queries"
+          - "depends_on is advisory, and Compose ignores it unless a healthcheck block is also absent"
+          - "depends_on waits for the db container to exit, so the API starts once the db is gone"
+          - "depends_on applies only to build ordering, and has no effect once the images exist"
+        answer: "depends_on orders container start only, and does not wait for the database to accept queries"
+        explanation: >-
+          Start order is not readiness: Postgres accepts connections seconds after its container
+          starts, so you need a healthcheck with a service_healthy condition or a retry loop in the
+          client. Compose does honour depends_on, it never waits for a dependency to exit, and it
+          governs run-time ordering rather than builds.
+        difficulty: intermediate
+        mastery: true
+      - id: ops-compose-ports-mapping
+        prompt: >-
+          A service declares a ports entry of 8000 colon 8080. Which mapping is that, and where
+          must your process be listening?
+        options:
+          - "Host port 8000 forwards to container port 8080, where your process must be listening"
+          - "Container port 8000 forwards to host port 8080, so the process should listen on 8000"
+          - "Both numbers refer to host ports, and the container inherits whichever one is free"
+          - "The first is the internal port and the second is the one other services must use"
+        answer: "Host port 8000 forwards to container port 8080, where your process must be listening"
+        explanation: >-
+          The published mapping reads host first, then container, so traffic to 8000 on your machine
+          reaches 8080 inside; binding the server to 8000 inside is the usual cause of an empty
+          reply. The order is not reversible, neither number is a second host port, and other
+          services on the project network use the container port directly.
+        difficulty: beginner
+      - id: ops-compose-model-weights-volume
+        prompt: >-
+          Your inference service downloads 4 GB of model weights on every docker compose up. What
+          belongs in the Compose file to stop that?
+        options:
+          - "A named volume mounted at the cache directory, so the download survives a container replacement"
+          - "A restart policy of unless-stopped, so the container reuses whatever weights it already fetched"
+          - "A build argument holding the weights URL, so the download happens during the image build"
+          - "A longer healthcheck interval, which gives the download more time to finish before retries"
+        answer: "A named volume mounted at the cache directory, so the download survives a container replacement"
+        explanation: >-
+          A named volume lives outside the container lifecycle, so the model cache persists across
+          recreates and is shared by replicas. A restart policy restarts the same throwaway writable
+          layer, a build argument bakes the download into image build time and repeats on every
+          rebuild while bloating the image, and healthcheck timing does not cache anything.
+        difficulty: intermediate
+      - id: ops-compose-dev-bind-mount
+        prompt: >-
+          During local development you edit Python files and want the running API container to
+          pick them up without a rebuild. What does Compose give you?
+        options:
+          - "A bind mount of the source directory over the app path, so the container sees your edits"
+          - "An automatic rebuild on every file change, which Compose performs for all its services"
+          - "A named volume for the source, which copies files back out of the image on each start"
+          - "An environment variable that switches the image from its baked copy to your local one"
+        answer: "A bind mount of the source directory over the app path, so the container sees your edits"
+        explanation: >-
+          A bind mount maps a host directory into the container, so edits are visible immediately and
+          a reloading server picks them up. Compose does not watch and rebuild by default, a named
+          volume is managed storage rather than a window onto your working tree, and no environment
+          variable can redirect code that is already baked into the image.
+        difficulty: intermediate
+
+  - topic: ops-ci-github-actions
+    # Source: GitHub Docs - GitHub Actions
+    questions:
+      - id: ops-actions-secrets
+        prompt: >-
+          Your workflow needs a registry password so it can push a built image. Where does that
+          value belong?
+        options:
+          - "In repository or environment secrets, read through the secrets context at run time"
+          - "In the workflow file itself, since the repository is private and only the team reads it"
+          - "In a committed .env file that the workflow sources before the docker login step runs"
+          - "In the runner's own environment, configured once by hand on the GitHub-hosted machine"
+        answer: "In repository or environment secrets, read through the secrets context at run time"
+        explanation: >-
+          Stored secrets are encrypted, injected only into runs that need them and masked in logs.
+          Anything committed to the repository, whether inline or in a dotfile, lives in git history
+          and in every clone forever, and a GitHub-hosted runner is created fresh for each job so
+          hand-configured state on it cannot survive.
+        difficulty: beginner
+      - id: ops-actions-cache-deps
+        prompt: >-
+          Installing torch takes four minutes of every CI run. Which change cuts that without
+          weakening what the run actually verifies?
+        options:
+          - "Cache the installed dependencies keyed on the lock file hash, restoring on unchanged runs"
+          - "Install with the pip no-deps flag so the resolver stops walking the dependency graph"
+          - "Move the install into a later job, since jobs after the first reuse the same runner"
+          - "Skip the install when the previous run passed, using the recorded result of that run"
+        answer: "Cache the installed dependencies keyed on the lock file hash, restoring on unchanged runs"
+        explanation: >-
+          A cache keyed on the lock file is safe because the key changes exactly when the
+          dependencies do, so you never test against stale packages. Skipping dependency resolution
+          installs an incomplete environment, jobs each get a fresh runner rather than sharing one,
+          and reusing a previous verdict means the current commit is untested.
+        difficulty: intermediate
+        mastery: true
+      - id: ops-actions-gate-image-push
+        prompt: >-
+          Your workflow builds and pushes a model service image on every push to main. What
+          sequencing keeps a failing build out of the registry?
+        options:
+          - "Make the push job depend on the test job with needs, so tests gate the publish step"
+          - "Run both jobs in parallel and delete the bad tag afterwards when the test job fails"
+          - "Push first under a temporary tag, since an unused tag in a registry costs nothing"
+          - "Build and push in one job and run the tests from a separate workflow file instead"
+        answer: "Make the push job depend on the test job with needs, so tests gate the publish step"
+        explanation: >-
+          A needs edge makes the publish job run only after its dependency succeeds, so a broken
+          image never reaches the registry. Deleting a bad tag afterwards leaves a window where
+          something can deploy it, a temporary tag is still a pullable artefact, and a separate
+          workflow has no ordering relationship with the push at all.
+        difficulty: intermediate
+      - id: ops-actions-matrix
+        prompt: >-
+          You must confirm your package works on both Python 3.10 and 3.11 in CI. What is the
+          idiomatic way to express that?
+        options:
+          - "A job matrix over the two versions, which fans the same job out into parallel runs"
+          - "Two copies of the workflow file, each pinning one version in its own setup step"
+          - "One job that installs both interpreters and runs the whole suite twice in sequence"
+          - "A conditional in each step that picks an interpreter from the commit message text"
+        answer: "A job matrix over the two versions, which fans the same job out into parallel runs"
+        explanation: >-
+          A matrix defines the job once and runs it per combination in parallel, with each result
+          reported separately. Duplicate workflow files drift apart the moment one is edited,
+          installing both interpreters in one job doubles the runtime and muddles the report, and
+          keying behaviour off commit messages makes coverage depend on what someone typed.
+        difficulty: beginner
+
+  - topic: ops-linux-services
+    # Source: man7.org - systemctl(1), unit commands
+    questions:
+      - id: ops-systemd-enable-vs-start
+        prompt: >-
+          You ran systemctl start on your model API unit and the service is up, but it is gone
+          after a reboot. What did you miss?
+        options:
+          - "systemctl enable, which links the unit into a target so boot starts it as well"
+          - "systemctl reload, which writes the running configuration to disk for the next boot"
+          - "systemctl daemon-reload, which registers the unit permanently with the manager"
+          - "Nothing, because units always start at boot unless masked, so the reboot failed"
+        answer: "systemctl enable, which links the unit into a target so boot starts it as well"
+        explanation: >-
+          Start affects the current boot only, while enable creates the dependency link that makes
+          the unit start automatically; enable --now does both. Reload asks a running service to
+          reread its configuration, daemon-reload only refreshes the manager's view of unit files,
+          and nothing starts at boot until something wants it.
+        difficulty: beginner
+        mastery: true
+      - id: ops-systemd-daemon-reload
+        prompt: >-
+          You edited the ExecStart line of a unit file and restarted the service, but the old
+          command is still what runs. What step is missing?
+        options:
+          - "systemctl daemon-reload, because the manager works from its cached copy of unit files"
+          - "A reboot, because ExecStart is read only once when the machine first starts up"
+          - "systemctl enable again, since editing a unit clears the link that made it startable"
+          - "Nothing on your side, since the restart is asynchronous and the change lands later"
+        answer: "systemctl daemon-reload, because the manager works from its cached copy of unit files"
+        explanation: >-
+          systemd parses unit files into memory, so a restart replays the cached definition until you
+          reload the manager configuration. A reboot would work but is a heavy way to do the same
+          thing, editing a unit does not remove its enablement symlink, and no amount of waiting
+          makes the manager reread the file.
+        difficulty: intermediate
+      - id: ops-systemd-status-logs
+        prompt: >-
+          A unit is in a failed state on a host you have just logged into. Which single command
+          starts the diagnosis, and what does it show you?
+        options:
+          - "systemctl status on the unit, which reports its state, the exit result and recent log lines"
+          - "systemctl list-units, which prints every unit on the host together with its failure cause"
+          - "systemctl cat on the unit, which shows the current runtime state alongside its output"
+          - "systemctl is-enabled on the unit, which reports why the last start attempt failed"
+        answer: "systemctl status on the unit, which reports its state, the exit result and recent log lines"
+        explanation: >-
+          Status combines the active state, the main process exit code and a tail of the journal,
+          which is usually enough to point at the real error before you open journalctl. list-units
+          gives an inventory without causes, cat prints the unit file text, and is-enabled answers
+          only whether it starts at boot.
+        difficulty: beginner
+      - id: ops-systemd-restart-vs-reload
+        prompt: >-
+          A configuration change has to take effect with as few dropped requests as possible.
+          What is the difference between reload and restart for the unit?
+        options:
+          - "Reload asks the running process to reread its config, while restart stops it and starts it fresh"
+          - "Reload restarts the process quietly, while restart also reloads every unit that depends on it"
+          - "Reload applies only to units that are enabled, while restart works on any unit at all"
+          - "Reload rereads the unit file from disk, while restart rereads only the process arguments"
+        answer: "Reload asks the running process to reread its config, while restart stops it and starts it fresh"
+        explanation: >-
+          Reload sends the unit's configured reload action, so the process keeps its listening socket
+          and in-flight work, whereas restart tears it down and loses both; reload only exists when
+          the unit defines it. Reload does not restart the process, enablement is irrelevant, and
+          rereading unit files is what daemon-reload does.
+        difficulty: intermediate
+
+  - topic: ops-k8s-awareness
+    # Source: Kubernetes docs - Concepts overview
+    questions:
+      - id: ops-k8s-pod-recreated
+        prompt: >-
+          You delete a Pod that belongs to a Deployment and a fresh one appears seconds later.
+          What brought it back?
+        options:
+          - "The Deployment's controller, which keeps observed state matching the declared replicas"
+          - "The kubelet on that node, which restores any Pod it has previously been asked to run"
+          - "The Service in front of the Pod, which recreates a backend whenever one disappears"
+          - "The container runtime, which restarts the container as soon as its process exits"
+        answer: "The Deployment's controller, which keeps observed state matching the declared replicas"
+        explanation: >-
+          A Deployment owns a ReplicaSet whose controller continuously compares actual Pods against
+          the requested count and creates replacements, which is what self-healing means here. The
+          kubelet runs Pods assigned to its node rather than inventing them, a Service only routes
+          traffic, and the runtime restarts containers inside a Pod, not the Pod itself.
+        difficulty: beginner
+      - id: ops-k8s-service-purpose
+        prompt: >-
+          Pod IP addresses change every time a Pod is replaced. Which object exists to solve that
+          for callers, and how does it do it?
+        options:
+          - "A Service, which gives a stable name and address in front of a changing set of Pods"
+          - "A Deployment, which pins each replacement Pod to the address the old Pod was using"
+          - "A Namespace, which reserves a fixed address range so replacements reuse the same IP"
+          - "A ConfigMap, which stores the current Pod addresses for clients to look up at start"
+        answer: "A Service, which gives a stable name and address in front of a changing set of Pods"
+        explanation: >-
+          A Service is a stable virtual address and DNS name whose backend set is selected by label,
+          so callers never learn Pod IPs. A Deployment manages Pod lifecycle without fixing
+          addresses, a Namespace is only a naming and isolation boundary, and a ConfigMap holds
+          static configuration that nothing updates as Pods churn.
+        difficulty: beginner
+        mastery: true
+      - id: ops-k8s-declarative
+        prompt: >-
+          You apply a manifest asking for three replicas and one node then dies. Why do you not
+          have to intervene by hand?
+        options:
+          - "You declared a desired state, and controllers keep reconciling actual state towards it"
+          - "You issued three imperative create commands, and each of them retries until it succeeds"
+          - "The manifest is replayed on a timer, recreating everything it describes each interval"
+          - "The dead node is rebooted by the control plane, which brings its old Pods back with it"
+        answer: "You declared a desired state, and controllers keep reconciling actual state towards it"
+        explanation: >-
+          Kubernetes stores what you asked for and runs control loops that continuously close the gap
+          to it, so replacement scheduling is automatic. Applying a manifest is not a set of retrying
+          commands, nothing replays your file on a timer, and the control plane does not repair
+          hardware; it reschedules the work elsewhere.
+        difficulty: intermediate
+      - id: ops-k8s-pod-contents
+        prompt: >-
+          What sits inside a Pod, and what do the things inside it share with each other?
+        options:
+          - "One or more containers sharing a network namespace and any volumes you declare"
+          - "Exactly one container, which is why Pod and container mean the same in practice"
+          - "One container per node, sharing that node's filesystem with every other Pod on it"
+          - "Several containers isolated from each other, each with its own address and volumes"
+        answer: "One or more containers sharing a network namespace and any volumes you declare"
+        explanation: >-
+          A Pod is the scheduling unit: its containers share an IP and localhost plus declared
+          volumes, which is what makes sidecar patterns possible. Most Pods hold one container but
+          the concepts are not interchangeable, a Pod is not node-wide, and containers in a Pod are
+          deliberately not isolated from each other at the network level.
+        difficulty: beginner
+
+  - topic: ops-observability
+    # Source: OpenTelemetry - Observability primer
+    questions:
+      - id: ops-otel-three-signals
+        prompt: >-
+          One prediction request was slow. Which signal tells you where that time went, and why
+          can the others not answer it?
+        options:
+          - "A trace, because its spans time each step of that request while metrics only aggregate"
+          - "A metric, because a latency histogram records the path each individual request took"
+          - "A log line, because one message carries the duration of every downstream call made"
+          - "Metrics and logs together, since traces describe deployments rather than requests"
+        answer: "A trace, because its spans time each step of that request while metrics only aggregate"
+        explanation: >-
+          A trace follows one request across services and its spans show which step consumed the
+          time. A histogram summarises many requests and cannot single one out, a log line records an
+          event without the causal structure of the call tree, and traces are precisely a
+          request-scoped signal rather than a deployment record.
+        difficulty: intermediate
+        mastery: true
+      - id: ops-otel-log-levels
+        prompt: >-
+          Your service logs every request body at INFO and nothing pages anyone at ERROR. What is
+          the right division of work across log levels?
+        options:
+          - "DEBUG for developer detail, INFO for notable events, WARN for suspicion, ERROR for failures"
+          - "INFO for everything, so one level keeps the format uniform and searching stays simple"
+          - "ERROR for anything unexpected, and DEBUG for absolutely everything else a service emits"
+          - "WARN as the default level, since it captures both failures and ordinary progress messages"
+        answer: "DEBUG for developer detail, INFO for notable events, WARN for suspicion, ERROR for failures"
+        explanation: >-
+          Levels exist so you can filter by severity and alert on the top of the range, which needs
+          ERROR reserved for genuine failures and voluminous detail pushed down to DEBUG. Logging
+          everything at one level makes filtering impossible and inflates cost, and a default of WARN
+          trains everyone to ignore warnings.
+        difficulty: beginner
+      - id: ops-otel-cardinality
+        prompt: >-
+          You add a user ID attribute to a request-count metric and your metrics backend starts
+          struggling. What went wrong?
+        options:
+          - "Each distinct attribute value creates a new time series, so cardinality explodes with users"
+          - "Attributes are stored as full text, so long user IDs make every recorded sample far bigger"
+          - "Counters cannot carry attributes at all, so the backend rejects each sample it receives"
+          - "Attributes are indexed only at query time, so the whole load moves onto the dashboard"
+        answer: "Each distinct attribute value creates a new time series, so cardinality explodes with users"
+        explanation: >-
+          Metric storage is per unique attribute combination, so an unbounded identifier multiplies
+          series until memory and query cost blow up; per-user detail belongs on traces or logs. The
+          problem is series count rather than sample size, counters do carry attributes, and the cost
+          lands on ingestion and storage rather than only on queries.
+        difficulty: advanced
+      - id: ops-otel-instrumentation
+        prompt: >-
+          What does instrumenting your service with OpenTelemetry actually add to the service
+          itself?
+        options:
+          - "Code that emits telemetry in a vendor-neutral format which a chosen backend receives"
+          - "A monitoring backend embedded in the process, which stores and queries its own data"
+          - "Automatic alerting rules derived from whatever traffic the service happens to receive"
+          - "A sampling proxy in front of the service that observes traffic without code changes"
+        answer: "Code that emits telemetry in a vendor-neutral format which a chosen backend receives"
+        explanation: >-
+          OpenTelemetry standardises generation and export of traces, metrics and logs so you can
+          change backends without reinstrumenting. It stores and queries nothing itself, it writes no
+          alert rules for you, and although agents can auto-instrument libraries it is not a proxy
+          sitting in front of your service.
+        difficulty: intermediate
+      - id: ops-otel-context-propagation
+        prompt: >-
+          Your gateway and your model service each produce traces, but no request ever appears as
+          one trace spanning both. What is missing?
+        options:
+          - "Context propagation, so the downstream span joins the trace its caller already started"
+          - "A shared metrics backend, since traces are stitched together during storage ingestion"
+          - "Identical service names, because a trace groups its spans by the name of the emitter"
+          - "A longer sampling window, as spans are joined only when they arrive close in time"
+        answer: "Context propagation, so the downstream span joins the trace its caller already started"
+        explanation: >-
+          Trace and span identifiers must travel with the request, normally in headers, so the callee
+          creates a child span rather than a new root trace. Backends assemble spans by those
+          identifiers rather than by storage location, service name is an attribute used to
+          distinguish emitters, and no timing window can infer the parent relationship.
+        difficulty: advanced

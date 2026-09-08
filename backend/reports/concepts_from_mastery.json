@@ -1,0 +1,305 @@
+{
+  "added": {
+    "dl-awareness": {
+      "topic_slug": "dl-awareness",
+      "learning_objective": "Neural nets stack differentiable layers to learn representations.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "dl-awareness-differentiable-layer-stacking-them-lets",
+          "description": "Say what a differentiable layer is, and why stacking them lets a network learn features instead of being given them.",
+          "evidence_terms": [
+            "differentiable",
+            "layer",
+            "stacking",
+            "them",
+            "lets",
+            "network",
+            "learn",
+            "features",
+            "instead",
+            "being",
+            "given",
+            "them."
+          ]
+        },
+        {
+          "slug": "dl-awareness-problem-where-deep-learning-wrong",
+          "description": "Name one problem where deep learning is the wrong tool and a simpler model is the right one.",
+          "evidence_terms": [
+            "problem",
+            "where",
+            "deep",
+            "learning",
+            "wrong",
+            "tool",
+            "simpler",
+            "model",
+            "right",
+            "one."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "dl-path": {
+      "topic_slug": "dl-path",
+      "learning_objective": "Sketch a personal learning path into Deep Learning after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "dl-path-order-these-justify-order-linear",
+          "description": "Order these and justify the order: linear models, gradient descent, backpropagation, CNNs, transformers.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "linear",
+            "models",
+            "gradient",
+            "descent",
+            "backpropagation",
+            "cnns",
+            "transformers."
+          ]
+        },
+        {
+          "slug": "dl-path-part-maths-need-before-backpropagation",
+          "description": "Say which part of the maths you need before backpropagation makes sense, and which parts can wait.",
+          "evidence_terms": [
+            "part",
+            "maths",
+            "need",
+            "before",
+            "backpropagation",
+            "makes",
+            "sense",
+            "parts",
+            "wait."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "nlp-awareness": {
+      "topic_slug": "nlp-awareness",
+      "learning_objective": "NLP turns text into tokens and models meaning.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "nlp-awareness-trace-text-through-tokenisation-vector",
+          "description": "Trace text through tokenisation to a vector, and say what is lost at each step.",
+          "evidence_terms": [
+            "trace",
+            "text",
+            "through",
+            "tokenisation",
+            "vector",
+            "lost",
+            "each",
+            "step."
+          ]
+        },
+        {
+          "slug": "nlp-awareness-task-where-word-order-changes",
+          "description": "Name a task where word order changes the answer, and one where it does not.",
+          "evidence_terms": [
+            "task",
+            "where",
+            "word",
+            "order",
+            "changes",
+            "answer",
+            "not."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "nlp-path": {
+      "topic_slug": "nlp-path",
+      "learning_objective": "Sketch a personal learning path into NLP after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "nlp-path-order-these-justify-order-bag",
+          "description": "Order these and justify the order: bag of words, TF-IDF, embeddings, attention, transformers.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "bag",
+            "words",
+            "tf-idf",
+            "embeddings",
+            "attention",
+            "transformers."
+          ]
+        },
+        {
+          "slug": "nlp-path-classical-text-representations-still-worth",
+          "description": "Say why classical text representations are still worth learning after transformers exist.",
+          "evidence_terms": [
+            "classical",
+            "text",
+            "representations",
+            "still",
+            "worth",
+            "learning",
+            "after",
+            "transformers",
+            "exist."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "genai-awareness": {
+      "topic_slug": "genai-awareness",
+      "learning_objective": "Generative models produce text/images from prompts and training data.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "genai-awareness-generative-model-doing-inference-terms",
+          "description": "Say what a generative model is doing at inference, in terms of a distribution over next tokens.",
+          "evidence_terms": [
+            "generative",
+            "model",
+            "doing",
+            "inference",
+            "terms",
+            "distribution",
+            "over",
+            "next",
+            "tokens."
+          ]
+        },
+        {
+          "slug": "genai-awareness-task-where-generative-model-wrong",
+          "description": "Name a task where a generative model is the wrong choice because the answer must be exactly right.",
+          "evidence_terms": [
+            "task",
+            "where",
+            "generative",
+            "model",
+            "wrong",
+            "choice",
+            "because",
+            "answer",
+            "must",
+            "exactly",
+            "right."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "genai-path": {
+      "topic_slug": "genai-path",
+      "learning_objective": "Sketch a personal learning path into Generative AI after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "genai-path-order-these-justify-order-prompting",
+          "description": "Order these and justify the order: prompting, retrieval, evaluation, fine-tuning.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "prompting",
+            "retrieval",
+            "evaluation",
+            "fine-tuning."
+          ]
+        },
+        {
+          "slug": "genai-path-fine-tuning-usually-last-thing",
+          "description": "Say why fine-tuning is usually the last thing to reach for rather than the first.",
+          "evidence_terms": [
+            "fine-tuning",
+            "usually",
+            "last",
+            "thing",
+            "reach",
+            "rather",
+            "first."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ai-eng-awareness": {
+      "topic_slug": "ai-eng-awareness",
+      "learning_objective": "AI engineering ships reliable LLM features with evals and ops.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "ai-eng-awareness-ai-engineer-responsible-model-researcher",
+          "description": "Say what an AI engineer is responsible for that a model researcher is not.",
+          "evidence_terms": [
+            "engineer",
+            "responsible",
+            "model",
+            "researcher",
+            "not."
+          ]
+        },
+        {
+          "slug": "ai-eng-awareness-things-make-llm-feature-shippable",
+          "description": "Name the two things that make an LLM feature shippable rather than a demo: evaluation, and knowing what it does when it fails.",
+          "evidence_terms": [
+            "things",
+            "make",
+            "llm",
+            "feature",
+            "shippable",
+            "rather",
+            "demo",
+            "evaluation",
+            "knowing",
+            "fails."
+          ]
+        }
+      ],
+      "optional": []
+    },
+    "ai-eng-path": {
+      "topic_slug": "ai-eng-path",
+      "learning_objective": "Sketch a personal learning path into AI Engineering after core ML/backend.",
+      "source": "HAND_WRITTEN_FOCUS",
+      "required": [
+        {
+          "slug": "ai-eng-path-order-these-justify-order-prompting",
+          "description": "Order these and justify the order: prompting, structured output, tool calling, retrieval, evaluation, monitoring.",
+          "evidence_terms": [
+            "order",
+            "these",
+            "justify",
+            "prompting",
+            "structured",
+            "output",
+            "tool",
+            "calling",
+            "retrieval",
+            "evaluation",
+            "monitoring."
+          ]
+        },
+        {
+          "slug": "ai-eng-path-those-skip-prototype-cannot-skip",
+          "description": "Say which of those you can skip for a prototype and which you cannot skip for production.",
+          "evidence_terms": [
+            "those",
+            "skip",
+            "prototype",
+            "cannot",
+            "production."
+          ]
+        }
+      ],
+      "optional": []
+    }
+  },
+  "skipped": [],
+  "dry_run": false
+}

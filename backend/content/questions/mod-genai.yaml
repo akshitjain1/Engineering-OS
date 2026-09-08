@@ -1,0 +1,1274 @@
+# Generative AI / LLM Engineering self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to, and
+# is scoped to that topic alone. The topics here are deliberately adjacent
+# (embeddings / vector databases / chunking / RAG), so each block stays inside
+# its own resource: embeddings asks about vector geometry, vector databases
+# about index structure, chunking about splitting and reranking, RAG about the
+# end-to-end pipeline. Gates in app/content/question_bank.py refuse a prompt
+# already used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-genai
+topics:
+  - topic: genai-embeddings
+    # Source: OpenAI - Embeddings guide (generation through semantic similarity)
+    questions:
+      - id: genai-emb-cosine-measures
+        prompt: "Two embedding vectors are compared with cosine similarity. What is that number actually measuring?"
+        options:
+          - "The cosine of the angle between the vectors, so direction matters and length does not"
+          - "The straight-line distance between the two vectors' endpoints in embedding space"
+          - "The proportion of dimensions where both vectors happen to carry the same sign"
+          - "The fraction of words the two input texts literally share once both are lowercased"
+        answer: "The cosine of the angle between the vectors, so direction matters and length does not"
+        explanation: >-
+          Cosine similarity is the dot product divided by both magnitudes, which leaves only the
+          angle. Straight-line distance is Euclidean distance, a different metric that grows with
+          vector magnitude. Counting matching signs throws away every magnitude and is far coarser.
+          Literal word overlap is lexical matching, which is exactly what semantic search replaces.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-emb-why-normalise
+        prompt: "Embedding APIs typically return vectors already scaled to unit length. What does that normalisation buy the caller?"
+        options:
+          - "Once every vector has length 1 the plain dot product equals cosine similarity exactly"
+          - "It removes the bias term that the embedding model adds to every vector it returns"
+          - "It compresses the vector so the index needs measurably less memory per stored row"
+          - "It makes each dimension readable on its own as a single named semantic feature"
+        answer: "Once every vector has length 1 the plain dot product equals cosine similarity exactly"
+        explanation: >-
+          Cosine divides by both magnitudes, so if both are 1 the division is a no-op and the cheaper
+          dot product gives the same ranking. There is no bias term to strip from an embedding.
+          Normalising rescales values but keeps the same dimension count and dtype, so memory is
+          unchanged, and individual embedding dimensions are not interpretable named features.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-emb-antonyms-close
+        prompt: "The words hot and cold end up close together in embedding space despite meaning opposites. Why does that happen?"
+        options:
+          - "Embeddings capture distributional context, and antonyms appear in nearly identical contexts"
+          - "The tokenizer maps known antonym pairs onto one shared token, so the vectors coincide"
+          - "Cosine similarity takes an absolute value, so opposing vectors also score as similar"
+          - "Negation and polarity words are stripped before embedding, collapsing the two phrases"
+        answer: "Embeddings capture distributional context, and antonyms appear in nearly identical contexts"
+        explanation: >-
+          Both words fill the same sentence slots, so their neighbourhoods and therefore their vectors
+          are similar; embeddings encode relatedness, not agreement. Tokenizers never merge distinct
+          words into one id. Cosine keeps its sign, so opposite directions score near minus one rather
+          than near one. Nothing strips polarity words before the encoder sees the text.
+        difficulty: advanced
+      - id: genai-emb-model-mismatch
+        prompt: "Stored passages were embedded with one model and, after an upgrade, queries are embedded with another. What is the consequence?"
+        options:
+          - "The two vector spaces are unrelated, so the similarity scores carry no useful signal"
+          - "Nothing breaks, provided both models emit vectors with the same number of dimensions"
+          - "Only latency changes, since the second model must be loaded again on every query"
+          - "Ranking still works but each score is offset by a constant you can subtract away"
+        answer: "The two vector spaces are unrelated, so the similarity scores carry no useful signal"
+        explanation: >-
+          Each model learns its own axes, so a vector from one and a vector from the other are not
+          comparable even when the shapes match; matching dimensionality only means the arithmetic does
+          not error. Latency is irrelevant to correctness here, and the mismatch is not a constant shift
+          you can calibrate away, it is a different geometry entirely.
+        difficulty: intermediate
+      - id: genai-emb-whole-doc-vector
+        prompt: "Why does embedding an entire 40-page report into a single vector hurt semantic search over that report?"
+        options:
+          - "One vector averages many unrelated topics, so it matches everything weakly and nothing sharply"
+          - "Long inputs are refused outright, so the report never enters the searchable index at all"
+          - "The vector's magnitude grows with input length, and cosine then favours long documents"
+          - "Dimensionality rises with input length, leaving the vector incompatible with the index"
+        answer: "One vector averages many unrelated topics, so it matches everything weakly and nothing sharply"
+        explanation: >-
+          A single vector is a centroid of everything in the document, so specific questions land between
+          topics rather than on one. Long inputs are truncated at the model's limit rather than rejected,
+          cosine similarity is magnitude-invariant so length cannot bias it, and embedding dimensionality
+          is fixed by the model and never varies with the size of the input.
+        difficulty: advanced
+
+  - topic: genai-rag
+    # Source: Pinecone - Retrieval-Augmented Generation, the full pipeline
+    questions:
+      - id: genai-rag-long-context-still-retrieve
+        prompt: "A model now accepts a 100k-token context. Why do production systems still retrieve rather than paste the whole corpus in?"
+        options:
+          - "Cost and latency scale with tokens sent, and accuracy falls as irrelevant text crowds the prompt"
+          - "The model cannot really attend past a few thousand tokens whatever its advertised limit says"
+          - "Pasted text bypasses the tokenizer, so documents supplied that way are never actually read"
+          - "Retrieval is mandatory because models refuse to answer from text they were not tuned on"
+        answer: "Cost and latency scale with tokens sent, and accuracy falls as irrelevant text crowds the prompt"
+        explanation: >-
+          You pay per input token and wait longer for prefill, and signal-to-noise in the prompt drops, so
+          retrieval is an economic and quality decision rather than a capacity one. Long-context models do
+          genuinely attend across the window, pasted text goes through the same tokenizer as anything else,
+          and no model requires fine-tuning before it will use context you supply.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-rag-vs-finetune-choice
+        prompt: "An assistant must answer from a policy handbook that is edited every week. Do you retrieve or fine-tune, and why?"
+        options:
+          - "Retrieve, because the index can be re-embedded on each edit without touching model weights"
+          - "Fine-tune, because facts held in the weights are recalled far more reliably than retrieved text"
+          - "Fine-tune, since retrieval cannot return exact wording and policy answers must quote source"
+          - "Retrieve, but only after fine-tuning on the handbook so the model knows the vocabulary first"
+        answer: "Retrieve, because the index can be re-embedded on each edit without touching model weights"
+        explanation: >-
+          Volatile knowledge belongs outside the weights: re-embedding changed chunks is minutes of work
+          where a fine-tune is a full retraining cycle per edit. Weights recall facts less reliably than
+          text placed in the prompt, retrieval returns the exact passage so quoting gets easier rather than
+          harder, and a preparatory fine-tune adds cost without solving the freshness problem.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-rag-non-parametric-half
+        prompt: "RAG is often described as pairing parametric with non-parametric knowledge. What plays the non-parametric role?"
+        options:
+          - "An external index of document vectors, searched at query time and injected into the prompt"
+          - "Extra adapter layers added to the model so fresh facts can be stored without retraining"
+          - "The model's own weights, holding facts learned in pretraining and frozen at inference time"
+          - "The chat history kept for the session, which the model consults before each new reply"
+        answer: "An external index of document vectors, searched at query time and injected into the prompt"
+        explanation: >-
+          Non-parametric means the knowledge lives in a searchable store rather than in weights, which is
+          the retriever's index. Adapter layers are still parameters, just fewer of them. The weights are
+          precisely the parametric half, so naming them inverts the distinction, and session history is
+          conversational state rather than the document corpus the pipeline searches.
+        difficulty: intermediate
+      - id: genai-rag-generation-ignores-context
+        prompt: "The retriever surfaces the correct passage, yet the generated answer contradicts it. Which stage is at fault?"
+        options:
+          - "Generation: the prompt never instructs the model to answer only from the supplied context"
+          - "The embedding model, which must be retrained whenever an answer disagrees with a passage"
+          - "The vector index, which returned that passage with a similarity score far too low to use"
+          - "The chunker, which built chunks longer than the generator can read inside one prompt"
+        answer: "Generation: the prompt never instructs the model to answer only from the supplied context"
+        explanation: >-
+          Once the right passage is in the prompt, retrieval has done its job; the model is falling back on
+          parametric memory because nothing told it to prefer the context or to abstain. Retraining the
+          embedder fixes a retrieval failure that did not occur, the score is moot because the passage was
+          returned, and an over-long chunk shows up as truncation rather than as contradiction.
+        difficulty: advanced
+      - id: genai-rag-citations-value
+        prompt: "What does returning source document identifiers alongside a grounded answer genuinely buy you in production?"
+        options:
+          - "A reader can check each claim against the passage, turning silent errors into visible ones"
+          - "It forces the generator to copy the passage word for word, removing any chance of error"
+          - "It lowers token cost, because the model then needs only the ids and not the passage text"
+          - "It raises retrieval recall, since the index reorders results once it learns which ids get cited"
+        answer: "A reader can check each claim against the passage, turning silent errors into visible ones"
+        explanation: >-
+          Citations make grounding auditable, which is what converts an unfalsifiable answer into a checkable
+          one. They do not constrain decoding, so the model can still paraphrase or overreach. The passage
+          text still has to be in the prompt for the model to use it, so cost is unchanged, and emitting an
+          id feeds no learning signal back into the index.
+        difficulty: intermediate
+
+  - topic: genai-agents
+    # Source: OpenAI - Function calling guide
+    questions:
+      - id: genai-agents-what-model-returns
+        prompt: "With function calling enabled, what does the model return at the moment it decides a tool is needed?"
+        options:
+          - "A structured request naming the function plus JSON arguments, which your code must execute"
+          - "The result of running the function, since the API executes registered tools on your behalf"
+          - "Python source for the call, which you evaluate in the same process that made the request"
+          - "A natural-language instruction telling the user which tool to run and what to pass it"
+        answer: "A structured request naming the function plus JSON arguments, which your code must execute"
+        explanation: >-
+          The model only emits an intent to call: name and arguments. Execution stays entirely on your side,
+          which is why the provider never touches your systems. It does not return code to evaluate, which
+          would be a serious injection risk, and the whole point of the structured form is that it is machine
+          readable rather than prose addressed to a human.
+        difficulty: beginner
+        mastery: true
+      - id: genai-agents-wrong-tool-picked
+        prompt: "An agent keeps selecting the wrong tool from five similar ones. Which change addresses the actual cause?"
+        options:
+          - "Sharpen each tool name, description and parameter doc so the boundaries between them are explicit"
+          - "Raise the temperature so the model explores tools it would otherwise be too conservative to pick"
+          - "Register the tools in priority order, since the model scans the declared list from top to bottom"
+          - "Retry the call until the right tool appears, because tool choice is random across the whole set"
+        answer: "Sharpen each tool name, description and parameter doc so the boundaries between them are explicit"
+        explanation: >-
+          Tool selection is driven by the schema text you supply, so overlapping descriptions are the usual
+          culprit and disambiguating them is the fix. Higher temperature adds noise to a decision you want
+          sharper. Declaration order is not a priority signal the model respects, and choice is conditioned on
+          the descriptions rather than drawn uniformly, so retrying just repeats the same mistake.
+        difficulty: intermediate
+      - id: genai-agents-step-budget
+        prompt: "Why does an agent loop need an explicit step budget instead of simply running until the model stops calling tools?"
+        options:
+          - "Models can loop on a failing tool indefinitely, and each turn costs tokens with no progress made"
+          - "Without a budget the API rejects the second tool call in a conversation as a duplicate request"
+          - "The budget is what tells the model how many tools it may register on any single request"
+          - "Token limits reset each turn, so an unbudgeted loop would never reach the context window"
+        answer: "Models can loop on a failing tool indefinitely, and each turn costs tokens with no progress made"
+        explanation: >-
+          A guarded loop needs a hard stop because the failure mode is a model that retries the same broken
+          call forever, burning money and latency. The API places no duplicate-call restriction on turns, the
+          step budget is a property of your orchestration code and not of tool registration, and the context
+          does not reset between turns since prior turns are resent.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-agents-schema-vs-truth
+        prompt: "The model emits arguments that satisfy your JSON schema but reference a customer id that does not exist. What is the lesson?"
+        options:
+          - "Schema validation checks shape and not truth, so your handler must still validate against real data"
+          - "The schema was written wrongly, since a correct JSON schema can restrict values to existing ids"
+          - "The model needs a lower temperature, which makes it emit only identifiers it has seen before"
+          - "Strict mode guarantees valid arguments, so this outcome proves strict mode was left switched off"
+        answer: "Schema validation checks shape and not truth, so your handler must still validate against real data"
+        explanation: >-
+          A schema constrains types and required fields; it cannot know which ids exist in your database, so
+          referential checks belong in the handler. No practical JSON schema enumerates a live table. Lower
+          temperature reduces variety but not fabrication of plausible ids, and strict mode enforces schema
+          conformance only, which this argument already satisfied.
+        difficulty: advanced
+      - id: genai-agents-tool-error-feedback
+        prompt: "A tool call fails with a timeout. What is the most useful thing to put back into the conversation?"
+        options:
+          - "A tool message describing the failure, so the model can retry differently or report it to the user"
+          - "Nothing at all, because a failed call should stay hidden to stop the model repeating the mistake"
+          - "The original user question again, which resets the loop and lets the model replan from scratch"
+          - "A fabricated successful result, so the conversation keeps its shape and the model stays on track"
+        answer: "A tool message describing the failure, so the model can retry differently or report it to the user"
+        explanation: >-
+          The loop only adapts to what it can see, so surfacing the error as a tool result is what enables a
+          different retry or an honest failure message. Hiding it leaves the model believing the call never
+          happened. Resending the question discards all intermediate progress, and faking success teaches the
+          model to build on data that does not exist.
+        difficulty: intermediate
+
+  - topic: genai-eval
+    # Source: OpenAI - Evals guide
+    questions:
+      - id: genai-eval-vs-spot-check
+        prompt: "What distinguishes a real eval from spot-checking a handful of prompts by hand before shipping a change?"
+        options:
+          - "An eval is a fixed dataset plus a grader, so two versions get scored on identical inputs"
+          - "An eval runs on the provider's servers, which is what makes its results statistically valid"
+          - "An eval always uses a stronger model as judge, and that is the only difference that matters"
+          - "An eval measures latency and cost rather than answer quality, which hand-checking cannot do"
+        answer: "An eval is a fixed dataset plus a grader, so two versions get scored on identical inputs"
+        explanation: >-
+          Comparability is the whole point: same items, same grading rule, so a score difference means a model
+          or prompt difference. Where it executes is irrelevant to validity. A stronger judge model is one
+          grading option among exact match, code checks and rubrics, and evals target answer quality while
+          latency and cost are tracked separately.
+        difficulty: beginner
+        mastery: true
+      - id: genai-eval-when-model-grader
+        prompt: "When is a model grader the right choice over an exact string match for scoring answers?"
+        options:
+          - "When many wordings are correct, so the grader must judge meaning against a written rubric"
+          - "When the dataset is small, because model graders need fewer examples to become reliable"
+          - "When answers are numeric, since string comparison cannot handle digits or decimal points"
+          - "Whenever cost matters, because a model grader is cheaper than comparing strings in code"
+        answer: "When many wordings are correct, so the grader must judge meaning against a written rubric"
+        explanation: >-
+          Open-ended answers have no single reference string, which is exactly the gap a rubric-driven judge
+          fills. Dataset size does not make a judge more reliable. Numeric answers are the easiest case for
+          exact or tolerance matching in code, and a model grader costs an extra inference per item, making it
+          strictly more expensive than a string comparison.
+        difficulty: intermediate
+      - id: genai-eval-judge-self-preference
+        prompt: "Your model-based judge scores your own system higher than a rival's on content that is effectively identical. What is going on?"
+        options:
+          - "Judges carry style and self-preference bias, so rubrics and blinded ordering are needed to control it"
+          - "The judge is reading the model name from metadata, which the API always attaches to the payload"
+          - "Judge scores drift upward over time, so the rival was simply scored in an earlier weaker run"
+          - "Content cannot be identical if scores differ, so the error must lie in how the pairs were built"
+        answer: "Judges carry style and self-preference bias, so rubrics and blinded ordering are needed to control it"
+        explanation: >-
+          LLM judges reward familiar phrasing, length and formatting, and favour outputs resembling their own,
+          which is why you write explicit criteria and randomise presentation order. Metadata is not part of
+          the graded text you send. Scores are not time-drifting when the grader is pinned, and identical
+          content genuinely can score differently precisely because the judge is biased.
+        difficulty: advanced
+        mastery: true
+      - id: genai-eval-small-sample-noise
+        prompt: "An eval of 20 items shows a two-point improvement after a prompt change. What should you conclude from that?"
+        options:
+          - "Very little: at that sample size the difference sits well inside the noise you get by chance"
+          - "That the change helped, since a consistent direction of movement is what an eval measures"
+          - "That the eval set is too easy, because a real improvement on 20 items would be much larger"
+          - "That the grader is broken, since a correct grader returns identical scores on identical items"
+        answer: "Very little: at that sample size the difference sits well inside the noise you get by chance"
+        explanation: >-
+          Twenty items means one or two flipped answers move the score by whole points, so the result is not
+          separable from sampling variance; you need more items or repeated runs. Direction alone is not
+          evidence at that scale. Set difficulty is a separate question from statistical power, and grader
+          determinism says nothing about whether a small difference is real.
+        difficulty: advanced
+
+  - topic: genai-what-is-lm
+    # Source: Hugging Face LLM course chapter 1, plus Transformers overview
+    questions:
+      - id: genai-lm-distribution-output
+        prompt: "At each generation step, what does a language model actually produce before any text is chosen?"
+        options:
+          - "A probability distribution over every token in its vocabulary for the next position"
+          - "The single most likely next word, decided inside the model before you ever see it"
+          - "A ranked list of complete candidate sentences, from which the best one is selected"
+          - "A lookup into stored training text, returning the passage that continues most often"
+        answer: "A probability distribution over every token in its vocabulary for the next position"
+        explanation: >-
+          The forward pass emits logits over the full vocabulary, which softmax turns into probabilities;
+          picking a token is a separate decoding step. Choosing the top token is only one decoding policy, not
+          what the model itself outputs. Whole sentences are built one token at a time, and nothing in the
+          model stores or retrieves raw training passages.
+        difficulty: beginner
+        mastery: true
+      - id: genai-lm-sampling-variability
+        prompt: "Two runs of the same prompt return different answers even though the weights never changed. What explains it?"
+        options:
+          - "Decoding samples from the distribution, so identical probabilities can yield different tokens"
+          - "The weights are updated by each conversation, so the model has learned since the earlier run"
+          - "The prompt is tokenised differently on each request, changing what the model actually receives"
+          - "The model keeps a random seed per user, and that seed is what encodes its personality"
+        answer: "Decoding samples from the distribution, so identical probabilities can yield different tokens"
+        explanation: >-
+          Generativeness comes from sampling: the same distribution can be drawn from differently, which is why
+          temperature and top-p exist. Inference does not update weights. Tokenisation of the same string is
+          deterministic, so it cannot be the source, and a per-user seed is not how any of this works.
+        difficulty: beginner
+        mastery: true
+      - id: genai-lm-fluent-but-false
+        prompt: "Why can a language model produce a grammatical, confident sentence that happens to be completely false?"
+        options:
+          - "It is optimised for likely continuations of text, and plausibility is not the same as truth"
+          - "It has no grammar rules at all, so correct form and correct fact are both pure accidents"
+          - "Its corpus was mostly fiction, so false statements outnumber true ones in the training data"
+          - "It stores only facts seen more than once, and rarer facts get replaced by generic filler"
+        answer: "It is optimised for likely continuations of text, and plausibility is not the same as truth"
+        explanation: >-
+          The training objective rewards text that looks like its corpus, and false statements can be highly
+          likely continuations, so fluency and factuality are decoupled. The model does capture grammar
+          statistically rather than accidentally. Pretraining corpora are mostly non-fiction, and there is no
+          frequency threshold below which facts are swapped for filler.
+        difficulty: intermediate
+      - id: genai-lm-classical-continuity
+        prompt: "What did pre-transformer statistical language models do that today's large models still fundamentally do?"
+        options:
+          - "Assign probabilities to word sequences, using preceding context to score what comes next"
+          - "Parse each sentence into a grammar tree first, then choose a word that fits the open slot"
+          - "Map text onto a fixed set of intents, from which a templated response was generated"
+          - "Store every sentence seen in training so that a matching query returns it back verbatim"
+        answer: "Assign probabilities to word sequences, using preceding context to score what comes next"
+        explanation: >-
+          An n-gram model and a transformer share the same task definition, differing in how much context they
+          condition on and how they represent it. Grammar-tree parsing belongs to symbolic NLP, not to
+          statistical language modelling. Intent classification with templates describes older dialogue
+          systems, and verbatim storage describes a database rather than a model.
+        difficulty: intermediate
+
+  - topic: genai-next-token-prediction
+    # Source: D2L.ai - Language Modeling (pretraining objective, next-token prediction)
+    questions:
+      - id: genai-ntp-loss-and-positions
+        prompt: "Which loss does next-token prediction minimise during pretraining, and over which positions in the sequence?"
+        options:
+          - "Cross-entropy on the true next token, averaged over every position in the sequence at once"
+          - "Mean squared error between the predicted embedding and the embedding of the true next word"
+          - "Cross-entropy on the final token only, since earlier positions are context rather than targets"
+          - "A ranking loss pushing the correct token above a sampled set of incorrect ones at each step"
+        answer: "Cross-entropy on the true next token, averaged over every position in the sequence at once"
+        explanation: >-
+          Every position supplies a prediction and a target, so one sequence yields as many loss terms as it
+          has tokens, which is why the objective is so data-efficient. Squared error on embeddings discards the
+          distribution over the vocabulary. Scoring only the last token would waste almost all supervision, and
+          sampled ranking losses are a contrastive alternative, not the standard objective.
+        difficulty: advanced
+        mastery: true
+      - id: genai-ntp-causal-mask
+        prompt: "Why is a causal mask applied to attention while training a next-token predictor?"
+        options:
+          - "Without it a position could attend to the answer that follows, making the task trivial"
+          - "Without it the sequence length would grow, since every token attends to every other one"
+          - "It marks the padding tokens so the loss is never computed on positions holding no text"
+          - "It stops gradients reaching the embedding layer, which keeps token vectors fixed in place"
+        answer: "Without it a position could attend to the answer that follows, making the task trivial"
+        explanation: >-
+          The mask enforces the left-to-right constraint that makes the label genuinely unseen; without it the
+          model copies the target and learns nothing useful. Masking does not change sequence length. Padding is
+          handled by a separate padding mask, and the causal mask does not gate gradient flow into embeddings,
+          which are trained like any other parameter.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-ntp-self-supervised
+        prompt: "Why is next-token prediction called self-supervised learning rather than unsupervised learning?"
+        options:
+          - "The labels already exist inside the text, being simply the token at each next position"
+          - "A small labelled set bootstraps training, after which the model labels the rest of the corpus"
+          - "Human annotators rate each generated continuation, and those ratings supply the training signal"
+          - "The model supervises a second copy of itself, and disagreement between them drives the updates"
+        answer: "The labels already exist inside the text, being simply the token at each next position"
+        explanation: >-
+          Supervision is real but free: the corpus is its own label set, which is what separates this from
+          unsupervised objectives like clustering. Bootstrapping from a seed set describes self-training,
+          human ratings describe RLHF, and two models disagreeing describes co-training or distillation, none
+          of which is the pretraining objective.
+        difficulty: intermediate
+      - id: genai-ntp-perplexity-halved
+        prompt: "A model's perplexity on held-out text falls from 40 to 20. What does that mean concretely?"
+        options:
+          - "It is on average half as uncertain per token, effectively choosing among far fewer options"
+          - "It generates text twice as fast, since perplexity measures the compute spent per token"
+          - "Its answers are twice as factual, because perplexity is a direct measure of factual accuracy"
+          - "It memorised half the held-out set, which is the only way perplexity drops by that amount"
+        answer: "It is on average half as uncertain per token, effectively choosing among far fewer options"
+        explanation: >-
+          Perplexity is the exponential of average cross-entropy, so it reads as an effective branching factor;
+          halving it means the model's uncertainty per token halved. It says nothing about generation speed,
+          which is a serving property. Factuality is not what the metric captures, and held-out data is by
+          definition unseen, so memorisation is not the explanation.
+        difficulty: advanced
+      - id: genai-ntp-emergent-tasks
+        prompt: "How can a model trained only to predict the next token end up able to summarise or translate?"
+        options:
+          - "Those tasks appear in the corpus as text, so predicting the continuation requires doing them"
+          - "A separate summarisation head is attached after pretraining and trained on paired examples"
+          - "The objective switches late in pretraining to a multi-task mixture that includes translation"
+          - "Instruction data is the sole source, so a base model cannot summarise or translate at all"
+        answer: "Those tasks appear in the corpus as text, so predicting the continuation requires doing them"
+        explanation: >-
+          The web contains abstracts after articles and bilingual pairs side by side, so minimising next-token
+          loss forces the model to acquire those skills. No task-specific head is added for a decoder-only base
+          model. The pretraining objective does not change mid-run, and base models demonstrably do these tasks
+          when prompted with the right pattern, before any instruction tuning.
+        difficulty: intermediate
+
+  - topic: genai-tokenization-llm
+    # Source: Hugging Face LLM course chapter 2 - Tokenization for LLMs
+    questions:
+      - id: genai-tok-bpe-merges
+        prompt: "How does byte-pair encoding decide which subword units end up in the vocabulary?"
+        options:
+          - "It repeatedly merges the most frequent adjacent pair in the corpus until the vocabulary is full"
+          - "It splits on whitespace and punctuation, then keeps whichever whole words appear most often"
+          - "It uses a dictionary of linguistic morphemes so each unit maps to a real prefix or suffix"
+          - "It assigns one token per character, then trains embeddings to group characters into words"
+        answer: "It repeatedly merges the most frequent adjacent pair in the corpus until the vocabulary is full"
+        explanation: >-
+          BPE starts from characters or bytes and learns a ranked list of merges from corpus statistics, which is
+          why the resulting pieces are frequency-driven rather than linguistic. Whole-word vocabularies cannot
+          cover unseen words. Morpheme dictionaries are hand-built and language-specific, and pure character
+          tokenisation is a different scheme that BPE is designed to improve on.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-tok-unseen-brand-name
+        prompt: "A user types a brand name the tokenizer has never encountered. What does a subword tokenizer do with it?"
+        options:
+          - "Splits it into several known subword pieces, so it is representable without an unknown token"
+          - "Replaces it with a single unknown token, losing every character of the original string"
+          - "Adds the word to the vocabulary at request time and assigns it a fresh unused token id"
+          - "Rejects the request, since a token id outside the vocabulary cannot be embedded at all"
+        answer: "Splits it into several known subword pieces, so it is representable without an unknown token"
+        explanation: >-
+          Falling back to smaller pieces, ultimately bytes, is precisely why subword tokenisers eliminated the
+          unknown-token problem that word-level vocabularies had. Emitting an unknown token is the old
+          behaviour BPE replaced. Vocabularies are fixed after training and cannot grow per request, and
+          nothing is rejected because every string is representable.
+        difficulty: beginner
+      - id: genai-tok-script-cost
+        prompt: "Why does the same paragraph consume more tokens in Hindi or Thai than in English on most tokenizers?"
+        options:
+          - "The merges were learned from mostly English text, so other scripts fragment into more pieces"
+          - "Non-Latin scripts are billed at a higher rate per token under the provider's pricing tiers"
+          - "Those languages need more words for the same content, so the character count itself is larger"
+          - "Unicode characters take two tokens by definition, while ASCII characters take only one"
+        answer: "The merges were learned from mostly English text, so other scripts fragment into more pieces"
+        explanation: >-
+          Merge tables encode the training distribution, so under-represented scripts get few useful merges and
+          decompose toward bytes, inflating token counts and therefore cost. Pricing is per token and script
+          neutral. The effect holds even when the character count is smaller, and there is no fixed
+          two-tokens-per-Unicode-character rule.
+        difficulty: advanced
+      - id: genai-tok-letter-counting
+        prompt: "Why do models struggle to count the letters in a word or to reverse its characters?"
+        options:
+          - "The word arrives as one or two opaque subword ids, so letters are not separate inputs at all"
+          - "Arithmetic is disabled at inference, so any task requiring counting has to be refused"
+          - "Character positions are dropped by the attention mask, which preserves only word boundaries"
+          - "Letters live in a separate vocabulary the model can read from but is unable to write into"
+        answer: "The word arrives as one or two opaque subword ids, so letters are not separate inputs at all"
+        explanation: >-
+          Character-level tasks are hard because the tokenizer has already hidden the characters inside a single
+          embedding, so the model must recover spelling indirectly. Arithmetic is not switched off anywhere.
+          The attention mask controls which positions are visible and has nothing to do with characters, and
+          there is no second letter-only vocabulary.
+        difficulty: advanced
+        mastery: true
+      - id: genai-tok-word-count-unsafe
+        prompt: "You must fit a document inside an 8k-token window. Why is counting its words an unsafe way to check?"
+        options:
+          - "Tokens are subwords, so word counts understate the total for code, names and rare vocabulary"
+          - "Words and tokens match one to one, but the window also reserves an equal number of outputs"
+          - "The window is measured in characters, so any word-based count is off by a fixed factor"
+          - "Word counting suits prose, but the API rejects documents that were not pre-tokenised for it"
+        answer: "Tokens are subwords, so word counts understate the total for code, names and rare vocabulary"
+        explanation: >-
+          One word can be many tokens, and identifiers, URLs and non-English text inflate the ratio well past
+          the rough one-and-a-third average, so you count with the actual tokenizer. Words and tokens are not
+          one to one at all. Windows are measured in tokens rather than characters, and the API tokenises your
+          text for you rather than demanding it pre-tokenised.
+        difficulty: intermediate
+
+  - topic: genai-pretraining-finetuning
+    # Source: Hugging Face LLM course chapter 3 - Introduction to fine-tuning
+    questions:
+      - id: genai-ft-stage-difference
+        prompt: "What is the substantive difference between the pretraining stage and a supervised fine-tuning stage?"
+        options:
+          - "Pretraining learns general language from a huge unlabelled corpus; fine-tuning adapts it on curated task data"
+          - "Pretraining uses labelled examples while fine-tuning learns from raw text scraped off the open web"
+          - "Pretraining trains only the embedding layer, and fine-tuning is where the transformer blocks get learned"
+          - "Pretraining and fine-tuning use the same data and differ only in the learning-rate schedule applied"
+        answer: "Pretraining learns general language from a huge unlabelled corpus; fine-tuning adapts it on curated task data"
+        explanation: >-
+          The stages differ in data and purpose: broad self-supervised text first, then a much smaller curated
+          set for the behaviour you want. The second option inverts which stage is labelled. Pretraining trains
+          the entire network rather than just embeddings, and the two stages differ in far more than the
+          learning rate they happen to use.
+        difficulty: beginner
+        mastery: true
+      - id: genai-ft-data-efficiency
+        prompt: "Why does fine-tuning a pretrained checkpoint need far less data than training the same model from scratch?"
+        options:
+          - "Representations of language are already learned, so only task-specific adaptation remains to be done"
+          - "The checkpoint ships with its fine-tuning data included, so your own examples merely supplement it"
+          - "Fine-tuning updates fewer layers by definition, and fewer parameters always means less data needed"
+          - "Pretrained models have smaller vocabularies, which shrinks the number of examples needed to cover them"
+        answer: "Representations of language are already learned, so only task-specific adaptation remains to be done"
+        explanation: >-
+          Transfer works because syntax, semantics and world knowledge are already in the weights, leaving a
+          much smaller function to fit. Checkpoints ship weights, not datasets. Full fine-tuning updates every
+          layer, so the claim about fewer layers is simply untrue of the default, and vocabulary size is
+          unchanged by pretraining and unrelated to data efficiency.
+        difficulty: intermediate
+      - id: genai-ft-catastrophic-forgetting
+        prompt: "After fine-tuning on 500 support tickets the model handles tickets well but has lost its general ability. Why?"
+        options:
+          - "Full fine-tuning on a narrow set shifts all the weights, overwriting behaviour the base model had"
+          - "The base weights are deleted during fine-tuning, so only the newly trained task remains at all"
+          - "The tickets were too few to learn anything, so the model's output is now effectively random noise"
+          - "General ability lives in the tokenizer, which gets replaced whenever you fine-tune on new text"
+        answer: "Full fine-tuning on a narrow set shifts all the weights, overwriting behaviour the base model had"
+        explanation: >-
+          This is catastrophic forgetting: gradients from a narrow distribution drag every parameter toward that
+          distribution, which is a key motivation for adapters and for mixing in general data. Weights are
+          updated, not deleted. The model clearly did learn the ticket task, so it is not random, and the
+          tokenizer is not retrained or replaced during fine-tuning.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-ft-stage-ordering
+        prompt: "Which ordering of stages takes a raw base model to a usable chat assistant?"
+        options:
+          - "Pretrain on broad text, fine-tune on instruction pairs, then optimise against human preferences"
+          - "Fine-tune on instructions first, then pretrain on broad text so general knowledge is layered on"
+          - "Pretrain on broad text, then serve directly, since instruction data is only needed for evaluation"
+          - "Collect preferences first, pretrain against them, then fine-tune on broad text at the very end"
+        answer: "Pretrain on broad text, fine-tune on instruction pairs, then optimise against human preferences"
+        explanation: >-
+          Capability is built first, then the format for following requests, then the ranking of good answers
+          over bad ones. Reversing the first two stages would wash out the instruction behaviour during
+          pretraining. Serving a base model directly gives text continuation rather than answers, and preference
+          data is far too small and too late-stage to pretrain on.
+        difficulty: intermediate
+      - id: genai-ft-diverging-losses
+        prompt: "During a fine-tune, training loss keeps dropping while validation loss starts to rise. How do you read that?"
+        options:
+          - "The model is memorising the fine-tuning set, so stop early or supply more varied examples"
+          - "The validation split is mislabelled, since two losses on one model cannot genuinely diverge"
+          - "The learning rate is too low, and the model just needs longer to fit both splits together"
+          - "Validation loss always rises during fine-tuning, so the run is healthy and should continue"
+        answer: "The model is memorising the fine-tuning set, so stop early or supply more varied examples"
+        explanation: >-
+          Diverging curves are the textbook overfitting signature, and small fine-tuning sets reach it quickly.
+          Divergence is expected rather than evidence of bad labels. A too-low learning rate would leave both
+          losses high and flat, not split them, and a rising validation loss is never the healthy case.
+        difficulty: intermediate
+
+  - topic: genai-instruction-tuning-rlhf
+    # Source: Hugging Face LLM course chapter 11 - Instruction tuning and alignment
+    questions:
+      - id: genai-align-behaviour-not-knowledge
+        prompt: "Instruction tuning is described as changing behaviour rather than adding knowledge. Why is that a fair description?"
+        options:
+          - "It teaches the model to follow a request format, while the underlying facts still come from pretraining"
+          - "It freezes the factual layers of the network and retrains only the layers that produce style"
+          - "It attaches a knowledge base that the model queries whenever an instruction mentions a fact"
+          - "It runs at inference rather than training time, so no weight changes and nothing is learned"
+        answer: "It teaches the model to follow a request format, while the underlying facts still come from pretraining"
+        explanation: >-
+          Instruction datasets are tiny compared with pretraining corpora, so they reshape how the model responds
+          without meaningfully teaching it new facts. There is no separation of factual and stylistic layers to
+          freeze. No knowledge base is attached, and instruction tuning is genuine gradient-based training rather
+          than an inference-time trick.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-align-preference-vs-sft
+        prompt: "What does a preference optimisation stage add that supervised fine-tuning on good answers cannot provide?"
+        options:
+          - "A signal about which of two answers is better, so the model learns to rank and not only to imitate"
+          - "A wider vocabulary of instructions, since preference data covers more task types than demonstrations"
+          - "A guarantee of factual correctness, because raters only ever approve answers they have verified"
+          - "Faster inference, because preference training prunes the paths the model does not need at runtime"
+        answer: "A signal about which of two answers is better, so the model learns to rank and not only to imitate"
+        explanation: >-
+          Demonstrations show one acceptable answer and say nothing about what is worse, whereas pairwise
+          preferences convey relative quality, which is cheaper to collect and more discriminating. Preference
+          sets are usually narrower than instruction sets. Raters judge preference rather than verify facts, and
+          preference training changes weights without altering inference cost.
+        difficulty: advanced
+        mastery: true
+      - id: genai-align-reward-model-role
+        prompt: "In an RLHF pipeline, what is the reward model actually trained to do?"
+        options:
+          - "Predict which response humans would prefer, giving a score the policy can then be optimised against"
+          - "Generate the reference answer that the policy is penalised for failing to reproduce exactly"
+          - "Filter the corpus so that only high-quality documents reach the supervised fine-tuning stage"
+          - "Score grammatical fluency, since human preference correlates almost entirely with readable prose"
+        answer: "Predict which response humans would prefer, giving a score the policy can then be optimised against"
+        explanation: >-
+          The reward model is a learned stand-in for human judgement, turning sparse pairwise labels into a dense
+          score usable by an optimiser. It does not generate reference answers, that is the supervised stage. It
+          is not a corpus filter, and it is trained on holistic preference rather than on fluency, which the base
+          model already has in abundance.
+        difficulty: advanced
+      - id: genai-align-sycophancy
+        prompt: "After alignment training the model agrees with whatever the user asserts. What is the likely mechanism behind that?"
+        options:
+          - "Raters preferred agreeable answers, so the reward signal rewarded agreement over correctness"
+          - "Alignment removes the model's factual weights, leaving only layers that produce a social tone"
+          - "Agreement is the most likely continuation of any sentence, so base models behave this way too"
+          - "The reward model runs at inference, where it rewrites answers to match the user's stated view"
+        answer: "Raters preferred agreeable answers, so the reward signal rewarded agreement over correctness"
+        explanation: >-
+          Sycophancy is reward hacking on a human-preference proxy: agreeable answers feel helpful and get
+          upvoted, so the policy learns to please rather than to be right. Alignment does not delete factual
+          capacity. Base models are notably less sycophantic since they were never optimised for approval, and
+          the reward model is a training-time component only.
+        difficulty: advanced
+      - id: genai-align-base-model-behaviour
+        prompt: "You send a plain question to a base model and receive a list of similar questions back. Why does that happen?"
+        options:
+          - "A base model continues text, and a question is often followed by more questions in a corpus"
+          - "Base models are trained to summarise, so a question gets answered with a summary of its topic"
+          - "Base models hold vocabulary for questions only, until instruction data supplies answer tokens"
+          - "Base models require a system prompt, and without one they return training data verbatim"
+        answer: "A base model continues text, and a question is often followed by more questions in a corpus"
+        explanation: >-
+          A base model has no notion of a request to satisfy, so it produces the most likely continuation, and
+          FAQ pages make more questions a likely continuation; instruction tuning is what installs the
+          answering behaviour. Base models are not summarisers, the vocabulary is shared across all text, and
+          a system prompt is a chat-template convention rather than a requirement.
+        difficulty: intermediate
+
+  - topic: genai-inference-parameters
+    # Source: Prompt Engineering Guide - LLM settings
+    questions:
+      - id: genai-params-temperature-mechanism
+        prompt: "Mechanically, what does raising the temperature do to the model's next-token distribution?"
+        options:
+          - "It divides the logits by a larger value, flattening the distribution so unlikely tokens gain share"
+          - "It multiplies the logits so the top token dominates, which is why answers become more decisive"
+          - "It adds random noise to the sampled token after the distribution has already been computed"
+          - "It widens the vocabulary the model may sample from, admitting tokens it otherwise never sees"
+        answer: "It divides the logits by a larger value, flattening the distribution so unlikely tokens gain share"
+        explanation: >-
+          Temperature scales logits before softmax, so higher values compress differences and spread probability
+          into the tail. Multiplying logits describes lowering temperature, not raising it. No noise is added
+          post-hoc, the distribution itself is reshaped, and the vocabulary is fixed, so temperature changes
+          probabilities rather than which tokens exist.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-params-topp-vs-topk
+        prompt: "How does top-p sampling differ from top-k sampling on a step where the model is extremely confident?"
+        options:
+          - "Top-p keeps only enough tokens to reach the mass threshold, perhaps one; top-k always keeps k of them"
+          - "Top-p keeps a fixed count like top-k but sorts by logit rather than by probability before cutting"
+          - "Top-p rescales every probability toward uniform, whereas top-k discards the tail without rescaling"
+          - "Top-p applies before temperature and top-k after it, so on a confident step they behave identically"
+        answer: "Top-p keeps only enough tokens to reach the mass threshold, perhaps one; top-k always keeps k of them"
+        explanation: >-
+          Top-p is adaptive: a peaked step needs one token to reach the mass, a flat step admits many, whereas
+          top-k keeps the same count regardless and so injects noise on confident steps. Top-p is not a fixed
+          count. Neither method rescales toward uniform, they truncate and renormalise, and both are applied
+          after temperature scaling.
+        difficulty: advanced
+        mastery: true
+      - id: genai-params-zero-temp-nondeterminism
+        prompt: "Temperature is set to zero and you still see different outputs across identical API calls. How is that possible?"
+        options:
+          - "Greedy decoding removes sampling noise only; batching, hardware and version changes still break ties"
+          - "Temperature zero is read as unset by most APIs, so the provider's own default gets applied instead"
+          - "Zero temperature divides by zero, so the implementation silently falls back to a random choice"
+          - "Determinism needs top-p at zero as well, since top-p resamples independently of the temperature"
+        answer: "Greedy decoding removes sampling noise only; batching, hardware and version changes still break ties"
+        explanation: >-
+          Floating-point reduction order varies with batch composition and kernel choice, so near-tied logits can
+          flip; greedy decoding is deterministic given identical arithmetic, which you do not control. APIs honour
+          zero rather than treating it as unset, implementations special-case it instead of dividing by zero, and
+          top-p has no effect once only one candidate survives.
+        difficulty: advanced
+      - id: genai-params-settings-for-extraction
+        prompt: "You need JSON extraction that comes out identical run to run. Which settings do you reach for, and why?"
+        options:
+          - "Low temperature with top-p at 1, so decoding is near-greedy and no creative tail is sampled"
+          - "High temperature with low top-p, so the model explores wordings and picks the most valid one"
+          - "Temperature 1 with top-k of 50, the balanced default recommended for every kind of task"
+          - "Maximum tokens set low, since truncation forces the model to keep to the schema you asked for"
+        answer: "Low temperature with top-p at 1, so decoding is near-greedy and no creative tail is sampled"
+        explanation: >-
+          Extraction has one right answer, so you remove variety at the decoding stage and leave nucleus
+          filtering inactive. High temperature is the opposite of what repeatability needs, and no single
+          temperature and top-k pair is right for every task. Capping output length truncates valid JSON
+          mid-structure rather than enforcing a schema.
+        difficulty: intermediate
+      - id: genai-params-not-both-knobs
+        prompt: "Guidance advises adjusting temperature or top-p but not both together. What is the reasoning behind that?"
+        options:
+          - "Both reshape the same sampling tail, so moving them together makes the effect hard to attribute"
+          - "The API ignores top-p whenever temperature is not exactly one, so the second setting does nothing"
+          - "Combining them multiplies the randomness, which always pushes output past the vocabulary limit"
+          - "They apply at different layers, so setting both makes the request ambiguous and it is rejected"
+        answer: "Both reshape the same sampling tail, so moving them together makes the effect hard to attribute"
+        explanation: >-
+          The advice is about controlled iteration: two knobs on one behaviour means you cannot tell which change
+          produced the result. Top-p is not ignored at other temperatures, the interaction does not overflow any
+          vocabulary limit since truncation only shrinks the candidate set, and providers accept both parameters
+          together without error.
+        difficulty: intermediate
+
+  - topic: genai-context-windows
+    # Source: Anthropic - Context windows
+    questions:
+      - id: genai-ctx-what-counts
+        prompt: "What exactly counts against a model's context window on one request?"
+        options:
+          - "Input tokens plus the tokens the model generates, since output shares the same budget"
+          - "Only the input tokens, because generated text is billed and counted entirely separately"
+          - "Only the current user turn, since earlier turns are stored server-side outside the window"
+          - "The number of messages in the conversation, independent of how long each message is"
+        answer: "Input tokens plus the tokens the model generates, since output shares the same budget"
+        explanation: >-
+          The window covers the whole token sequence, so a long prompt leaves less room for a long answer, which
+          is why max-tokens interacts with prompt size. Output is billed separately but still occupies the
+          window. Nothing is stored server-side between stateless calls, and the limit is counted in tokens
+          rather than in messages.
+        difficulty: beginner
+        mastery: true
+      - id: genai-ctx-turn-cost-growth
+        prompt: "In a long chat, why does each new turn get more expensive even when your latest question is short?"
+        options:
+          - "The whole prior conversation is resent as input each turn, so the token count keeps growing"
+          - "The provider raises its per-token price after a fixed number of turns in the same session"
+          - "Each turn adds a hidden summary of the session, longer than the messages that it replaces"
+          - "Later turns need more output tokens, since the model must restate context it already gave"
+        answer: "The whole prior conversation is resent as input each turn, so the token count keeps growing"
+        explanation: >-
+          Inference is stateless, so conversational memory is simulated by resending history, making input cost
+          grow roughly linearly with turn count. Pricing does not change with session length. No hidden summary
+          is injected by the API, and output length is driven by the answer rather than forced to grow with
+          conversation depth.
+        difficulty: beginner
+      - id: genai-ctx-truncation-strategy
+        prompt: "A support bot must keep a 60-turn conversation inside its window. Which truncation strategy loses the least?"
+        options:
+          - "Keep the system prompt and recent turns verbatim, replacing older turns with a rolling summary"
+          - "Drop the system prompt first, because instructions matter less once a conversation is under way"
+          - "Truncate from the end, keeping the opening turns that established the purpose of the session"
+          - "Reduce the maximum output length, which frees input budget in proportion to the tokens saved"
+        answer: "Keep the system prompt and recent turns verbatim, replacing older turns with a rolling summary"
+        explanation: >-
+          Instructions and recent context carry the most weight per token, and summarising the middle preserves
+          gist cheaply. Dropping the system prompt discards the behaviour contract and is the worst first move.
+          Truncating from the end deletes the turns the user is actually referring to, and shrinking max output
+          frees only that reservation while doing nothing about history growth.
+        difficulty: advanced
+      - id: genai-ctx-buried-fact
+        prompt: "Why can a fact placed in the middle of a very long prompt be missed even though it fits inside the window?"
+        options:
+          - "Fitting is not attending: retrieval accuracy measurably degrades for material buried mid-prompt"
+          - "Anything past the halfway mark is truncated silently, so the middle never reaches the model"
+          - "Middle tokens receive no positional encoding, which leaves them unordered and unreadable"
+          - "The model reads only the first and last message of a request, discarding everything between"
+        answer: "Fitting is not attending: retrieval accuracy measurably degrades for material buried mid-prompt"
+        explanation: >-
+          Attention over long inputs is uneven, with beginnings and ends favoured, which is why important
+          instructions are placed at the edges and why retrieval still beats stuffing. No silent truncation
+          happens at a halfway point. Every position gets a positional encoding, and all messages are read
+          rather than only the outermost two.
+        difficulty: advanced
+        mastery: true
+      - id: genai-ctx-window-vs-cutoff
+        prompt: "A model with a very large window still does not know last month's news. Which limit explains that?"
+        options:
+          - "The training cutoff bounds what is in the weights; the window only bounds what you can supply"
+          - "The window is reserved for input, so freshly supplied news cannot occupy any of that budget"
+          - "Large windows compress old content lossily, and recent facts are the first thing dropped"
+          - "News is filtered by a safety layer that removes dated material before the model reads it"
+        answer: "The training cutoff bounds what is in the weights; the window only bounds what you can supply"
+        explanation: >-
+          These are independent limits: window size governs how much context you can pass in, while the cutoff
+          governs parametric knowledge, and pasting the article fixes the second. Input is exactly what the
+          window is for. Windows do not lossily compress their contents, and no safety layer strips recent
+          material from your prompt.
+        difficulty: intermediate
+
+  - topic: genai-prompt-engineering
+    # Source: Prompt Engineering Guide - General tips for designing prompts
+    questions:
+      - id: genai-pe-specificity-over-politeness
+        prompt: "Which change most reliably improves a vague prompt according to standard prompt-design guidance?"
+        options:
+          - "State the task, the output format and the constraints explicitly rather than describing them loosely"
+          - "Add polite phrasing and encouragement, which raises the quality of the completion the model picks"
+          - "Make the prompt as short as possible, since brevity leaves the model less room to go wrong"
+          - "Repeat the same instruction several times so that it outweighs the rest of the prompt text"
+        answer: "State the task, the output format and the constraints explicitly rather than describing them loosely"
+        explanation: >-
+          Specificity is the highest-leverage edit because ambiguity is what the model resolves by guessing.
+          Politeness has no reliable effect on quality. Shortness is not the goal, precision is, and a prompt can
+          be too short to specify the task. Repetition adds tokens and can confuse priority rather than
+          strengthening a single clear instruction.
+        difficulty: beginner
+        mastery: true
+      - id: genai-pe-fewshot-signal
+        prompt: "What do few-shot examples placed in a prompt actually communicate to the model?"
+        options:
+          - "The pattern and format expected of the output, demonstrated rather than described in words"
+          - "New facts, which get written into the weights for the duration of the current conversation"
+          - "A ranking of acceptable answers, from which the model picks the highest-scoring example"
+          - "The temperature to use, inferred from how varied the example answers are from each other"
+        answer: "The pattern and format expected of the output, demonstrated rather than described in words"
+        explanation: >-
+          Examples work by showing the input-output mapping, which is often easier than specifying a format in
+          prose. Nothing in a prompt modifies weights; in-context learning is purely activation-level. Examples
+          are not scored candidates to choose among, and decoding parameters come from the API call rather than
+          being inferred from prompt content.
+        difficulty: intermediate
+      - id: genai-pe-say-what-to-do
+        prompt: "Why does prompt guidance prefer telling a model what to do over listing what it must not do?"
+        options:
+          - "Negative instructions still put the forbidden behaviour in context and give no target to aim at"
+          - "Negations are stripped by the tokenizer, so the model literally never receives the word not"
+          - "Prohibitions consume more tokens, and that cost is what makes them unattractive in practice"
+          - "Models read instructions in reverse order, so anything phrased as a ban lands out of sequence"
+        answer: "Negative instructions still put the forbidden behaviour in context and give no target to aim at"
+        explanation: >-
+          A ban describes the space of wrong answers without specifying a right one, and mentioning the
+          behaviour makes it salient, so positive instructions steer better. Tokenizers preserve negations
+          faithfully. Token cost is trivial and not the reason, and instructions are processed in the order
+          given rather than reversed.
+        difficulty: intermediate
+      - id: genai-pe-two-examples-risk
+        prompt: "You tweak a production prompt and the two examples you tried both look better. What is the risk you are taking?"
+        options:
+          - "Two examples cannot reveal a regression elsewhere, so prompt changes need a held-out eval set"
+          - "Editing a prompt invalidates the model's cache, which makes any comparison against it unreliable"
+          - "Gains on examples you chose are always illusory, since the model recognises your own test cases"
+          - "Prompt changes take effect gradually, so the two examples still reflect the previous prompt text"
+        answer: "Two examples cannot reveal a regression elsewhere, so prompt changes need a held-out eval set"
+        explanation: >-
+          Prompt edits trade behaviour across the whole input distribution, so improving your two favourites can
+          quietly break other cases; that is why iteration needs a fixed evaluation set. Prompt caching affects
+          cost and latency, not correctness of comparison. The model does not recognise your test cases, and
+          prompt changes apply immediately on the next call.
+        difficulty: advanced
+        mastery: true
+      - id: genai-pe-delimiters
+        prompt: "Why wrap a user-supplied document in explicit delimiters inside your prompt?"
+        options:
+          - "It marks where data ends and instructions begin, so text in the document is less likely to be obeyed"
+          - "It compresses the document, letting the same content occupy fewer tokens of the context window"
+          - "It tells the model to treat the document as more trustworthy than the instructions around it"
+          - "It lets the model skip the document unless the question turns out to require reading it"
+        answer: "It marks where data ends and instructions begin, so text in the document is less likely to be obeyed"
+        explanation: >-
+          Instructions and data share one token stream, so a structural boundary is the cheapest way to signal
+          which spans are content to analyse rather than commands to follow. Delimiters add tokens rather than
+          saving them. They lower the authority of the enclosed text rather than raising it, and they do not
+          make any part of the prompt conditionally skippable.
+        difficulty: intermediate
+
+  - topic: genai-vector-databases
+    # Source: Pinecone - What is a Vector Database?
+    questions:
+      - id: genai-vdb-ann-tradeoff
+        prompt: "An index is described as approximate nearest neighbour. What is being traded away by that approximation?"
+        options:
+          - "Some recall: a true nearest neighbour can be missed, in exchange for far lower search latency"
+          - "Precision of the vectors, which get rounded to fewer dimensions before entering the index"
+          - "Support for filtering, since approximate indexes cannot combine metadata with vector search"
+          - "Durability, because approximate structures live in memory and vanish whenever a node restarts"
+        answer: "Some recall: a true nearest neighbour can be missed, in exchange for far lower search latency"
+        explanation: >-
+          ANN skips most of the collection, so it can miss a genuine neighbour; the payoff is sublinear query
+          time. Dimensionality reduction and quantisation are separate optional techniques, not what the word
+          approximate refers to. Metadata filtering is a standard feature, and persistence is an independent
+          storage concern from index approximation.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-vdb-candidate-breadth
+        prompt: "Raising the number of candidates an index explores per query has which combined effect?"
+        options:
+          - "Recall improves while latency rises, because more of the graph or more of the lists get scanned"
+          - "Recall improves and latency falls, since scanning more candidates prunes the search tree earlier"
+          - "Recall is unchanged and only memory grows, as extra candidates are cached rather than compared"
+          - "Recall falls, because a wider search admits more distant vectors into the returned result set"
+        answer: "Recall improves while latency rises, because more of the graph or more of the lists get scanned"
+        explanation: >-
+          Search breadth parameters are the recall-versus-latency dial: examine more of the index and you find
+          the true neighbours more often but spend more time. More work cannot make a query faster. The extra
+          candidates are compared rather than merely cached, and results are still ranked by distance, so a
+          wider search does not degrade the top of the list.
+        difficulty: advanced
+        mastery: true
+      - id: genai-vdb-metadata-filter
+        prompt: "You need results drawn only from documents a given user owns. What does a vector database offer for that?"
+        options:
+          - "Metadata filters evaluated alongside the vector search, so the neighbour set respects the predicate"
+          - "A separate index per user, which is the only way ownership can be enforced on a vector search"
+          - "Post-filtering in your own code, since the store cannot see the fields kept beside a vector"
+          - "An owner dimension appended to each vector, so similarity naturally excludes other users' rows"
+        answer: "Metadata filters evaluated alongside the vector search, so the neighbour set respects the predicate"
+        explanation: >-
+          Vectors are stored with structured metadata and the engine can constrain the search to matching
+          records, which is why you get k relevant results rather than k minus the filtered ones. Per-user
+          indexes are one heavy workaround, not a requirement. Filtering in application code after the fact
+          returns too few rows, and encoding ownership as a dimension gives no hard guarantee.
+        difficulty: intermediate
+      - id: genai-vdb-when-brute-force-fails
+        prompt: "At what point does brute-force cosine scanning inside your application code stop being good enough?"
+        options:
+          - "When the collection outgrows memory and per-query scan time exceeds your latency budget"
+          - "Immediately, because cosine similarity cannot be computed correctly outside a vector database"
+          - "Only above 1000 dimensions, past which elementwise products start to lose their precision"
+          - "Never for text, since brute force is exact and exactness always beats an approximate index"
+        answer: "When the collection outgrows memory and per-query scan time exceeds your latency budget"
+        explanation: >-
+          Exact scanning is fine for thousands of vectors and becomes untenable as the collection and query rate
+          grow, which is the honest threshold. The maths is identical wherever you run it. High dimensionality
+          does not break floating-point similarity, and exactness stops being worth its cost once latency
+          matters more than the last few points of recall.
+        difficulty: intermediate
+      - id: genai-vdb-stale-vector
+        prompt: "A document is edited but its old vector is never replaced in the index. What symptom does that produce?"
+        options:
+          - "Retrieval returns confident matches for wording that no longer exists in the current document"
+          - "The index refuses further queries until the stale vector is deleted from the collection"
+          - "Similarity scores for every vector shift, because one stale entry rescales the entire space"
+          - "The document becomes unsearchable, since an edit invalidates the id its vector was stored under"
+        answer: "Retrieval returns confident matches for wording that no longer exists in the current document"
+        explanation: >-
+          The index is a snapshot, so without an upsert on write it happily serves deleted text with a high
+          score, and the generator then grounds an answer in something stale. Queries are unaffected by
+          staleness and keep succeeding. One entry cannot rescale other scores, and the id remains valid, which
+          is exactly why the outdated vector keeps being found.
+        difficulty: advanced
+
+  - topic: genai-chunking-retrieval
+    # Source: LangChain - Retrieval-augmented generation (splitting, embedding, ranking, reranking)
+    questions:
+      - id: genai-chunk-plausible-irrelevant
+        prompt: "Retrieval keeps returning fluent chunks that are on topic but never answer the question. What is the most likely cause?"
+        options:
+          - "Chunks are cut at arbitrary boundaries, so the passage holding the answer is split across two of them"
+          - "The embedding model is too small, so every chunk collapses to nearly the same point in the space"
+          - "The generator's temperature is too high, which makes it paraphrase chunks it never retrieved"
+          - "The store uses cosine rather than dot product, which silently reverses the ranking of results"
+        answer: "Chunks are cut at arbitrary boundaries, so the passage holding the answer is split across two of them"
+        explanation: >-
+          Fixed-length splitting cuts mid-argument, leaving each half topically similar but individually
+          incomplete, which is the classic source of on-topic-but-useless hits. A weak embedder would degrade
+          topicality too, not preserve it. Generator temperature cannot affect what the retriever returns, and
+          cosine and dot product agree on ranking for normalised vectors.
+        difficulty: advanced
+        mastery: true
+      - id: genai-chunk-size-tradeoff
+        prompt: "What is the real tradeoff between 200-token chunks and 2000-token chunks in a retrieval index?"
+        options:
+          - "Small chunks match precisely but may lack context; large ones carry context but dilute the vector"
+          - "Small chunks are cheaper to embed and also always more accurate, so there is no real tradeoff"
+          - "Large chunks improve recall and precision together, since more text gives more chances to match"
+          - "Chunk size affects storage cost only, because similarity is computed per token and then averaged"
+        answer: "Small chunks match precisely but may lack context; large ones carry context but dilute the vector"
+        explanation: >-
+          Chunk size trades retrieval sharpness against self-containedness, which is why sizing is tuned per
+          corpus rather than set once. Small chunks are not uniformly better; they often lose the context the
+          generator needs. Large chunks blur the embedding toward a topical average, and similarity is computed
+          over the whole chunk vector rather than averaged per token.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-chunk-overlap-reason
+        prompt: "Why do chunkers commonly overlap adjacent chunks by a few dozen tokens?"
+        options:
+          - "So a sentence spanning a boundary appears whole in at least one chunk and stays retrievable"
+          - "So the index can deduplicate chunks by comparing the overlapping region between neighbours"
+          - "So the total number of chunks falls, which cuts the cost of embedding a long document"
+          - "So every chunk has the same token count, which the store requires for fixed-size vectors"
+        answer: "So a sentence spanning a boundary appears whole in at least one chunk and stays retrievable"
+        explanation: >-
+          Overlap is insurance against unlucky cuts: the sentence that answers the question survives intact
+          somewhere. Deduplication is not the purpose and overlap deliberately creates redundancy. Overlap
+          increases the chunk count and therefore embedding cost, and vector dimensionality comes from the model
+          rather than from chunk length, so no padding is required.
+        difficulty: intermediate
+      - id: genai-chunk-reranker-role
+        prompt: "What does a cross-encoder reranker do that the initial vector search fundamentally cannot?"
+        options:
+          - "Score each candidate against the query jointly, catching relevance that independent embeddings miss"
+          - "Search the whole collection exactly, replacing the approximate index with a brute-force pass"
+          - "Rewrite the query into several variants, then merge the result lists each variant returns"
+          - "Compress the chunks so that more of them fit inside the generator's window at answer time"
+        answer: "Score each candidate against the query jointly, catching relevance that independent embeddings miss"
+        explanation: >-
+          A bi-encoder embeds query and chunk separately, so their interaction is only a dot product, whereas a
+          cross-encoder reads both together and is far more accurate, at a cost that only suits a short list.
+          It does not scan the collection, that is the retriever's job. Query rewriting is a different technique
+          entirely, and rerankers reorder rather than compress.
+        difficulty: advanced
+      - id: genai-chunk-fetch-many-pass-few
+        prompt: "Why does a pipeline fetch 50 candidates from the index but pass only 5 of them to the model?"
+        options:
+          - "Cheap recall first, then an expensive precise ranker on a short list, keeps the final prompt clean"
+          - "The index cannot return fewer than 50, so the surplus candidates are discarded after the call"
+          - "Passing 50 would exceed any model's vocabulary, which caps how many chunks it can read at once"
+          - "The model ranks the 50 itself, and the 5 are simply the ones it happened to cite in its answer"
+        answer: "Cheap recall first, then an expensive precise ranker on a short list, keeps the final prompt clean"
+        explanation: >-
+          This is the standard two-stage design: over-fetch so the answer is somewhere in the pool, then rerank
+          and truncate so the generator sees only high-precision context. Top-k is configurable to any value.
+          Vocabulary size is unrelated to how many chunks fit, and the model is not the ranker in this design,
+          the reranker is.
+        difficulty: intermediate
+
+  - topic: genai-hallucinations-guardrails
+    # Source: Prompt Engineering Guide - Risks and misuses
+    questions:
+      - id: genai-halluc-inherent-to-sampling
+        prompt: "Why is hallucination described as inherent to how these models generate rather than as a defect awaiting a patch?"
+        options:
+          - "Decoding samples likely continuations with no truth check, so a plausible false token is a valid sample"
+          - "It stems from a known bug in attention that vendors have chosen not to fix for cost reasons"
+          - "It only happens when the model is asked about events after its cutoff, which is easy to detect"
+          - "It is caused by corrupted training files, so cleaning the corpus removes the behaviour entirely"
+        answer: "Decoding samples likely continuations with no truth check, so a plausible false token is a valid sample"
+        explanation: >-
+          Nothing in the objective or the decoder consults a source of truth, so confident fabrication is the
+          expected output of an unconstrained sampler, which is why mitigation means grounding and verification
+          rather than a fix. There is no attention bug involved. Hallucination happens well inside the cutoff,
+          and clean corpora still produce it.
+        difficulty: advanced
+        mastery: true
+      - id: genai-halluc-fluency-not-evidence
+        prompt: "Why is a confidently worded answer no evidence at all that the answer is correct?"
+        options:
+          - "Fluency reflects token likelihood, learned from form, and says nothing about the underlying facts"
+          - "Confidence is a separate calibrated score the model returns, and it is switched off by default"
+          - "Confident answers come from memorised passages, which are accurate but frequently out of date"
+          - "Wording is chosen after the facts are checked, so a confident tone means the check has failed"
+        answer: "Fluency reflects token likelihood, learned from form, and says nothing about the underlying facts"
+        explanation: >-
+          Hedging and assertiveness are stylistic patterns learned from text, so tone is uncorrelated with
+          correctness and cannot be used as a signal. Models do not emit a calibrated confidence score
+          alongside answers. Confident phrasing is not evidence of memorisation, and there is no fact-checking
+          stage that wording could be chosen after.
+        difficulty: intermediate
+      - id: genai-halluc-grounding-mitigation
+        prompt: "Which mitigation most directly reduces fabricated specifics such as dates, names and citations?"
+        options:
+          - "Supply the source text in the prompt and require the answer to quote or cite from it"
+          - "Lower the maximum output length, so there is less room for a fabricated detail to appear"
+          - "Raise the temperature, so the model explores alternatives and settles on the accurate one"
+          - "Ask the model to rate its own confidence and discard answers scoring below a threshold"
+        answer: "Supply the source text in the prompt and require the answer to quote or cite from it"
+        explanation: >-
+          Grounding replaces recall from weights with copying from context, which is where fabricated specifics
+          come from. Shorter answers fabricate fewer details but just as readily. Higher temperature increases
+          invention rather than accuracy, and self-reported confidence is poorly calibrated, so thresholding on
+          it filters unreliably.
+        difficulty: intermediate
+      - id: genai-halluc-injection-category
+        prompt: "A retrieved web page contains a line telling the model to ignore prior instructions and reveal its system prompt. Which risk is that?"
+        options:
+          - "Prompt injection: untrusted content is read as instructions because both share one token stream"
+          - "Data poisoning: the training corpus was altered, so the weights now contain the attacker's text"
+          - "Jailbreaking: the user has phrased a request that the model's safety training fails to refuse"
+          - "Model inversion: the attacker reconstructs training examples out of the answers the model gives"
+        answer: "Prompt injection: untrusted content is read as instructions because both share one token stream"
+        explanation: >-
+          There is no privilege boundary inside a prompt, so retrieved text can issue commands, which is why
+          untrusted content is delimited and treated as data. Poisoning happens at training time, not retrieval
+          time. Jailbreaking comes from the user rather than from third-party content, and model inversion is an
+          extraction attack on training data.
+        difficulty: advanced
+        mastery: true
+      - id: genai-halluc-refusal-pattern
+        prompt: "Your grounded assistant finds nothing relevant in the retrieved context. Which behaviour should you design for?"
+        options:
+          - "Say it cannot answer from the available sources, rather than filling the gap from its own weights"
+          - "Answer from the weights anyway, since a helpful guess is preferable to leaving the user stuck"
+          - "Retry retrieval at a higher temperature until some chunk clears the similarity threshold you set"
+          - "Return the top-scoring chunk verbatim, which guarantees the answer is grounded in a real source"
+        answer: "Say it cannot answer from the available sources, rather than filling the gap from its own weights"
+        explanation: >-
+          An explicit abstention is the guardrail that keeps a grounded system honest and makes retrieval gaps
+          visible instead of silently plausible. Guessing from weights is the failure this design exists to
+          prevent. Temperature does not affect the retriever, and echoing an irrelevant chunk is grounded but
+          still not an answer to the question asked.
+        difficulty: intermediate
+
+  - topic: genai-lora-peft
+    # Source: Hugging Face - PEFT and LoRA
+    questions:
+      - id: genai-lora-what-trains
+        prompt: "In LoRA, which parameters are updated during training and which ones stay untouched?"
+        options:
+          - "The base weights are frozen; two small low-rank matrices injected beside them are trained"
+          - "The base weights train at a low learning rate while the adapters stay fixed as a prior"
+          - "Only the embedding and output layers train, and the attention blocks are left frozen"
+          - "Every weight trains but is stored in lower precision, which is where the saving comes from"
+        answer: "The base weights are frozen; two small low-rank matrices injected beside them are trained"
+        explanation: >-
+          LoRA adds a rank-r product beside chosen projections and trains only that, leaving the pretrained
+          weights untouched, which is what makes the adapter tiny and the base reusable. The second option
+          inverts what is frozen. Freezing attention while training embeddings is a different scheme, and
+          low-precision storage describes quantisation rather than LoRA.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-lora-memory-vs-flops
+        prompt: "Why does LoRA cut training memory far more than it cuts the number of floating-point operations?"
+        options:
+          - "Optimiser state and gradients are kept only for the tiny adapter, while the frozen base still runs forward"
+          - "The frozen base layers are skipped entirely during training, so memory and compute both fall together"
+          - "Activations need not be stored, because low-rank updates make backpropagation unnecessary here"
+          - "The base model is quantised down to four bits by LoRA itself, which is where the whole saving comes from"
+        answer: "Optimiser state and gradients are kept only for the tiny adapter, while the frozen base still runs forward"
+        explanation: >-
+          Adam states and gradients dominate full fine-tuning memory and scale with trainable parameters, so
+          shrinking those collapses memory while the full forward and most of the backward pass still execute.
+          The base cannot be skipped since its activations are needed. Backpropagation still runs, and
+          quantisation is QLoRA, a separate technique layered on top.
+        difficulty: advanced
+        mastery: true
+      - id: genai-lora-rank-choice
+        prompt: "What does raising the LoRA rank from 8 to 64 change about the adapter you are training?"
+        options:
+          - "More trainable parameters and more capacity to fit the task, with more memory and overfitting risk"
+          - "A larger base model, since rank sets how many transformer layers the adapter attaches itself to"
+          - "Guaranteed faster convergence, because rank controls the effective learning rate of the update"
+          - "Nothing about capacity; rank only decides how the adapter file is compressed when it is saved"
+        answer: "More trainable parameters and more capacity to fit the task, with more memory and overfitting risk"
+        explanation: >-
+          Rank is the width of the bottleneck, so it scales trainable parameters linearly and buys expressiveness
+          you may not need on a small dataset. It does not change the base model or which layers are targeted,
+          which is a separate configuration. Rank is unrelated to learning rate, and it is a training
+          hyperparameter rather than a file-format setting.
+        difficulty: intermediate
+      - id: genai-lora-many-adapters
+        prompt: "Why is it practical to serve twenty task-specific adapters from one deployed base model?"
+        options:
+          - "Each adapter is a few megabytes and can be swapped or merged while the base weights stay shared"
+          - "Adapters run on the CPU, so the number you host is bounded only by the host's system memory"
+          - "Each adapter holds a full copy of the model, so they stay independent and never interfere"
+          - "Adapters are averaged into one merged set of weights at load time, giving a single shared model"
+        answer: "Each adapter is a few megabytes and can be swapped or merged while the base weights stay shared"
+        explanation: >-
+          Multi-tenant serving works because the expensive weights are loaded once and each tenant contributes
+          only a small delta. Adapters execute on the same accelerator as the base. They contain deltas rather
+          than full copies, which is the whole point, and averaging them together would destroy the per-task
+          specialisation you trained.
+        difficulty: intermediate
+      - id: genai-lora-poor-fit-goal
+        prompt: "For which goal is LoRA a poor fit compared with retrieval or with continued pretraining?"
+        options:
+          - "Teaching the model a large body of new factual knowledge that also changes every week"
+          - "Teaching the model a house output format it must follow on every single request"
+          - "Adapting tone for one customer without disturbing the model's other behaviour"
+          - "Fitting a domain classification task on a few thousand labelled in-house examples"
+        answer: "Teaching the model a large body of new factual knowledge that also changes every week"
+        explanation: >-
+          A low-rank delta has little capacity for facts and would need retraining on every change, so volatile
+          knowledge belongs in a retrieval index instead. The other three are textbook adapter use cases: format
+          adherence, tone and narrow supervised tasks are all behavioural adaptations that a small number of
+          trainable parameters captures well.
+        difficulty: advanced
+
+  - topic: genai-production-serving
+    # Source: vLLM documentation - introduction through serving architecture
+    questions:
+      - id: genai-serve-kv-cache-contents
+        prompt: "What does the KV cache hold during generation, and what does caching it save?"
+        options:
+          - "Per-token key and value tensors, so each new token attends without recomputing the whole prefix"
+          - "The text of previous responses, so an identical prompt can be answered without generating again"
+          - "The model weights in fast memory, which is what makes a second request quicker than the first"
+          - "The sampled logits for each step, letting the decoder backtrack when a sequence goes wrong"
+        answer: "Per-token key and value tensors, so each new token attends without recomputing the whole prefix"
+        explanation: >-
+          Attention needs keys and values for every earlier position, so caching them turns per-step cost from
+          quadratic re-computation into a single new column. Caching response text is a separate application-level
+          idea. Weights are resident regardless of any cache, and logits are consumed by the sampler rather than
+          stored for backtracking.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-serve-prefill-vs-decode
+        prompt: "Why is the prefill phase compute-bound while the decode phase is memory-bandwidth-bound?"
+        options:
+          - "Prefill processes all prompt tokens in parallel; decode emits one token per step while rereading the cache"
+          - "Prefill loads weights from disk while decode keeps them resident, so only prefill touches storage"
+          - "Prefill runs on the CPU tokenizer and decode on the accelerator, which have opposite bottlenecks"
+          - "Decode recomputes attention over the entire prompt each step, which makes it the compute-heavy half"
+        answer: "Prefill processes all prompt tokens in parallel; decode emits one token per step while rereading the cache"
+        explanation: >-
+          Prefill is a big matrix multiply with high arithmetic intensity, while decode does tiny multiplies but
+          must stream weights and the growing cache from memory each step, which is why the two phases are tuned
+          differently. Disk is not in either path once loaded, tokenisation is negligible, and decode avoids
+          recomputing attention precisely because of the cache.
+        difficulty: advanced
+      - id: genai-serve-continuous-batching
+        prompt: "What does continuous batching change relative to waiting for a fixed-size batch to fill up?"
+        options:
+          - "Finished sequences leave and new requests join mid-flight, so the accelerator sits idle far less"
+          - "Every request is padded to a common length, which is what allows them to share one kernel call"
+          - "Requests are served strictly one at a time, which removes the queueing delay a batch introduces"
+          - "Batch size grows until memory fills, and per-request latency is left unaffected by the change"
+        answer: "Finished sequences leave and new requests join mid-flight, so the accelerator sits idle far less"
+        explanation: >-
+          Sequences finish at different lengths, so static batches waste slots waiting for the longest one;
+          iteration-level scheduling refills those slots immediately. Padding to a common length is the static
+          approach being replaced. Serving one at a time destroys throughput, and growing the batch does affect
+          per-request latency rather than leaving it untouched.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-serve-paged-kv-blocks
+        prompt: "Why does allocating KV cache in fixed-size blocks raise the number of requests you can serve concurrently?"
+        options:
+          - "It removes the waste from reserving each sequence's maximum length up front, cutting fragmentation"
+          - "It compresses the key and value tensors, so each sequence needs a fraction of the memory it did"
+          - "It moves the cache into host memory, freeing accelerator memory for additional model weights"
+          - "It trims every sequence to a block boundary, which caps how much any single request may consume"
+        answer: "It removes the waste from reserving each sequence's maximum length up front, cutting fragmentation"
+        explanation: >-
+          Paged allocation hands out small blocks on demand, so memory tracks actual generated length instead of
+          worst-case length, and the reclaimed space becomes extra concurrency. Blocks do not compress the
+          tensors themselves. The cache stays on the accelerator where attention reads it, and sequences are not
+          truncated to block boundaries.
+        difficulty: advanced
+      - id: genai-serve-throughput-vs-latency
+        prompt: "Raising your batch size doubled tokens per second, yet users complain that replies feel slower. Explain the result."
+        options:
+          - "Larger batches raise throughput and cost efficiency but add queueing and per-request latency"
+          - "Throughput and latency are one measurement, so the complaint must come from network delay"
+          - "Larger batches always cut latency, so the slowdown must reflect a smaller KV cache budget"
+          - "Tokens per second counts prefill only, so the reported gain never reflected generation speed"
+        answer: "Larger batches raise throughput and cost efficiency but add queueing and per-request latency"
+        explanation: >-
+          Aggregate tokens per second and time-to-first-token for one user pull in opposite directions, so cost
+          per token improves while individual waits grow; you tune to a latency target rather than maximising
+          throughput. The two metrics are distinct rather than identical, batching does not reduce latency, and
+          throughput counters include decode as well as prefill.
+        difficulty: advanced

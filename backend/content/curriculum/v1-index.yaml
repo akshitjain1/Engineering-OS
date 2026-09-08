@@ -16,3 +16,13 @@ files:
 - devops/11-devops-platform.yaml
 - data-science/12-data-science.yaml
 - ai-systems/13-ai-systems-design.yaml
+- python/14-python-tooling.yaml
+- ai-systems/15-reinforcement-learning.yaml
+- cloud/16-cloud-for-ai.yaml
+- ai-systems/17-ai-security.yaml
+- ai-systems/18-inference-performance.yaml
+- ai-systems/19-retrieval-quality.yaml
+- ml/20-ml-data-quality.yaml
+- ml/21-gradient-boosting.yaml
+- ml/22-time-series.yaml
+- cloud/23-cicd-for-ml.yaml

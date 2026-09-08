@@ -1,0 +1,366 @@
+# SQL & data self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to, and
+# stays inside that topic's scope. Gates in app/content/question_bank.py enforce
+# both: a prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-db-sql
+topics:
+  - topic: db-sql-select
+    # Source: SQLite - SELECT statement (simple SELECT, WHERE, ORDER BY, LIMIT, compound SELECT)
+    questions:
+      - id: select-star-hidden-costs
+        prompt: "A reporting endpoint runs SELECT * FROM events WHERE user_id = ? when it only needs two columns. What does the star cost you?"
+        options:
+          - "Extra bytes and row lookups, plus a result whose shape changes silently when a column is added"
+          - "Nothing measurable, because the engine prunes unused columns after it reads the row from storage"
+          - "Only readability, since the planner rewrites the star into the columns the client actually reads"
+          - "A full table scan every time, because a star projection is never allowed to use an index at all"
+        answer: "Extra bytes and row lookups, plus a result whose shape changes silently when a column is added"
+        explanation: >-
+          Selecting everything reads and ships columns nobody wants, can force a table visit that an
+          index-only plan would have skipped, and breaks consumers when the schema grows. Engines do not
+          prune unrequested columns, no such rewrite happens, and the star alone does not block index use.
+        difficulty: intermediate
+        mastery: true
+      - id: select-limit-without-order-by
+        prompt: "A query is written as SELECT id, name FROM users LIMIT 20 with no ORDER BY clause. What has the caller actually asked for?"
+        options:
+          - "Any twenty rows the engine finds first, in an order it is free to change between runs"
+          - "The twenty oldest rows, because rows come back in insertion order when none is requested"
+          - "The twenty rows with the smallest primary key, since that is a table's default ordering"
+          - "An error, because LIMIT is only valid on a statement that also specifies an ORDER BY clause"
+        answer: "Any twenty rows the engine finds first, in an order it is free to change between runs"
+        explanation: >-
+          Without ORDER BY the row order is unspecified, so LIMIT slices an arbitrary window and paging
+          through it can repeat or skip rows. Insertion order and primary key order are not promised and
+          change when the plan changes, and the statement is perfectly legal, which is what keeps the bug
+          quiet.
+        difficulty: beginner
+      - id: select-null-equality-comparison
+        prompt: "A filter written as WHERE deleted_at = NULL returns no rows even though many rows have no deletion date. Why?"
+        options:
+          - "Comparing with NULL yields unknown rather than true, so the test never matches; use IS NULL"
+          - "The column holds an empty string instead of NULL, so equality against NULL cannot match it"
+          - "NULL sorts after every real value, so the rows exist but fall outside the window returned"
+          - "Equality with NULL matches only rows written before the column gained its NOT NULL default"
+        answer: "Comparing with NULL yields unknown rather than true, so the test never matches; use IS NULL"
+        explanation: >-
+          NULL means unknown, and any comparison against it is unknown, which WHERE treats as not true, so
+          IS NULL is the only test that works. The column really does hold NULL rather than an empty string,
+          sort position is irrelevant with no ORDER BY here, and no default rewrites existing rows.
+        difficulty: beginner
+        mastery: true
+      - id: select-union-versus-union-all
+        prompt: "Two SELECTs are combined with UNION and the compound query is slower than expected on large inputs. What is UNION doing that UNION ALL would not?"
+        options:
+          - "Removing duplicate rows across both branches, which needs the whole result sorted or hashed"
+          - "Running the two branches in sequence, where UNION ALL may evaluate them both in parallel"
+          - "Re-checking each branch's WHERE clause a second time, to confirm both sides agree on rows"
+          - "Materialising only the first branch, then probing the second once for every row it produced"
+        answer: "Removing duplicate rows across both branches, which needs the whole result sorted or hashed"
+        explanation: >-
+          UNION is defined to return distinct rows, so the engine must compare every row against the others,
+          while UNION ALL just concatenates and is cheaper when duplicates are impossible or harmless.
+          Branch ordering, repeated predicate checks and row-by-row probing are not what the keyword changes.
+        difficulty: intermediate
+      - id: select-deep-offset-pagination
+        prompt: "A page fetched with LIMIT 20 OFFSET 100000 takes far longer than the first page of the same ordering. What explains the gap?"
+        options:
+          - "The engine still produces and discards the skipped rows, so cost grows with the offset itself"
+          - "The offset forces a different index to be chosen, and that index is missing on the sort column"
+          - "Later pages come from disk while early pages are always served out of the page cache instead"
+          - "OFFSET re-runs the whole query once per skipped block, so cost grows with the block size used"
+        answer: "The engine still produces and discards the skipped rows, so cost grows with the offset itself"
+        explanation: >-
+          OFFSET is implemented by generating rows in order and throwing the first N away, so deep pages get
+          steadily more expensive; paging on the last key seen avoids it. The plan does not swap indexes
+          because of an offset, caching is not the dominant effect, and the query is not re-executed per block.
+        difficulty: advanced
+
+  - topic: db-sql-joins
+    # Source: SQLite - SELECT core, JOIN clause and join operators
+    questions:
+      - id: join-duplicate-key-fanout
+        prompt: "You join orders to payments on order_id, where one order can have several payments, then SUM the order total. What happens to that sum?"
+        options:
+          - "It is inflated, because each order row is repeated once per matching payment before the sum"
+          - "It is correct, because the join collapses matching rows back to one row per order for you"
+          - "It is understated, because only the first matching payment row is kept per order in a join"
+          - "It errors, because summing a left-table column is not allowed once a join has fanned out"
+        answer: "It is inflated, because each order row is repeated once per matching payment before the sum"
+        explanation: >-
+          A join on a non-unique key multiplies rows, so the order total is counted once per payment and the
+          aggregate is wrong. Joins do not deduplicate, they do not keep only the first match, and nothing
+          raises an error, which is why these bugs survive review; aggregate the child side first instead.
+        difficulty: advanced
+        mastery: true
+      - id: join-inner-drops-parents
+        prompt: "A dashboard counts customers by joining customers to orders with an INNER JOIN. Which customers vanish from the report?"
+        options:
+          - "Every customer with no orders at all, because an inner join keeps only rows matching on both sides"
+          - "Every customer with more than one order, because the join keeps a single row per matching key value"
+          - "Every customer whose orders are older than the join predicate allows, whatever the join type used"
+          - "Not one of them, because an inner join preserves the left table and pads unmatched columns with NULL"
+        answer: "Every customer with no orders at all, because an inner join keeps only rows matching on both sides"
+        explanation: >-
+          An inner join emits only matched pairs, so customers without orders disappear and the count quietly
+          understates the base. Multiple orders produce more rows rather than fewer, no time predicate exists
+          here, and it is a LEFT JOIN rather than an inner one that preserves the left side with NULLs.
+        difficulty: beginner
+      - id: join-left-join-predicate-placement
+        prompt: "A LEFT JOIN to orders is then filtered with WHERE orders.status = ?, and the unmatched customers disappear. What went wrong?"
+        options:
+          - "The WHERE test drops NULL rows, making the outer join behave as an inner one; move it into ON"
+          - "The planner reversed the join order, so the preserved side became the orders table instead"
+          - "LEFT JOIN preserves the right table, so filtering the left table always removes unmatched rows"
+          - "The status column needs an index before an outer join can retain rows that found no match"
+        answer: "The WHERE test drops NULL rows, making the outer join behave as an inner one; move it into ON"
+        explanation: >-
+          Unmatched rows arrive with NULL columns from the right table, and a WHERE comparison on those
+          columns is never true, so they get filtered out; the predicate belongs in the ON clause. Planner
+          join order does not change which side is preserved, LEFT JOIN preserves the left table, and indexes
+          affect speed rather than row retention.
+        difficulty: advanced
+      - id: join-missing-on-cartesian
+        prompt: "Two tables of ten thousand rows each are listed in FROM with no join condition between them. How many rows does the query produce?"
+        options:
+          - "A hundred million, because every row of one table is paired with every row of the other"
+          - "Ten thousand, because the engine pairs rows positionally when no condition is supplied"
+          - "Zero, because a join with no condition has nothing to match and returns an empty result"
+          - "Twenty thousand, because the two tables are concatenated when no join condition is given"
+        answer: "A hundred million, because every row of one table is paired with every row of the other"
+        explanation: >-
+          Omitting the condition asks for a cross join, so the result is the product of the row counts and
+          the query buries the server. There is no positional pairing, the result is not empty, and
+          concatenation is what a compound UNION does rather than what a join does.
+        difficulty: beginner
+      - id: join-count-star-versus-column
+        prompt: "With a LEFT JOIN from customers to orders, how do COUNT(*) and COUNT(orders.id) differ for a customer who has no orders?"
+        options:
+          - "COUNT(*) reports one because the padded row exists, while COUNT(orders.id) reports zero, skipping NULL"
+          - "Both report zero, because an outer join contributes no row at all when the right side has no match"
+          - "Both report one, because COUNT ignores which table a column came from once the join has been built"
+          - "COUNT(*) reports zero and COUNT(orders.id) reports one, because the star counts matched pairs only"
+        answer: "COUNT(*) reports one because the padded row exists, while COUNT(orders.id) reports zero, skipping NULL"
+        explanation: >-
+          The outer join emits one row with NULL order columns, so counting rows gives one while counting a
+          nullable column gives zero, which is usually the number you wanted. The row does exist, COUNT does
+          care whether the counted expression is NULL, and the star counts rows rather than matches.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: db-indexes
+    # Source: SQLite - Query Planner (how indexes change a plan, and what they cost)
+    questions:
+      - id: index-lookup-replaces-scan
+        prompt: "Adding an index on users.email changes the plan for a lookup by email. What did the engine do before, and what does it do now?"
+        options:
+          - "It read every row and tested each one; now it descends a sorted structure straight to the matches"
+          - "It read every row and cached them; now it reads the same rows but answers later queries from memory"
+          - "It sorted the table on each query; now the sort is stored so the same ordering can be reused later"
+          - "It hashed the whole row to compare; now it compares only the email column while still reading rows"
+        answer: "It read every row and tested each one; now it descends a sorted structure straight to the matches"
+        explanation: >-
+          An index is a sorted copy of the key with pointers back to the rows, so a lookup becomes a
+          logarithmic descent instead of a full scan. An index is not a row cache, the base table is not
+          physically reordered by adding one, and the win is skipping rows rather than comparing fewer bytes.
+        difficulty: beginner
+        mastery: true
+      - id: index-write-amplification-cost
+        prompt: "A busy table gains six indexes so that every reporting filter is fast. What does that do to the write path?"
+        options:
+          - "Each insert, update and delete has to maintain every index, so writes slow and storage grows"
+          - "Writes are unaffected, because indexes are rebuilt in the background on a schedule, not inline"
+          - "Only updates are affected, since an insert appends to the table without touching any index"
+          - "Writes get faster, because the indexes let the engine locate the row it must modify sooner"
+        answer: "Each insert, update and delete has to maintain every index, so writes slow and storage grows"
+        explanation: >-
+          Every index is another structure to keep consistent inside the same transaction, which is why an
+          unused index is pure cost. Maintenance is inline rather than scheduled, inserts must add entries
+          too, and the small locate-the-row saving does not offset maintaining six copies of the key.
+        difficulty: intermediate
+      - id: index-leftmost-prefix-usage
+        prompt: "An index exists on the column pair (tenant_id, created_at). Which queries can use it, and which cannot?"
+        options:
+          - "It helps a filter on tenant_id, alone or with created_at, but not one on created_at by itself"
+          - "It helps any filter on either column, because a composite index can be entered from either end"
+          - "It helps only a query naming both columns, since a composite index needs every key bound first"
+          - "It helps a filter on created_at, because the trailing column is the one kept sorted throughout"
+        answer: "It helps a filter on tenant_id, alone or with created_at, but not one on created_at by itself"
+        explanation: >-
+          A composite index is sorted by its first column and then the second, so a leading-column filter
+          narrows the search while a query on the second column alone has no starting point. Entry from
+          either end is impossible, binding every column is not required, and the trailing column is sorted
+          only within each leading value.
+        difficulty: advanced
+      - id: index-function-wrapped-column
+        prompt: "A query filters with WHERE lower(email) = ? and the plan still shows a full scan despite an index on email. Why?"
+        options:
+          - "The index stores raw email values, so a function applied to the column no longer matches its keys"
+          - "The index was never analysed, so the planner has no statistics and always falls back to a scan"
+          - "String indexes cannot serve equality tests, only range comparisons and ordered scans of the key"
+          - "The function makes the predicate non-deterministic, so the planner refuses to trust any index"
+        answer: "The index stores raw email values, so a function applied to the column no longer matches its keys"
+        explanation: >-
+          An index is usable only when the indexed expression appears in the predicate, and lower(email) is a
+          different expression from email, so you need an index on that expression. Statistics affect plan
+          choice rather than eligibility, equality is the ideal index test, and lower is deterministic.
+        difficulty: advanced
+      - id: index-covering-avoids-lookup
+        prompt: "A plan report says the query was answered from the index alone. What did the engine avoid, and what made that possible?"
+        options:
+          - "It skipped fetching the table rows, because every column the query needed was present in the index"
+          - "It skipped the WHERE clause, because an index guarantees its stored keys already satisfy the filter"
+          - "It skipped the sort step, because an index-only plan returns rows in the physical order of the table"
+          - "It skipped opening the table file, because an index is stored inside a separate database of its own"
+        answer: "It skipped fetching the table rows, because every column the query needed was present in the index"
+        explanation: >-
+          When the index carries both the filter keys and the selected columns there is no need to visit the
+          row, which is one reason a narrow projection beats a star. The filter is still evaluated, index
+          order is not table order, and the index lives in the same database file.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: db-transactions
+    # Source: SQLite - Transactions (BEGIN/COMMIT/ROLLBACK, read vs write, DEFERRED/IMMEDIATE/EXCLUSIVE)
+    questions:
+      - id: transaction-partial-failure-state
+        prompt: "A transfer debits one account and credits another as two separate statements with no transaction, and the process dies between them. What is left behind?"
+        options:
+          - "The debit is durable and the credit never happened, so the books are permanently out of balance"
+          - "Neither statement survives, because a connection that closes uncleanly discards its recent writes"
+          - "Both survive, because the engine groups statements that touch related rows into one atomic unit"
+          - "The debit is held pending until the credit lands, so a reader sees neither change in the meantime"
+        answer: "The debit is durable and the credit never happened, so the books are permanently out of balance"
+        explanation: >-
+          Each statement commits on its own, so the first write is permanent and the second is simply missing,
+          with no rollback to save you. Closing a connection does not undo committed work, nothing groups
+          related statements implicitly, and without a transaction the debit is visible immediately.
+        difficulty: intermediate
+        mastery: true
+      - id: transaction-rollback-scope
+        prompt: "Inside an explicit transaction you run four updates, hit an error on the fourth and issue ROLLBACK. Which of the changes remain?"
+        options:
+          - "None of the four, because ROLLBACK returns the database to the state it had when the block began"
+          - "The first three, because only the statement that raised the error is undone by a rollback command"
+          - "All four, because the failing statement is retried automatically before the rollback takes effect"
+          - "The first three until the connection closes, at which point the engine discards those as well"
+        answer: "None of the four, because ROLLBACK returns the database to the state it had when the block began"
+        explanation: >-
+          The transaction is the unit of atomicity, so rolling back discards every change made since BEGIN,
+          which is the whole point of wrapping the block. Rollback is not per-statement, the failing statement
+          is not retried for you, and statements inside an aborted transaction never become durable.
+        difficulty: beginner
+      - id: transaction-deferred-versus-immediate
+        prompt: "A BEGIN DEFERRED block reads rows and then writes, and it fails with a busy error partway through under concurrency. What would BEGIN IMMEDIATE change?"
+        options:
+          - "The write lock is taken up front, so contention surfaces before any of the work has been done"
+          - "Reads become writes, so every statement in the block takes the same lock and cannot contend"
+          - "The busy error is retried internally until the lock frees, so the block always eventually commits"
+          - "Locking is skipped entirely, letting concurrent writers interleave their statements without conflict"
+        answer: "The write lock is taken up front, so contention surfaces before any of the work has been done"
+        explanation: >-
+          DEFERRED starts as a read transaction and only tries to upgrade when the first write arrives, so a
+          conflict can strike after you have computed a result; IMMEDIATE asks for the write lock at BEGIN.
+          Reads do not become writes, busy errors are not retried for you, and no mode skips locking.
+        difficulty: advanced
+      - id: transaction-autocommit-per-statement
+        prompt: "A loader inserts fifty thousand rows in a loop without ever issuing BEGIN. What is the effect on durability cost and on atomicity?"
+        options:
+          - "Each insert is its own transaction, so you pay a commit per row and a crash leaves a partial load"
+          - "The engine batches the loop into one transaction, so a crash rolls the whole load back cleanly"
+          - "The inserts stay buffered until the connection closes, so a crash before that loses every one"
+          - "Only the last insert is committed, since each statement replaces the pending transaction before it"
+        answer: "Each insert is its own transaction, so you pay a commit per row and a crash leaves a partial load"
+        explanation: >-
+          Outside an explicit transaction every statement commits separately, which means fifty thousand
+          durability flushes and no all-or-nothing guarantee. Nothing batches the loop for you, writes are
+          not held until close, and each statement commits rather than displacing the previous one.
+        difficulty: intermediate
+      - id: transaction-read-snapshot-consistency
+        prompt: "Two SELECTs run back to back outside any transaction and their totals disagree. How does wrapping them in a read transaction fix that?"
+        options:
+          - "It fixes one consistent snapshot for the whole block, so both queries see the same committed state"
+          - "It locks the tables against readers, so no other session can query them while the block stays open"
+          - "It merges the two results on the server, so the second query reuses the rows the first one returned"
+          - "It repeats each query until two consecutive runs agree, which is what makes the totals consistent"
+        answer: "It fixes one consistent snapshot for the whole block, so both queries see the same committed state"
+        explanation: >-
+          A read transaction gives every statement inside it the same view of committed data, which is how a
+          multi-query report stays self-consistent. It does not block other readers, nothing merges results
+          across statements, and no engine re-runs your queries hoping for agreement.
+        difficulty: intermediate
+
+  - topic: db-schema-design
+    # Source: PostgreSQL - Data Definition (tables, constraints, keys, relationships)
+    questions:
+      - id: schema-primary-key-role
+        prompt: "Beyond making lookups faster, what does declaring a primary key actually give a table?"
+        options:
+          - "A guaranteed unique, non-null identity per row that other tables can reference as a foreign key"
+          - "A physical ordering of the rows on disk, which is what keeps range queries over the table fast"
+          - "Automatic uniqueness across every column, so that no two rows can ever be completely identical"
+          - "A stored count of the rows, letting the engine answer aggregate queries without reading them"
+        answer: "A guaranteed unique, non-null identity per row that other tables can reference as a foreign key"
+        explanation: >-
+          A primary key is the identity constraint the rest of the schema depends on: it forbids duplicates
+          and nulls and gives foreign keys something to point at. It does not dictate physical layout in
+          general, it constrains only the key columns, and it stores no row count.
+        difficulty: beginner
+        mastery: true
+      - id: schema-foreign-key-versus-app-check
+        prompt: "Your service already checks that a customer exists before inserting an order. Is a foreign key constraint still worth declaring?"
+        options:
+          - "Yes, because the check and the insert are not atomic and another writer can bypass your code path"
+          - "No, because the constraint duplicates a validation the application has already performed on the row"
+          - "No, because constraints are advisory in most engines and are not enforced during ordinary inserts"
+          - "Yes, but only as documentation, since the engine never rejects a row that fails a foreign key test"
+        answer: "Yes, because the check and the insert are not atomic and another writer can bypass your code path"
+        explanation: >-
+          A constraint is enforced by the database for every writer and every race, which an application check
+          cannot promise, and orphan rows are what you get without it. Foreign keys are genuinely enforced
+          rather than advisory or decorative, and the duplication is deliberate defence in depth.
+        difficulty: intermediate
+      - id: schema-nullable-column-ambiguity
+        prompt: "A status column is left nullable with no default, and reports begin disagreeing about how many records are active. What is the design fault?"
+        options:
+          - "NULL means unknown, so it is neither active nor inactive and every filter must handle it explicitly"
+          - "NULL is stored as an empty string, so string comparisons in the reports match different sets of rows"
+          - "Nullable columns cannot be indexed, so each report reads the table separately and drifts over time"
+          - "NULL sorts before all values, so a report using an ordered window counts a different set of rows"
+        answer: "NULL means unknown, so it is neither active nor inactive and every filter must handle it explicitly"
+        explanation: >-
+          A nullable column with no default introduces a third state that every query has to decide about,
+          and different authors decide differently. NULL is not an empty string, nullable columns can be
+          indexed, and sort position only matters for ordered windows rather than for a plain count.
+        difficulty: intermediate
+      - id: schema-unique-constraint-race
+        prompt: "Signup checks whether an email is taken and then inserts the user. Two requests arrive together and you end up with duplicate accounts. What prevents it?"
+        options:
+          - "A unique constraint on the email column, so the second insert is rejected by the database itself"
+          - "Ordering the two requests in the application, since a unique index cannot span concurrent sessions"
+          - "Wrapping only the existence check in a transaction, which blocks other readers until it completes"
+          - "An index on the email column, which makes the existence check fast enough to close the race window"
+        answer: "A unique constraint on the email column, so the second insert is rejected by the database itself"
+        explanation: >-
+          Only a database-level uniqueness guarantee survives concurrency: the loser of the race gets a
+          constraint violation you can turn into a clean error. Application ordering does not hold across
+          processes, a read transaction does not block other readers, and a faster check only narrows the
+          window.
+        difficulty: advanced
+        mastery: true
+      - id: schema-many-to-many-junction
+        prompt: "Each article can carry several tags and each tag applies to many articles. How should that relationship be modelled?"
+        options:
+          - "A junction table holding article and tag identifiers, keyed on the pair with a foreign key to each"
+          - "A text column on articles holding the tag names joined by commas, parsed by the application on read"
+          - "A fixed set of tag columns on the article row, sized to the largest number of tags observed so far"
+          - "A foreign key on tags pointing at one article, since a tag is always created for a specific article"
+        answer: "A junction table holding article and tag identifiers, keyed on the pair with a foreign key to each"
+        explanation: >-
+          A many-to-many relationship needs its own relation so each pairing is one row you can constrain,
+          index and query from either direction. A comma list cannot be joined or validated, fixed columns
+          break the day the limit is exceeded, and a single foreign key models one-to-many and loses tag reuse.
+        difficulty: intermediate

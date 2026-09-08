@@ -1,0 +1,401 @@
+# Data Quality for ML - self-check questions.
+#
+# Grounded in the scikit-learn common-pitfalls, imputation and outlier-detection
+# guides plus the Google crash-course page on imbalanced datasets. These go
+# deeper than mod-ml-core's working-level treatment of splits and scaling: the
+# questions here are about the specific ways a dataset lies to you.
+schema_version: 1
+kind: question_bank
+module: mod-ml-data-quality
+topics:
+  - topic: dq-data-leakage
+    # Source: scikit-learn - Common pitfalls and recommended practices, 12.2
+    questions:
+      - id: dq-leakage-scaler-before-split
+        prompt: "A script calls fit_transform on a StandardScaler over the whole table and only then splits into train and test. What has the reported test score become?"
+        options:
+          - "An optimistic estimate, because the scaling statistics carry information from the test rows into training"
+          - "An unchanged estimate, because centring and scaling are reversible and so cannot move any decision boundary"
+          - "A pessimistic estimate, because the test rows drag the training columns away from their own true means"
+          - "An invalid estimate only if the two splits happen to differ in size, and otherwise the numbers are fine"
+        answer: "An optimistic estimate, because the scaling statistics carry information from the test rows into training"
+        explanation: >-
+          The mean and variance used to scale training rows were computed with the test rows included, so the
+          model was fitted with a summary of data it is later scored on. The transform is not neutral here
+          precisely because its parameters were estimated, not fixed. It is not pessimistic either, since the
+          direction of the bias is always towards a better-looking score. And split sizes change variance, not
+          whether information crossed the boundary.
+        difficulty: intermediate
+        mastery: true
+      - id: dq-leakage-feature-selection-on-all-data
+        prompt: "You rank 10,000 random noise features by their correlation with y across the entire dataset, keep the best 20, then cross-validate. Why can this score well on pure noise?"
+        options:
+          - "The selection step already saw every fold's labels, so the surviving features are chosen to fit the held-out rows too"
+          - "Correlation is the wrong statistic for ranking features here, and mutual information would have rejected the noise"
+          - "Twenty features is far too few for the estimator, so the score reflects underfitting rather than any leakage at all"
+          - "Cross-validation averages across folds, and averaging always inflates a score relative to a single holdout split"
+        answer: "The selection step already saw every fold's labels, so the surviving features are chosen to fit the held-out rows too"
+        explanation: >-
+          Selection is part of fitting, so doing it once on everything hands each validation fold features tuned
+          against its own labels. Swapping the ranking statistic changes nothing, because any statistic computed
+          on all rows leaks the same way. The score is high rather than low, so underfitting is not the story.
+          And averaging folds reduces variance rather than manufacturing accuracy out of noise.
+        difficulty: advanced
+      - id: dq-leakage-group-appears-in-both-folds
+        prompt: "Each patient contributed several rows, and a plain KFold has put some of one patient's rows in the training fold and the rest in the validation fold. What does the score measure now?"
+        options:
+          - "Recognition of patients it has already seen, rather than generalisation to a patient who is new to the model"
+          - "Generalisation to new patients, since the individual rows in the validation fold were still never trained on"
+          - "Nothing whatsoever, because repeated measurements taken from one subject cannot be used in supervised learning"
+          - "Only the variance of the split, which averaging together a larger number of folds would reduce to an honest number"
+        answer: "Recognition of patients it has already seen, rather than generalisation to a patient who is new to the model"
+        explanation: >-
+          Rows from one subject are near-duplicates, so the model can memorise the subject rather than the
+          relationship, and grouped splitters exist to stop exactly this. Row-level novelty is not the unit that
+          matters when the deployment question is about an unseen patient. Repeated measurements are perfectly
+          usable, provided every group lands wholly on one side. And more folds cannot fix a bias that every
+          fold shares.
+        difficulty: intermediate
+        mastery: true
+      - id: dq-leakage-target-mean-over-full-table
+        prompt: "Before splitting, a script replaces each city with the mean of y for that city computed over every available row, and then cross-validates. Which number is now untrustworthy?"
+        options:
+          - "The cross-validated score, because each validation row helped compute the very encoding used to predict it"
+          - "The encoded column itself, which is acceptable as a score but should never be handed to a tree-based model"
+          - "The training score only, since the validation folds were held back from the encoder by cross_val_score itself"
+          - "Neither of them, because averaging a target within a category is a summary statistic rather than a label lookup"
+        answer: "The cross-validated score, because each validation row helped compute the very encoding used to predict it"
+        explanation: >-
+          A category mean computed over all rows embeds each validation row's own label into its feature, so the
+          reported score is partly the label predicting itself. The column is not intrinsically unsuitable for
+          trees; the problem is when it was computed. cross_val_score cannot protect a transform that ran before
+          it was called. And a summary statistic still carries label information when the summarised rows include
+          the ones being scored.
+        difficulty: advanced
+      - id: dq-leakage-available-at-prediction-time
+        prompt: "Which single check tells you whether a candidate feature will leak, before you have looked at any validation score at all?"
+        options:
+          - "Whether its value would already be recorded, with that same meaning, at the moment the prediction has to be made"
+          - "Whether it correlates with the target more strongly than any other column currently in the whole feature matrix"
+          - "Whether it has missing values in the test split, since leaky columns are almost always fully dense in training"
+          - "Whether the fitted model's importance ranking places it first, which is the usual signature a leaky column leaves"
+        answer: "Whether its value would already be recorded, with that same meaning, at the moment the prediction has to be made"
+        explanation: >-
+          Leakage is a timing property, so availability at prediction time settles it without any experiment.
+          Strong correlation is what a genuinely good feature also shows, so it cannot separate the two cases.
+          Missingness patterns are unrelated, and plenty of leaky columns are sparse. Importance rankings are a
+          symptom that arrives too late and that honest dominant features produce as well.
+        difficulty: intermediate
+
+  - topic: dq-inconsistent-preprocessing
+    # Source: scikit-learn - Common pitfalls and recommended practices, 12.1
+    questions:
+      - id: dq-preprocessing-served-raw
+        prompt: "Training scaled every numeric column, but the serving code passes raw values straight into the loaded estimator. What do you observe in production?"
+        options:
+          - "Confident predictions that are quietly wrong, with no exception raised anywhere along the request path"
+          - "An immediate shape or dtype error from the estimator, because unscaled input fails its own input validation"
+          - "Predictions that stay correct on average, since scaling is a monotone transform each tree can simply absorb"
+          - "A gradual decay in accuracy over several weeks, which is the standard signature of upstream data drift instead"
+        answer: "Confident predictions that are quietly wrong, with no exception raised anywhere along the request path"
+        explanation: >-
+          The array has the right shape and dtype, so nothing validates the units and the model happily scores
+          nonsense. That is why no error appears: numeric range is not something an estimator checks. Monotonicity
+          does not save a linear model, whose coefficients were learned in scaled units, nor a tree whose
+          thresholds are in scaled units. And the failure is immediate and total rather than gradual, which is
+          what distinguishes it from drift.
+        difficulty: intermediate
+        mastery: true
+      - id: dq-preprocessing-single-artifact
+        prompt: "Which packaging choice removes the entire class of bug where a transform is applied during training and then forgotten at inference?"
+        options:
+          - "Serialising the fitted transformer together with the estimator as one pipeline object that serving calls"
+          - "Writing the list of transforms into the project README so whoever builds the serving path can copy them"
+          - "Re-fitting the transformer on each incoming batch of requests so its statistics always match that batch"
+          - "Keeping the two separate scripts but adding an assertion that both files carry the same modification date"
+        answer: "Serialising the fitted transformer together with the estimator as one pipeline object that serving calls"
+        explanation: >-
+          If the transform and the model are one artifact, there is no second place for the steps to be omitted
+          or reordered. Documentation relies on a human copying correctly every time, which is the failure mode
+          itself. Re-fitting per batch introduces a different bug, since statistics then vary between requests.
+          And matching timestamps says nothing about whether the two files agree on what to compute.
+        difficulty: beginner
+      - id: dq-preprocessing-fit-transform-at-serve
+        prompt: "The serving path calls fit_transform on each incoming request batch instead of calling transform. What specifically breaks?"
+        options:
+          - "Each batch is rescaled by its own statistics, so identical inputs get different features and predictions"
+          - "Nothing at all breaks, since fit_transform is simply the convenience shorthand for calling transform in place"
+          - "The estimator refuses to score anything, because a transformer may only ever be fitted once in its lifetime"
+          - "Only the very first request is affected, after which the transformer keeps the statistics it learned initially"
+        answer: "Each batch is rescaled by its own statistics, so identical inputs get different features and predictions"
+        explanation: >-
+          Fitting at serving time makes the transform depend on whatever else arrived in the same batch, so the
+          same customer can be scored differently at two times of day. The two calls are not interchangeable:
+          one estimates parameters and the other applies stored ones. Nothing refuses to run, which is what makes
+          this hard to spot. And every subsequent fit overwrites the previous statistics rather than keeping them.
+        difficulty: intermediate
+      - id: dq-preprocessing-column-order
+        prompt: "Serving builds its feature array out of a Python dictionary, so column order varies between requests. Why does the estimator not complain about it?"
+        options:
+          - "It receives a plain numeric array and reads positions, so a reordered column is silently taken as another one"
+          - "It reads the column names from the array metadata and reorders them, which is why nothing ever has to complain"
+          - "It validates the order against a stored signature and does warn, but that warning is suppressed by default"
+          - "Order genuinely does not matter to a fitted estimator, so there is nothing here for it to complain about at all"
+        answer: "It receives a plain numeric array and reads positions, so a reordered column is silently taken as another one"
+        explanation: >-
+          A fitted estimator maps column index to learned parameter, so swapping two columns feeds age into the
+          income coefficient without any signal that it happened. Bare arrays carry no names for it to consult.
+          Nothing warns unless you deliberately attach and check a schema or feed named columns through a
+          transformer that validates them. And order matters absolutely, because index is the only identity a
+          feature has.
+        difficulty: intermediate
+      - id: dq-preprocessing-reimplementation-drift
+        prompt: "Why is exporting the exact fitted preprocessing object safer than reimplementing the same formulas in whatever language serving happens to be written in?"
+        options:
+          - "A reimplementation drifts as defaults and edge cases diverge, whereas one exported object cannot disagree with itself"
+          - "A reimplementation runs measurably more slowly, and latency is the only real cost of duplicating preprocessing logic"
+          - "A reimplementation cannot express standardisation at all, so the serving path is effectively forced to skip that step"
+          - "An exported object keeps retraining itself on production traffic, which keeps its statistics closer to the live data"
+        answer: "A reimplementation drifts as defaults and edge cases diverge, whereas one exported object cannot disagree with itself"
+        explanation: >-
+          Two implementations are two things to keep in step, and they diverge on the quiet details such as how
+          an unseen category or a missing value is handled. Speed is beside the point when the two paths compute
+          different numbers. Standardisation is trivially expressible anywhere, so capability is not the issue.
+          And a serialised transformer is frozen by design; it does not update itself on traffic.
+        difficulty: intermediate
+
+  - topic: dq-missing-values
+    # Source: scikit-learn - Imputation of missing values
+    questions:
+      - id: dq-impute-median-for-skewed
+        prompt: "An income column is heavily right-skewed and roughly eight per cent of its rows are blank. Which univariate imputation strategy fits, and why that one?"
+        options:
+          - "Median, because a handful of very large incomes would drag the mean well away from a typical row"
+          - "Mean, because it minimises squared error against the observed values and is therefore always optimal"
+          - "Most frequent, because income becomes effectively categorical once a skewed distribution is detected"
+          - "A constant zero, because a blank income is best read as an explicit statement that nothing was earned"
+        answer: "Median, because a handful of very large incomes would drag the mean well away from a typical row"
+        explanation: >-
+          The median is the robust centre, so extreme incomes do not pull the fill value away from where most
+          rows sit. Mean imputation is only well behaved on roughly symmetric columns; optimality against
+          observed values says nothing about the unobserved ones. Most-frequent is for categorical columns and
+          would collapse a continuous variable onto one spike. And a constant zero invents a claim about the
+          data that a blank cell does not make.
+        difficulty: beginner
+      - id: dq-impute-missing-indicator
+        prompt: "Adding a boolean column that marks which cells were filled in helps most in which situation?"
+        options:
+          - "When whether a value is missing carries signal of its own, which the filled number alone would erase"
+          - "When the imputer is univariate, since a marker column is what turns it into a multivariate imputer"
+          - "When the missing fraction is tiny, because the marker column is then cheap and adds almost no width"
+          - "When the target is continuous, since a marker column means nothing for a classification problem"
+        answer: "When whether a value is missing carries signal of its own, which the filled number alone would erase"
+        explanation: >-
+          Missingness is often informative, and imputing destroys the distinction between a measured value and
+          a guessed one unless you record it separately. A marker changes nothing about how the fill value is
+          computed, so it does not upgrade a univariate imputer. Cheapness is not a reason to add a column, and
+          a tiny missing fraction is where the marker matters least. And the marker is about the feature, so the
+          target type is irrelevant.
+        difficulty: intermediate
+        mastery: true
+      - id: dq-impute-iterative
+        prompt: "How does an iterative imputer fill a gap differently from replacing it with that column's own mean?"
+        options:
+          - "It models each incomplete column as a function of the other columns, and cycles through them repeatedly"
+          - "It copies the value from the row physically above, repeating that pass until no blank cells are left"
+          - "It fills every gap with zero first and then rescales the column so its mean matches the observed mean"
+          - "It drops the incomplete columns entirely and refits, which is why it is described as an iterative method"
+        answer: "It models each incomplete column as a function of the other columns, and cycles through them repeatedly"
+        explanation: >-
+          The method treats imputation as a round-robin regression problem, so a gap is predicted from the rest
+          of the row rather than from the column margin alone. Forward-filling from the row above assumes an
+          ordering the table does not have. Zero-filling and rescaling changes the column mean without using any
+          cross-column structure. And dropping columns is deletion, not imputation, and nothing about it iterates.
+        difficulty: intermediate
+      - id: dq-impute-knn
+        prompt: "What does a nearest-neighbour imputer use to fill a blank cell, and what must hold of the columns for that to work?"
+        options:
+          - "The average of that feature over the nearest complete rows, so distance across the columns must be meaningful"
+          - "The average over the whole column, restricted to rows that happen to share the same target label as this one"
+          - "A regression fitted on all the other columns at once, which is why it needs no notion of distance between rows"
+          - "The commonest category among neighbouring rows, so every column must first be converted into a category type"
+        answer: "The average of that feature over the nearest complete rows, so distance across the columns must be meaningful"
+        explanation: >-
+          Neighbour-based imputation borrows from rows that look similar on the observed columns, so the metric
+          has to mean something, which is why scaling the features first matters. Conditioning on the target
+          label would leak the label into a feature. The regression description belongs to iterative imputation,
+          which is a different estimator. And averaging neighbours is a numeric operation, not a categorical vote.
+        difficulty: intermediate
+      - id: dq-impute-inside-pipeline
+        prompt: "Where must the imputer be fitted so that cross-validated scores stay honest, and what leaks through if it is not?"
+        options:
+          - "Inside the pipeline on each training fold, since otherwise the fill values are computed from validation rows too"
+          - "On the full dataset exactly once, because an imputer only ever needs the marginal distribution of each column"
+          - "On the validation fold itself, so the values used at scoring time match the distribution being scored against"
+          - "After the estimator in the step list, so that the model can tell the imputer which of the rows matter most"
+        answer: "Inside the pipeline on each training fold, since otherwise the fill values are computed from validation rows too"
+        explanation: >-
+          An imputer has fitted state, so computing it once on everything mixes validation information into every
+          training fold. Needing only marginals does not make it safe, because those marginals are still estimated
+          from rows you are about to score. Fitting on the validation fold is the leak stated backwards. And an
+          imputer must run before the estimator, since the estimator cannot accept the blanks at all.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: dq-outliers
+    # Source: scikit-learn - Novelty and Outlier Detection, section intro and overview
+    questions:
+      - id: dq-outliers-which-problem
+        prompt: "Your only training data is a year of unfiltered production logs known to contain bad rows. Which of the two detection settings does that put you in?"
+        options:
+          - "Outlier detection, since the fitting data is itself contaminated and the method has to tolerate that"
+          - "Novelty detection, since any unusual row you later see will be new relative to whatever was fitted"
+          - "Neither of them, because contaminated training data must be cleaned by hand before a detector is fitted"
+          - "Both equally, because the two settings differ only in which scikit-learn module the estimator lives in"
+        answer: "Outlier detection, since the fitting data is itself contaminated and the method has to tolerate that"
+        explanation: >-
+          The setting is decided by whether the fitting sample is clean, and here it is not, so you need an
+          estimator that finds the odd rows inside its own training data. Novelty detection assumes a clean
+          reference to compare against, which you do not have. Hand cleaning a year of logs is the work the
+          detector is there to do. And the distinction is about the assumption made of the training sample, not
+          about module layout.
+        difficulty: intermediate
+        mastery: true
+      - id: dq-outliers-clean-reference-then-score
+        prompt: "You hold a hand-verified clean reference set and want to flag odd rows arriving at a prediction endpoint. What does that require of the estimator?"
+        options:
+          - "That it be fitted on the clean set and then asked to score fresh points it has never been shown before"
+          - "That it be refitted on every incoming request batch so that its notion of normal always tracks live traffic"
+          - "That it treat the clean reference set as the positive class of an ordinary supervised binary classifier"
+          - "That it be fitted on the mixture of clean and incoming rows so the contamination rate can be estimated"
+        answer: "That it be fitted on the clean set and then asked to score fresh points it has never been shown before"
+        explanation: >-
+          This is the novelty setting: a trusted description of normal, then a decision about each new point, so
+          the estimator must expose scoring for unseen data. Refitting on live batches would absorb the very
+          anomalies you want flagged into the definition of normal. A supervised classifier needs labelled
+          examples of the abnormal class, which you do not have. And mixing incoming rows back into the fit
+          throws the clean reference away.
+        difficulty: intermediate
+      - id: dq-outliers-elliptic-envelope-assumption
+        prompt: "An elliptic envelope fits a robust covariance estimate to the data. On which data shape does that assumption fail badly?"
+        options:
+          - "Data forming several well-separated clusters, because one ellipse cannot enclose a multimodal cloud"
+          - "Data with more rows than columns, because a covariance estimate needs at least as many columns as rows"
+          - "Data on a single common scale, because an ellipse degenerates once every feature shares one variance"
+          - "Data with no outliers in it at all, because the estimator then has nothing to place its ellipse around"
+        answer: "Data forming several well-separated clusters, because one ellipse cannot enclose a multimodal cloud"
+        explanation: >-
+          The method assumes one roughly elliptical blob, so with several modes the fitted ellipse spans the gap
+          between clusters and calls perfectly empty regions normal while flagging cluster edges. More rows than
+          columns is the comfortable case for covariance estimation, not the failure. Equal variances give a
+          circle, which is a fine ellipse. And a clean sample simply yields a boundary with nothing outside it.
+        difficulty: advanced
+      - id: dq-outliers-drop-or-keep
+        prompt: "A detector flags three per cent of the rows in a fraud dataset. Why can deleting those rows be exactly the wrong move?"
+        options:
+          - "Those rows may be the rare positives the model exists to find, so removing them removes the signal"
+          - "Deleting rows always shrinks the training set below the minimum a tree ensemble is able to fit on"
+          - "Detectors report three per cent by construction, so the flag carries no information about those rows"
+          - "Fraud data is usually balanced, so any flagged fraction above one per cent must be a bug in the fit"
+        answer: "Those rows may be the rare positives the model exists to find, so removing them removes the signal"
+        explanation: >-
+          Statistically unusual and wrong are different things, and in fraud the unusual rows are the target
+          class, so cleaning them away deletes what is being predicted. Sample size is not the objection; a
+          three per cent cut leaves plenty of rows. The flagged fraction reflects the contamination setting you
+          chose rather than being fixed by construction. And fraud data is characteristically imbalanced, so a
+          small flagged share is expected.
+        difficulty: intermediate
+      - id: dq-outliers-isolation-forest-choice
+        prompt: "Which property makes an isolation forest a reasonable first choice on a wide, large and possibly contaminated table?"
+        options:
+          - "It scales to many rows and many columns and assumes no particular distribution for the data"
+          - "It returns a calibrated probability for each row, which the other detectors in the module cannot"
+          - "It requires a clean training sample, which is what makes its scores on brand new points trustworthy"
+          - "It is exact rather than randomised, so repeated fits on one table always flag an identical row set"
+        answer: "It scales to many rows and many columns and assumes no particular distribution for the data"
+        explanation: >-
+          Random partitioning is cheap and distribution-free, which is why the comparison figure shows it holding
+          up across awkward shapes where covariance and kernel methods struggle. Its output is an anomaly score,
+          not a calibrated probability. Needing clean data describes a novelty-only estimator, which is the
+          opposite of what a contaminated table allows. And the method is explicitly randomised, so fits vary
+          unless the seed is fixed.
+        difficulty: intermediate
+
+  - topic: dq-class-imbalance
+    # Source: Google for Developers - Datasets: Class-imbalanced datasets; imbalanced-learn
+    questions:
+      - id: dq-imbalance-accuracy-meaningless
+        prompt: "One positive row in every thousand. What accuracy does a model that always answers negative reach, and what does that number tell you?"
+        options:
+          - "Around 99.9 per cent, showing accuracy is reporting the base rate rather than any ability to find positives"
+          - "Around 50 per cent, because accuracy is computed within each class and then averaged evenly across the two"
+          - "Around 0.1 per cent, because a model that never predicts the positive class scores zero on the positive rows"
+          - "It cannot be computed at all, because accuracy is undefined whenever one class falls below one per cent"
+        answer: "Around 99.9 per cent, showing accuracy is reporting the base rate rather than any ability to find positives"
+        explanation: >-
+          Accuracy counts every correct row equally, so at this ratio a constant answer is right almost always
+          while being useless. It is not class-averaged; balanced accuracy is the metric that does that. It is not
+          near zero either, because the enormous negative class dominates the count. And nothing prevents its
+          computation, which is precisely why it is dangerous to report here.
+        difficulty: beginner
+        mastery: true
+      - id: dq-imbalance-downsample-and-upweight
+        prompt: "You downsample the majority class by a factor of ten to train faster. Why attach a weight of ten to the majority rows you kept?"
+        options:
+          - "Without it the model learns the rebalanced base rate, so its predicted probabilities come out far too high"
+          - "Without it the loss divides by the wrong row count and the reported training loss is simply misscaled"
+          - "Without it the kept rows are drawn without replacement, which biases the sample towards the earliest rows"
+          - "Without it the minority class dominates the split search, and every tree grows on the positives alone"
+        answer: "Without it the model learns the rebalanced base rate, so its predicted probabilities come out far too high"
+        explanation: >-
+          Upweighting restores the original class proportions inside the loss, which keeps the output probabilities
+          calibrated against reality rather than against your sampling ratio. The issue is the prior the model
+          learns, not a display bug in the loss value. Sampling without replacement is unbiased when done at
+          random, so ordering is not the problem. And after downsampling the majority is still the larger class,
+          so it does not get overwhelmed.
+        difficulty: advanced
+        mastery: true
+      - id: dq-imbalance-smote-mechanics
+        prompt: "What does a synthetic minority oversampling step actually add to the training set?"
+        options:
+          - "New points interpolated along the line between a minority row and one of its minority neighbours"
+          - "Exact duplicates of the existing minority rows, repeated until the two class counts finally match"
+          - "Minority rows with small Gaussian noise added to the target value rather than to any of the features"
+          - "Majority rows relabelled as minority whenever they sit closest to the boundary between the classes"
+        answer: "New points interpolated along the line between a minority row and one of its minority neighbours"
+        explanation: >-
+          The method builds genuinely new feature vectors between existing minority examples, which is what
+          separates it from simple duplication and is also why it can invent points in implausible regions.
+          Duplication is random oversampling, a different and weaker technique. Perturbing the target rather
+          than the features would corrupt the labels. And relabelling majority rows would deliberately introduce
+          wrong labels.
+        difficulty: intermediate
+      - id: dq-imbalance-resample-inside-fold
+        prompt: "Why must oversampling happen inside each cross-validation fold rather than once over the whole training table?"
+        options:
+          - "Synthetic points built from validation neighbours would land in training, so the fold score comes out optimistic"
+          - "Oversampling twice would double the minority count, and the class ratio would then overshoot its intended target"
+          - "The sampler needs the fold index to seed its random generator, or else the folds come out non-reproducible"
+          - "Cross-validation shuffles the rows, and a sampler fitted earlier would have its neighbour lists invalidated"
+        answer: "Synthetic points built from validation neighbours would land in training, so the fold score comes out optimistic"
+        explanation: >-
+          Interpolation uses neighbours, so resampling before the split can manufacture training points sitting
+          between validation rows, which is leakage with extra steps. Doing it once does not double anything; the
+          count is set by the sampling ratio you request. Seeding is a reproducibility concern and unrelated to
+          validity. And shuffling does not invalidate neighbour lists, since the rows themselves are unchanged.
+        difficulty: advanced
+      - id: dq-imbalance-threshold-instead
+        prompt: "Your ranking metric is already strong but every predicted probability sits below one half. What is the cheapest correct fix?"
+        options:
+          - "Move the decision threshold to a value chosen on validation data, leaving the fitted model untouched"
+          - "Oversample the minority class and refit, because a good ranking cannot survive an imbalanced fit at all"
+          - "Rescale every predicted probability so that the largest becomes one, then keep the half threshold as it is"
+          - "Switch the loss to accuracy, which pushes the model to produce probabilities spread evenly around one half"
+        answer: "Move the decision threshold to a value chosen on validation data, leaving the fitted model untouched"
+        explanation: >-
+          A good ranking means the ordering is right and only the cut point is wrong, so tuning the threshold
+          costs one validation sweep and preserves calibration. Refitting with resampling changes the learned
+          probabilities and can make calibration worse for no gain in ranking. Rescaling to a maximum of one is
+          an arbitrary monotone stretch that destroys the probability interpretation. And accuracy is not a
+          differentiable training loss and would push towards the majority answer anyway.
+        difficulty: intermediate

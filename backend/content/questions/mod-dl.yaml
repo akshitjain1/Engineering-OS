@@ -1,0 +1,312 @@
+# Deep Learning self-check questions.
+#
+# Grounded in the CS231n notes each topic maps to, plus the Hugging Face LLM
+# course page for the transformer introduction. Questions stay inside their own
+# topic: architecture questions do not drift into optimisation, and vice versa.
+schema_version: 1
+kind: question_bank
+module: mod-dl
+topics:
+  - topic: dl-nn-basics
+    # Source: CS231n - Neural Networks Part 1: Setting up the Architecture
+    questions:
+      - id: dl-nn-no-nonlinearity
+        prompt: "You stack three fully connected layers with no activation function between them. What have you actually built?"
+        options:
+          - "One linear map, because composing linear functions collapses to a single linear function"
+          - "A model with triple the capacity, since each layer contributes its own parameters"
+          - "A network that trains but cannot backpropagate, since gradients need a nonlinearity"
+          - "A deep network with weaker gradients that still represents nonlinear boundaries"
+        answer: "One linear map, because composing linear functions collapses to a single linear function"
+        explanation: >-
+          A product of weight matrices is another matrix, so the whole stack is equivalent to one layer
+          and gains no expressive power. Extra parameters without extra expressiveness is not extra
+          capacity. Gradients flow perfectly well through linear layers, so backpropagation is not the
+          problem, and no nonlinear decision surface is representable at all.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-nn-sigmoid-saturation
+        prompt: "The notes advise against sigmoid units in hidden layers. What is the main objection they raise?"
+        options:
+          - "They saturate at both extremes, where the local gradient is near zero and learning stalls"
+          - "They are far more expensive to evaluate than the other activations used in practice"
+          - "They emit negative outputs, which the following layer cannot combine with weights"
+          - "They are not differentiable at the origin, so backpropagation has no gradient there"
+        answer: "They saturate at both extremes, where the local gradient is near zero and learning stalls"
+        explanation: >-
+          A saturated sigmoid multiplies the upstream gradient by almost nothing, which kills learning in
+          earlier layers, and its outputs are not zero-centred either. Evaluation cost is negligible, a
+          sigmoid outputs only values between zero and one, and it is smooth and differentiable
+          everywhere, unlike the rectifier at zero.
+        difficulty: intermediate
+      - id: dl-nn-dead-relu
+        prompt: "Half the rectified units in a layer output zero for every training example. What has happened to them?"
+        options:
+          - "They are dead: a large update pushed them where their input is always negative"
+          - "They have saturated at an upper bound, so their outputs are clipped to a constant"
+          - "Their weights decayed to exactly zero, which only weight decay could have produced"
+          - "Their inputs were normalised too hard, so every activation landed precisely on zero"
+        answer: "They are dead: a large update pushed them where their input is always negative"
+        explanation: >-
+          A rectifier that never receives positive input passes zero forward and zero gradient back, so it
+          can never recover, which the notes call a dead unit. Rectifiers have no upper saturation point.
+          Weight decay shrinks weights gradually rather than snapping them to zero, and normalisation
+          centres inputs instead of collapsing them all onto one value.
+        difficulty: advanced
+      - id: dl-nn-layer-counting
+        prompt: "The notes call a network with a single hidden layer a two-layer network. What does that convention count?"
+        options:
+          - "Layers that carry weights, so the input layer is not counted as a layer at all"
+          - "Every layer including the input, with the output layer left out of the total"
+          - "Only the hidden layers, so the count says nothing about the output layer at all"
+          - "The activation functions used, so a linear output layer never enters the count"
+        answer: "Layers that carry weights, so the input layer is not counted as a layer at all"
+        explanation: >-
+          The convention counts layers of learnable weights, which here means the hidden layer and the
+          output layer. The input is just the data, so including it would inflate every count by one.
+          Excluding the output layer would leave the hidden count alone, and activations are not what
+          the naming tracks.
+        difficulty: beginner
+      - id: dl-nn-capacity-vs-regularisation
+        prompt: "Your network with one hidden layer is overfitting. Which remedy do the notes prefer over shrinking that layer?"
+        options:
+          - "Keep the larger network and increase the regularisation strength that controls overfitting"
+          - "Shrink it until training accuracy stops being perfect, since capacity is the real cause"
+          - "Remove the hidden layer, because a purely linear model cannot overfit any dataset"
+          - "Add layers and leave regularisation alone, since deeper networks generalise by themselves"
+        answer: "Keep the larger network and increase the regularisation strength that controls overfitting"
+        explanation: >-
+          The notes argue that smaller networks have worse, more local-minimum-prone loss surfaces, so you
+          keep capacity and control overfitting with regularisation. Shrinking capacity throws away
+          expressiveness you may need. A linear model can certainly overfit high-dimensional data, and
+          depth without regularisation makes overfitting worse rather than automatic.
+        difficulty: advanced
+        mastery: true
+
+  - topic: dl-backprop
+    # Source: CS231n - Backpropagation, Intuitions
+    questions:
+      - id: dl-bp-local-gradient
+        prompt: "In the gate view used by these notes, what does a single gate need in order to send gradients backwards?"
+        options:
+          - "Its local gradients on its own inputs, multiplied by the gradient arriving from above"
+          - "The whole loss expression, differentiated symbolically with respect to every parameter"
+          - "The values held by every other gate, so the chain rule can be applied globally"
+          - "Only the gradient arriving from above, since a gate does not depend on its inputs"
+        answer: "Its local gradients on its own inputs, multiplied by the gradient arriving from above"
+        explanation: >-
+          The whole point of the gate picture is locality: a gate knows its own derivative and multiplies
+          it by whatever comes back from the layer above. Symbolic differentiation of the full loss is the
+          thing backpropagation avoids, no gate needs a global view, and ignoring the local gradient
+          would drop the chain rule factor entirely.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-bp-multiply-gate
+        prompt: "A multiply gate computed z from x equal to 3 and y equal to -4. Which gradients does it send back?"
+        options:
+          - "The gradient on x is -4 times the upstream value, and on y it is 3 times upstream"
+          - "The gradient on x is 3 times the upstream value, and on y it is -4 times upstream"
+          - "Both inputs receive the upstream gradient unchanged, since multiplication is symmetric"
+          - "Both inputs receive -12 times the upstream gradient, matching the forward output value"
+        answer: "The gradient on x is -4 times the upstream value, and on y it is 3 times upstream"
+        explanation: >-
+          For a product, the local derivative with respect to one input is the value of the other input, so
+          the gate swaps them. Assigning each input its own value gets the swap backwards. Passing the
+          gradient through unchanged is what an addition gate does, and scaling by the output value
+          confuses the forward result with the local derivative.
+        difficulty: advanced
+      - id: dl-bp-max-gate
+        prompt: "A max gate selected the larger of its two inputs during the forward pass. How does it distribute the upstream gradient?"
+        options:
+          - "All of it goes to whichever input was larger, and the other input receives zero"
+          - "It is split evenly between both inputs, since either one could have been the maximum"
+          - "It reaches both inputs unchanged, exactly as an addition gate treats its branches"
+          - "It is scaled by the gap between the inputs, so near-ties receive tiny gradients"
+        answer: "All of it goes to whichever input was larger, and the other input receives zero"
+        explanation: >-
+          The max gate routes: the winner has local derivative one and the loser has local derivative zero,
+          because changing the loser slightly does not change the output. Splitting or copying the gradient
+          would credit an input that had no influence, and the size of the gap does not appear in the
+          derivative at all.
+        difficulty: intermediate
+      - id: dl-bp-add-gate
+        prompt: "An addition gate takes two inputs. What does the backward pass through it do to the upstream gradient?"
+        options:
+          - "It routes the same upstream gradient to both inputs, leaving its value unchanged"
+          - "It halves the upstream gradient so that the two branches together preserve the total"
+          - "It sends the gradient only to the input with the larger forward value, as max does"
+          - "It multiplies the upstream gradient by each of the two forward input values in turn"
+        answer: "It routes the same upstream gradient to both inputs, leaving its value unchanged"
+        explanation: >-
+          Both partial derivatives of a sum are one, so addition is a gradient distributor that copies the
+          upstream value to each branch. Halving would understate each input's genuine influence,
+          routing to a single branch describes the max gate, and scaling by input values describes the
+          multiply gate.
+        difficulty: beginner
+      - id: dl-bp-reused-variable
+        prompt: "One variable feeds two separate branches of your computation graph. What must its backward pass do?"
+        options:
+          - "Add the gradients arriving from both branches instead of letting one overwrite the other"
+          - "Take the larger of the two incoming gradients, since only one path can dominate learning"
+          - "Average the two incoming gradients so the variable is not updated twice in one step"
+          - "Use the gradient from the branch nearest the loss and discard the other contribution"
+        answer: "Add the gradients arriving from both branches instead of letting one overwrite the other"
+        explanation: >-
+          The multivariate chain rule sums contributions over every path a variable influences, which is why
+          hand-written backward passes accumulate rather than assign. Taking the maximum or averaging
+          scales the true gradient wrongly, and discarding a branch loses part of the derivative, which is
+          the classic bug the notes warn about.
+        difficulty: advanced
+        mastery: true
+
+  - topic: dl-cnn
+    # Source: CS231n - Convolutional Neural Networks (architecture, layers, spatial arrangement)
+    questions:
+      - id: dl-cnn-parameter-sharing
+        prompt: "A convolutional layer reuses one filter's weights at every spatial position. What does that buy, and what does it assume?"
+        options:
+          - "Far fewer parameters, assuming a feature worth detecting is worth detecting anywhere"
+          - "Faster convergence, assuming every spatial position holds much the same pixel values"
+          - "Lower activation memory, assuming the input volume is smaller than the filter itself"
+          - "Complete invariance to position, assuming the objects in the image never move at all"
+        answer: "Far fewer parameters, assuming a feature worth detecting is worth detecting anywhere"
+        explanation: >-
+          Parameter sharing is what turns a per-position weight set into one filter, and it rests on
+          translation invariance of useful features. Positions do not hold similar pixel values, sharing
+          weights does not change activation sizes, and the layer gains equivariance rather than the total
+          invariance the last option claims.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-cnn-invalid-stride
+        prompt: "You try stride 2 with a 5x5 filter on a 32x32 input and no padding. What do the notes say about that configuration?"
+        options:
+          - "It is invalid, because the spatial size formula does not come out as a whole number"
+          - "It is valid but wasteful, since the filters overlap far more than a stride of one"
+          - "It is valid and gives a larger output, because a bigger stride covers more positions"
+          - "It is invalid because the stride must always divide the filter size exactly"
+        answer: "It is invalid, because the spatial size formula does not come out as a whole number"
+        explanation: >-
+          The output width is the input minus the filter, divided by the stride, plus one, and 27 divided by
+          2 is not an integer, so the filters do not tile the input. A larger stride reduces overlap rather
+          than increasing it, a larger stride shrinks the output, and there is no rule requiring the stride
+          to divide the filter size.
+        difficulty: advanced
+      - id: dl-cnn-pooling-properties
+        prompt: "What does a max-pooling layer contribute to a convolutional network, and what does it not have?"
+        options:
+          - "It downsamples each channel on its own and holds no learnable parameters at all"
+          - "It mixes information across channels and learns one weight per pooling window"
+          - "It merges all channels into one and learns a separate bias for each of them"
+          - "It smooths each channel with a learned kernel and keeps the spatial size intact"
+        answer: "It downsamples each channel on its own and holds no learnable parameters at all"
+        explanation: >-
+          Pooling operates independently per channel and has a fixed rule, so it introduces no parameters and
+          reduces spatial size. It never mixes channels, which is what a 1x1 convolution is for, it does not
+          collapse depth, and it has nothing learned to smooth with and does change the spatial
+          dimensions.
+        difficulty: beginner
+      - id: dl-cnn-receptive-field-stack
+        prompt: "Two 3x3 convolutional layers are stacked with stride 1. How much of the input does a unit in the second layer see?"
+        options:
+          - "A 5x5 region, since each further layer widens the view by the filter size minus one"
+          - "A 3x3 region, since the receptive field is set by the filter size of the final layer"
+          - "A 9x9 region, since the receptive fields of the two layers multiply with each other"
+          - "A 6x6 region, since the two 3x3 filters are laid side by side across the input"
+        answer: "A 5x5 region, since each further layer widens the view by the filter size minus one"
+        explanation: >-
+          Each 3x3 unit sees three positions of the layer beneath, and those overlap, so the field grows
+          additively to 5x5. Taking the last filter alone ignores the layer below it, multiplying fields
+          overstates the growth badly, and filters are applied in sequence rather than tiled next to
+          one another.
+        difficulty: advanced
+      - id: dl-cnn-why-not-dense
+        prompt: "Why do the notes reject a fully connected first layer for a 200x200x3 image?"
+        options:
+          - "A single unit would hold 120,000 weights, so the layer wastes parameters and overfits"
+          - "Fully connected layers cannot accept three-dimensional input unless it is flattened"
+          - "The layer could not learn edges, because edge detection needs a nonlinearity first"
+          - "Gradients cannot reach a fully connected layer placed at the start of a network"
+        answer: "A single unit would hold 120,000 weights, so the layer wastes parameters and overfits"
+        explanation: >-
+          The parameter count is the argument: full connectivity on raw pixels explodes in size and ignores
+          spatial structure, which is why local connectivity is used instead. Flattening is trivially
+          possible, so that is not the objection, a dense layer can represent edge filters, and gradients
+          reach the first layer regardless of its type.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: dl-transformers-intro
+    # Source: Hugging Face LLM course, chapter 1 section 4 - How do Transformers work?
+    questions:
+      - id: dl-tf-attention-relevance
+        prompt: "The course explains attention using translation. What does an attention layer let the model do while encoding one word?"
+        options:
+          - "Weight the other words of the sentence by how relevant each is to that word"
+          - "Look the word up in a fixed dictionary of translations built during training"
+          - "Process words strictly left to right, carrying one summary vector forwards"
+          - "Swap the word for its nearest neighbour in the embedding table before encoding"
+        answer: "Weight the other words of the sentence by how relevant each is to that word"
+        explanation: >-
+          Attention gives each position a weighted view of the other positions, which is how gendered or
+          ambiguous words get resolved from context. There is no translation lookup table inside the model,
+          the sequential single-state description is a recurrent network, and no substitution of nearby
+          embeddings takes place.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-tf-architecture-vs-checkpoint
+        prompt: "The course separates an architecture from a checkpoint. Which pairing matches that distinction?"
+        options:
+          - "BERT names the architecture, and bert-base-cased is one set of weights trained for it"
+          - "BERT names the checkpoint, and bert-base-cased is the architecture behind those weights"
+          - "Both name the same thing, since every architecture ships with exactly one weight set"
+          - "BERT names the tokeniser, and bert-base-cased names the architecture with its weights"
+        answer: "BERT names the architecture, and bert-base-cased is one set of weights trained for it"
+        explanation: >-
+          An architecture is the skeleton of layers, while a checkpoint is a particular trained set of
+          weights for that skeleton, and one architecture has many checkpoints. Reversing the terms
+          inverts the relationship, treating them as identical erases the many-checkpoint fact, and the
+          tokeniser is a third, separate artefact.
+        difficulty: beginner
+      - id: dl-tf-family-for-masked-fill
+        prompt: "Your task is filling in a masked word using the words both before and after it. Which family does the course point to?"
+        options:
+          - "An encoder-only model, whose attention can read the whole sentence in both directions"
+          - "A decoder-only model, whose attention reaches only the words before each position"
+          - "An encoder-decoder model, since two stacks are needed when context runs both ways"
+          - "Any of the three, because the course treats masked filling as architecture-neutral"
+        answer: "An encoder-only model, whose attention can read the whole sentence in both directions"
+        explanation: >-
+          Bidirectional context is exactly what the encoder stack provides, which is why the course groups
+          masked-language tasks there. A decoder is masked to the past, so it cannot use the following
+          words. Encoder-decoder models are aimed at sequence-to-sequence generation, and the choice of
+          family is not neutral for this task.
+        difficulty: intermediate
+      - id: dl-tf-transfer-learning-cost
+        prompt: "Why does the course argue for fine-tuning a pretrained model instead of training your own from scratch?"
+        options:
+          - "Pretraining consumes enormous data, compute and energy that need not be spent again"
+          - "Training from scratch is impossible without first obtaining a pretrained tokeniser"
+          - "A fine-tuned model always beats a from-scratch model even with unlimited data"
+          - "From-scratch training cannot use attention layers, which appear only after pretraining"
+        answer: "Pretraining consumes enormous data, compute and energy that need not be spent again"
+        explanation: >-
+          The course makes the resource argument explicitly, including the environmental cost of repeated
+          pretraining. A tokeniser can be trained from scratch alongside a model, unlimited data would
+          eventually favour from-scratch training, and attention layers are part of the architecture rather
+          than something pretraining installs.
+        difficulty: beginner
+      - id: dl-tf-self-supervised-but-unusable
+        prompt: "Pretraining is described as self-supervised, yet the resulting model is still said to be unusable for your task. How can both hold?"
+        options:
+          - "Labels come from the text itself, but what is learned is language statistics, not your task"
+          - "Labels come from human annotators, so the model learned tasks other than the one you need"
+          - "Labels are absent entirely, so nothing at all is learned that could transfer to a task"
+          - "Labels come from the text itself, which forces any fine-tune to start from random weights"
+        answer: "Labels come from the text itself, but what is learned is language statistics, not your task"
+        explanation: >-
+          Self-supervised means the objective is derived automatically from the input, so no annotation is
+          needed, and what results is a general statistical grasp of language that transfer learning then
+          specialises. Human annotation is what self-supervision avoids, something clearly is learned, and
+          a fine-tune starts from the pretrained weights by definition.
+        difficulty: advanced
+        mastery: true

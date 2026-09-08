@@ -1,0 +1,435 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ai-systems
+    name: AI Systems & Design
+    description: AI Systems & Design
+    order: 12
+    subjects:
+    - slug: ai-systems-design
+      name: Deep Learning, GenAI, MLOps, System Design
+      order: 0
+      modules:
+      - slug: mod-ai-security
+        name: AI/ML Security
+        description: OWASP LLM risks, prompt injection, tool-mediated exfiltration, output handling, model
+          supply chain and PII disclosure.
+        order: 106
+        topics:
+        - slug: aisec-owasp-llm-top-10
+          name: OWASP Top 10 for LLM applications
+          description: The industry's shared vocabulary for LLM risk, read once as a map before going
+            deep on the individual risks.
+          order: 0
+          prerequisites: []
+          learning_objective: Recognise and name the ten OWASP LLM risks in a design review.
+          mastery_criteria:
+          - Name the risk behind LLM01, LLM02, LLM05 and LLM06 without looking them up.
+          - Given a described feature, point at the one or two OWASP risk IDs it most exposes.
+          - Explain why excessive agency is a risk about permissions rather than about the model.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: AWARENESS
+          parallel_eligible: false
+          estimated_minutes: 15
+          domain_key: genai
+          lessons:
+          - slug: aisec-owasp-llm-top-10-core
+            title: OWASP Top 10 for LLM applications
+            description: 'WHY NOW: Recognise and name the ten OWASP LLM risks in a design review.
+
+
+              LEARN: OWASP Gen AI Security Project — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+
+              TIME: ~15 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: map one LLM feature you have built or used against the ten risks, marking
+              each as applies or does not apply with one line of reasoning. HOW MANY: 1 feature. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a ten-row risk checklist for that feature with a verdict and a reason
+              per row.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.25
+            resources:
+            - slug: aisec-owasp-llm-top-10-primary
+              title: OWASP Top 10 for LLM Applications 2025
+              type: documentation
+              url: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+              provider: OWASP Gen AI Security Project
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE (the ten risk summaries; the linked PDF is optional)
+              description: The industry's shared vocabulary for LLM risk. Read it once as a map so "LLM01"
+                and "excessive agency" are terms you recognise in a design review, then go deep on the
+                individual risks.
+        - slug: aisec-prompt-injection
+          name: Prompt injection
+          description: Direct and indirect prompt injection, the mitigations that only partly work, and
+            the published attacks against real LLM-integrated applications.
+          order: 1
+          prerequisites:
+          - aisec-owasp-llm-top-10
+          learning_objective: Explain indirect prompt injection and state honestly what the available
+            mitigations do and do not achieve.
+          mastery_criteria:
+          - Distinguish direct from indirect injection with one concrete example of each.
+          - Explain why input filtering and instruction hierarchy reduce but do not eliminate the risk,
+            and cite the source that admits it.
+          - Name one place in a system you have seen where untrusted text reaches the model without being
+            labelled as untrusted.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 55
+          domain_key: genai
+          lessons:
+          - slug: aisec-prompt-injection-core
+            title: Prompt injection
+            description: 'WHY NOW: Explain indirect prompt injection and state honestly what the available
+              mitigations do and do not achieve.
+
+
+              LEARN: OWASP Gen AI Security Project — https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+
+              TIME: ~55 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write an indirect-injection scenario against a retrieval-augmented app you
+              know - where the payload lives, who fetches it, and what it makes the model do. HOW MANY:
+              1 scenario. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a one-page threat sketch of that scenario with the trust boundary drawn
+              on it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.92
+            resources:
+            - slug: aisec-prompt-injection-primary
+              title: LLM01:2025 Prompt Injection
+              type: documentation
+              url: https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+              provider: OWASP Gen AI Security Project
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Defines direct vs indirect injection and lists mitigations honestly, including
+                the crucial admission that no mitigation is complete. This is the one attack an AI engineer
+                is personally responsible for.
+            - slug: aisec-prompt-injection-reference
+              title: 'Not what you''ve signed up for: Compromising Real-World LLM-Integrated Applications
+                with Indirect Prompt Injection'
+              type: article
+              url: https://arxiv.org/abs/2302.12173
+              provider: arXiv
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Abstract, §1 Introduction, then the threat model and attack sections
+              description: The paper that named indirect prompt injection, with working attacks against
+                real integrated apps - read it so the risk stops feeling theoretical.
+        - slug: aisec-data-exfiltration-tools
+          name: Data exfiltration through tools
+          description: The lethal trifecta - private data, untrusted content and external communication
+            - and the permission-minimisation controls that break it.
+          order: 2
+          prerequisites:
+          - aisec-prompt-injection
+          learning_objective: Audit a tool-using agent for the three legs of the exfiltration trifecta
+            and remove one of them.
+          mastery_criteria:
+          - State the three legs and explain why removing any one of them makes exfiltration impossible
+            rather than merely harder.
+          - Given an agent's tool list, identify which tool supplies each leg.
+          - Name two excessive-agency controls you would apply to a tool that can send email or make outbound
+            HTTP requests.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: genai
+          lessons:
+          - slug: aisec-data-exfiltration-tools-core
+            title: Data exfiltration through tools
+            description: 'WHY NOW: Audit a tool-using agent for the three legs of the exfiltration trifecta
+              and remove one of them.
+
+
+              LEARN: simonwillison.net — https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: list one agent''s tools and mark each with which of the three legs it provides,
+              then name the leg you would remove and what capability that costs the user. HOW MANY: 1
+              agent audit. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a tool-permission table with the removed leg and its user-visible cost
+              stated.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: aisec-data-exfiltration-tools-primary
+              title: 'The lethal trifecta for AI agents: private data, untrusted content, and external
+                communication'
+              type: article
+              url: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+              provider: simonwillison.net
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'The most useful design rule in LLM security: an agent is exfiltration-safe
+                only if it lacks one of the three legs. Twelve minutes that will change how you wire every
+                tool-using agent - no official doc states it this clearly.'
+            - slug: aisec-data-exfiltration-tools-reference
+              title: LLM06:2025 Excessive Agency
+              type: documentation
+              url: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+              provider: OWASP Gen AI Security Project
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: 'The standards-body version: minimise tool permissions, require human approval
+                for consequential actions, scope credentials per tool.'
+        - slug: aisec-improper-output-handling
+          name: Improper output handling
+          description: Model output as untrusted input to whatever consumes it - the path from "the LLM
+            wrote some SQL" to XSS, SSRF and remote code execution.
+          order: 3
+          prerequisites:
+          - aisec-owasp-llm-top-10
+          - be-rest
+          learning_objective: Treat model output as untrusted and place the right validation at each downstream
+            consumer.
+          mastery_criteria:
+          - Name three downstream consumers of model output and the injection class each one is vulnerable
+            to.
+          - Explain why validating output against a JSON schema is not the same as making it safe to execute
+            or render.
+          - State where the escaping or parameterisation belongs for model-generated SQL, and why it is
+            not in the prompt.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 15
+          domain_key: genai
+          lessons:
+          - slug: aisec-improper-output-handling-core
+            title: Improper output handling
+            description: 'WHY NOW: Treat model output as untrusted and place the right validation at each
+              downstream consumer.
+
+
+              LEARN: OWASP Gen AI Security Project — https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
+
+              TIME: ~15 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: trace one model output in a system you know from generation to its final
+              consumer and name the missing validation step. HOW MANY: 1 trace. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a data-flow line from model to consumer with the validation step inserted
+              at the right hop.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.25
+            resources:
+            - slug: aisec-improper-output-handling-primary
+              title: LLM05:2025 Improper Output Handling
+              type: documentation
+              url: https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
+              provider: OWASP Gen AI Security Project
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Model output is untrusted user input to whatever consumes it - the path from
+                "the LLM wrote some SQL" to XSS, SSRF and RCE. The failure mode that turns a prompt-injection
+                nuisance into a breach.
+        - slug: aisec-model-supply-chain
+          name: Model supply chain
+          description: Why loading an untrusted pickle checkpoint is arbitrary code execution, how the
+            Hub scans for it, and the format that is safe by construction.
+          order: 4
+          prerequisites:
+          - aisec-owasp-llm-top-10
+          - cf-dependency-management
+          learning_objective: Load third-party model weights safely and explain the risk you are avoiding.
+          mastery_criteria:
+          - Explain in one sentence why torch.load on an untrusted file can execute arbitrary code.
+          - Say what safetensors removes from the format that makes the attack impossible, rather than
+            merely detectable.
+          - Check a Hub repo's pickle-scan result and state what a clean scan does and does not prove.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: genai
+          lessons:
+          - slug: aisec-model-supply-chain-core
+            title: Model supply chain
+            description: 'WHY NOW: Load third-party model weights safely and explain the risk you are
+              avoiding.
+
+
+              LEARN: Hugging Face — https://huggingface.co/docs/hub/security-pickle
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: pick one Hub model, check whether it ships safetensors and what its pickle
+              scan reports, then load it via the safe path. HOW MANY: 1 model. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a load call that prefers safetensors, with a comment stating what you
+              would do if only a pickle were available.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: aisec-model-supply-chain-primary
+              title: Pickle Scanning
+              type: documentation
+              url: https://huggingface.co/docs/hub/security-pickle
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Explains concretely why torch.load on an untrusted .bin is arbitrary code execution,
+                and how the Hub scans for it. You already have dl-pytorch-save-load; this is the security
+                half of that skill. OWASP LLM03:2025 Supply Chain (https://genai.owasp.org/llmrisk/llm032025-supply-chain/)
+                is a verified optional third slot.
+            - slug: aisec-model-supply-chain-reference
+              title: Safetensors
+              type: documentation
+              url: https://huggingface.co/docs/safetensors/index
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The fix, and why the format is safe by construction (no executable payload,
+                plus zero-copy loading as a bonus).
+        - slug: aisec-pii-and-disclosure
+          name: PII and sensitive information disclosure
+          description: 'How PII leaves an LLM system - through prompts, logs, embeddings, fine-tuning
+            data and RAG corpora - and the de-identification techniques for each. Honest gap from the
+            research: the obvious tool anchor (Microsoft Presidio) is orphaned and is deliberately not
+            linked, so the reference is a vendor-hosted technique taxonomy; read it for the taxonomy,
+            not the API. This is the weakest resource pairing in an otherwise strong module.'
+          order: 5
+          prerequisites:
+          - aisec-owasp-llm-top-10
+          - db-schema-design
+          - ops-observability
+          learning_objective: Find the paths PII takes out of an LLM system and choose a de-identification
+            technique per path.
+          mastery_criteria:
+          - Name five places PII can persist in an LLM system, including at least one that is not the
+            prompt.
+          - Distinguish reversible from irreversible de-identification and give one technique of each.
+          - Explain why redacting the prompt does not protect the embedding index or the request logs.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: genai
+          lessons:
+          - slug: aisec-pii-and-disclosure-core
+            title: PII and sensitive information disclosure
+            description: 'WHY NOW: Find the paths PII takes out of an LLM system and choose a de-identification
+              technique per path.
+
+
+              LEARN: OWASP Gen AI Security Project — https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: inventory every store in one LLM system that could hold user text, marking
+              each with its retention period and its de-identification technique. HOW MANY: 1 system inventory.
+              WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a PII path inventory with the technique and its reversibility recorded
+              per row.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: aisec-pii-and-disclosure-primary
+              title: LLM02:2025 Sensitive Information Disclosure
+              type: documentation
+              url: https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/
+              provider: OWASP Gen AI Security Project
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: How PII leaves an LLM system - through prompts, logs, embeddings, fine-tuning
+                data and RAG corpora - and the sanitisation and access-control controls for each. LLM-specific
+                and current, which is why it beats a generic privacy page.
+            - slug: aisec-pii-and-disclosure-reference
+              title: De-identification | Sensitive Data Protection
+              type: documentation
+              url: https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-de-identification
+              provider: Google Cloud
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The clearest verified taxonomy of techniques - redaction, masking, tokenisation,
+                format-preserving encryption, date shifting - and their reversibility trade-offs. Vendor-hosted;
+                read it for the taxonomy, not the API. Note cloud.google.com 301s to docs.cloud.google.com,
+                so the docs. form is stored here.

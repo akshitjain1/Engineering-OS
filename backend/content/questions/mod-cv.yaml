@@ -1,0 +1,1844 @@
+# Computer Vision self-check questions.
+#
+# Every question here is answerable from the resource its topic maps to, and is
+# about that topic only. Gates in app/content/question_bank.py enforce both: a
+# prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-cv
+topics:
+  - topic: cv-what-is-an-image
+    # Source: scikit-image - Image data representation with NumPy arrays
+    questions:
+      - id: cv-image-array-shape
+        prompt: A colour photograph is loaded with scikit-image. What does the shape of the resulting array tell you?
+        options:
+          - "(rows, columns, channels) - height first, then width, then colour"
+          - "(width, height, channels) - width first, matching screen coordinates"
+          - "(channels, rows, columns) - colour first, as PyTorch stores tensors"
+          - "(pixels, channels) - a flat list of pixels with their colours"
+        answer: "(rows, columns, channels) - height first, then width, then colour"
+        explanation: >-
+          scikit-image follows NumPy convention, so the first axis is rows (height).
+          Width-first is the screen-coordinate habit that produces transposed images.
+          Channels-first is the PyTorch tensor layout you convert to later, not the layout
+          on load. A flat pixel list would discard the spatial grid every convolution needs.
+        difficulty: beginner
+        mastery: true
+      - id: cv-image-dtype-range
+        prompt: An image loads as dtype uint8. What range do its pixel values occupy, and why does that matter before training?
+        options:
+          - "0 to 255; networks expect small floats, so you must scale before training"
+          - "0.0 to 1.0; the values are already normalised and need no scaling at all"
+          - "-128 to 127; the sign carries brightness relative to mid-grey in this type"
+          - "0 to 65535; uint8 is a 16-bit type with headroom for very bright pixels"
+        answer: "0 to 255; networks expect small floats, so you must scale before training"
+        explanation: >-
+          uint8 is an unsigned 8-bit integer, so 0 to 255. Feeding those in raw gives
+          activations two orders of magnitude too large. The 0.0 to 1.0 range describes float
+          images after conversion. -128 to 127 is int8, a signed type, and 0 to 65535 is uint16.
+        difficulty: beginner
+        mastery: true
+      - id: cv-grayscale-axes
+        prompt: You expect a grayscale image but indexing img[row, col, 2] raises an IndexError. What is the most likely cause?
+        options:
+          - "A grayscale image is 2-D, so there is no third channel axis to index at all"
+          - "Grayscale images store their single channel at index 0, so only 0 is valid"
+          - "The image failed to load, so the array is empty and every index will fail"
+          - "Grayscale uses a 4-D array here, so index 2 refers to the wrong position"
+        answer: "A grayscale image is 2-D, so there is no third channel axis to index at all"
+        explanation: >-
+          Grayscale drops the channel axis entirely, giving shape (rows, columns), so axis 2
+          does not exist. Index 0 on a missing axis fails for the same reason, so that is not
+          the distinction. An empty array fails on any index rather than specifically index 2,
+          and grayscale image data is never 4-D.
+        difficulty: intermediate
+      - id: cv-resolution-tradeoff
+        prompt: Halving both the height and the width of your training images has what effect on compute and information?
+        options:
+          - "Roughly a quarter of the pixels, so far less compute but fine detail is lost"
+          - "Roughly half the pixels, so half the compute with no loss of detail at all"
+          - "The same pixel count, since resizing only changes the size it displays at"
+          - "Four times the pixels, because both dimensions are scaled independently"
+        answer: "Roughly a quarter of the pixels, so far less compute but fine detail is lost"
+        explanation: >-
+          Pixel count scales with the product of the dimensions, so halving both leaves one
+          quarter. Half would assume the dimensions add rather than multiply. Resizing genuinely
+          resamples the array rather than changing display size, and scaling down cannot
+          possibly increase the pixel count.
+        difficulty: intermediate
+
+  - topic: cv-pixels-channels
+    # Source: scikit-image - Image data: NumPy arrays
+    questions:
+      - id: cv-channel-slice
+        prompt: Given an RGB array named img, which expression extracts the green channel as a 2-D array?
+        options:
+          - "img[:, :, 1]"
+          - "img[:, :, 2]"
+          - "img[1, :, :]"
+          - "img[:, 1, :]"
+        answer: "img[:, :, 1]"
+        explanation: >-
+          Channels are the last axis in RGB order, so green is index 1 on axis 2. Index 2 on
+          that axis returns blue instead. Indexing axis 0 selects a single row of the image and
+          axis 1 selects a single column, so both return a slice of the wrong orientation.
+        difficulty: beginner
+        mastery: true
+      - id: cv-bgr-vs-rgb
+        prompt: An image read with OpenCV looks right in an OpenCV window but its colours are wrong under Matplotlib. Why?
+        options:
+          - "OpenCV loads channels as BGR while Matplotlib expects RGB, so red and blue swap"
+          - "OpenCV loads images as float values while Matplotlib expects integer pixels"
+          - "OpenCV stores channels first, so Matplotlib ends up reading it transposed"
+          - "OpenCV applies a gamma correction on load that Matplotlib then undoes again"
+        answer: "OpenCV loads channels as BGR while Matplotlib expects RGB, so red and blue swap"
+        explanation: >-
+          This is the classic OpenCV trap: imread returns BGR order for historical reasons.
+          The dtype is uint8 in both libraries, so it is not a float problem. OpenCV is
+          channels-last like NumPy rather than channels-first, and neither library silently
+          applies gamma correction on load.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-alpha-channel
+        prompt: A PNG loads with shape (480, 640, 4) rather than (480, 640, 3). What is that fourth channel?
+        options:
+          - "Alpha, an opacity channel that most model inputs need to have dropped"
+          - "Depth, giving each pixel's measured distance from the camera that took it"
+          - "A duplicate of the green channel, kept to help the compression stage"
+          - "Infrared, captured alongside visible light by the same image sensor"
+        answer: "Alpha, an opacity channel that most model inputs need to have dropped"
+        explanation: >-
+          PNG supports transparency, so RGBA gives four channels. Handing four channels to a
+          model expecting three raises a shape error, which is why you convert to RGB first.
+          Depth and infrared both need special sensors and are absent from an ordinary PNG,
+          and no format duplicates a channel to aid compression.
+        difficulty: intermediate
+      - id: cv-pixel-write
+        prompt: On a colour image, what does the assignment img[100:200, 50:150] = 0 actually do?
+        options:
+          - "Blacks out a 100x100 rectangular region across every colour channel"
+          - "Blacks out a single pixel, the one at row 100 and column 50 exactly"
+          - "Sets only the red channel of that rectangular region to zero, not all"
+          - "Raises an error, because the assignment leaves out the channel axis"
+        answer: "Blacks out a 100x100 rectangular region across every colour channel"
+        explanation: >-
+          NumPy broadcasts the scalar across the unspecified trailing axis, so all channels in
+          that row and column range go to zero, which reads as black. It covers a region rather
+          than one pixel, and because the channel axis is broadcast rather than selected it
+          affects every channel instead of erroring.
+        difficulty: intermediate
+
+  - topic: cv-color-spaces
+    # Source: OpenCV - Changing Colorspaces
+    questions:
+      - id: cv-hsv-why
+        prompt: Why is HSV usually a better colour space than RGB for thresholding an object by its colour?
+        options:
+          - "Hue separates colour from brightness, so a threshold survives lighting change"
+          - "HSV uses fewer bits per pixel, which makes the threshold faster to compute"
+          - "HSV stores its colours as integers, whereas RGB stores them all as floats"
+          - "HSV is linear in perceived brightness, so equal steps look equally bright"
+        answer: "Hue separates colour from brightness, so a threshold survives lighting change"
+        explanation: >-
+          In RGB, shading a red object changes all three components together, so a fixed range
+          fails. HSV isolates the colour into hue and pushes illumination into value. HSV is the
+          same bit depth as RGB and both are commonly uint8, and neither space is perceptually
+          uniform in brightness.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-hue-range-opencv
+        prompt: In OpenCV's 8-bit HSV representation, what range of values does the hue channel use?
+        options:
+          - "0 to 179, because the 360 degree wheel is halved to fit inside a byte"
+          - "0 to 255, which is simply the full range available to an unsigned byte"
+          - "0 to 359, matching the degrees of the colour wheel exactly as drawn"
+          - "0 to 100, expressing the hue as a percentage of the way round it"
+        answer: "0 to 179, because the 360 degree wheel is halved to fit inside a byte"
+        explanation: >-
+          OpenCV halves the 360 degree wheel so hue fits in uint8 alongside saturation and
+          value. This is what breaks thresholds copied from tools that use 0 to 359. Saturation
+          and value do use the full 0 to 255, and no common tool expresses hue as a percentage.
+        difficulty: advanced
+        mastery: true
+      - id: cv-grayscale-weights
+        prompt: Standard RGB to grayscale conversion weights green far more heavily than blue. Why is that?
+        options:
+          - "Human vision peaks near green, so it carries most of perceived luminance"
+          - "Green is stored at higher precision than the others in most file formats"
+          - "Green sits between red and blue in wavelength, so it averages the other two"
+          - "Camera sensors record almost no usable signal at all in the blue channel"
+        answer: "Human vision peaks near green, so it carries most of perceived luminance"
+        explanation: >-
+          The luminance weights come from human photopic sensitivity, which peaks in the green
+          part of the spectrum. All three channels share the same precision, averaging by
+          wavelength position is not how luminance is defined, and blue carries real signal,
+          just less perceived brightness.
+        difficulty: intermediate
+      - id: cv-colorspace-conversion-call
+        prompt: Which conversion do you apply before handing an OpenCV-loaded image to a Matplotlib plot?
+        options:
+          - "cv2.cvtColor(img, cv2.COLOR_BGR2RGB)"
+          - "cv2.cvtColor(img, cv2.COLOR_RGB2BGR)"
+          - "cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)"
+          - "cv2.cvtColor(img, cv2.COLOR_BGR2HSV)"
+        answer: "cv2.cvtColor(img, cv2.COLOR_BGR2RGB)"
+        explanation: >-
+          OpenCV hands you BGR and Matplotlib expects RGB, so you convert in that direction.
+          RGB2BGR is the reverse and leaves the colours still swapped. BGR2GRAY discards colour
+          altogether, and BGR2HSV produces a space that Matplotlib would misread as RGB.
+        difficulty: beginner
+
+  - topic: cv-image-tensors
+    # Source: Vizuara - Introduction to Computer Vision, Lecture 1; CS231n input volumes
+    questions:
+      - id: cv-batch-tensor-shape
+        prompt: You stack 32 RGB images of 224x224 into one tensor for a PyTorch CNN. What shape does that tensor have?
+        options:
+          - "(32, 3, 224, 224) - batch, channels, height, width"
+          - "(32, 224, 224, 3) - batch, height, width, channels"
+          - "(3, 32, 224, 224) - channels, batch, height, width"
+          - "(224, 224, 3, 32) - height, width, channels, batch"
+        answer: "(32, 3, 224, 224) - batch, channels, height, width"
+        explanation: >-
+          PyTorch convolutions expect NCHW, so batch comes first and channels second. NHWC is
+          the TensorFlow and NumPy loading layout, which is why a permute is needed after
+          reading files. Putting channels before batch, or batch last, leaves the batch axis
+          somewhere the layer will treat as spatial or as feature depth.
+        difficulty: beginner
+        mastery: true
+      - id: cv-totensor-two-jobs
+        prompt: Beyond producing a tensor object, what two changes does torchvision ToTensor make to a loaded PIL image?
+        options:
+          - "Moves channels to the front and rescales integer 0-255 into float 0.0-1.0"
+          - "Moves channels to the back and rescales float 0.0-1.0 into integer 0-255"
+          - "Keeps the pixel layout and range, only changing the container type to a tensor"
+          - "Moves channels to the front and subtracts the ImageNet per-channel mean values"
+        answer: "Moves channels to the front and rescales integer 0-255 into float 0.0-1.0"
+        explanation: >-
+          ToTensor does HWC to CHW and divides by 255, which is why Normalize afterwards is
+          written in 0-1 units. It does not reverse either step, it does more than rewrap the
+          data, and mean subtraction is a separate Normalize stage you have to add yourself.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-dtype-byte-error
+        prompt: Your first conv layer raises an error saying it expected scalar type Float but found Byte. What is wrong with the input?
+        options:
+          - "The tensor is still uint8, so it must be cast to float and scaled first"
+          - "The tensor is float64, so it must be downcast to float32 before the layer"
+          - "The tensor has the wrong channel count, which surfaces as a dtype error"
+          - "The tensor is on the CPU while the layer weights already live on the GPU"
+        answer: "The tensor is still uint8, so it must be cast to float and scaled first"
+        explanation: >-
+          Byte is uint8, and convolution weights are float32, so the multiply refuses to run.
+          A float64 input reports Double rather than Byte, a channel mismatch raises a shape
+          error naming the channel counts, and a device mismatch complains about cpu and cuda
+          rather than about scalar types.
+        difficulty: intermediate
+      - id: cv-input-volume-depth
+        prompt: In the CS231n description of an input volume, what is the depth of the volume entering the very first conv layer of a colour image network?
+        options:
+          - "3, one slice per colour channel of the incoming image"
+          - "1, because the volume is flattened before the first layer"
+          - "224, matching the spatial side length of the input image"
+          - "64, the number of filters that this first layer will learn"
+        answer: "3, one slice per colour channel of the incoming image"
+        explanation: >-
+          Depth at the input is channel count, so a colour image gives 3. Flattening to 1 would
+          discard the spatial grid that convolution needs. The side length describes width and
+          height rather than depth, and the filter count sets the depth of the output volume
+          instead of the input.
+        difficulty: beginner
+      - id: cv-missing-batch-dim
+        prompt: A single preprocessed image of shape (3, 224, 224) is passed to a trained model and the forward pass fails on dimensions. What is the fix?
+        options:
+          - "Add a leading batch axis with unsqueeze(0) to make it (1, 3, 224, 224)"
+          - "Flatten the tensor to a single vector so the model reads it as one sample"
+          - "Repeat the image 32 times because models only accept full-size batches"
+          - "Transpose the tensor to (224, 224, 3) which is the layout models expect"
+        answer: "Add a leading batch axis with unsqueeze(0) to make it (1, 3, 224, 224)"
+        explanation: >-
+          Conv layers always want four dimensions, and a batch of one is perfectly valid.
+          Flattening destroys the spatial structure the convolutions operate on. Batch size is
+          not fixed by the architecture, so padding to 32 is unnecessary, and HWC is the
+          loading layout rather than the model layout.
+        difficulty: intermediate
+
+  - topic: cv-transformations
+    # Source: PyTorch - torchvision.transforms, geometric and colour transforms
+    questions:
+      - id: cv-interpolation-choice
+        prompt: Downscaling 512x512 photographs to 64x64 with nearest-neighbour interpolation leaves jagged, speckled edges. What change removes them?
+        options:
+          - "Use bilinear resizing with antialiasing so shrinking averages neighbouring pixels"
+          - "Use nearest-neighbour but resize in two steps, which cancels the aliasing out"
+          - "Increase the output size to 128x128, since aliasing only affects small outputs"
+          - "Convert to grayscale first, because aliasing is caused by the colour channels"
+        answer: "Use bilinear resizing with antialiasing so shrinking averages neighbouring pixels"
+        explanation: >-
+          Nearest-neighbour samples one source pixel and throws the rest away, so fine detail
+          aliases into speckle. Averaging filters it out first. Repeating a bad sampler does not
+          undo aliasing, a larger output only makes it less visible, and colour has nothing to
+          do with the sampling geometry.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-compose-order
+        prompt: Which ordering inside transforms.Compose actually runs without error for a pretrained classifier?
+        options:
+          - "Resize, then CenterCrop, then ToTensor, then Normalize"
+          - "Normalize, then Resize, then CenterCrop, then ToTensor"
+          - "ToTensor, then Normalize, then Resize, then CenterCrop"
+          - "CenterCrop, then Normalize, then ToTensor, then Resize"
+        answer: "Resize, then CenterCrop, then ToTensor, then Normalize"
+        explanation: >-
+          Geometric work happens on the image, ToTensor then converts it, and Normalize needs a
+          float tensor so it must come last. Any ordering that normalises before ToTensor hands
+          tensor arithmetic a PIL image, and resizing after normalising also interpolates
+          between already-shifted values.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-random-flip-probability
+        prompt: What exactly does RandomHorizontalFlip with p equal to 0.5 do to the images your training loop sees?
+        options:
+          - "Each image is flipped or not by an independent coin toss every time it is drawn"
+          - "Exactly half the dataset is flipped once, and that choice is then fixed forever"
+          - "Every image is flipped, and p only sets how strong the mirroring effect looks"
+          - "The first half of each batch is flipped and the second half is left untouched"
+        answer: "Each image is flipped or not by an independent coin toss every time it is drawn"
+        explanation: >-
+          The transform samples fresh randomness per call, so the same image differs between
+          epochs, which is the point. A fixed half-and-half split would give the model one
+          static extra view. Flipping is binary rather than a strength dial, and the decision is
+          per sample, not per position in the batch.
+        difficulty: beginner
+      - id: cv-train-vs-eval-crop
+        prompt: Why do vision pipelines use RandomResizedCrop while training but Resize plus CenterCrop at evaluation time?
+        options:
+          - "Training wants varied views, while evaluation must be deterministic and repeatable"
+          - "Evaluation wants varied views, while training must stay deterministic to converge"
+          - "CenterCrop is faster, so it is used wherever throughput matters more than accuracy"
+          - "RandomResizedCrop cannot run without gradients, so it is unavailable at eval time"
+        answer: "Training wants varied views, while evaluation must be deterministic and repeatable"
+        explanation: >-
+          Random crops act as augmentation during training, but a metric that changes run to run
+          is useless, so evaluation fixes the view. Training does not require determinism, speed
+          is not the deciding factor here, and transforms are plain array operations that never
+          depend on autograd.
+        difficulty: intermediate
+      - id: cv-crop-label-shift
+        prompt: You apply a random crop to detection images but leave the bounding-box coordinates untouched. What goes wrong?
+        options:
+          - "Boxes now point at the wrong pixels, so the model learns badly placed targets"
+          - "Nothing breaks, because box coordinates are stored relative to the crop region"
+          - "The loss becomes undefined immediately, so training stops with a runtime error"
+          - "Only the class labels are corrupted, while the box positions stay perfectly valid"
+        answer: "Boxes now point at the wrong pixels, so the model learns badly placed targets"
+        explanation: >-
+          Cropping moves the coordinate origin and changes the visible extent, so geometric
+          transforms must be applied to targets as well as pixels. Coordinates are absolute
+          unless you convert them, the loss stays finite and merely wrong, and it is the
+          geometry rather than the class that the crop invalidates.
+        difficulty: advanced
+
+  - topic: cv-normalization-cv
+    # Source: Stanford CS231n - preprocessing and normalization
+    questions:
+      - id: cv-pretrained-stats-match
+        prompt: Fine-tuning a torchvision ResNet, why normalise with the published ImageNet mean and standard deviation instead of statistics from your own images?
+        options:
+          - "The pretrained features were learned on inputs shaped by those exact statistics"
+          - "Published statistics are more accurate than any you could compute yourself"
+          - "Your own dataset is too small for its statistics to be computable at all"
+          - "ImageNet statistics map the input range onto exactly zero to one, which layers need"
+        answer: "The pretrained features were learned on inputs shaped by those exact statistics"
+        explanation: >-
+          Pretrained filters expect the input distribution they were trained on, so changing it
+          silently shifts every activation downstream. Accuracy of the numbers is not the issue,
+          dataset statistics are trivially computable at any size, and dividing by a standard
+          deviation gives roughly zero-centred values, not a zero-to-one range.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-stats-from-train-only
+        prompt: You compute per-channel mean and standard deviation across your training, validation and test images pooled together. What is the problem?
+        options:
+          - "Test statistics leak into preprocessing, so the accuracy you report is optimistic"
+          - "The pooled numbers are less stable, so training simply takes longer to converge"
+          - "Nothing is wrong here, since normalisation constants carry no label information"
+          - "The channels end up scaled differently from each other, which breaks convolution"
+        answer: "Test statistics leak into preprocessing, so the accuracy you report is optimistic"
+        explanation: >-
+          Any quantity fitted on held-out data leaks it, even one as small as a mean, and your
+          estimate of generalisation is then biased. Stability is not a concern across millions
+          of pixels, leakage does not require labels to matter, and per-channel scaling is
+          exactly what normalisation is meant to do.
+        difficulty: advanced
+        mastery: true
+      - id: cv-why-zero-center
+        prompt: What does subtracting the mean and dividing by the standard deviation do for the optimisation itself?
+        options:
+          - "It centres and rescales inputs so gradient descent meets a better conditioned surface"
+          - "It removes outlier pixels from the data so that the loss cannot be dominated by them"
+          - "It guarantees the network output becomes a valid probability distribution over classes"
+          - "It removes the need for any learning rate schedule because gradients then stay constant"
+        answer: "It centres and rescales inputs so gradient descent meets a better conditioned surface"
+        explanation: >-
+          Uncentred or unequally scaled features stretch the loss surface, forcing tiny steps in
+          some directions. Normalisation discards no pixel, output probabilities come from the
+          softmax rather than from input scaling, and gradients still change during training so
+          schedules remain useful.
+        difficulty: intermediate
+      - id: cv-normalize-missing-at-inference
+        prompt: A model scores 94% in validation but near chance in serving code that resizes and tensorises yet never normalises. Why does nothing raise an error?
+        options:
+          - "Unnormalised inputs are still valid float tensors, so only the accuracy collapses"
+          - "The framework silently reapplies training normalisation, so the gap must be elsewhere"
+          - "Skipping normalisation changes the tensor shape, which the model then quietly pads"
+          - "Serving runs in evaluation mode, and that mode turns normalisation off on purpose"
+        answer: "Unnormalised inputs are still valid float tensors, so only the accuracy collapses"
+        explanation: >-
+          Distribution mismatch is a silent failure: shapes and dtypes are fine, so nothing
+          throws, and only the predictions degrade. Frameworks do not remember your transform
+          pipeline, normalisation is elementwise and leaves shape untouched, and eval mode only
+          affects dropout and batch-norm statistics.
+        difficulty: intermediate
+      - id: cv-normalize-wrong-scale
+        prompt: You apply Normalize with ImageNet means near 0.45 to a tensor whose values still run from 0 to 255. What happens to the data?
+        options:
+          - "The shift is negligible against that scale, so values stay huge and off-distribution"
+          - "The values end up correctly centred anyway, because Normalize rescales the range first"
+          - "Every value turns negative, since the mean gets subtracted from itself repeatedly"
+          - "The operation raises a range error, which is how this mistake is normally caught"
+        answer: "The shift is negligible against that scale, so values stay huge and off-distribution"
+        explanation: >-
+          Normalize only subtracts and divides by the constants you gave it, and 0.45 against a
+          0-255 range does almost nothing, so activations stay orders of magnitude too big. It
+          does not rescale for you, subtraction happens once rather than repeatedly, and there
+          is no range check to raise.
+        difficulty: advanced
+
+  - topic: cv-augmentation
+    # Source: D2L.ai - Image Augmentation
+    questions:
+      - id: cv-augment-train-only
+        prompt: In the D2L augmentation pipeline, which split receives the random transforms and when are they sampled?
+        options:
+          - "Training only, resampled each time an image is loaded during an epoch"
+          - "Training only, sampled once up front to build a fixed enlarged dataset"
+          - "Training and test alike, so both splits see the same variety of views"
+          - "Test only, because augmentation is a way of averaging over uncertainty"
+        answer: "Training only, resampled each time an image is loaded during an epoch"
+        explanation: >-
+          Augmentation is applied on the fly in the training loader, so each epoch shows a fresh
+          variant. Precomputing a fixed set gives the model a static, smaller pool of views.
+          Augmenting the test set makes the metric noisy and non-comparable, and test-time
+          augmentation is a separate inference trick rather than the default.
+        difficulty: beginner
+        mastery: true
+      - id: cv-augment-breaks-label
+        prompt: Adding RandomVerticalFlip to a house-number digit classifier makes validation accuracy fall. What explains that?
+        options:
+          - "Upside-down digits are not valid digits, so the transform corrupts the label"
+          - "Vertical flips are far slower than horizontal ones, so training saw fewer epochs"
+          - "Flipping vertically reverses the channel order, which breaks the normalisation"
+          - "Any second augmentation cancels the first, so the pipeline stops helping at all"
+        answer: "Upside-down digits are not valid digits, so the transform corrupts the label"
+        explanation: >-
+          Augmentation must preserve the label, and a flipped six is not a six, so the model is
+          taught contradictions. Flip cost is negligible either way, flipping rearranges rows
+          rather than channels, and augmentations compose rather than cancelling one another
+          out.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-color-jitter-when
+        prompt: When is ColorJitter on brightness and saturation a poor choice of augmentation?
+        options:
+          - "When colour itself is the label, such as sorting ripe fruit from unripe fruit"
+          - "When the training set is large, since big datasets cannot benefit from any jitter"
+          - "When images are already grayscale, because jitter then raises a channel error"
+          - "When the model is a transformer, which cannot learn colour invariance at all"
+        answer: "When colour itself is the label, such as sorting ripe fruit from unripe fruit"
+        explanation: >-
+          Jitter teaches invariance to lighting, which is wrong when hue or intensity is the
+          discriminative signal. Large datasets still gain from jitter, grayscale jitter changes
+          brightness harmlessly rather than erroring, and architecture does not decide whether
+          colour invariance is desirable.
+        difficulty: intermediate
+      - id: cv-augment-information
+        prompt: Does augmentation add new information to your dataset, and what is it actually doing for generalisation?
+        options:
+          - "No new information; it encodes invariances you already believe the task has"
+          - "Yes, each transform contributes genuinely new independent samples of the world"
+          - "No new information, and therefore it cannot reduce overfitting in any way"
+          - "Yes, but only for classification, since detection labels cannot be transformed"
+        answer: "No new information; it encodes invariances you already believe the task has"
+        explanation: >-
+          The extra views are deterministic functions of existing images, so what you add is a
+          prior about symmetry rather than data, and that prior is exactly what curbs
+          overfitting. Transformed copies are not independent samples, and detection labels can
+          be transformed alongside the pixels.
+        difficulty: advanced
+      - id: cv-over-augmentation
+        prompt: With aggressive crops, heavy jitter, blur and large rotations stacked together, training loss stays high while validation loss barely moves. What is the diagnosis?
+        options:
+          - "Augmentation is so strong that many training images no longer show the class"
+          - "The model has overfitted, which is why both of the losses stopped improving"
+          - "The learning rate must be too low, since augmentation cannot raise training loss"
+          - "The validation set leaked into training, which flattens both of the curves together"
+        answer: "Augmentation is so strong that many training images no longer show the class"
+        explanation: >-
+          Over-augmentation destroys signal, so the task itself gets harder and training loss
+          plateaus high, which is underfitting rather than overfitting. Overfitting shows a low
+          training loss with rising validation loss. Augmentation certainly does raise training
+          loss, and leakage would make validation look unusually good.
+        difficulty: advanced
+
+  - topic: cv-traditional-filters
+    # Source: OpenCV - Making your own linear filters (filter2D)
+    questions:
+      - id: cv-filter2d-box-kernel
+        prompt: You pass filter2D a 5x5 kernel whose every entry is 1/25. What does the output image look like?
+        options:
+          - "A blurred version, since each pixel becomes the mean of its 5x5 neighbourhood"
+          - "A sharpened version, since the small weights amplify the local differences"
+          - "An edge map, since equal weights cancel everywhere except at boundaries"
+          - "An unchanged copy, since the kernel weights already sum to exactly one"
+        answer: "A blurred version, since each pixel becomes the mean of its 5x5 neighbourhood"
+        explanation: >-
+          A normalised box kernel averages, which is smoothing. Sharpening needs a centre weight
+          above one with negative neighbours. Edge maps come from kernels that sum to zero, and
+          summing to one preserves brightness rather than preserving the image, which only an
+          identity kernel would do.
+        difficulty: beginner
+        mastery: true
+      - id: cv-kernel-sum-zero
+        prompt: Why does a kernel whose weights sum to zero, such as a Laplacian, produce a mostly black result on a photograph?
+        options:
+          - "Flat regions cancel to near zero, so only intensity changes survive as bright pixels"
+          - "Zero-sum kernels discard the colour channels, and grayscale output always looks dark"
+          - "The kernel normalises the output to the 0-1 range, which then displays as black"
+          - "Summing to zero makes every response negative, and negatives clip to black on display"
+        answer: "Flat regions cancel to near zero, so only intensity changes survive as bright pixels"
+        explanation: >-
+          A zero-sum kernel is a difference operator: constant neighbourhoods annihilate and only
+          gradients respond, which is why edges glow on a dark field. Colour handling is
+          unaffected, no automatic renormalisation happens, and responses are signed in both
+          directions rather than uniformly negative.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-filter-border-handling
+        prompt: When filter2D places a 5x5 kernel over a pixel one row from the image edge, part of the kernel hangs off the image. How is that handled?
+        options:
+          - "Virtual pixels are synthesised by extrapolating the border, for example by reflection"
+          - "Those output pixels are dropped, so the result is smaller than the input image"
+          - "The kernel shrinks near the border, using only the taps that land on real pixels"
+          - "The missing taps are treated as the image mean so brightness stays consistent"
+        answer: "Virtual pixels are synthesised by extrapolating the border, for example by reflection"
+        explanation: >-
+          OpenCV extrapolates using a border mode such as reflect or replicate, so output stays
+          the same size as input. It does not crop the result by default, it does not reweight a
+          truncated kernel, and filling with the global mean is not one of the border modes on
+          offer.
+        difficulty: intermediate
+      - id: cv-blur-before-edges
+        prompt: Standard edge-detection recipes smooth the image before taking derivatives. Why is that step there?
+        options:
+          - "Differencing amplifies pixel noise, so smoothing first stops noise reading as edges"
+          - "Smoothing widens real edges, which makes the derivative response easier to threshold"
+          - "Derivative kernels require float input, and smoothing is what performs that conversion"
+          - "Blurring rescales intensities into a range where the derivative kernel stays stable"
+        answer: "Differencing amplifies pixel noise, so smoothing first stops noise reading as edges"
+        explanation: >-
+          A derivative responds to any rapid change, and sensor noise is exactly that, so
+          unsmoothed gradients are speckled. Smoothing actually blurs real edges rather than
+          helping them, dtype conversion is a separate cast, and blurring does not change the
+          intensity range meaningfully.
+        difficulty: intermediate
+      - id: cv-filters-convolution-lineage
+        prompt: What is the relationship between a hand-designed Sobel kernel and the first layer of a trained CNN?
+        options:
+          - "Both slide a small weight grid over the image; the CNN learns those weights from data"
+          - "Both slide a small weight grid, but the CNN applies it to only one image region at a time"
+          - "They are unrelated operations, since CNN layers use matrix products rather than kernels"
+          - "The CNN uses far larger kernels, which is the only difference between the two of them"
+        answer: "Both slide a small weight grid over the image; the CNN learns those weights from data"
+        explanation: >-
+          The operation is identical; only the source of the numbers differs, which is the
+          lineage from classical filters to learned convolution. CNN kernels sweep the whole
+          image, convolution is not replaced by dense matrix products, and learned first-layer
+          kernels are typically small, often 3x3 or 7x7.
+        difficulty: beginner
+
+  - topic: cv-convolution-in-cv
+    # Source: Stanford CS231n - The Convolutional Layer
+    questions:
+      - id: cv-conv-output-size-formula
+        prompt: A 32x32 input meets a conv layer with 5x5 filters, stride 1 and zero padding 0. What spatial size comes out?
+        options:
+          - "28x28, from (32 minus 5 plus twice 0) divided by 1, plus 1"
+          - "32x32, because a stride of 1 always preserves the spatial size"
+          - "27x27, from (32 minus 5) divided by 1, without the trailing plus 1"
+          - "36x36, because the filter extends the map by its own width each side"
+        answer: "28x28, from (32 minus 5 plus twice 0) divided by 1, plus 1"
+        explanation: >-
+          The CS231n formula is (W minus F plus 2P) over S, plus 1, giving 28. Stride 1 only
+          preserves size when padding compensates for the filter width. Dropping the plus one
+          undercounts by a position, and convolution without padding can only shrink the map
+          rather than grow it.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-same-padding-choice
+        prompt: You want a 3x3 stride-1 conv layer to leave the spatial dimensions unchanged. What padding do you set, and why?
+        options:
+          - "Padding 1, since (F minus 1) over 2 restores the pixels the filter width removes"
+          - "Padding 3, matching the filter size so each border gains a full kernel width"
+          - "Padding 0, because stride 1 already guarantees the output keeps its input size"
+          - "Padding 2, since the filter touches two neighbours on each side of a pixel"
+        answer: "Padding 1, since (F minus 1) over 2 restores the pixels the filter width removes"
+        explanation: >-
+          Same-size convolution needs P equal to (F minus 1) over 2, so 1 for a 3x3 filter.
+          Padding 3 would grow the map, padding 0 shrinks it by two pixels per side, and a 3x3
+          filter reaches only one neighbour in each direction, so 2 overshoots.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-conv-param-count
+        prompt: A conv layer takes a 64-channel input and learns 128 filters of size 3x3, with biases. How many parameters does it hold?
+        options:
+          - "3 times 3 times 64 times 128, plus 128 biases, independent of the map size"
+          - "3 times 3 times 128, plus 128 biases, because filters are shared across channels"
+          - "3 times 3 times 64 times 128 times the map height times its width, plus biases"
+          - "64 times 128, plus 128 biases, since a 3x3 window has no weights of its own"
+        answer: "3 times 3 times 64 times 128, plus 128 biases, independent of the map size"
+        explanation: >-
+          Each filter spans the full input depth, so its weight count is F times F times depth,
+          and there is one filter per output channel plus its bias. Filters are not shared
+          across input channels, parameter sharing across positions is precisely why the map
+          size does not appear, and the spatial taps do carry weights.
+        difficulty: advanced
+      - id: cv-stride-two-effect
+        prompt: Changing a conv layer from stride 1 to stride 2 has what effect on the activation volume it produces?
+        options:
+          - "Height and width roughly halve, so the volume shrinks while filter count sets depth"
+          - "Depth roughly halves while height and width are left exactly as they were before"
+          - "Height and width roughly double, because larger steps cover more ground per filter"
+          - "Nothing changes in shape; only the number of learned parameters is cut in half"
+        answer: "Height and width roughly halve, so the volume shrinks while filter count sets depth"
+        explanation: >-
+          Stride is the step between receptive-field centres, so doubling it halves the number of
+          positions in each spatial dimension. Depth is set by how many filters you learn, larger
+          steps yield fewer outputs rather than more, and the parameter count depends on filter
+          shape, not on stride.
+        difficulty: intermediate
+      - id: cv-filter-depth-matches-input
+        prompt: Why does each filter in a conv layer always extend through the full depth of its input volume?
+        options:
+          - "So one filter mixes every input channel and emits a single 2-D activation map"
+          - "So each filter can be assigned to one input channel and ignore the others"
+          - "So the output volume keeps exactly the same depth as the input volume had"
+          - "So the layer can be computed without any padding along the depth dimension"
+        answer: "So one filter mixes every input channel and emits a single 2-D activation map"
+        explanation: >-
+          Filters are local in space but full-depth in channels, which is how a layer combines
+          features from all incoming maps into one response map. Per-channel filters describe
+          depthwise convolution instead, output depth equals the filter count rather than the
+          input depth, and depth is never padded.
+        difficulty: advanced
+
+  - topic: cv-classification-workflow
+    # Source: Stanford CS231n - Linear classification pipeline
+    questions:
+      - id: cv-pipeline-three-stages
+        prompt: CS231n frames image classification as a score function, a loss function and optimisation. Which piece does the softmax cross-entropy loss occupy?
+        options:
+          - "The loss: it turns class scores into a single number measuring how wrong they are"
+          - "The score function: it maps raw pixels to one score for each candidate class"
+          - "The optimiser: it walks the parameters downhill until the scores stop improving"
+          - "A preprocessing step: it rescales the pixels before scores are ever computed"
+        answer: "The loss: it turns class scores into a single number measuring how wrong they are"
+        explanation: >-
+          Cross-entropy consumes scores and produces the quantity to minimise, so it is the loss.
+          The score function is the network or matrix multiply that produces logits, the
+          optimiser is gradient descent acting on parameters, and preprocessing happens before
+          the score function runs.
+        difficulty: beginner
+        mastery: true
+      - id: cv-softmax-logits-shape
+        prompt: For a 10-class classifier evaluated on a batch of 64 images, what does the network emit just before the softmax, and what does softmax do to it?
+        options:
+          - "A 64 by 10 array of unbounded scores, which softmax turns into per-row probabilities"
+          - "A 64 by 10 array of probabilities already, which softmax then simply renormalises"
+          - "A single vector of 64 scores, which softmax spreads across the ten class slots"
+          - "A 10 by 10 confusion matrix, which softmax reduces to one prediction per class"
+        answer: "A 64 by 10 array of unbounded scores, which softmax turns into per-row probabilities"
+        explanation: >-
+          One score per class per image gives batch by classes, and softmax exponentiates and
+          normalises each row to sum to one. Logits are unbounded rather than already
+          probabilities, a 64-long vector loses the class axis, and a confusion matrix is an
+          evaluation artefact computed after prediction.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-linear-classifier-limit
+        prompt: A linear classifier on raw pixels plateaus far below a CNN on the same images. What is the fundamental limitation?
+        options:
+          - "One weight template per class cannot capture objects that shift, scale or change pose"
+          - "Linear models cannot be optimised by gradient descent, so they never fully converge"
+          - "Linear models cannot output probabilities, so their accuracy cannot be measured well"
+          - "Linear models require grayscale input, and discarding colour is what caps the accuracy"
+        answer: "One weight template per class cannot capture objects that shift, scale or change pose"
+        explanation: >-
+          A linear score is a single dot product against a fixed template, so it averages over all
+          appearances of a class and blurs. Linear models train perfectly well with gradient
+          descent, softmax gives them probabilities, and they accept colour pixels just as
+          readily as grayscale ones.
+        difficulty: intermediate
+      - id: cv-workflow-metric-choice
+        prompt: Your classifier reports 97% accuracy on a dataset where 97% of images belong to one class. What should you look at instead?
+        options:
+          - "Per-class recall and a confusion matrix, which expose the ignored minority classes"
+          - "The training loss curve, since a flat curve proves the accuracy figure is trustworthy"
+          - "The total parameter count, because larger models make accuracy more meaningful"
+          - "The pixel intensity histogram, since input statistics determine achievable accuracy"
+        answer: "Per-class recall and a confusion matrix, which expose the ignored minority classes"
+        explanation: >-
+          With that imbalance, predicting the majority class always reaches 97%, so the headline
+          number hides total failure on the rest, which per-class breakdowns reveal. Loss curves
+          say nothing about class balance, parameter count is unrelated to metric validity, and
+          input histograms do not measure predictions.
+        difficulty: advanced
+      - id: cv-workflow-split-order
+        prompt: In the standard classification loop, at what point is the test set allowed to be touched?
+        options:
+          - "Once at the very end, after hyperparameters have been chosen on the validation split"
+          - "Every epoch, so you can early-stop the run at its best test-set accuracy figure"
+          - "Before training, so its statistics can be folded into the preprocessing constants"
+          - "Whenever validation accuracy stalls, as a second opinion on the current model"
+        answer: "Once at the very end, after hyperparameters have been chosen on the validation split"
+        explanation: >-
+          The test set estimates generalisation only while it stays unused; every peek turns it
+          into another validation set. Early stopping on test accuracy selects a model using test
+          data, folding it into preprocessing leaks it, and consulting it when validation stalls
+          is the same leak by another route.
+        difficulty: intermediate
+
+  - topic: cv-classic-architectures
+    # Source: D2L.ai - Convolutional Neural Networks (LeNet), through AlexNet-style discussion
+    questions:
+      - id: cv-lenet-structure
+        prompt: What overall structure does LeNet-5 use to get from a handwritten digit image to ten class scores?
+        options:
+          - "Two convolution-and-pooling blocks feeding a stack of fully connected layers"
+          - "Two fully connected layers feeding a stack of convolution-and-pooling blocks"
+          - "A single very wide convolution followed directly by the ten-way output layer"
+          - "Five convolution blocks with no pooling and no fully connected layers at all"
+        answer: "Two convolution-and-pooling blocks feeding a stack of fully connected layers"
+        explanation: >-
+          LeNet alternates convolution with pooling to build features, then flattens into dense
+          layers for classification, the template later networks inherit. Dense layers first
+          would discard spatial structure, one wide convolution has no hierarchy, and LeNet does
+          both pool and use dense layers.
+        difficulty: beginner
+        mastery: true
+      - id: cv-alexnet-what-changed
+        prompt: AlexNet looks like a scaled-up LeNet. Which changes were the ones that made it work at ImageNet scale?
+        options:
+          - "ReLU activations, dropout, GPU training and heavy augmentation on far more data"
+          - "Sigmoid activations, weight decay only, CPU clusters and a much smaller input size"
+          - "Removing pooling entirely, adding recurrence, and training on grayscale images"
+          - "Replacing convolution with dense layers so the network could be trained faster"
+        answer: "ReLU activations, dropout, GPU training and heavy augmentation on far more data"
+        explanation: >-
+          AlexNet kept the LeNet shape but swapped saturating sigmoids for ReLU, regularised with
+          dropout, and exploited GPUs and ImageNet-scale data. Sigmoids and CPUs are what it moved
+          away from, it retained pooling and had no recurrence, and it stayed convolutional
+          because dense layers would explode in size.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-vgg-blocks
+        prompt: VGG replaces large filters with stacks of 3x3 convolutions. What does that buy?
+        options:
+          - "A comparable receptive field with fewer parameters and more nonlinearity between layers"
+          - "A larger receptive field per layer, letting the network use far fewer layers overall"
+          - "Fewer multiply-accumulate operations per image, which is why VGG is unusually cheap"
+          - "Freedom from pooling layers, since small filters shrink the maps on their own"
+        answer: "A comparable receptive field with fewer parameters and more nonlinearity between layers"
+        explanation: >-
+          Two stacked 3x3 layers see as much as one 5x5 while using fewer weights and inserting an
+          extra activation. Each individual layer sees less, not more, VGG is famously expensive
+          in compute and memory, and it still relies on pooling to reduce spatial size.
+        difficulty: intermediate
+      - id: cv-architecture-arc
+        prompt: Reading LeNet, AlexNet and VGG in order, what single trend best summarises the progression?
+        options:
+          - "Deeper stacks of simple repeated blocks, with design shifting from layers to blocks"
+          - "Shallower networks with progressively wider individual layers doing all the work"
+          - "A steady move away from convolution towards fully connected feature extraction"
+          - "Ever larger filters, since bigger kernels were found to capture more context"
+        answer: "Deeper stacks of simple repeated blocks, with design shifting from layers to blocks"
+        explanation: >-
+          The arc is increasing depth plus the idea of a reusable block, which VGG makes explicit
+          and ResNet later formalises. The networks got deeper rather than shallower, convolution
+          became more central rather than less, and filters shrank towards 3x3 instead of
+          growing.
+        difficulty: beginner
+
+  - topic: cv-resnet
+    # Source: D2L.ai - Residual Networks (ResNet)
+    questions:
+      - id: cv-degradation-problem
+        prompt: A plain 56-layer CNN scores worse than a plain 20-layer one on both training and test sets. What does D2L call this and what does it show?
+        options:
+          - "Degradation: extra layers fail to even learn the identity, so depth hurts optimisation"
+          - "Overfitting: the deeper model memorised the training set and lost generalisation"
+          - "Underfitting from too few parameters, so the deeper model needs to be widened"
+          - "Vanishing labels: deeper networks dilute the supervision signal across more layers"
+        answer: "Degradation: extra layers fail to even learn the identity, so depth hurts optimisation"
+        explanation: >-
+          The giveaway is that training error also rose, so this is an optimisation failure rather
+          than a generalisation one. Overfitting would show low training error, a 56-layer network
+          has more parameters not fewer, and the supervision signal is not diluted by depth in the
+          way that phrase suggests.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-residual-block-form
+        prompt: A residual block computes its output as f(x) equals g(x) plus x. What is the learning problem this reformulates?
+        options:
+          - "The block learns only the residual g(x), so producing the identity means driving g to zero"
+          - "The block learns the full mapping twice, and averaging the two copies stabilises training"
+          - "The block learns g(x) and discards x, with the addition only rescaling the activations"
+          - "The block learns x from g(x), inverting the layer so gradients can be computed exactly"
+        answer: "The block learns only the residual g(x), so producing the identity means driving g to zero"
+        explanation: >-
+          Because x arrives for free, the layers only need to model the difference, and doing
+          nothing is easy to represent. There is no duplicated mapping being averaged, x is added
+          rather than discarded, and nothing is being inverted; the shortcut is a plain addition.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-skip-gradient-path
+        prompt: Why does the addition in a residual block help gradients reach early layers during backpropagation?
+        options:
+          - "The addition passes gradient through unchanged, giving a route that avoids the weight layers"
+          - "The addition normalises gradient magnitude at every block, capping it at exactly one"
+          - "The addition removes the need for any activation function, so nothing can saturate"
+          - "The addition stores gradients from earlier steps and replays them on the next batch"
+        answer: "The addition passes gradient through unchanged, giving a route that avoids the weight layers"
+        explanation: >-
+          Differentiating a sum sends gradient down both branches, so the identity path carries it
+          intact past layers that would otherwise shrink it. Addition does not normalise or cap
+          magnitudes, residual blocks still contain ReLU activations, and nothing about the
+          shortcut caches gradients across steps.
+        difficulty: advanced
+      - id: cv-resnet-1x1-shortcut
+        prompt: When a ResNet block halves the spatial size and doubles the channels, why does the shortcut branch need a 1x1 convolution?
+        options:
+          - "The addition requires matching shapes, so the shortcut must be reshaped to the new depth"
+          - "The 1x1 convolution adds nonlinearity, which the shortcut branch would otherwise lack"
+          - "The 1x1 convolution regularises the shortcut, preventing the block from copying its input"
+          - "The addition needs matching dtypes, and the 1x1 convolution performs that conversion"
+        answer: "The addition requires matching shapes, so the shortcut must be reshaped to the new depth"
+        explanation: >-
+          You can only add tensors of the same shape, so a strided 1x1 convolution projects the
+          input to the block output geometry. It is there for shape, not nonlinearity, the whole
+          point is to preserve rather than block the copy of the input, and dtypes already agree.
+        difficulty: advanced
+      - id: cv-resnet-depth-benefit
+        prompt: What practical consequence does the residual design have for how deep you can usefully train a network?
+        options:
+          - "Very deep stacks stay trainable, so hundreds of layers can improve on shallow ones"
+          - "Depth stops mattering entirely, so a residual network of two layers matches any other"
+          - "Depth is capped lower than before, because each shortcut consumes optimisation capacity"
+          - "Depth becomes free of compute cost, so deeper residual networks run as fast as shallow ones"
+        answer: "Very deep stacks stay trainable, so hundreds of layers can improve on shallow ones"
+        explanation: >-
+          Residual connections removed the degradation barrier, which is why 50 to 152 layer
+          networks became standard. Depth still buys accuracy so it has not stopped mattering,
+          shortcuts raise rather than lower the usable depth, and every extra layer still costs
+          real computation.
+        difficulty: beginner
+
+  - topic: cv-efficientnet-awareness
+    # Source: arXiv - EfficientNet: Rethinking Model Scaling for CNNs (abstract and scaling method)
+    questions:
+      - id: cv-compound-scaling-three-axes
+        prompt: EfficientNet scales a network along which three dimensions, and how are they combined?
+        options:
+          - "Depth, width and input resolution, scaled together by a fixed set of coefficients"
+          - "Depth, width and batch size, scaled one at a time until accuracy stops improving"
+          - "Kernel size, stride and channel count, tuned independently by a grid search"
+          - "Learning rate, weight decay and dropout, scaled up in step with the parameter count"
+        answer: "Depth, width and input resolution, scaled together by a fixed set of coefficients"
+        explanation: >-
+          The paper contribution is compound scaling: layers, channels and image size lifted
+          jointly in a fixed ratio. Batch size and the regularisation hyperparameters are training
+          settings rather than architecture dimensions, and kernel geometry is not what the scaling
+          study varies.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-why-scale-jointly
+        prompt: Why does the paper argue that scaling depth alone gives diminishing returns?
+        options:
+          - "Deeper layers need matching receptive field and channel capacity, so the axes are coupled"
+          - "Deeper layers cannot be optimised at all, so any added depth is simply wasted compute"
+          - "Deeper layers overfit immediately, and only more regularisation can offset the extra depth"
+          - "Deeper layers slow inference, so the returns are real but too expensive to be worth it"
+        answer: "Deeper layers need matching receptive field and channel capacity, so the axes are coupled"
+        explanation: >-
+          A taller network fed small images with few channels runs out of information to combine,
+          which is why balance across the axes beats pushing one. Depth is trainable with modern
+          blocks, the ceiling shows up as accuracy saturation rather than pure overfitting, and the
+          argument is about accuracy per unit compute rather than speed alone.
+        difficulty: advanced
+        mastery: true
+      - id: cv-efficientnet-claim
+        prompt: What headline claim does the EfficientNet abstract make about accuracy against model size?
+        options:
+          - "Top ImageNet accuracy with an order of magnitude fewer parameters than prior networks"
+          - "Top ImageNet accuracy achieved by using far more parameters than any prior network"
+          - "Slightly lower accuracy than prior networks, traded for a dramatically simpler design"
+          - "Equal accuracy to prior networks, with the gain being shorter training time only"
+        answer: "Top ImageNet accuracy with an order of magnitude fewer parameters than prior networks"
+        explanation: >-
+          The pitch is state-of-the-art accuracy at a small fraction of the parameters and
+          inference cost. It is not a bigger-model result, accuracy is not sacrificed for
+          simplicity, and the improvement is in accuracy per parameter rather than in training
+          wall-clock alone.
+        difficulty: beginner
+      - id: cv-when-reach-for-efficientnet
+        prompt: You must ship an image classifier onto a phone with a tight latency budget. Why is an EfficientNet variant a sensible first pick?
+        options:
+          - "Its family spans compute budgets, so you choose the largest variant that meets latency"
+          - "It needs no pretrained weights, which is what makes it small enough to run on a phone"
+          - "It runs without floating-point arithmetic, so mobile chips can execute it directly"
+          - "It requires no input preprocessing, which removes the main source of on-device latency"
+        answer: "Its family spans compute budgets, so you choose the largest variant that meets latency"
+        explanation: >-
+          Compound scaling produces a ladder from B0 upward, so you pick a rung by budget instead
+          of hand-designing. Pretrained weights are still what makes it accurate, it is an ordinary
+          float network unless you quantise it, and it needs the same resize and normalise pipeline
+          as anything else.
+        difficulty: intermediate
+      - id: cv-efficientnet-resolution-cost
+        prompt: Raising the input resolution as part of compound scaling has what effect on the cost of every convolution?
+        options:
+          - "Cost grows with the pixel count, so doubling each side roughly quadruples the work"
+          - "Cost grows with the side length, so doubling each side roughly doubles the work"
+          - "Cost is unchanged, because parameter count does not depend on the input resolution"
+          - "Cost falls, since larger inputs let the network use fewer layers to see the whole scene"
+        answer: "Cost grows with the pixel count, so doubling each side roughly quadruples the work"
+        explanation: >-
+          Convolution applies its kernel at every spatial position, so FLOPs scale with height
+          times width. Linear scaling would ignore the second dimension. Parameters are indeed
+          resolution independent, but compute is not, and larger inputs do not reduce the layer
+          count you need.
+        difficulty: advanced
+
+  - topic: cv-transfer-learning-cv
+    # Source: D2L.ai - Fine-Tuning
+    questions:
+      - id: cv-finetune-head-init
+        prompt: In the D2L fine-tuning recipe, how are the backbone weights and the new output layer initialised?
+        options:
+          - "Backbone copied from the pretrained model, output layer initialised randomly from scratch"
+          - "Backbone initialised randomly, output layer copied from the pretrained model instead"
+          - "Both copied from the pretrained model, then the output layer is truncated to fit"
+          - "Both initialised randomly, since copying weights across datasets transfers little"
+        answer: "Backbone copied from the pretrained model, output layer initialised randomly from scratch"
+        explanation: >-
+          The reusable knowledge lives in the feature extractor, while the classifier head has the
+          wrong output dimension and no meaning for your classes, so it starts fresh. Copying the
+          head is impossible when class counts differ, and random-initialising the backbone throws
+          away the entire benefit.
+        difficulty: beginner
+        mastery: true
+      - id: cv-finetune-lr-split
+        prompt: Why is the new output layer usually given a larger learning rate than the pretrained backbone?
+        options:
+          - "The head starts from noise and must move far, while good backbone features need small nudges"
+          - "The backbone starts from noise and must move far, while the head is already close to correct"
+          - "A larger rate on the head reduces memory use, which is the real constraint when fine-tuning"
+          - "The two rates must differ to keep gradients flowing, or the shared layers receive nothing"
+        answer: "The head starts from noise and must move far, while good backbone features need small nudges"
+        explanation: >-
+          Large updates to well-trained features destroy them, a failure often called catastrophic
+          forgetting, whereas the random head needs to travel. The backbone is the pretrained part,
+          learning rates have no bearing on memory, and gradients flow regardless of whether the
+          rates match.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-freeze-vs-finetune-choice
+        prompt: You have 300 labelled images in a domain close to ImageNet. Freeze the backbone and train only the head, or fine-tune everything?
+        options:
+          - "Freeze and train the head, since 300 images cannot support updating millions of weights"
+          - "Fine-tune everything, since more trainable weights always fit a small dataset better"
+          - "Fine-tune everything, because frozen features cannot be used for a new set of classes"
+          - "Freeze everything including the head, and pick classes by nearest neighbour on features"
+        answer: "Freeze and train the head, since 300 images cannot support updating millions of weights"
+        explanation: >-
+          With few examples and a similar domain, the pretrained features already transfer, so
+          training only the head keeps the effective parameter count tiny and avoids overfitting.
+          More trainable weights hurt at this size, frozen features feed a new head perfectly well,
+          and a fully frozen model cannot output your labels at all.
+        difficulty: intermediate
+      - id: cv-transfer-domain-gap
+        prompt: Fine-tuning an ImageNet backbone on grayscale medical scans helps far less than on everyday photographs. What is the reason?
+        options:
+          - "Domain gap: the low-level statistics and structures differ from the pretraining images"
+          - "Grayscale input is rejected by pretrained models, so the transfer never actually happens"
+          - "Medical datasets are always larger, so pretraining contributes proportionally less"
+          - "Pretrained weights expire after a fixed number of fine-tuning steps on new data"
+        answer: "Domain gap: the low-level statistics and structures differ from the pretraining images"
+        explanation: >-
+          Transfer strength tracks similarity between source and target distributions, and scans
+          share little with natural photographs beyond basic edges. Grayscale can be replicated
+          across three channels, medical datasets are usually smaller rather than larger, and
+          weights do not expire.
+        difficulty: advanced
+      - id: cv-transfer-normalisation-consistency
+        prompt: When fine-tuning a pretrained backbone, which preprocessing detail must match the original training setup?
+        options:
+          - "The input size plus the per-channel mean and standard deviation used at pretraining"
+          - "The optimiser and its momentum term, which are baked into the pretrained weights"
+          - "The original batch size, since the pretrained weights encode that batch statistic"
+          - "The original number of output classes, which the backbone layers depend on directly"
+        answer: "The input size plus the per-channel mean and standard deviation used at pretraining"
+        explanation: >-
+          Pretrained filters expect the input distribution and scale they were trained on, so
+          resize and normalise the same way. The optimiser and batch size are training choices you
+          are free to change, and the class count is precisely the thing you replace when swapping
+          the head.
+        difficulty: intermediate
+
+  - topic: cv-object-detection-overview
+    # Source: D2L.ai - Bounding boxes and object detection
+    questions:
+      - id: cv-detection-vs-classification-output
+        prompt: What does a detector output for one image that an image classifier does not?
+        options:
+          - "A variable-length list of boxes, each with a class label and a confidence score"
+          - "A single class label chosen from the label set, but with higher confidence attached"
+          - "A per-pixel class map covering the whole image with no box coordinates involved"
+          - "A fixed-length vector of class probabilities, one entry for every possible class"
+        answer: "A variable-length list of boxes, each with a class label and a confidence score"
+        explanation: >-
+          Detection localises as well as classifies, and the number of objects is not known in
+          advance, so the output is a variable-length set of boxes. A single label is exactly what
+          classification gives, a per-pixel map is segmentation, and a fixed class vector carries
+          no position information.
+        difficulty: beginner
+        mastery: true
+      - id: cv-detection-variable-count
+        prompt: Why can a detector not simply be a network with a fixed number of regression outputs for box coordinates?
+        options:
+          - "Object count varies per image, so a fixed output size cannot cover crowds or empty scenes"
+          - "Coordinate regression is not differentiable, so those outputs could never be trained"
+          - "Box coordinates are integers, and networks are unable to predict integer values"
+          - "Fixed outputs would be too few parameters to represent any bounding box precisely"
+        answer: "Object count varies per image, so a fixed output size cannot cover crowds or empty scenes"
+        explanation: >-
+          The set-valued output is the structural difficulty detection adds, which is why anchors,
+          grids and suppression exist. Coordinate regression is perfectly differentiable, networks
+          predict continuous coordinates that are simply rounded for display, and parameter count
+          is not the obstacle.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-box-corner-vs-centre
+        prompt: D2L converts between two box representations. What are they and why do both exist?
+        options:
+          - "Corner form with two opposite points, and centre form with a centre plus width and height"
+          - "Corner form with two opposite points, and polygon form listing every vertex on the outline"
+          - "Centre form with a centre point, and mask form storing a binary pixel map per object"
+          - "Pixel-index form counting from the top-left, and normalised form scaled to the image area"
+        answer: "Corner form with two opposite points, and centre form with a centre plus width and height"
+        explanation: >-
+          Corner form suits IoU and clipping arithmetic, while centre form suits regressing offsets
+          from an anchor, so libraries convert between them constantly. Polygons and masks describe
+          segmentation rather than boxes, and absolute versus normalised coordinates is a separate
+          scaling question.
+        difficulty: intermediate
+      - id: cv-detection-annotation-cost
+        prompt: Compared with a classification dataset, why is a detection dataset far more expensive to label?
+        options:
+          - "Every object instance needs a drawn box and a class, not one label for the whole image"
+          - "Detection images must be captured at much higher resolution than classification images"
+          - "Detection labels must be redrawn after each augmentation, unlike classification labels"
+          - "Detection requires several independent annotators per image to reach usable agreement"
+        answer: "Every object instance needs a drawn box and a class, not one label for the whole image"
+        explanation: >-
+          Annotation cost scales with instances per image plus the precision of the drawing, which
+          is why detection sets are smaller than classification ones. Resolution requirements are
+          similar, augmentation transforms labels automatically in code, and multiple annotators
+          are an optional quality measure rather than a requirement.
+        difficulty: beginner
+
+  - topic: cv-bounding-boxes-iou
+    # Source: D2L.ai - Bounding boxes through intersection over union
+    questions:
+      - id: cv-iou-definition-ratio
+        prompt: Intersection over union is a ratio of which two quantities for a pair of boxes?
+        options:
+          - "Overlapping area divided by the area their union covers, so it lands between 0 and 1"
+          - "Overlapping area divided by the area of the smaller box, so identical boxes score above 1"
+          - "Overlapping perimeter divided by the total perimeter of both boxes added together"
+          - "Distance between the two box centres divided by the diagonal length of the image"
+        answer: "Overlapping area divided by the area their union covers, so it lands between 0 and 1"
+        explanation: >-
+          Union is in the denominator, which is what bounds the score at 1 and penalises a
+          prediction that is much larger than the target. Dividing by the smaller box ignores
+          oversized predictions, perimeter ratios are not area overlap, and centre distance is a
+          different metric entirely.
+        difficulty: beginner
+        mastery: true
+      - id: cv-iou-hand-computation
+        prompt: Box A spans x from 0 to 4 and y from 0 to 4. Box B spans x from 2 to 6 and y from 2 to 6. What is their IoU?
+        options:
+          - "4 divided by 28, since the overlap is 2 by 2 and the union is 16 plus 16 minus 4"
+          - "4 divided by 32, since the union is just the two box areas of 16 added together"
+          - "4 divided by 16, since the overlap should be compared against one box area only"
+          - "2 divided by 28, since the overlap side length rather than its area goes on top"
+        answer: "4 divided by 28, since the overlap is 2 by 2 and the union is 16 plus 16 minus 4"
+        explanation: >-
+          Overlap runs 2 to 4 on both axes, giving area 4, and union must subtract that overlap once
+          so it is not double counted, giving 28. Adding the areas without subtracting inflates the
+          union, dividing by one box area is not IoU, and the numerator is an area rather than a
+          length.
+        difficulty: advanced
+        mastery: true
+      - id: cv-iou-threshold-meaning
+        prompt: A detection is counted correct at an IoU threshold of 0.5. What does raising that threshold to 0.75 change?
+        options:
+          - "Localisation must be tighter, so loosely placed but correctly classified boxes now fail"
+          - "Classification must be more confident, so low-scoring predictions are discarded first"
+          - "More predictions pass, because a higher threshold admits a wider range of overlaps"
+          - "Only the ordering of predictions changes, while the count of correct ones stays fixed"
+        answer: "Localisation must be tighter, so loosely placed but correctly classified boxes now fail"
+        explanation: >-
+          The IoU threshold is purely a geometric matching criterion, so tightening it demands
+          better box placement. Confidence is governed by a separate score threshold, a stricter
+          criterion admits fewer predictions rather than more, and the set of matches genuinely
+          shrinks.
+        difficulty: intermediate
+      - id: cv-iou-zero-overlap
+        prompt: Two boxes that do not touch both score an IoU of 0, whether they are close or on opposite sides of the image. Why does that matter for training?
+        options:
+          - "A flat zero gives no gradient direction, so pure IoU loss cannot guide a distant box closer"
+          - "A flat zero makes the loss infinite, so training diverges as soon as a box misses entirely"
+          - "A flat zero is treated as a perfect match, so the model is rewarded for missing the object"
+          - "A flat zero forces the optimiser to fall back on classification loss, which fixes geometry"
+        answer: "A flat zero gives no gradient direction, so pure IoU loss cannot guide a distant box closer"
+        explanation: >-
+          IoU saturates for non-overlapping boxes, which is exactly why coordinate regression losses
+          and variants like generalised IoU exist. Zero is finite rather than infinite, it signals
+          the worst match rather than a perfect one, and classification loss carries no information
+          about where the box sits.
+        difficulty: advanced
+
+  - topic: cv-nms
+    # Source: Ultralytics - Non-Maximum Suppression (NMS)
+    questions:
+      - id: cv-nms-problem-solved
+        prompt: A detector returns eleven overlapping boxes around one car before post-processing. Which stage is responsible for reducing them to one?
+        options:
+          - "Non-maximum suppression, which keeps the top-scoring box and drops its overlapping rivals"
+          - "The softmax over classes, which normalises the eleven scores so only one can stay high"
+          - "The IoU loss during training, which teaches the network to emit exactly one box per object"
+          - "The confidence threshold alone, since duplicates always score below the main detection"
+        answer: "Non-maximum suppression, which keeps the top-scoring box and drops its overlapping rivals"
+        explanation: >-
+          Duplicates arise because many anchors or grid cells fire on the same object, and NMS is
+          the post-processing that deduplicates them. Softmax normalises across classes for one
+          prediction, not across predictions, and duplicate boxes often score highly, so a
+          confidence threshold alone leaves them in.
+        difficulty: beginner
+        mastery: true
+      - id: cv-nms-greedy-trace
+        prompt: Walk the greedy NMS loop. What happens on each iteration?
+        options:
+          - "Take the highest remaining score, keep it, and delete every box whose IoU with it exceeds the threshold"
+          - "Take the lowest remaining score, delete it, and repeat until only high-scoring boxes remain"
+          - "Average every pair of boxes whose IoU exceeds the threshold, replacing both with the mean box"
+          - "Take a random remaining box, keep it, and delete all boxes that share its predicted class label"
+        answer: "Take the highest remaining score, keep it, and delete every box whose IoU with it exceeds the threshold"
+        explanation: >-
+          NMS is score-ordered and greedy: the best box wins its neighbourhood and suppresses
+          overlapping candidates, then the loop continues on what is left. Working upward from the
+          worst score does not select winners, boxes are discarded rather than averaged, and
+          suppression depends on overlap, not on class alone.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-nms-threshold-too-low
+        prompt: You lower the NMS IoU threshold from 0.5 to 0.2 and your model starts missing motorbikes parked side by side. Why?
+        options:
+          - "A low threshold suppresses boxes on genuinely distinct but adjacent objects as duplicates"
+          - "A low threshold keeps more duplicates, and the extra boxes crowd out the correct ones"
+          - "A low threshold reruns the detector at lower resolution, where small objects disappear"
+          - "A low threshold raises the confidence cut-off as a side effect, dropping weak detections"
+        answer: "A low threshold suppresses boxes on genuinely distinct but adjacent objects as duplicates"
+        explanation: >-
+          The threshold decides how much overlap counts as a duplicate, so a small value makes NMS
+          aggressive and it deletes neighbours in crowded scenes. A lower threshold suppresses more
+          rather than fewer boxes, NMS never reruns the detector, and it does not touch the
+          confidence threshold.
+        difficulty: advanced
+      - id: cv-nms-class-scope
+        prompt: Should NMS compare a high-scoring dog box against an overlapping cat box in the standard detection pipeline?
+        options:
+          - "No, suppression runs per class, so boxes of different classes do not suppress each other"
+          - "Yes, all boxes compete regardless of class, since only one object can occupy a region"
+          - "Yes, but only when the two class scores are within a fixed margin of one another"
+          - "No, and boxes of the same class are also left alone, since suppression is per anchor"
+        answer: "No, suppression runs per class, so boxes of different classes do not suppress each other"
+        explanation: >-
+          Standard NMS is class-wise, which lets a person and the bicycle they are riding both
+          survive in the same region. Class-agnostic suppression is a deliberate variant rather than
+          the default, no score-margin rule exists, and same-class overlaps are precisely what does
+          get suppressed.
+        difficulty: intermediate
+      - id: cv-nms-latency
+        prompt: On a crowded image your detector latency spikes even though the network forward pass is unchanged. How does NMS explain that?
+        options:
+          - "Its pairwise IoU comparisons grow with the number of surviving candidate boxes"
+          - "It runs one extra forward pass of the network for every box that it decides to keep"
+          - "It reloads the model weights each time the candidate count exceeds the batch size"
+          - "It falls back to CPU sorting only for images that contain more than one class"
+        answer: "Its pairwise IoU comparisons grow with the number of surviving candidate boxes"
+        explanation: >-
+          NMS cost depends on candidate count, not image content, so dense scenes make the
+          post-processing itself the bottleneck, which is why pre-filtering by confidence and
+          capping detections matters. It never re-runs the network or reloads weights, and its
+          device placement does not depend on class count.
+        difficulty: advanced
+
+  - topic: cv-two-stage-vs-one-stage
+    # Source: D2L.ai - Region-based CNNs (R-CNN family), contrasted with single-shot detectors
+    questions:
+      - id: cv-two-stage-pipeline
+        prompt: What are the two stages in a two-stage detector such as Faster R-CNN?
+        options:
+          - "Propose candidate regions, then classify and refine each proposal that was produced"
+          - "Classify the whole image, then crop the region that the winning class scored highest in"
+          - "Detect edges across the image, then group those edges into candidate object outlines"
+          - "Segment every pixel by class, then fit the tightest box around each connected region"
+        answer: "Propose candidate regions, then classify and refine each proposal that was produced"
+        explanation: >-
+          The defining structure is a proposal generator followed by a per-region head that scores
+          and adjusts the box. Whole-image classification produces no proposals, edge grouping is
+          the pre-deep-learning approach it replaced, and segmenting first describes a different
+          family of methods altogether.
+        difficulty: beginner
+        mastery: true
+      - id: cv-roi-pooling-purpose
+        prompt: Fast R-CNN runs the backbone once per image rather than once per proposal. Which component makes that possible?
+        options:
+          - "Region-of-interest pooling, which crops and resizes each proposal from the shared feature map"
+          - "Non-maximum suppression, which removes enough proposals that a single pass becomes sufficient"
+          - "A larger input resolution, which lets one forward pass carry detail for every proposal"
+          - "Weight sharing between proposals, which lets each one reuse the previous crop computation"
+        answer: "Region-of-interest pooling, which crops and resizes each proposal from the shared feature map"
+        explanation: >-
+          RoI pooling turns arbitrary proposal rectangles into fixed-size feature patches taken from
+          one shared convolutional pass, which is the whole speed-up. Suppression happens after
+          scoring, resolution does not remove the redundancy, and there is no per-proposal
+          computation left to reuse.
+        difficulty: advanced
+      - id: cv-one-stage-tradeoff
+        prompt: A one-stage detector predicts classes and boxes directly from a feature grid. What is the classic tradeoff against two-stage designs?
+        options:
+          - "Much faster inference, historically at some cost in accuracy on small or crowded objects"
+          - "Much higher accuracy, at the cost of needing far more labelled training images"
+          - "Identical accuracy and speed, differing only in how the training loss is written"
+          - "Much lower memory use, at the cost of being unable to detect more than one class"
+        answer: "Much faster inference, historically at some cost in accuracy on small or crowded objects"
+        explanation: >-
+          Skipping the proposal stage removes a whole per-region pass, which buys speed, while dense
+          prediction struggles most where objects are tiny or overlapping. Two-stage detectors are
+          the more accurate branch historically, the two families genuinely differ in cost, and
+          one-stage detectors are fully multi-class.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-class-imbalance-one-stage
+        prompt: A one-stage detector scores tens of thousands of anchors per image, nearly all background. What problem does that create?
+        options:
+          - "Foreground-background imbalance, so easy background examples swamp the training signal"
+          - "Memory exhaustion, so anchors must be scored in sequential batches rather than at once"
+          - "Duplicate proposals, which is why one-stage detectors need no suppression at inference"
+          - "Label noise, since anchors have no ground-truth assignment and must be labelled by hand"
+        answer: "Foreground-background imbalance, so easy background examples swamp the training signal"
+        explanation: >-
+          Dense anchor sets are overwhelmingly negative, so the loss is dominated by trivially easy
+          background, which is the problem focal loss and hard-negative mining address. Anchors are
+          cheap to score, one-stage detectors still need suppression, and anchor labels are assigned
+          automatically by IoU.
+        difficulty: advanced
+      - id: cv-detector-choice-scenario
+        prompt: You need detection on a 30 frames-per-second video stream on modest hardware, with roughly known object sizes. Which family fits and why?
+        options:
+          - "One-stage, because a single pass per frame meets the frame budget on limited hardware"
+          - "Two-stage, because proposal generation is the cheaper half of the detection pipeline"
+          - "Two-stage, because only proposal-based methods can run on hardware without a large GPU"
+          - "Either one works identically, since detector family has no bearing on frames per second"
+        answer: "One-stage, because a single pass per frame meets the frame budget on limited hardware"
+        explanation: >-
+          Real-time video on constrained hardware is exactly the case single-shot detectors were
+          built for. Proposal generation plus per-region heads is the expensive part, two-stage
+          models are the heavier option rather than the lighter one, and architecture choice
+          dominates achievable throughput.
+        difficulty: intermediate
+
+  - topic: cv-yolo-concept
+    # Source: Ultralytics - Object Detection task documentation
+    questions:
+      - id: cv-yolo-single-pass
+        prompt: What does the you-only-look-once framing actually describe about how the model produces detections?
+        options:
+          - "One forward pass over the image predicts all boxes and class scores simultaneously"
+          - "One region of the image is examined per pass, with the model looping over regions"
+          - "One class is predicted per image, with boxes added by a separate second network"
+          - "One training epoch suffices, because the model sees each image only a single time"
+        answer: "One forward pass over the image predicts all boxes and class scores simultaneously"
+        explanation: >-
+          The name refers to a single network evaluation producing the whole detection set, in
+          contrast to proposal-then-classify pipelines. Looping over regions is the sliding-window
+          approach it replaced, YOLO is multi-object and multi-class, and the phrase says nothing
+          about how many epochs training takes.
+        difficulty: beginner
+        mastery: true
+      - id: cv-yolo-grid-responsibility
+        prompt: YOLO divides the image into a grid of cells. What is each cell responsible for predicting?
+        options:
+          - "Boxes for objects whose centre falls inside it, with confidence and class scores attached"
+          - "Boxes for any object that overlaps it at all, so large objects are predicted many times"
+          - "A single class label for the pixels it contains, with no box coordinates at all"
+          - "A crop of the image passed to a second classification network for a final decision"
+        answer: "Boxes for objects whose centre falls inside it, with confidence and class scores attached"
+        explanation: >-
+          Assignment by centre location is what makes the mapping from image to fixed output grid
+          well defined and gives each object one owning cell. Overlap-based assignment would make
+          every large object the responsibility of dozens of cells, per-cell class maps describe
+          segmentation, and there is no second network.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-yolo-output-per-box
+        prompt: For each predicted box, what does a YOLO detection head emit alongside the four coordinates?
+        options:
+          - "A confidence that an object is present plus a score for each class it could be"
+          - "A binary mask covering the object, from which the class is then read off directly"
+          - "A depth estimate for the object, used to order overlapping boxes front to back"
+          - "The index of the grid cell that produced it, so the box can be traced back later"
+        answer: "A confidence that an object is present plus a score for each class it could be"
+        explanation: >-
+          Coordinates, objectness and class scores are the three parts of a detection, and the
+          product of the last two is what you threshold. Masks belong to segmentation heads, depth
+          requires a different task and sensor, and the originating cell is bookkeeping rather than
+          a predicted quantity.
+        difficulty: intermediate
+      - id: cv-yolo-version-positioning
+        prompt: Successive YOLO releases publish a family of model sizes from nano to extra large. What is that ladder for?
+        options:
+          - "Choosing a point on the speed-accuracy curve that matches your deployment budget"
+          - "Choosing how many object classes the model is able to detect in a single image"
+          - "Choosing the input resolution, which is fixed per size and cannot be changed later"
+          - "Choosing between detection and classification, since each size targets one task"
+        answer: "Choosing a point on the speed-accuracy curve that matches your deployment budget"
+        explanation: >-
+          The variants trade parameters and latency for accuracy, so you pick by hardware and frame
+          budget. Class count is set by your dataset and head, input size is a configurable argument
+          rather than a property of the variant, and every size supports the same set of tasks.
+        difficulty: beginner
+      - id: cv-yolo-small-object-weakness
+        prompt: Your YOLO model detects cars reliably but misses distant pedestrians in the same frames. What explains the pattern?
+        options:
+          - "Small objects occupy few cells at coarse strides, so their features are largely pooled away"
+          - "Pedestrians are a harder class semantically, so no amount of resolution will help them"
+          - "Confidence scores are computed per class, so rarer classes receive systematically lower ones"
+          - "Suppression removes small boxes first, because it processes candidates in size order"
+        answer: "Small objects occupy few cells at coarse strides, so their features are largely pooled away"
+        explanation: >-
+          Downsampling leaves tiny objects with almost no spatial support, which is why higher input
+          resolution and multi-scale feature levels are the usual remedies. The difficulty is scale
+          rather than semantics, confidence is not biased by class frequency in this way, and
+          suppression orders candidates by score rather than by size.
+        difficulty: advanced
+
+  - topic: cv-semantic-segmentation
+    # Source: D2L.ai - Transposed convolution and semantic segmentation
+    questions:
+      - id: cv-semantic-output-shape
+        prompt: For semantic segmentation of a 512x512 image into 21 classes, what shape does the network output?
+        options:
+          - "512 by 512 by 21, one class score per pixel position in the input image"
+          - "21 by 1, a single probability per class for the image taken as a whole"
+          - "512 by 512 by 1, a single integer identifying which object instance each pixel joins"
+          - "21 by 4, one bounding box for each of the classes that the model can recognise"
+        answer: "512 by 512 by 21, one class score per pixel position in the input image"
+        explanation: >-
+          Semantic segmentation is dense classification, so every pixel gets a full class score
+          vector and an argmax gives the label map. A single class vector is image classification,
+          instance identifiers belong to instance segmentation, and per-class boxes describe
+          detection.
+        difficulty: beginner
+        mastery: true
+      - id: cv-why-transposed-conv
+        prompt: An encoder has downsampled the feature map to one thirty-second of the input size. Why is transposed convolution used next?
+        options:
+          - "It upsamples with learned weights, restoring the spatial resolution the labels require"
+          - "It downsamples further, compressing the map until only one class score per image remains"
+          - "It normalises the feature map so per-pixel scores fall into a valid probability range"
+          - "It removes the channel dimension so the output can be compared against a label image"
+        answer: "It upsamples with learned weights, restoring the spatial resolution the labels require"
+        explanation: >-
+          Per-pixel prediction needs the map back at input resolution, and transposed convolution
+          learns how to expand it rather than guessing by interpolation. It increases rather than
+          reduces spatial size, probability normalisation is the softmax, and the channel axis is
+          what carries the class scores.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-transposed-conv-mechanics
+        prompt: How does a transposed convolution with stride 2 actually produce a larger output than its input?
+        options:
+          - "Each input value is multiplied by the kernel and the results are summed into a spread grid"
+          - "Each input value is copied into a 2 by 2 block, which is then smoothed by the kernel"
+          - "The input is padded with zeros to the target size and a normal convolution is applied"
+          - "The kernel is inverted numerically, and applying the inverse recovers the original pixels"
+        answer: "Each input value is multiplied by the kernel and the results are summed into a spread grid"
+        explanation: >-
+          Transposed convolution scatters each input by the kernel and accumulates overlaps, which
+          is why checkerboard artefacts appear when stride and kernel size interact badly. Copying
+          then smoothing is nearest-neighbour upsampling, and no matrix inverse is computed despite
+          the deconvolution nickname.
+        difficulty: advanced
+      - id: cv-segmentation-label-format
+        prompt: How are semantic segmentation labels stored, and what does that imply about resizing them?
+        options:
+          - "As a single-channel map of class indices, so it must be resized with nearest-neighbour only"
+          - "As a set of bounding boxes with class ids, so resizing means rescaling four numbers each"
+          - "As an RGB photograph of the scene, so it can be resized with any interpolation method"
+          - "As a flat list of class counts, so resizing has no effect on the label data at all"
+        answer: "As a single-channel map of class indices, so it must be resized with nearest-neighbour only"
+        explanation: >-
+          Class indices are categorical, so interpolating them invents nonexistent classes halfway
+          between two ids, which is why nearest-neighbour is mandatory for masks. Boxes are
+          detection labels, colour-coded masks still decode to indices, and a count vector would
+          discard all spatial information.
+        difficulty: advanced
+      - id: cv-semantic-cannot-separate
+        prompt: Two people stand shoulder to shoulder and your semantic segmentation output merges them into one region. Is that a bug?
+        options:
+          - "No, semantic segmentation labels pixels by class and has no concept of separate instances"
+          - "Yes, the decoder has lost resolution and a wider transposed convolution would separate them"
+          - "Yes, the class weights are unbalanced, and reweighting the loss will split the two regions"
+          - "No, but only because the two people belong to different classes in this dataset"
+        answer: "No, semantic segmentation labels pixels by class and has no concept of separate instances"
+        explanation: >-
+          Every person pixel gets the same label by design, so touching instances necessarily merge,
+          and separating them requires instance segmentation. Resolution and loss weighting affect
+          boundary quality rather than instance identity, and both people are of course the same
+          class.
+        difficulty: intermediate
+
+  - topic: cv-u-net
+    # Source: D2L.ai - Fully Convolutional Networks
+    questions:
+      - id: cv-fcn-fully-convolutional
+        prompt: What does making a classification network fully convolutional change about its output?
+        options:
+          - "Dense layers become 1x1 convolutions, so the output becomes a spatial map instead of a vector"
+          - "Convolutions become dense layers, so the output collapses to a single vector of class scores"
+          - "Pooling layers are removed, so the output keeps the exact input resolution throughout"
+          - "The output becomes a fixed-length list of boxes, one for each class the network knows"
+        answer: "Dense layers become 1x1 convolutions, so the output becomes a spatial map instead of a vector"
+        explanation: >-
+          Replacing the classifier head with 1x1 convolutions preserves the spatial grid and lets any
+          input size be processed, which is the enabling trick for dense prediction. The other
+          direction destroys spatial structure, pooling is retained in the encoder, and boxes belong
+          to detection heads.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-skip-fuse-coarse-fine
+        prompt: Why does a segmentation network combine deep low-resolution features with shallower high-resolution ones?
+        options:
+          - "Deep layers know what the object is while shallow layers know exactly where its edges lie"
+          - "Deep layers know where edges lie while shallow layers carry the semantic class information"
+          - "Combining them halves the parameter count, which is the main reason the pattern is used"
+          - "Combining them removes the need for any upsampling, since resolutions already match"
+        answer: "Deep layers know what the object is while shallow layers know exactly where its edges lie"
+        explanation: >-
+          Semantics accumulate with depth while spatial precision is lost to downsampling, so fusing
+          both gives correct labels on sharp boundaries. The roles are not reversed, skip connections
+          add rather than remove parameters, and the branches are at different resolutions which is
+          precisely why upsampling is still needed.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-skip-concat-vs-add
+        prompt: A U-shaped segmentation network concatenates the encoder feature map onto the decoder map rather than adding them. What does concatenation give up and gain?
+        options:
+          - "More channels and therefore more compute, but the decoder can weigh both sources separately"
+          - "Fewer channels and less compute, but the two feature sources become impossible to separate"
+          - "Identical cost to addition, with the only difference being the order of the channel axis"
+          - "A shape mismatch that must be padded, which is why addition is used in every such network"
+        answer: "More channels and therefore more compute, but the decoder can weigh both sources separately"
+        explanation: >-
+          Concatenation keeps both signals distinct so the following convolution learns how to mix
+          them, at the cost of a wider tensor. Addition is the cheaper option that fuses them
+          irreversibly, the two are not equivalent, and encoder and decoder maps are matched
+          spatially before the join.
+        difficulty: advanced
+      - id: cv-unet-biomedical-origin
+        prompt: U-Net came out of biomedical microscopy. Which property of that setting shaped the design?
+        options:
+          - "Very few annotated images with precise boundaries, so heavy augmentation and skips both matter"
+          - "Enormous labelled datasets, so the design could afford a very wide and deep encoder"
+          - "Colour images with rich texture, so the encoder was tuned for three-channel photographic input"
+          - "Video sequences, so the architecture was built around propagating masks between frames"
+        answer: "Very few annotated images with precise boundaries, so heavy augmentation and skips both matter"
+        explanation: >-
+          Pixel-accurate medical annotation is expensive, so the architecture had to be
+          data-efficient and boundary-accurate, which is why skips plus elastic augmentation feature
+          so heavily. Such datasets are small rather than enormous, microscopy input is often
+          single-channel, and the original network processes individual images.
+        difficulty: beginner
+      - id: cv-decoder-resolution-recovery
+        prompt: A segmentation decoder with no skip connections produces correct class regions but badly blurred outlines. What is the cause?
+        options:
+          - "Fine spatial detail was discarded during downsampling and upsampling cannot invent it back"
+          - "The class weights are unbalanced, so the loss cares about interiors more than boundaries"
+          - "The output was resized with nearest-neighbour interpolation, which softens every edge"
+          - "The encoder was frozen, so its filters never learned to respond to object boundaries"
+        answer: "Fine spatial detail was discarded during downsampling and upsampling cannot invent it back"
+        explanation: >-
+          Information lost to pooling is gone, so a decoder working only from coarse features gives
+          soft outlines, which is exactly the gap skip connections fill. Loss weighting shifts which
+          classes are favoured rather than sharpness, nearest-neighbour produces blocky rather than
+          blurred edges, and a frozen ImageNet encoder still detects edges well.
+        difficulty: advanced
+
+  - topic: cv-instance-segmentation
+    # Source: D2L.ai - Region-based CNNs, Mask R-CNN section
+    questions:
+      - id: cv-instance-vs-semantic-output
+        prompt: Three overlapping sheep are photographed. How does an instance segmentation output differ from a semantic one here?
+        options:
+          - "It returns one mask per sheep, whereas semantic output gives a single merged sheep region"
+          - "It returns a single merged sheep region, whereas semantic output separates the three animals"
+          - "It returns three bounding boxes and no masks, whereas semantic output returns pixel labels"
+          - "It returns identical output, since both tasks assign one class label to every image pixel"
+        answer: "It returns one mask per sheep, whereas semantic output gives a single merged sheep region"
+        explanation: >-
+          Instance segmentation adds identity on top of class, so each animal gets its own mask.
+          Merging is the semantic behaviour, not the instance one; instance methods produce masks
+          rather than boxes alone; and the two tasks differ precisely in whether identity is
+          represented.
+        difficulty: beginner
+        mastery: true
+      - id: cv-mask-rcnn-third-branch
+        prompt: Mask R-CNN is described as Faster R-CNN with an extra branch. What does that branch output and where is it attached?
+        options:
+          - "A small binary mask per region of interest, predicted in parallel with the class and box heads"
+          - "A refined bounding box per region, predicted after the class head has committed to a label"
+          - "A depth map for the whole image, predicted from the shared backbone before proposals exist"
+          - "A confidence recalibration for each class, predicted from the mask head after suppression"
+        answer: "A small binary mask per region of interest, predicted in parallel with the class and box heads"
+        explanation: >-
+          The mask branch is a small fully convolutional head on each RoI, running alongside
+          classification and box regression rather than after them. Box refinement already exists in
+          Faster R-CNN, depth is a different task entirely, and no recalibration stage follows
+          suppression.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-roi-align-vs-pool
+        prompt: Mask R-CNN replaces region-of-interest pooling with RoI align. Why does that matter more for masks than for boxes?
+        options:
+          - "Pooling quantises region boundaries to the feature grid, and that misalignment shifts masks visibly"
+          - "Pooling loses the channel dimension, and masks need all channels while boxes only need four numbers"
+          - "Pooling is far slower per region, and mask heads run on many more regions than box heads do"
+          - "Pooling cannot handle regions smaller than the kernel, and masks are always smaller than boxes"
+        answer: "Pooling quantises region boundaries to the feature grid, and that misalignment shifts masks visibly"
+        explanation: >-
+          RoI pooling rounds coordinates to integers, a sub-pixel error a box can absorb but a
+          per-pixel mask cannot, so bilinear sampling replaces it. Channels are preserved either
+          way, both heads see the same regions, and region size is not the limitation being fixed.
+        difficulty: advanced
+      - id: cv-instance-mask-per-class
+        prompt: Mask R-CNN predicts one binary mask per class rather than a single mask with class competition. Why?
+        options:
+          - "Decoupling class from shape means the mask loss never has to compare rival class predictions"
+          - "Predicting one mask per class is cheaper, since only one channel is ever computed per region"
+          - "A single mask cannot represent a non-rectangular shape, which per-class masks make possible"
+          - "Per-class masks are required so that suppression can compare masks across different classes"
+        answer: "Decoupling class from shape means the mask loss never has to compare rival class predictions"
+        explanation: >-
+          The classification head picks the label and only that label mask contributes to the loss,
+          so shape prediction does not compete across classes. Per-class masks cost more channels
+          rather than fewer, any binary mask can be non-rectangular, and suppression works on boxes
+          and scores.
+        difficulty: advanced
+
+  - topic: cv-evaluation-metrics-cv
+    # Source: Ultralytics - YOLO performance metrics
+    questions:
+      - id: cv-map-construction
+        prompt: How is mean average precision assembled from raw detections?
+        options:
+          - "Average precision from each class precision-recall curve, then the mean across all classes"
+          - "Precision and recall averaged separately across classes, then multiplied together at the end"
+          - "Accuracy computed per image, then averaged across every image in the evaluation set"
+          - "The single best precision value per class, then the mean of those maxima across classes"
+        answer: "Average precision from each class precision-recall curve, then the mean across all classes"
+        explanation: >-
+          AP is the area under one class precision-recall curve, and mAP averages those areas, which
+          is why it summarises behaviour across all confidence thresholds. Multiplying averaged
+          precision and recall is not AP, detection has no per-image accuracy, and taking only the
+          peak precision ignores the curve.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-map-50-vs-95
+        prompt: Ultralytics reports both mAP50 and mAP50-95. What does the second number add?
+        options:
+          - "It averages mAP over IoU thresholds from 0.50 to 0.95, so it rewards tighter localisation"
+          - "It averages mAP over confidence thresholds from 0.50 to 0.95, so it rewards calibration"
+          - "It reports mAP only at the strictest threshold of 0.95, so it is the harder single number"
+          - "It averages mAP over image sizes from half to full resolution, so it rewards scale robustness"
+        answer: "It averages mAP over IoU thresholds from 0.50 to 0.95, so it rewards tighter localisation"
+        explanation: >-
+          The range sweeps the geometric matching criterion in steps of 0.05, so sloppy boxes that
+          pass at 0.50 fail higher up and drag the average down. It is an IoU sweep rather than a
+          confidence or resolution sweep, and it averages many thresholds instead of reporting only
+          the hardest.
+        difficulty: advanced
+        mastery: true
+      - id: cv-per-class-recall-pitfall
+        prompt: Your detector reports mAP of 0.62, but the class you actually care about is missed constantly. How did the headline number hide that?
+        options:
+          - "mAP averages classes equally, so strong common classes mask a weak rare one in the mean"
+          - "mAP ignores recall entirely, so a class that is never detected cannot lower the score"
+          - "mAP is computed only on the first few images, so rare classes rarely appear in it"
+          - "mAP counts a missed detection as a true negative, which raises rather than lowers it"
+        answer: "mAP averages classes equally, so strong common classes mask a weak rare one in the mean"
+        explanation: >-
+          Averaging across classes is exactly why you must read the per-class AP table before
+          trusting a single figure. Recall is one axis of the curve mAP integrates, evaluation covers
+          the whole split, and misses count as false negatives which do reduce recall.
+        difficulty: intermediate
+      - id: cv-precision-recall-tradeoff-threshold
+        prompt: Raising the confidence threshold on a deployed detector moves precision and recall which ways, and when is that the right call?
+        options:
+          - "Precision up and recall down, which suits a pipeline where a false alarm is costly"
+          - "Recall up and precision down, which suits a pipeline where a false alarm is costly"
+          - "Both up together, which is why tuning the threshold is the cheapest way to improve a model"
+          - "Both down together, since a stricter cut-off discards correct and incorrect boxes alike"
+        answer: "Precision up and recall down, which suits a pipeline where a false alarm is costly"
+        explanation: >-
+          A stricter cut-off keeps only confident boxes, so the kept set is purer but smaller, which
+          is what you want when a false positive triggers expensive action. The reverse pairing is
+          backwards, the two metrics trade off rather than both rising, and true detections above the
+          threshold survive.
+        difficulty: intermediate
+      - id: cv-dice-vs-iou-segmentation
+        prompt: For segmentation you can report IoU or Dice. How do they relate, and when does the choice matter most?
+        options:
+          - "Dice weights the overlap more generously than IoU, and the gap is widest on small thin regions"
+          - "Dice and IoU are the same quantity written differently, so the reported values always match"
+          - "Dice ignores false positives while IoU ignores false negatives, so they measure opposite errors"
+          - "Dice applies only to binary masks and IoU only to multi-class masks, so they never compete"
+        answer: "Dice weights the overlap more generously than IoU, and the gap is widest on small thin regions"
+        explanation: >-
+          Dice puts twice the intersection over the summed areas, so it always reads at least as high
+          as IoU, and the divergence is largest where the region is small and boundary pixels
+          dominate. They are monotonically related but not equal, both penalise false positives and
+          negatives, and each extends to multi-class by averaging per class.
+        difficulty: advanced
+
+  - topic: cv-vision-transformers-awareness
+    # Source: D2L.ai - Vision Transformers
+    questions:
+      - id: cv-vit-patch-embedding
+        prompt: How does a Vision Transformer turn a 224x224 image into a sequence the transformer blocks can consume?
+        options:
+          - "Split into 16x16 patches, flatten each one, and project it linearly to an embedding vector"
+          - "Flatten the whole image into one long pixel vector and project it to a single embedding"
+          - "Run a convolutional backbone first, then feed its final class scores in as the sequence"
+          - "Treat each individual pixel as a token, giving a sequence of just over fifty thousand items"
+        answer: "Split into 16x16 patches, flatten each one, and project it linearly to an embedding vector"
+        explanation: >-
+          Patching gives 196 tokens for a 224 image at patch size 16, which keeps self-attention
+          tractable. One flat vector has no sequence to attend over, class scores discard all spatial
+          content, and per-pixel tokens make quadratic attention hopelessly expensive.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-vit-data-appetite
+        prompt: A ViT trained from scratch on 20,000 images underperforms a ResNet of similar size. What does the D2L discussion attribute this to?
+        options:
+          - "Transformers lack the locality and translation bias convolution builds in, so they need more data"
+          - "Transformers cannot process images at all without a convolutional stem to extract features first"
+          - "Transformers overfit less than convolutional networks, so they need far more epochs to fit"
+          - "Transformers require square inputs, and non-square photographs waste most of the training signal"
+        answer: "Transformers lack the locality and translation bias convolution builds in, so they need more data"
+        explanation: >-
+          Self-attention starts with almost no spatial prior, so the invariances a CNN gets for free
+          must be learned from examples, which is why ViTs shine only after large-scale pretraining.
+          A patch projection suffices as a stem, weaker priors mean more overfitting not less, and
+          inputs are resized to square routinely.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-vit-positional-encoding
+        prompt: Why must a Vision Transformer add positional embeddings to its patch embeddings?
+        options:
+          - "Self-attention is permutation invariant, so without them the patch layout carries no meaning"
+          - "Self-attention cannot handle negative values, and positional embeddings shift them upward"
+          - "Positional embeddings normalise patch magnitudes so attention scores stay numerically stable"
+          - "Positional embeddings supply the class label during training and are dropped at inference"
+        answer: "Self-attention is permutation invariant, so without them the patch layout carries no meaning"
+        explanation: >-
+          Attention treats its input as a set, so shuffling patches would leave the output unchanged
+          unless position is encoded. Sign and magnitude are handled by layer normalisation, and
+          positional embeddings are learned inputs present at inference rather than label
+          information.
+        difficulty: advanced
+      - id: cv-vit-when-to-choose
+        prompt: You have 5,000 labelled images and need the strongest classifier you can get. What does the CNN-versus-ViT contrast suggest?
+        options:
+          - "Use a pretrained backbone of either family, since at this size pretraining dominates the choice"
+          - "Train a ViT from scratch, because attention extracts more from a small dataset than convolution"
+          - "Train a CNN from scratch, because pretrained weights cannot transfer to a five-thousand-image task"
+          - "Use no pretrained model, since fine-tuning always overfits datasets below ten thousand images"
+        answer: "Use a pretrained backbone of either family, since at this size pretraining dominates the choice"
+        explanation: >-
+          At five thousand images the decisive factor is transferred features rather than
+          architecture family, and a pretrained ViT competes fine. Training a ViT from scratch is the
+          worst case for its weak priors, transfer works well at this size, and fine-tuning is the
+          standard remedy for small data rather than a cause of overfitting.
+        difficulty: beginner
+
+  - topic: cv-end-to-end-project
+    # Source: PyTorch - Transfer Learning for Computer Vision Tutorial
+    questions:
+      - id: cv-project-two-strategies
+        prompt: The PyTorch transfer-learning tutorial contrasts two strategies on the same dataset. What are they?
+        options:
+          - "Fine-tuning the whole network, versus freezing the backbone and training only the final layer"
+          - "Training from random initialisation, versus training the same network twice and averaging it"
+          - "Fine-tuning the whole network, versus training a linear model on raw pixels for comparison"
+          - "Freezing the final layer only, versus freezing every layer including the classification head"
+        answer: "Fine-tuning the whole network, versus freezing the backbone and training only the final layer"
+        explanation: >-
+          The tutorial runs both a full fine-tune and a fixed feature extractor so the accuracy and
+          runtime difference is visible. Random initialisation is not one of its two arms, no
+          ensembling is involved, and freezing the head while training the backbone would leave the
+          output layer meaningless.
+        difficulty: beginner
+        mastery: true
+      - id: cv-project-replace-fc
+        prompt: Before training on a two-class dataset, the tutorial reassigns model.fc. Why is that step mandatory?
+        options:
+          - "The pretrained head emits 1000 ImageNet logits, so it must be swapped for a two-way layer"
+          - "The pretrained head has no bias term, so it must be replaced before gradients can flow"
+          - "The pretrained head is frozen permanently, so a new one is needed to hold any gradient"
+          - "The pretrained head expects grayscale features, so it must be rebuilt for colour input"
+        answer: "The pretrained head emits 1000 ImageNet logits, so it must be swapped for a two-way layer"
+        explanation: >-
+          Output dimension must match your class count or the loss cannot be computed against your
+          labels. The original head does have a bias, freezing is a choice you make rather than a
+          property of the weights, and channel handling happens at the input stem not the classifier.
+        difficulty: beginner
+        mastery: true
+      - id: cv-project-scheduler-role
+        prompt: The tutorial pairs SGD with a step learning-rate scheduler. What is the scheduler contributing?
+        options:
+          - "It cuts the learning rate periodically so late epochs refine rather than disturb the weights"
+          - "It raises the learning rate periodically so the model can escape every local minimum found"
+          - "It adjusts the batch size as training proceeds, which is what the step interval controls"
+          - "It stops training automatically once validation accuracy has failed to improve for a while"
+        answer: "It cuts the learning rate periodically so late epochs refine rather than disturb the weights"
+        explanation: >-
+          A step decay takes large steps early and small ones later, which is how fine-tuning settles
+          without destroying transferred features. It decays rather than raises the rate, batch size
+          is unrelated to the scheduler, and stopping on a plateau is early stopping, a separate
+          mechanism.
+        difficulty: intermediate
+      - id: cv-project-train-eval-mode
+        prompt: The tutorial calls model.train() and model.eval() around each phase of every epoch. What breaks if the eval call is omitted?
+        options:
+          - "Dropout stays active and batch-norm keeps updating running statistics, so validation is noisy"
+          - "Gradients are still accumulated, so the validation pass slowly trains the model on held-out data"
+          - "The data loader keeps shuffling, so validation metrics are computed on the wrong label order"
+          - "The learning-rate scheduler advances twice per epoch, so the rate decays at double speed"
+        answer: "Dropout stays active and batch-norm keeps updating running statistics, so validation is noisy"
+        explanation: >-
+          Those two layers behave differently between modes, so evaluating in train mode gives
+          unstable numbers and quietly contaminates the running statistics. Gradient accumulation is
+          controlled separately by no_grad, shuffling does not desynchronise labels from images, and
+          the scheduler advances only where you step it.
+        difficulty: advanced
+      - id: cv-project-reflection-step
+        prompt: Your fine-tuned classifier reaches 92% validation accuracy. What is the most useful next diagnostic before calling the project done?
+        options:
+          - "Inspect the misclassified images and the confusion matrix to see which classes confuse it"
+          - "Retrain with a larger backbone, since a bigger model is the reliable way to lift accuracy"
+          - "Report the best epoch accuracy seen during training, since that is the model you would ship"
+          - "Increase the number of epochs until validation accuracy stops changing between runs"
+        answer: "Inspect the misclassified images and the confusion matrix to see which classes confuse it"
+        explanation: >-
+          Looking at errors tells you whether the remaining 8% is label noise, a class pair, or a
+          data gap, which decides what to do next. Scaling the model is a guess before diagnosis,
+          reporting the best epoch cherry-picks a number, and more epochs address neither of the
+          likely causes.
+        difficulty: intermediate
+
+  - topic: cv-sift-orb-awareness
+    # Source: OpenCV - Introduction to SIFT
+    questions:
+      - id: cv-sift-scale-invariance
+        prompt: How does SIFT achieve scale invariance when locating keypoints?
+        options:
+          - "It searches for extrema across a scale space built by progressively blurring the image"
+          - "It resizes the input to a single fixed resolution, which removes scale from the problem"
+          - "It normalises each descriptor by the image area, which cancels any change of scale"
+          - "It detects corners at one scale and then rescales their coordinates to the original image"
+        answer: "It searches for extrema across a scale space built by progressively blurring the image"
+        explanation: >-
+          Keypoints are extrema of the difference-of-Gaussian pyramid in both space and scale, so the
+          detected scale travels with the feature. Fixing the input resolution only hides scale
+          change, descriptor normalisation handles contrast rather than scale, and single-scale
+          corner detection is exactly what SIFT improves on.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-sift-orientation-descriptor
+        prompt: Each SIFT keypoint is assigned a dominant orientation before its descriptor is built. What does that step buy?
+        options:
+          - "Rotation invariance, because the gradient histograms are measured relative to that orientation"
+          - "Illumination invariance, because the orientation cancels any overall brightness change"
+          - "Scale invariance, because orientation is what encodes the size of the detected keypoint"
+          - "Faster matching, because orientation lets descriptors be compared as single scalar values"
+        answer: "Rotation invariance, because the gradient histograms are measured relative to that orientation"
+        explanation: >-
+          Measuring gradients in a canonical frame means a rotated patch yields the same descriptor.
+          Illumination is handled by normalising the descriptor vector, scale comes from the pyramid
+          level, and the descriptor stays a 128-dimensional vector rather than collapsing to one
+          number.
+        difficulty: intermediate
+        mastery: true
+      - id: cv-sift-descriptor-shape
+        prompt: What does the SIFT descriptor for one keypoint actually contain?
+        options:
+          - "A 128-value vector of gradient orientation histograms taken over a grid around the point"
+          - "A 128 by 128 pixel crop of the image, stored raw so patches can be compared directly"
+          - "A single scalar corner-strength score, which is what the matcher compares between images"
+          - "The pixel coordinates and scale of the point, with no appearance information attached"
+        answer: "A 128-value vector of gradient orientation histograms taken over a grid around the point"
+        explanation: >-
+          Four by four spatial cells times eight orientation bins gives the familiar 128 numbers, and
+          gradients rather than raw pixels are what make it robust. A raw crop would be sensitive to
+          lighting, a scalar cannot distinguish patches, and coordinates alone carry no appearance to
+          match on.
+        difficulty: advanced
+      - id: cv-sift-orb-where-they-win
+        prompt: For real-time panorama stitching on a phone, why might classical keypoints still beat a learned deep feature extractor?
+        options:
+          - "They need no training data or GPU and give sub-pixel geometry usable straight away"
+          - "They are strictly more accurate than any learned descriptor on every matching benchmark"
+          - "They are invariant to viewpoint change in a way that learned descriptors can never be"
+          - "They produce a single global vector per image, which makes geometric fitting unnecessary"
+        answer: "They need no training data or GPU and give sub-pixel geometry usable straight away"
+        explanation: >-
+          Classical detectors are cheap, deterministic and directly geometric, which is why they
+          survive in stitching, calibration and visual odometry. Learned descriptors often win on
+          hard matching benchmarks, neither family is fully viewpoint invariant, and keypoint methods
+          produce many local features precisely so geometry can be fitted.
+        difficulty: intermediate

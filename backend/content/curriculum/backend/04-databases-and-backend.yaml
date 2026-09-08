@@ -53,24 +53,12 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for SQL SELECT.
-            questions:
-            - slug: db-sql-select-q1
-              prompt: What is the core idea of SQL SELECT?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Query rows with SELECT, WHERE, ORDER BY.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Query rows with SELECT, WHERE, ORDER BY.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: db-sql-select-practice
               title: 'Practice: SQL SELECT'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write 5 SELECT queries on a sample table. HOW MANY:
-                5. WHERE: SQLite.'
+              instructions: 'WHAT: Write 5 SELECT queries on a sample table. HOW MANY: 5. WHERE: SQLite.'
               difficulty: beginner
               order: 0
         - slug: db-sql-joins
@@ -106,18 +94,7 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for SQL JOINs.
-            questions:
-            - slug: db-sql-joins-q1
-              prompt: What is the core idea of SQL JOINs?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Combine tables with INNER/LEFT joins correctly.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Combine tables with INNER/LEFT joins correctly.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: db-sql-joins-practice
               title: 'Practice: SQL JOINs'
@@ -158,24 +135,14 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Indexes & query plans.
-            questions:
-            - slug: db-indexes-q1
-              prompt: What is the core idea of Indexes & query plans?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Explain when an index helps and when it hurts.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Explain when an index helps and when it hurts.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: db-indexes-practice
               title: 'Practice: Indexes & query plans'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Compare EXPLAIN QUERY PLAN with/without index.
-                HOW MANY: 2. WHERE: SQLite.'
+              instructions: 'WHAT: Compare EXPLAIN QUERY PLAN with/without index. HOW MANY: 2. WHERE:
+                SQLite.'
               difficulty: beginner
               order: 0
         - slug: db-transactions
@@ -211,24 +178,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Transactions.
-            questions:
-            - slug: db-transactions-q1
-              prompt: What is the core idea of Transactions?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Use BEGIN/COMMIT/ROLLBACK for atomic updates.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Use BEGIN/COMMIT/ROLLBACK for atomic updates.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: db-transactions-practice
               title: 'Practice: Transactions'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Script a transfer with rollback on failure. HOW
-                MANY: 1. WHERE: SQLite.'
+              instructions: 'WHAT: Script a transfer with rollback on failure. HOW MANY: 1. WHERE: SQLite.'
               difficulty: beginner
               order: 0
         - slug: db-schema-design
@@ -237,8 +193,7 @@ track:
           order: 4
           prerequisites:
           - db-sql-joins
-          learning_objective: Model entities, keys, and relationships without premature
-            complexity.
+          learning_objective: Model entities, keys, and relationships without premature complexity.
           mastery_criteria:
           - Explain Schema design basics in your own words.
           - Complete the mapped practice checklist.
@@ -251,8 +206,7 @@ track:
           lessons:
           - slug: db-schema-design-core
             title: Schema design basics
-            description: Model entities, keys, and relationships without premature
-              complexity.
+            description: Model entities, keys, and relationships without premature complexity.
             order: 0
             hours_estimated: 0.75
             resources:
@@ -266,24 +220,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Schema design basics.
-            questions:
-            - slug: db-schema-design-q1
-              prompt: What is the core idea of Schema design basics?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Model entities, keys, and relationships without premature complexity.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Model entities, keys, and relationships without premature complexity.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: db-schema-design-practice
               title: 'Practice: Schema design basics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Design schema for a notes app. HOW MANY: 1 ER sketch.
-                WHERE: notes.'
+              instructions: 'WHAT: Design schema for a notes app. HOW MANY: 1 ER sketch. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-be-http
@@ -322,24 +265,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for HTTP fundamentals.
-            questions:
-            - slug: be-http-q1
-              prompt: What is the core idea of HTTP fundamentals?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Explain methods, status codes, headers, and idempotency.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Explain methods, status codes, headers, and idempotency.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-http-practice
               title: 'Practice: HTTP fundamentals'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Map 8 status codes to scenarios. HOW MANY: 8. WHERE:
-                notes.'
+              instructions: 'WHAT: Map 8 status codes to scenarios. HOW MANY: 8. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: be-rest
@@ -375,24 +307,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for REST resources.
-            questions:
-            - slug: be-rest-q1
-              prompt: What is the core idea of REST resources?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Model collections/items with consistent URLs and verbs.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Model collections/items with consistent URLs and verbs.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-rest-practice
               title: 'Practice: REST resources'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Design REST resources for bookstore. HOW MANY:
-                1. WHERE: notes.'
+              instructions: 'WHAT: Design REST resources for bookstore. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: be-json
@@ -428,24 +349,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for JSON APIs.
-            questions:
-            - slug: be-json-q1
-              prompt: What is the core idea of JSON APIs?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Serialize request/response bodies and validate shapes.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Serialize request/response bodies and validate shapes.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-json-practice
               title: 'Practice: JSON APIs'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Design 3 request/response JSON samples. HOW MANY:
-                3. WHERE: notes.'
+              instructions: 'WHAT: Design 3 request/response JSON samples. HOW MANY: 3. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: be-fastapi-intro
@@ -482,24 +392,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for FastAPI intro.
-            questions:
-            - slug: be-fastapi-intro-q1
-              prompt: What is the core idea of FastAPI intro?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Build a tiny FastAPI app with typed routes.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Build a tiny FastAPI app with typed routes.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-fastapi-intro-practice
               title: 'Practice: FastAPI intro'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Create GET/POST hello endpoints. HOW MANY: 2 routes.
-                WHERE: local repo.'
+              instructions: 'WHAT: Create GET/POST hello endpoints. HOW MANY: 2 routes. WHERE: local repo.'
               difficulty: beginner
               order: 0
             - slug: be-fastapi-intro-build
@@ -541,24 +440,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Auth basics.
-            questions:
-            - slug: be-auth-basics-q1
-              prompt: What is the core idea of Auth basics?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Distinguish authentication vs authorization; hash passwords.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Distinguish authentication vs authorization; hash passwords.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-auth-basics-practice
               title: 'Practice: Auth basics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Outline register/login flow. HOW MANY: 1. WHERE:
-                notes.'
+              instructions: 'WHAT: Outline register/login flow. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: be-errors
@@ -594,24 +482,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for API error handling.
-            questions:
-            - slug: be-errors-q1
-              prompt: What is the core idea of API error handling?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Return structured errors without leaking internals.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Return structured errors without leaking internals.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-errors-practice
               title: 'Practice: API error handling'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Define error envelope for 4 failure modes. HOW
-                MANY: 4. WHERE: notes.'
+              instructions: 'WHAT: Define error envelope for 4 failure modes. HOW MANY: 4. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: be-persistence
@@ -648,24 +525,14 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for API + SQL persistence.
-            questions:
-            - slug: be-persistence-q1
-              prompt: What is the core idea of API + SQL persistence?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Wire a FastAPI route to SQL CRUD.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Wire a FastAPI route to SQL CRUD.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: be-persistence-practice
               title: 'Practice: API + SQL persistence'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Persist one resource with SQLAlchemy/SQLite. HOW
-                MANY: 1 resource. WHERE: local repo.'
+              instructions: 'WHAT: Persist one resource with SQLAlchemy/SQLite. HOW MANY: 1 resource.
+                WHERE: local repo.'
               difficulty: beginner
               order: 0
             - slug: be-persistence-build

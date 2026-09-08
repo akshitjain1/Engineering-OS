@@ -1729,15 +1729,20 @@ track:
               difficulty: medium
               mastery_requirement: true
             - slug: cf-os-memory-q3
-              prompt: 'Stack vs heap at programmer level:'
+              prompt: At the level a programmer needs, what distinguishes the stack from the heap in a
+                running process?
               options:
-              - Both are disk partitions
-              - Stack holds call frames/locals; heap is for dynamic allocation
-              - Heap is only for Git objects
-              - Stack is only for SSDs
-              answer: Stack holds call frames/locals; heap is for dynamic allocation
-              explanation: Enough for Domain 0.
-              difficulty: easy
+              - The stack holds call frames and locals; the heap serves allocations that outlive a call
+              - The stack holds data read from disk; the heap holds data waiting to be written to disk
+              - The stack is memory on the CPU die; the heap is the memory sitting on the motherboard
+              - The stack stores small values and the heap stores large ones, decided by size alone
+              answer: The stack holds call frames and locals; the heap serves allocations that outlive
+                a call
+              explanation: 'The distinction is lifetime and who manages it: stack frames come and go with
+                calls automatically, while heap allocations persist until freed. Neither region is about
+                disk transfer. Both live in main memory rather than on the CPU, and size influences where
+                you allocate but is not what defines the two regions.'
+              difficulty: beginner
               mastery_requirement: false
             - slug: cf-os-memory-q4
               prompt: Who decides which physical RAM page backs an address?
@@ -3242,6 +3247,7 @@ track:
               description: git init vs git clone. Canonical book chapter.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-repository-reference
               title: MIT Missing Semester 2026 — Version Control and Git
               type: article
@@ -3337,6 +3343,7 @@ track:
               description: status, add, commit, diff. Canonical.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-commits-reference
               title: Pro Git — Viewing the Commit History
               type: book
@@ -3438,6 +3445,7 @@ track:
               description: What a branch is.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-branches-reference
               title: Pro Git — Branch Management
               type: book
@@ -3614,6 +3622,7 @@ track:
               description: Canonical rebase vs merge. Read the warning about public history.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-rebase-reference
               title: MIT Missing Semester 2026 — Git
               type: article
@@ -3967,6 +3976,7 @@ track:
               description: reset, checkout/restore, amend. Pair with git-revert(1).
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-reset-revert-reference
               title: git-reset / git-revert / git-restore
               type: documentation
@@ -4060,6 +4070,7 @@ track:
               description: Canonical command page.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-cherry-pick-reference
               title: MIT Missing Semester 2026 — Git
               type: article
@@ -4150,6 +4161,7 @@ track:
               description: Canonical stash workflow.
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-stash-reference
               title: git-stash documentation
               type: documentation
@@ -4243,6 +4255,7 @@ track:
               description: 'Official hands-on: repo, branch, commit, PR, merge.'
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: cf-github-workflow-reference
               title: GitHub Docs — Pull request quickstart
               type: documentation
@@ -4539,7 +4552,7 @@ track:
             - slug: cf-debugger-reference
               title: VS Code — Debug code
               type: documentation
-              url: https://code.visualstudio.com/docs/editor/debugging
+              url: https://code.visualstudio.com/docs/debugtest/debugging
               provider: VS Code
               role: REFERENCE
               description: Breakpoints, step, variables, call stack. PRIMARY course TBD.

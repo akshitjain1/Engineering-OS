@@ -1,0 +1,129 @@
+# NLP awareness shell: orientation questions only.
+#
+# Both topics map to the introduction of the Hugging Face LLM course.
+# nlp-awareness asks what the field covers and the vocabulary that page defines;
+# nlp-path asks what the course expects first and in which order it teaches.
+schema_version: 1
+kind: question_bank
+module: mod-nlp-shell
+topics:
+  - topic: nlp-awareness
+    # Source: Hugging Face LLM course, chapter 1 section 1 - Introduction
+    questions:
+      - id: nlp-aware-not-a-task
+        prompt: "The introduction lists the kinds of problem this field covers. Which of these is not among them?"
+        options:
+          - "Compressing an image file so it downloads faster over a slow mobile connection"
+          - "Classifying a whole sentence, such as judging whether a review is positive"
+          - "Classifying each word of a sentence, such as marking people and place names"
+          - "Generating new text from input text, such as translating or summarising it"
+        answer: "Compressing an image file so it downloads faster over a slow mobile connection"
+        explanation: >-
+          The page enumerates language tasks: sentence classification, word classification, text
+          generation, answer extraction and sequence-to-sequence generation. Image compression involves no
+          language at all, while the other three are named directly as task families the course will
+          work through.
+        difficulty: beginner
+      - id: nlp-aware-why-text-is-hard
+        prompt: "The introduction says people understand a sentence in a way computers do not. What does that mean in practice?"
+        options:
+          - "Meaning depends on context, so a model needs a representation of text rather than letters"
+          - "Computers cannot store text at all, so an encoding must be invented for each new task"
+          - "People read faster than computers, so a model needs more time to reach the same answer"
+          - "Text is hopelessly ambiguous to a machine, so no dependable system can be built on it"
+        answer: "Meaning depends on context, so a model needs a representation of text rather than letters"
+        explanation: >-
+          The difficulty is semantic: characters carry no meaning by themselves, so the field is about
+          building representations that capture context. Storing text is trivial, reading speed is not the
+          issue, and the pessimistic conclusion contradicts a course whose whole subject is working
+          systems.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-aware-what-an-llm-is
+        prompt: "How does this introduction describe a large language model?"
+        options:
+          - "A model trained on huge text corpora that handles many tasks without task-specific training"
+          - "A model trained on one labelled dataset per task, which is why each task needs its own"
+          - "A search engine over its training corpus that returns the passage closest to a prompt"
+          - "A rule system whose grammar linguists wrote and which was then scaled to more languages"
+        answer: "A model trained on huge text corpora that handles many tasks without task-specific training"
+        explanation: >-
+          The page contrasts general-purpose large models with the older one-model-per-task approach, which
+          is the second option and the thing being superseded. A large model generates rather than
+          retrieves passages, and hand-written grammars belong to an earlier era of the field entirely.
+        difficulty: beginner
+      - id: nlp-aware-limitation-named
+        prompt: "Which limitation of large language models does this introduction raise?"
+        options:
+          - "They can produce confident text that is simply wrong, which the page calls hallucination"
+          - "They cannot process any language other than English, whatever their training data held"
+          - "They must be retrained from scratch before answering a question of an unfamiliar kind"
+          - "They return an identical answer to a prompt every time, which limits creative work"
+        answer: "They can produce confident text that is simply wrong, which the page calls hallucination"
+        explanation: >-
+          Hallucination, bias and a bounded context window are the limitations the page names. Multilingual
+          models are commonplace, generalising to new phrasings without retraining is the selling point
+          being described, and the outputs vary between runs rather than being fixed.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: nlp-path
+    # Source: Hugging Face LLM course introduction - prerequisites and chapter ordering
+    questions:
+      - id: nlp-path-prerequisites
+        prompt: "What does this course expect you to already have before starting its first chapter?"
+        options:
+          - "Solid Python and some introductory deep learning; no prior research background needed"
+          - "A graduate background in computational linguistics plus experience training transformers"
+          - "Fluency in two deep learning frameworks, since both are used in every single chapter"
+          - "No programming experience, because the course teaches Python alongside the material"
+        answer: "Solid Python and some introductory deep learning; no prior research background needed"
+        explanation: >-
+          The stated prerequisites are programming ability and a general grasp of deep learning, which is
+          why the course can start from using models rather than from mathematics. It does not assume a
+          linguistics degree, framework fluency is helpful rather than required, and it is not a
+          first programming course.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-path-datasets-before-finetune
+        prompt: "Why does the course cover datasets and tokenizers before fine-tuning a model on your own task?"
+        options:
+          - "Fine-tuning consumes your data in the model's own token format, so both come first"
+          - "Tokenizers are the hardest chapters, so they are placed early while motivation lasts"
+          - "Fine-tuning is optional, so the earlier chapters have to stand alone without it"
+          - "Datasets are needed only for evaluation, which the course performs before training"
+        answer: "Fine-tuning consumes your data in the model's own token format, so both come first"
+        explanation: >-
+          A fine-tune is a data pipeline plus a training loop, so loading and tokenising your corpus is a
+          strict dependency of it. Difficulty is not what sets the ordering, fine-tuning is central rather
+          than optional, and evaluation needs the same dataset machinery rather than preceding it.
+        difficulty: intermediate
+      - id: nlp-path-skip-pretraining
+        prompt: "Which step does this path let you skip on the way to a working language feature?"
+        options:
+          - "Pretraining a transformer yourself, because you begin from an existing checkpoint"
+          - "Loading a pretrained model, because the early chapters train small models yourself"
+          - "Learning what a tokenizer does, because the high-level pipeline hides it from you"
+          - "Evaluating your model, because a fine-tune on your own data cannot regress quality"
+        answer: "Pretraining a transformer yourself, because you begin from an existing checkpoint"
+        explanation: >-
+          The course is built on the model hub, so pretraining is the one enormous step you inherit rather
+          than repeat. Loading a pretrained model is the very first thing you do, tokenisation gets a
+          chapter of its own because hiding it causes bugs, and a fine-tune absolutely can make quality
+          worse.
+        difficulty: intermediate
+      - id: nlp-path-late-chapters-assume
+        prompt: "A learner jumps straight to the later chapters on optimising and aligning large models. What does the path assume they already did?"
+        options:
+          - "Used pretrained models and fine-tuned one, so later work has a baseline to improve"
+          - "Read the original paper behind each architecture, which those chapters build upon"
+          - "Trained a language model from raw text, which the alignment chapters take as input"
+          - "Written their own tokenizer library, since the optimisation chapters modify it"
+        answer: "Used pretrained models and fine-tuned one, so later work has a baseline to improve"
+        explanation: >-
+          The later material tunes and aligns something that already works, so the earlier hands-on chapters
+          are its prerequisite. Paper reading is optional enrichment, training a model from raw text is the
+          step the course deliberately skips, and nobody is expected to reimplement the tokenizer
+          library.
+        difficulty: intermediate
+        mastery: true

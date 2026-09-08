@@ -46,15 +46,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Create arrays and compute mean/std for 2 datasets. HOW
-              MANY: 2. WHERE: notebook.
+              PRACTICE: WHAT: Create arrays and compute mean/std for 2 datasets. HOW MANY: 2. WHERE: notebook.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -67,26 +65,16 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for NumPy foundations. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: ds-numpy-q1
-              prompt: Core idea of NumPy foundations?
-              options:
-              - A vague buzzword
-              - Manipulate arrays with NumPy.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Manipulate arrays with NumPy.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for NumPy foundations. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ds-numpy-practice
               title: 'Practice: NumPy foundations'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Create arrays and compute mean/std for 2 datasets.
-                HOW MANY: 2. WHERE: notebook.'
+              instructions: 'WHAT: Create arrays and compute mean/std for 2 datasets. HOW MANY: 2. WHERE:
+                notebook.'
               difficulty: beginner
               order: 0
         - slug: ds-pandas
@@ -123,8 +111,7 @@ track:
 
               BUILD: IMPLEMENT: notebook section.
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -137,26 +124,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Pandas foundations. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: ds-pandas-q1
-              prompt: Core idea of Pandas foundations?
-              options:
-              - A vague buzzword
-              - Load and transform tabular data with Pandas.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Load and transform tabular data with Pandas.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Pandas foundations. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ds-pandas-practice
               title: 'Practice: Pandas foundations'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Load CSV, filter, groupby. HOW MANY: 3 ops. WHERE:
-                notebook.'
+              instructions: 'WHAT: Load CSV, filter, groupby. HOW MANY: 3 ops. WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ds-pandas-build
@@ -185,16 +161,14 @@ track:
           lessons:
           - slug: ds-eda-core
             title: Exploratory data analysis
-            description: 'WHY NOW: Explore distributions and relationships before
-              modeling.
+            description: 'WHY NOW: Explore distributions and relationships before modeling.
 
 
               LEARN: Pandas — https://pandas.pydata.org/docs/user_guide/visualization.html
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Produce 3 EDA plots + written findings. HOW MANY: 3.
-              WHERE: notebook.
+              PRACTICE: WHAT: Produce 3 EDA plots + written findings. HOW MANY: 3. WHERE: notebook.
 
               DESTINATION: LOCAL_IDE
 
@@ -202,8 +176,7 @@ track:
 
               BUILD: IMPLEMENT: notebook section.
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -216,26 +189,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Exploratory data analysis. Content
-                inspection pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: ds-eda-q1
-              prompt: Core idea of Exploratory data analysis?
-              options:
-              - A vague buzzword
-              - Explore distributions and relationships before modeling.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Explore distributions and relationships before modeling.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Exploratory data analysis. Content inspection pending
+                upgrade to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ds-eda-practice
               title: 'Practice: Exploratory data analysis'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Produce 3 EDA plots + written findings. HOW MANY:
-                3. WHERE: notebook.'
+              instructions: 'WHAT: Produce 3 EDA plots + written findings. HOW MANY: 3. WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ds-eda-build
@@ -270,8 +232,7 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Build 3 feature transforms in a Pipeline. HOW MANY:
-              3. WHERE: notebook.
+              PRACTICE: WHAT: Build 3 feature transforms in a Pipeline. HOW MANY: 3. WHERE: notebook.
 
               DESTINATION: LOCAL_IDE
 
@@ -279,8 +240,7 @@ track:
 
               BUILD: IMPLEMENT: notebook section.
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -293,26 +253,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Feature engineering. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: ds-feature-eng-q1
-              prompt: Core idea of Feature engineering?
-              options:
-              - A vague buzzword
-              - Create usable features without leakage.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Create usable features without leakage.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Feature engineering. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ds-feature-eng-practice
               title: 'Practice: Feature engineering'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Build 3 feature transforms in a Pipeline. HOW MANY:
-                3. WHERE: notebook.'
+              instructions: 'WHAT: Build 3 feature transforms in a Pipeline. HOW MANY: 3. WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ds-feature-eng-build
@@ -356,8 +305,7 @@ track:
 
               BUILD: IMPLEMENT: notebook section.
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -370,26 +318,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for SQL for analytics. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: ds-sql-analytics-q1
-              prompt: Core idea of SQL for analytics?
-              options:
-              - A vague buzzword
-              - Answer analytical questions with SQL aggregations.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Answer analytical questions with SQL aggregations.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for SQL for analytics. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ds-sql-analytics-practice
               title: 'Practice: SQL for analytics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write 5 aggregate queries. HOW MANY: 5. WHERE:
-                SQL.'
+              instructions: 'WHAT: Write 5 aggregate queries. HOW MANY: 5. WHERE: SQL.'
               difficulty: beginner
               order: 0
             - slug: ds-sql-analytics-build

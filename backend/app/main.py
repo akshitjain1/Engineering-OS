@@ -335,6 +335,89 @@ def _serialize_lesson_summary(lesson: CurriculumLesson) -> dict[str, Any]:
     }
 
 
+def _done_when(
+    *,
+    practice_exercise: Any,
+    practice_resources: list[Any],
+    mapped_problems: list[Any],
+    build_exercise: Any,
+    overclaimed: bool,
+    question_count: int,
+) -> list[str]:
+    """The finish line for a topic, listing only steps that exist.
+
+    This used to be a fixed list of three, two of which named work that is not
+    always there. 57 topics have no exercises at all, so their checklist read
+    "Complete the PRACTICE quantity/destination" and "Finish BUILD/implement if
+    listed" with nothing behind either line. A learner cannot tell an unwritten
+    step from one they have missed, so the honest list is the shorter one.
+    """
+    steps = ["Finish the LEARN source segment/page listed above"]
+
+    if mapped_problems:
+        steps.append(f"Solve the {len(mapped_problems)} mapped problems, in the order listed")
+    elif overclaimed:
+        steps.append("Work the practice prompt you generate for yourself")
+    elif practice_exercise is not None or practice_resources:
+        steps.append("Complete the PRACTICE quantity at the destination listed")
+
+    if build_exercise is not None:
+        steps.append("Finish the BUILD task")
+
+    if question_count:
+        # Always last: the questions are the check that the reading landed,
+        # so they belong after the work rather than instead of it.
+        steps.append(
+            f"Answer the {question_count} recall questions without looking back at the source"
+        )
+    return steps
+
+
+def _focus_concepts(topic_slug: Optional[str], audit: Any) -> list[str]:
+    """The "Focus" list, in words a person can read.
+
+    ``audit.required_concepts`` holds concept *slugs*, because coverage is
+    computed by set arithmetic against the slugs a resource is recorded as
+    covering. Those slugs were being rendered straight onto the topic page,
+    so the study guidance read ``dsa-dp-mindset-recognize-overlapping-
+    subproblems-and-op`` -- machine text, truncated mid-word. The registry
+    already carries a human sentence per concept; use it.
+
+    Generated contracts also tend to hold the same objective twice, once bare
+    and once prefixed with ``Understand <Topic>:``. Both say the same thing, so
+    the prefixed copy is dropped when the bare one is present.
+    """
+    if audit is None:
+        return []
+    slugs = list(audit.required_concepts or [])
+    if not topic_slug:
+        return slugs
+
+    from app.content.concept_contracts import get_topic_concepts
+
+    entry = get_topic_concepts(topic_slug)
+    names = {c.slug: (c.name or c.slug).strip() for c in (entry.required if entry else [])}
+    labels = [names.get(slug) or slug for slug in slugs]
+
+    if not labels and entry is not None:
+        # A few topics record their concepts as optional rather than required,
+        # so coverage does not gate on them. That is a decision about
+        # readiness, not a reason to show the learner an empty Focus panel --
+        # "depth/width/resolution co-scaling" is exactly what they need to
+        # look for on the page.
+        labels = [(c.name or c.slug).strip() for c in entry.optional]
+
+    kept: list[str] = []
+    for label in labels:
+        # "Understand Foo: <objective>" is a wrapper around "<objective>".
+        tail = label.split(":", 1)[1].strip() if ":" in label else None
+        if tail and any(tail.rstrip(".") == other.rstrip(".") for other in labels if other != label):
+            continue
+        if label not in kept:
+            kept.append(label)
+    return kept
+
+
 def _topic_payload(
     topic: CurriculumTopic,
     topics_by_name: dict[str, CurriculumTopic],
@@ -862,8 +945,12 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
                 "estimate_confidence",
                 None,
             ),
+            # Separate from verification_status on purpose. See the note in
+            # app/content/resources.py: one says the link works, the other
+            # says the content was reviewed against the topic's concepts.
+            "link_checked_at": (primary0 or {}).get("link_checked_at"),
         },
-        "focus_concepts": (audit.required_concepts if audit else [])[:12],
+        "focus_concepts": _focus_concepts(topic.slug, audit)[:12],
         "practice": {
             "title": (
                 f"{len(mapped_problems)} mapped problems"
@@ -905,15 +992,19 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
             "title": build_ex.title if build_ex else None,
             "instructions": build_ex.description if build_ex else None,
         },
-        "done_when": [
-            "Finish the LEARN source segment/page listed above",
-            (
-                "Work the practice prompt and answer the recall questions"
-                if overclaimed
-                else "Complete the PRACTICE quantity/destination"
-            ),
-            "Finish BUILD/implement if listed",
-        ],
+        # Only list steps this topic actually has. The previous version always
+        # said "Complete the PRACTICE quantity/destination" and "Finish
+        # BUILD/implement if listed", which for the 57 topics that have no
+        # exercises was a checklist of two things that do not exist. A done-when
+        # list you cannot finish is worse than a short one.
+        "done_when": _done_when(
+            practice_exercise=practice_ex,
+            practice_resources=practice_resources,
+            mapped_problems=mapped_problems,
+            build_exercise=build_ex,
+            overclaimed=overclaimed,
+            question_count=len(payload.get("questions") or []),
+        ),
         "next": next_in_sequence,
         "readiness": audit.readiness if audit else None,
         "missing_concepts": audit.missing_required if audit else [],

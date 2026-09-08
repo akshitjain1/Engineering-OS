@@ -1,0 +1,421 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ai-systems
+    name: AI Systems & Design
+    description: AI Systems & Design
+    order: 12
+    subjects:
+    - slug: ai-systems-design
+      name: Deep Learning, GenAI, MLOps, System Design
+      order: 0
+      modules:
+      - slug: mod-retrieval-quality
+        name: Retrieval Quality
+        description: Reranking, hybrid search, chunking evaluation, ranked retrieval metrics, ANN index
+          choice and when Postgres is enough.
+        order: 108
+        topics:
+        - slug: rag-reranking-cross-encoders
+          name: Reranking with cross-encoders
+          description: The two-stage retrieve-and-rerank architecture - cheap bi-encoder recall, then
+            expensive cross-encoder precision - and why a cross-encoder cannot be pre-indexed.
+          order: 0
+          prerequisites:
+          - genai-rag
+          - genai-embeddings
+          learning_objective: Add a reranking stage to a retrieval pipeline and explain the recall/precision
+            division of labour.
+          mastery_criteria:
+          - Explain why a bi-encoder can be indexed offline and a cross-encoder cannot.
+          - Say how many candidates you would retrieve before reranking, and what determines that number.
+          - State the latency cost a reranker adds and where it lands in the request path.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: genai
+          lessons:
+          - slug: rag-reranking-cross-encoders-core
+            title: Reranking with cross-encoders
+            description: 'WHY NOW: Add a reranking stage to a retrieval pipeline and explain the recall/precision
+              division of labour.
+
+
+              LEARN: Sentence Transformers — https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: take one query against an existing index, retrieve the top 50, rerank to
+              the top 5 with a cross-encoder, and note which documents moved. HOW MANY: 1 query. WHERE:
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a two-stage retrieve-then-rerank function with the candidate count and
+              final top-n as parameters.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: rag-reranking-cross-encoders-primary
+              title: Retrieve & Re-Rank
+              type: documentation
+              url: https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html
+              provider: Sentence Transformers
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The two-stage architecture - cheap bi-encoder recall, then expensive cross-encoder
+                precision - with the diagram and the reason it works. Reranking is the highest-leverage
+                single change to a mediocre RAG system. The short /examples/applications/... path 301s
+                here.
+            - slug: rag-reranking-cross-encoders-reference
+              title: Cross-Encoders
+              type: documentation
+              url: https://sbert.net/examples/cross_encoder/applications/README.html
+              provider: Sentence Transformers
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Why a cross-encoder is more accurate and cannot be pre-indexed - the architectural
+                reason you need both models.
+        - slug: rag-hybrid-search
+          name: Hybrid search
+          description: Combining BM25 keyword scores with dense vector scores, including the fusion algorithms
+            and the alpha weighting, plus reciprocal rank fusion stated as a formula.
+          order: 1
+          prerequisites:
+          - genai-rag
+          - genai-embeddings
+          learning_objective: Fuse keyword and vector retrieval, and treat the fusion step as a formula
+            rather than a magic dial.
+          mastery_criteria:
+          - Name a query class that dense retrieval fails on and say why BM25 catches it.
+          - Write the reciprocal rank fusion formula and say what its constant damps.
+          - Explain what alpha = 0 and alpha = 1 each reduce hybrid search to.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: genai
+          lessons:
+          - slug: rag-hybrid-search-core
+            title: Hybrid search
+            description: 'WHY NOW: Fuse keyword and vector retrieval, and treat the fusion step as a formula
+              rather than a magic dial.
+
+
+              LEARN: Weaviate — https://docs.weaviate.io/weaviate/search/hybrid
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: find one query where dense retrieval misses and keyword retrieval hits,
+              then check that reciprocal rank fusion over both ranks the right document first. HOW MANY:
+              1 query. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a reciprocal rank fusion function over two ranked lists, tested on that
+              query.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: rag-hybrid-search-primary
+              title: Hybrid search
+              type: documentation
+              url: https://docs.weaviate.io/weaviate/search/hybrid
+              provider: Weaviate
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Combining BM25 keyword scores with dense vector scores, including the fusion
+                algorithms and the alpha weighting - the fix for the classic dense-retrieval failure on
+                rare terms, product codes and names. weaviate.io/developers/... 301s here.
+            - slug: rag-hybrid-search-reference
+              title: Reciprocal rank fusion
+              type: documentation
+              url: https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion
+              provider: Elastic
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: RRF stated as a formula, so you understand the fusion step rather than treating
+                alpha as a magic dial. The old /guide/en/elasticsearch/reference/current/rrf.html 301s
+                here.
+        - slug: rag-chunking-evaluation
+          name: Evaluating chunking strategies
+          description: A controlled experiment across chunking strategies with token-level recall and
+            precision - a measurement method that replaces chunk sizes copied from tutorials.
+          order: 2
+          prerequisites:
+          - rag-retrieval-metrics
+          - genai-eval
+          learning_objective: Measure a chunking strategy instead of choosing one by convention.
+          mastery_criteria:
+          - Explain what token-level precision measures that document-level recall does not.
+          - 'Describe the experiment design: what is held fixed and what varies when comparing two chunkers.'
+          - State the chunk size and overlap you would start from, and name the evidence that would move
+            you off it.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: genai
+          lessons:
+          - slug: rag-chunking-evaluation-core
+            title: Evaluating chunking strategies
+            description: 'WHY NOW: Measure a chunking strategy instead of choosing one by convention.
+
+
+              LEARN: Chroma — https://www.trychroma.com/research/evaluating-chunking
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: evaluate two chunk sizes on the same corpus and query set, reporting recall
+              and precision for each. HOW MANY: 2 configurations. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a chunking sweep that prints recall and precision per configuration.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: rag-chunking-evaluation-primary
+              title: Evaluating Chunking Strategies for Retrieval
+              type: article
+              url: https://www.trychroma.com/research/evaluating-chunking
+              provider: Chroma
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: An actual controlled experiment across chunking strategies with token-level
+                recall and precision - replaces "512 with 50 overlap because a tutorial said so" with
+                a measurement method. The rare case where a vendor published a real study rather than
+                a pitch. research.trychroma.com/evaluating-chunking 301s here.
+        - slug: rag-retrieval-metrics
+          name: Ranked retrieval metrics
+          description: Precision@k, recall@k, MAP and NDCG from the standard information-retrieval textbook
+            - the metrics RAG evaluation keeps reinventing badly.
+          order: 3
+          prerequisites:
+          - genai-rag
+          - ml-metrics
+          learning_objective: Choose and compute the right ranked-retrieval metric for a RAG system.
+          mastery_criteria:
+          - Compute precision@5 and recall@5 by hand from a ranked list with known relevant documents.
+          - Explain what NDCG adds over MAP, and when graded relevance is worth the labelling cost.
+          - Say which single metric you would report to decide whether a reranker helped, and why that
+            one.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: genai
+          lessons:
+          - slug: rag-retrieval-metrics-core
+            title: Ranked retrieval metrics
+            description: 'WHY NOW: Choose and compute the right ranked-retrieval metric for a RAG system.
+
+
+              LEARN: Stanford NLP (Introduction to Information Retrieval) — https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: hand-compute precision@k, recall@k and NDCG@k for one ranked list of ten
+              results with labelled relevance. HOW MANY: 1 ranked list. WHERE: notes or notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: functions for precision@k, recall@k and NDCG@k checked against your hand
+              calculation.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: rag-retrieval-metrics-primary
+              title: Evaluation of ranked retrieval results
+              type: book
+              url: https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html
+              provider: Stanford NLP (Introduction to Information Retrieval)
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Precision@k, recall@k, MAP and NDCG from the standard IR textbook - the metrics
+                RAG evaluation keeps reinventing badly. Learn them from the field that spent forty years
+                on them.
+        - slug: rag-ann-index-choice
+          name: Choosing an ANN index
+          description: 'A decision tree over dataset size, memory budget and recall target - flat versus
+            IVF versus HNSW versus product quantization - checked against objective measured recall/QPS
+            data. Honest gap from the research: there is no vendor-neutral authoritative page comparing
+            FAISS, Chroma, pgvector and managed services, so this topic teaches the index trade-off rather
+            than a product comparison.'
+          order: 4
+          prerequisites:
+          - dsa-big-o
+          - db-indexes
+          learning_objective: Pick an ANN index from dataset size, memory budget and recall target, and
+            read a recall/QPS curve.
+          mastery_criteria:
+          - Say when a flat exact index is the right answer, and roughly where that stops being true.
+          - Explain what IVF, HNSW and product quantization each trade away, and which of them costs recall.
+          - Read an ANN-Benchmarks recall/QPS Pareto plot and state why there is no single winning library.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: genai
+          lessons:
+          - slug: rag-ann-index-choice-core
+            title: Choosing an ANN index
+            description: 'WHY NOW: Pick an ANN index from dataset size, memory budget and recall target,
+              and read a recall/QPS curve.
+
+
+              LEARN: GitHub (facebookresearch/faiss wiki) — https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: state your own dataset size, memory ceiling and recall target, then walk
+              the FAISS decision tree to a specific index string. HOW MANY: 1 index choice. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: the chosen index factory string with the three constraints that produced
+              it written above it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: rag-ann-index-choice-primary
+              title: Guidelines to choose an index
+              type: github_repo
+              url: https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index
+              provider: GitHub (facebookresearch/faiss wiki)
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: A decision tree over dataset size, memory budget and recall target (flat vs
+                IVF vs HNSW vs PQ). Renders as a normal wiki page, and it is the closest thing to a vendor-neutral
+                statement of the real trade-off.
+            - slug: rag-ann-index-choice-reference
+              title: ANN-Benchmarks
+              type: article
+              url: https://ann-benchmarks.com/index.html
+              provider: ann-benchmarks.com
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE — read the recall/QPS Pareto plots
+              description: Objective measured data across libraries instead of anyone's marketing claim;
+                teaches that the answer is a recall-vs-throughput curve, not a winner. ann-benchmarks.com/
+                301s to /index.html.
+        - slug: rag-when-postgres-is-enough
+          name: When Postgres is enough
+          description: 'pgvector as the honest default: if the data already lives in Postgres, a vector
+            column plus an HNSW index removes a whole service from the architecture. Read it to be able
+            to justify not adopting a vector database.'
+          order: 5
+          prerequisites:
+          - rag-ann-index-choice
+          - db-indexes
+          - db-schema-design
+          - be-persistence
+          learning_objective: Justify using, or not using, Postgres as the vector store for a given project.
+          mastery_criteria:
+          - Write the DDL for a vector column and an HNSW index, plus the query that uses the index.
+          - Explain how pgvector handles metadata filtering, and why that is the strongest argument for
+            keeping vectors next to the rows.
+          - Name the point at which pgvector stops being the right answer, stated in row count or recall
+            target rather than in feelings.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: genai
+          lessons:
+          - slug: rag-when-postgres-is-enough-core
+            title: When Postgres is enough
+            description: 'WHY NOW: Justify using, or not using, Postgres as the vector store for a given
+              project.
+
+
+              LEARN: GitHub (pgvector/pgvector) — https://github.com/pgvector/pgvector
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write the table definition, the index and a top-k query for one embedding
+              use case, including one metadata filter. HOW MANY: 1 schema. WHERE: local Postgres or a
+              .sql file.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a .sql file with the extension, table, HNSW index and a filtered nearest-neighbour
+              query.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: rag-when-postgres-is-enough-primary
+              title: pgvector
+              type: github_repo
+              url: https://github.com/pgvector/pgvector
+              provider: GitHub (pgvector/pgvector)
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: README sections "Getting Started", "Storing", "Querying", "Indexing", "Filtering",
+                "Hybrid Search", "Performance" (headings verified; skip the language bindings and installation
+                notes)
+              description: 'The honest default for most projects: if the data already lives in Postgres,
+                a vector column plus an HNSW index removes a whole service from the architecture. Read
+                it to be able to justify not adopting a vector database.'

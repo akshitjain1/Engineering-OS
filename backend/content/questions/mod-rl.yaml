@@ -1,0 +1,478 @@
+# Reinforcement Learning self-check questions.
+#
+# Anchored on OpenAI Spinning Up and the Hugging Face Deep RL course. Every
+# question is answerable from the resource its topic maps to, and stays inside
+# that topic. rl-rlhf-mechanics deliberately goes below the awareness-level
+# treatment in genai-instruction-tuning-rlhf: pipeline stages, the reward
+# signal actually fed to PPO, and what the KL term protects.
+schema_version: 1
+kind: question_bank
+module: mod-rl
+topics:
+  - topic: rl-mdp-fundamentals
+    # Source: OpenAI Spinning Up - Part 1: Key Concepts in RL
+    questions:
+      - id: rl-trajectory-definition
+        prompt: "Spinning Up writes a trajectory as tau = (s0, a0, s1, a1, ...). What is a trajectory a record of?"
+        options:
+          - "One sequence of states and actions produced by running a policy in the environment"
+          - "The set of every state the environment can ever occupy, enumerated once per episode"
+          - "The mapping from each state to the action the agent would choose if it went there"
+          - "The expected cumulative reward collected from the start state onward under a policy"
+        answer: "One sequence of states and actions produced by running a policy in the environment"
+        explanation: >-
+          A trajectory, also called an episode or rollout, is one realised run through the
+          environment. The set of all reachable states is the state space, not a trajectory.
+          A state-to-action mapping is the policy that generates trajectories, and an expected
+          cumulative reward is the return, computed from trajectories rather than being one.
+        difficulty: beginner
+      - id: rl-discounted-return-purpose
+        prompt: "Spinning Up gives return in two forms - a finite-horizon undiscounted sum and an infinite-horizon discounted sum. What does gamma buy you in the discounted form?"
+        options:
+          - "It keeps an infinite sum finite while weighting nearer rewards above distant ones"
+          - "It normalises rewards into the zero to one range so different tasks become comparable"
+          - "It counts the steps the episode ran, so a longer episode scores proportionally higher"
+          - "It strips randomness out of the reward signal so the return becomes fully deterministic"
+        answer: "It keeps an infinite sum finite while weighting nearer rewards above distant ones"
+        explanation: >-
+          A discount factor below one makes the geometric series converge and expresses a
+          preference for sooner rewards. It does not rescale rewards into a fixed range, which
+          would be reward normalisation. It is not a step counter, and it cannot remove the
+          stochasticity of the policy or transitions, which is why return stays a random variable.
+        difficulty: intermediate
+        mastery: true
+      - id: rl-objective-expected-return
+        prompt: "The RL problem is stated as picking a policy that maximises J(pi). Which quantity is J(pi)?"
+        options:
+          - "The expected return over trajectories, taken over both policy and environment randomness"
+          - "The return of the single best trajectory the policy has produced anywhere in training"
+          - "The reward available at the current step, maximised independently in each state visited"
+          - "The number of steps the policy survives before the environment terminates the episode"
+        answer: "The expected return over trajectories, taken over both policy and environment randomness"
+        explanation: >-
+          J(pi) is an expectation over the trajectory distribution the policy induces, so both
+          action sampling and transition noise are averaged out. Optimising the best observed
+          trajectory would reward luck rather than the policy. Maximising immediate reward per
+          state is greedy behaviour that ignores the future, and survival time is only the
+          objective when the reward happens to be one per step.
+        difficulty: intermediate
+        mastery: true
+      - id: rl-reward-function-arguments
+        prompt: "Reward at step t is written r_t = R(s_t, a_t, s_t+1). Why does it take three arguments rather than the state alone?"
+        options:
+          - "Reward may depend on the action taken and where it landed, not only where it started"
+          - "The three arguments are averaged together to smooth noise out of the reward signal"
+          - "Rewards exist only at episode end, so intermediate steps need extra context supplied"
+          - "The extra arguments let the agent set its own reward, which is what makes learning work"
+        answer: "Reward may depend on the action taken and where it landed, not only where it started"
+        explanation: >-
+          The general form allows reward to be a function of the whole transition, which covers
+          action costs and outcome bonuses; many environments then simplify it. Nothing is
+          averaged, since this is a definition rather than an estimator. Sparse terminal reward is
+          one special case, not the general signature, and the environment authors reward, never the agent.
+        difficulty: intermediate
+      - id: rl-state-vs-observation
+        prompt: "Spinning Up separates fully observed environments from partially observed ones. What does the agent receive in the partially observed case?"
+        options:
+          - "An observation carrying only part of the state, so history may be needed to act well"
+          - "The complete state plus a noise term the agent is expected to filter out before acting"
+          - "A reward but no observation at all, so it must act on its own action history alone"
+          - "The states of the other agents present but never its own position in the environment"
+        answer: "An observation carrying only part of the state, so history may be needed to act well"
+        explanation: >-
+          Partial observability means the observation is a lossy view of the state, which is why
+          such problems often need memory or frame stacking. Full state plus noise would still be
+          fully observed in principle. Losing observations entirely is a different, degenerate
+          setting, and hiding only the agent's own position describes no standard formulation.
+        difficulty: intermediate
+
+  - topic: rl-policy-vs-value
+    # Source: Hugging Face Deep RL Course - The Bellman Equation
+    questions:
+      - id: rl-bellman-what-it-saves
+        prompt: "The Hugging Face unit motivates the Bellman equation by removing a cost from the naive definition of a state value. Which cost?"
+        options:
+          - "Summing the entire discounted future from scratch for every state you want a value for"
+          - "Storing a separate table row per state, which the recursion lets you avoid altogether"
+          - "Needing a reward signal at all, since the recursion derives reward from the transitions"
+          - "Waiting for the environment to become deterministic before any value can be estimated"
+        answer: "Summing the entire discounted future from scratch for every state you want a value for"
+        explanation: >-
+          The recursion expresses a state's value as immediate reward plus the discounted value of
+          the successor, so the future is reused rather than recomputed. The table is unchanged in
+          size by the recursion. Reward remains an input from the environment, and Bellman equations
+          are written with expectations precisely so they hold in stochastic environments.
+        difficulty: intermediate
+      - id: rl-bellman-equation-form
+        prompt: "Which expression matches the Bellman equation for the state-value function of a policy as the unit writes it?"
+        options:
+          - "V(s) = E[r + gamma * V(s')] - immediate reward plus the discounted value of the next state"
+          - "V(s) = E[r * gamma * V(s')] - immediate reward multiplied by the discounted successor value"
+          - "V(s) = E[r + gamma * Q(s,a)] - immediate reward plus the discounted value of the same action"
+          - "V(s) = max over a of r(s,a) - the largest immediate reward reachable from this state now"
+        answer: "V(s) = E[r + gamma * V(s')] - immediate reward plus the discounted value of the next state"
+        explanation: >-
+          The recursion adds the discounted successor value to the immediate reward, under an
+          expectation over the policy and transitions. Multiplying instead of adding would let a
+          single zero reward wipe out the whole estimate. Mixing V on the left with Q on the right
+          is not the state-value recursion, and a max over immediate reward is a one-step greedy
+          rule that discards the future entirely.
+        difficulty: intermediate
+      - id: rl-v-versus-q-scope
+        prompt: "What does V(s) estimate that Q(s,a) does not, among the four value functions this unit introduces?"
+        options:
+          - "V(s) values a state under the policy; Q(s,a) values committing to one action there first"
+          - "V(s) values the single best action while Q(s,a) averages over every action available"
+          - "V(s) is used while training and Q(s,a) is the same number reported at evaluation time"
+          - "V(s) returns only immediate reward while Q(s,a) returns the whole discounted future sum"
+        answer: "V(s) values a state under the policy; Q(s,a) values committing to one action there first"
+        explanation: >-
+          The action-value function fixes the first action and then follows the policy, so it is
+          indexed by state and action together. The best-action reading describes the optimal value
+          function, not V under a policy. Both are estimates used throughout training and evaluation
+          alike, and both are expected discounted returns rather than one-step rewards.
+        difficulty: intermediate
+      - id: rl-greedy-policy-from-q
+        prompt: "Why can you read a policy directly off Q* but not off V*, if you have no model of the environment?"
+        options:
+          - "Q* already scores each action, while V* scores only states so you must know where actions lead"
+          - "V* is defined only for terminal states, so it says nothing about what to do before the end"
+          - "Q* is exact by construction while V* is always an approximation that has to be corrected"
+          - "V* is defined for one fixed policy only, so it cannot be used to rank any other policy"
+        answer: "Q* already scores each action, while V* scores only states so you must know where actions lead"
+        explanation: >-
+          Acting greedily on Q* is an argmax over the action index, whereas acting greedily on V*
+          requires the transition model to know which successor each action produces. V* is defined
+          over all states, not only terminal ones. Both are exact when converged, and the star
+          notation already means optimal rather than policy-specific.
+        difficulty: advanced
+      - id: rl-value-is-not-a-policy
+        prompt: "A colleague says their agent 'has learned the value function, so it has a policy'. What step is missing from that claim?"
+        options:
+          - "A value estimate ranks situations; a policy is the rule that turns those numbers into actions"
+          - "The value function must be retrained on the evaluation environment before a policy exists"
+          - "Values have to be converted into probabilities summing to one, which is a separate training run"
+          - "A policy also needs the reward function stored beside it, since values discard the rewards"
+        answer: "A value estimate ranks situations; a policy is the rule that turns those numbers into actions"
+        explanation: >-
+          Values are predictions; the policy is the decision rule, whether greedy, epsilon-greedy or
+          softmax over those values. Retraining on the evaluation environment would be a different
+          problem, not the missing step. Turning values into probabilities is a choice of policy
+          rather than extra learning, and values already summarise future reward so the reward
+          function need not be kept alongside.
+        difficulty: advanced
+        mastery: true
+
+  - topic: rl-q-learning
+    # Source: Hugging Face Deep RL Course - Introducing Q-Learning
+    # Reference: Sutton & Barto 2nd ed. section 6.5, served over http:// only
+    # because that host's certificate is self-signed. Recorded on purpose.
+    questions:
+      - id: rl-q-update-td-error
+        prompt: "The tabular update is Q(s,a) <- Q(s,a) + alpha * [r + gamma * max Q(s',a') - Q(s,a)]. What is the bracketed term, and what does it measure?"
+        options:
+          - "The TD error - the gap between the bootstrapped target and the value currently stored"
+          - "The policy gradient - the direction in which the action probabilities should be nudged"
+          - "The advantage - reward collected minus the average reward over the whole episode so far"
+          - "The regret - the reward given up by not having played the optimal action from the start"
+        answer: "The TD error - the gap between the bootstrapped target and the value currently stored"
+        explanation: >-
+          The bracket subtracts the current estimate from a one-step target built out of the observed
+          reward and the best next value, which is the temporal-difference error the learning rate
+          scales. A policy gradient acts on action probabilities, which a tabular method does not
+          have. The advantage compares an action to a state value, and regret is an evaluation
+          measure over a whole run rather than a per-step signal.
+        difficulty: intermediate
+        mastery: true
+      - id: rl-epsilon-greedy-meaning
+        prompt: "With epsilon-greedy action selection and epsilon set to 0.05, what happens when the agent picks an action?"
+        options:
+          - "Five percent of steps take a uniformly random action; the rest take the highest stored Q value"
+          - "Five percent of the Q table is reset each episode so that stale values cannot dominate"
+          - "The learning rate is scaled by 0.05 whenever the agent enters a state it has not seen before"
+          - "Only the top five percent of actions ranked by Q value are ever considered as candidates"
+        answer: "Five percent of steps take a uniformly random action; the rest take the highest stored Q value"
+        explanation: >-
+          Epsilon is the probability of exploring rather than exploiting, and the random draw covers
+          all actions including the greedy one. It has nothing to do with resetting table entries,
+          which would throw away learning. It is not a learning-rate modifier, and it never trims the
+          candidate set - it chooses between exploring and taking the current best.
+        difficulty: beginner
+      - id: rl-q-learning-off-policy-reason
+        prompt: "Which detail of the Q-learning update is what makes the algorithm off-policy?"
+        options:
+          - "The target uses the greedy action's value even when behaviour took an exploratory action"
+          - "The table is updated only once the episode ends, so behaviour and learning never overlap"
+          - "The table is trained from a dataset collected before learning begins and never online"
+          - "Exploration uses a random policy while the update uses that same random policy's average"
+        answer: "The target uses the greedy action's value even when behaviour took an exploratory action"
+        explanation: >-
+          The max over next actions evaluates the greedy target policy while epsilon-greedy behaviour
+          generates the data, and that mismatch is what off-policy means. Q-learning updates every
+          step rather than at episode end. Learning from a fixed prior dataset is offline RL, a
+          different distinction, and averaging over the behaviour policy's own actions is what makes
+          Sarsa on-policy instead.
+        difficulty: advanced
+        mastery: true
+      - id: rl-q-table-cell-contents
+        prompt: "You build a Q-table for an environment with 16 states and 4 actions. What does one cell of that table hold?"
+        options:
+          - "The expected discounted return from taking that action there and acting greedily afterwards"
+          - "The probability that the policy will select that action when the agent is in that state"
+          - "The immediate reward the environment paid the last time that action was tried in that state"
+          - "The number of times that state-action pair has been visited since training first began"
+        answer: "The expected discounted return from taking that action there and acting greedily afterwards"
+        explanation: >-
+          A Q-table stores action values, which are expected returns rather than rewards or counts.
+          Action probabilities belong to a policy table, which Q-learning does not maintain. The last
+          observed reward is one noisy sample that the update blends in, and visit counts are
+          bookkeeping some exploration schemes add separately.
+        difficulty: beginner
+      - id: rl-epsilon-decay-schedule
+        prompt: "Your agent reaches a good score then plateaus below it while epsilon stays fixed at 0.3. What does the unit's exploration schedule advise?"
+        options:
+          - "Decay epsilon over training so exploration gives way to exploiting what the table now knows"
+          - "Raise gamma towards one so that distant rewards outweigh the noise exploration introduces"
+          - "Reset the Q table whenever the score dips, so poor estimates cannot accumulate over time"
+          - "Raise the learning rate so that good values are written into the table more aggressively"
+        answer: "Decay epsilon over training so exploration gives way to exploiting what the table now knows"
+        explanation: >-
+          A fixed high epsilon keeps forcing random actions, which caps the achieved score no matter
+          how good the table becomes, so epsilon is annealed over training. Changing gamma alters the
+          objective rather than the exploration rate. Resetting the table discards everything learned,
+          and a larger learning rate makes updates noisier without reducing random action selection.
+        difficulty: intermediate
+
+  - topic: rl-policy-gradients
+    # Source: OpenAI Spinning Up - Part 3: Intro to Policy Optimization
+    questions:
+      - id: rl-policy-gradient-expectation
+        prompt: "Spinning Up derives the gradient of J as an expectation. For one sampled trajectory, what sits inside that expectation?"
+        options:
+          - "A sum of grad log pi(a_t|s_t) over the trajectory, each term weighted by a return-like value"
+          - "The gradient of the environment's transition probabilities with respect to the parameters"
+          - "The squared difference between the observed return and a value network's prediction of it"
+          - "The gradient of the reward function with respect to each action the policy took in the run"
+        answer: "A sum of grad log pi(a_t|s_t) over the trajectory, each term weighted by a return-like value"
+        explanation: >-
+          The log-derivative trick moves the gradient onto the policy's log probabilities, weighted by
+          return, which is exactly why no model of the environment is needed. The transition gradient
+          drops out of the derivation, which is the point of it. A squared value error is a critic
+          loss, and the reward function is generally not differentiable and never needs to be here.
+        difficulty: advanced
+      - id: rl-reinforce-loss-freshness
+        prompt: "A REINFORCE implementation minimises a scalar computed from a batch of trajectories. What is that scalar, and why must the batch be freshly collected?"
+        options:
+          - "Minus the mean of log pi(a|s) times its weight; the expectation is only valid for the current policy"
+          - "The mean squared error against the observed returns; a stale batch biases the value estimate low"
+          - "The negative total reward of the batch; an older batch merely slows convergence but stays correct"
+          - "Cross-entropy against the best action seen; the batch must be fresh to keep those labels correct"
+        answer: "Minus the mean of log pi(a|s) times its weight; the expectation is only valid for the current policy"
+        explanation: >-
+          The coded loss is a sample estimate of an expectation under the current policy, so its
+          gradient is the policy gradient only for the policy that generated the data - that is what
+          makes it on-policy rather than a true loss you can re-minimise. Squared return error is a
+          critic objective, total reward alone carries no log-probability term to differentiate, and
+          there are no supervised action labels anywhere in REINFORCE.
+        difficulty: advanced
+        mastery: true
+      - id: rl-reward-to-go-reason
+        prompt: "Why does the reward-to-go form weight grad log pi at step t only by rewards collected from step t onward?"
+        options:
+          - "Actions cannot affect rewards already collected, so earlier rewards only add noise to that term"
+          - "Earlier rewards were already consumed by the value network, so counting them twice is wrong"
+          - "Discounting makes earlier rewards numerically negligible, so dropping them is only a shortcut"
+          - "Rewards before step t belong to a separate episode boundary and are held in another buffer"
+        answer: "Actions cannot affect rewards already collected, so earlier rewards only add noise to that term"
+        explanation: >-
+          Past rewards have zero expected correlation with a later action, so including them leaves the
+          gradient unbiased but inflates its variance; dropping them is a strict improvement. It is not
+          about double counting with a critic, which this form does not require. Discounting weights
+          the future rather than the past, and the rewards in question sit inside the same episode.
+        difficulty: advanced
+      - id: rl-baseline-variance-effect
+        prompt: "Subtracting a state-dependent baseline b(s) from the weight in the policy gradient has which effect?"
+        options:
+          - "It leaves the gradient unbiased in expectation while reducing the variance of the estimate"
+          - "It biases the gradient towards high-value states, which is precisely why it speeds learning"
+          - "It converts the on-policy estimator into an off-policy one that can reuse old trajectories"
+          - "It guarantees monotonic policy improvement at each update, removing the need for tuning"
+        answer: "It leaves the gradient unbiased in expectation while reducing the variance of the estimate"
+        explanation: >-
+          Because the expected value of grad log pi is zero, any function of state alone can be
+          subtracted without changing the expectation, and a good baseline shrinks the spread of the
+          samples. It introduces no bias, so the second option has the claim backwards. Baselines do
+          not license reusing stale data, and monotonic improvement is a claim made by trust-region
+          methods rather than by baselines.
+        difficulty: advanced
+        mastery: true
+      - id: rl-on-policy-data-lifetime
+        prompt: "In the Spinning Up taxonomy, what does labelling vanilla policy gradient on-policy tell you about the data you feed it?"
+        options:
+          - "Each batch must come from the policy being updated, so experience is discarded after one use"
+          - "Data can be replayed from a buffer for many updates, which is what makes it sample efficient"
+          - "Data has to be collected by a human demonstrator before any gradient step can be taken"
+          - "An environment model is learned from the data first, and the policy is optimised against it"
+        answer: "Each batch must come from the policy being updated, so experience is discarded after one use"
+        explanation: >-
+          On-policy methods trade sample efficiency for a directly valid gradient estimate, which is
+          why they throw rollouts away once the parameters move. Replay buffers belong to off-policy
+          methods such as Q-learning and DDPG. Human demonstrations describe imitation learning, and
+          learning a transition model is what makes an algorithm model-based.
+        difficulty: intermediate
+
+  - topic: rl-rlhf-mechanics
+    # Source: Hugging Face blog - Illustrating Reinforcement Learning from Human Feedback
+    questions:
+      - id: rl-rlhf-three-stages
+        prompt: "The illustrated RLHF post splits the pipeline into three steps. What are they, in order?"
+        options:
+          - "Pretrain or fine-tune a language model, train a reward model on preferences, then optimise by RL"
+          - "Train a reward model, pretrain a language model against it, then distil the result into a smaller one"
+          - "Collect preferences, train a classifier that filters bad prompts, then fine-tune on the survivors"
+          - "Fine-tune on demonstrations, quantise the model for serving, then retrain the tokeniser on new text"
+        answer: "Pretrain or fine-tune a language model, train a reward model on preferences, then optimise by RL"
+        explanation: >-
+          The order matters: you need a capable base policy before preferences over its outputs are
+          meaningful, and a reward model before RL has anything to optimise. Pretraining against a
+          reward model inverts that dependency. Prompt filtering and quantisation are unrelated
+          engineering steps that appear nowhere in the three-stage description.
+        difficulty: intermediate
+      - id: rl-rlhf-comparison-labels
+        prompt: "Labellers in the reward-modelling stage compare or rank outputs instead of scoring each one out of ten. Why is comparison the format used?"
+        options:
+          - "Absolute scores are poorly calibrated between labellers, while relative rankings stay consistent"
+          - "Comparisons remove the need for a reward model, since the ranking is usable as the reward itself"
+          - "A score out of ten cannot be turned into a gradient, whereas a ranking is already differentiable"
+          - "Comparisons let one labeller cover many more prompts, which is the only reason they are cheaper"
+        answer: "Absolute scores are poorly calibrated between labellers, while relative rankings stay consistent"
+        explanation: >-
+          The post notes that scalar scores are noisy and uncalibrated across annotators, so pairwise
+          preferences are collected and converted to a scalar reward by the ranking loss. A reward
+          model is still required, since rankings exist only for the prompts that were labelled.
+          Rankings are no more differentiable than scores, and throughput is a side benefit rather
+          than the reason for the format.
+        difficulty: intermediate
+      - id: rl-rlhf-kl-penalty-purpose
+        prompt: "The RL stage penalises KL divergence between the tuned policy's output distribution and that of a frozen reference model. Which failure is that preventing?"
+        options:
+          - "The policy drifting into degenerate text that scores highly on the reward model but reads badly"
+          - "The reward model overfitting the preference dataset it was trained on before RL even starts"
+          - "The gradient exploding when reward is sparse, which the divergence term rescales downward"
+          - "The policy losing its tokeniser vocabulary, which the reference model supplies during decoding"
+        answer: "The policy drifting into degenerate text that scores highly on the reward model but reads badly"
+        explanation: >-
+          The reward model is an imperfect proxy, so an unconstrained policy will find text that games
+          it; the KL term keeps generations near the distribution the reward model was trained to
+          judge. Reward-model overfitting is addressed by its own training data, not by a penalty
+          applied later. The term is reward shaping rather than gradient clipping, and both models
+          share the same tokeniser throughout.
+        difficulty: advanced
+        mastery: true
+      - id: rl-rlhf-effective-reward
+        prompt: "During the RL stage of RLHF, what reward signal does the policy update actually receive for one generated response?"
+        options:
+          - "The reward model's score for that response, shifted by a penalty term based on the KL divergence"
+          - "A human rating collected live for that exact response, which is why labellers stay in the loop"
+          - "Token-level cross-entropy against the reference model's most likely continuation at each step"
+          - "The reward model's score alone, with the reference model used only to initialise the weights"
+        answer: "The reward model's score for that response, shifted by a penalty term based on the KL divergence"
+        explanation: >-
+          The effective reward combines the learned preference score with a scaled KL term, so the
+          policy is rewarded for being preferred and punished for straying from the reference. Humans
+          are not queried per sample at this stage - that is what the reward model replaces. Matching
+          the reference token by token would be plain distillation, and omitting the penalty is the
+          unconstrained setup the post warns produces gibberish.
+        difficulty: advanced
+        mastery: true
+      - id: rl-rlhf-frozen-reference-role
+        prompt: "What job does the frozen copy of the initial model do throughout the RL stage of RLHF?"
+        options:
+          - "It supplies the reference distribution the tuned policy is measured against and is never updated"
+          - "It generates the training prompts the tuned policy answers, refreshed after every single update"
+          - "It scores each response for helpfulness, which is the job the reward model would otherwise do"
+          - "It is averaged with the tuned policy after each step so that the two can never diverge at all"
+        answer: "It supplies the reference distribution the tuned policy is measured against and is never updated"
+        explanation: >-
+          Two copies of the model are kept: one being trained and one frozen, whose per-token
+          distribution defines the KL penalty. Prompts come from a dataset rather than from the frozen
+          copy. Scoring responses is the reward model's role, and weight averaging is a different
+          technique that would defeat the purpose of holding a fixed reference at all.
+        difficulty: intermediate
+
+  - topic: rl-bandits-for-ranking
+    # Source: Vowpal Wabbit - Contextual Bandits tutorial
+    questions:
+      - id: rl-bandit-vs-full-rl
+        prompt: "The Vowpal Wabbit tutorial frames a recommendation problem as a contextual bandit instead of full RL. Which simplification does that framing make?"
+        options:
+          - "The chosen action does not change the state of the next decision, so there is no horizon to plan over"
+          - "Rewards for every action are known before deciding, so the problem reduces to ordinary ranking"
+          - "The context is ignored, so a single globally best action is learned and served to every user"
+          - "Reward arrives only at the end of a long session, so credit must be spread over all the clicks"
+        answer: "The chosen action does not change the state of the next decision, so there is no horizon to plan over"
+        explanation: >-
+          A contextual bandit is a one-step decision problem: context in, action out, reward observed,
+          with no transition dynamics to propagate value through. Knowing every action's reward up
+          front would be supervised learning, which is exactly what bandit feedback is not. Ignoring
+          context describes a plain multi-armed bandit, and delayed session credit is the full RL
+          problem this framing avoids.
+        difficulty: intermediate
+        mastery: true
+      - id: rl-bandit-interaction-parts
+        prompt: "In the Vowpal Wabbit contextual bandit loop, which four things make up a single logged interaction?"
+        options:
+          - "Context, the action chosen, the probability it was chosen with, and the resulting cost or reward"
+          - "Context, a full reward vector over every action, the learning rate, and the exploration parameter"
+          - "State, the next state, the discount factor, and a terminal flag marking the episode's end"
+          - "User features, item features, a relevance label for each item, and the position it was shown at"
+        answer: "Context, the action chosen, the probability it was chosen with, and the resulting cost or reward"
+        explanation: >-
+          Those four fields are what the bandit data format records, and the probability is what later
+          makes unbiased offline estimates possible. A full reward vector is unavailable by definition
+          under bandit feedback. State transitions and discounting belong to full RL, and per-item
+          relevance labels describe supervised learning-to-rank data instead.
+        difficulty: intermediate
+      - id: rl-bandit-logged-propensity
+        prompt: "Why does the logging policy record the probability with which the action it served was chosen?"
+        options:
+          - "So logged rewards can be reweighted later to estimate how a different policy would have scored"
+          - "So the exploration rate can be recomputed afterwards and corrected in the following training run"
+          - "So duplicate impressions of one action can be removed before the model is ever trained on them"
+          - "So the reward model can be calibrated against the click-through rate observed for that action"
+        answer: "So logged rewards can be reweighted later to estimate how a different policy would have scored"
+        explanation: >-
+          The stored propensity is the denominator in inverse-propensity weighting, which corrects for
+          the log over-representing whatever the old policy preferred. Recomputing an exploration rate
+          needs no per-decision record. Deduplication is unrelated bookkeeping, and contextual bandits
+          learn a policy directly rather than calibrating a separate reward model.
+        difficulty: advanced
+        mastery: true
+      - id: rl-bandit-offline-eval-difficulty
+        prompt: "You want to score a new ranking policy on last month's interaction logs. What makes that harder than evaluating a supervised classifier offline?"
+        options:
+          - "The logs hold the reward only for the action that was actually served, never for the alternatives"
+          - "The logs contain no features at all, so a new policy cannot be replayed over historical requests"
+          - "Reward labels in logs are always delayed by over a month, so the data is never yet complete"
+          - "A ranking policy is stochastic, so its outputs cannot be compared against any stored label"
+        answer: "The logs hold the reward only for the action that was actually served, never for the alternatives"
+        explanation: >-
+          This is the counterfactual problem: where the new policy would have shown something else, the
+          log is silent, which is why propensity-weighted estimators are needed. Logs do contain the
+          context features, so replay is possible in principle. Delay is a practical nuisance rather
+          than the structural issue, and stochastic policies can be evaluated in expectation.
+        difficulty: advanced
+      - id: rl-bandit-regret-definition
+        prompt: "What does the regret of a bandit policy measure across a run of interactions?"
+        options:
+          - "The cumulative reward lost relative to always having played the best action for each context"
+          - "The variance of the reward the policy collected over the interactions making up that run"
+          - "The share of interactions on which the policy explored rather than exploiting its estimates"
+          - "The gap between the policy's predicted reward and the calibration curve of its own estimator"
+        answer: "The cumulative reward lost relative to always having played the best action for each context"
+        explanation: >-
+          Regret compares the policy against an oracle that always picks the best arm, which is why
+          algorithms are described by how slowly their regret grows. Reward variance measures spread,
+          not loss against an optimum. The exploration fraction is a knob that influences regret rather
+          than being it, and estimator calibration is a separate diagnostic.
+        difficulty: intermediate

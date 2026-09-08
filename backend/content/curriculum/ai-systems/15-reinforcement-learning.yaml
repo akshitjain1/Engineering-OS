@@ -1,0 +1,432 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ai-systems
+    name: AI Systems & Design
+    description: AI Systems & Design
+    order: 12
+    subjects:
+    - slug: ai-systems-design
+      name: Deep Learning, GenAI, MLOps, System Design
+      order: 0
+      modules:
+      - slug: mod-rl
+        name: Reinforcement Learning
+        description: MDPs, value functions, Q-learning, policy gradients, RLHF mechanics and contextual
+          bandits.
+        order: 105
+        topics:
+        - slug: rl-mdp-fundamentals
+          name: MDP fundamentals
+          description: States, actions, trajectories, reward, return and the RL optimisation problem stated
+            formally, with a diagram-led second pass for the notation.
+          order: 0
+          prerequisites:
+          - math-probability
+          learning_objective: Define the reinforcement learning problem in MDP terms and read the notation
+            used in RL papers.
+          mastery_criteria:
+          - Write down the objective an RL agent maximises and say why it is an expectation over trajectories.
+          - Distinguish reward from return, and finite-horizon undiscounted return from infinite-horizon
+            discounted return.
+          - Explain what the discount factor changes about the agent's behaviour, not just about the maths.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 55
+          domain_key: ml
+          lessons:
+          - slug: rl-mdp-fundamentals-core
+            title: MDP fundamentals
+            description: 'WHY NOW: Define the reinforcement learning problem in MDP terms and read the
+              notation used in RL papers.
+
+
+              LEARN: OpenAI — https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+
+              TIME: ~55 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write the state, action, reward and episode boundary for one system you
+              already know - a recommender, a game, an autoscaler. HOW MANY: 1 MDP. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a one-page MDP specification for that system, including what makes an
+              episode end.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.92
+            resources:
+            - slug: rl-mdp-fundamentals-primary
+              title: 'Part 1: Key Concepts in RL'
+              type: documentation
+              url: https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+              provider: OpenAI
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: States, actions, trajectories, reward, return and the RL optimisation problem,
+                written by people who shipped RL rather than taught it; it is the one page that defines
+                every symbol you will later meet in a paper.
+            - slug: rl-mdp-fundamentals-reference
+              title: Introduction to Deep Reinforcement Learning
+              type: documentation
+              url: https://huggingface.co/learn/deep-rl-course/unit1/introduction
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Sections "The RL Framework" and "The reward hypothesis"
+              description: Gentler, diagram-led version of the same content if Spinning Up's notation
+                lands too fast.
+        - slug: rl-policy-vs-value
+          name: Policies and value functions
+          description: The Bellman recursion, and the four value functions (V, Q, V*, Q*) that it makes
+            computable.
+          order: 1
+          prerequisites:
+          - rl-mdp-fundamentals
+          learning_objective: Explain how a value function is defined recursively and what separates a
+            policy from a value estimate.
+          mastery_criteria:
+          - State the Bellman equation for the value of a fixed policy in words, and say which term makes
+            it recursive.
+          - Given a Q function, produce the greedy policy; given a policy, say what its V function measures.
+          - Explain the difference between the optimal and the on-policy value function, and why the optimal
+            version needs a max rather than an expectation over actions.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: ml
+          lessons:
+          - slug: rl-policy-vs-value-core
+            title: Policies and value functions
+            description: 'WHY NOW: Explain how a value function is defined recursively and what separates
+              a policy from a value estimate.
+
+
+              LEARN: Hugging Face — https://huggingface.co/learn/deep-rl-course/unit2/bellman-equation
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: hand-compute the value function of a 3-state chain MDP under a fixed policy
+              with a discount of 0.9, running two Bellman sweeps. HOW MANY: 2 sweeps. WHERE: notes or
+              a scratch notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a ten-line Python loop that runs those Bellman sweeps on a hard-coded
+              3-state MDP.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: rl-policy-vs-value-primary
+              title: 'The Bellman Equation: simplify our value estimation'
+              type: documentation
+              url: https://huggingface.co/learn/deep-rl-course/unit2/bellman-equation
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The recursive idea that makes value functions computable at all - chosen because
+                it is exactly this one idea on one page, where every textbook buries it in a chapter.
+            - slug: rl-policy-vs-value-reference
+              title: 'Part 1: Key Concepts in RL'
+              type: documentation
+              url: https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+              provider: OpenAI
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Sections "Value Functions" and "Bellman Equations"
+              description: The formal statement of V, Q, V* and Q* and the four Bellman equations side
+                by side.
+        - slug: rl-q-learning
+          name: Q-learning
+          description: The tabular Q-learning update rule with a worked example, epsilon-greedy exploration,
+            and the off-policy convergence claim behind it.
+          order: 2
+          prerequisites:
+          - rl-policy-vs-value
+          learning_objective: Implement tabular Q-learning and explain why it is off-policy.
+          mastery_criteria:
+          - 'Write the Q-learning update rule from memory and name each term: target, TD error, learning
+            rate.'
+          - Explain what off-policy means here by pointing at the max in the target.
+          - Say what epsilon controls, and what goes wrong at epsilon = 0 and at epsilon = 1.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: ml
+          lessons:
+          - slug: rl-q-learning-core
+            title: Q-learning
+            description: 'WHY NOW: Implement tabular Q-learning and explain why it is off-policy.
+
+
+              LEARN: Hugging Face — https://huggingface.co/learn/deep-rl-course/unit2/q-learning
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: implement tabular Q-learning on a small gridworld and plot return per episode.
+              HOW MANY: 1 agent. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a Q-table gridworld agent that reaches the goal reliably, with the learned
+              table printed.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: rl-q-learning-primary
+              title: Introducing Q-Learning
+              type: documentation
+              url: https://huggingface.co/learn/deep-rl-course/unit2/q-learning
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The tabular Q-learning update rule with a worked example, plus epsilon-greedy
+                exploration; understand this and DQN becomes a small step rather than a new subject.
+            - slug: rl-q-learning-reference
+              title: 'Reinforcement Learning: An Introduction (2nd ed.)'
+              type: book
+              url: http://incompleteideas.net/book/RLbook2020.pdf
+              provider: incompleteideas.net (Sutton & Barto)
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: '§6.5 "Q-learning: Off-policy TD Control" (pp. 131–132)'
+              description: 'The canonical statement of the algorithm and its off-policy convergence claim.
+                NOTE: this URL is http:// only - the https certificate on incompleteideas.net is self-signed
+                and fails verification. Do not "fix" the scheme; https will break the link.'
+        - slug: rl-policy-gradients
+          name: Policy gradients
+          description: Deriving the policy gradient from scratch down to the loss you would code, including
+            reward-to-go and baselines, plus where policy optimisation sits in the RL algorithm taxonomy.
+          order: 3
+          prerequisites:
+          - rl-mdp-fundamentals
+          - math-gradient-intuition
+          learning_objective: Derive the policy gradient and state the loss a REINFORCE implementation
+            actually minimises.
+          mastery_criteria:
+          - Write the policy-gradient expression and explain why the log-probability term appears.
+          - Explain what reward-to-go and a baseline each fix, and why neither changes the gradient in
+            expectation.
+          - Place policy optimisation against Q-learning on the taxonomy and state one trade-off in each
+            direction.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 55
+          domain_key: ml
+          lessons:
+          - slug: rl-policy-gradients-core
+            title: Policy gradients
+            description: 'WHY NOW: Derive the policy gradient and state the loss a REINFORCE implementation
+              actually minimises.
+
+
+              LEARN: OpenAI — https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
+
+              TIME: ~55 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write out the REINFORCE loss for one sampled episode as code, with the baseline
+              subtracted and every tensor shape annotated. HOW MANY: 1 loss function. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: the REINFORCE loss expression in PyTorch with shapes annotated in comments.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.92
+            resources:
+            - slug: rl-policy-gradients-primary
+              title: 'Part 3: Intro to Policy Optimization'
+              type: documentation
+              url: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
+              provider: OpenAI
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Derives the policy gradient from scratch and lands on the actual loss you would
+                code, including reward-to-go and baselines; this is the page that makes PPO and RLHF legible
+                instead of magical.
+            - slug: rl-policy-gradients-reference
+              title: 'Part 2: Kinds of RL Algorithms'
+              type: documentation
+              url: https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html
+              provider: OpenAI
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The taxonomy (model-free vs model-based, policy optimisation vs Q-learning)
+                that tells you where policy gradients sit and what the trade-off is.
+        - slug: rl-rlhf-mechanics
+          name: RLHF mechanics
+          description: 'The three-stage RLHF pipeline: pretrained model, reward model trained on preferences,
+            then PPO with a KL penalty against the reference model.'
+          order: 4
+          prerequisites:
+          - rl-policy-gradients
+          learning_objective: Explain the RLHF pipeline stage by stage, including what the KL penalty
+            is protecting.
+          mastery_criteria:
+          - Name the three stages in order and say what the training signal is at each one.
+          - Explain what the reward model is trained on, and why preference pairs are used rather than
+            absolute scalar scores.
+          - Say what drifts if the KL penalty against the reference model is removed.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: ml
+          lessons:
+          - slug: rl-rlhf-mechanics-core
+            title: RLHF mechanics
+            description: 'WHY NOW: Explain the RLHF pipeline stage by stage, including what the KL penalty
+              is protecting.
+
+
+              LEARN: Hugging Face — https://huggingface.co/blog/rlhf
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: draw the RLHF pipeline from memory, labelling every arrow with the data
+              that flows along it. HOW MANY: 1 diagram. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a diagram of the three stages with the reward-model and KL terms named
+              on it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: rl-rlhf-mechanics-primary
+              title: Illustrating Reinforcement Learning from Human Feedback (RLHF)
+              type: article
+              url: https://huggingface.co/blog/rlhf
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The three-stage pipeline (pretrain, reward model, PPO with a KL penalty) with
+                the diagrams everyone else redraws; upgrades the existing awareness-level RLHF topic into
+                something you could explain in an interview.
+        - slug: rl-bandits-for-ranking
+          name: Contextual bandits for ranking
+          description: 'Where RL actually shows up in product work: contextual bandits for recommendation,
+            explore/exploit policies, regret, and the offline-evaluation problem.'
+          order: 5
+          prerequisites:
+          - rl-mdp-fundamentals
+          - ml-metrics
+          learning_objective: Frame a recommendation problem as a contextual bandit and say how you would
+            evaluate a policy offline.
+          mastery_criteria:
+          - Explain what a bandit drops from the full MDP, and why that omission is what makes it usable
+            in production.
+          - Read a regret curve and say which of two policies explored too little.
+          - State why logged data from an old policy cannot be used naively to score a new one.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 65
+          domain_key: ml
+          lessons:
+          - slug: rl-bandits-for-ranking-core
+            title: Contextual bandits for ranking
+            description: 'WHY NOW: Frame a recommendation problem as a contextual bandit and say how you
+              would evaluate a policy offline.
+
+
+              LEARN: VowpalWabbit — https://vowpalwabbit.org/docs/vowpal_wabbit/python/latest/tutorials/python_Contextual_bandits_and_Vowpal_Wabbit.html
+
+              TIME: ~65 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: run the VowpalWabbit contextual-bandit simulation, then change the exploration
+              policy once and compare the two regret plots. HOW MANY: 2 runs. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two regret plots side by side with a one-sentence reading of the difference.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 1.08
+            resources:
+            - slug: rl-bandits-for-ranking-primary
+              title: Contextual Bandits
+              type: interactive_tutorial
+              url: https://vowpalwabbit.org/docs/vowpal_wabbit/python/latest/tutorials/python_Contextual_bandits_and_Vowpal_Wabbit.html
+              provider: VowpalWabbit
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'Where RL actually shows up in product work: a runnable content-recommendation
+                simulation with explore/exploit policies and a regret plot. Chosen over blog explainers
+                because it is the production library''s own tutorial and you can execute it.'
+            - slug: rl-bandits-for-ranking-reference
+              title: A Contextual-Bandit Approach to Personalized News Article Recommendation
+              type: article
+              url: https://arxiv.org/abs/1003.0146
+              provider: arXiv
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Abstract, §1 Introduction, §3 (LinUCB)
+              description: The primary source for bandits in ranking (LinUCB, deployed on Yahoo front-page
+                news) - read it for the offline-evaluation problem, which is the part everyone underestimates.

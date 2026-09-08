@@ -1,0 +1,2182 @@
+# Machine Learning Foundations - supervised learning path self-check questions.
+#
+# Each block below is grounded in the PRIMARY resource its topic maps to, and
+# stays inside that topic's own scope: adjacent topics here (train/test split,
+# validation split, cross-validation; the individual metrics; the individual
+# model families) each get their own questions rather than a shared generic set.
+# Gates in app/content/question_bank.py refuse a prompt reused across topics.
+schema_version: 1
+kind: question_bank
+module: mod-ml-core
+topics:
+  - topic: ml-what-is-ml
+    # Source: Vizuara - ML Teach by Doing, Introduction
+    questions:
+      - id: ml-what-is-ml-rules-vs-learning
+        prompt: "What distinguishes a machine-learning spam filter from one built out of hand-written rules?"
+        options:
+          - "The model infers its rules from labelled examples, so new spam needs new data, not new code"
+          - "The model needs no examples at all, since it reasons about spam from first principles"
+          - "The model is the same set of hand-written rules, just executed faster on better hardware"
+          - "The model stores every training email and rejects anything it has not literally seen before"
+        answer: "The model infers its rules from labelled examples, so new spam needs new data, not new code"
+        explanation: >-
+          Learning from examples is the whole point: behaviour changes by supplying data rather than
+          editing conditionals. A learner with no examples has nothing to fit, so first-principles
+          reasoning is not what is happening. It is not a faster rule engine, since nobody wrote the
+          rules. And exact-match lookup would fail on every unseen message, which is the failure
+          learning is meant to avoid.
+        difficulty: beginner
+        mastery: true
+      - id: ml-what-is-ml-unlabelled-grouping
+        prompt: "You hold 50,000 customer records with no labels and want to find natural groupings. Which setting is that?"
+        options:
+          - "Unsupervised learning, which returns groupings you must interpret, since no ground truth exists"
+          - "Supervised classification, where the cluster each record lands in serves as its training label"
+          - "Supervised regression, since predicting a continuous group index is how segmentation is done"
+          - "Reinforcement learning, since the algorithm gets a reward each time it places a record well"
+        answer: "Unsupervised learning, which returns groupings you must interpret, since no ground truth exists"
+        explanation: >-
+          With no target column there is nothing to supervise, so the task is unsupervised and the
+          output needs human interpretation. Calling the cluster id a label is circular: it is produced
+          by the method, not observed. Regression needs a measured continuous target, which you also do
+          not have. Reinforcement learning needs a reward signal from an environment, and no reward is
+          available for a static table of records.
+        difficulty: beginner
+      - id: ml-what-is-ml-task-shape
+        prompt: "A team must predict how many days a machine will run before it fails. Is that classification or regression?"
+        options:
+          - "Regression, because the target is a continuous quantity where nearness of the guess matters"
+          - "Classification, because failure is a discrete event and the day counts are only bucket names"
+          - "Classification, because every prediction about a failure is at heart a yes-or-no decision"
+          - "Unsupervised, because nobody can label how many days remain before a failure occurs"
+        answer: "Regression, because the target is a continuous quantity where nearness of the guess matters"
+        explanation: >-
+          The target is a number on an ordered scale, and predicting 31 when the truth is 30 is nearly
+          right, which is exactly what regression optimises. Treating day counts as unordered classes
+          throws that ordering away. Reducing the task to yes-or-no answers a different question, namely
+          whether failure happens at all. And the target is observable from maintenance history, so the
+          problem is supervised.
+        difficulty: beginner
+      - id: ml-what-is-ml-learns-the-labels
+        prompt: "A loan model is trained only on approvals made by one officer known to be biased. What does the model learn?"
+        options:
+          - "It learns to reproduce that officer's decision pattern, because the labels are what it imitates"
+          - "It learns the objectively correct approval policy, since mathematics cannot inherit human bias"
+          - "It ignores the labels and derives an approval rule from the applicant features on their own"
+          - "It refuses to train, because the library detects and rejects labels that are internally biased"
+        answer: "It learns to reproduce that officer's decision pattern, because the labels are what it imitates"
+        explanation: >-
+          A supervised model's target is the label column, so it approximates whoever produced those
+          labels, bias included. There is no external notion of correctness for it to prefer instead.
+          It cannot ignore the labels, since the labels are the only thing defining the task. And no
+          library inspects labels for fairness, which is why bias audits are a human responsibility.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: ml-features-labels
+    # Source: scikit-learn - Getting Started (fitting an estimator on X and y)
+    questions:
+      - id: ml-features-labels-shapes
+        prompt: "When you call estimator.fit(X, y) on tabular data, what shapes does scikit-learn expect for X and y?"
+        options:
+          - "X is n_samples by n_features and y is length n_samples, aligned to X row by row"
+          - "X is n_features by n_samples and y is length n_features, aligned to X column by column"
+          - "X and y are both n_samples by n_features, with y repeating the target in every column"
+          - "X is n_samples by n_features and y is length n_features, one target for each input column"
+        answer: "X is n_samples by n_features and y is length n_samples, aligned to X row by row"
+        explanation: >-
+          One row per observation and one target per row is the whole convention, and positional
+          alignment is what makes fit meaningful. Transposing X gives features as samples, which is the
+          classic reshape bug. y never needs a column per feature, and a target per feature would leave
+          the actual observations unlabelled.
+        difficulty: beginner
+        mastery: true
+      - id: ml-features-labels-what-goes-in-x
+        prompt: "Your table holds customer_id, twelve measurements and a churn flag. Which columns belong in X?"
+        options:
+          - "The twelve measurements only, since the id is a row name that carries no transferable signal"
+          - "The twelve measurements plus customer_id, because extra columns always give more to learn from"
+          - "The twelve measurements plus the churn flag, so the model can see the answer while it fits"
+          - "Only customer_id, since it uniquely identifies the customer the prediction is made about"
+        answer: "The twelve measurements only, since the id is a row name that carries no transferable signal"
+        explanation: >-
+          Identifiers are unique per row, so any pattern found in them cannot generalise to a new
+          customer with a new id. More columns are not automatically better when a column is noise.
+          Putting the churn flag in X hands the model its own answer, which is leakage. And an id alone
+          gives the model nothing measurable to reason from.
+        difficulty: beginner
+      - id: ml-features-labels-leaky-column
+        prompt: "A churn model scores 99.8 per cent on held-out rows, and one feature is days_since_cancellation. Diagnose it."
+        options:
+          - "That column only exists after a customer churns, so it leaks the label straight into X"
+          - "That column sits on a different scale from the rest, and the mismatch inflates the score"
+          - "The held-out set is too small, so one lucky split happened to produce a very high score"
+          - "Nothing is wrong here, since a strongly predictive column is what a good feature set needs"
+        answer: "That column only exists after a customer churns, so it leaks the label straight into X"
+        explanation: >-
+          A feature recorded after the outcome cannot be available at prediction time, so the score is
+          measuring the label against itself. Scale differences change optimisation, not correctness,
+          and never manufacture near-perfect accuracy. A small split adds variance rather than a
+          consistent 99.8. And a feature this predictive is a warning sign, not a success.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-features-labels-unit-of-prediction
+        prompt: "Which framing turns flagging fraudulent payments into a supervised problem with a usable target column?"
+        options:
+          - "One row per transaction, with y a confirmed-fraud flag resolved by later investigation"
+          - "One row per customer, with y the total money the business lost across all of their orders"
+          - "One row per transaction, with y a copy of the transaction amount used as a fraud proxy"
+          - "One row per day, with y the number of transactions the payment system processed that day"
+        answer: "One row per transaction, with y a confirmed-fraud flag resolved by later investigation"
+        explanation: >-
+          The unit of prediction must match the decision you make, and you decide per transaction, so
+          rows are transactions and y is the verified outcome. Aggregating to a customer changes the
+          question to lifetime loss. Using the amount as a proxy trains the model to predict size, not
+          fraud. Daily counts describe volume and contain no fraud label at all.
+        difficulty: intermediate
+
+  - topic: ml-train-test
+    # Source: scikit-learn - Cross-validation: evaluating estimator performance (holding out a test set)
+    questions:
+      - id: ml-train-test-why-hold-out
+        prompt: "Why is a model's score on the rows it was fitted on not an estimate of how it will behave in production?"
+        options:
+          - "A fitted model can memorise those rows, so the score partly measures recall of seen data"
+          - "Training scores use a different metric from the one applied at prediction time by default"
+          - "Training data is always smaller than production data, so the score is statistically unstable"
+          - "It is a fine estimate as long as the training rows were originally sampled at random"
+        answer: "A fitted model can memorise those rows, so the score partly measures recall of seen data"
+        explanation: >-
+          Fitting optimises performance on exactly those rows, so the score rewards memorisation and
+          says nothing about unseen data. The metric is whatever you asked for and does not silently
+          change. Sample size affects variance but not this specific optimism. And random sampling
+          gives a fair split, not permission to score on the training rows.
+        difficulty: beginner
+        mastery: true
+      - id: ml-train-test-grouped-rows
+        prompt: "You have three photographs of each of 400 patients and split the rows at random. Why is the test score optimistic?"
+        options:
+          - "Photos of one patient land on both sides, so the model recognises patients it trained on"
+          - "Random splitting reliably yields a test set that is easier than the training set on average"
+          - "The test set comes out smaller than requested, because duplicate rows are silently dropped"
+          - "Three photos per patient makes the labels noisy, and noisy labels inflate accuracy scores"
+        answer: "Photos of one patient land on both sides, so the model recognises patients it trained on"
+        explanation: >-
+          The rows are not independent: identity leaks across the split, so the test set measures
+          patient recognition rather than generalisation to new patients. Random splitting is unbiased
+          in difficulty, and nothing deduplicates rows for you. Label noise depresses scores rather
+          than inflating them, so it cannot explain the optimism either.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-train-test-time-ordered
+        prompt: "You are forecasting next month's demand from three years of daily sales. How should the test set be formed?"
+        options:
+          - "Hold out the most recent stretch of months, keeping all earlier days for training"
+          - "Shuffle the days and take a random twenty per cent, as with any other tabular data"
+          - "Take every fifth day as the test set so both parts span the whole three-year window"
+          - "Train on the most recent months and test on the oldest, since old data matters less"
+        answer: "Hold out the most recent stretch of months, keeping all earlier days for training"
+        explanation: >-
+          Deployment means predicting the future from the past, so the split must respect time. A random
+          shuffle lets the model train on days after the ones it is tested on, which is future
+          information. Every fifth day has the same defect at a finer grain. Training on recent data and
+          testing on old data reverses the direction you actually care about.
+        difficulty: intermediate
+      - id: ml-train-test-set-size
+        prompt: "With 2,000 rows and a five per cent test set, accuracy swings four points between random seeds. What does that mean?"
+        options:
+          - "A 100-row test set gives a noisy estimate, so widen it or average over repeated splits"
+          - "The model is unstable and should be refitted with a much lower learning rate instead"
+          - "The seed drives model initialisation, so the swing reflects genuine differences in quality"
+          - "Accuracy is the wrong metric here, and switching to F1 would remove the seed sensitivity"
+        answer: "A 100-row test set gives a noisy estimate, so widen it or average over repeated splits"
+        explanation: >-
+          Each of 100 test rows moves accuracy by a full point, so a four-point swing is ordinary
+          sampling noise in the evaluation, not in the model. The seed here chooses which rows are held
+          out, not how a deterministic estimator initialises. And any metric computed on 100 rows is
+          just as noisy, so changing metric does not help.
+        difficulty: intermediate
+
+  - topic: ml-linear-regression
+    # Source: scikit-learn - Linear Models user guide
+    questions:
+      - id: ml-linear-regression-read-coefficient
+        prompt: "A fitted LinearRegression gives the bedrooms coefficient 12500 on house prices. How do you read that number?"
+        options:
+          - "Each extra bedroom adds 12500 to the prediction with the other features held fixed"
+          - "Each extra bedroom multiplies the predicted price by 12500 relative to the intercept"
+          - "Bedrooms account for 12500 units of the variance in price across the training rows"
+          - "Bedrooms are the strongest feature, since the size of a coefficient ranks importance"
+        answer: "Each extra bedroom adds 12500 to the prediction with the other features held fixed"
+        explanation: >-
+          A linear model is additive, so a coefficient is the change in the prediction per one-unit
+          change in that feature with the others unchanged. Nothing multiplies, since the terms are
+          summed. Coefficients are not variance shares, and their sizes depend on each feature's units,
+          so they cannot be read as a ranking.
+        difficulty: beginner
+        mastery: true
+      - id: ml-linear-regression-units-not-importance
+        prompt: "Your model shows 0.02 for square_metres and 8000 for has_garage. Why is garage not four hundred thousand times more important?"
+        options:
+          - "The features use different units, so per-unit coefficients are not comparable as they stand"
+          - "Coefficients are unsigned magnitudes, so their sizes carry no comparative meaning at all"
+          - "The intercept absorbs most of the effect, which leaves every coefficient arbitrarily small"
+          - "Coefficients only become comparable after they are squared and rescaled to sum to one"
+        answer: "The features use different units, so per-unit coefficients are not comparable as they stand"
+        explanation: >-
+          One square metre and one whole garage are wildly different amounts of feature, so the
+          coefficients are measured in different currencies until you standardise the columns.
+          Coefficients do carry signs and do carry meaning per unit, so they are not meaningless.
+          The intercept only shifts the baseline, and squaring or renormalising invents a scale.
+        difficulty: intermediate
+      - id: ml-linear-regression-collinearity
+        prompt: "You accidentally include a duplicate of one feature and refit the least-squares model. What happens to the coefficients?"
+        options:
+          - "The shared effect splits arbitrarily between them, so the individual values become unstable"
+          - "The duplicate is detected and dropped, so the original coefficient comes out unchanged"
+          - "Both coefficients double, since least squares counts the identical effect twice over"
+          - "The fit raises an error, because least squares requires strictly independent columns"
+        answer: "The shared effect splits arbitrarily between them, so the individual values become unstable"
+        explanation: >-
+          With perfectly correlated columns, many coefficient pairs give the same predictions, so the
+          solver returns one of them and small data changes swing the split. Nothing removes duplicate
+          columns for you. Doubling would change the predictions, which the fit avoids. And the solver
+          handles the degeneracy rather than failing outright.
+        difficulty: advanced
+      - id: ml-linear-regression-residual-curve
+        prompt: "Residuals from your straight-line fit form a clear U shape when plotted against the fitted values. What does that show?"
+        options:
+          - "The true relationship is curved, so a straight-line form is systematically misfitting it"
+          - "The target contains outliers, which is the only pattern a residual plot can reveal"
+          - "The model has overfitted, since visible structure in residuals indicates memorisation"
+          - "The rows need shuffling, because their order changes how least squares converges"
+        answer: "The true relationship is curved, so a straight-line form is systematically misfitting it"
+        explanation: >-
+          Structured residuals mean the model form is missing something, and a U shape is the signature
+          of unmodelled curvature that a basis expansion or a non-linear model would capture. Outliers
+          show up as isolated extreme points, not a smooth arc. Overfitting leaves residuals small on
+          the training rows, and least squares has a closed-form solution insensitive to row order.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: ml-classification
+    # Source: StatQuest - Decision and Classification Trees (what a classifier outputs)
+    questions:
+      - id: ml-classification-leaf-vote
+        prompt: "A classification tree leaf holds 30 samples, 24 labelled yes and 6 labelled no. What does the tree report there?"
+        options:
+          - "Class yes with probability 0.8, read straight off the class proportions in that leaf"
+          - "Class yes with probability 1.0, because a leaf always commits fully to a single class"
+          - "Class no with probability 0.2, since the minority class is the one worth flagging"
+          - "No prediction at all, since a leaf holding two classes is impure and must be split"
+        answer: "Class yes with probability 0.8, read straight off the class proportions in that leaf"
+        explanation: >-
+          A leaf predicts its majority class and reports the class frequencies inside it as
+          probabilities, so 24 of 30 gives 0.8. Leaves are not forced to be pure, so a hard 1.0 is
+          wrong. Predicting the minority class inverts the vote. And growing until every leaf is pure is
+          exactly the memorisation that depth limits exist to prevent.
+        difficulty: beginner
+        mastery: true
+      - id: ml-classification-matrix-orientation
+        prompt: "A binary confusion_matrix comes back as rows 85, 5 then 10, 20. What does the value 10 count?"
+        options:
+          - "Ten class-1 cases predicted as class 0, since rows are truth and columns are predictions"
+          - "Ten class-0 cases predicted as class 1, since rows are predictions and columns are truth"
+          - "Ten cases the model declined to score because some of their feature values were missing"
+          - "Ten class-1 cases predicted correctly, as agreements sit off the diagonal in this layout"
+        answer: "Ten class-1 cases predicted as class 0, since rows are truth and columns are predictions"
+        explanation: >-
+          scikit-learn orders the matrix truth by row and prediction by column with labels sorted, so
+          the second row first column is a true 1 predicted as 0, a missed positive. The reversed
+          reading is the most common mistake and gives the wrong error type. Nothing is ever declined
+          for missing values, and correct predictions always sit on the diagonal.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-classification-multiclass-output
+        prompt: "How does a four-species classifier's output differ from a two-class one when you call predict and predict_proba?"
+        options:
+          - "One of four labels per row, with predict_proba giving four probabilities that sum to one"
+          - "Four separate binary decisions per row, each of which may independently be true or false"
+          - "A single number between 0 and 3 that has to be rounded to recover the class label"
+          - "One label per row plus one confidence value, since probabilities only exist for two classes"
+        answer: "One of four labels per row, with predict_proba giving four probabilities that sum to one"
+        explanation: >-
+          Multiclass prediction still returns one label per row, and the probability array simply widens
+          to one column per class summing to one. Independent true-or-false outputs describe multilabel
+          problems, which is a different task. The classes are not an ordered numeric scale to round.
+          And probabilities are defined for any number of classes.
+        difficulty: intermediate
+      - id: ml-classification-overlapping-classes
+        prompt: "Two classes overlap completely in every feature you managed to measure. What is the best any classifier can do there?"
+        options:
+          - "Predict the locally more likely class and accept an error rate it cannot drive below"
+          - "Reach perfect accuracy anyway, provided the tree is grown deep enough to isolate rows"
+          - "Return a missing value in the overlapping region rather than committing to a class"
+          - "Split the overlap using an added random column, which separates the classes cleanly"
+        answer: "Predict the locally more likely class and accept an error rate it cannot drive below"
+        explanation: >-
+          When the features do not distinguish the classes, the Bayes-optimal choice is the more
+          probable class and the remaining error is irreducible without better features. Deep trees can
+          memorise those rows but the same regions will be wrong on new data. Classifiers always emit a
+          class. And a random column carries no information, so any separation it produces is noise.
+        difficulty: advanced
+
+  - topic: ml-metrics
+    # Source: scikit-learn - Metrics and scoring (choosing accuracy, precision, recall, F1)
+    questions:
+      - id: ml-metrics-accuracy-imbalance
+        prompt: "A fraud classifier reports 99.1 per cent accuracy where 0.9 per cent of transactions are fraudulent. What do you check first?"
+        options:
+          - "Whether it ever predicts fraud at all, since always saying legitimate also scores 99.1"
+          - "Whether the score came from training rows instead of the properly held-out split"
+          - "Whether the learning rate was too high, which caps accuracy near the base rate"
+          - "Nothing, since above ninety-nine per cent the model is clearly fit for production use"
+        answer: "Whether it ever predicts fraud at all, since always saying legitimate also scores 99.1"
+        explanation: >-
+          Accuracy equals the majority share for a model that never predicts the rare class, so the
+          headline number is uninformative until you look at recall on the positives. Training-versus-test
+          confusion would show up as a gap, not as a number matching the base rate exactly. Learning
+          rates do not pin accuracy to a class prior. And a model that catches no fraud is worthless.
+        difficulty: beginner
+        mastery: true
+      - id: ml-metrics-screening-choice
+        prompt: "A cancer screen sends every positive to a cheap confirmatory test. Which metric should you tune, and why?"
+        options:
+          - "Recall, because a missed case costs far more than a false alarm the follow-up will clear"
+          - "Precision, because each false alarm consumes exactly the resources a real positive would"
+          - "Accuracy, because it folds both error types into one number that is simple to report"
+          - "Specificity, because correctly ruling out healthy patients is the purpose of a screen"
+        answer: "Recall, because a missed case costs far more than a false alarm the follow-up will clear"
+        explanation: >-
+          The cost structure decides the metric: with a cheap second stage, false positives are absorbed
+          while false negatives are catastrophic, so recall dominates. Optimising precision here
+          protects the cheap resource at the expense of patients. Accuracy hides which error type you
+          are making. And a screen exists to catch cases, not primarily to clear the healthy.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-metrics-f1-harmonic
+        prompt: "With precision 0.9 and recall 0.1, why does F1 come out near 0.18 rather than near their average of 0.5?"
+        options:
+          - "F1 is the harmonic mean, so it is pulled down towards the weaker of the two numbers"
+          - "F1 is the geometric mean, so it equals the square root of the product of the two"
+          - "F1 weights recall twice as heavily as precision by definition in scikit-learn"
+          - "F1 subtracts the gap between precision and recall from their arithmetic average"
+        answer: "F1 is the harmonic mean, so it is pulled down towards the weaker of the two numbers"
+        explanation: >-
+          The harmonic mean punishes imbalance, which is why F1 refuses to reward a model that is
+          precise but catches almost nothing. The geometric mean of these values would be about 0.3, so
+          that is arithmetically ruled out. Equal weighting is what the 1 in F1 means, and no
+          gap-penalty subtraction appears anywhere in the definition.
+        difficulty: intermediate
+      - id: ml-metrics-macro-vs-weighted
+        prompt: "In a classification report, why can macro-averaged F1 sit far below the weighted average on the same predictions?"
+        options:
+          - "Macro treats every class equally, so a badly handled rare class is not hidden by size"
+          - "Macro averages across folds rather than classes, so it exposes fold-to-fold instability"
+          - "Weighted averaging drops the largest class, which usually raises the number it reports"
+          - "Macro uses precision alone while the weighted variant combines precision with recall"
+        answer: "Macro treats every class equally, so a badly handled rare class is not hidden by size"
+        explanation: >-
+          Weighting by support lets frequent classes dominate, while the macro average gives a rare
+          class the same vote, so a large gap points at poor minority-class performance. Macro averaging
+          is over classes, not folds. Weighted averaging includes every class rather than dropping the
+          largest. And both variants are computed from the same per-class F1 values.
+        difficulty: advanced
+
+  - topic: ml-overfitting
+    # Source: scikit-learn - Linear Models, Ridge regression (penalised coefficients)
+    questions:
+      - id: ml-overfitting-wiggly-polynomial
+        prompt: "A degree-15 polynomial passes through every training point but swings wildly between them. Name the behaviour and its cause."
+        options:
+          - "Overfitting, since the model has enough capacity to absorb noise as though it were signal"
+          - "Underfitting, since a high-degree curve is too rigid to follow the shape of the data"
+          - "Leakage, since the model must have seen the test points while it was being fitted"
+          - "Non-convergence, since the optimiser stopped before reaching the least-squares solution"
+        answer: "Overfitting, since the model has enough capacity to absorb noise as though it were signal"
+        explanation: >-
+          Interpolating every point while behaving badly in between is the definition of excess
+          capacity fitting noise. A degree-15 curve is extremely flexible, so rigidity is the opposite
+          diagnosis. No test data is involved in the description, so leakage does not apply. And the fit
+          clearly converged, since it reaches every training point.
+        difficulty: beginner
+        mastery: true
+      - id: ml-overfitting-cheapest-fix
+        prompt: "An unpenalised linear model on 300 rows and 400 columns scores 0.98 in training and 0.41 held out. What is the cheapest first fix?"
+        options:
+          - "Add an L2 penalty so oversized coefficients are discouraged and the fit becomes tamer"
+          - "Add more features, which gives the solver more directions in which to fit the data"
+          - "Lower the solver tolerance so least squares matches the training rows more precisely"
+          - "Report the training score instead, since it was computed on much more of the data"
+        answer: "Add an L2 penalty so oversized coefficients are discouraged and the fit becomes tamer"
+        explanation: >-
+          More columns than rows lets coefficients grow without limit, and a penalty on their size is
+          the standard cure that keeps the same model family. Adding features makes the imbalance worse.
+          Tightening the tolerance fits the training rows even harder, which is the problem, not the
+          cure. And quoting the training score just hides the gap you already measured.
+        difficulty: intermediate
+      - id: ml-overfitting-watch-the-right-curve
+        prompt: "Why does monitoring only the training loss give you no warning that a model has begun to overfit?"
+        options:
+          - "Training loss keeps falling as the model memorises, so it cannot reveal lost generalisation"
+          - "Training loss uses a different scale from held-out loss, so the two are not comparable"
+          - "Training loss rises the moment overfitting starts, but only after many more iterations"
+          - "Training loss is computed once when fitting ends, so there is nothing there to watch"
+        answer: "Training loss keeps falling as the model memorises, so it cannot reveal lost generalisation"
+        explanation: >-
+          Overfitting is by definition invisible in training error, which improves monotonically as
+          capacity is spent on noise; only held-out error turns upward. Both losses use the same
+          function, so scale is not the issue. Training loss does not rise when overfitting begins.
+          And it can be tracked at every iteration, so availability is not the obstacle.
+        difficulty: intermediate
+      - id: ml-overfitting-too-much-penalty
+        prompt: "You keep raising the penalty until training and validation scores both settle at 0.55. What have you done?"
+        options:
+          - "Pushed the penalty too far, so the model now underfits and both scores are poor together"
+          - "Tuned it correctly, since closing the gap between the two scores is the goal in itself"
+          - "Leaked the validation rows into training, which is why the two scores became equal"
+          - "Removed the noise, so 0.55 is simply the ceiling that this dataset itself allows"
+        answer: "Pushed the penalty too far, so the model now underfits and both scores are poor together"
+        explanation: >-
+          A closed gap at a low score means the model is too constrained to fit even the signal, which
+          trades overfitting for underfitting. Closing the gap is not the objective; maximising the
+          held-out score is. Leakage raises the validation score rather than lowering both. And nothing
+          here shows 0.55 is the data's limit, since a weaker penalty was not tried.
+        difficulty: advanced
+        mastery: true
+
+  - topic: ml-sklearn-pipeline
+    # Source: scikit-learn - Pipelines and composite estimators
+    questions:
+      - id: ml-pipeline-prevents-leakage
+        prompt: "Why does wrapping a scaler and an estimator in a Pipeline stop preprocessing leaking during cross-validation?"
+        options:
+          - "Each fold refits the scaler on that fold's training part only, never on the held-out part"
+          - "The pipeline caches the scaler once, so every fold reuses one identical transformation"
+          - "The pipeline reshuffles the rows before each fold, which prevents the folds overlapping"
+          - "The pipeline hides the held-out rows from the dataset until the estimator has been fitted"
+        answer: "Each fold refits the scaler on that fold's training part only, never on the held-out part"
+        explanation: >-
+          A pipeline is a single estimator, so cross-validation calls fit on the whole chain per fold
+          and the scaler's statistics come only from that fold's training rows. Caching one shared
+          transformation is precisely the leak being avoided. Shuffling is a separate concern of the
+          splitter, and the pipeline never removes rows from your dataset.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-pipeline-column-routing
+        prompt: "Numeric and categorical columns need different preprocessing. Which construct applies each transformer to its own subset?"
+        options:
+          - "ColumnTransformer, which routes named column groups to different transformers in parallel"
+          - "make_pipeline, which chains transformers so each one runs over the whole frame in turn"
+          - "FeatureUnion of two identical scalers, which picks the right dtype for each column itself"
+          - "FunctionTransformer, which applies one chosen Python function to every column it is given"
+        answer: "ColumnTransformer, which routes named column groups to different transformers in parallel"
+        explanation: >-
+          ColumnTransformer exists exactly for per-column-group preprocessing and concatenates the
+          results. A plain pipeline is sequential and would hand every column to every step.
+          FeatureUnion combines transformers over the same input and does no dtype routing. And
+          FunctionTransformer applies one function without selecting subsets of columns.
+        difficulty: intermediate
+      - id: ml-pipeline-param-naming
+        prompt: "In a pipeline whose steps are named scale and clf, how do you refer to the classifier's C value in a search grid?"
+        options:
+          - "clf__C, the step name and the parameter joined by a double underscore"
+          - "C on its own, because a search targets the final estimator by default"
+          - "LogisticRegression.C, using the class name of the step that owns it"
+          - "clf.C, using ordinary Python attribute access on the named step"
+        answer: "clf__C, the step name and the parameter joined by a double underscore"
+        explanation: >-
+          Nested parameters are addressed by step name plus double underscore, which is what lets one
+          grid tune any depth of a composite estimator. A bare name is ambiguous and is not resolved to
+          the last step. The class name is not part of the parameter path. And dotted attribute access
+          is not the grid syntax, so it raises an invalid-parameter error.
+        difficulty: intermediate
+      - id: ml-pipeline-predict-path
+        prompt: "What do the preprocessing steps do when you call predict on a fitted pipeline with new rows?"
+        options:
+          - "They apply each already-fitted step's transform to the new rows, refitting nothing"
+          - "They refit on the new rows first, so the data is scaled by its own statistics"
+          - "They are skipped entirely, since preprocessing was only needed while training the model"
+          - "They refit the estimator on the new rows before predicting, reusing stored parameters"
+        answer: "They apply each already-fitted step's transform to the new rows, refitting nothing"
+        explanation: >-
+          A fitted pipeline transforms with the parameters learned during fit, which is what makes
+          training and serving consistent. Refitting on new rows would apply a different transformation
+          and is the leak the pipeline prevents. Skipping preprocessing would hand the estimator inputs
+          in the wrong space. And predict never refits the final estimator.
+        difficulty: beginner
+        mastery: true
+
+  - topic: ml-types-of-ml
+    # Source: D2L.ai - Introduction (supervised, unsupervised and reinforcement settings)
+    questions:
+      - id: ml-types-reinforcement-setting
+        prompt: "A robot learns to walk by trying movements and being rewarded for staying upright. Which setting is that, and what makes it distinct?"
+        options:
+          - "Reinforcement learning, where the agent's own actions produce the data and feedback is delayed"
+          - "Supervised learning, where the reward acts as a label attached to each movement attempted"
+          - "Unsupervised learning, where the robot finds structure in its sensors with no feedback at all"
+          - "Semi-supervised learning, where only a handful of the robot's movements ever get a reward"
+        answer: "Reinforcement learning, where the agent's own actions produce the data and feedback is delayed"
+        explanation: >-
+          Reinforcement learning is defined by an agent acting in an environment and receiving scalar
+          rewards, often long after the decisive action. A reward is not a target label for a fixed
+          input, so it is not supervised. Feedback clearly exists, so it is not unsupervised. And
+          semi-supervised learning means partially labelled fixed data, not interaction.
+        difficulty: beginner
+        mastery: true
+      - id: ml-types-no-target-column
+        prompt: "Which of these four tasks has no target variable available to learn from?"
+        options:
+          - "Grouping news articles into themes that nobody has named in advance"
+          - "Predicting tomorrow's temperature from the readings taken today"
+          - "Deciding whether an email is spam using a labelled inbox archive"
+          - "Estimating a used car's resale value from its mileage and its age"
+        answer: "Grouping news articles into themes that nobody has named in advance"
+        explanation: >-
+          Only the grouping task lacks an observed outcome, which is what makes it unsupervised.
+          Tomorrow's temperature and a car's resale value are measured continuous targets, so both are
+          supervised regression. The labelled inbox provides spam labels directly, making that
+          supervised classification rather than discovery of unknown structure.
+        difficulty: beginner
+      - id: ml-types-labelling-budget
+        prompt: "You have a million unlabelled images and enough budget to label one thousand. What does that suggest about framing?"
+        options:
+          - "Label the thousand for supervised training, and cluster the rest to choose which to label"
+          - "Treat all million as supervised by assigning every image a random starting label first"
+          - "Use reinforcement learning, since a labelling budget is naturally modelled as a reward"
+          - "Abandon the problem, because supervised learning needs every single example labelled"
+        answer: "Label the thousand for supervised training, and cluster the rest to choose which to label"
+        explanation: >-
+          Unsupervised structure can guide where scarce labels go, which is the practical bridge between
+          the two settings. Random labels are pure noise and teach a model nothing. A labelling budget is
+          not an environment reward, so reinforcement learning does not apply. And supervised learning
+          only needs the labelled subset, so abandoning the task is unnecessary.
+        difficulty: intermediate
+      - id: ml-types-clusters-are-not-labels
+        prompt: "Why is clustering your customers not a replacement for a supervised churn model?"
+        options:
+          - "Clusters capture similarity, not the churn outcome, so no cluster need track churn at all"
+          - "Clustering only accepts numeric columns, whereas churn models require categorical ones"
+          - "Clustering needs far more rows than supervised learning, so churn tables are too small"
+          - "Clusters are unordered, so refitting renames them and predictions stop being numeric"
+        answer: "Clusters capture similarity, not the churn outcome, so no cluster need track churn at all"
+        explanation: >-
+          Without the outcome in the objective, nothing forces clusters to align with churn, so they
+          answer a different question. Both settings handle numeric and encoded categorical columns, so
+          the dtype claim is false. Clustering does not require more data than supervised learning. And
+          unstable cluster names are an inconvenience, not the reason the substitution fails.
+        difficulty: intermediate
+
+  - topic: ml-validation-split
+    # Source: scikit-learn - Cross-validation (why a third split is needed for model selection)
+    questions:
+      - id: ml-validation-split-selection-leak
+        prompt: "You tried forty variants, checked the test score each time and kept the best. Why is that final number optimistic?"
+        options:
+          - "The test set steered your choices, so it became part of fitting rather than a clean check"
+          - "Forty models is too many for one dataset, so the estimator has simply run out of capacity"
+          - "Test scores drift upward when a dataset is read many times, because of floating-point error"
+          - "The best of forty scores is unbiased, and only averaging the forty would bias it upward"
+        answer: "The test set steered your choices, so it became part of fitting rather than a clean check"
+        explanation: >-
+          Every decision made by looking at the test set spends some of its independence, so the winner's
+          score includes the luck that made it win. Datasets do not have a model quota, and repeated
+          reads do not accumulate numerical error. Taking a maximum over noisy estimates is exactly what
+          creates upward bias, so the last option has the statistics backwards.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-validation-split-three-roles
+        prompt: "In a train, validation and test arrangement, what is each of the three parts responsible for?"
+        options:
+          - "Train fits parameters, validation compares configurations, test is touched once at the end"
+          - "Train fits parameters, validation checks for leakage, test is used to refit the winner"
+          - "Train and validation are both fitted on, and test measures how far the fit has converged"
+          - "Validation fits parameters, train compares configurations, and test reports the final score"
+        answer: "Train fits parameters, validation compares configurations, test is touched once at the end"
+        explanation: >-
+          The split separates three distinct jobs: learning weights, choosing between models, and
+          estimating future performance once. Validation is for selection, not leakage auditing, and the
+          test set is never refitted on. Fitting on validation destroys its role as a selector. And the
+          last option simply swaps the roles of train and validation.
+        difficulty: beginner
+        mastery: true
+      - id: ml-validation-split-after-selection
+        prompt: "Once the validation set has chosen your best configuration, what is the usual step before you read the test score?"
+        options:
+          - "Refit that configuration on train plus validation, then score the test set exactly once"
+          - "Refit on the test set, so the deployed model has seen the most recent rows available"
+          - "Score the test set repeatedly with small tweaks until the number stops improving"
+          - "Keep the validation-fitted model and report its validation score as the final result"
+        answer: "Refit that configuration on train plus validation, then score the test set exactly once"
+        explanation: >-
+          Selection is finished, so the validation rows can go back into training to give the final model
+          more data, and the test set is spent in a single measurement. Fitting on the test set destroys
+          the estimate entirely. Repeated tweaking against the test set recreates the selection bias.
+          And a validation score is optimistic because that split chose the winner.
+        difficulty: intermediate
+      - id: ml-validation-split-small-data
+        prompt: "On a dataset of 500 rows, what is the drawback of carving out one fixed validation set?"
+        options:
+          - "It shrinks the training data and gives one noisy estimate that depends on which rows fell in it"
+          - "It cannot be stratified at that size, so the class proportions are certain to be distorted"
+          - "It forces you to fix hyperparameters before you have seen any of the training rows at all"
+          - "It makes the test set redundant, so the final estimate has to come from training rows"
+        answer: "It shrinks the training data and gives one noisy estimate that depends on which rows fell in it"
+        explanation: >-
+          Small data makes both costs bite at once, which is why fold rotation is preferred at this size.
+          Stratification works fine on small sets as long as each class has enough members. Nothing about
+          a validation set changes when hyperparameters are chosen, since that is its purpose. And the
+          test set keeps its separate role regardless of how selection is done.
+        difficulty: intermediate
+
+  - topic: ml-loss-intuition
+    # Source: scikit-learn - Linear Models, Ordinary Least Squares (the squared-error cost)
+    questions:
+      - id: ml-loss-intuition-spread-vs-spike
+        prompt: "Two fits each miss by ten units in total: one is off by ten on a single row, the other by two on five rows. Which does squared error prefer?"
+        options:
+          - "The second, because squaring turns one miss of ten into 100 against five totalling 20"
+          - "The first, because squared error rewards concentrating mistakes into as few rows as it can"
+          - "Neither, because squared error depends only on total absolute deviation, ten in both cases"
+          - "The second, but only because spreading error over more rows gives a larger effective sample"
+        answer: "The second, because squaring turns one miss of ten into 100 against five totalling 20"
+        explanation: >-
+          Squaring makes the cost grow faster than the error, so many small misses are cheaper than one
+          large one, and that is why least squares chases outliers. Preferring the concentrated miss
+          inverts the arithmetic. Absolute deviation is what MAE uses, not squared error. And sample size
+          plays no part in comparing two fits on the same rows.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-loss-intuition-ols-objective
+        prompt: "What quantity does ordinary least squares actually minimise when it fits a line?"
+        options:
+          - "The sum of squared vertical gaps between each observed target and its fitted value"
+          - "The sum of squared perpendicular distances from each point to the fitted line itself"
+          - "The single largest residual, so that the worst-case prediction error stays small"
+          - "The count of points sitting on the wrong side of the line by more than one unit"
+        answer: "The sum of squared vertical gaps between each observed target and its fitted value"
+        explanation: >-
+          The residual is measured in the target direction, since the model predicts y from x, so the
+          gaps are vertical. Perpendicular distances define total least squares, a different method that
+          treats both axes as noisy. Minimising the worst residual is a minimax objective, and counting
+          misclassified sides describes a classification loss rather than a regression cost.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-loss-intuition-bowl-surface
+        prompt: "Why is the squared-error surface of a linear model described as a bowl with a single bottom?"
+        options:
+          - "It is convex in the weights, so one minimum exists and there are no local traps to reach"
+          - "It is flat in the weights, so any set of coefficients reaches the same value at the bottom"
+          - "It has many equally deep minima, so the starting point decides which solution you obtain"
+          - "It is bowl-shaped in the targets only, while its shape in the weights stays unpredictable"
+        answer: "It is convex in the weights, so one minimum exists and there are no local traps to reach"
+        explanation: >-
+          Squared error is a quadratic function of the coefficients, and quadratics with positive
+          curvature have exactly one minimum, which is why the fit is reliable. A flat surface would
+          leave the coefficients undetermined. Multiple minima describe non-convex losses such as deep
+          networks. And the surface is defined over the weights, with the targets held fixed as data.
+        difficulty: advanced
+      - id: ml-loss-intuition-outlier-pull
+        prompt: "A single mistyped target of one million is added to your training rows. What does a squared-error fit do with it?"
+        options:
+          - "It drags the fitted line towards that point, since its squared residual dominates the cost"
+          - "It ignores the point, because least squares clips residuals beyond a multiple of the spread"
+          - "It shifts only the intercept, leaving every slope coefficient exactly where it was before"
+          - "It raises the reported loss but cannot move coefficients, which depend on ranks alone"
+        answer: "It drags the fitted line towards that point, since its squared residual dominates the cost"
+        explanation: >-
+          One enormous squared term can outweigh every other row, so the whole fit tilts to reduce it,
+          which is the classic fragility of squared loss. There is no clipping in ordinary least squares;
+          robust losses add that deliberately. The pull affects slopes as well as the intercept. And
+          least squares uses values, not ranks, so the coefficients genuinely move.
+        difficulty: intermediate
+
+  - topic: ml-gradient-descent-intuition
+    # Source: Vizuara - ML Teach by Doing Day 6 (stepping downhill on a loss surface)
+    questions:
+      - id: ml-gd-rate-too-large
+        prompt: "Your loss oscillates and then climbs steeply over successive gradient-descent iterations. What is the likeliest cause?"
+        options:
+          - "The step size is too large, so each update overshoots the valley and lands further out"
+          - "The step size is too small, so accumulated rounding error eventually makes the loss diverge"
+          - "The gradient is zero, so the optimiser has no direction and wanders randomly each round"
+          - "The surface is convex, which makes divergence unavoidable without a second-order method"
+        answer: "The step size is too large, so each update overshoots the valley and lands further out"
+        explanation: >-
+          Divergence with oscillation is the signature of overshooting: each step jumps past the minimum
+          onto a steeper slope, so the next step is worse. Tiny steps cannot diverge, only stall.
+          A zero gradient produces no movement at all rather than growth. And convexity guarantees a
+          single minimum, so it makes descent easier, not impossible.
+        difficulty: beginner
+        mastery: true
+      - id: ml-gd-gradient-direction
+        prompt: "What does the gradient tell you at the current point of a loss surface, and how is it used in the update?"
+        options:
+          - "The direction of steepest increase, so the update moves against it by the step size"
+          - "The direction of steepest decrease, so the update moves along it by the step size"
+          - "The remaining distance to the minimum, which is divided by the step size to update"
+          - "The curvature of the surface, from which the exact minimum can be computed at once"
+        answer: "The direction of steepest increase, so the update moves against it by the step size"
+        explanation: >-
+          The gradient points uphill, which is why the update subtracts it, and forgetting the sign is
+          the most common implementation bug. It is not a distance, so nothing about how far the minimum
+          lies can be read from it. Curvature is the second derivative, used by Newton-style methods
+          rather than plain gradient descent.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-gd-rate-too-small
+        prompt: "What is the practical cost of choosing a very small learning rate for a long training run?"
+        options:
+          - "Progress per step is tiny, so training may end far from the minimum within your budget"
+          - "Each step overshoots slightly, so the loss ends up bouncing around the minimum forever"
+          - "The gradient becomes inaccurate, since small steps amplify the noise in the loss estimate"
+          - "The optimiser lands in a different minimum, because the surface changes with the step size"
+        answer: "Progress per step is tiny, so training may end far from the minimum within your budget"
+        explanation: >-
+          Small steps are stable but slow, so the real cost is an unconverged model when iterations run
+          out. Overshooting and bouncing come from rates that are too large. Step size does not change
+          how accurately the gradient is computed. And the loss surface is fixed by the data and model,
+          so it does not depend on the rate.
+        difficulty: beginner
+      - id: ml-gd-plateau-reading
+        prompt: "Loss drops quickly for twenty iterations, then flattens with the gradient close to zero. What does that indicate?"
+        options:
+          - "The optimiser has reached a flat region, so further steps barely change the weights"
+          - "The learning rate has decayed to zero, which is the only way progress can ever stall"
+          - "The model has started overfitting, which always shows up as a flat training curve"
+          - "The gradient computation has failed, since a correct gradient never approaches zero"
+        answer: "The optimiser has reached a flat region, so further steps barely change the weights"
+        explanation: >-
+          A vanishing gradient with a flat curve means you are near a minimum or on a plateau, so each
+          update multiplies a small step by a small direction. A fixed rate does not decay on its own.
+          Overfitting is diagnosed from held-out loss, not from a flat training curve. And a gradient of
+          zero at an optimum is the correct answer, not a bug.
+        difficulty: intermediate
+
+  - topic: ml-logistic-regression
+    # Source: scikit-learn - Linear Models, Logistic regression
+    questions:
+      - id: ml-logreg-sigmoid-role
+        prompt: "What does the logistic function do to the linear score inside logistic regression?"
+        options:
+          - "It squashes any real number into the range 0 to 1, giving a class-membership probability"
+          - "It rounds the linear score to whichever of 0 and 1 is nearer, producing the class directly"
+          - "It rescales the score to zero mean and unit variance before the class decision is taken"
+          - "It exponentiates the score so that larger inputs give proportionally larger predictions"
+        answer: "It squashes any real number into the range 0 to 1, giving a class-membership probability"
+        explanation: >-
+          The sigmoid maps the unbounded linear score onto a valid probability, which is what makes the
+          model a classifier with calibrated-ish outputs. Rounding happens later, when a threshold is
+          applied to that probability. Standardising is a preprocessing step on inputs, not part of the
+          link. And plain exponentiation is unbounded above, so it cannot give a probability.
+        difficulty: beginner
+        mastery: true
+      - id: ml-logreg-threshold-move
+        prompt: "Your recall is too low and predict labels a case positive above probability 0.5. What do you change?"
+        options:
+          - "Lower the decision threshold below 0.5, trading away some precision to gain recall"
+          - "Raise the decision threshold above 0.5, which lets more positives into the class"
+          - "Refit with fewer features, since the threshold itself is fixed at 0.5 by the sigmoid"
+          - "Rescale the probabilities so their mean lands on 0.5, which balances the two classes"
+        answer: "Lower the decision threshold below 0.5, trading away some precision to gain recall"
+        explanation: >-
+          The threshold is a deployment choice separate from fitting, and lowering it admits more
+          positives, which raises recall at the cost of precision. Raising it does the opposite and would
+          worsen recall. The 0.5 default is a convention, not a property of the sigmoid. And shifting
+          the probability distribution is an indirect way of doing the same thing far less clearly.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-logreg-vs-least-squares
+        prompt: "Why is fitting ordinary least squares to a zero-or-one target a poor substitute for logistic regression?"
+        options:
+          - "It can predict below zero and above one, which cannot be interpreted as probabilities"
+          - "It cannot be fitted at all, since least squares requires a strictly continuous target"
+          - "It always predicts the majority class, because a zero-or-one target has too little variance"
+          - "It returns identical coefficients but reports them on the log-odds scale by default"
+        answer: "It can predict below zero and above one, which cannot be interpreted as probabilities"
+        explanation: >-
+          An unbounded linear output has no probability interpretation and its errors are badly modelled
+          for binary outcomes, which is exactly what the logistic link fixes. It can be fitted
+          numerically, so failure is not the issue. It does not collapse to the majority class. And its
+          coefficients differ from logistic ones and are not on a log-odds scale.
+        difficulty: intermediate
+      - id: ml-logreg-coefficient-scale
+        prompt: "A logistic regression coefficient for a binary indicator comes out at 0.7. On which scale does that value live?"
+        options:
+          - "Log-odds, so having the feature multiplies the odds of the positive class by about two"
+          - "Probability, so having the feature adds 0.7 to the predicted chance of the positive class"
+          - "Percentage points, so the feature lifts the positive rate by seven tenths of one point"
+          - "Standard deviations of the target, since logistic regression standardises what it outputs"
+        answer: "Log-odds, so having the feature multiplies the odds of the positive class by about two"
+        explanation: >-
+          Coefficients are additive in log-odds, so exponentiating gives an odds ratio, here roughly
+          two. They cannot be added to a probability, because the same log-odds shift changes probability
+          differently depending on the starting point. Percentage points have the same problem. And the
+          model standardises nothing about its output.
+        difficulty: advanced
+
+  - topic: ml-decision-trees
+    # Source: StatQuest - Decision and Classification Trees (choosing splits by impurity)
+    questions:
+      - id: ml-trees-split-criterion
+        prompt: "When a tree evaluates candidate thresholds for a split, what is it comparing between them?"
+        options:
+          - "How much each split cuts impurity in the two child nodes, weighted by their sizes"
+          - "How near each threshold lies to the mean of that feature, preferring the closest one"
+          - "How evenly each split divides the samples, preferring an even fifty-fifty division"
+          - "How strongly the feature correlates with the other features before the split is made"
+        answer: "How much each split cuts impurity in the two child nodes, weighted by their sizes"
+        explanation: >-
+          A tree greedily picks the threshold with the largest weighted impurity decrease, which is what
+          information gain measures. Proximity to the feature mean is irrelevant, since the best cut can
+          sit anywhere. Balance is not an objective; a lopsided but pure split is excellent. And
+          inter-feature correlation plays no part in the split search.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-trees-gini-reading
+        prompt: "A node holding eight positives and two negatives has Gini impurity 0.32. How should you read that value?"
+        options:
+          - "The node is fairly pure, since a single-class node scores 0 and a fifty-fifty node 0.5"
+          - "The node is fairly impure, since the scale runs from 0 for mixed up to 1 for pure nodes"
+          - "Thirty-two per cent of the samples inside that node have so far been classified wrongly"
+          - "The node needs 0.32 more information gain before the tree is allowed to split it again"
+        answer: "The node is fairly pure, since a single-class node scores 0 and a fifty-fifty node 0.5"
+        explanation: >-
+          Binary Gini runs from 0 at perfect purity to 0.5 at an even mix, so 0.32 is closer to pure
+          than to mixed. Reading the scale as 0 for mixed and 1 for pure inverts it. Gini is a
+          probability of misclassifying a random draw from the node, not a count of past mistakes. And
+          gain thresholds are a separate stopping rule, not what the value means.
+        difficulty: intermediate
+      - id: ml-trees-deep-leaves
+        prompt: "Grown without limits, a tree ends with leaves containing a single sample each. Why is that a problem?"
+        options:
+          - "Each leaf then encodes one row's noise, so its prediction does not transfer to new data"
+          - "Each leaf then holds too little data to compute impurity, so the tree cannot finish"
+          - "The tree becomes too shallow to represent interactions between more than two features"
+          - "The tree starts favouring features with fewer distinct values, biasing the split choices"
+        answer: "Each leaf then encodes one row's noise, so its prediction does not transfer to new data"
+        explanation: >-
+          Perfectly pure leaves reproduce the training set exactly, including its noise, which is
+          overfitting by construction. Impurity is perfectly well defined for a single sample, namely
+          zero. A fully grown tree is deep rather than shallow. And impurity criteria lean towards
+          high-cardinality features, which is the opposite of the stated bias.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-trees-limit-memorisation
+        prompt: "Which single change most directly limits how far one decision tree can memorise its training rows?"
+        options:
+          - "Setting max_depth or min_samples_leaf so every leaf must retain several samples"
+          - "Setting a larger random_state so the tree explores a different sequence of splits"
+          - "Standardising the features so that no one column can dominate the choice of split"
+          - "Adding more features so the tree has alternatives to its most predictive column"
+        answer: "Setting max_depth or min_samples_leaf so every leaf must retain several samples"
+        explanation: >-
+          Capacity control is the direct lever: forcing leaves to pool several rows stops them encoding
+          individual rows. A different seed changes tie-breaking, not capacity. Trees split on thresholds
+          per feature, so monotonic rescaling leaves them unchanged. And more features give a greedy tree
+          more ways to fit noise, making memorisation easier.
+        difficulty: beginner
+
+  - topic: ml-random-forests
+    # Source: scikit-learn - Ensembles, Forests of randomized trees
+    questions:
+      - id: ml-forest-feature-subsampling
+        prompt: "Beyond resampling rows, what second source of randomness does a random forest introduce, and why?"
+        options:
+          - "A random subset of features is considered at each split, so the trees decorrelate further"
+          - "A random subset of features is dropped from the data once, before any tree is grown"
+          - "A random depth limit is drawn per tree, so the ensemble mixes shallow and deep members"
+          - "A random permutation of the target is used per tree, which stops the ensemble memorising"
+        answer: "A random subset of features is considered at each split, so the trees decorrelate further"
+        explanation: >-
+          Feature subsampling happens split by split, which prevents one dominant predictor from making
+          every tree look alike and so improves the averaging. Dropping columns once would apply the
+          same restriction to all trees and lose information. Depth is a fixed hyperparameter here. And
+          permuting the target would destroy the signal each tree is meant to learn.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-forest-why-averaging-helps
+        prompt: "Why does averaging many deep trees generalise better than the single deep tree they are built from?"
+        options:
+          - "Their errors are partly independent, so averaging cancels variance while the signal survives"
+          - "Averaging lowers each individual tree's bias, which is the dominant error term for deep trees"
+          - "The averaged tree is shallower than its members, so the ensemble has less capacity overall"
+          - "Averaging discards the trees that overfit and keeps only those that generalise on their own"
+        answer: "Their errors are partly independent, so averaging cancels variance while the signal survives"
+        explanation: >-
+          Deep trees are low-bias and high-variance, and averaging decorrelated predictions shrinks
+          variance without touching the shared signal. Bias is not what bagging reduces. The ensemble is
+          more flexible than a single tree, not less. And no member is discarded; every tree contributes
+          to the average regardless of how it performs alone.
+        difficulty: intermediate
+      - id: ml-forest-oob-estimate
+        prompt: "What is an out-of-bag score, and why can it stand in for a separate held-out split?"
+        options:
+          - "Each row is scored only by the trees whose bootstrap sample left it out, so it was unseen"
+          - "Each tree is scored on the rows it was grown from, and those results are averaged over trees"
+          - "The forest is scored on a random tenth of the rows set aside before bootstrapping started"
+          - "The forest is scored on synthetic rows generated to sit outside the training distribution"
+        answer: "Each row is scored only by the trees whose bootstrap sample left it out, so it was unseen"
+        explanation: >-
+          Bootstrapping omits roughly a third of the rows from each tree, so those omissions give a free
+          held-out prediction per row. Scoring trees on their own training rows measures memorisation.
+          Nothing is set aside before bootstrapping in the out-of-bag scheme. And no synthetic data is
+          involved, which would test the wrong distribution anyway.
+        difficulty: advanced
+        mastery: true
+      - id: ml-forest-more-trees
+        prompt: "What happens to a random forest's held-out error as n_estimators rises from 100 to 1000?"
+        options:
+          - "It usually plateaus rather than worsening, since averaging more trees adds no capacity"
+          - "It climbs steadily, because each extra tree adds parameters that fit the training noise"
+          - "It falls to zero, because with enough trees every training row is eventually memorised"
+          - "It becomes erratic, since more trees make the majority vote increasingly sensitive"
+        answer: "It usually plateaus rather than worsening, since averaging more trees adds no capacity"
+        explanation: >-
+          More members refine the same average, so error flattens and the extra cost is compute rather
+          than overfitting. Extra trees do not raise the effective capacity of the average, so error
+          does not climb. Held-out error cannot be driven to zero by memorising training rows. And more
+          votes make the ensemble more stable, not less.
+        difficulty: intermediate
+
+  - topic: ml-knn
+    # Source: scikit-learn - Nearest Neighbors user guide
+    questions:
+      - id: ml-knn-scale-sensitivity
+        prompt: "Why does k-nearest neighbours break down when one column is in metres and another in kilometres?"
+        options:
+          - "Euclidean distance is dominated by the large-numbered column, so the other barely counts"
+          - "Mixed units make some pairwise distances negative, which the class vote cannot interpret"
+          - "Neighbours are then chosen alphabetically by feature name, since the units disagree"
+          - "Distances become integers, so many neighbours tie and the class vote cannot be settled"
+        answer: "Euclidean distance is dominated by the large-numbered column, so the other barely counts"
+        explanation: >-
+          Distance sums squared differences, so a column with a numerically larger spread contributes
+          almost all of it and effectively silences the rest, which is why scaling is mandatory here.
+          Distances are non-negative by definition. Feature names never influence the search. And
+          distances stay continuous, so systematic ties are not the failure mode.
+        difficulty: beginner
+        mastery: true
+      - id: ml-knn-choosing-k
+        prompt: "You raise k from 1 to 200 on a thousand-row dataset. What happens to the decision boundary?"
+        options:
+          - "It smooths out, and at very large k it drifts towards simply predicting the majority class"
+          - "It sharpens, since more neighbours give each vote more evidence about local structure"
+          - "It stays identical, because k changes only prediction speed rather than the boundary"
+          - "It turns discontinuous, since large k forces ties that are then broken at random"
+        answer: "It smooths out, and at very large k it drifts towards simply predicting the majority class"
+        explanation: >-
+          k controls the bias-variance dial: k of 1 traces every point, and huge k averages over so wide
+          a neighbourhood that local structure disappears into the global class prior. More neighbours
+          smooth rather than sharpen. The boundary genuinely changes with k. And ties are rare and
+          resolved deterministically rather than making the boundary erratic.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-knn-cost-location
+        prompt: "Where does the computational cost of a k-nearest-neighbours model actually sit?"
+        options:
+          - "At prediction time, since fitting mostly stores the rows and each query must search them"
+          - "At fit time, since the model solves for a boundary and prediction is then a quick lookup"
+          - "Evenly split, because the neighbour index is rebuilt on every fit and every predict call"
+          - "In memory only, since the search itself takes constant time whatever the dataset size"
+        answer: "At prediction time, since fitting mostly stores the rows and each query must search them"
+        explanation: >-
+          Nearest neighbours is a lazy learner: fitting is nearly free and every prediction pays for a
+          search, which is why tree indexes exist. There is no boundary solved at fit time. The index is
+          built once during fit, not on every call. And search cost grows with the number of stored
+          rows, so it is not constant.
+        difficulty: intermediate
+      - id: ml-knn-high-dimensions
+        prompt: "With three hundred mostly irrelevant columns, why do the nearest neighbours stop being meaningful?"
+        options:
+          - "Irrelevant dimensions add noise to every distance, so all points become roughly equidistant"
+          - "Distances overflow in high dimensions, so the search returns neighbours in arbitrary order"
+          - "The vote needs more neighbours than samples once features outnumber the available rows"
+          - "Neighbour search silently ignores every feature beyond the first hundred it was given"
+        answer: "Irrelevant dimensions add noise to every distance, so all points become roughly equidistant"
+        explanation: >-
+          Each useless dimension contributes random distance, and with enough of them the contrast
+          between near and far collapses, so the neighbourhood is no longer local in any useful sense.
+          Distances do not overflow at these scales. The number of neighbours is unrelated to the
+          feature count. And no implementation truncates the feature list.
+        difficulty: advanced
+
+  - topic: ml-naive-bayes
+    # Source: scikit-learn - Naive Bayes user guide
+    questions:
+      - id: ml-nb-independence-assumption
+        prompt: "What exactly is the assumption that makes naive Bayes naive, and what does it buy you?"
+        options:
+          - "Features are independent given the class, which lets a product replace a joint estimate"
+          - "Classes are equally likely, which lets the classifier ignore the prior probabilities"
+          - "Features are normally distributed, which lets the model be fitted in one closed form"
+          - "Labels are noise-free, which lets the posterior be computed without any smoothing"
+        answer: "Features are independent given the class, which lets a product replace a joint estimate"
+        explanation: >-
+          Conditional independence turns an intractable joint likelihood into a product of simple
+          per-feature estimates, which is why the model trains in one pass. Class priors are estimated
+          from the data rather than assumed equal. Normality is only the extra assumption of the
+          Gaussian variant. And label noise is unrelated to why smoothing is needed.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-nb-works-anyway
+        prompt: "Words in an email are obviously correlated, so why is naive Bayes still a strong spam baseline?"
+        options:
+          - "Its probability estimates are poorly calibrated, but the ranking of classes is often right"
+          - "Correlated words cancel out exactly, so the independence assumption does hold for language"
+          - "Text features are binary, and independence is provably true whenever inputs are binary"
+          - "It decorrelates the vocabulary internally before fitting, repairing the broken assumption"
+        answer: "Its probability estimates are poorly calibrated, but the ranking of classes is often right"
+        explanation: >-
+          Double-counting correlated evidence pushes the probabilities towards zero and one, yet the
+          class with the highest score is frequently still correct, so the decision survives the bad
+          calibration. Correlations do not cancel. Binary inputs can be strongly dependent. And no
+          decorrelation step exists in the model.
+        difficulty: advanced
+      - id: ml-nb-zero-frequency
+        prompt: "A word in a test document never appeared with one class during training. Without smoothing, what happens?"
+        options:
+          - "That class gets probability zero, since a single zero factor wipes out the whole product"
+          - "That class gets probability one, since an unseen word cannot count as evidence against it"
+          - "The word is dropped and the remaining factors are renormalised to sum back up to one"
+          - "Training fails, because the vocabulary has to be identical in the training and test sets"
+        answer: "That class gets probability zero, since a single zero factor wipes out the whole product"
+        explanation: >-
+          Because the likelihood is a product, one zero estimate vetoes the class no matter how much
+          other evidence supports it, which is exactly why additive smoothing is applied. Zero evidence
+          does not imply certainty in the other direction. Nothing drops unseen terms automatically. And
+          training completes normally, since the problem surfaces at prediction time.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-nb-variant-choice
+        prompt: "Which naive Bayes variant suits word-count vectors taken from documents, and why?"
+        options:
+          - "MultinomialNB, because it models counts of discrete events drawn from a fixed vocabulary"
+          - "GaussianNB, because counts are continuous values best summarised by a mean and variance"
+          - "BernoulliNB, because it multiplies the raw counts instead of reducing them to presence"
+          - "CategoricalNB, because every distinct count value must be treated as an unordered category"
+        answer: "MultinomialNB, because it models counts of discrete events drawn from a fixed vocabulary"
+        explanation: >-
+          The multinomial likelihood is built for term frequencies, so it uses the counts directly.
+          GaussianNB assumes continuous bell-shaped features, which counts are not. BernoulliNB models
+          binary presence and ignores how often a term occurs. And treating each count as its own
+          category discards the ordering that makes counts informative.
+        difficulty: intermediate
+
+  - topic: ml-svm
+    # Source: scikit-learn - Support Vector Machines user guide
+    questions:
+      - id: ml-svm-margin-choice
+        prompt: "Many straight lines separate two classes perfectly. Which one does a linear support vector machine settle on?"
+        options:
+          - "The one leaving the widest gap to the closest points of either class on both sides"
+          - "The one passing through the midpoint of the two class means at a right angle to it"
+          - "The one minimising the total squared distance from every training point to the line"
+          - "The one misclassifying the fewest points, with ties broken by whichever is found first"
+        answer: "The one leaving the widest gap to the closest points of either class on both sides"
+        explanation: >-
+          Maximising the margin is the defining objective, and it is what makes the boundary robust to
+          small shifts in the data. The mean-midpoint rule ignores the shape of each class. Minimising
+          squared distance to all points is a regression criterion. And when every line separates the
+          data perfectly, error counting cannot distinguish them at all.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-svm-support-vectors
+        prompt: "You delete a training point lying far from the boundary and refit the support vector machine. What changes?"
+        options:
+          - "Nothing changes, since only the support vectors near the margin determine the boundary"
+          - "The boundary shifts towards the deleted point's side, since every point pulls on the fit"
+          - "The margin grows wider, because removing any point relaxes a constraint on the fit"
+          - "The model must be rescaled, since support vectors are recomputed from the class means"
+        answer: "Nothing changes, since only the support vectors near the margin determine the boundary"
+        explanation: >-
+          The solution depends only on the points on or inside the margin, which is what makes the model
+          sparse in its training data. Interior points exert no pull, unlike in least squares. A
+          non-support point imposes no active constraint, so removing it cannot widen the margin. And
+          support vectors are actual data points, not functions of the class means.
+        difficulty: advanced
+      - id: ml-svm-kernel-trick
+        prompt: "What does an RBF kernel let a support vector machine do without materialising any new columns?"
+        options:
+          - "Compare points through an implicit richer space, so curved boundaries become linear there"
+          - "Shrink the feature count first, so the linear boundary is fitted in a smaller space"
+          - "Weight training points by distance, so nearby points count for more in the fitted margin"
+          - "Standardise the features automatically, so the margin stops depending on their units"
+        answer: "Compare points through an implicit richer space, so curved boundaries become linear there"
+        explanation: >-
+          A kernel computes inner products in a high-dimensional feature space directly from the
+          original inputs, so non-linear boundaries are reachable without ever building the expansion.
+          It expands rather than reduces the representation. It is not a distance-weighted vote, which
+          describes neighbours. And kernels do not scale your inputs, so you still must.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-svm-c-tradeoff
+        prompt: "What is being traded off when you lower the C value of a support vector machine?"
+        options:
+          - "A wider margin against tolerating more training points inside or across the boundary"
+          - "A wider margin against a slower fit, since a low C needs more optimiser passes to finish"
+          - "A curved boundary against a straight one, since C selects between the available kernels"
+          - "Higher recall against lower precision, since C shifts where the class threshold falls"
+        answer: "A wider margin against tolerating more training points inside or across the boundary"
+        explanation: >-
+          C is the penalty on margin violations, so a small C buys a smoother, wider margin by accepting
+          more mistakes on the training rows. It is not a speed setting. Kernel choice is a separate
+          parameter entirely. And C is not a decision threshold, so it does not directly trade recall
+          against precision the way moving a cutoff does.
+        difficulty: intermediate
+
+  - topic: ml-confusion-matrix
+    # Source: scikit-learn - Model evaluation, Confusion matrix
+    questions:
+      - id: ml-cm-derive-precision-recall
+        prompt: "A model flags 120 of 1,000 cases, 90 of those flags are correct, and 40 real positives were missed. Give precision and recall."
+        options:
+          - "Precision 0.75 and recall about 0.69, dividing by flagged cases and by real positives"
+          - "Precision about 0.69 and recall 0.75, dividing by real positives and by flagged cases"
+          - "Precision 0.75 and recall 0.75, since both take the 120 flagged cases as denominator"
+          - "Precision 0.90 and recall 0.90, since 90 of the decisions the model made were correct"
+        answer: "Precision 0.75 and recall about 0.69, dividing by flagged cases and by real positives"
+        explanation: >-
+          Precision is 90 of the 120 predicted positives, and recall is 90 of the 130 actual positives,
+          namely the 90 found plus the 40 missed. Swapping the denominators swaps the two metrics.
+          They share a numerator but never a denominator. And 90 out of 90 is not a rate at all, since
+          it ignores both the false positives and the misses.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-cm-error-profile
+        prompt: "A matrix shows many false negatives and hardly any false positives. Which metric is low and what does that mean in practice?"
+        options:
+          - "Recall is low, so the model misses real positives while rarely raising a false alarm"
+          - "Precision is low, so the model raises alarms that turn out not to be real positives"
+          - "Specificity is low, so the model misclassifies the negatives it ought to be ruling out"
+          - "Accuracy is low, so both error types are represented about equally in this matrix"
+        answer: "Recall is low, so the model misses real positives while rarely raising a false alarm"
+        explanation: >-
+          False negatives sit in recall's denominator, so many of them means low recall, while few false
+          positives means precision is healthy. The precision reading describes the opposite profile.
+          Specificity concerns negatives predicted positive, which is the rare error here. And the
+          matrix explicitly shows unequal error types, so the accuracy reading contradicts it.
+        difficulty: intermediate
+      - id: ml-cm-true-negatives-dominate
+        prompt: "Why does accuracy computed from a confusion matrix flatter a model on a ninety-nine to one class split?"
+        options:
+          - "The true-negative cell dwarfs the rest, so accuracy mostly reports the majority class"
+          - "The false-negative cell is left out of the accuracy formula in the imbalanced case"
+          - "Accuracy divides by the positive count only, which is tiny and so inflates the ratio"
+          - "Accuracy uses a normalised matrix diagonal, which hides the class sizes by design"
+        answer: "The true-negative cell dwarfs the rest, so accuracy mostly reports the majority class"
+        explanation: >-
+          Accuracy sums both diagonal cells over the total, and with a rare positive class the true
+          negatives swamp everything, so the score tracks the class prior. No cell is excluded from the
+          formula. The denominator is every case, not just positives. And normalising is something you
+          request when plotting, not part of the accuracy definition.
+        difficulty: intermediate
+      - id: ml-cm-f1-ignores-cell
+        prompt: "Which cell of the confusion matrix never enters an F1 score, and why does that matter?"
+        options:
+          - "True negatives, so F1 stays informative when correct rejections vastly outnumber positives"
+          - "False negatives, so F1 measures only the purity of the positives the model chose to flag"
+          - "True positives, so F1 is computed from the two error cells and the row totals alone"
+          - "False positives, so F1 is a recall-only summary that ignores the cost of a false alarm"
+        answer: "True negatives, so F1 stays informative when correct rejections vastly outnumber positives"
+        explanation: >-
+          Precision and recall are both built from true positives, false positives and false negatives,
+          so F1 is blind to true negatives, which is precisely why it survives heavy imbalance. False
+          negatives are in recall, true positives are the shared numerator, and false positives are in
+          precision, so each of the other three cells is genuinely used.
+        difficulty: advanced
+        mastery: true
+
+  - topic: ml-bias-variance
+    # Source: scikit-learn - Underfitting versus overfitting (reading train and validation gaps)
+    questions:
+      - id: ml-bias-variance-both-low
+        prompt: "Training accuracy is 0.62 and validation accuracy is 0.61. Which regime are you in and what helps?"
+        options:
+          - "High bias and underfitting, so add capacity or better features rather than more rows"
+          - "High variance and overfitting, so add regularisation or cut the model's capacity back"
+          - "A leakage problem, since two scores should never land that close on healthy data"
+          - "Correctly tuned already, since a small gap between the two scores is the only goal"
+        answer: "High bias and underfitting, so add capacity or better features rather than more rows"
+        explanation: >-
+          Both scores being equally poor means the model cannot even fit the training data, which is the
+          bias signature and calls for more expressive features or a richer model. Overfitting would
+          show a large gap. Matching scores are the healthy case, not evidence of leakage. And a small
+          gap at a low score is not success, since the score itself is what matters.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-bias-variance-diverging-curves
+        prompt: "Training loss continues to fall while validation loss turns upward after epoch twelve. What is happening?"
+        options:
+          - "Variance is rising as the model fits training noise, so stop early or add regularisation"
+          - "Bias is rising as the model loses capacity, so it needs more parameters added to it"
+          - "The optimiser is diverging, so the learning rate must be raised to escape a plateau"
+          - "The validation labels are wrong, since a healthy fit pushes both curves down together"
+        answer: "Variance is rising as the model fits training noise, so stop early or add regularisation"
+        explanation: >-
+          Diverging curves are the canonical overfitting picture: capacity is now being spent on noise
+          that does not exist in the validation rows. Bias cannot be rising while training loss falls.
+          A diverging optimiser would push training loss up too, and raising the rate would not help.
+          And mislabelled validation data would hurt from the first epoch rather than from epoch twelve.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-bias-variance-more-data
+        prompt: "Collecting many more training rows helps most against which of the two failure modes?"
+        options:
+          - "High variance, because more rows make it much harder for a model to memorise the noise"
+          - "High bias, because more rows let a simple model discover the curvature it was missing"
+          - "Neither, because the sample size only affects the width of the confidence interval"
+          - "Both equally, because every model improves at the same rate as the data volume grows"
+        answer: "High variance, because more rows make it much harder for a model to memorise the noise"
+        explanation: >-
+          Extra data constrains a flexible model and shrinks the gap between the curves, so it is the
+          standard remedy for variance. A model that is too simple stays too simple no matter how many
+          rows it sees, so bias is untouched. Data volume changes the fit itself, not merely interval
+          width. And the two regimes respond quite differently, so equal benefit is wrong.
+        difficulty: intermediate
+      - id: ml-bias-variance-irreducible
+        prompt: "A carefully tuned model plateaus at 0.86 on both the training and the validation curve. What is the likely explanation?"
+        options:
+          - "The task carries irreducible noise, so no amount of tuning will drive the error to zero"
+          - "The regularisation strength is still a little too high and ought to be lowered further"
+          - "The validation split is unrepresentative, which always caps both curves at one value"
+          - "The model has overfitted so heavily that the two curves have converged onto one score"
+        answer: "The task carries irreducible noise, so no amount of tuning will drive the error to zero"
+        explanation: >-
+          When capacity and regularisation have been explored and both curves stop at the same ceiling,
+          the remaining error is Bayes error from noise or missing features. Over-regularisation would
+          have shown up as improvement when the penalty was reduced. A bad split does not pin the
+          training curve. And overfitting separates the curves rather than merging them.
+        difficulty: advanced
+
+  - topic: ml-cross-validation
+    # Source: scikit-learn - Cross-validation guide (K-fold and stratified folds)
+    questions:
+      - id: ml-cv-what-kfold-adds
+        prompt: "What does five-fold cross-validation give you that one eighty-twenty split cannot?"
+        options:
+          - "Every row is evaluated once, giving a mean and a spread across five separate estimates"
+          - "A larger training set each round, since all the data is used to fit every fold's model"
+          - "An unbiased final estimate, because folds are never involved in choosing a model"
+          - "A faster evaluation, since each fold trains on a fifth of the rows instead of all of them"
+        answer: "Every row is evaluated once, giving a mean and a spread across five separate estimates"
+        explanation: >-
+          Rotating the held-out fold uses all the data for evaluation and reports variability, which a
+          single split cannot. Each fold still trains on only four fifths of the rows. Folds are commonly
+          used for selection, which is why a separate test set is still needed. And five fits cost
+          roughly five times as much, so it is slower rather than faster.
+        difficulty: beginner
+        mastery: true
+      - id: ml-cv-stratification
+        prompt: "What does StratifiedKFold preserve in each fold that plain KFold may fail to keep?"
+        options:
+          - "The class proportions of the whole dataset inside every training and testing fold"
+          - "The original row ordering inside each fold, which matters when the data is time-ordered"
+          - "An identical number of rows in each fold, which plain KFold cannot guarantee at all"
+          - "The feature distributions per fold, so each fold shows the same means and variances"
+        answer: "The class proportions of the whole dataset inside every training and testing fold"
+        explanation: >-
+          Stratification keeps the label distribution stable, which stops a rare class vanishing from a
+          fold and making that fold's score meaningless. It does not preserve ordering, and honouring
+          time order needs a time-series splitter instead. Plain KFold already produces near-equal fold
+          sizes. And no splitter matches feature distributions across folds.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-cv-grouped-splitter
+        prompt: "Your rows are repeated measurements taken from fifty patients. Which cross-validator keeps the estimate honest?"
+        options:
+          - "GroupKFold, so every row from one patient stays on the same side of each split"
+          - "StratifiedKFold on the patient id, so each fold contains a sample of every patient"
+          - "ShuffleSplit with many repeats, so repeated measurements average out over the runs"
+          - "KFold with shuffling disabled, since keeping the original order separates the patients"
+        answer: "GroupKFold, so every row from one patient stays on the same side of each split"
+        explanation: >-
+          Grouping by patient is what stops identity leaking across the split and inflating the score.
+          Stratifying on the id deliberately puts each patient on both sides, which is the leak itself.
+          Repeated random splits leak in every repeat, so averaging does not fix it. And relying on the
+          file order to group patients is an accident waiting to happen.
+        difficulty: advanced
+      - id: ml-cv-reading-fold-spread
+        prompt: "cross_val_score returns 0.91, 0.62, 0.88, 0.90 and 0.89. What should you conclude?"
+        options:
+          - "One fold behaves unlike the others, so investigate it before trusting the mean of 0.84"
+          - "The mean of 0.84 is the answer, and the fold-to-fold spread carries no useful information"
+          - "The weakest fold is the honest estimate, so report 0.62 as the model's real performance"
+          - "The folds disagree only because five is too few, so any mean below ten folds is useless"
+        answer: "One fold behaves unlike the others, so investigate it before trusting the mean of 0.84"
+        explanation: >-
+          A single outlying fold usually points at something structural, such as a group or a time block
+          concentrated in that fold, and the mean hides it. Ignoring the spread throws away the main
+          advantage of cross-validation. The minimum is a pessimistic single estimate, not the truth.
+          And five folds are perfectly standard, so fold count is not the explanation.
+        difficulty: intermediate
+
+  - topic: ml-feature-scaling
+    # Source: scikit-learn - Preprocessing, standardization and variance scaling
+    questions:
+      - id: ml-scaling-fit-on-train-only
+        prompt: "Why must a StandardScaler be fitted on the training rows alone and merely applied to the rest?"
+        options:
+          - "Its mean and variance would otherwise carry test-set information into the training fit"
+          - "It cannot be fitted twice, so fitting it on the test rows raises an error at transform"
+          - "The test set is usually smaller, so its statistics are too noisy to be worth including"
+          - "Fitting on all the data reorders the columns, which then breaks the estimator's inputs"
+        answer: "Its mean and variance would otherwise carry test-set information into the training fit"
+        explanation: >-
+          The scaler's parameters are learned from data, so computing them over everything lets held-out
+          information influence training, which is leakage even though no labels are involved. Refitting
+          is technically allowed, so an error is not what stops you. Noise is not the argument, and
+          scaling never changes column order.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-scaling-standard-output
+        prompt: "After a StandardScaler is applied, what are the mean and the standard deviation of each training column?"
+        options:
+          - "Mean 0 and standard deviation 1, with the shape of the distribution otherwise unchanged"
+          - "Mean 0 and standard deviation 1, with the values additionally clipped into minus one to one"
+          - "Minimum 0 and maximum 1, with the distribution stretched to fill that whole interval"
+          - "Mean 1 and standard deviation 0, so every value in the column ends up identical"
+        answer: "Mean 0 and standard deviation 1, with the shape of the distribution otherwise unchanged"
+        explanation: >-
+          Standardising subtracts the mean and divides by the standard deviation, which recentres and
+          rescales without reshaping, so skew and outliers survive. Nothing is clipped, and values well
+          outside minus one to one are normal. Mapping onto zero to one is what MinMaxScaler does. And a
+          standard deviation of zero would mean the column had lost all its information.
+        difficulty: beginner
+      - id: ml-scaling-which-models-care
+        prompt: "Which pair of methods is hurt most if you skip scaling entirely?"
+        options:
+          - "Distance-based neighbours and gradient-descent solvers, since both read raw magnitudes"
+          - "Decision trees and random forests, because their split thresholds depend on the units"
+          - "Naive Bayes and decision trees, since both multiply feature values together when fitting"
+          - "Nothing is affected, since scikit-learn rescales features internally before any fit"
+        answer: "Distance-based neighbours and gradient-descent solvers, since both read raw magnitudes"
+        explanation: >-
+          Distances and gradient steps both depend on the numeric size of each column, so one wide-ranging
+          feature dominates either. Trees compare values within a single column at a time, so monotonic
+          rescaling leaves their splits identical. Naive Bayes multiplies likelihoods, not raw values.
+          And estimators do not silently scale your inputs for you.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-scaling-minmax-outliers
+        prompt: "Your column contains a few extreme outliers. What does MinMaxScaler do to it that StandardScaler does not?"
+        options:
+          - "It crushes the bulk of the values into a narrow band, since the extremes define the range"
+          - "It removes the outliers outright, because values beyond the range cannot be represented"
+          - "It leaves the outliers unscaled and applies its transformation to the middle half only"
+          - "It reduces the outliers' influence, since dividing by a range is robust to extreme values"
+        answer: "It crushes the bulk of the values into a narrow band, since the extremes define the range"
+        explanation: >-
+          Minimum and maximum are set by the most extreme points, so a single wild value squeezes
+          everything else towards one end, whereas mean and standard deviation are moved less
+          dramatically. No scaler deletes rows. Using the middle half describes RobustScaler. And the
+          range is the least robust statistic available, so the last option is backwards.
+        difficulty: advanced
+
+  - topic: ml-encoding-categorical
+    # Source: scikit-learn - Preprocessing, encoding categorical features
+    questions:
+      - id: ml-encoding-fake-order
+        prompt: "You encode an unordered city column as integers from zero to forty and feed it to a linear model. What goes wrong?"
+        options:
+          - "The model reads the codes as magnitudes, so city forty is treated as far above city one"
+          - "The model rejects the column, since linear models require every input to be one-hot"
+          - "The model drops the column silently, because integer codes carry no gradient signal"
+          - "Nothing goes wrong, since integer codes and one-hot columns are equivalent to a linear fit"
+        answer: "The model reads the codes as magnitudes, so city forty is treated as far above city one"
+        explanation: >-
+          A linear model multiplies the code by one coefficient, which imposes an ordering and equal
+          spacing that the categories never had. Nothing rejects or drops the column, so the failure is
+          silent and shows up only as poor predictions. And one-hot encoding gives each category its own
+          coefficient, which is precisely why it is not equivalent.
+        difficulty: beginner
+        mastery: true
+      - id: ml-encoding-when-ordinal-fits
+        prompt: "For which column is an ordinal encoder with an explicitly stated category order the better choice?"
+        options:
+          - "A rating running from poor through fair to excellent, which has a genuine ordering"
+          - "A postcode column, whose numeric codes already place nearby areas next to each other"
+          - "A product colour column, where alphabetical order gives a stable and repeatable code"
+          - "A yes-or-no column, which needs two one-hot columns to be represented correctly"
+        answer: "A rating running from poor through fair to excellent, which has a genuine ordering"
+        explanation: >-
+          Ordinal encoding is right when the categories really are ranked, so the single coefficient it
+          implies is meaningful. Postcode digits are administrative and only loosely geographic.
+          Alphabetical order for colours is arbitrary, which reintroduces the fake-magnitude problem.
+          And a binary column needs only one indicator, so two one-hot columns are redundant.
+        difficulty: intermediate
+      - id: ml-encoding-target-leakage
+        prompt: "Target encoding replaces each category with the mean outcome for that category. Where exactly does leakage creep in?"
+        options:
+          - "If a row's own outcome is inside its category mean, the feature partly encodes its own label"
+          - "If the mean is recomputed per fold, the encoder produces a different column on each fold"
+          - "If a category is rare, its mean is noisy, which tilts the model towards the majority class"
+          - "If the outcome is continuous, the encoded column must be discretised before it can be used"
+        answer: "If a row's own outcome is inside its category mean, the feature partly encodes its own label"
+        explanation: >-
+          Self-inclusion is the leak, which is why out-of-fold or leave-one-out schemes and smoothing are
+          used. Recomputing per fold is the fix rather than the problem. Rare-category noise is a real
+          weakness but it degrades the feature instead of leaking the label. And continuous targets are
+          perfectly acceptable, since the encoding is just a conditional mean.
+        difficulty: advanced
+        mastery: true
+      - id: ml-encoding-unseen-category
+        prompt: "A category never seen during training turns up in production. What does a one-hot encoder do by default?"
+        options:
+          - "It raises an error unless unknown handling was configured to ignore or to group them"
+          - "It adds a new column for the unseen category, widening the matrix at prediction time"
+          - "It maps the unseen category onto the most frequent training category and carries on"
+          - "It fills the entire row with zeros, which every estimator then treats as missing data"
+        answer: "It raises an error unless unknown handling was configured to ignore or to group them"
+        explanation: >-
+          The default is strict, because silently guessing would hide a real distribution shift; you opt
+          into ignoring unknowns or bucketing infrequent ones. Adding a column at predict time would
+          break the fitted model's expected width. Nothing substitutes the modal category. And zeroing
+          only that category's indicators is what the ignore setting does, not a whole-row wipe.
+        difficulty: intermediate
+
+  - topic: ml-ensemble-learning
+    # Source: StatQuest - Random Forests Part 1 (why combining models works)
+    questions:
+      - id: ml-ensemble-bagging-vs-boosting
+        prompt: "Which part of the error does bagging chiefly attack, and which part does boosting attack?"
+        options:
+          - "Bagging cuts variance by averaging, and boosting cuts bias by correcting earlier mistakes"
+          - "Bagging cuts bias by averaging, and boosting cuts variance by shrinking each learner's weight"
+          - "Both cut variance, and they differ only in whether the members are trained side by side"
+          - "Both cut bias, and they differ only in how the individual base learners are combined"
+        answer: "Bagging cuts variance by averaging, and boosting cuts bias by correcting earlier mistakes"
+        explanation: >-
+          Bagging averages many low-bias high-variance learners, while boosting adds many weak learners
+          each aimed at the current errors, which reduces bias. Swapping the two roles gets both
+          mechanisms wrong. They do not attack the same term, which is why boosting can overfit with
+          extra rounds while bagging largely plateaus.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-ensemble-parallel-vs-serial
+        prompt: "Why can bagged trees be fitted in parallel while boosted trees cannot?"
+        options:
+          - "Each bagged tree sees an independent resample, but each boosted tree needs the previous one"
+          - "Each bagged tree is shallower, so parallel hardware finishes them before boosting begins"
+          - "Boosting recomputes its bootstrap sample every round, which forces a strictly serial order"
+          - "Bagging shares one fitted tree between all workers, which removes any need to synchronise"
+        answer: "Each bagged tree sees an independent resample, but each boosted tree needs the previous one"
+        explanation: >-
+          Bagging's members are conditionally independent given the data, so they can be built at once,
+          whereas boosting's targets are the residuals left by the stages before it. Depth has nothing
+          to do with parallelism. Boosting's serial nature comes from the residuals rather than from
+          resampling. And bagging fits many distinct trees, not one shared tree.
+        difficulty: intermediate
+      - id: ml-ensemble-stacking-input
+        prompt: "What does the meta-learner of a stacking ensemble actually receive as its input?"
+        options:
+          - "The base models' predictions, so it can learn how far to trust each of them"
+          - "The original features again, so the meta-learner simply refits the whole problem"
+          - "The base models' training losses, so it can pick the single member scoring best"
+          - "The mean of the base predictions, which it then rescales towards the target range"
+        answer: "The base models' predictions, so it can learn how far to trust each of them"
+        explanation: >-
+          Stacking learns a combination rule from out-of-fold base predictions, which is how it exploits
+          models that are strong in different regions. Feeding it the raw features again would not
+          combine anything. Choosing one member by loss is model selection, not stacking. And a fixed
+          mean with rescaling is blending by hand rather than a learned meta-model.
+        difficulty: advanced
+      - id: ml-ensemble-identical-members
+        prompt: "You bag one hundred copies of the same linear regression on the same rows. Why does the ensemble not improve anything?"
+        options:
+          - "The members are near-identical, and averaging highly correlated predictions cancels nothing"
+          - "Linear models cannot be averaged, since their coefficients live on incompatible scales"
+          - "Bagging needs at least a thousand members before its variance reduction becomes visible"
+          - "Averaging always raises bias, so any variance gain is cancelled out by definition"
+        answer: "The members are near-identical, and averaging highly correlated predictions cancels nothing"
+        explanation: >-
+          Variance reduction comes from diversity, and a stable low-variance learner refitted on the same
+          data produces the same answer every time, so there is nothing to average away. Averaging
+          linear predictions is perfectly well defined. Member count is not the obstacle. And averaging
+          leaves bias essentially unchanged rather than raising it.
+        difficulty: advanced
+        mastery: true
+
+  - topic: ml-end-to-end-workflow
+    # Source: Google Developers - Production ML systems / workflow checklist
+    questions:
+      - id: ml-workflow-framing-first
+        prompt: "Before any model is chosen, what does framing the problem require you to pin down?"
+        options:
+          - "The prediction target, the unit each prediction covers, and the metric defining success"
+          - "The model family, the learning rate, and how many features you intend to engineer"
+          - "The training framework, the hardware budget, and the release date for the deployment"
+          - "The train and test ratio, the random seed, and how many folds you will rotate through"
+        answer: "The prediction target, the unit each prediction covers, and the metric defining success"
+        explanation: >-
+          Until the outcome, the row definition and the success measure are fixed, no modelling choice
+          can be judged, so this is genuinely step one. Model family and learning rate are decisions
+          this framing exists to inform. Infrastructure and dates are project management. And split
+          mechanics are downstream details, not the definition of the task.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-workflow-baseline-value
+        prompt: "Why is a trivial baseline a real step in the loop rather than a formality to skip?"
+        options:
+          - "It fixes the score any real model must beat, and often exposes broken data or labels"
+          - "It is required by the library before a pipeline object can be fitted to your data"
+          - "It removes the need for a validation split, since a baseline defines the ceiling"
+          - "It tunes the hyperparameters that the real model will then inherit later in the loop"
+        answer: "It fixes the score any real model must beat, and often exposes broken data or labels"
+        explanation: >-
+          A baseline calibrates every later number and frequently reveals leakage or mislabelled rows
+          when it scores absurdly well. Nothing in the tooling demands one. It sets a floor rather than
+          a ceiling, and you still need a validation split to compare against it. And baselines have no
+          hyperparameters to pass along.
+        difficulty: beginner
+      - id: ml-workflow-where-gains-come-from
+        prompt: "After a first honest validation number, where does the next real improvement usually come from?"
+        options:
+          - "Better data and features, which typically move the score more than swapping the model"
+          - "A deeper model, since more capacity is the main lever once any score exists at all"
+          - "More cross-validation folds, which raise the score by averaging over more estimates"
+          - "A different random seed, which is the cheapest route to a better final result"
+        answer: "Better data and features, which typically move the score more than swapping the model"
+        explanation: >-
+          Iteration on inputs is where most gains sit, because a model can only use the information you
+          give it. Extra capacity helps only if the diagnosis is underfitting. More folds change the
+          precision of the estimate rather than the model's quality. And seed hunting is selection on
+          noise, which does not survive contact with new data.
+        difficulty: intermediate
+      - id: ml-workflow-training-serving-skew
+        prompt: "Your offline validation looks strong but the deployed model underperforms. Which part of the loop is the usual culprit?"
+        options:
+          - "Feature computation differs between training and serving, so live inputs are not the same"
+          - "The test set was too large, which reliably makes offline scores higher than live ones"
+          - "The model was refitted before deployment, which invalidates every offline measurement"
+          - "The metric was computed per class, which a live serving system cannot reproduce at all"
+        answer: "Feature computation differs between training and serving, so live inputs are not the same"
+        explanation: >-
+          Training and serving skew is the classic production failure: a feature built from a batch
+          table has no identical online counterpart, so the model sees a different distribution. Larger
+          test sets give more reliable, not higher, scores. Refitting on the same pipeline is routine.
+          And per-class metrics are computable anywhere the labels arrive.
+        difficulty: advanced
+        mastery: true
+
+  - topic: ml-ridge-lasso
+    # Source: Vizuara - Ridge regression intuition, with the scikit-learn Ridge and Lasso reference
+    questions:
+      - id: ml-ridge-lasso-l1-zeroes
+        prompt: "What does an L1 penalty do to coefficients that an L2 penalty will not do?"
+        options:
+          - "It drives some of them exactly to zero, so the fit performs feature selection as well"
+          - "It shrinks all of them towards zero smoothly, but never sets any of them exactly to zero"
+          - "It leaves the largest coefficients untouched and shrinks only the small ones to zero"
+          - "It bounds each coefficient at one, so the fitted weights all sit in a fixed interval"
+        answer: "It drives some of them exactly to zero, so the fit performs feature selection as well"
+        explanation: >-
+          The absolute-value penalty has a corner at zero, so the optimum often lands exactly there,
+          which yields a sparse model. Smooth shrinkage without exact zeros is what L2 does, so that
+          option describes Ridge. L1 shrinks large coefficients too. And neither penalty imposes a hard
+          bound of one on any weight.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-ridge-lasso-correlated-pair
+        prompt: "Two features are almost perfectly correlated. How do Ridge and Lasso differ in what they do with that pair?"
+        options:
+          - "Ridge shares the weight between the two, while Lasso tends to keep one and zero the other"
+          - "Lasso shares the weight between the two, while Ridge picks one at random and drops it"
+          - "Both drop one of the pair, differing only in how fast the penalty removes it entirely"
+          - "Both keep the pair at full weight, since these penalties act on the intercept alone"
+        answer: "Ridge shares the weight between the two, while Lasso tends to keep one and zero the other"
+        explanation: >-
+          The squared penalty is cheapest when weight is spread across correlated columns, whereas the
+          absolute penalty is indifferent to how weight is split and so settles on a sparse corner. The
+          reversed description misassigns both behaviours. Ridge drops nothing. And the intercept is
+          normally excluded from the penalty entirely.
+        difficulty: advanced
+        mastery: true
+      - id: ml-ridge-lasso-choose-alpha
+        prompt: "How should the penalty strength alpha be selected for a Ridge model?"
+        options:
+          - "By the cross-validated score over a grid of values, never by the training error itself"
+          - "By whichever value minimises the training error, since that is what the fit optimises"
+          - "By setting it to the inverse of the feature count, as a closed-form rule of thumb"
+          - "By raising it until every coefficient is zero, then stepping back one grid position"
+        answer: "By the cross-validated score over a grid of values, never by the training error itself"
+        explanation: >-
+          Alpha trades fit against simplicity, and only held-out performance can say where the trade is
+          worthwhile. Training error always prefers alpha of zero, which reproduces the unpenalised
+          model you were trying to escape. There is no closed-form rule tied to feature count. And an
+          all-zero model is the most underfitted point on the path, not a reference to step back from.
+        difficulty: intermediate
+      - id: ml-ridge-lasso-needs-scaling
+        prompt: "Why should features be standardised before a penalised linear model is fitted?"
+        options:
+          - "The penalty acts on coefficient size, so unscaled columns end up penalised unequally"
+          - "The penalty requires positive inputs, and standardising guarantees non-negative values"
+          - "The solver cannot converge on raw columns, since penalties need a bounded input range"
+          - "Standardising removes the intercept, which the penalty would otherwise shrink as well"
+        answer: "The penalty acts on coefficient size, so unscaled columns end up penalised unequally"
+        explanation: >-
+          A feature measured in small units needs a large coefficient, so the penalty punishes it harder
+          for no good reason; standardising makes the penalty comparable across columns. Standardising
+          produces negative values, so the positivity claim is false. Solvers converge on raw columns,
+          just more slowly. And centring does not remove the intercept from the model.
+        difficulty: intermediate
+
+  - topic: ml-roc-auc
+    # Source: StatQuest - ROC curves and AUC in classification
+    questions:
+      - id: ml-roc-axes
+        prompt: "What sits on the two axes of an ROC curve, and what generates the individual points along it?"
+        options:
+          - "True positive rate against false positive rate, one point per candidate decision threshold"
+          - "Precision against recall, with one point for each candidate decision threshold considered"
+          - "Accuracy against the threshold, with one point for every model being compared in the study"
+          - "True positives against false positives as raw counts, one point per scored test-set row"
+        answer: "True positive rate against false positive rate, one point per candidate decision threshold"
+        explanation: >-
+          Sweeping the threshold traces rates rather than counts, which is what makes the curve
+          comparable across datasets of different sizes. Precision against recall is the PR curve, a
+          different plot with different behaviour under imbalance. Accuracy against threshold is a
+          single line, not a curve of trade-offs. And raw counts would depend on test-set size.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-roc-vs-pr-imbalance
+        prompt: "Your fraud model shows ROC AUC 0.94 but PR AUC 0.21. Why do the two disagree so violently?"
+        options:
+          - "False positive rate divides by a huge negative count, so many false alarms barely move it"
+          - "PR AUC also divides by the negative count, which is what makes it the harsher measure"
+          - "ROC AUC is computed at a single threshold, so it cannot reflect the whole trade-off curve"
+          - "The two use different predictions, since PR AUC needs hard labels rather than scores"
+        answer: "False positive rate divides by a huge negative count, so many false alarms barely move it"
+        explanation: >-
+          With rare positives, thousands of false alarms hardly register against the enormous negative
+          denominator, so ROC looks excellent while precision, which divides by the flags raised,
+          collapses. PR curves deliberately avoid the negative count. ROC AUC integrates over all
+          thresholds. And both curves are built from the same continuous scores.
+        difficulty: advanced
+        mastery: true
+      - id: ml-roc-auc-half
+        prompt: "What does an AUC of 0.5 tell you about the scores a classifier produces?"
+        options:
+          - "Its ranking is no better than chance, since a random positive outranks a random negative half the time"
+          - "It classifies half of the test rows correctly, which is the accuracy you get from a coin flip"
+          - "It is perfectly calibrated, because 0.5 is the midpoint of the probability scale it uses"
+          - "Its threshold sits at 0.5, which is the default cutoff the predict method applies by default"
+        answer: "Its ranking is no better than chance, since a random positive outranks a random negative half the time"
+        explanation: >-
+          AUC is exactly that ranking probability, so 0.5 means the scores carry no ordering information
+          about the classes. It is not an accuracy, and on imbalanced data a coin flip scores nothing
+          like 0.5 accuracy. Calibration concerns whether probabilities match observed frequencies,
+          which is unrelated. And AUC is threshold-free, so it says nothing about a cutoff.
+        difficulty: intermediate
+      - id: ml-roc-operating-point
+        prompt: "Your team must commit to one operating point for deployment. Why is AUC on its own not enough?"
+        options:
+          - "AUC averages over every threshold, so it cannot say which one matches your cost ratio"
+          - "AUC is only valid on balanced data, so it cannot be used to pick a threshold at all"
+          - "AUC is computed from training scores, so choosing a threshold needs held-out data instead"
+          - "AUC assumes a cutoff of 0.5, so any other operating point invalidates the value reported"
+        answer: "AUC averages over every threshold, so it cannot say which one matches your cost ratio"
+        explanation: >-
+          A summary over all thresholds deliberately discards the choice you now have to make, so you go
+          back to the curve and pick the point meeting your false-alarm or recall constraint. AUC is
+          computable on imbalanced data, though it can flatter there. It is normally reported on held-out
+          scores. And it assumes no particular cutoff, which is the whole point of it.
+        difficulty: advanced
+
+  - topic: ml-regression-metrics
+    # Source: scikit-learn - Model evaluation, regression metrics
+    questions:
+      - id: ml-regmetrics-mae-vs-rmse-gap
+        prompt: "On the same predictions MAE is 4.2 while RMSE is 19.8. What does that gap tell you?"
+        options:
+          - "A few very large errors dominate, since squaring inside RMSE magnifies the worst residuals"
+          - "The predictions are biased upward, which is the only way these two metrics can diverge"
+          - "RMSE is on a different scale from the target, so the two numbers cannot be compared"
+          - "The model underfits everywhere, which lifts RMSE while leaving MAE close to zero"
+        answer: "A few very large errors dominate, since squaring inside RMSE magnifies the worst residuals"
+        explanation: >-
+          RMSE exceeds MAE whenever errors are unevenly sized, and a factor of nearly five means a heavy
+          tail of large misses. Systematic bias would raise both metrics together. RMSE is deliberately
+          returned in target units so it can be compared with MAE. And uniform underfitting would raise
+          MAE as much as RMSE.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-regmetrics-units
+        prompt: "Which regression metrics are expressed in the same units as the target itself?"
+        options:
+          - "MAE and RMSE, whereas MSE is in squared units and R2 carries no units"
+          - "MSE and RMSE, whereas MAE reports absolute units and R2 is a percentage"
+          - "R2 and MAE, whereas both MSE and RMSE report squared units of the target"
+          - "All four of them, since every regression metric lives on the target scale"
+        answer: "MAE and RMSE, whereas MSE is in squared units and R2 carries no units"
+        explanation: >-
+          Taking the root undoes the squaring, so RMSE returns to target units alongside MAE, which is
+          why either can be quoted to a stakeholder in currency or degrees. MSE stays squared. R2 is a
+          unitless variance ratio, not a percentage of the target. And they plainly do not all share
+          one scale, since MSE differs from the rest.
+        difficulty: beginner
+      - id: ml-regmetrics-r2-reading
+        prompt: "A model records R2 of 0.02 on held-out rows. What does that mean, and what would a negative value mean?"
+        options:
+          - "It barely beats predicting the mean, and a negative value means it does worse than that"
+          - "It explains two per cent of the variance, and a negative value is impossible by definition"
+          - "It has two per cent error, and a negative value means the residuals carry the wrong sign"
+          - "It correlates weakly with the target, and a negative value means that correlation inverted"
+        answer: "It barely beats predicting the mean, and a negative value means it does worse than that"
+        explanation: >-
+          R2 compares your errors with those of the mean predictor, so near zero means no real gain and
+          below zero means actively worse, which is common on held-out data. Explaining two per cent of
+          variance is the right reading of the number but wrongly rules out negatives. It is not an
+          error percentage. And it is not a correlation, so a sign flip is not what negative means.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-regmetrics-spikes-matter
+        prompt: "Your target has rare genuine spikes that carry most of the commercial value. Which metric should drive selection?"
+        options:
+          - "A squared-error metric, since you want the model punished heavily for missing the spikes"
+          - "MAE, because it treats a spike exactly like an ordinary row and so is always the safer choice"
+          - "R2, because it is unitless and therefore comparable between the spiky and the flat regions"
+          - "Median absolute error, because it sets the spikes aside and reports the typical case only"
+        answer: "A squared-error metric, since you want the model punished heavily for missing the spikes"
+        explanation: >-
+          When large errors cost disproportionately more, a metric that grows with the square of the
+          error matches your cost function. MAE prices a huge miss the same as a small one, which is
+          wrong here even though it is robust. R2 is a variance ratio and does not encode spike costs.
+          And a median-based metric is designed to ignore exactly the rows you care about.
+        difficulty: advanced
+
+  - topic: ml-grid-search
+    # Source: scikit-learn - Tuning the hyper-parameters of an estimator
+    questions:
+      - id: ml-search-random-vs-grid
+        prompt: "With six hyperparameters and a fixed compute budget, why is randomised search usually the better tool than an exhaustive grid?"
+        options:
+          - "A grid's cost multiplies across dimensions, while random draws explore each range broadly"
+          - "Random search evaluates each combination faster, since it skips the cross-validation step"
+          - "A grid must be run on a single core, whereas random search parallelises across the folds"
+          - "Random search guarantees the optimum, while a grid can only find a nearby approximation"
+        answer: "A grid's cost multiplies across dimensions, while random draws explore each range broadly"
+        explanation: >-
+          Grid cost is the product of the per-axis counts, so six axes explode, and random sampling
+          spends the same budget covering more distinct values of the parameters that matter. Both
+          approaches cross-validate every candidate. Both parallelise the same way. And random search
+          offers no optimality guarantee at all.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-search-best-score-meaning
+        prompt: "When a grid search finishes, what does its best score represent and what has the object been fitted to?"
+        options:
+          - "The mean cross-validated score of the winning setting, refitted on the whole training set"
+          - "The winning setting's score on the test set, which the search holds back internally for you"
+          - "The single best fold score observed anywhere during the search, from the fold that gave it"
+          - "The training score of the winning setting, measured before the final refit takes place"
+        answer: "The mean cross-validated score of the winning setting, refitted on the whole training set"
+        explanation: >-
+          The reported score is the average across folds for the best candidate, and with refit enabled
+          the returned estimator is retrained on all the training data. The search never touches a test
+          set of its own. It ranks by the fold mean, not by a single lucky fold. And training scores are
+          not what candidates are ranked on.
+        difficulty: intermediate
+      - id: ml-search-selection-optimism
+        prompt: "Why is the winning cross-validated score from a large search an optimistic view of future performance?"
+        options:
+          - "Taking the maximum over many noisy estimates is itself a choice, so it is biased upward"
+          - "Cross-validation trains on less data than the final model, which always inflates the score"
+          - "The search refits the winner, and a refitted model always scores higher than during search"
+          - "Large searches overfit because every candidate is evaluated on the very same folds once"
+        answer: "Taking the maximum over many noisy estimates is itself a choice, so it is biased upward"
+        explanation: >-
+          Each fold mean carries noise, and picking the largest of hundreds selects partly for luck,
+          which is why an outer loop or a held-out test set is needed for an honest number. Training on
+          less data biases scores downward if anything. The refit is not scored. And reusing folds is
+          how the bias arises but it is not itself an overfitting of the estimator.
+        difficulty: advanced
+        mastery: true
+      - id: ml-search-validation-curve
+        prompt: "A validation curve over tree depth rises to a peak at six and then declines. What does the declining part show?"
+        options:
+          - "Deeper trees fit the training folds better while generalising worse, which is overfitting"
+          - "Deeper trees underfit, because extra depth reduces the capacity available in each leaf"
+          - "The search became unstable, since depth beyond the feature count is undefined behaviour"
+          - "The folds shrank as depth grew, so those later points were scored on less held-out data"
+        answer: "Deeper trees fit the training folds better while generalising worse, which is overfitting"
+        explanation: >-
+          A peak marks the best capacity, and the fall after it is the validation curve detecting
+          variance as the model starts memorising. Depth increases capacity rather than reducing it.
+          Depth greater than the feature count is perfectly legal, since features can be reused. And
+          fold sizes are fixed by the splitter regardless of the parameter being varied.
+        difficulty: intermediate
+
+  - topic: ml-kmeans
+    # Source: StatQuest - K-means clustering
+    questions:
+      - id: ml-kmeans-two-steps
+        prompt: "Which two steps does k-means alternate between until the assignments stop changing?"
+        options:
+          - "Assign each point to its nearest centroid, then move each centroid to its members' mean"
+          - "Assign each point to a random cluster, then merge whichever two clusters are closest"
+          - "Split the widest cluster in two, then reassign the points that changed side of the split"
+          - "Fit a Gaussian to each cluster, then assign points by their highest posterior probability"
+        answer: "Assign each point to its nearest centroid, then move each centroid to its members' mean"
+        explanation: >-
+          The assign-then-update cycle is the entire algorithm, and each half can only lower the
+          within-cluster sum of squares, which is why it converges. Merging closest clusters describes
+          agglomerative clustering. Splitting the widest cluster is a divisive scheme. And fitting
+          Gaussians with soft posteriors is a mixture model rather than k-means.
+        difficulty: beginner
+        mastery: true
+      - id: ml-kmeans-elbow-vs-silhouette
+        prompt: "How do the elbow and silhouette approaches differ in the way they suggest a value for k?"
+        options:
+          - "The elbow watches for diminishing inertia gains, silhouette scores separation against cohesion"
+          - "The elbow scores separation against cohesion, silhouette watches for diminishing inertia gains"
+          - "Both simply minimise inertia, differing only in dividing the total by the number of clusters"
+          - "The elbow needs labels to compute purity, while silhouette works without any labels at all"
+        answer: "The elbow watches for diminishing inertia gains, silhouette scores separation against cohesion"
+        explanation: >-
+          Inertia falls monotonically with k, so the elbow looks for the bend, while silhouette compares
+          each point's own-cluster distance with its nearest other cluster and so has an interior
+          optimum. The reversed pairing misdescribes both. Silhouette is not a rescaled inertia. And
+          neither method requires ground-truth labels.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-kmeans-init-variability
+        prompt: "Two runs of k-means on identical data return different clusters. Why, and what reduces it?"
+        options:
+          - "Starting centroids differ, so it lands in different local optima; use k-means++ and n_init"
+          - "The rows are reshuffled each run, so the clusters really are different partitions of them"
+          - "Inertia is stochastic, so the same partition scores differently and the labels get swapped"
+          - "The method is randomised by design, and no available setting can make its output repeatable"
+        answer: "Starting centroids differ, so it lands in different local optima; use k-means++ and n_init"
+        explanation: >-
+          The objective is non-convex, so initialisation decides which local optimum is reached; smarter
+          seeding and several restarts keeping the best inertia are the standard mitigations. Row order
+          is not what changes the partition. Inertia is a deterministic function of a partition. And
+          fixing the seed does make runs reproducible.
+        difficulty: intermediate
+      - id: ml-kmeans-shape-assumption
+        prompt: "Your true groups are long thin crescents. Why does k-means carve them up badly?"
+        options:
+          - "It assigns by distance to a centre, so it divides space into roughly spherical cells"
+          - "It requires clusters of equal size, and crescent shapes always hold unequal counts"
+          - "It cannot handle two dimensions, so curved shapes need a kernel projection first"
+          - "It stops iterating too early on curved data, so raising the iteration cap fixes it"
+        answer: "It assigns by distance to a centre, so it divides space into roughly spherical cells"
+        explanation: >-
+          Nearest-centroid assignment produces convex, roughly equal-radius regions, which cannot follow
+          a curved band, so a crescent gets sliced across. Equal cluster sizes are a tendency rather
+          than a requirement. Two dimensions are perfectly fine for k-means. And the failure is the
+          objective's shape assumption, not premature stopping.
+        difficulty: advanced
+
+  - topic: ml-hierarchical-dbscan
+    # Source: scikit-learn - Clustering: hierarchical clustering and DBSCAN
+    questions:
+      - id: ml-dbscan-noise-label
+        prompt: "What does DBSCAN do that neither k-means nor agglomerative clustering offers?"
+        options:
+          - "It labels low-density points as noise instead of forcing every point into a cluster"
+          - "It guarantees the globally optimal partition for whatever cluster count you request"
+          - "It produces a nested hierarchy that can be cut at any level of similarity you choose"
+          - "It requires the cluster count up front, which makes its output easier to compare"
+        answer: "It labels low-density points as noise instead of forcing every point into a cluster"
+        explanation: >-
+          Density-based clustering can leave a point unassigned, which is what makes it usable when part
+          of the data is genuinely background. No clustering method guarantees a global optimum for a
+          requested k. The nested hierarchy is what agglomerative clustering gives. And needing k in
+          advance is the limitation DBSCAN avoids, not a feature it adds.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-dbscan-eps-minsamples
+        prompt: "What do the eps and min_samples settings of DBSCAN jointly define?"
+        options:
+          - "The density a neighbourhood must reach before a point counts as a core point"
+          - "The number of clusters and how many noise points each of them may contain"
+          - "The distance metric in use and how many iterations run before the search stops"
+          - "The size of the dendrogram and the height at which it should finally be cut"
+        answer: "The density a neighbourhood must reach before a point counts as a core point"
+        explanation: >-
+          A radius plus a required neighbour count is precisely a density threshold, and core points are
+          what clusters grow from. Cluster count is an output of DBSCAN rather than an input. The metric
+          is a separate parameter and there is no iteration budget here. And dendrograms belong to
+          hierarchical clustering, which DBSCAN does not build.
+        difficulty: intermediate
+      - id: ml-dendrogram-join-height
+        prompt: "In a dendrogram, what does the height at which two branches join actually represent?"
+        options:
+          - "The distance between those clusters at the moment they merged, under the chosen linkage"
+          - "The number of points inside the smaller of the two clusters that were merged there"
+          - "The improvement in inertia that this particular merge produced over the previous step"
+          - "The order in which that merge occurred, counted upward from the bottom of the tree"
+        answer: "The distance between those clusters at the moment they merged, under the chosen linkage"
+        explanation: >-
+          Height is the linkage dissimilarity, which is why cutting the tree at a height is equivalent
+          to choosing a similarity threshold. Cluster size is shown by the width of the subtree, not its
+          height. Inertia change is a k-means notion. And merge order is implied by height but is not
+          what the axis measures.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-dbscan-varying-density
+        prompt: "Why does one single eps value struggle when your data holds both dense and sparse groups?"
+        options:
+          - "One eps fixes one density, so it either merges dense groups or calls the sparse ones noise"
+          - "One eps caps the cluster count, so the sparse regions are always split into too many pieces"
+          - "Sparse clusters are unreachable, so DBSCAN raises an error before it can label anything"
+          - "Dense clusters exceed min_samples, so DBSCAN discards them as outliers before merging"
+        answer: "One eps fixes one density, so it either merges dense groups or calls the sparse ones noise"
+        explanation: >-
+          A global radius imposes a single density threshold, and no single value can suit two very
+          different densities, which is why hierarchical density methods exist. Eps does not limit the
+          number of clusters. Sparse regions are labelled noise rather than causing an error. And
+          exceeding min_samples is what makes a point a core point, not an outlier.
+        difficulty: advanced
+
+  - topic: ml-pca
+    # Source: StatQuest - Principal component analysis, step by step
+    questions:
+      - id: ml-pca-first-component
+        prompt: "What property does the first principal component of a dataset have?"
+        options:
+          - "It is the direction along which the projected data has the greatest possible variance"
+          - "It is the direction that best separates whatever class labels the training data holds"
+          - "It is the original feature correlating most strongly with all of the other features"
+          - "It is the direction along which the data varies least, so noise can then be discarded"
+        answer: "It is the direction along which the projected data has the greatest possible variance"
+        explanation: >-
+          PCA is defined by maximising projected variance, equivalently minimising reconstruction error,
+          which is why it needs no labels. Separating classes is what linear discriminant analysis
+          optimises. Components are combinations of features rather than one chosen column. And the
+          least-variance direction is the last component, not the first.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-pca-explained-variance
+        prompt: "The explained variance ratios begin 0.62, 0.21 and 0.09. What does keeping only two components cost you?"
+        options:
+          - "You keep 83 per cent of the total variance and give up the remaining 17 per cent"
+          - "You keep 62 per cent, since only the first component's variance is genuinely retained"
+          - "You keep 83 per cent of the original features and drop the rest of the columns"
+          - "You keep all the variance, since a projection is a rotation and rotations lose nothing"
+        answer: "You keep 83 per cent of the total variance and give up the remaining 17 per cent"
+        explanation: >-
+          The ratios add up over the components you keep, so two components retain 0.62 plus 0.21.
+          Taking only the first component would be the 62 per cent figure. Components are new axes, so
+          nothing maps onto a percentage of original columns. And dropping components is a projection
+          rather than a rotation, so information really is lost.
+        difficulty: intermediate
+      - id: ml-pca-needs-scaling
+        prompt: "Why is PCA misleading when one column is measured in millions and another in single units?"
+        options:
+          - "Variance depends on units, so the large-numbered column simply becomes the first component"
+          - "Covariance cannot be computed across mixed units, so the decomposition fails outright"
+          - "PCA centres but never scales, so the components come out in an arbitrary random order"
+          - "Small-numbered columns dominate, because PCA maximises variance after inverting the units"
+        answer: "Variance depends on units, so the large-numbered column simply becomes the first component"
+        explanation: >-
+          PCA chases variance, and variance is not unit-free, so a column measured in large numbers wins
+          by accident of measurement, which is why standardising first is routine. Covariance is
+          computable across any units. Components are always ordered by variance, never randomly. And
+          nothing inverts units, so small columns do not dominate.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-pca-whitening
+        prompt: "What does turning on whitening change about the output that PCA hands back?"
+        options:
+          - "Each component is rescaled to unit variance, so their relative importance is discarded"
+          - "Each component is centred on zero, which the standard transformation does not already do"
+          - "The components are made uncorrelated, which the plain transformation does not provide"
+          - "The components are sorted by variance, which the plain transformation leaves unordered"
+        answer: "Each component is rescaled to unit variance, so their relative importance is discarded"
+        explanation: >-
+          Whitening divides each component by its singular value, which equalises the axes and helps
+          downstream methods that assume comparable scales, at the cost of losing the variance ordering
+          information. Centring already happens by default. Components are uncorrelated with or without
+          whitening. And they are always returned in descending variance order.
+        difficulty: advanced
+
+  - topic: ml-anomaly-awareness
+    # Source: scikit-learn - Novelty and outlier detection
+    questions:
+      - id: ml-anomaly-novelty-vs-outlier
+        prompt: "What separates the novelty detection setting from the outlier detection setting?"
+        options:
+          - "Novelty detection fits clean data and scores new points, while outlier detection finds contamination inside the training data"
+          - "Novelty detection needs labelled anomalies to fit, while outlier detection infers the same boundary with no labels at all"
+          - "Novelty detection works only on streaming data, while outlier detection is limited to batch tables held in memory"
+          - "Novelty detection flags rare classes in supervised data, while outlier detection flags mislabelled rows during validation"
+        answer: "Novelty detection fits clean data and scores new points, while outlier detection finds contamination inside the training data"
+        explanation: >-
+          The distinction is what the training set contains and what you score: clean reference data plus
+          new observations, versus a possibly polluted set you want cleaned. Both settings are
+          unsupervised, so neither needs anomaly labels. Neither is restricted to streaming or batch
+          data. And neither is a supervised rare-class or label-auditing method.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-anomaly-contamination-param
+        prompt: "What does the contamination setting control in scikit-learn's outlier detectors?"
+        options:
+          - "The expected share of outliers, which fixes where the threshold on the scores falls"
+          - "The share of feature values allowed to be missing before a row is flagged as an outlier"
+          - "The amount of noise added during fitting, which makes the learnt boundary less sensitive"
+          - "The share of training rows withheld so that the outlier scores can afterwards be calibrated"
+        answer: "The expected share of outliers, which fixes where the threshold on the scores falls"
+        explanation: >-
+          The detectors produce continuous scores, and contamination is the quantile used to cut them
+          into inliers and outliers, so it encodes your prior about how dirty the data is. It has
+          nothing to do with missing values. No noise is injected during fitting. And no rows are held
+          back for calibration by this parameter.
+        difficulty: intermediate
+      - id: ml-anomaly-rarity-is-not-fraud
+        prompt: "Your unsupervised detector flags three per cent of payments, yet almost none turn out to be fraudulent. What does that show?"
+        options:
+          - "Statistical rarity is not fraud, so unusual-looking rows still need validation against labels"
+          - "The contamination was set too low, so raising it towards thirty per cent will find the cases"
+          - "The wrong columns were used, since fraud is always visible in the transaction amount alone"
+          - "Unsupervised detectors do not work on tabular data and are only usable on images or signals"
+        answer: "Statistical rarity is not fraud, so unusual-looking rows still need validation against labels"
+        explanation: >-
+          Unsupervised methods find what is unusual, which coincides with what is malicious only
+          sometimes, so labels are needed to confirm the overlap. Flagging ten times as many rows would
+          add far more false alarms rather than precision. Fraud is rarely reducible to one column. And
+          these detectors are used on tabular data routinely.
+        difficulty: advanced
+        mastery: true
+      - id: ml-anomaly-lof-novelty-flag
+        prompt: "Why can a local outlier factor model not score fresh points unless it is created in novelty mode?"
+        options:
+          - "It is built to judge each training row against its own neighbourhood rather than be reused"
+          - "It stores no distances, so a new point would need the whole neighbour graph rebuilt first"
+          - "It returns ranks instead of scores, and ranks cannot be extended beyond the training rows"
+          - "It needs labels at prediction time, which are unavailable for genuinely new observations"
+        answer: "It is built to judge each training row against its own neighbourhood rather than be reused"
+        explanation: >-
+          By default the method is transductive: the score is a comparison of local densities inside the
+          fitted set, so a predict method for new data is only exposed when you opt into novelty mode.
+          It does keep the training data and index. Its output is a continuous factor, not a rank. And
+          it never uses labels at any stage.
+        difficulty: advanced
+
+  - topic: ml-gradient-boosting
+    # Source: scikit-learn - Ensembles, gradient-boosted trees
+    questions:
+      - id: ml-gbm-what-each-tree-fits
+        prompt: "In a gradient-boosting model, what does each newly added tree fit?"
+        options:
+          - "The gradient of the loss against the current predictions, so it corrects what remains"
+          - "A bootstrap resample of the original targets, independently of the trees already built"
+          - "The original targets again, with the ensemble taking a majority vote across all trees"
+          - "The rows the previous tree got wrong, which are then removed from the training data"
+        answer: "The gradient of the loss against the current predictions, so it corrects what remains"
+        explanation: >-
+          Boosting is stage-wise descent in function space: each tree approximates the negative gradient,
+          which for squared loss is exactly the residual. Independent resampling with a vote describes
+          bagging instead. Refitting the original target ignores the stages already added. And no rows
+          are ever deleted; they are reweighted through the gradient.
+        difficulty: advanced
+        mastery: true
+      - id: ml-gbm-rate-and-stages
+        prompt: "How do the learning rate and the number of boosting stages interact?"
+        options:
+          - "A smaller rate shrinks each tree's contribution, so more stages are needed for the same fit"
+          - "A smaller rate makes each tree deeper, so fewer stages are needed to reach the same fit"
+          - "They are independent, since the rate rescales the prediction after every tree is built"
+          - "A larger rate adds stages by itself, so the stage count is ignored when the rate is high"
+        answer: "A smaller rate shrinks each tree's contribution, so more stages are needed for the same fit"
+        explanation: >-
+          Shrinkage and stage count trade off directly, which is why small rates with many stages
+          generalise better but cost more compute. The rate does not change tree depth. It multiplies
+          each stage as it is added rather than rescaling the finished model, so the two are coupled.
+          And no setting silently overrides the stage count.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-gbm-shallow-members
+        prompt: "Why are boosted trees usually kept to about depth three, unlike the deep trees inside a forest?"
+        options:
+          - "Boosting cuts bias by accumulating weak learners, so each member should stay simple"
+          - "Boosting cannot fit trees deeper than three levels, since the gradients vanish below that"
+          - "Boosting averages its members, so deeper trees would only make the average slower"
+          - "Boosting needs identical members, and shallow trees are the only ones sure to match"
+        answer: "Boosting cuts bias by accumulating weak learners, so each member should stay simple"
+        explanation: >-
+          The ensemble's power comes from many small corrections, so a strong member would overshoot and
+          overfit within a few stages. Depth is not technically limited and gradients do not vanish in
+          trees. Boosting sums weighted stages rather than averaging equals. And members are deliberately
+          different, since each targets the current residual.
+        difficulty: intermediate
+      - id: ml-gbm-too-many-stages
+        prompt: "What happens to a boosted model's validation loss as you keep adding stages indefinitely?"
+        options:
+          - "It falls and then turns upward once stages start fitting noise, so use early stopping"
+          - "It falls without limit, because each stage only ever corrects the previous stage's errors"
+          - "It plateaus permanently, since extra stages cannot add capacity to an additive model"
+          - "It rises from the very first stage, because boosting overfits without a subsample rate"
+        answer: "It falls and then turns upward once stages start fitting noise, so use early stopping"
+        explanation: >-
+          Every stage adds capacity, so boosting genuinely overfits with too many rounds, which is why
+          validation monitoring and early stopping are standard. Correcting errors includes correcting
+          noise, so the fall does not continue. Additive stages do increase capacity, so it does not
+          plateau. And early stages reduce loss, so it does not rise from the start.
+        difficulty: intermediate
+
+  - topic: ml-feature-importance
+    # Source: scikit-learn - Permutation importance
+    questions:
+      - id: ml-importance-impurity-bias
+        prompt: "Why can the impurity-based importances reported by a tree model mislead you?"
+        options:
+          - "They favour high-cardinality columns, which offer many split points and can fit noise"
+          - "They are computed on held-out rows, so they describe that split rather than the model"
+          - "They sum to more than one, so their relative sizes cannot be compared across columns"
+          - "They ignore the tree structure and rank columns by their correlation with the target"
+        answer: "They favour high-cardinality columns, which offer many split points and can fit noise"
+        explanation: >-
+          More candidate thresholds mean more chances to reduce impurity by luck, so continuous or
+          high-cardinality columns score highly even when useless. These importances are computed from
+          the training-time splits, not on held-out data. They are normalised to sum to one. And they
+          come directly from the tree structure rather than from correlations.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-importance-permutation-definition
+        prompt: "What does permutation importance measure for a given column?"
+        options:
+          - "The drop in a chosen score when that column's values are shuffled, breaking its signal"
+          - "The share of splits in which the column was chosen, averaged over all trees in the model"
+          - "The coefficient the column would get if the model were refitted as a linear regression"
+          - "The correlation between the column and the target, computed before any model is fitted"
+        answer: "The drop in a chosen score when that column's values are shuffled, breaking its signal"
+        explanation: >-
+          Shuffling destroys the link between one column and the target while leaving its distribution
+          intact, so the score loss measures how much the fitted model relied on it. Split counts are
+          the impurity-style measure. No refitting happens, linear or otherwise. And a raw correlation
+          ignores the model entirely.
+        difficulty: intermediate
+        mastery: true
+      - id: ml-importance-correlated-pair
+        prompt: "Two duplicated columns both come back with permutation importance near zero. What explains that?"
+        options:
+          - "Shuffling one leaves the other intact, so the model's score barely moves either way"
+          - "Duplicate columns are dropped when fitting, so neither was ever used by the model"
+          - "Permutation importance is undefined for correlated columns and returns zero by design"
+          - "Both columns had zero impurity gain, which permutation importance simply reproduces"
+        answer: "Shuffling one leaves the other intact, so the model's score barely moves either way"
+        explanation: >-
+          The method perturbs one column at a time, so a redundant copy can supply the same information
+          and mask the loss, which is why correlated groups should be permuted together. Nothing removes
+          duplicate columns automatically. The measure is well defined for correlated inputs. And the
+          impurity measure would give these columns nonzero shares.
+        difficulty: advanced
+      - id: ml-importance-which-split
+        prompt: "Why is permutation importance normally computed on held-out rows rather than on the training rows?"
+        options:
+          - "Training importances reward what the model memorised rather than what actually generalises"
+          - "Training importances cannot be computed once the model has already been fitted to them"
+          - "Held-out data is larger, so the shuffling gives a much less noisy estimate of each drop"
+          - "Held-out importances are unitless, whereas training importances depend on the loss used"
+        answer: "Training importances reward what the model memorised rather than what actually generalises"
+        explanation: >-
+          An overfitted model leans hard on columns that only helped it memorise, so training-set
+          importances can highlight features with no predictive value on new data. Computing them on
+          training rows is possible, just less useful. Held-out sets are smaller, not larger. And both
+          variants are expressed in the units of whichever score you chose.
+        difficulty: intermediate

@@ -1,0 +1,394 @@
+# Gradient Boosting in Practice - self-check questions.
+#
+# Grounded in the XGBoost boosted-trees and parameter-tuning tutorials, the
+# LightGBM features page, the XGBoost categorical-data tutorial and the 2022
+# tabular-versus-deep-learning benchmark paper. mod-ml-core already covers
+# boosting at working level, so these questions go at the objective, the
+# split-gain algebra, the parameter groups and the published evidence.
+schema_version: 1
+kind: question_bank
+module: mod-ml-boosting
+topics:
+  - topic: gbm-boosted-trees-theory
+    # Source: XGBoost - Introduction to Boosted Trees
+    questions:
+      - id: gbm-theory-regularised-objective
+        prompt: "In the XGBoost objective, what does the term sitting alongside the training loss actually penalise?"
+        options:
+          - "The complexity of each tree, through its number of leaves and the squared magnitude of the leaf weights"
+          - "The depth of each tree only, which is why a depth limit is the sole regularisation the method offers"
+          - "The number of trees in the ensemble, so the objective stops improving once enough rounds are added"
+          - "The distance between successive trees, keeping each new tree close in structure to the previous one"
+        answer: "The complexity of each tree, through its number of leaves and the squared magnitude of the leaf weights"
+        explanation: >-
+          The regularisation term is written per tree as a leaf count multiplied by a penalty plus an L2 norm on
+          the leaf values, which is the part that makes this more than plain gradient boosting. Depth is only an
+          indirect proxy for that and is a search constraint, not a term in the objective. Nothing in the
+          objective counts trees, which is why more rounds keep reducing training loss. And no term compares one
+          tree with the previous one.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-theory-second-order-expansion
+        prompt: "The objective is expanded to second order around the current prediction. What two quantities does each training row contribute to that expansion?"
+        options:
+          - "The first and the second derivative of the loss with respect to that row's own current prediction"
+          - "The residual and the squared residual, which is why the method supports only the squared-error loss"
+          - "The row's target value and its sample weight, which the split finder treats as a single statistic"
+          - "The current prediction and the previous prediction, whose difference measures that round's progress"
+        answer: "The first and the second derivative of the loss with respect to that row's own current prediction"
+        explanation: >-
+          Each row supplies a gradient and a Hessian, and every later formula is written purely in those two
+          sums, which is exactly what lets one solver handle any twice-differentiable loss. Residuals are the
+          special case the gradient reduces to under squared error, so naming them narrows the method wrongly.
+          Targets and weights enter only through the derivatives. And successive predictions describe progress
+          rather than the local shape of the loss.
+        difficulty: advanced
+      - id: gbm-theory-leaf-weight-formula
+        prompt: "The best value for a leaf is minus its gradient sum divided by its Hessian sum plus lambda. What does raising lambda do?"
+        options:
+          - "It shrinks every leaf value towards zero, and shrinks leaves holding few rows proportionally more"
+          - "It raises every leaf value away from zero, since a larger denominator makes the whole ratio grow"
+          - "It changes which splits get chosen but leaves the value stored in each resulting leaf untouched"
+          - "It removes leaves whose gradient sum is negative, which is how the algorithm prunes a grown tree"
+        answer: "It shrinks every leaf value towards zero, and shrinks leaves holding few rows proportionally more"
+        explanation: >-
+          Lambda only ever adds to the denominator, so each leaf value moves towards zero, and a leaf with a
+          small Hessian sum is dominated by lambda and shrinks hardest, which is the intended effect on sparse
+          leaves. It cannot raise a value, since increasing a denominator reduces a ratio. It also feeds the gain
+          formula, so split choice changes too. And pruning is governed by gamma against the gain, not by the
+          sign of a gradient sum.
+        difficulty: advanced
+      - id: gbm-theory-gain-and-gamma
+        prompt: "The split-gain expression subtracts a constant gamma from the improvement a candidate split would offer. What follows from that?"
+        options:
+          - "A split whose improvement does not exceed gamma is not worth making, so gamma acts as a pruning threshold"
+          - "Gamma rescales the improvement so that gains at different depths of the tree become directly comparable"
+          - "Gamma is the learning rate under another name, shrinking every accepted split before it gets applied"
+          - "Gamma counts the rows in the node, so deeper nodes holding fewer rows automatically produce larger gains"
+        answer: "A split whose improvement does not exceed gamma is not worth making, so gamma acts as a pruning threshold"
+        explanation: >-
+          Gamma is the price of the extra leaf a split creates, so a negative gain means the split loses more in
+          complexity than it wins in loss and the branch is cut. It is a constant subtraction, not a rescaling,
+          so it does not normalise across depths. The learning rate shrinks the whole tree's contribution and is
+          a separate parameter. And gamma is a fixed penalty rather than anything derived from node row counts.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-theory-additive-frozen
+        prompt: "Why does additive training keep every previously fitted tree frozen instead of refitting the whole ensemble at each round?"
+        options:
+          - "Each round then reduces to one tractable optimisation over a single tree given the current predictions"
+          - "Refitting is mathematically forbidden, since a sum of trees has no gradient with respect to earlier terms"
+          - "Frozen trees can be evaluated in parallel at prediction time, which is the only reason for the choice"
+          - "The ensemble would otherwise converge onto a single averaged tree, losing the benefit of having many"
+        answer: "Each round then reduces to one tractable optimisation over a single tree given the current predictions"
+        explanation: >-
+          Freezing what came before turns an intractable joint search over many tree structures into a greedy
+          sequence of single-tree problems, which is the whole point of the additive strategy. Joint refitting is
+          simply expensive rather than forbidden. Parallel scoring is a happy side effect and not the motivation.
+          And the ensemble does not collapse to one averaged tree; each round deliberately targets what remains.
+        difficulty: intermediate
+
+  - topic: gbm-xgboost-tuning
+    # Source: XGBoost - Notes on Parameter Tuning
+    questions:
+      - id: gbm-tuning-two-overfitting-levers
+        prompt: "Validation error is climbing while training error keeps falling. Which two families of parameters does the XGBoost tuning guide point you at?"
+        options:
+          - "Direct complexity limits such as depth and minimum child weight, and randomness such as row and column subsampling"
+          - "The objective function and the evaluation metric, since a mismatch between the two is what drives the divergence"
+          - "The thread count and the tree method, because a slower exact split search fits the training rows far more tightly"
+          - "The base score and the missing-value marker, which together determine how aggressively the leaves get grown"
+        answer: "Direct complexity limits such as depth and minimum child weight, and randomness such as row and column subsampling"
+        explanation: >-
+          The guide splits overfitting controls into constraining the model directly and injecting randomness, and
+          recommends lowering the step size with more rounds alongside either. Objective and metric affect what
+          is optimised and reported, not how tightly the model fits. Thread count and tree method are speed
+          settings that leave the fitted function essentially unchanged. And base score and the missing marker do
+          not govern growth at all.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-tuning-eta-and-rounds
+        prompt: "You cut eta from 0.1 to 0.02 and leave the round count exactly where it was. What happens, and what is the intended companion change?"
+        options:
+          - "The model underfits, because each round now contributes less, so the number of rounds has to rise to match"
+          - "The model overfits, because smaller steps let the ensemble follow individual training rows much more closely"
+          - "Nothing changes, because eta and the round count are internally normalised to give the same total step size"
+          - "Training fails to converge, because an eta below 0.05 leaves the gradient steps numerically far too small"
+        answer: "The model underfits, because each round now contributes less, so the number of rounds has to rise to match"
+        explanation: >-
+          Eta and the round count multiply into the total distance the ensemble travels, so shrinking one without
+          growing the other simply stops short of the optimum. Small steps regularise rather than overfit, which
+          is why the guide pairs a lower eta with more rounds and early stopping. There is no internal
+          normalisation between the two. And a small eta converges slowly, not numerically badly.
+        difficulty: intermediate
+      - id: gbm-tuning-imbalance-two-parameters
+        prompt: "For a heavily imbalanced binary task, when does the tuning guide suggest scale_pos_weight and when max_delta_step instead?"
+        options:
+          - "The weight when you only care about ranking, and the delta cap when the predicted probability has to be right"
+          - "The weight when the classes are balanced, and the delta cap once the minority share falls below one per cent"
+          - "The weight for tree boosters, and the delta cap for linear boosters, since the two do not share any parameters"
+          - "The weight during training, and the delta cap afterwards while the raw scores are converted to probabilities"
+        answer: "The weight when you only care about ranking, and the delta cap when the predicted probability has to be right"
+        explanation: >-
+          The guide separates the two goals explicitly: reweighting the positive class helps a ranking metric such
+          as AUC, whereas if you need calibrated probabilities you keep the weights alone and cap the per-round
+          update to stabilise the extreme logits imbalance produces. The weight is pointless on balanced classes.
+          Both parameters apply to the tree booster. And neither is a post-hoc score conversion step.
+        difficulty: advanced
+      - id: gbm-tuning-min-child-weight
+        prompt: "What does min_child_weight count, and why does it behave like a minimum sample size on an ordinary squared-error regression?"
+        options:
+          - "The summed Hessian in a child, which under squared error is one per row, so it reduces to a row count"
+          - "The number of leaves below a node, which for a regression task equals the row count in that node exactly"
+          - "The minimum gain a child must contribute, expressed as a weight so that it stays scale independent"
+          - "The fraction of total training weight in a child, so it always behaves as a proportion of the dataset"
+        answer: "The summed Hessian in a child, which under squared error is one per row, so it reduces to a row count"
+        explanation: >-
+          The parameter is a floor on the child's Hessian sum, and squared error has a constant second derivative
+          of one, so the sum is just the number of rows there. On logistic loss the same setting is much stricter
+          near confident predictions, where Hessians are tiny. It is not a gain threshold, which is what gamma
+          does. And it is an absolute sum rather than a proportion of the data.
+        difficulty: advanced
+      - id: gbm-tuning-underfit-direction
+        prompt: "Both training and validation error have plateaued at a high value. Which direction does the bias-variance framing recommend?"
+        options:
+          - "Give the model more capacity, by allowing deeper trees or relaxing the regularisation currently applied"
+          - "Add more randomness, since subsampling rows and columns is what lets a boosted model escape a plateau"
+          - "Raise the L2 penalty on the leaf weights, which sharpens the splits the model is currently able to find"
+          - "Reduce the round count, because a plateau means the later rounds are undoing the work of earlier ones"
+        answer: "Give the model more capacity, by allowing deeper trees or relaxing the regularisation currently applied"
+        explanation: >-
+          High error on both splits is a bias problem, so the fix is a more expressive model rather than anything
+          that constrains it further. Subsampling and a larger L2 penalty both reduce variance, which is not what
+          is limiting you and will usually raise training error further. And cutting rounds removes capacity in
+          the same wrong direction; training error would rise, not fall.
+        difficulty: intermediate
+
+  - topic: gbm-lightgbm-mechanics
+    # Source: LightGBM - Features (speed and memory, sparse, accuracy, leaf-wise, categorical)
+    questions:
+      - id: gbm-lgbm-histogram-binning
+        prompt: "LightGBM buckets each continuous feature into a fixed number of bins before searching for splits. What does that change about the cost of finding one?"
+        options:
+          - "It falls from a term in the number of rows to a term in the number of bins, which is far smaller"
+          - "It falls from a term in the number of features to a term in the number of rows, which is far smaller"
+          - "It is unchanged in cost but becomes exact, since bin edges are the only thresholds worth considering"
+          - "It rises slightly, and the payoff is purely in memory because bin indices are cheaper to store than floats"
+        answer: "It falls from a term in the number of rows to a term in the number of bins, which is far smaller"
+        explanation: >-
+          Once the gradient statistics are accumulated into a histogram, the split search scans a couple of
+          hundred bins instead of every distinct value, which is where the speedup comes from. The number of
+          features stays in the cost either way, so that swap is not what happens. Binning is an approximation
+          rather than exact, and it lowers rather than raises cost, with the memory saving as a bonus.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-lgbm-leafwise-growth
+        prompt: "Leaf-wise growth splits whichever current leaf promises the largest loss reduction. What does that buy, and what does it cost?"
+        options:
+          - "Lower loss for the same number of leaves, at the price of deep unbalanced trees that overfit small data"
+          - "Lower memory for the same number of leaves, at the price of needing many more boosting rounds to converge"
+          - "Faster inference at the same accuracy, at the price of losing the native handling of missing values"
+          - "Better handling of imbalance, at the price of trees that can no longer be limited by a depth parameter"
+        answer: "Lower loss for the same number of leaves, at the price of deep unbalanced trees that overfit small data"
+        explanation: >-
+          Spending each leaf where it helps most reduces loss faster than growing a whole level, and the
+          documentation pairs that claim directly with an overfitting warning on small datasets. Memory and round
+          count are not what the strategy changes. Missing-value handling is orthogonal to how the tree is grown.
+          And a maximum depth can still be imposed on top, which is one of the recommended guards.
+        difficulty: intermediate
+      - id: gbm-lgbm-num-leaves-vs-depth
+        prompt: "Someone ports a depth-7 XGBoost configuration by setting num_leaves to 128 in LightGBM. Why does that overfit?"
+        options:
+          - "Leaf-wise growth reaches that leaf count with much deeper branches than a balanced depth-7 tree has"
+          - "num_leaves is capped at 31 internally, so any larger value silently falls back to an unregularised default"
+          - "The two libraries count leaves differently, and LightGBM includes the internal nodes in the same total"
+          - "A leaf count that is a power of two forces perfectly balanced splits, which fit the training rows exactly"
+        answer: "Leaf-wise growth reaches that leaf count with much deeper branches than a balanced depth-7 tree has"
+        explanation: >-
+          Two to the seventh is the leaf count of a full depth-7 tree only when growth is level-wise; grown
+          leaf-wise, the same budget is spent along a few long branches, giving a far more complex model, which is
+          why the tuning guide says to set num_leaves well below that. There is no internal cap at 31, only a
+          default. Both libraries count leaves the same way. And powers of two force nothing about balance.
+        difficulty: advanced
+        mastery: true
+      - id: gbm-lgbm-histogram-subtraction
+        prompt: "Building one child's gradient histogram by subtracting its sibling's from the parent's saves what exactly?"
+        options:
+          - "A full pass over the rows for the larger child, since only the smaller sibling then has to be scanned"
+          - "The need to sort the feature values, which is what a level-wise learner spends most of its time doing"
+          - "Memory for the parent histogram, which can be discarded as soon as the first child has been built"
+          - "The split search itself, because a subtracted histogram already names the best threshold available"
+        answer: "A full pass over the rows for the larger child, since only the smaller sibling then has to be scanned"
+        explanation: >-
+          Histograms are additive over rows, so the cheaper child is built by scanning and the expensive one by
+          subtraction, halving the data passes per node. Sorting is avoided by binning, which is a separate idea.
+          The parent histogram must be kept precisely so the subtraction is possible. And a histogram still has
+          to be scanned bin by bin to find the best threshold.
+        difficulty: advanced
+      - id: gbm-lgbm-sparse-and-bundling
+        prompt: "On a wide sparse matrix, which two LightGBM behaviours remove work that a dense histogram builder would still do?"
+        options:
+          - "Ignoring the zero entries when accumulating, and bundling features that are never non-zero together"
+          - "Dropping the sparse columns entirely, and re-encoding the survivors as dense floating point values"
+          - "Sorting each column once, and caching that sorted order so later rounds can reuse it without a resort"
+          - "Sampling the rows carrying the smallest gradients, and reweighting the remaining rows to compensate"
+        answer: "Ignoring the zero entries when accumulating, and bundling features that are never non-zero together"
+        explanation: >-
+          Sparse optimisation skips zeros when filling histograms, and exclusive feature bundling packs mutually
+          sparse columns into one, so a wide one-hot block costs far less than its column count suggests.
+          Dropping and densifying columns would lose information and add memory. Sorted-order caching belongs to
+          pre-sorted learners. And gradient-based row sampling is a separate accuracy technique, not a sparsity one.
+        difficulty: intermediate
+
+  - topic: gbm-categorical-features
+    # Source: XGBoost - Categorical Data; CatBoost - transforming categorical features
+    questions:
+      - id: gbm-cat-partition-split
+        prompt: "A native categorical split in a boosted tree divides the levels how, and how does that differ from splitting on one-hot columns?"
+        options:
+          - "Into two groups of levels at once, whereas a one-hot column can only separate a single level from the rest"
+          - "Into one group per level, whereas a one-hot column can separate any subset of the levels in a single split"
+          - "By numeric code order, whereas one-hot columns let the tree choose an ordering appropriate to the target"
+          - "Into two halves of equal row count, whereas one-hot columns split wherever the gain happens to be highest"
+        answer: "Into two groups of levels at once, whereas a one-hot column can only separate a single level from the rest"
+        explanation: >-
+          A partition-based split searches for the best two-way grouping of the levels, so one node can express
+          a pattern that would take many one-vs-rest splits to approximate. The comparison is the reverse of the
+          second option, which is exactly the misconception. Native splits do not use code order, since that is
+          the thing they exist to avoid. And nothing forces equal row counts on either side.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-cat-dtype-requirement
+        prompt: "XGBoost appears to ignore your categorical handling and treats the column as ordinary numbers. What was most likely missed?"
+        options:
+          - "The column never got the pandas category dtype, and the categorical flag on the estimator was left off"
+          - "The column held strings, and native categorical support only ever accepts integer codes as its input"
+          - "The column had too many levels, and native support silently reverts to numeric above a fixed limit"
+          - "The booster was linear rather than tree based, and categorical support needs no flag on a tree booster"
+        answer: "The column never got the pandas category dtype, and the categorical flag on the estimator was left off"
+        explanation: >-
+          Native handling is opt-in twice over: the frame must declare the column categorical and the estimator
+          must be told to enable it, otherwise the codes are read as magnitudes. Strings are fine once the dtype
+          is set, so the input type is not the blocker. There is no silent numeric fallback on cardinality; a
+          threshold instead chooses between one-hot and partition splits. And the flag is required precisely for
+          the tree booster.
+        difficulty: intermediate
+      - id: gbm-cat-high-cardinality-onehot
+        prompt: "One-hot encoding a column with 4,000 levels for a boosted tree goes wrong in what specific way?"
+        options:
+          - "Each indicator holds so few positive rows that no single split earns much gain, so the trees stay weak"
+          - "The matrix exceeds the maximum column count a boosted tree implementation is able to accept at all"
+          - "The indicator columns are collinear with each other, and boosted trees require the features independent"
+          - "The encoder assigns an ordering to the levels, and the tree then reads that ordering as a real magnitude"
+        answer: "Each indicator holds so few positive rows that no single split earns much gain, so the trees stay weak"
+        explanation: >-
+          Splitting off one rare level at a time yields a tiny gain that regularisation often rejects outright, so
+          the information in the column never gets used, which is the argument for partition-based splits. There
+          is no hard column limit being hit here. Trees do not assume independent features, so collinearity is
+          harmless. And an imposed ordering is the problem with integer codes, not with one-hot indicators.
+        difficulty: intermediate
+      - id: gbm-cat-ordered-target-statistics
+        prompt: "Ordered target statistics compute a level's encoding from which rows, and what does restricting them that way prevent?"
+        options:
+          - "Only rows appearing earlier in a random permutation, so a row's own target never enters its own encoding"
+          - "Only rows sharing the same target value, so the encoding separates the classes as cleanly as it can"
+          - "All rows except the current fold, so the encoding has to be refitted once for each fold of the split"
+          - "Only rows from the most recent time window, so the encoding tracks how the level behaves right now"
+        answer: "Only rows appearing earlier in a random permutation, so a row's own target never enters its own encoding"
+        explanation: >-
+          Using only the history of a random ordering makes the statistic for each row depend on other rows'
+          targets alone, which is what removes the self-referential leakage plain target encoding has.
+          Conditioning on the target value would maximise the leakage instead. Fold-wise encoding is a coarser
+          approximation of the same idea and is not what ordered means. And recency has nothing to do with it.
+        difficulty: advanced
+        mastery: true
+      - id: gbm-cat-native-overfitting
+        prompt: "Native categorical splits introduce a fresh overfitting risk on rare levels. Which control addresses that most directly?"
+        options:
+          - "A minimum weight requirement on each child, so a group built from a handful of rows cannot become a leaf"
+          - "A lower learning rate, which is the only lever that has any effect at all on how the levels get grouped"
+          - "Switching back to numeric codes, since an imposed ordering constrains the search and so regularises it"
+          - "Raising the maximum bin count, which spreads the rare levels over more bins and dilutes their effect"
+        answer: "A minimum weight requirement on each child, so a group built from a handful of rows cannot become a leaf"
+        explanation: >-
+          The risk comes from a partition that isolates a few rows of a rare level, so a floor on child weight
+          together with a cap on how many levels may be considered is the documented guard. A lower learning rate
+          slows every update but does not stop that grouping from being chosen. Numeric codes trade one bias for
+          a worse one. And more bins gives the search more freedom, making the risk larger.
+        difficulty: intermediate
+
+  - topic: gbm-tabular-vs-deep-learning
+    # Source: arXiv 2207.08815 - Why do tree-based models still outperform deep learning
+    questions:
+      - id: gbm-tabular-three-inductive-biases
+        prompt: "The 2022 benchmark paper attributes the tree advantage on tabular data to three inductive biases. Which set is it?"
+        options:
+          - "Fitting irregular target functions, resisting uninformative features, and not being rotationally invariant"
+          - "More parameters, longer training schedules, and access to far larger tabular datasets than networks get"
+          - "Convolutional weight sharing, batch normalisation, and residual connections adapted to table columns"
+          - "Built-in missing value handling, native categorical splits, and parallel fitting of independent trees"
+        answer: "Fitting irregular target functions, resisting uninformative features, and not being rotationally invariant"
+        explanation: >-
+          The paper isolates these three properties empirically and shows each one separately favours trees on
+          typical tables. Parameter counts and dataset sizes are what it controls for rather than what explains
+          the gap. Convolutional machinery is a vision inductive bias with no bearing on unordered columns.
+          And the engineering conveniences in the last option are real but are not the paper's explanation.
+        difficulty: intermediate
+        mastery: true
+      - id: gbm-tabular-not-a-data-volume-claim
+        prompt: "Why is it wrong to read that benchmark as saying neural networks merely need more rows to catch up?"
+        options:
+          - "The gap persists across the dataset sizes benchmarked, so it is attributed to inductive bias rather than volume"
+          - "The benchmark used only very large datasets, where the two model families are already known to perform alike"
+          - "The paper trains its networks on synthetic data alone, so real row counts never entered the comparison at all"
+          - "Row count was held fixed at a few hundred, which is far too small for either family to be separated fairly"
+        answer: "The gap persists across the dataset sizes benchmarked, so it is attributed to inductive bias rather than volume"
+        explanation: >-
+          The comparison is run at several sample sizes with tuning budgets equalised, and trees stay ahead
+          throughout, which is what licenses a bias explanation instead of a data-hunger one. The benchmark spans
+          medium-sized tables rather than only very large ones. The datasets are real, curated tabular ones, not
+          synthetic. And sample size is varied deliberately rather than pinned at a few hundred rows.
+        difficulty: intermediate
+      - id: gbm-tabular-rotational-invariance
+        prompt: "A multilayer perceptron behaves identically if you rotate the feature space. Why is that a liability on a table?"
+        options:
+          - "Table columns each mean something specific, and a rotation mixes them into combinations carrying less signal"
+          - "Rotation changes the scale of every column, so the network has to relearn all of its normalisation constants"
+          - "Rotation destroys the row order, and tabular learners depend on rows arriving in their recorded sequence"
+          - "Rotation is only defined for square matrices, so a table with more rows than columns cannot be rotated"
+        answer: "Table columns each mean something specific, and a rotation mixes them into combinations carrying less signal"
+        explanation: >-
+          Invariance means the learner cannot prefer the original axes, yet on a table those axes are the
+          meaningful ones, and the paper shows performance drops when features are rotated for trees but not for
+          networks. Rotation is norm preserving, so scale is not the issue. Row order is untouched by a feature
+          rotation and irrelevant to both families here. And rotations of a feature space are perfectly well
+          defined whatever the row count.
+        difficulty: advanced
+      - id: gbm-tabular-uninformative-features
+        prompt: "The paper adds pure noise columns to each dataset and replots accuracy. What does that curve show?"
+        options:
+          - "Network accuracy degrades much faster than tree accuracy, because trees simply never split on those columns"
+          - "Both families degrade at exactly the same rate, which is why feature selection matters equally for either"
+          - "Network accuracy improves, because the extra columns act as a regulariser on an over-parameterised model"
+          - "Tree accuracy degrades faster, because every added column widens the split search and dilutes each gain"
+        answer: "Network accuracy degrades much faster than tree accuracy, because trees simply never split on those columns"
+        explanation: >-
+          Greedy split selection ignores a column that earns no gain, so trees are close to robust to junk
+          features while a dense network gives every input a weight and has to learn to suppress it. The rates
+          are demonstrably different, which is the whole point of the experiment. Noise columns do not act as a
+          useful regulariser. And the degradation runs against networks, not against trees.
+        difficulty: intermediate
+      - id: gbm-tabular-when-to-reach-for-deep
+        prompt: "Given that evidence, what remains a defensible reason to pick a neural network for a problem whose core input is a table?"
+        options:
+          - "The table has to be joined with text or images, and one network can learn jointly over all those inputs"
+          - "The table has more than a million rows, which is the point at which the published gap is known to close"
+          - "The features are individually meaningful, which is exactly the regime the paper finds networks favour"
+          - "The metric is accuracy rather than squared error, since boosted trees optimise regression losses only"
+        answer: "The table has to be joined with text or images, and one network can learn jointly over all those inputs"
+        explanation: >-
+          Multimodal input is a genuine reason, because end-to-end learning over raw text or pixels is something
+          trees cannot do at all, and the paper's scope is tabular-only comparisons. No published row threshold
+          flips the result. Individually meaningful features are the regime that favours trees, so that reasoning
+          is inverted. And boosted trees handle classification losses perfectly well.
+        difficulty: intermediate

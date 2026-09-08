@@ -133,10 +133,27 @@ def test_practice_stays_paired_with_its_own_topic(curriculum):
             )
 
 
-def test_reflect_still_closes_the_day(curriculum):
-    """Extra blocks are inserted before it, never after."""
+def test_the_day_no_longer_carries_a_reflect_block(curriculum):
+    """The written recap lives on the finish screen, not in a block of its own.
+
+    The REFLECT block spent eight planned minutes telling you to answer three
+    prompts, and the finish screen that appears when the last block is done
+    *is* those three prompts. One step, charged twice.
+    """
     blocks = _blocks(curriculum, 250)
-    assert blocks[-1].activity_type == day_engine.ACTIVITY_REFLECT
+    assert not [b for b in blocks if b.activity_type == day_engine.ACTIVITY_REFLECT]
+
+
+def test_the_day_ends_on_real_work(curriculum):
+    """With no closing signpost, the last block is study rather than admin."""
+    blocks = _blocks(curriculum, 250)
+    assert blocks[-1].activity_type in {
+        day_engine.ACTIVITY_LEARN,
+        day_engine.ACTIVITY_DSA,
+        day_engine.ACTIVITY_PRACTICE,
+        day_engine.ACTIVITY_REVIEW,
+        day_engine.ACTIVITY_BUILD,
+    }
 
 
 def test_a_small_budget_is_unchanged(curriculum):

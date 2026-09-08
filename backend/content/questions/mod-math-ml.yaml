@@ -1,0 +1,475 @@
+# Math foundations self-check questions.
+#
+# Every question is answerable from the PRIMARY resource its topic maps to, and
+# stays inside that topic's scope. These replace the template-filler questions the
+# six topics previously held. Depth here is working knowledge; the deeper calculus
+# and probability treatments live in mod-math-jit, so prompts are kept distinct.
+schema_version: 1
+kind: question_bank
+module: mod-math-ml
+topics:
+  - topic: math-vectors
+    # Source: Khan Academy - Vectors and spaces, introduction to vectors
+    questions:
+      - id: mfnd-vec-components-meaning
+        prompt: "A vector is introduced as having magnitude and direction. What is the component list [3, -1] actually recording?"
+        options:
+          - "How far to move along each axis, which together fix length and direction"
+          - "Two unrelated one-dimensional numbers with no connection to each other"
+          - "The length 3 and the direction -1, given as two separate quantities"
+          - "Two points in the plane, with the vector being the line joining them"
+        answer: "How far to move along each axis, which together fix length and direction"
+        explanation: >-
+          Components are per-axis displacements, and magnitude and direction are both derived
+          from them, which is why one row of features can be treated as a single arrow. The
+          numbers are not independent scalars, since reordering them changes the vector. No
+          single component is the length or the direction, and a vector records one displacement
+          rather than a pair of endpoints.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-vec-add-components
+        prompt: "Add the vectors [2, 3] and [-1, 1]. What is the result, and how is it built?"
+        options:
+          - "[1, 4], adding the matching components one axis at a time"
+          - "[-2, 3], multiplying the matching components of the two vectors"
+          - "[5], adding all four numbers together into one combined total"
+          - "[2, 3, -1, 1], joining the two vectors into one longer list"
+        answer: "[1, 4], adding the matching components one axis at a time"
+        explanation: >-
+          Vector addition works componentwise, so 2 plus -1 and 3 plus 1. Multiplying the
+          components is a different elementwise operation that answers a different question.
+          Collapsing everything to one number throws away the axes and gives a scalar, and
+          joining the lists is concatenation, which is what a framework does when you use the
+          wrong axis argument.
+        difficulty: beginner
+      - id: mfnd-vec-negative-scalar
+        prompt: "You multiply a vector by the scalar -2. What happens to its length and to its direction?"
+        options:
+          - "The length doubles and the direction reverses to point the opposite way"
+          - "The length doubles and the direction is left completely unchanged here"
+          - "The length halves and the direction reverses, since the scalar is negative"
+          - "The length is unchanged and only the direction flips to the other side"
+        answer: "The length doubles and the direction reverses to point the opposite way"
+        explanation: >-
+          Scaling multiplies the magnitude by the size of the scalar and a negative sign flips
+          the arrow, which is exactly what the minus in a gradient step does to a direction.
+          Claiming the direction survives ignores the sign. A scalar of size 2 stretches rather
+          than shrinks, and a pure flip with no stretch would need the scalar -1 instead.
+        difficulty: beginner
+      - id: mfnd-vec-position-independence
+        prompt: "Two arrows drawn at different places on the page each go 4 right and 2 up. Are they the same vector?"
+        options:
+          - "Yes, a vector is fixed by its components, not by where it is drawn from"
+          - "No, the starting point is part of the vector and makes these two differ"
+          - "Yes, but only once both arrows are moved to start from the origin point"
+          - "No, because two arrows match only if they also lie along the same line"
+        answer: "Yes, a vector is fixed by its components, not by where it is drawn from"
+        explanation: >-
+          A vector encodes a displacement, so translating the arrow leaves it unchanged, which
+          is why a difference of two embeddings can be reused as a direction elsewhere in the
+          space. Treating the tail as part of the identity describes a located arrow instead.
+          They are already equal before any move, and lying on one line is not required for
+          equality, only a shared direction and length.
+        difficulty: intermediate
+      - id: mfnd-vec-row-as-vector
+        prompt: "A dataset row holds age, income, and years of study. Why is it useful to treat that row as a vector?"
+        options:
+          - "One example becomes one point in a space, so distance can mean similarity"
+          - "The three numbers can then be added into a single summary score value"
+          - "Vectors force all three features onto the same scale automatically here"
+          - "It turns the three features into a direction that no longer has a length"
+        answer: "One example becomes one point in a space, so distance can mean similarity"
+        explanation: >-
+          Placing rows in a shared space is what lets nearest-neighbour search and clustering
+          compare examples geometrically. Summing the features would discard which feature was
+          which. Vectors do not rescale anything, which is why standardisation is a separate
+          step, and a vector keeps its length; only explicit normalisation removes it.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: math-matrices
+    # Source: Khan Academy - Matrices, introduction to matrices
+    questions:
+      - id: mfnd-mat-shape-rule
+        prompt: "You multiply a 3 by 4 matrix with a 4 by 2 matrix. What is the resulting shape, and which dimensions had to agree?"
+        options:
+          - "3 by 2, and the inner dimensions, both 4, are the ones that had to match"
+          - "4 by 4, and the outer dimensions, 3 and 2, are the ones that had to match"
+          - "3 by 4, and no dimensions have to match when multiplying matrices at all"
+          - "2 by 3, and the inner dimensions match but the result is always flipped"
+        answer: "3 by 2, and the inner dimensions, both 4, are the ones that had to match"
+        explanation: >-
+          The inner dimensions must agree and then vanish, leaving the two outer ones as the
+          result shape, which is the rule behind almost every shape mismatch error in a training
+          script. The outer dimensions never need to match. Some agreement is always required,
+          and the result keeps the row count of the first operand rather than being transposed.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-mat-noncommutative
+        prompt: "For two square matrices A and B of the same size, is A times B the same as B times A?"
+        options:
+          - "Not in general, since each product composes the two maps in a different order"
+          - "Always, because number multiplication commutes and matrices follow the same rule"
+          - "Always, provided that both matrices are square and their sizes are matching"
+          - "Never, because two different matrices cannot ever produce equal products"
+        answer: "Not in general, since each product composes the two maps in a different order"
+        explanation: >-
+          Matrix multiplication is composition of transformations, and doing a rotation then a
+          scaling differs from the reverse, which is why layer order matters in a network.
+          Borrowing commutativity from ordinary numbers is the usual mistake, and squareness
+          only makes both products defined, not equal. Never is too strong, since the identity
+          and any diagonal pair do commute.
+        difficulty: intermediate
+      - id: mfnd-mat-vector-product
+        prompt: "Multiply the matrix with rows [1, 2] and [0, 3] by the column vector [4, 5]. What comes out?"
+        options:
+          - "[14, 15], taking each row of the matrix dotted with the column vector"
+          - "[4, 15], multiplying only the diagonal entries against the vector entries"
+          - "[4, 10, 0, 15], forming every pairwise product and keeping them apart"
+          - "[9, 3], summing the matrix rows first and then adding the vector entries"
+        answer: "[14, 15], taking each row of the matrix dotted with the column vector"
+        explanation: >-
+          Each output entry is one row dotted with the input, so 1 times 4 plus 2 times 5 gives
+          14 and 0 times 4 plus 3 times 5 gives 15. Using only the diagonal ignores the
+          off-diagonal mixing that makes the map interesting. Keeping four products skips the
+          summation step, and summing rows before multiplying changes the operation entirely.
+        difficulty: intermediate
+      - id: mfnd-mat-layer-weight-shape
+        prompt: "A batch of 32 examples with 10 features each must produce 4 outputs. What shape does the weight matrix in X times W need?"
+        options:
+          - "10 by 4, so that the 32 by 10 batch produces a 32 by 4 output block"
+          - "4 by 10, so that the batch has to be transposed before the multiply"
+          - "32 by 4, matching the batch size against the number of outputs wanted"
+          - "10 by 32, so that the feature count lines up with the batch size instead"
+        answer: "10 by 4, so that the 32 by 10 batch produces a 32 by 4 output block"
+        explanation: >-
+          The weight matrix maps features to outputs, so its rows match the incoming feature
+          count and its columns match the outgoing width, leaving the batch dimension untouched.
+          The 4 by 10 version is the transpose, which is the layout some libraries store but not
+          what X times W needs. Putting 32 in a weight shape ties the parameters to the batch
+          size, so the model would break on a different batch.
+        difficulty: intermediate
+        mastery: true
+      - id: mfnd-mat-identity-map
+        prompt: "What does multiplying any vector by the identity matrix do, and why is that matrix useful?"
+        options:
+          - "It returns the vector unchanged, giving a neutral element for composition"
+          - "It returns the vector scaled by its own length, normalising it in one step"
+          - "It returns a vector of ones, which is the reason for the matrix name"
+          - "It returns the vector with its entries reversed, undoing an earlier flip"
+        answer: "It returns the vector unchanged, giving a neutral element for composition"
+        explanation: >-
+          The identity leaves every input alone, which is why it is the starting point for an
+          inverse and appears as the skip path in a residual block. It performs no scaling and
+          no normalisation. Its name comes from that do-nothing behaviour rather than from
+          containing ones, and reversing entries would be a permutation matrix instead.
+        difficulty: beginner
+
+  - topic: math-probability
+    # Source: Seeing Theory - Basic probability
+    questions:
+      - id: mfnd-prob-independent-multiply
+        prompt: "Two fair coin flips are independent. What is the probability that both of them land heads?"
+        options:
+          - "0.25, because independent probabilities multiply to give the joint chance"
+          - "0.50, because either one of the flips landing heads already satisfies it"
+          - "1.00, because two flips make a head certain to appear at least once"
+          - "0.75, because the four equally likely outcomes include three with a head"
+        answer: "0.25, because independent probabilities multiply to give the joint chance"
+        explanation: >-
+          Independence means the joint probability is the product, so 0.5 times 0.5. The 0.50
+          answer solves a single flip. Certainty is impossible while tails remains reachable,
+          and 0.75 answers at least one head rather than both, which is the swap that quietly
+          inflates estimates when you chain two model calls together.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-prob-complement-rule
+        prompt: "Three fair coins are flipped. What is the probability of getting at least one head?"
+        options:
+          - "0.875, found as 1 minus the 0.125 chance that all three land as tails"
+          - "0.500, since heads and tails stay equally likely on each of the flips"
+          - "0.375, which is the chance that exactly one of the three flips is heads"
+          - "1.500, adding the 0.5 chance of a head across each of the three flips"
+        answer: "0.875, found as 1 minus the 0.125 chance that all three land as tails"
+        explanation: >-
+          At least one is easiest as one minus the complement, and all tails has probability
+          0.125. Quoting 0.5 answers a single flip. The 0.375 figure is exactly one head, a
+          narrower event than at least one, and 1.5 adds probabilities of overlapping events,
+          producing a value above one that cannot be a probability.
+        difficulty: intermediate
+      - id: mfnd-prob-addition-overlap
+        prompt: "P(A) = 0.6, P(B) = 0.5, and the two events can happen together. Why is P(A or B) not 1.1?"
+        options:
+          - "Probabilities cap at 1, and the overlap of A and B must be subtracted once"
+          - "Probabilities cap at 1, so any sum that runs above it is rounded back down"
+          - "The two numbers should be multiplied rather than added whenever they overlap"
+          - "One of the two probabilities must be wrong, since valid ones cannot sum past 1"
+        answer: "Probabilities cap at 1, and the overlap of A and B must be subtracted once"
+        explanation: >-
+          Adding counts the shared outcomes twice, so the joint probability has to be subtracted
+          to get a valid answer. Rounding down hides the error instead of fixing it and would
+          give the wrong number. Multiplying answers an and question, not an or question, and
+          individual probabilities are free to sum above one whenever the events overlap.
+        difficulty: intermediate
+      - id: mfnd-prob-outputs-sum-to-one
+        prompt: "A classifier over three classes reports the scores 0.5, 0.3, and 0.3. Why is that output suspect?"
+        options:
+          - "The three classes exhaust the options, so they must sum to 1 and not to 1.1"
+          - "Each value is below 1, so nothing at all is actually wrong with the output"
+          - "The largest value should be above 0.5 before any class can be predicted"
+          - "The values should each equal one third, since probabilities spread evenly"
+        answer: "The three classes exhaust the options, so they must sum to 1 and not to 1.1"
+        explanation: >-
+          Probabilities over a complete set of mutually exclusive outcomes must total one, so
+          1.1 signals that a sigmoid was used where a softmax belongs. Checking each value alone
+          misses the constraint that ties them together. No threshold of 0.5 is required for a
+          three-class argmax, and equal probabilities describe only a uniform case.
+        difficulty: intermediate
+        mastery: true
+      - id: mfnd-prob-without-replacement
+        prompt: "You draw two cards from a deck without replacement. Why does multiplying 4/52 by 4/52 give the wrong chance of two aces?"
+        options:
+          - "The second draw depends on the first, so the second fraction becomes 3/51"
+          - "The two fractions should be added instead, since either card may be an ace"
+          - "The deck size is irrelevant here, so both fractions should be simplified"
+          - "Multiplying is right, but the answer needs doubling for the two draw orders"
+        answer: "The second draw depends on the first, so the second fraction becomes 3/51"
+        explanation: >-
+          Removing a card changes both the ace count and the deck size, so the events are not
+          independent and the product rule needs the updated second factor. Adding answers an or
+          question. The deck size is exactly what changes, and doubling for order would count the
+          same pair twice, since both draws must be aces either way.
+        difficulty: advanced
+
+  - topic: math-distributions
+    # Source: Seeing Theory - Probability distributions
+    questions:
+      - id: mfnd-dist-bernoulli-parameter
+        prompt: "A sigmoid output of 0.7 is read as the parameter of a Bernoulli distribution. What does that single number describe?"
+        options:
+          - "The chance of the outcome 1 in one trial, leaving 0.3 for the outcome 0"
+          - "The average over many trials of the variable, which may land above 1"
+          - "The spread of the outcome about its mean, which is 0.7 units wide here"
+          - "The count of successes expected across exactly ten independent trials"
+        answer: "The chance of the outcome 1 in one trial, leaving 0.3 for the outcome 0"
+        explanation: >-
+          A Bernoulli distribution has two outcomes and one parameter, the probability of the 1
+          outcome, and the complement follows automatically. A Bernoulli mean is that same
+          parameter and can never exceed 1. The spread is derived from the parameter rather than
+          equal to it, and an expected count over ten trials would be a binomial quantity.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-dist-normal-bands
+        prompt: "For a normal distribution, roughly what share of values falls within one standard deviation of the mean?"
+        options:
+          - "About 68 percent, with roughly 95 percent inside two standard deviations"
+          - "About 95 percent, with roughly 99.7 percent inside two standard deviations"
+          - "About 50 percent, because the mean splits the distribution into two halves"
+          - "About 34 percent, counting only the values that sit above the mean itself"
+        answer: "About 68 percent, with roughly 95 percent inside two standard deviations"
+        explanation: >-
+          The familiar bands are about 68, 95 and 99.7 percent at one, two and three standard
+          deviations, which is the rule of thumb behind flagging an outlier at three sigma. The
+          second option shifts every band inward by one step. Half describes the split at the
+          mean rather than a one-sigma interval, and 34 percent counts only one side of it.
+        difficulty: beginner
+      - id: mfnd-dist-density-not-probability
+        prompt: "A normal density curve reaches a height of 0.8 at its peak. Why is that height not the probability of that value?"
+        options:
+          - "A continuous variable has zero chance of an exact value; area gives chance"
+          - "The height is a probability but has to be divided by the total spread first"
+          - "The height is fine as a probability, since 0.8 sits inside the legal range"
+          - "Densities are probabilities only when a curve peaks below the value of 1.0"
+        answer: "A continuous variable has zero chance of an exact value; area gives chance"
+        explanation: >-
+          Density is probability per unit of the variable, so only the area over an interval is a
+          probability, and a density can even exceed 1 for a narrow distribution. Dividing by the
+          spread does not convert it, since integration is what is required. Accepting the height
+          as a probability confuses the two, and no threshold on the peak changes what a density
+          means.
+        difficulty: advanced
+      - id: mfnd-dist-sigma-versus-mu
+        prompt: "You raise the standard deviation of a normal distribution but leave its mean alone. How does the curve change?"
+        options:
+          - "It flattens and widens around the same centre, keeping its total area at 1"
+          - "It slides sideways to a new centre while keeping exactly the same width"
+          - "It grows taller and narrower, because more spread concentrates the values"
+          - "It keeps its shape but its total area grows past 1 to cover the extra spread"
+        answer: "It flattens and widens around the same centre, keeping its total area at 1"
+        explanation: >-
+          The mean sets location and the standard deviation sets scale, and because total area is
+          fixed at one, widening must lower the peak. Sliding sideways is what changing the mean
+          does. More spread cannot concentrate values, and no distribution ever integrates to
+          more than one, which is why the height must fall as the width grows.
+        difficulty: intermediate
+      - id: mfnd-dist-choose-the-family
+        prompt: "Which distribution family suits whether a user clicked, and which suits how many seconds they stayed?"
+        options:
+          - "Bernoulli for the click, and a continuous family for the seconds stayed"
+          - "Normal for the click, and Bernoulli for the seconds stayed on the page"
+          - "Bernoulli for both, since each observation is one single recorded event"
+          - "Normal for both, because a large sample makes every variable normal here"
+        answer: "Bernoulli for the click, and a continuous family for the seconds stayed"
+        explanation: >-
+          A click is a two-outcome event, which is what Bernoulli describes, while a duration is
+          continuous and non-negative, so it needs a continuous family. Swapping them assigns a
+          two-outcome model to a duration. Bernoulli cannot represent a duration at all, and the
+          central limit theorem makes sample averages approximately normal, not the individual
+          observations.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: math-stats-summary
+    # Source: OpenStax Introductory Statistics - 2.5 Measures of the Center of the Data
+    questions:
+      - id: mfnd-stats-mean-versus-median
+        prompt: "Salaries in a sample are 30, 32, 35, 38 and 900 thousand. Which centre better describes a typical value, and why?"
+        options:
+          - "The median 35, because the single huge value drags the mean far upward"
+          - "The mean 207, because it makes use of every observation in the sample"
+          - "The mode, because the most frequent value is always the typical one here"
+          - "The mean 35, because averaging cancels out unusual values automatically"
+        answer: "The median 35, because the single huge value drags the mean far upward"
+        explanation: >-
+          The mean of these five values is 207, above every salary but one, while the median sits
+          among the cluster. Using every observation is exactly why the mean is sensitive to an
+          outlier rather than a virtue here. There is no repeated value, so the mode says
+          nothing, and the mean is not 35, since averaging does not cancel an extreme value.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-stats-skewed-latency
+        prompt: "Request latencies are mostly small with a long tail of slow calls. Which measure of centre is least misleading to report?"
+        options:
+          - "The median, since a long right tail pulls the mean above typical latency"
+          - "The mean, since a long right tail is exactly what the users end up feeling"
+          - "The mode, since latencies repeat often enough to make it the safest pick"
+          - "The range, since the smallest and largest calls bracket every other one"
+        answer: "The median, since a long right tail pulls the mean above typical latency"
+        explanation: >-
+          In a right-skewed distribution the mean sits above the median, so the median better
+          represents a typical request, which is why dashboards quote p50 alongside p99. The mean
+          overstates the common case even though the tail matters separately. The mode of a
+          near-continuous measurement is unstable, and the range describes spread, not a centre.
+        difficulty: intermediate
+      - id: mfnd-stats-mode-baseline
+        prompt: "A label column is 80 percent class A. Which measure of centre applies to it, and what baseline does that suggest?"
+        options:
+          - "The mode, class A, which a majority-class baseline would always predict"
+          - "The mean, which averages the labels into a value between the classes"
+          - "The median, which needs the classes ranked before it can be computed"
+          - "The range, which spans from the rarest class through to the commonest"
+        answer: "The mode, class A, which a majority-class baseline would always predict"
+        explanation: >-
+          Only the mode is defined for unordered categories, and it gives the trivial baseline
+          any real model must beat, 80 percent accuracy here. A mean of category labels is
+          meaningless because the codes are arbitrary. The median needs a ranking these classes
+          do not have, and a range over categories is not a measure of centre.
+        difficulty: intermediate
+      - id: mfnd-stats-train-split-mean
+        prompt: "When centring features before training, why compute the mean on the training split rather than on the whole dataset?"
+        options:
+          - "Using all rows leaks test information into training and flatters the score"
+          - "Using all rows is slower, and the two means come out identical in any case"
+          - "The training split has fewer rows, so its mean is the more accurate of the two"
+          - "A whole-dataset mean cannot be computed until the model has been fitted"
+        answer: "Using all rows leaks test information into training and flatters the score"
+        explanation: >-
+          The held-out rows must stay unseen, and a mean computed over them smuggles their
+          information into the transform, so the reported metric is optimistic. Speed is not the
+          issue and the means generally differ. Fewer rows make an estimate less precise, not
+          more, and a mean is a simple sum that needs no fitted model at all.
+        difficulty: advanced
+      - id: mfnd-stats-centre-needs-spread
+        prompt: "Two features both have a mean of 0, but one varies over 0.01 and the other over 1000. Why is reporting the centre not enough?"
+        options:
+          - "Centre says nothing about spread, and the wide feature will dominate updates"
+          - "Spread does not affect gradient updates, so a shared mean settles the matter"
+          - "The two means must really differ, so recomputing them carefully fixes this"
+          - "Both features are already comparable, since a shared mean aligns the scales"
+        answer: "Centre says nothing about spread, and the wide feature will dominate updates"
+        explanation: >-
+          Equal means say nothing about scale, and the feature with the larger spread produces
+          far larger gradient contributions, which is why centring is normally paired with
+          scaling. Spread very much affects updates, so the second option is wrong on the
+          mechanism. The means genuinely are equal here, and equal means alone do not make two
+          features comparable.
+        difficulty: advanced
+        mastery: true
+
+  - topic: math-gradient-intuition
+    # Source: OpenStax Calculus Volume 3 - 4.6 Directional Derivatives and the Gradient
+    questions:
+      - id: mfnd-grad-minus-sign
+        prompt: "The gradient points uphill on a loss surface. What is the minus sign in w := w - lr * grad doing?"
+        options:
+          - "Turning the uphill direction into a downhill step so the loss decreases"
+          - "Cancelling the learning rate so the step size stays fixed between updates"
+          - "Correcting the sign of the loss, which is negative before the update runs"
+          - "Reversing the order of the weights so that later layers update first"
+        answer: "Turning the uphill direction into a downhill step so the loss decreases"
+        explanation: >-
+          The gradient gives steepest ascent, so descent requires stepping the opposite way, and
+          dropping the minus turns training into gradient ascent that grows the loss. The minus
+          does not interact with the learning rate, which independently sets step size. The loss
+          is typically positive, and nothing about the sign reorders layers.
+        difficulty: beginner
+        mastery: true
+      - id: mfnd-grad-magnitude-max-rate
+        prompt: "What does the length of the gradient vector tell you at a given point on a surface?"
+        options:
+          - "The largest rate of change available there, attained along the gradient itself"
+          - "The distance still remaining to the nearest minimum of the surface from there"
+          - "The number of parameters that still need updating before the loss settles"
+          - "The average rate of change taken over all directions leaving that point"
+        answer: "The largest rate of change available there, attained along the gradient itself"
+        explanation: >-
+          The gradient norm is the maximum directional derivative, which is why it is the
+          quantity clipped to keep steps bounded. It is a slope, not a distance, so a large norm
+          on a steep cliff can sit close to a minimum. It has nothing to do with counting
+          parameters, and the average over all directions of a smooth surface is zero.
+        difficulty: intermediate
+      - id: mfnd-grad-orthogonal-contours
+        prompt: "How does the gradient sit relative to the level curves of a loss surface?"
+        options:
+          - "Perpendicular to them, because moving along a level curve changes nothing"
+          - "Tangent to them, because that is the direction the surface slopes along"
+          - "At 45 degrees to them, which is why descent paths zigzag across contours"
+          - "Parallel to the nearest contour, whose spacing then sets the step length"
+        answer: "Perpendicular to them, because moving along a level curve changes nothing"
+        explanation: >-
+          A level curve is where the value is constant, so the directional derivative along it is
+          zero and the gradient must be orthogonal, which is why descent paths cross contours at
+          right angles. Tangent and parallel both describe the no-change direction, the one the
+          gradient is not. Zigzag comes from step size and curvature, not from a fixed 45 degrees.
+        difficulty: advanced
+      - id: mfnd-grad-zero-not-minimum
+        prompt: "Training halts with a gradient of zero in every component. What situations are possible?"
+        options:
+          - "A minimum, a maximum, or a saddle point, since all three flatten the surface"
+          - "A minimum only, because a zero gradient is what defines the lowest point"
+          - "A saddle point only, because a true minimum keeps a small residual slope"
+          - "A numerical bug only, since real loss surfaces never reach exact flatness"
+        answer: "A minimum, a maximum, or a saddle point, since all three flatten the surface"
+        explanation: >-
+          A zero gradient marks a critical point, and the type is settled by curvature rather
+          than by the gradient, which is why saddles stall high-dimensional training. Assuming a
+          minimum is the common error. Minima have exactly zero gradient too, so the third
+          option inverts the definition, and flat regions such as a saturated activation arise
+          without any bug.
+        difficulty: intermediate
+        mastery: true
+      - id: mfnd-grad-directional-derivative
+        prompt: "The gradient at a point is [3, 4]. What is the rate of change along the unit direction [0.6, 0.8]?"
+        options:
+          - "5.0, the dot product, which equals the gradient length because they align"
+          - "1.8, taking only the first gradient component times its direction entry"
+          - "7.0, adding the two gradient components with the direction left ignored"
+          - "0.0, since a unit direction always removes the scale from the gradient"
+        answer: "5.0, the dot product, which equals the gradient length because they align"
+        explanation: >-
+          A directional derivative is the gradient dotted with a unit vector, so 1.8 plus 3.2
+          gives 5, and it matches the gradient norm here precisely because [0.6, 0.8] is the
+          normalised gradient. Stopping at 1.8 drops the second term. Adding components without
+          the direction ignores which way you are moving, and a unit vector rescales rather than
+          cancels the rate.
+        difficulty: advanced

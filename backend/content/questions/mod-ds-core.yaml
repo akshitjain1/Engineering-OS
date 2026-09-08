@@ -1,0 +1,400 @@
+# Scientific Python self-check questions.
+#
+# Grounded in each topic's PRIMARY resource and scoped to that topic only.
+# The questions favour the silent-wrong-answer failures - views versus copies,
+# dtype surprises, NaN handling, leakage - over vocabulary checks.
+schema_version: 1
+kind: question_bank
+module: mod-ds-core
+topics:
+  - topic: ds-numpy
+    # Source: numpy.org/doc/stable/user/absolute_beginners.html
+    questions:
+      - id: np-slice-is-a-view
+        prompt: "You take a slice of a NumPy array, then write a value into the first element of that slice. What happens to the original array?"
+        options:
+          - "The original changes too, because basic slicing returns a view on the same buffer"
+          - "The original is untouched, because slicing copies the selected elements out first"
+          - "The original is untouched, and the slice stays read-only until it is copied"
+          - "A ValueError is raised, because you cannot assign into a sliced array at all"
+        answer: "The original changes too, because basic slicing returns a view on the same buffer"
+        explanation: >-
+          A basic slice shares memory with its parent, so writing through it mutates the parent; call
+          copy when you want independence. List slicing does copy, which is where the wrong expectation
+          comes from, views are writable rather than read-only, and no error is raised because the
+          assignment is entirely legal.
+        difficulty: intermediate
+        mastery: true
+      - id: np-fancy-index-copies
+        prompt: "Indexing an array with a list of positions or a boolean mask gives you data you can safely modify. Why?"
+        options:
+          - "Advanced indexing gathers the selected elements into a new array rather than a view"
+          - "Every form of NumPy indexing returns a copy, so the original is never at any risk"
+          - "Masks are evaluated lazily, so the parent array is only rebuilt on the next read"
+          - "Boolean masks lock the parent array against writes until the mask is discarded"
+        answer: "Advanced indexing gathers the selected elements into a new array rather than a view"
+        explanation: >-
+          Fancy and boolean indexing cannot be expressed as a strided window, so NumPy materialises a
+          copy, which is the opposite of basic slicing. Not every form of indexing copies, nothing about
+          mask evaluation is deferred, and NumPy never locks a parent array in response to how you
+          indexed it.
+        difficulty: advanced
+      - id: np-broadcast-row-versus-column
+        prompt: "Why does adding a one-dimensional array of length 3 to an array of shape (3, 1) produce a 3 by 3 result?"
+        options:
+          - "Shapes are aligned from the right and every length-one axis is stretched to match"
+          - "NumPy transposes the second operand automatically so that the two shapes agree"
+          - "Adding any two one-dimensional arrays returns their outer sum as a square matrix"
+          - "The smaller array is padded with zeros up to the larger shape before adding them"
+        answer: "Shapes are aligned from the right and every length-one axis is stretched to match"
+        explanation: >-
+          The length-3 array is treated as shape (1, 3), which pairs with (3, 1) and broadcasts both
+          axes, so a shape you meant as a column silently becomes a matrix. Nothing is transposed for
+          you, the (3, 1) operand is two-dimensional rather than one-dimensional, and broadcasting
+          stretches axes instead of zero-padding them.
+        difficulty: intermediate
+        mastery: true
+      - id: np-int-dtype-truncation
+        prompt: "An array was created from whole numbers, and you assign 2.7 into one of its positions. What is stored?"
+        options:
+          - "2, because the array dtype is an integer type and the float is truncated on the way in"
+          - "2.7, because NumPy promotes the whole array to a float dtype to hold the new value"
+          - "3, because NumPy rounds the float to the nearest representable integer before storing"
+          - "Nothing, because a TypeError is raised when a float is assigned into an integer array"
+        answer: "2, because the array dtype is an integer type and the float is truncated on the way in"
+        explanation: >-
+          The dtype is fixed when the array is created, and assignment casts silently rather than
+          complaining, so fractional values disappear. Create the array with a float dtype if that is
+          what you need. NumPy never resizes the dtype in place, the cast truncates instead of rounding,
+          and no error is raised at all.
+        difficulty: intermediate
+      - id: np-sum-axis-meaning
+        prompt: "For a two-dimensional array of readings laid out as rows by columns, which reduction gives one number per column?"
+        options:
+          - "Summing along axis 0, because the axis you name is the one collapsed by the reduction"
+          - "Summing along axis 1, because axis 1 names the columns you are asking for totals of"
+          - "Summing with no axis argument, because NumPy reduces column-wise unless told not to"
+          - "Summing along the last axis, because the final axis is always the one left intact"
+        answer: "Summing along axis 0, because the axis you name is the one collapsed by the reduction"
+        explanation: >-
+          The axis argument names the dimension that disappears, so collapsing rows leaves one value per
+          column. Axis 1 collapses the columns and gives a per-row total, omitting the argument flattens
+          the whole array to a scalar, and the last axis here is axis 1, so that choice also collapses
+          the wrong direction.
+        difficulty: intermediate
+      - id: np-nan-propagation-aggregate
+        prompt: "A float array contains a single missing value written as NaN. What does taking its mean return?"
+        options:
+          - "NaN, because NaN propagates through arithmetic; the nan-aware mean skips it instead"
+          - "The mean of the remaining values, because NumPy leaves missing entries out by default"
+          - "Zero, because a NaN entry contributes nothing at all to the sum being accumulated"
+          - "A warning plus the correct mean, because the missing value is dropped after warning"
+        answer: "NaN, because NaN propagates through arithmetic; the nan-aware mean skips it instead"
+        explanation: >-
+          One NaN poisons the whole reduction, and because NaN is not even equal to itself you have to
+          test for it with a dedicated check. NumPy does not skip missing values by default, which is a
+          habit imported from pandas, NaN is never treated as zero, and the plain reduction issues no
+          warning and returns no usable number.
+        difficulty: intermediate
+
+  - topic: ds-pandas
+    # Source: pandas getting_started/intro_tutorials/01_table_oriented.html
+    questions:
+      - id: pd-series-versus-dataframe-selection
+        prompt: "In pandas, how does selecting a column by name differ from selecting it with a list containing that one name?"
+        options:
+          - "The name gives a Series, while the single-item list gives a one-column DataFrame"
+          - "They are equivalent, because the extra brackets are a style choice with no effect"
+          - "The name gives a copy and the list a view, which is why writes behave differently"
+          - "The list returns the column names rather than any of the values stored under them"
+        answer: "The name gives a Series, while the single-item list gives a one-column DataFrame"
+        explanation: >-
+          Passing a list asks for a subset of columns, so the result keeps two dimensions, which matters
+          whenever something downstream expects a table rather than a vector. The two forms are not
+          interchangeable, the difference is dimensionality rather than copy versus view, and neither
+          form returns column labels instead of data.
+        difficulty: beginner
+      - id: pd-int-column-becomes-float
+        prompt: "A column of whole-number counts reports a float dtype after some rows ended up without a value. Why?"
+        options:
+          - "Missing entries are stored as NaN, which is a float, so the column has to upcast"
+          - "Counting operations always return floats in pandas, whatever the input column was"
+          - "pandas stores all numbers as floats and only displays integers when they are exact"
+          - "The empty rows were filled with zeros, and a zero is stored as a floating value"
+        answer: "Missing entries are stored as NaN, which is a float, so the column has to upcast"
+        explanation: >-
+          The default integer dtype has no room for a missing marker, so introducing NaN forces the
+          whole column to float and your identifiers start printing with decimal points; the nullable
+          integer dtype avoids it. Counting does not blanket-cast, integers are genuinely stored as
+          integers, and missing rows become NaN rather than zero.
+        difficulty: intermediate
+        mastery: true
+      - id: pd-describe-numeric-only
+        prompt: "You summarise a table of names, dates and prices with describe, and only one column comes back. Why?"
+        options:
+          - "By default the summary covers numeric columns only, so text and dates are left out"
+          - "The summary shows only the column with the fewest missing values in the whole table"
+          - "The summary samples whichever column it can parse first and skips the rest for speed"
+          - "Only columns named in the index or in a dtype mapping are eligible to be summarised"
+        answer: "By default the summary covers numeric columns only, so text and dates are left out"
+        explanation: >-
+          Numeric columns are the default selection, and the include argument widens it to object or to
+          every dtype. There is no ranking by missing values, nothing is sampled for speed, and no
+          declaration is needed to make a column eligible, so the other options all invent a rule that
+          does not exist.
+        difficulty: beginner
+      - id: pd-dataframe-index-alignment
+        prompt: "You build a DataFrame from two Series whose index labels only partly overlap. What does the result contain?"
+        options:
+          - "The union of both indexes, with a missing value wherever one Series had no label"
+          - "Only the labels present in both Series, because pandas intersects the two indexes"
+          - "Both Series stacked by position, with the index labels ignored during the build"
+          - "An error, because a DataFrame requires all its Series to share one exact index"
+        answer: "The union of both indexes, with a missing value wherever one Series had no label"
+        explanation: >-
+          pandas aligns on labels rather than positions, which is the most common source of surprise
+          NaNs when combining data. Reset the index or take the underlying values to align positionally.
+          Construction unions rather than intersects the labels, position is not the default, and
+          mismatched indexes are perfectly legal.
+        difficulty: intermediate
+      - id: pd-column-oriented-storage
+        prompt: "Why does a DataFrame carry one dtype per column instead of a single dtype for the whole table?"
+        options:
+          - "Each column is stored as its own typed array, which is what makes column maths fast"
+          - "The dtype is a display hint only, and every value is really held as a Python object"
+          - "Rows are the unit of storage, so a column dtype is inferred afresh on every access"
+          - "A table-wide dtype does exist, but pandas hides it behind a per-column convenience"
+        answer: "Each column is stored as its own typed array, which is what makes column maths fast"
+        explanation: >-
+          A DataFrame is a dict of columns, each a homogeneous array, which is exactly why whole-column
+          arithmetic is fast and row-by-row iteration is slow. Dtypes describe real storage rather than
+          formatting, object dtype is a fallback and not the norm, rows are not the storage unit, and
+          there is no hidden table-wide dtype.
+        difficulty: intermediate
+
+  - topic: ds-eda
+    # Source: pandas user_guide/10min.html - selection, missing data, grouping
+    questions:
+      - id: pd-chained-assignment-warning
+        prompt: "You filter rows with a boolean mask, index a column on that result, assign to it, and the DataFrame is unchanged. What happened?"
+        options:
+          - "The filter produced a copy, so the write landed on a temporary object and was lost"
+          - "The write did land, but pandas defers it until the next read of that same column"
+          - "Boolean masks are read-only in pandas, so any assignment made through one is ignored"
+          - "The target column did not exist yet, and writes to unknown column names are ignored"
+        answer: "The filter produced a copy, so the write landed on a temporary object and was lost"
+        explanation: >-
+          Two chained indexing operations mean the assignment targets an intermediate object, which is
+          what the SettingWithCopyWarning is warning about; a single label-based indexer with both the
+          mask and the column writes to the real frame. Nothing is deferred, masks are not read-only,
+          and label-based assignment happily creates a new column.
+        difficulty: advanced
+        mastery: true
+      - id: pd-loc-versus-iloc-endpoint
+        prompt: "With a plain integer index, how do the label-based and position-based slicers differ in the rows they return for the same bounds?"
+        options:
+          - "The label slicer includes its endpoint, so it returns one more row than the positional one"
+          - "Both exclude the upper bound, because every slice in Python excludes its endpoint"
+          - "The positional slicer includes its endpoint, while the label-based one excludes it"
+          - "Both include the upper bound, because pandas slices always keep the final label"
+        answer: "The label slicer includes its endpoint, so it returns one more row than the positional one"
+        explanation: >-
+          Label-based slicing is inclusive on both ends because a label has no successor to stop before,
+          while positional slicing follows the usual half-open Python rule. The two are therefore not
+          equivalent, the inclusivity belongs to the label slicer and not the positional one, and only
+          one of them keeps the final bound.
+        difficulty: intermediate
+        mastery: true
+      - id: pd-inplace-versus-reassign
+        prompt: "A script drops missing rows on its own statement line and later still hits missing-value errors. Why?"
+        options:
+          - "The call returns a new frame and leaves the original alone unless you assign it back"
+          - "The call removes only rows where every single column is missing, so most rows stay"
+          - "The call needs a subset argument, and without one it silently performs no work at all"
+          - "The call marks rows for removal and applies them only when the frame is next sorted"
+        answer: "The call returns a new frame and leaves the original alone unless you assign it back"
+        explanation: >-
+          Most pandas operations are non-mutating and return a new object, so a bare call is a no-op you
+          never see fail; assign the result back to the name. The default drops rows with any missing
+          value rather than all, the subset argument is optional, and nothing is queued for later
+          application.
+        difficulty: beginner
+      - id: pd-groupby-mean-skips-nan
+        prompt: "Two groups hold the same number of rows, yet their grouped means are divided by different counts. What explains it?"
+        options:
+          - "The mean skips missing values per column, so a group with gaps averages over fewer rows"
+          - "Grouping weights each group by its share of the table before the mean is computed"
+          - "The mean divides by the number of distinct values, so duplicates shrink the divisor"
+          - "Grouping sorts the keys and consumes the first row of each group as its group label"
+        answer: "The mean skips missing values per column, so a group with gaps averages over fewer rows"
+        explanation: >-
+          Aggregations skip missing values by default, so the denominator is the non-null count per
+          column and not the group size; comparing the group size against the per-column count exposes
+          it. No weighting by group share happens, means never divide by a distinct-value count, and no
+          row is consumed to carry the group label.
+        difficulty: advanced
+      - id: pd-apply-versus-vectorised
+        prompt: "Scaling a numeric column with a lambda through apply is far slower than multiplying the column directly. Why?"
+        options:
+          - "Apply calls back into Python once per element, while the multiply runs as one array op"
+          - "Apply copies the entire DataFrame for each element it visits, and that cost dominates"
+          - "Apply runs on one core, while arithmetic operators are parallelised across cores"
+          - "Apply converts the column to text first and parses each value back to a number"
+        answer: "Apply calls back into Python once per element, while the multiply runs as one array op"
+        explanation: >-
+          The cost is per-element interpreter overhead against a single compiled loop over a typed
+          buffer, which is why vectorised expressions win by orders of magnitude. Apply does not copy
+          the frame per element, plain arithmetic is single-threaded too so parallelism is not the
+          difference, and no text conversion takes place.
+        difficulty: intermediate
+
+  - topic: ds-feature-eng
+    # Source: scikit-learn.org/stable/modules/preprocessing.html
+    questions:
+      - id: sk-fit-on-train-only
+        prompt: "Why must a standardising scaler be fitted on the training split rather than on the whole dataset?"
+        options:
+          - "Fitting on everything leaks test means and variances into the training features"
+          - "Fitting on everything is slower, and the extra rows do not improve the estimates"
+          - "A scaler can be fitted only once, so it must be saved for the test split instead"
+          - "Test rows carry a different dtype, and mixing them corrupts the fitted parameters"
+        answer: "Fitting on everything leaks test means and variances into the training features"
+        explanation: >-
+          The scaler's statistics are learned parameters, so computing them over held-out rows lets
+          information about those rows reach the model and inflates your validation score. Fit on train
+          and transform both. Speed is not the concern, an estimator can be refitted freely, and dtype
+          has nothing to do with it.
+        difficulty: intermediate
+        mastery: true
+      - id: sk-scaler-choice-outliers
+        prompt: "A feature carries a few extreme outliers. What does min-max scaling do to it that a robust scaler avoids?"
+        options:
+          - "It squeezes the bulk of the values into a narrow band at one end of the output range"
+          - "It removes the outlying values entirely, so the surviving points lose their spread"
+          - "It centres the feature and gives it unit variance, which the outliers then dominate"
+          - "It replaces the values with their ranks, so the distances between them are discarded"
+        answer: "It squeezes the bulk of the values into a narrow band at one end of the output range"
+        explanation: >-
+          Min-max scaling derives its range from the extremes, so one outlier compresses everything
+          else, whereas a robust scaler centres on the median and scales by the interquartile range.
+          Nothing is removed, centring with unit variance describes the standard scaler, and turning
+          values into ranks is what a quantile transform does.
+        difficulty: intermediate
+      - id: sk-ordinal-versus-onehot-nominal
+        prompt: "You encode an unordered category such as city as integer codes and feed it to a linear model. What goes wrong?"
+        options:
+          - "The model reads the arbitrary codes as an ordering and fits one slope across the categories"
+          - "The model cannot accept integer features at all, so training fails before it begins"
+          - "The encoder gives every category the same code, which collapses the column entirely"
+          - "The codes are expanded into separate columns, so the design matrix silently explodes"
+        answer: "The model reads the arbitrary codes as an ordering and fits one slope across the categories"
+        explanation: >-
+          A linear model treats the code as a magnitude, so it asserts that city 3 sits between city 2
+          and city 4; one-hot encoding is the fix for unordered categories, while integer codes remain
+          fine for tree models and genuinely ordered levels. Integer features are accepted, each
+          category gets a distinct code, and it is one-hot encoding that widens the matrix.
+        difficulty: intermediate
+      - id: sk-onehot-unseen-category
+        prompt: "A category appears at inference time that was absent when the one-hot encoder was fitted. What is the default behaviour?"
+        options:
+          - "It raises an error, unless the encoder was configured to ignore unknown categories"
+          - "It adds a fresh column for the new category and back-fills the earlier rows with zeros"
+          - "It maps the value to the most frequent training category so the row can still be scored"
+          - "It quietly emits an all-zero row, which is the standard handling for unknown values"
+        answer: "It raises an error, unless the encoder was configured to ignore unknown categories"
+        explanation: >-
+          The default refuses to guess, and the ignore setting is what produces the all-zero row, so
+          the choice is yours to make explicitly. A fitted encoder never grows new columns because the
+          feature count must stay stable, no imputation to the most common category happens, and the
+          silent all-zero row is not the default.
+        difficulty: advanced
+        mastery: true
+      - id: sk-pipeline-prevents-leakage
+        prompt: "Why does wrapping the preprocessing and the estimator into one pipeline matter when you cross-validate?"
+        options:
+          - "The transform is refitted inside each fold, so validation rows never shape the transform"
+          - "The pipeline caches the transform once, which is what keeps the folds comparable"
+          - "Cross-validation cannot accept a bare estimator, so a pipeline is required first"
+          - "The pipeline shuffles the folds for you, which removes the ordering bias in the data"
+        answer: "The transform is refitted inside each fold, so validation rows never shape the transform"
+        explanation: >-
+          Cross-validation clones and refits the whole pipeline per split, so scaling and encoding are
+          learned from that split's training rows only. Caching one transform across folds is precisely
+          the leak being avoided, a bare estimator works fine with cross-validation, and shuffling is
+          the splitter's job rather than the pipeline's.
+        difficulty: advanced
+
+  - topic: ds-sql-analytics
+    # Source: postgresql.org/docs/current/tutorial-agg.html
+    questions:
+      - id: sql-where-cannot-hold-aggregate
+        prompt: "Why is it invalid to put an aggregate such as a maximum inside the WHERE clause of a grouped query?"
+        options:
+          - "WHERE filters individual rows before grouping, so no aggregate result exists yet"
+          - "WHERE accepts only indexed columns, and an aggregate result can never be indexed"
+          - "The aggregate needs an alias before it can be referenced anywhere in the statement"
+          - "GROUP BY has to appear before WHERE in the text for aggregates to be available"
+        answer: "WHERE filters individual rows before grouping, so no aggregate result exists yet"
+        explanation: >-
+          WHERE runs on raw rows, groups are formed afterwards, and HAVING is the clause that filters
+          the grouped results, so conditions on aggregates belong there. Indexing is irrelevant, an
+          alias does not change evaluation order and cannot be referenced in WHERE either, and clause
+          order in the text is fixed by the grammar.
+        difficulty: intermediate
+        mastery: true
+      - id: sql-count-star-versus-column
+        prompt: "On a table where some email values are NULL, how does counting rows differ from counting that column?"
+        options:
+          - "Counting rows counts every row, while counting the column skips the NULL entries"
+          - "They agree, because counting ignores the expression given and simply counts rows"
+          - "Counting the column counts distinct values, so duplicate addresses collapse into one"
+          - "Counting rows drops any row holding a NULL anywhere, so it returns the smaller number"
+        answer: "Counting rows counts every row, while counting the column skips the NULL entries"
+        explanation: >-
+          A count over an expression counts the rows where that expression is not NULL, which is how the
+          same table yields two different totals. The expression is not ignored, distinctness requires
+          asking for it explicitly, and counting rows never inspects other columns for NULLs.
+        difficulty: beginner
+      - id: sql-avg-ignores-nulls
+        prompt: "A revenue column contains NULLs. Why can its average disagree with the sum divided by the row count?"
+        options:
+          - "The average divides by the count of non-NULL values, while the row count counts all rows"
+          - "The average rounds to the column scale first, so the two expressions differ by rounding"
+          - "The sum treats NULL as zero while the average treats it as the mean, shifting the total"
+          - "The average follows the grouping order, so it averages a differently ordered set of rows"
+        answer: "The average divides by the count of non-NULL values, while the row count counts all rows"
+        explanation: >-
+          Both the sum and the average skip NULLs, so the numerators match and only the denominator
+          differs; counting the column rather than the rows makes the two agree. Rounding is not the
+          cause, NULL is never coerced to zero in either aggregate, and row ordering cannot change an
+          average.
+        difficulty: intermediate
+      - id: sql-groupby-missing-column
+        prompt: "Adding another plain column to the select list of a grouped query is rejected as not being in the GROUP BY. Why?"
+        options:
+          - "Each output row stands for many input rows, so one value for that column cannot be picked"
+          - "The select list is evaluated first, so any extra column must be aggregated beforehand"
+          - "PostgreSQL permits at most one non-aggregated column in the select list of a grouped query"
+          - "The column needs an alias, because a grouped query requires every output column be named"
+        answer: "Each output row stands for many input rows, so one value for that column cannot be picked"
+        explanation: >-
+          Grouping collapses rows, so every selected expression must either be a grouping key or be
+          reduced by an aggregate; add the column to the grouping or wrap it in one. The select list is
+          not evaluated before grouping, there is no allowance for a single loose column, and aliases
+          have nothing to do with the rule.
+        difficulty: intermediate
+      - id: sql-aggregate-over-no-rows
+        prompt: "A filter matches no rows at all and the query has no grouping clause. What do a row count and a sum return?"
+        options:
+          - "The count returns zero and the sum returns NULL, so coalesce it before doing arithmetic"
+          - "Both return zero, because an aggregate over an empty input defaults to zero in SQL"
+          - "Both return NULL, and the resulting row is dropped from the output before it is sent"
+          - "No row comes back at all, because an aggregate needs at least one input row to exist"
+        answer: "The count returns zero and the sum returns NULL, so coalesce it before doing arithmetic"
+        explanation: >-
+          Counting an empty input is a well-defined zero, but summing nothing has no value, so it comes
+          back NULL and any later arithmetic on it becomes NULL too. Sums do not default to zero, the
+          count is a real value rather than NULL, and an ungrouped aggregate query always returns
+          exactly one row.
+        difficulty: advanced
+        mastery: true

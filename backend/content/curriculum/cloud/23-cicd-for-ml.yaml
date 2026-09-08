@@ -1,0 +1,399 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-devops
+    name: DevOps & Platform
+    description: DevOps & Platform
+    order: 10
+    subjects:
+    - slug: devops-platform
+      name: DevOps and Platform Engineering
+      order: 0
+      modules:
+      - slug: mod-mlops-cicd
+        name: CI/CD for ML
+        description: Continuous delivery for ML, testing ML systems, production-readiness scoring, training
+          in CI and model registries.
+        order: 2
+        topics:
+        - slug: mlcicd-cd4ml
+          name: Continuous delivery for ML
+          description: 'Why CI/CD for ML is not CI with a training step bolted on: an ML system has three
+            versioned artifacts - code, data and model - plus the MLOps maturity ladder for placing any
+            team you join.'
+          order: 0
+          prerequisites:
+          - se-ci-basics
+          - ops-ci-github-actions
+          - mlops-model-packaging
+          learning_objective: Describe an end-to-end CD4ML pipeline and place a team on the MLOps maturity
+            ladder.
+          mastery_criteria:
+          - Name the three versioned artifacts and say what breaks if any one of them is unversioned.
+          - Walk the technical components of a CD4ML pipeline in order, from data pipeline through to
+            production monitoring.
+          - Place a team you know at MLOps level 0, 1 or 2 and name the specific automation that would
+            move it up one level.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 105
+          domain_key: mlops
+          lessons:
+          - slug: mlcicd-cd4ml-core
+            title: Continuous delivery for ML
+            description: 'WHY NOW: Describe an end-to-end CD4ML pipeline and place a team on the MLOps
+              maturity ladder.
+
+
+              LEARN: martinfowler.com — https://martinfowler.com/articles/cd4ml.html
+
+              TIME: ~105 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: draw the pipeline for one ML project you know, marking where each of the
+              three artifacts is versioned and where the gaps are. HOW MANY: 1 pipeline diagram. WHERE:
+              notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a pipeline diagram with the maturity level stated and the single next
+              automation named.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 1.75
+            resources:
+            - slug: mlcicd-cd4ml-primary
+              title: Continuous Delivery for Machine Learning
+              type: article
+              url: https://martinfowler.com/articles/cd4ml.html
+              provider: martinfowler.com
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE (long; the "Technical Components of CD4ML" walkthrough is the
+                core)
+              description: 'The canonical statement of the problem: an ML system has three versioned artifacts
+                (code, data, model), so "CI/CD for ML" is not just CI with a training step bolted on.
+                Builds one end-to-end pipeline concretely, which is what makes it teachable.'
+            - slug: mlcicd-cd4ml-reference
+              title: 'MLOps: Continuous delivery and automation pipelines in machine learning'
+              type: documentation
+              url: https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning
+              provider: Google Cloud
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: The "MLOps level 0 / level 1 / level 2" ladder
+              description: The maturity ladder - manual process, then pipeline automation, then CI/CD
+                of pipelines - which is the useful way to place any team you join. Note cloud.google.com
+                301s to docs.cloud.google.com, so the docs. form is stored here.
+        - slug: mlcicd-testing-ml-systems
+          name: Testing ML systems
+          description: 'The distinction that makes ML testable at all: pre-train tests (shape, leakage,
+            label distribution - runnable in CI without a GPU) versus post-train behavioural tests (invariance,
+            directional expectation, minimum functionality).'
+          order: 1
+          prerequisites:
+          - se-unit-tests
+          - se-testing-pyramid
+          - py-testing
+          - dq-data-leakage
+          learning_objective: Write ML tests that run in CI and say what each one would catch.
+          mastery_criteria:
+          - Classify a given test as pre-train or post-train, and say which of the two can run without
+            a trained model.
+          - Write one invariance test and one directional-expectation test for a model you know, stating
+            the expected relation explicitly.
+          - Name a pre-train test that would have caught a leakage bug before any training ran.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 70
+          domain_key: mlops
+          lessons:
+          - slug: mlcicd-testing-ml-systems-core
+            title: Testing ML systems
+            description: 'WHY NOW: Write ML tests that run in CI and say what each one would catch.
+
+
+              LEARN: jeremyjordan.me — https://www.jeremyjordan.me/testing-ml/
+
+              TIME: ~70 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write three pytest tests for one model - one pre-train (shape or leakage),
+              one invariance, one minimum-functionality - and run them. HOW MANY: 3 tests. WHERE: local
+              IDE.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: a test file with those three tests passing under a plain pytest run.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 1.17
+            resources:
+            - slug: mlcicd-testing-ml-systems-primary
+              title: Effective testing for machine learning systems
+              type: article
+              url: https://www.jeremyjordan.me/testing-ml/
+              provider: jeremyjordan.me
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'The distinction that makes ML testable at all: pre-train tests (shape, leakage,
+                label distribution - runnable in CI without a GPU) vs post-train behavioural tests (invariance,
+                directional expectation, minimum functionality). This is the page that answers "how do
+                you unit-test a model?".'
+            - slug: mlcicd-testing-ml-systems-reference
+              title: 'Testing Machine Learning Systems: Code, Data and Models'
+              type: article
+              url: https://madewithml.com/courses/mlops/testing/
+              provider: Made With ML
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The same taxonomy with runnable pytest and Great Expectations code, if you
+                want to implement rather than only understand.
+        - slug: mlcicd-production-readiness
+          name: Production readiness scoring
+          description: A 28-item rubric across features/data, model development, infrastructure and monitoring,
+            used as a literal pre-launch checklist.
+          order: 2
+          prerequisites:
+          - mlcicd-testing-ml-systems
+          - mlops-monitoring
+          learning_objective: Score an ML system against the ML Test Score rubric and name its lowest-scoring
+            section.
+          mastery_criteria:
+          - Name the four rubric sections and one test from each.
+          - Score one system you know across all 28 items and state the final rubric score the scoring
+            scheme produces.
+          - Name the two cheapest items that would raise that score, and say why they are cheap.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: mlops
+          lessons:
+          - slug: mlcicd-production-readiness-core
+            title: Production readiness scoring
+            description: 'WHY NOW: Score an ML system against the ML Test Score rubric and name its lowest-scoring
+              section.
+
+
+              LEARN: Google Research (served from storage.googleapis.com) — https://storage.googleapis.com/gweb-research2023-media/pubtools/4156.pdf
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: score one ML system against all 28 items, recording a score per item and
+              the final rubric score. HOW MANY: 1 scored system. WHERE: notes or a spreadsheet.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a 28-row scoresheet with the final score and the two chosen next actions
+              written at the bottom.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: mlcicd-production-readiness-primary
+              title: 'The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction'
+              type: article
+              url: https://storage.googleapis.com/gweb-research2023-media/pubtools/4156.pdf
+              provider: Google Research (served from storage.googleapis.com)
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE (PDF, 8 pp.) — the 28 tests are the payload, the scoring rubric
+                at the end is what you actually use
+              description: A 28-item checklist across features/data, model development, infrastructure
+                and monitoring, from the team that wrote "Hidden Technical Debt in ML Systems". Use it
+                as a literal pre-launch checklist. The host is storage.googleapis.com, not research.google,
+                which is why the provider is recorded that way.
+            - slug: mlcicd-production-readiness-reference
+              title: 'The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction'
+              type: documentation
+              url: https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/
+              provider: Google Research
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Canonical publication record and abstract, for citation and for confirming
+                the PDF above is the real paper.
+        - slug: mlcicd-training-in-ci
+          name: Training in CI
+          description: Turning CI from "run the tests" into "train the model on this branch and post the
+            metrics and plots as a PR comment", so model changes get reviewed like code changes - plus
+            self-hosted GPU runners for when the job outgrows a hosted runner.
+          order: 3
+          prerequisites:
+          - ops-ci-github-actions
+          - cf-github-workflow
+          - mlops-tracking
+          - mlcicd-cd4ml
+          learning_objective: Add a CI job that trains on a branch and reports metrics back into the pull
+            request.
+          mastery_criteria:
+          - Explain what a metrics-in-the-PR-comment workflow changes about how a model change gets reviewed.
+          - Name the workflow permission and token the report step needs, and say why it needs them.
+          - Say when you would move the job to a self-hosted GPU runner, and what that costs you in operations.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 40
+          domain_key: mlops
+          lessons:
+          - slug: mlcicd-training-in-ci-core
+            title: Training in CI
+            description: 'WHY NOW: Add a CI job that trains on a branch and reports metrics back into
+              the pull request.
+
+
+              LEARN: CML (Iterative) — https://cml.dev/doc/start/github
+
+              TIME: ~40 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: add a workflow to one repo that trains a small model on push and posts one
+              metric as a pull-request comment. HOW MANY: 1 workflow. WHERE: local IDE plus GitHub.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a working .github/workflows file that produces a metrics comment on a
+              test pull request.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.67
+            resources:
+            - slug: mlcicd-training-in-ci-primary
+              title: Get Started with CML on GitHub
+              type: documentation
+              url: https://cml.dev/doc/start/github
+              provider: CML (Iterative)
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'Turns CI from "run the tests" into "train the model on this branch and post
+                the metrics and plots as a PR comment" - model changes reviewed like code changes. Ships
+                a complete cml.yaml workflow you can copy. Note: the docs are a JS-rendered SPA, so a
+                plain fetch reports a blank title; a browser-style fetch confirmed the rendered page.'
+            - slug: mlcicd-training-in-ci-reference
+              title: CML - Continuous Machine Learning | CI/CD for ML
+              type: github_repo
+              url: https://github.com/iterative/cml
+              provider: GitHub (iterative/cml)
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Rendered README
+              description: Project scope, the cml command surface, and self-hosted GPU runners for when
+                the training job outgrows a GitHub runner.
+        - slug: mlcicd-model-registry
+          name: Model registry and versioning
+          description: Registered models, versions, aliases and tags as the deployment gate, plus the
+            git-native alternative of versioning datasets and model files alongside code.
+          order: 4
+          prerequisites:
+          - mlops-tracking
+          - mlops-model-packaging
+          - mlcicd-cd4ml
+          - se-versioning
+          learning_objective: Promote a model to production as a recorded, reversible decision rather
+            than a file copy.
+          mastery_criteria:
+          - Explain what an alias gives you that a bare version number does not, in deployment terms.
+          - Describe how you would roll back a bad production model in the registry, and what record that
+            rollback leaves behind.
+          - Say what DVC versions that a model registry does not, and when you would want both.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: mlops
+          lessons:
+          - slug: mlcicd-model-registry-core
+            title: Model registry and versioning
+            description: 'WHY NOW: Promote a model to production as a recorded, reversible decision rather
+              than a file copy.
+
+
+              LEARN: MLflow — https://mlflow.org/docs/latest/ml/model-registry/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: register two versions of one model locally, point a production alias at
+              the first, then move the alias to the second and back. HOW MANY: 2 versions. WHERE: local
+              MLflow.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a local registry with two versions plus a scripted alias promotion and
+              rollback.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: mlcicd-model-registry-primary
+              title: ML Model Registry
+              type: documentation
+              url: https://mlflow.org/docs/latest/ml/model-registry/
+              provider: MLflow
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'The deployment gate: registered model, versions, aliases and tags, so promotion
+                to production is a recorded, reversible decision rather than someone copying a file. Extends
+                the existing mlops-tracking topic to the CD side. Note: mlflow.org is on the audit''s
+                BOT_PROTECTED list and can answer 403 to non-browser clients.'
+            - slug: mlcicd-model-registry-reference
+              title: Versioning Data and Models
+              type: documentation
+              url: https://doc.dvc.org/example-scenarios/versioning-data-and-models
+              provider: DVC
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: 'The git-native alternative: version datasets and model files alongside code
+                so a CI run is reproducible from a commit hash. Note dvc.org/doc/use-cases/... 301s here;
+                do not use dvc.org/doc/start/data-management/data-versioning, which now lands on the Get
+                Started index.'

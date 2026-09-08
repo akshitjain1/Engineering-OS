@@ -1,0 +1,470 @@
+# Time Series - self-check questions.
+#
+# Grounded in the scikit-learn cross-validation guide (time series section),
+# the fpp3 chapters on simple methods, accuracy, cross-validation and
+# stationarity, and the scikit-learn time-related feature engineering example.
+# The anchor is that an ordinary random split is not a valid measurement when
+# observations are autocorrelated, so every topic here is asked from that side.
+schema_version: 1
+kind: question_bank
+module: mod-ml-timeseries
+topics:
+  - topic: ts-why-random-splits-fail
+    # Source: scikit-learn - Cross-validation, 3.1.2.6 time series data
+    questions:
+      - id: ts-random-split-what-it-measured
+        prompt: "Random K-fold on hourly sensor readings reports two per cent error while a chronological split reports eighteen. What was the K-fold actually measuring?"
+        options:
+          - "Interpolation between readings whose time neighbours sat in the training fold, not forecasting ahead"
+          - "Forecasting skill with less variance, since averaging over five folds is more stable than one holdout"
+          - "The model's sensitivity to the random seed, which is what the gap between the two numbers reports"
+          - "Extrapolation beyond the observed range, which is always harder than a chronological split suggests"
+        answer: "Interpolation between readings whose time neighbours sat in the training fold, not forecasting ahead"
+        explanation: >-
+          A shuffled fold leaves the hour before and the hour after each held-out reading in training, so the task
+          collapses to filling a gap between two known points, which is far easier than predicting forward. It is
+          not the same quantity measured more precisely, so calling it lower variance misses the point. Seed
+          sensitivity would show as spread between folds, not a consistent nine-fold gap. And the shuffled split
+          demands less extrapolation, not more.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-timeseriessplit-fold-shape
+        prompt: "How does TimeSeriesSplit form its folds, and what is unusual about the training sets it hands back?"
+        options:
+          - "Each split trains on the observations before its test block, so successive training sets keep growing"
+          - "Each split trains on a random half of the series, so successive training sets stay the same size throughout"
+          - "Each split trains on the observations after its test block, so the model always predicts backwards in time"
+          - "Each split trains on every observation except its test block, so successive training sets are equal in size"
+        answer: "Each split trains on the observations before its test block, so successive training sets keep growing"
+        explanation: >-
+          The splitter walks forward through the series, and the k-th training set is a superset of the previous
+          one, which is the departure from ordinary K-fold where every training set is the same size. Nothing is
+          drawn at random. Training on later data and testing on earlier would be leakage in the most literal
+          form. And using everything except the test block is exactly the leaky K-fold behaviour being replaced.
+        difficulty: intermediate
+      - id: ts-timeseriessplit-gap
+        prompt: "What does the gap argument of TimeSeriesSplit remove, and when do you genuinely need it?"
+        options:
+          - "The observations right after the training block, needed when features or targets span a window of time"
+          - "The observations right before the training block, needed when the series has a long warm-up period"
+          - "The folds holding too few rows, needed when the series is short enough that early folds are unreliable"
+          - "The duplicate timestamps in the series, needed when several readings happen to share one recorded time"
+        answer: "The observations right after the training block, needed when features or targets span a window of time"
+        explanation: >-
+          The gap drops samples between train and test, which matters when a row's features are rolling windows or
+          its target covers several periods, so an adjacent row would otherwise share data with the training set.
+          It is inserted after the training block, not before it. Fold sizes are governed by the split count and
+          the test size instead. And duplicate timestamps are a data-cleaning matter the splitter knows nothing about.
+        difficulty: advanced
+      - id: ts-timeseriessplit-max-train-size
+        prompt: "Setting max_train_size turns the expanding training window into what, and why would you want that?"
+        options:
+          - "A fixed-length rolling window, useful when the oldest history no longer resembles the current regime"
+          - "A shuffled sample of the history, useful when the series is too long to hold in memory during fitting"
+          - "A single training block reused by every fold, useful when refitting the model is expensive to repeat"
+          - "A window that grows twice as fast, useful when the series is short and each fold needs more history"
+        answer: "A fixed-length rolling window, useful when the oldest history no longer resembles the current regime"
+        explanation: >-
+          Capping the training length makes each fold slide rather than expand, which is what you want when
+          behaviour from years ago would actively mislead the model. It never shuffles, since the whole point is
+          preserving order. It does not freeze one training block; every fold still moves forward. And it caps
+          growth rather than accelerating it.
+        difficulty: intermediate
+      - id: ts-autocorrelation-breaks-iid
+        prompt: "Which assumption behind ordinary cross-validation does autocorrelation violate, and what follows for the held-out rows?"
+        options:
+          - "Independence between observations, so a held-out row is nearly a copy of the neighbour left in training"
+          - "Identical distribution across observations, so a held-out row comes from a distribution never trained on"
+          - "Linearity between features and target, so the held-out rows cannot be scored by a linear model at all"
+          - "Equal variance across observations, so held-out rows carry more noise than the training rows before them"
+        answer: "Independence between observations, so a held-out row is nearly a copy of the neighbour left in training"
+        explanation: >-
+          Cross-validation assumes the samples are independent and identically distributed, and autocorrelation
+          attacks the independence half, which is why a shuffled held-out row is not really new information.
+          Non-stationarity would attack the identical-distribution half, but that is a separate problem. Linearity
+          is an assumption of particular models rather than of the resampling scheme. And unequal variance is
+          heteroscedasticity, which is again a different issue.
+        difficulty: advanced
+        mastery: true
+
+  - topic: ts-rolling-origin-validation
+    # Source: fpp3 5.10 - Time series cross-validation
+    questions:
+      - id: ts-rolling-origin-one-fold
+        prompt: "In time series cross-validation as fpp3 sets it out, what plays the role that one fold plays in ordinary K-fold?"
+        options:
+          - "One training set ending at a chosen origin, plus the observation immediately after it as the test point"
+          - "One randomly drawn block of the series held out, with everything around it forming the training set"
+          - "One complete refit on the whole series, scored against its own in-sample residuals at that origin"
+          - "One contiguous half of the series used for training, with the other half always reserved for testing"
+        answer: "One training set ending at a chosen origin, plus the observation immediately after it as the test point"
+        explanation: >-
+          Each fold is a forecasting origin: everything up to a point is training and the next observation is the
+          single test case, and the origin then moves forward. A randomly drawn block would put future data in
+          training. In-sample residuals are not out-of-sample forecasts at all. And a fixed half-and-half cut is
+          the single train-test split this scheme is designed to improve on.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-rolling-origin-multi-step
+        prompt: "You need four-step-ahead forecasts. How does the rolling-origin scheme change compared with the one-step case?"
+        options:
+          - "The test point sits four periods after each origin, and the three periods between are kept out of training"
+          - "The training set grows by four observations at each origin, while the test point stays one period ahead"
+          - "Four separate models get fitted at each origin, one for each of the four horizons being evaluated"
+          - "Nothing changes at all, because a four-step forecast is scored in exactly the same way as a one-step"
+        answer: "The test point sits four periods after each origin, and the three periods between are kept out of training"
+        explanation: >-
+          Evaluating a horizon means the origin has to sit a full horizon before the test observation, and the
+          intervening periods must be unavailable, otherwise you are measuring a shorter horizon than you claim.
+          Growing the training set faster while testing one step ahead measures the wrong horizon. Nothing
+          requires four models for one horizon. And the scoring changes precisely because the horizon does.
+        difficulty: advanced
+      - id: ts-rolling-origin-why-many-origins
+        prompt: "Why does averaging errors over many origins beat scoring a single train-and-test cut of the same series?"
+        options:
+          - "It uses far more test observations, so the estimate depends much less on which single period you cut at"
+          - "It uses more training observations in total, so the fitted model has strictly lower bias than one cut"
+          - "It removes the need for a test set entirely, since every observation is eventually used for training"
+          - "It makes the errors independent of one another, which is what allows a significance test to be applied"
+        answer: "It uses far more test observations, so the estimate depends much less on which single period you cut at"
+        explanation: >-
+          Many origins produce many out-of-sample errors from a short series, which is the whole reason to prefer
+          the scheme when data is scarce. Total training rows are not pooled into one bigger fit, so bias is not
+          what improves. There is still a test observation at every origin, so the test set has not disappeared.
+          And errors from overlapping training sets remain dependent, which is why comparisons need care.
+        difficulty: intermediate
+      - id: ts-rolling-origin-minimum-history
+        prompt: "Why can the first forecasting origin not sit at the very beginning of the series?"
+        options:
+          - "The model needs enough prior observations to be estimated at all, especially with seasonal terms present"
+          - "The earliest observations are the least reliable in any series, so convention discards the first year"
+          - "The scheme requires the training block and the test block to be equal in length at the first origin"
+          - "Errors from the earliest origins are on a different scale, so they cannot be averaged with later ones"
+        answer: "The model needs enough prior observations to be estimated at all, especially with seasonal terms present"
+        explanation: >-
+          Every origin refits the model, so the first one has to leave enough history for estimation, and a
+          seasonal model needs at least a full period or two before it can be identified. Early observations are
+          not inherently unreliable. Nothing in the scheme balances the two block lengths. And errors are on the
+          series scale throughout, so they average perfectly well.
+        difficulty: intermediate
+      - id: ts-rolling-origin-residuals-not-errors
+        prompt: "Why are in-sample residuals a poor substitute for the forecast errors this scheme produces?"
+        options:
+          - "Residuals come from a model fitted to those same observations, so they understate how it does on new ones"
+          - "Residuals are computed on a different scale from forecast errors and would need standardising first"
+          - "Residuals are only defined for models with a closed-form fit, so most forecasters cannot report them"
+          - "Residuals average to zero by construction, so any accuracy metric computed from them returns zero too"
+        answer: "Residuals come from a model fitted to those same observations, so they understate how it does on new ones"
+        explanation: >-
+          A residual measures fit to data the parameters already saw, so it is optimistic in exactly the way a
+          forecast error is not, and fpp3 keeps the two words distinct for that reason. Both are in the units of
+          the series, so scale is not the difference. Residuals are available for any fitted model. And although
+          they often average near zero, their absolute and squared values certainly do not.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: ts-forecasting-baselines
+    # Source: fpp3 5.2 - Some simple forecasting methods
+    questions:
+      - id: ts-baseline-seasonal-naive-value
+        prompt: "For monthly data with a yearly pattern, what value does the seasonal naive method forecast for next March?"
+        options:
+          - "The value observed last March, which is the most recent observation from that same season of the year"
+          - "The average of every March observed so far, which is what makes the method seasonal rather than naive"
+          - "The most recent observation of any month, adjusted upwards by the average March seasonal factor found"
+          - "The average of the twelve most recent observations, which covers one full period of the seasonality"
+        answer: "The value observed last March, which is the most recent observation from that same season of the year"
+        explanation: >-
+          Seasonal naive repeats the last value from the corresponding season, so with monthly data it looks back
+          exactly one period. Averaging all past Marches is a different estimator with lower variance and more
+          bias. Adjusting the latest observation by a seasonal factor is a decomposition approach, not this
+          method. And averaging the last twelve months is closer to the mean method applied to a window.
+        difficulty: beginner
+        mastery: true
+      - id: ts-baseline-naive-random-walk
+        prompt: "Why is the naive forecast so hard to beat on a daily share price?"
+        options:
+          - "A random walk has no predictable movement, so the last observed value is genuinely the optimal forecast"
+          - "Share prices are seasonal at a weekly period, and the naive method captures that seasonality exactly"
+          - "The naive method is refitted every single day, so it adapts faster than any model fitted on long history"
+          - "Prices are bounded, and the naive forecast is the only method that respects a bounded target range"
+        answer: "A random walk has no predictable movement, so the last observed value is genuinely the optimal forecast"
+        explanation: >-
+          For a random walk the best prediction of the next value really is the current one, so the naive method
+          is optimal rather than merely convenient, which is why fpp3 introduces it with financial series. Daily
+          prices are not weekly seasonal, and the naive method ignores seasonality anyway. It has no parameters
+          to refit, so adaptivity is not the mechanism. And it makes no use of any bound on the target.
+        difficulty: intermediate
+      - id: ts-baseline-drift-method
+        prompt: "What does the drift method add to the naive forecast, and how is that added amount computed?"
+        options:
+          - "A steady per-period change, set by the average change over the history, which is the line from first to last"
+          - "A seasonal adjustment, set by the average deviation of each season from the overall mean of the whole series"
+          - "A shrinkage back towards the series mean, set by how far the last observation currently lies from that mean"
+          - "A random increment drawn each period, set by the standard deviation of the once-differenced series values"
+        answer: "A steady per-period change, set by the average change over the history, which is the line from first to last"
+        explanation: >-
+          Drift extends the naive forecast by the mean first difference, and because those differences telescope
+          the result is equivalent to drawing a straight line through the first and last observations. A seasonal
+          adjustment is what seasonal naive supplies instead. Shrinking towards the mean describes neither method.
+          And drift is deterministic; the differenced standard deviation feeds the interval, not the point forecast.
+        difficulty: intermediate
+      - id: ts-baseline-mean-vs-naive
+        prompt: "A series wanders around a stable level with no trend and no seasonality. Which of the simple methods is the more sensible bar to set?"
+        options:
+          - "The mean method, because the level is stable so the whole history is evidence about where that level sits"
+          - "The naive method, because the most recent observation is always the best available single estimate to use"
+          - "The drift method, because it reduces to the naive method whenever the series turns out to have no trend"
+          - "The seasonal naive method, because a wandering series always has some period worth exploiting somewhere"
+        answer: "The mean method, because the level is stable so the whole history is evidence about where that level sits"
+        explanation: >-
+          When the level does not move, averaging many observations estimates it far more precisely than trusting
+          one, so the mean method is the tougher bar here. The naive method is optimal for a random walk, which is
+          a different generating process from a stable level. Drift only equals naive when the average change is
+          zero, and it adds needless variance. And seasonal naive requires a season, which this series lacks.
+        difficulty: intermediate
+      - id: ts-baseline-why-report-one
+        prompt: "Your neural forecaster scores a mean absolute error of 41 while the seasonal naive baseline scores 38. What does that tell you?"
+        options:
+          - "The model has not yet earned its complexity, since a method with no parameters is still forecasting better"
+          - "The model is fine and the baseline overfits, since a naive method cannot generalise to a new period at all"
+          - "The two are close enough to count as equivalent, so the choice should be made on training time alone"
+          - "The error measure is wrong here, since it cannot compare a fitted model against an unfitted baseline"
+        answer: "The model has not yet earned its complexity, since a method with no parameters is still forecasting better"
+        explanation: >-
+          A baseline exists to define the bar, and losing to one is evidence the model has learned nothing useful
+          yet, whatever its architecture. A parameter-free rule cannot overfit, since there is nothing fitted to
+          overfit with. Calling a worse score equivalent abandons the comparison that motivated the baseline. And
+          absolute error on the same test observations compares any two sets of forecasts perfectly well.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: ts-forecast-accuracy-metrics
+    # Source: fpp3 5.8 - Evaluating point forecast accuracy
+    questions:
+      - id: ts-metrics-mape-near-zero
+        prompt: "Your demand series contains many zero and near-zero days. What does a percentage error measure do on those days?"
+        options:
+          - "It blows up or is undefined, because each term divides the error by an actual value close to zero"
+          - "It reports zero, because a forecast of zero against an actual of zero contributes no error at all"
+          - "It caps each term at one hundred per cent, which is why it stays bounded and safe on a sparse series"
+          - "It falls back to absolute error on those days, which is why it is recommended for sparse demand"
+        answer: "It blows up or is undefined, because each term divides the error by an actual value close to zero"
+        explanation: >-
+          Dividing by the actual value is the whole construction, so a zero actual makes the term infinite and a
+          near-zero one makes it enormous, which is why fpp3 rules the measure out for series that pass through
+          zero. A zero forecast on a zero actual is the one lucky case and does not rescue the rest. There is no
+          cap, so it is unbounded above. And there is no fallback behaviour built into the definition.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-metrics-mase-scaling
+        prompt: "A mean absolute scaled error divides each error by what, and what does a value of 0.8 therefore mean?"
+        options:
+          - "The average in-sample error of a naive forecast, so 0.8 means twenty per cent better than that benchmark"
+          - "The mean of the actual values, so 0.8 means the average error is eighty per cent of a typical observation"
+          - "The standard deviation of the series, so 0.8 means the errors are smaller than its natural variation"
+          - "The largest error observed anywhere, so 0.8 means the typical error is eighty per cent of the worst case"
+        answer: "The average in-sample error of a naive forecast, so 0.8 means twenty per cent better than that benchmark"
+        explanation: >-
+          The scaling factor is the training-period absolute error of a naive or seasonal naive forecast, which
+          both removes the units and builds the baseline comparison into the number, so one is the break-even
+          point. Dividing by the mean level gives a percentage-style measure with the near-zero problem back.
+          Dividing by the standard deviation would be a different normalisation with no baseline meaning. And the
+          worst-case error is not used at all.
+        difficulty: advanced
+      - id: ts-metrics-across-series
+        prompt: "You must rank one forecasting method across 300 series measured in completely different units. Which kind of error measure supports that?"
+        options:
+          - "A scaled measure, because a scale-dependent measure cannot be meaningfully averaged over unlike units"
+          - "Root mean squared error, because squaring the errors removes the units and makes the numbers comparable"
+          - "Mean absolute error, because taking absolute values puts every series on the same non-negative scale"
+          - "The largest per-series error, because a worst case is expressed the same way whatever the unit involved"
+        answer: "A scaled measure, because a scale-dependent measure cannot be meaningfully averaged over unlike units"
+        explanation: >-
+          Scaling each series by its own benchmark error makes the numbers unitless and comparable, which is
+          exactly the use case fpp3 gives for it. Squaring does not remove units; it squares them, and the root
+          puts them back. Absolute values keep the original units too, so a series measured in millions would
+          dominate any average. And a maximum error is still in the series units and is no more comparable.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-metrics-rmse-vs-mae-target
+        prompt: "Choosing a squared error measure over an absolute one as the thing you optimise changes what your point forecast aims at?"
+        options:
+          - "The mean of the predictive distribution rather than its median, so large errors are penalised more heavily"
+          - "The median of the predictive distribution rather than its mean, so outlying periods stop dominating things"
+          - "The mode of the predictive distribution, which is what squaring the individual errors is designed to recover"
+          - "Nothing about the target, since the two measures differ only by a monotone transformation of one another"
+        answer: "The mean of the predictive distribution rather than its median, so large errors are penalised more heavily"
+        explanation: >-
+          Squared loss is minimised by the conditional mean and absolute loss by the conditional median, so the
+          choice of measure silently chooses which summary of the future you are forecasting. The second option
+          states that relationship the wrong way round. Nothing here targets the mode. And the two are not
+          monotone transformations of each other, which is why they can rank two methods differently.
+        difficulty: advanced
+      - id: ts-metrics-in-sample-vs-test
+        prompt: "A candidate model has the smallest residual error on the training period of any you tried. Why is that not enough to pick it?"
+        options:
+          - "Fit to observed data improves with parameters, so the best in-sample fit is often the worst forecaster"
+          - "Residual errors are measured over a different horizon, so they need rescaling before candidates compare"
+          - "Residual error is only defined for the naive methods, so richer candidates cannot report it at all"
+          - "The training period is shorter than the test period, so its error is estimated from too few points"
+        answer: "Fit to observed data improves with parameters, so the best in-sample fit is often the worst forecaster"
+        explanation: >-
+          A flexible model can drive training residuals down by fitting noise, so the ranking on the training
+          period rewards exactly the behaviour that hurts forecasts, which is why fpp3 insists on a test period.
+          Residuals are one-step errors in the series units and need no rescaling. Every fitted model produces
+          residuals. And the training period is normally the longer of the two, so scarcity is not the objection.
+        difficulty: intermediate
+
+  - topic: ts-stationarity-differencing
+    # Source: fpp3 9.1 - Stationarity and differencing
+    questions:
+      - id: ts-stationarity-what-still-counts
+        prompt: "Which of these series can still count as stationary under the definition fpp3 uses?"
+        options:
+          - "One with aperiodic cycles of varying length, since stationarity forbids only time-dependent behaviour"
+          - "One with a steady upward trend, since a constant slope means its behaviour does not depend on the time"
+          - "One whose seasonal pattern repeats identically every year, since an exactly repeating pattern is fixed"
+          - "One whose variance grows with its level, since only the mean is required to stay constant over time"
+        answer: "One with aperiodic cycles of varying length, since stationarity forbids only time-dependent behaviour"
+        explanation: >-
+          Cyclic behaviour with no fixed period is allowed, because you cannot tell from a stretch of the series
+          where in time it came from. A trend fails immediately, since the level tells you when you are. A fixed
+          seasonal pattern also fails, because the season identifies the position in the year. And changing
+          variance breaks the definition just as changing mean does.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-stationarity-acf-diagnostic
+        prompt: "What does the autocorrelation function of a trended series look like next to that of a stationary one?"
+        options:
+          - "Large positive values decaying slowly, whereas a stationary series drops towards zero within a few lags"
+          - "Values alternating in sign at every lag, whereas a stationary series keeps one sign across all the lags"
+          - "Values near zero at every lag, whereas a stationary series shows one large spike at the first lag only"
+          - "A single spike at the seasonal lag, whereas a stationary series spreads correlation across all its lags"
+        answer: "Large positive values decaying slowly, whereas a stationary series drops towards zero within a few lags"
+        explanation: >-
+          A trend makes nearby and even distant observations similar, so the correlogram stays high and decays
+          slowly, which is the visual test the chapter teaches. Alternating signs indicate over-differencing or a
+          strong negative dependence, not a trend. A flat near-zero correlogram is what white noise looks like.
+          And an isolated seasonal spike indicates seasonality on an otherwise stationary series.
+        difficulty: intermediate
+      - id: ts-stationarity-seasonal-then-first
+        prompt: "A monthly series shows both a trend and a strong yearly pattern. Which differencing order does fpp3 recommend trying?"
+        options:
+          - "The seasonal difference first, then an ordinary difference as well only if the result still looks non-stationary"
+          - "Two ordinary differences, since applying the plain difference twice removes seasonality as a side effect"
+          - "One difference at lag one, then a second difference at lag one, and never a difference at the seasonal lag"
+          - "Twelve consecutive ordinary differences, one for each month, which together strip the annual pattern out"
+        answer: "The seasonal difference first, then an ordinary difference as well only if the result still looks non-stationary"
+        explanation: >-
+          Taking the seasonal difference often removes the trend at the same time, so doing it first can leave
+          nothing more to do, and the chapter warns against differencing more than necessary. Two ordinary
+          differences do not remove a yearly cycle. Refusing a seasonal difference leaves the twelve-month
+          dependence in place. And twelve stacked ordinary differences is heavy over-differencing rather than one
+          seasonal difference.
+        difficulty: intermediate
+      - id: ts-stationarity-over-differencing
+        prompt: "What is the cost of taking one more difference than the series actually needed?"
+        options:
+          - "It injects autocorrelation that was not there, so the differenced series is harder to model, not easier"
+          - "It cannot cost anything, because a stationary series stays stationary however often it is differenced"
+          - "It reverses the sign of the series, so the forecasts come back pointing the opposite way to reality"
+          - "It shortens the series by one observation only, which is the entire price of one unnecessary difference"
+        answer: "It injects autocorrelation that was not there, so the differenced series is harder to model, not easier"
+        explanation: >-
+          Differencing white noise produces a series with a negative correlation at lag one, so an unnecessary
+          difference manufactures structure the model must then explain away. Stationarity is preserved in a
+          formal sense, but the dependence structure is damaged, so it is not free. No sign reversal occurs. And
+          losing one observation is real but is much the smaller of the two costs.
+        difficulty: advanced
+      - id: ts-stationarity-variance-transform
+        prompt: "Seasonal swings in a series get wider as its level rises. Which step addresses that, and which does not?"
+        options:
+          - "A logarithm or Box-Cox transform stabilises the changing variance; differencing only removes a changing level"
+          - "Differencing stabilises the changing variance; a logarithm only shifts the series without changing its shape"
+          - "Seasonal differencing stabilises the changing variance; a logarithm is used only on negative valued series"
+          - "Neither step helps, so the series has to be cut into segments and modelled one segment at a time instead"
+        answer: "A logarithm or Box-Cox transform stabilises the changing variance; differencing only removes a changing level"
+        explanation: >-
+          Widening swings are a variance problem, and a log or Box-Cox transform compresses the large values,
+          which is why the chapter applies it before differencing. Differencing targets the level and leaves
+          proportional variation intact. A logarithm changes shape rather than merely shifting, and it cannot be
+          applied to negative values at all. And segmenting the series throws away the structure a transform
+          handles cleanly.
+        difficulty: intermediate
+
+  - topic: ts-lag-and-calendar-features
+    # Source: scikit-learn - Time-related feature engineering example
+    questions:
+      - id: ts-features-cyclical-encoding
+        prompt: "A linear model given the hour of day as an integer from zero to twenty-three predicts badly around midnight. What fixes it?"
+        options:
+          - "Encoding the hour as a sine and cosine pair, so that hour twenty-three and hour zero sit next to each other"
+          - "Standardising the hour column, so that the model sees it centred at zero with a unit standard deviation"
+          - "Squaring the hour column, so the model can bend its response near the two ends of the daily range"
+          - "Dropping the hour column, since a linear model cannot represent any periodic effect whatsoever anyway"
+        answer: "Encoding the hour as a sine and cosine pair, so that hour twenty-three and hour zero sit next to each other"
+        explanation: >-
+          A trigonometric pair maps the hour onto a circle, restoring the adjacency the integer encoding destroys
+          at the wrap point, and periodic splines do the same job with more flexibility. Standardising is a linear
+          rescaling, so the wrap discontinuity survives untouched. A squared term adds curvature but still treats
+          the two ends as far apart. And dropping the column discards a genuinely strong predictor.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-features-trees-vs-linear-encoding
+        prompt: "Why does the gradient-boosted model in that example need less help from cyclical encoding than the linear model does?"
+        options:
+          - "It splits on ordinal values, so it can carve the hour range into pieces without needing a smooth wrap"
+          - "It normalises every feature internally, which removes the discontinuity at the end of the daily cycle"
+          - "It fits a separate model for each hour, so every hour is handled independently of the ones around it"
+          - "It ignores the calendar features entirely and works from the lagged target values on their own instead"
+        answer: "It splits on ordinal values, so it can carve the hour range into pieces without needing a smooth wrap"
+        explanation: >-
+          A tree can isolate the late and early hours with two thresholds and give them similar leaf values, so
+          the ordinal encoding costs it little, which is exactly what the example demonstrates. Trees do not
+          normalise features, and normalisation would not help with a wrap anyway. Nothing fits one model per
+          hour. And the boosted model does use the calendar features; that is what is being compared.
+        difficulty: intermediate
+      - id: ts-features-rolling-window-leak
+        prompt: "One feature is the mean demand over a seven-day window centred on the current day. Why is that a leak?"
+        options:
+          - "Three of the days in that window lie in the future, and their values are not known at prediction time"
+          - "A centred window is computed after the split, so the training and validation rows end up on one scale"
+          - "Rolling means are always correlated with the target, and a correlated feature cannot be used safely"
+          - "Seven days is longer than the forecast horizon, so the window carries less signal than a shorter one"
+        answer: "Three of the days in that window lie in the future, and their values are not known at prediction time"
+        explanation: >-
+          Centring the window means half of it comes from after the timestamp being predicted, so the feature
+          cannot be computed in production and its offline score is fiction; a trailing window fixes it. When the
+          window is computed relative to the split is not the issue. Correlation with the target is what a useful
+          feature has. And window length affects signal strength, not availability.
+        difficulty: intermediate
+        mastery: true
+      - id: ts-features-lag-versus-horizon
+        prompt: "You forecast seven days out but your strongest feature is the value from the previous day. What is wrong with that pairing?"
+        options:
+          - "At the moment of forecasting, the day before the target has not happened yet, so the feature is unavailable"
+          - "A one-day lag is too short to carry weekly seasonality, so the feature is merely weak rather than unusable"
+          - "Lag features may only be used with linear models, and a seven-day horizon needs a nonlinear model instead"
+          - "A single lag can never be used alone, so the pairing fails until at least seven lags have been added in"
+        answer: "At the moment of forecasting, the day before the target has not happened yet, so the feature is unavailable"
+        explanation: >-
+          The lag must be measured from when you forecast, not from the target date, so a seven-day horizon can
+          only use lags of seven or more; anything shorter is a value from the future. Weakness is not the
+          complaint, since the feature would be strong if it existed. Lag features work with any model family.
+          And one well-chosen lag is a perfectly legitimate feature set.
+        difficulty: advanced
+      - id: ts-features-splitter-choice
+        prompt: "That example evaluates its engineered features with which kind of splitter, and why not a shuffled one?"
+        options:
+          - "A time-based split, because a shuffled split would train on days that come after the ones it scores"
+          - "A stratified split, because a shuffled split would leave some hours of the day out of the training set"
+          - "A grouped split by weekday, because a shuffled split would put every weekday into every single fold"
+          - "A shuffled split with a fixed seed, because reproducibility is the only concern the example raises"
+        answer: "A time-based split, because a shuffled split would train on days that come after the ones it scores"
+        explanation: >-
+          The example uses a time-series splitter so every evaluation only ever looks forward, which is the whole
+          point of validating a forecasting pipeline. Stratification balances class frequencies and is not what
+          protects order here. Grouping by weekday would still allow future days into training. And a fixed seed
+          makes a leaky split reproducible without making it valid.
+        difficulty: intermediate

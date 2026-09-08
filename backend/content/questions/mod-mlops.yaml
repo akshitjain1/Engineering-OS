@@ -1,0 +1,1085 @@
+# MLOps / AI Engineering self-check questions.
+#
+# Every question here is answerable from the resource its own topic maps to, and
+# stays inside that topic's scope. The adjacent AI-engineering topics (structured
+# output, tool calling, function-calling patterns, agent loops, planning and
+# memory) are deliberately kept disjoint: sharing a question set across siblings
+# is the defect the gates in app/content/question_bank.py exist to refuse.
+schema_version: 1
+kind: question_bank
+module: mod-mlops
+topics:
+  - topic: mlops-tracking
+    # Source: MLflow - MLflow Tracking (https://mlflow.org/docs/latest/ml/tracking/)
+    questions:
+      - id: mlops-tracking-vs-logfile
+        prompt: "What does an experiment tracking server give you that appending metrics to a log file does not?"
+        options:
+          - "Queryable runs that join params, metrics and artifacts, so any two can be compared side by side"
+          - "Faster training, because the tracking server batches gradient updates across your runs"
+          - "A guarantee your metrics are correct, since the server recomputes them from the raw data"
+          - "Automatic hyperparameter search, removing the need to choose a sweep strategy yourself"
+        answer: "Queryable runs that join params, metrics and artifacts, so any two can be compared side by side"
+        explanation: >-
+          The value of tracking is structure: each run ties its inputs, its numbers and its files
+          together so you can query and rank them. Tracking does not touch training speed, so the
+          gradient claim is invented. MLflow stores whatever value you log and never recomputes it,
+          so it cannot certify correctness. Sweep strategy is something you supply, not something
+          the tracking layer decides for you.
+        difficulty: beginner
+        mastery: true
+      - id: mlops-tracking-artifact-vs-param
+        prompt: "Which of these belongs logged as an artifact in MLflow rather than as a param or a metric?"
+        options:
+          - "The confusion-matrix image and the serialised model file that the run produced"
+          - "The learning rate, since it is a value the run was configured with up front"
+          - "Validation accuracy at each epoch, since it changes as the run progresses"
+          - "The number of training epochs requested before the run had even started"
+        answer: "The confusion-matrix image and the serialised model file that the run produced"
+        explanation: >-
+          Artifacts are files: plots, model binaries, sample predictions. Learning rate and epoch
+          count are params, fixed inputs recorded once at the start. Per-epoch accuracy is a metric,
+          a numeric series logged against a step. Filing any of those three as an artifact loses the
+          ability to sort, filter and chart runs by them.
+        difficulty: beginner
+      - id: mlops-tracking-metric-step
+        prompt: "You call mlflow.log_metric with a step argument on every epoch. What does logging as a metric rather than a param buy you?"
+        options:
+          - "A time series MLflow can chart and compare per step, whereas a param holds one fixed value"
+          - "Nothing structural; params and metrics are stored identically and only the naming differs"
+          - "Automatic early stopping, because MLflow halts the run once the metric stops improving"
+          - "Type safety on the value, since metrics must be floats while params reject every number"
+        answer: "A time series MLflow can chart and compare per step, whereas a param holds one fixed value"
+        explanation: >-
+          Metrics accept repeated values against a step, which is what makes learning curves and
+          per-step comparison possible; a param is written once. They are stored differently, so the
+          claim that only naming differs is wrong. MLflow records but never controls your training
+          loop, so it cannot early-stop. Params are stored as strings and happily accept numbers,
+          so the type-safety reasoning is backwards.
+        difficulty: intermediate
+      - id: mlops-tracking-sweep-layout
+        prompt: "A hyperparameter sweep launches forty training jobs. How should those be organised in MLflow Tracking?"
+        options:
+          - "As forty runs under one parent run in a single experiment, so the sweep compares as a unit"
+          - "As forty separate experiments, so each job gets its own namespace and cannot be confused"
+          - "As one run whose params are overwritten each time, which keeps the experiment list short"
+          - "As forty runs with tracking switched off for all but the best, to avoid storing dead data"
+        answer: "As forty runs under one parent run in a single experiment, so the sweep compares as a unit"
+        explanation: >-
+          One experiment with nested child runs is what lets you sort forty configurations by a metric
+          in a single view. Forty experiments scatter the comparison across namespaces. Overwriting one
+          run's params destroys thirty-nine results, which is the exact loss tracking exists to prevent.
+          You cannot know which run was best until all of them are logged, so selective tracking is
+          self-defeating.
+        difficulty: intermediate
+      - id: mlops-tracking-uri-visibility
+        prompt: "A teammate cannot see any of the runs you logged with MLflow this morning. What is the most likely reason?"
+        options:
+          - "Your tracking URI points at a local mlruns directory rather than a shared tracking server"
+          - "MLflow keeps runs private per user, so every run must be explicitly shared once it finishes"
+          - "Metrics need at least two logged steps before MLflow will make a run visible to anybody"
+          - "MLflow exposes runs only through its REST API, so the web interface never lists other users"
+        answer: "Your tracking URI points at a local mlruns directory rather than a shared tracking server"
+        explanation: >-
+          With no tracking URI set, MLflow writes to a local directory that only you can read, which is
+          the usual cause of invisible runs. There is no per-run sharing step in MLflow's model. A run
+          appears as soon as it is created, regardless of how many metric steps it has. The web UI is a
+          client of the same REST API, so it shows everything the server holds.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: mlops-model-packaging
+    # Source: MLflow - MLflow Models (https://mlflow.org/docs/latest/ml/model/)
+    questions:
+      - id: mlops-packaging-pin-deps
+        prompt: "Why does a packaged model record pinned dependency versions as well as the trained weights?"
+        options:
+          - "Weights alone do not reproduce behaviour; a different library version can change ops or fail to load"
+          - "Pinning shrinks the artefact, because the packager then stores only the libraries you named"
+          - "The weights file embeds its own versions, so the environment file is a convenience for humans"
+          - "Pinning exists for licensing, since serving needs a written record of every dependency used"
+        answer: "Weights alone do not reproduce behaviour; a different library version can change ops or fail to load"
+        explanation: >-
+          A serialised model is only meaningful to the library that wrote it: deserialisation can break
+          outright or, worse, silently change numerics across versions. Pinning adds metadata rather
+          than shrinking anything. Most serialisation formats carry no dependency graph, so the weights
+          cannot speak for themselves. Licensing may also want the list, but that is a side benefit,
+          not the reason serving needs it.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-packaging-flavor
+        prompt: "What does an MLflow Model flavor actually give a downstream consumer of the artefact?"
+        options:
+          - "A named way to load the same saved model, so a tool can use it without knowing your framework"
+          - "A compression scheme for the weights, chosen to suit the framework that produced the model"
+          - "A performance tier, telling the serving layer how much CPU and memory it should allocate"
+          - "A permission level, restricting which downstream teams are allowed to load this model at all"
+        answer: "A named way to load the same saved model, so a tool can use it without knowing your framework"
+        explanation: >-
+          Flavors are interoperability contracts: a generic pyfunc consumer and a framework-native
+          consumer can both load one artefact. They say nothing about compression, which is a property
+          of the serialisation format. Resource sizing lives in the deployment configuration, not the
+          artefact. Access control is a registry and platform concern and is never encoded in a flavor.
+        difficulty: intermediate
+      - id: mlops-packaging-signature-gate
+        prompt: "What does attaching a model signature to a packaged model catch that production monitoring would not?"
+        options:
+          - "A wrong input schema at load or predict time, refused before a single bad prediction is served"
+          - "A gradual shift in the input distribution, flagged as soon as the shape of the data moves"
+          - "A drop in business metrics, because the signature ties predictions to downstream revenue"
+          - "A slow prediction endpoint, because the signature records the latency budget for each call"
+        answer: "A wrong input schema at load or predict time, refused before a single bad prediction is served"
+        explanation: >-
+          A signature is a hard contract on column names, types and shapes, so a mismatched caller fails
+          fast instead of producing garbage. Distribution shift is exactly what a signature cannot see:
+          the schema still matches while the values move, which is monitoring's job. Signatures carry no
+          business or latency semantics, so the last two options describe things nothing in the artefact
+          could know.
+        difficulty: intermediate
+      - id: mlops-packaging-artifact-vs-config
+        prompt: "Which of these belongs inside the model artefact rather than in the serving deployment configuration?"
+        options:
+          - "The fitted preprocessing steps the model needs, so training and serving transform data alike"
+          - "The number of replicas to run, since that determines how the model handles its traffic"
+          - "The endpoint authentication settings, which the model must know in order to accept a request"
+          - "The autoscaling thresholds, since only the model knows how expensive its predictions are"
+        answer: "The fitted preprocessing steps the model needs, so training and serving transform data alike"
+        explanation: >-
+          Fitted transformers hold learned state such as means and vocabularies; leaving them out of the
+          artefact is how training and serving skew gets introduced. Replica counts, authentication and
+          autoscaling are all properties of the deployment: they change without retraining and must not
+          force a new model version. Baking them into the artefact couples the model to one environment.
+        difficulty: advanced
+        mastery: true
+      - id: mlops-packaging-overwrite-file
+        prompt: "You retrain weekly and overwrite the same model file in blob storage. What breaks the week a bad model ships?"
+        options:
+          - "You cannot roll back or reproduce, because no earlier version of the artefact still exists"
+          - "Nothing, provided the training code is in git; the artefact can always be rebuilt exactly"
+          - "Only the metrics dashboard breaks, since the serving layer reloads the file automatically"
+          - "The signature is lost while the weights stay valid, so serving carries on entirely unaffected"
+        answer: "You cannot roll back or reproduce, because no earlier version of the artefact still exists"
+        explanation: >-
+          Immutable, versioned artefacts are what make rollback a single repoint rather than a retraining
+          project. Code in git is not enough on its own: data, library versions and seeds all moved too,
+          so a rebuild is not guaranteed to be identical. The failure is in serving, not in a dashboard.
+          And overwriting replaces the whole artefact including its metadata, so the last option
+          misreads what happened.
+        difficulty: intermediate
+
+  - topic: mlops-serving
+    # Source: FastAPI - Tutorial: first steps (https://fastapi.tiangolo.com/tutorial/first-steps/)
+    questions:
+      - id: mlops-serving-request-model
+        prompt: "In a FastAPI prediction endpoint, what does declaring a typed request body model actually do for you?"
+        options:
+          - "It validates and coerces the incoming JSON, rejecting malformed requests before the model runs"
+          - "It converts your model output to a serialisable form so predictions can be returned as JSON"
+          - "It caches identical requests, so a repeated feature vector reuses the previous prediction"
+          - "It batches concurrent requests into one array before the predict call is finally made"
+        answer: "It validates and coerces the incoming JSON, rejecting malformed requests before the model runs"
+        explanation: >-
+          A declared body type gives you parsing, type coercion and a 422 on bad input, which keeps
+          malformed features away from the model. Response serialisation is a separate concern handled by
+          the return value and response model. Caching and batching are things you build deliberately;
+          declaring a request type does neither, and assuming it does leaves you unprotected.
+        difficulty: beginner
+      - id: mlops-serving-load-once
+        prompt: "Where in a FastAPI application should a served model be loaded, and why there?"
+        options:
+          - "Once at startup and held in application state, so no request ever pays the load cost again"
+          - "Inside the path operation function, so every request works with a clean copy of the weights"
+          - "In middleware on each request, so a newly deployed model file is picked up immediately"
+          - "In a background task after the response, so the endpoint can return without any blocking"
+        answer: "Once at startup and held in application state, so no request ever pays the load cost again"
+        explanation: >-
+          Model loading is expensive and the weights are read-only, so one load at startup and a shared
+          reference is correct. Loading per request adds seconds of latency and memory churn for no
+          benefit, since prediction does not mutate the weights. Middleware has the same cost on every
+          call. Loading after the response means the first requests have no model at all to use.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-serving-async-blocking
+        prompt: "Your predict route is declared async and calls a synchronous, CPU-bound model. What happens under concurrent load?"
+        options:
+          - "The blocking call occupies the event loop, so concurrent requests queue up behind each other"
+          - "The framework moves the call to a thread pool automatically, so throughput scales with cores"
+          - "Requests fail with a timeout, because an async route may not call synchronous code at all"
+          - "Nothing changes, since the event loop runs each coroutine in a separate operating system process"
+        answer: "The blocking call occupies the event loop, so concurrent requests queue up behind each other"
+        explanation: >-
+          An async route runs on the event loop, so a blocking CPU-bound call stalls every other request
+          in that worker. The automatic thread pool is what you get from a plain non-async route, which
+          is why declaring the route async here is the mistake. Synchronous code is callable, just
+          harmful, so it does not error. Coroutines share one process and one thread, not separate ones.
+        difficulty: advanced
+        mastery: true
+      - id: mlops-serving-openapi-docs
+        prompt: "Which path serves FastAPI's interactive API documentation by default, and what generates its content?"
+        options:
+          - "/docs, rendered from the OpenAPI schema the framework derives from your type annotations"
+          - "/openapi, rendered from a specification file you write and keep beside the application code"
+          - "/, rendered by the root path operation whenever no explicit response model was declared"
+          - "/swagger, rendered by a plugin you install separately once the application is deployed"
+        answer: "/docs, rendered from the OpenAPI schema the framework derives from your type annotations"
+        explanation: >-
+          FastAPI generates an OpenAPI document from your annotations and serves a browsable UI at /docs.
+          The raw JSON schema lives at a separate path, but you never hand-author it. The root path
+          returns whatever your own handler returns and has no documentation role. No extra plugin is
+          needed, which is precisely the point of schema generation from types.
+        difficulty: beginner
+      - id: mlops-serving-batch-vs-online
+        prompt: "You must score forty million rows every night for a mailing list. Why is an HTTP prediction endpoint the wrong tool?"
+        options:
+          - "Per-request overhead and connection limits dominate; a batch job scores the set far more cheaply"
+          - "HTTP cannot carry the data volume involved, so the payloads would be rejected as far too large"
+          - "Accuracy degrades over a long run of calls, because serving state accumulates between requests"
+          - "Batch jobs need a different model format entirely, so the served artefact could not be reused"
+        answer: "Per-request overhead and connection limits dominate; a batch job scores the set far more cheaply"
+        explanation: >-
+          Real-time serving buys you low latency per call and pays for it with per-call overhead; when
+          nothing needs an answer within milliseconds, a batch job amortises that away. Payload size is a
+          chunking detail, not the blocker. A stateless predictor does not drift within a run, so the
+          accuracy claim is invented. The same packaged artefact is usually what the batch job loads.
+        difficulty: intermediate
+
+  - topic: mlops-monitoring
+    # Source: Evidently - Model monitoring overview
+    questions:
+      - id: mlops-monitoring-flat-accuracy
+        prompt: "Offline accuracy on fresh labelled data is unchanged, yet the business metric the model drives has fallen. What do you check first?"
+        options:
+          - "Whether the production pipeline feeds the model the same features your offline check used"
+          - "Whether the model needs more capacity, and then start a larger architecture training run"
+          - "Whether accuracy is the wrong metric, and switch the monitoring report over to F1 instead"
+          - "Whether labels arrived late, and then wait a further week before investigating any deeper"
+        answer: "Whether the production pipeline feeds the model the same features your offline check used"
+        explanation: >-
+          When the model scores well offline but performs badly live, the difference is usually the path
+          the data took: a skewed feature, a missing join, a default filled in silently. Retraining a
+          bigger model cannot fix a pipeline defect and will reproduce it. Changing the metric relabels
+          the problem instead of finding it. Waiting a week costs real money while the cause sits in
+          code you can inspect today.
+        difficulty: advanced
+        mastery: true
+      - id: mlops-monitoring-data-vs-concept
+        prompt: "Input feature distributions have moved, but the relationship between features and label is unchanged. What is that, and what follows?"
+        options:
+          - "Data drift; predictions get less reliable in new regions though the learned mapping still holds"
+          - "Concept drift; the mapping from features to labels has changed and the model must be retrained"
+          - "Training and serving skew; the two pipelines compute the same feature in two different ways"
+          - "Label drift; the class balance has moved while the feature distribution stayed exactly as before"
+        answer: "Data drift; predictions get less reliable in new regions though the learned mapping still holds"
+        explanation: >-
+          Data drift means the inputs moved, so the model is extrapolating even though what it learned is
+          still true. Concept drift is the opposite case, where the mapping itself changed, and it demands
+          retraining on new labels. Skew is a pipeline inconsistency rather than a change over time. Label
+          drift describes a moving target base rate, which the question explicitly rules out.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-monitoring-no-labels-yet
+        prompt: "Ground-truth labels arrive sixty days after each prediction is made. What can you usefully monitor in the meantime?"
+        options:
+          - "Input distributions, prediction distributions and data quality, as proxies for model health"
+          - "Nothing meaningful; without labels every monitoring signal is noise and should be ignored"
+          - "Accuracy against the training set, recomputed nightly to see whether the model has degraded"
+          - "Only latency and error rates, since prediction values reveal nothing at all until labels exist"
+        answer: "Input distributions, prediction distributions and data quality, as proxies for model health"
+        explanation: >-
+          Unlabelled monitoring is the normal case: missing values, new categories, and a shifting score
+          distribution all fire long before labels land. Declaring it all noise leaves you blind for two
+          months. Re-scoring the training set measures nothing about production, since that data never
+          changes. Latency and errors matter but miss every data-shaped failure.
+        difficulty: intermediate
+      - id: mlops-monitoring-bad-reference
+        prompt: "A drift report compares production data against a reference dataset. What makes a reference window a bad choice?"
+        options:
+          - "A window containing a known anomaly, which makes normal traffic look drifted and hides real drift"
+          - "A window drawn from the training data, which cannot be compared against production data at all"
+          - "Any window longer than one single day, because drift tests need equal-sized samples to run"
+          - "A window from the same season, since seasonal similarity strips the test of statistical power"
+        answer: "A window containing a known anomaly, which makes normal traffic look drifted and hides real drift"
+        explanation: >-
+          The reference defines what normal means, so an outage or promotion inside it poisons every later
+          comparison in both directions. Training data is a perfectly standard reference. Drift tests do
+          not require equal sample sizes, and longer windows are usually more stable. Comparing like
+          season with like season removes a known confounder rather than removing power.
+        difficulty: advanced
+      - id: mlops-monitoring-alert-fatigue
+        prompt: "Your drift monitor fires on thirty features every morning and the team now ignores it. What is the right fix?"
+        options:
+          - "Alert on features the model actually relies on, and on a metric tied to a decision, not every column"
+          - "Raise the significance threshold until nothing fires, then review the full report by hand each month"
+          - "Drop drift monitoring and rely on accuracy alone, since only labels can prove the model is wrong"
+          - "Keep alerting on every column but route the alerts to a channel nobody is required to read"
+        answer: "Alert on features the model actually relies on, and on a metric tied to a decision, not every column"
+        explanation: >-
+          An alert has to imply an action, so tie it to importance-weighted features and to prediction or
+          quality signals that would change a decision. Tuning the threshold until nothing fires deletes
+          the signal along with the noise. Waiting for labels means finding out weeks late. Routing alerts
+          somewhere unread is alert fatigue formalised rather than solved.
+        difficulty: advanced
+
+  - topic: ai-eng-structured-output
+    # Source: OpenAI - Structured outputs
+    questions:
+      - id: aieng-structured-guarantee-scope
+        prompt: "With a strict JSON schema on a structured-output call, what is guaranteed and what is still not guaranteed?"
+        options:
+          - "The shape and types conform to your schema; whether the values are factually right is untested"
+          - "Both the shape and the truth of the values, since the schema constrains what may be generated"
+          - "Neither shape nor values; the schema is a hint the model may ignore whenever it is uncertain"
+          - "Only that the output parses as JSON, with fields possibly missing or of an unexpected type"
+        answer: "The shape and types conform to your schema; whether the values are factually right is untested"
+        explanation: >-
+          Strict schema enforcement is a syntax and type guarantee, which is why you can parse without a
+          try block and still need to check the contents. It cannot make a hallucinated date correct.
+          Treating the schema as a mere hint understates it, since generation is constrained rather than
+          suggested. Parse-only is what plain JSON mode gives you, one level weaker than a strict schema.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-structured-json-mode-vs-schema
+        prompt: "How does simply asking for JSON output differ from supplying a schema with strict validation enabled?"
+        options:
+          - "JSON output only promises valid syntax; a strict schema also pins the keys, types and required set"
+          - "They are the same feature; the schema is documentation and the model behaves identically either way"
+          - "A strict schema promises syntax only, while JSON output additionally pins the exact field names"
+          - "JSON output pins the keys and types, and a strict schema adds a check on the value ranges"
+        answer: "JSON output only promises valid syntax; a strict schema also pins the keys, types and required set"
+        explanation: >-
+          Plain JSON mode guarantees the response parses, and nothing more, so a renamed or absent field is
+          still possible. A strict schema is what removes that class of failure. The two are not equivalent,
+          and the last two options simply swap the guarantees around: neither feature validates value ranges
+          such as a date being in the past.
+        difficulty: intermediate
+      - id: aieng-structured-empty-required-field
+        prompt: "Your extraction step returns schema-valid JSON in which a required date field holds the empty string. What handles this?"
+        options:
+          - "Application-level validation of the values, with a retry or a fallback when a check fails"
+          - "Marking the field required in the schema, which forces the model to emit a genuine date"
+          - "Raising the temperature, so the model explores until it produces a plausible date value"
+          - "Switching the field to a number type, since dates are safer transmitted as raw timestamps"
+        answer: "Application-level validation of the values, with a retry or a fallback when a check fails"
+        explanation: >-
+          An empty string satisfies a required string field, so the schema is doing its job and the gap is
+          semantic: your code must assert the value parses as a date and loop or fall back if not. Marking
+          it required changed nothing, because it already was. Temperature does not add missing information.
+          A numeric type just moves the same emptiness problem to a zero.
+        difficulty: advanced
+        mastery: true
+      - id: aieng-structured-schema-shape
+        prompt: "Which schema design is most likely to be rejected or to behave unreliably under strict structured outputs?"
+        options:
+          - "Deeply nested open-ended objects that allow free-form additional properties throughout"
+          - "A flat object of named string and number fields, each carrying an explicit description"
+          - "An enum field listing the six categories your downstream code is actually able to handle"
+          - "An array of objects whose item schema is declared once and required in full each time"
+        answer: "Deeply nested open-ended objects that allow free-form additional properties throughout"
+        explanation: >-
+          Strict mode needs a closed, fully specified schema, so open-ended maps and unbounded nesting are
+          exactly what it refuses or handles worst. Flat named fields with descriptions are the easiest
+          shape to enforce and to read. Enums are the strongest tool available, because they eliminate
+          unmappable values. A reused, fully required item schema is a normal, well-supported pattern.
+        difficulty: advanced
+      - id: aieng-structured-refusal-branch
+        prompt: "A structured-output call comes back carrying a refusal instead of your object. How should the caller behave?"
+        options:
+          - "Handle the refusal branch explicitly rather than parsing, then surface it or retry safer input"
+          - "Parse the response anyway, since a refusal is still valid JSON matching the requested schema"
+          - "Retry the identical request in a tight loop until the model eventually returns the object"
+          - "Discard the schema and reparse the text with a regular expression to salvage the fields"
+        answer: "Handle the refusal branch explicitly rather than parsing, then surface it or retry safer input"
+        explanation: >-
+          A refusal is a distinct response shape, so code that assumes the object exists throws on the very
+          input you least want to crash on. It does not conform to your schema, so parsing it fails.
+          Retrying the same input unchanged tends to refuse again while burning quota. Regex salvage on a
+          refusal extracts fields that were never generated.
+        difficulty: intermediate
+
+  - topic: ai-eng-tool-calling
+    # Source: OpenAI - Function calling (tool-calling mechanics and the request/response contract)
+    questions:
+      - id: aieng-toolcall-what-model-returns
+        prompt: "Under the tool-calling contract, what does the model actually return at the moment it decides a tool is needed?"
+        options:
+          - "A structured tool call naming the function and its JSON arguments; your own code performs the call"
+          - "The result of the function, which the provider has already executed on your behalf server side"
+          - "Natural-language instructions telling your code, in prose, which function it really ought to run"
+          - "A signed request the tool endpoint accepts directly, bypassing your application layer entirely"
+        answer: "A structured tool call naming the function and its JSON arguments; your own code performs the call"
+        explanation: >-
+          The model only ever proposes: it emits a name and arguments, and execution stays entirely on your
+          side, which is what keeps credentials and side effects under your control. The provider does not
+          run your code. Prose instructions are what tool calling replaced, precisely because they were
+          unparseable. Nothing is signed or dispatched to your endpoint on your behalf.
+        difficulty: beginner
+        mastery: true
+      - id: aieng-toolcall-result-message
+        prompt: "After executing a requested tool, what must you send back so the model can carry the conversation forward?"
+        options:
+          - "A tool result message keyed to that call's id, appended after the assistant's tool-call message"
+          - "A fresh user message containing the result as prose, with the earlier tool call removed first"
+          - "Nothing; the model retains its own tool state and will ask again if it still needs the result"
+          - "The whole conversation resent as one system message summarising every result obtained so far"
+        answer: "A tool result message keyed to that call's id, appended after the assistant's tool-call message"
+        explanation: >-
+          The transcript is the state, so the result goes back as a tool-role message carrying the same call
+          id, in order after the call it answers. Rewriting it as a user message and deleting the call breaks
+          that pairing and providers reject or mishandle it. The API holds no hidden state between requests.
+          Collapsing history into a system message destroys the id linkage.
+        difficulty: intermediate
+      - id: aieng-toolcall-ambiguous-descriptions
+        prompt: "Your model keeps picking the wrong one of two similar registered tools. Which change addresses the actual cause?"
+        options:
+          - "Sharpen each tool description and its parameter docs so the boundary between them is explicit"
+          - "Lower the temperature to zero, which makes tool selection deterministic and therefore correct"
+          - "Merge them into one tool with a mode flag, and let the model guess which mode it needs"
+          - "Register only one tool per request and ask the user which of the two they actually intended"
+        answer: "Sharpen each tool description and its parameter docs so the boundary between them is explicit"
+        explanation: >-
+          Tool descriptions are the prompt the model uses to choose, so ambiguity there is the defect and
+          clarifying it is the fix. Zero temperature makes a wrong choice consistent rather than right.
+          A mode flag moves the same ambiguity into an argument where it is harder to see. Asking the user
+          to disambiguate every call gives up the routing that tool calling was adopted to provide.
+        difficulty: intermediate
+      - id: aieng-toolcall-forcing-choice
+        prompt: "When is forcing a specific tool through the tool-choice setting better than letting the model decide?"
+        options:
+          - "When the step must always happen, such as an extraction call whose output your code requires"
+          - "Whenever more than one tool is registered, since the model cannot choose reliably between them"
+          - "When you want lower cost, because a forced call skips the model's reasoning about the request"
+          - "Only during development, since forcing a tool is unsupported once traffic reaches production"
+        answer: "When the step must always happen, such as an extraction call whose output your code requires"
+        explanation: >-
+          Forcing is right where the call is not really a decision: you need the structured result every
+          time, so removing the choice removes a failure mode. Forcing with several tools registered still
+          means picking one, which does not help. The model must still generate the arguments, so the cost
+          saving is imaginary. Tool choice is a normal production setting, not a development-only switch.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-toolcall-parallel-calls
+        prompt: "A single assistant turn returns three tool calls at once. What is the correct way to handle that turn?"
+        options:
+          - "Execute all three, then return one result message per call id before requesting the next turn"
+          - "Execute only the first and discard the rest, since a turn can carry just one valid call"
+          - "Return a single combined result message, because the model matches results by their ordering"
+          - "Reject the turn and re-prompt, since parallel calls mean the model misread your tool schema"
+        answer: "Execute all three, then return one result message per call id before requesting the next turn"
+        explanation: >-
+          Parallel calls are a throughput feature: run them, ideally concurrently, and answer each with its
+          own id-matched result. Dropping two leaves the model waiting on results it asked for. Matching is
+          by id and not by position, so one merged message cannot be resolved. Multiple calls in a turn are
+          expected behaviour rather than a schema error.
+        difficulty: advanced
+
+  - topic: ai-eng-function-calling
+    # Source: Anthropic - Tool use overview (typed signatures, error surfacing, idempotency)
+    questions:
+      - id: aieng-fncall-error-surfacing
+        prompt: "A model-invoked function raises a database timeout partway through a run. What do you hand back to the model?"
+        options:
+          - "A structured error result flagged as an error, describing what failed so the model can adapt"
+          - "Nothing, letting the request time out so the model retries the same arguments automatically"
+          - "A success result with empty data, which keeps the conversation simple and avoids confusion"
+          - "The raw stack trace as the entire content, so the model has every last detail of the failure"
+        answer: "A structured error result flagged as an error, describing what failed so the model can adapt"
+        explanation: >-
+          Tool results carry an error flag for exactly this: a short, actionable message lets the model
+          retry differently, choose another tool, or tell the user. Silence stalls the loop, since nothing
+          retries on your behalf. An empty success is the worst option, because the model will reason
+          confidently from data that does not exist. A raw trace leaks internals and buries the one
+          sentence that mattered.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-fncall-idempotency-key
+        prompt: "Why does a model-invoked create_refund function need an idempotency key on every invocation?"
+        options:
+          - "A retried or duplicated tool call must not issue a second refund for the very same request"
+          - "The key lets the model cache the result locally and skip the network call the next time"
+          - "Idempotency keys are how providers bill tool use, so refunds need one in order to be tracked"
+          - "The key orders concurrent tool calls, ensuring refunds are applied in the sequence requested"
+        answer: "A retried or duplicated tool call must not issue a second refund for the very same request"
+        explanation: >-
+          Agent loops retry, and models sometimes re-emit a call whose result they never saw, so any
+          side-effecting function needs a deduplication key derived from the request. Models hold no local
+          cache of your side effects. Providers bill on tokens, not on keys. Ordering is a concurrency
+          control concern and is not what an idempotency key provides.
+        difficulty: advanced
+        mastery: true
+      - id: aieng-fncall-validate-arguments
+        prompt: "The model supplies arguments that already match your declared JSON schema. Why validate them again inside the function?"
+        options:
+          - "Schema conformance is not authorisation or sanity; ids, ranges and ownership still need checking"
+          - "Schemas are advisory only, so arguments frequently arrive with completely wrong primitive types"
+          - "Validation is what tells the model the schema exists, since descriptions on their own are ignored"
+          - "The provider strips your schema before dispatch, leaving the arguments entirely unchecked"
+        answer: "Schema conformance is not authorisation or sanity; ids, ranges and ownership still need checking"
+        explanation: >-
+          A well-typed account id can still belong to another customer, and a well-typed amount can still be
+          absurd, so the function is where authorisation and business rules live. Type violations are the
+          rarer problem, not the frequent one. Validation is server-side behaviour the model never observes.
+          The schema is enforced rather than discarded, which is why type checks alone feel sufficient
+          and are not.
+        difficulty: intermediate
+      - id: aieng-fncall-split-read-write
+        prompt: "Which pair of capabilities should be split into separate registered functions rather than one flexible function?"
+        options:
+          - "A read-only query and a record write, so the write can be narrowly scoped and confirmed"
+          - "Two read-only queries over one table, so each returns a narrower slice of the columns"
+          - "A function and its retry wrapper, so failed calls are handled by a separately registered one"
+          - "A function and its logging helper, so tracing lives in something the model can call directly"
+        answer: "A read-only query and a record write, so the write can be narrowly scoped and confirmed"
+        explanation: >-
+          Separating reads from writes lets you give each its own credential, confirmation step and audit
+          trail, which is the whole point of least privilege for model-invoked code. Two similar reads are
+          better merged, since extra near-identical tools worsen selection. Retries and logging belong in
+          your infrastructure; exposing them as tools invites the model to spend turns on plumbing.
+        difficulty: advanced
+      - id: aieng-fncall-too-many-tools
+        prompt: "An agent has forty registered functions and chooses poorly among them. What is the most effective structural fix?"
+        options:
+          - "Group them behind fewer well-described tools scoped to the task, exposing only what is relevant"
+          - "Keep all forty but shorten every description, so the whole tool list fits in a smaller prompt"
+          - "Order the tools by how often they are used, since the model prefers the earliest definitions"
+          - "Raise the output token limit so the model has room to reason over all forty before choosing"
+        answer: "Group them behind fewer well-described tools scoped to the task, exposing only what is relevant"
+        explanation: >-
+          Selection accuracy falls as the candidate set grows, so the fix is a smaller, task-scoped surface,
+          often assembled per request. Shortening descriptions removes the information the model needs to
+          choose, making it worse. Definition order is not a reliable preference signal. More output tokens
+          buy reasoning room but do nothing about forty overlapping options.
+        difficulty: intermediate
+
+  - topic: ai-eng-agent-loops
+    # Source: Anthropic - Building effective agents (agent definition through the workflow loop)
+    questions:
+      - id: aieng-loop-runaway-guard
+        prompt: "An agent loop has run for forty-five minutes on one task with no sign of stopping. Which guard actually prevents this?"
+        options:
+          - "A hard cap on iterations and on token or cost budget, checked by the harness before each step"
+          - "A prompt instruction telling the model to stop as soon as it believes the task is complete"
+          - "A lower sampling temperature, which makes the model converge on its answer far more quickly"
+          - "A shorter per-call timeout, so each individual model request returns without a long delay"
+        answer: "A hard cap on iterations and on token or cost budget, checked by the harness before each step"
+        explanation: >-
+          Only the code that owns the loop can stop it, so the guard has to be an external counter and
+          budget enforced before every iteration. A prompt instruction is a request the model may not honour
+          when it is confused, which is exactly when loops run away. Temperature changes the wording, not
+          the willingness to continue. A per-call timeout bounds one call while the loop happily makes
+          another thousand.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-loop-agent-vs-workflow
+        prompt: "In loop terms, what distinguishes an agent from a prompt-chaining workflow?"
+        options:
+          - "The agent picks its own next step and when to stop; a workflow follows a path you fixed in code"
+          - "The agent uses tools while a workflow only generates text through repeated calls to the model"
+          - "The agent runs on a larger model, whereas a workflow can be served by any smaller model"
+          - "The agent keeps conversation state while a workflow must start from an empty context each step"
+        answer: "The agent picks its own next step and when to stop; a workflow follows a path you fixed in code"
+        explanation: >-
+          Control is the dividing line: an agent decides the trajectory at run time, a workflow's trajectory
+          is written by you, which makes it cheaper and far easier to debug. Workflows can absolutely call
+          tools at fixed points. Model size is unrelated to either shape. Workflows commonly pass state
+          along the chain, so the last option is not the distinction either.
+        difficulty: intermediate
+      - id: aieng-loop-termination-condition
+        prompt: "For a loop whose job is to make a test suite pass, which termination condition is most trustworthy?"
+        options:
+          - "An external check: run the suite and stop when it passes, with an iteration cap as a backstop"
+          - "The model asserting in a final message that the tests should now pass, then exiting the loop"
+          - "A fixed count of five iterations, chosen because most fixes converge within about that many"
+          - "The absence of a tool call in a turn, treating any text-only reply as proof of a finished task"
+        answer: "An external check: run the suite and stop when it passes, with an iteration cap as a backstop"
+        explanation: >-
+          A verifiable signal from outside the model is the strongest stopping rule available, and the cap
+          protects you when the signal never arrives. The model's own claim of success is the failure mode
+          you are trying to detect. A fixed count stops mid-fix on the hard cases. A text-only turn often
+          means the model gave up or got confused, which is not the same as done.
+        difficulty: advanced
+        mastery: true
+      - id: aieng-loop-feed-results-back
+        prompt: "Your loop executes tools but never appends their output to the context before the next model call. What goes wrong?"
+        options:
+          - "The model cannot observe results, so it repeats the same action and never makes real progress"
+          - "Nothing important; the model infers each result from the fact that the tool was invoked at all"
+          - "Costs rise but behaviour is fine, since the model reconstructs results from its own reasoning"
+          - "Tools execute twice per turn, because a call left unacknowledged is automatically reissued"
+        answer: "The model cannot observe results, so it repeats the same action and never makes real progress"
+        explanation: >-
+          Observe, think, act only works if the observation is written back; without it the model re-derives
+          the same next step forever, which is the classic loop that burns budget and achieves nothing.
+          Invocation alone carries no information about the outcome. The model cannot invent a result it
+          never saw. And nothing in the protocol reissues an unanswered call on its own.
+        difficulty: beginner
+      - id: aieng-loop-wrong-shape
+        prompt: "When is an agent loop the wrong shape for the problem compared with a fixed workflow?"
+        options:
+          - "When the steps are known in advance, where a fixed path is cheaper, faster and easier to debug"
+          - "When the task needs tools, because only a fixed workflow may call out to external systems"
+          - "When latency matters, because a loop always makes exactly one model call per user request"
+          - "When the task is long, since a fixed workflow can run for hours whereas an agent loop cannot"
+        answer: "When the steps are known in advance, where a fixed path is cheaper, faster and easier to debug"
+        explanation: >-
+          Loops buy adaptability and pay in cost, latency and unpredictability, so a known sequence should
+          be coded rather than rediscovered on every request. Tool access is available to both shapes.
+          A loop makes many model calls, not one, which is why latency argues against it rather than for
+          the reasoning given. Duration is a budget question and is not what separates the two.
+        difficulty: intermediate
+
+  - topic: ai-eng-planning-memory
+    # Source: Anthropic - Building effective agents (planning through memory)
+    questions:
+      - id: aieng-memory-scratchpad-scope
+        prompt: "Which of these belongs in a short-term scratchpad rather than in a long-term memory store?"
+        options:
+          - "Intermediate results and the current plan for this task, discarded once the task is finished"
+          - "Stable user preferences that should shape the agent's behaviour across all future sessions"
+          - "The tool schemas, which change rarely and are needed on every single request the agent makes"
+          - "Audit records of past actions, which compliance requires be retained for a number of years"
+        answer: "Intermediate results and the current plan for this task, discarded once the task is finished"
+        explanation: >-
+          A scratchpad holds working state whose lifetime is the task: partial results, the plan, notes on
+          what has been tried. Durable preferences are the textbook long-term case, since their value is
+          precisely that they survive. Tool schemas belong in the request construction rather than in either
+          memory. Audit records need durable, queryable storage outside the agent's context entirely.
+        difficulty: beginner
+        mastery: true
+      - id: aieng-memory-decomposition-support
+        prompt: "A model decomposes a task into subtasks at run time. What must the surrounding harness supply for that to work?"
+        options:
+          - "A way to carry each subtask result forward, plus a check that the overall plan still makes sense"
+          - "A fixed list of allowed subtasks, since the model cannot be trusted to invent any of them"
+          - "One model call per subtask with no shared context, so the subtasks stay strictly independent"
+          - "A single very large context window, which removes the need to track subtask results at all"
+        answer: "A way to carry each subtask result forward, plus a check that the overall plan still makes sense"
+        explanation: >-
+          Decomposition is only useful if results compose, so the harness owns result plumbing and a
+          validity check on the plan as facts arrive. A fixed subtask list turns the whole thing back into a
+          workflow. Fully isolated calls cannot combine into an answer. A huge window still leaves you
+          without any structured record of which subtask produced which result.
+        difficulty: intermediate
+      - id: aieng-memory-context-growth
+        prompt: "An agent's context grows every turn until calls become slow and expensive. Which memory strategy addresses that directly?"
+        options:
+          - "Summarise or externalise older turns, then retrieve only what the current step actually needs"
+          - "Increase the context limit and keep every turn, since removing any history loses information"
+          - "Reset the conversation each turn, so the agent begins from a clean prompt on every step"
+          - "Move the history into the system prompt, which providers exclude from the token count"
+        answer: "Summarise or externalise older turns, then retrieve only what the current step actually needs"
+        explanation: >-
+          Compaction plus retrieval keeps the working set small while the full record lives outside the
+          prompt, which is what bounds cost and latency. A bigger window postpones the problem and makes
+          every call dearer meanwhile. Resetting each turn throws away the state the agent needs to
+          continue. System prompt tokens are billed like any other, so the last option is simply false.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-memory-stale-retrieval
+        prompt: "You store past interactions in a long-term memory the agent retrieves from. What new failure mode does that introduce?"
+        options:
+          - "Stale or wrong memories get retrieved and treated as fact, so writes need curating and expiry"
+          - "Retrieval makes the agent deterministic, so it can no longer adapt to a genuinely novel request"
+          - "Memory replaces planning altogether, since the agent simply recalls the plan it used last time"
+          - "Long-term memory cannot be searched, so every stored interaction must be read on each turn"
+        answer: "Stale or wrong memories get retrieved and treated as fact, so writes need curating and expiry"
+        explanation: >-
+          A memory store is a trusted input, so a mistaken or outdated note becomes a confident wrong answer
+          months later; that is why what gets written, and for how long, matters as much as retrieval.
+          Retrieval adds context rather than removing variability. Planning still has to happen for any task
+          that differs from the last. And memory stores are searched by design, which is their purpose.
+        difficulty: advanced
+      - id: aieng-memory-replanning-cost
+        prompt: "When is re-planning partway through a task worth the extra model calls it costs?"
+        options:
+          - "When an action's result invalidates an assumption that the original plan had depended on"
+          - "On every turn, since a freshly written plan is always better informed than the previous one"
+          - "Never, because a plan the model keeps revising loses the structure that made it useful"
+          - "Only at the very start, where the plan is written once and then followed to completion"
+        answer: "When an action's result invalidates an assumption that the original plan had depended on"
+        explanation: >-
+          Re-planning earns its cost when new evidence contradicts the plan, because continuing would spend
+          more than replanning does. Replanning every turn is pure overhead and makes behaviour unstable
+          when nothing has changed. Refusing to replan strands the agent on a plan known to be wrong.
+          Plan-once suits fixed workflows, which is not the case being asked about here.
+        difficulty: intermediate
+
+  - topic: ai-eng-multi-agent-awareness
+    # Source: Anthropic - Building effective agents (multi-agent orchestration)
+    questions:
+      - id: aieng-multi-coordination-cost
+        prompt: "What cost does splitting a task across role-specialised agents add that a single agent never pays?"
+        options:
+          - "Coordination: context must be handed between agents, and every handoff can lose or distort it"
+          - "Nothing measurable; separate agents run in parallel, so the extra calls are effectively free"
+          - "Only storage, since each agent keeps its own transcript in the conversation database"
+          - "Latency alone, while token usage stays the same because the work is merely redistributed"
+        answer: "Coordination: context must be handed between agents, and every handoff can lose or distort it"
+        explanation: >-
+          Handoffs are where multi-agent systems actually fail: each boundary re-serialises context, so
+          detail and intent leak out. Parallelism hides latency but not the duplicated context each agent
+          must be given, so the calls are far from free. Storage is trivial next to that. Total tokens rise
+          rather than staying flat, because context is re-sent to every participant.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-multi-orchestrator-role
+        prompt: "In an orchestrator-worker arrangement, which responsibility should stay with the orchestrator?"
+        options:
+          - "Decomposing the task and combining results, while workers handle narrow well-scoped subtasks"
+          - "Executing the tool calls, while the workers decide the plan and report back what to run"
+          - "Nothing at all; the orchestrator forwards the user's message unchanged to every worker"
+          - "The whole task, using workers only to re-check the answer it has already produced itself"
+        answer: "Decomposing the task and combining results, while workers handle narrow well-scoped subtasks"
+        explanation: >-
+          The orchestrator owns the parts that need a view of the whole: splitting the work and synthesising
+          what comes back. Pushing planning to workers while centralising execution inverts the pattern and
+          leaves nobody holding the plan. Broadcasting the raw message duplicates work instead of dividing
+          it. Using workers purely as reviewers is a different pattern and wastes their specialisation.
+        difficulty: intermediate
+      - id: aieng-multi-when-justified
+        prompt: "Which situation genuinely justifies multiple agents rather than one agent with more tools?"
+        options:
+          - "Subtasks are independent and parallelisable, and each needs a distinct context or permission set"
+          - "The task is simply long, so splitting it across agents shortens the total wall-clock time"
+          - "The prompt has grown complicated, and separate agents feel easier to write than one prompt"
+          - "One agent occasionally errs, so a second agent is added to vote on every single answer"
+        answer: "Subtasks are independent and parallelisable, and each needs a distinct context or permission set"
+        explanation: >-
+          Real independence plus a genuine need for separate context or privileges is what makes the
+          coordination cost worth paying. A long but sequential task gains nothing from being split, since
+          each agent waits on the last. Prompt complexity is usually better answered by decomposing the
+          prompt. Voting on every answer multiplies cost for a small and unmeasured accuracy gain.
+        difficulty: advanced
+        mastery: true
+      - id: aieng-multi-handoff-contract
+        prompt: "Two agents pass work to each other through free-form prose messages. What is the practical risk of that?"
+        options:
+          - "Ambiguous handoffs drift, so a typed handoff payload with required fields is far more reliable"
+          - "Prose costs more tokens than structure, which is the only real drawback of the arrangement"
+          - "The receiving agent will refuse prose input, since agents accept structured messages only"
+          - "Prose handoffs cannot be traced, because observability tools record structured payloads alone"
+        answer: "Ambiguous handoffs drift, so a typed handoff payload with required fields is far more reliable"
+        explanation: >-
+          Prose lets a required field be omitted or restated vaguely, and the receiver then invents the
+          missing piece, so errors compound quietly across hops. Token cost is a minor secondary effect.
+          Agents accept prose perfectly well, which is why the failure is silent rather than loud. Tracing
+          captures whatever you log, prose included.
+        difficulty: intermediate
+      - id: aieng-multi-debugging-difficulty
+        prompt: "A multi-agent system produces a wrong final answer. What makes diagnosing that harder than with a single agent?"
+        options:
+          - "The fault may lie in any agent or any handoff, so you need traces spanning the whole run"
+          - "Agents produce no logs of their own, so the only evidence available is the final answer"
+          - "Each agent is nondeterministic, which makes the overall system impossible to reproduce at all"
+          - "Errors always originate in the orchestrator, so worker traces are of no use when debugging"
+        answer: "The fault may lie in any agent or any handoff, so you need traces spanning the whole run"
+        explanation: >-
+          Blame is distributed across agents and the boundaries between them, so end-to-end tracing with a
+          shared run id is the only way to localise a fault. Agents log exactly what you instrument them to
+          log. Nondeterminism makes reproduction harder but not impossible, especially with recorded
+          inputs. Workers fail on their own often enough that ignoring their traces is how bugs get missed.
+        difficulty: advanced
+
+  - topic: ai-eng-observability-security
+    # Source: Microsoft Learn - Observability for generative AI and agentic AI systems; OWASP Top 10 for LLM Applications
+    questions:
+      - id: aieng-obs-trace-contents
+        prompt: "What should a trace of a single model request capture so that a bad answer can be debugged days later?"
+        options:
+          - "Prompt version, model and params, tool calls with results, token counts, latency and the output"
+          - "The final output and a timestamp, which is enough to reproduce the request whenever needed"
+          - "Only aggregate token and cost counters, since individual prompts are too sensitive to retain"
+          - "The user's raw input alone, because everything downstream is derived from it deterministically"
+        answer: "Prompt version, model and params, tool calls with results, token counts, latency and the output"
+        explanation: >-
+          Debugging needs the whole causal chain, because the fault is as often a tool result or a prompt
+          version as the model itself. An output and a timestamp cannot tell you which prompt produced it.
+          Aggregates answer cost questions and no correctness questions. Generation is not deterministic
+          from the input, so the raw request alone will not reproduce the answer.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-obs-injection-via-tool-output
+        prompt: "Your agent summarises web pages users supply. One page contains text instructing the agent to email its context out. What actually mitigates this?"
+        options:
+          - "Treat retrieved content as untrusted data, and scope tool permissions so the agent simply cannot"
+          - "Add a system-prompt line telling the model to ignore instructions found inside any web page"
+          - "Filter each page for suspicious keywords before summarising, and block anything that matches"
+          - "Use a larger model, which is better at noticing the instruction did not come from the user"
+        answer: "Treat retrieved content as untrusted data, and scope tool permissions so the agent simply cannot"
+        explanation: >-
+          Indirect prompt injection is mitigated by architecture: untrusted content stays data, and the
+          capability to exfiltrate is not granted in the first place. A prompt instruction is itself just
+          text and is routinely talked around. Keyword filters are trivially evaded by paraphrase and
+          encoding. A stronger model lowers the success rate without removing the capability, so the
+          risk remains.
+        difficulty: advanced
+        mastery: true
+      - id: aieng-obs-least-privilege-scope
+        prompt: "An agent needs to read support tickets and occasionally close one. What does least privilege look like here?"
+        options:
+          - "A read-scoped credential by default, plus a separate narrow close action that is audited in use"
+          - "One administrative credential, since the agent needs write access and splitting it adds work"
+          - "A read credential only, with every closure performed by a human who repeats the agent's work"
+          - "A write credential the agent holds briefly, then rotated after each individual request it makes"
+        answer: "A read-scoped credential by default, plus a separate narrow close action that is audited in use"
+        explanation: >-
+          Scoping by capability keeps the blast radius of a compromised or injected agent to one narrow,
+          logged action. An admin credential means any injection inherits full control. Read-only with a
+          human redoing the work removes the value of automating it. Frequent rotation is fine hygiene but
+          does nothing about the breadth of what the credential can do while held.
+        difficulty: intermediate
+      - id: aieng-obs-cost-localisation
+        prompt: "Monthly model spend has tripled with no change in request volume. Which observability signal localises the cause fastest?"
+        options:
+          - "Per-request input and output token counts, broken down by prompt version and tool loop depth"
+          - "The total spend graph, which shows the day the increase began and therefore reveals the cause"
+          - "Server CPU and memory utilisation, which in practice tracks model spend fairly closely"
+          - "Average latency per request, since cost and latency are really the same underlying measure"
+        answer: "Per-request input and output token counts, broken down by prompt version and tool loop depth"
+        explanation: >-
+          Spend at constant traffic means tokens per request rose, so you need that number sliced by the
+          things that change it: a longer prompt, a larger context, more loop iterations. The spend graph
+          gives a date and no mechanism. Provider cost is unrelated to your own machine utilisation.
+          Latency correlates loosely with output length but attributes nothing.
+        difficulty: intermediate
+      - id: aieng-obs-sensitive-trace-data
+        prompt: "You want full prompt traces, but prompts contain customer data. What is the workable position to take?"
+        options:
+          - "Redact or tokenise sensitive fields at capture, with access-controlled and short-lived retention"
+          - "Store everything unredacted, since traces live in internal systems that end users cannot reach"
+          - "Store no prompt content whatsoever, and debug purely from user reports and the model output"
+          - "Hash whole prompts before storing, so traces stay searchable while remaining unreadable"
+        answer: "Redact or tokenise sensitive fields at capture, with access-controlled and short-lived retention"
+        explanation: >-
+          Redacting at the point of capture keeps the structure you need to debug while limiting what a
+          breach or a curious employee can see. Internal is not a security boundary, so unredacted storage
+          just relocates the risk. Storing nothing makes every incident unexplainable. A hash of the whole
+          prompt is unreadable to you as well, so it supports neither debugging nor search.
+        difficulty: advanced
+
+  - topic: ai-eng-production-deployment
+    # Source: OpenAI - Production best practices checklist
+    questions:
+      - id: aieng-prod-version-prompts
+        prompt: "Why version prompts the way you version code, instead of editing them live in a dashboard?"
+        options:
+          - "A prompt change alters behaviour, so it needs review, a diff, an eval run and a rollback path"
+          - "Dashboards cannot store long prompts, so version control is needed for purely practical reasons"
+          - "Versioning lowers cost, because the provider caches any prompt it has already seen once before"
+          - "Only compliance requires it; behaviourally a prompt edit is as safe as changing a log message"
+        answer: "A prompt change alters behaviour, so it needs review, a diff, an eval run and a rollback path"
+        explanation: >-
+          A prompt is executable behaviour, so it belongs under the same controls as code: peer review, a
+          recorded diff, an eval gate and a version you can revert to. Length limits are not the issue.
+          Prompt caching depends on prefix reuse rather than on your version control. And treating an edit
+          as harmless is exactly how unexplained quality regressions reach production.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-prod-eval-gate-ci
+        prompt: "What does an eval gate in continuous integration give you that spot-checking a few prompts by hand does not?"
+        options:
+          - "A fixed dataset and threshold, so every change is measured the same way before it can merge"
+          - "Certainty the model is correct, since an eval suite covers the whole space of possible inputs"
+          - "Faster inference in production, because the gate warms the provider's cache for your prompts"
+          - "Freedom from monitoring, since a change that has passed evals cannot regress once deployed"
+        answer: "A fixed dataset and threshold, so every change is measured the same way before it can merge"
+        explanation: >-
+          The gate's value is comparability: the same cases and the same bar on every change, so a
+          regression is visible rather than a matter of impression. No finite suite covers the input space,
+          so certainty is overclaiming. Evals do not affect serving performance. And production sees inputs
+          your suite never had, which is why monitoring stays necessary afterwards.
+        difficulty: intermediate
+      - id: aieng-prod-rollback-speed
+        prompt: "A new prompt version is live and answer quality has dropped. What makes the rollback fast?"
+        options:
+          - "The prompt is a deployed pinned artefact, so you repoint to the previous version immediately"
+          - "The provider retains prior responses, so the old behaviour can be replayed from their cache"
+          - "You retrain a fallback model overnight, since a prompt cannot be reverted once it is released"
+          - "You lower the temperature, which returns the model to its previous and more reliable behaviour"
+        answer: "The prompt is a deployed pinned artefact, so you repoint to the previous version immediately"
+        explanation: >-
+          Rollback is fast when the previous version still exists and serving selects it by reference, which
+          is why prompts are pinned rather than edited in place. Providers do not keep a replayable copy of
+          your behaviour. Retraining is not the remedy for a prompt change, and it is slow. Temperature is
+          an unrelated knob that cannot undo different instructions.
+        difficulty: intermediate
+        mastery: true
+      - id: aieng-prod-rate-limit-retries
+        prompt: "How should a production client handle provider rate limits and transient upstream errors?"
+        options:
+          - "Retry with exponential backoff and jitter, cap the attempts, and shed load rather than queue for ever"
+          - "Retry immediately in a tight loop, since a rate limit typically clears within a few milliseconds"
+          - "Fail the user's request on the first error, because any retry risks duplicating a side effect"
+          - "Raise the request timeout, which lets the provider serve the call once capacity frees up again"
+        answer: "Retry with exponential backoff and jitter, cap the attempts, and shed load rather than queue for ever"
+        explanation: >-
+          Backoff with jitter and a cap recovers from transient faults without synchronising every client
+          into a thundering herd, and shedding load keeps queues from growing without bound. Tight retries
+          make the throttling worse. Never retrying wastes recoverable requests, and idempotency keys exist
+          to make retries safe. A longer timeout hides the delay from you while the user still waits.
+        difficulty: intermediate
+      - id: aieng-prod-staged-rollout
+        prompt: "You are shipping a model upgrade behind an unchanged API. What sequencing limits the blast radius?"
+        options:
+          - "Run the evals, then shadow or canary a small share of traffic while watching quality and cost"
+          - "Switch all traffic at once and then watch the dashboards, since a partial rollout muddles metrics"
+          - "Ship to production first and run the evals afterwards on the real traffic that it generates"
+          - "Enable it for internal users permanently, since external traffic can never be sampled safely"
+        answer: "Run the evals, then shadow or canary a small share of traffic while watching quality and cost"
+        explanation: >-
+          Offline evals catch the cheap failures and a canary exposes the ones only real traffic reveals,
+          with a small population at risk. A full switch makes every user the test group. Evals after
+          deployment discover regressions your customers already met. Restricting it to internal users
+          for ever means the upgrade never actually ships.
+        difficulty: advanced
+
+  - topic: mlops-experiment-lifecycle
+    # Source: MLflow - MLflow Tracking, experiment through metric tracking (reproducibility angle)
+    questions:
+      - id: mlops-lifecycle-reproduce-inputs
+        prompt: "To reproduce a training run from three months ago exactly, what must have been recorded beyond its params and metrics?"
+        options:
+          - "The code version, the dataset version, the random seeds and the environment the run really used"
+          - "The final metric values, which are enough to reconstruct the configuration that produced them"
+          - "The run's wall-clock duration and hardware, which together determine the result deterministically"
+          - "The experiment name and run id, since the tracking server can regenerate a run from its id"
+        answer: "The code version, the dataset version, the random seeds and the environment the run really used"
+        explanation: >-
+          Reproducibility needs every input that influenced the result, and code, data, seeds and library
+          versions are the four that most often go unlogged. Metrics are outputs and cannot be inverted into
+          a configuration. Duration and hardware do not pin the computation. A run id identifies a record
+          of the run rather than the means to recreate it.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-lifecycle-identical-params-differ
+        prompt: "Two runs with identical logged params come out with different accuracy. What is the most likely unlogged cause?"
+        options:
+          - "An unrecorded seed or nondeterministic data ordering, so the runs were never truly identical"
+          - "Metric logging drift inside the tracking server, which rounds values differently over time"
+          - "The server overwrote one run's metrics with the other's, because their params matched exactly"
+          - "Different experiment names, which cause the server to evaluate metrics on different data"
+        answer: "An unrecorded seed or nondeterministic data ordering, so the runs were never truly identical"
+        explanation: >-
+          Identical params only prove the params matched; seeds, shuffling, nondeterministic kernels and
+          data snapshots all vary underneath and are the usual explanation. A tracking server stores the
+          floats you send and does not round them over time. Runs are separate records and never overwrite
+          one another. Experiment names are labels and have no effect on evaluation at all.
+        difficulty: advanced
+      - id: mlops-lifecycle-dataset-version
+        prompt: "Why log a dataset version alongside a run rather than just the path the data was read from?"
+        options:
+          - "A path's contents change, so without a version you cannot tell which data produced that result"
+          - "Paths are unavailable to a tracking server, so a version is the only value it is able to store"
+          - "Versioning the dataset compresses it, which is why tracking servers ask you to provide one"
+          - "The version is used to shuffle the data identically, which is what makes the runs reproducible"
+        answer: "A path's contents change, so without a version you cannot tell which data produced that result"
+        explanation: >-
+          A location is not an identity: the same path holds different rows next week, so a hash, snapshot
+          id or table version is what makes the run's inputs pinned. Paths are ordinary strings a tracking
+          server stores happily. Versioning has nothing to do with compression. Shuffling is controlled by
+          the seed, which is a separate thing you also need to record.
+        difficulty: intermediate
+      - id: mlops-lifecycle-auditable-months-later
+        prompt: "Which record makes a run auditable months later, once the notebook that produced it is long gone?"
+        options:
+          - "The logged environment file, the code commit and the output model, all attached to that run"
+          - "The notebook's final cell output, kept in the tracking interface as the run's description text"
+          - "The metric chart, which encodes the training configuration in the shape of its own curve"
+          - "The run's tags alone, which record who launched the job and when it finished its execution"
+        answer: "The logged environment file, the code commit and the output model, all attached to that run"
+        explanation: >-
+          An audit needs the run to be self-contained, so environment, commit and artefact must be attached
+          rather than living in a notebook that can vanish. Pasted cell output is unstructured and easily
+          stale. A metric curve shows behaviour and reveals nothing about configuration. Tags give
+          provenance metadata but not the inputs anyone would need to verify the result.
+        difficulty: intermediate
+      - id: mlops-lifecycle-spreadsheet-results
+        prompt: "Your team keeps results in spreadsheets copied from terminal output. Which failure does that most reliably produce?"
+        options:
+          - "Numbers with no link to the code, data or config that produced them, so nothing can be rerun"
+          - "Slower training, because copying the results interrupts the job and lengthens every epoch"
+          - "Incorrect metric values, since spreadsheets round floating-point numbers on every single paste"
+          - "Loss of the model weights, which a spreadsheet is unable to store alongside those metrics"
+        answer: "Numbers with no link to the code, data or config that produced them, so nothing can be rerun"
+        explanation: >-
+          Hand-copied results lose provenance, which is the whole point of tracking: six weeks later nobody
+          can say which commit and dataset gave the best number. Copying happens after training and cannot
+          slow it. Spreadsheets do not corrupt pasted floats in the way described. Weights were never going
+          into a spreadsheet anyway, so that is not the failure being introduced.
+        difficulty: beginner
+        mastery: true
+
+  - topic: mlops-drift-quality
+    # Source: MLflow - Model evaluation; Google Rules of ML - Training-Serving Skew
+    questions:
+      - id: mlops-drift-name-the-skew
+        prompt: "A feature is computed one way in the training pipeline and a slightly different way in the serving path. What is that, precisely?"
+        options:
+          - "Training and serving skew, a pipeline defect that shows as poor live quality with clean offline scores"
+          - "Concept drift, since the meaning of that feature has changed between training time and serving time"
+          - "Data drift, since the distribution of the served feature now differs from the training distribution"
+          - "Label leakage, since the serving path exposes information that the training path never had access to"
+        answer: "Training and serving skew, a pipeline defect that shows as poor live quality with clean offline scores"
+        explanation: >-
+          Skew is a code inconsistency between two paths, not a change over time, and it is the classic
+          reason a model looks fine in evaluation and disappoints in production. Concept drift and data
+          drift both describe the world moving while your pipelines stay consistent. Leakage is training on
+          information unavailable at prediction time, which is a different bug with a different symptom.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-drift-schema-gate-vs-monitor
+        prompt: "What does a schema validation gate on incoming data catch that a drift monitor would not?"
+        options:
+          - "Hard contract breaks such as a missing column, a changed type or a new category, refused before scoring"
+          - "Slow statistical shifts in a feature, which a schema check quantifies using a distance metric"
+          - "Falling accuracy, because the gate compares each prediction against the label as it arrives"
+          - "Rising latency in the feature pipeline, which the gate measures while validating every batch"
+        answer: "Hard contract breaks such as a missing column, a changed type or a new category, refused before scoring"
+        explanation: >-
+          A schema gate is a binary contract check that runs before inference, so a renamed column fails the
+          batch instead of silently becoming nulls. Statistical shift is the drift monitor's job and needs
+          distributions, not a schema. Accuracy needs labels, which the gate does not have. Latency is an
+          operational metric that no schema describes.
+        difficulty: intermediate
+        mastery: true
+      - id: mlops-drift-label-base-rate
+        prompt: "Input distributions look stable but the positive-class rate has halved this month. What does that suggest?"
+        options:
+          - "Label drift: the target base rate has moved, so calibration and thresholds need revisiting"
+          - "Input drift: the features must have moved even though your tests failed to detect the change"
+          - "Training and serving skew: the label pipeline computes the target differently from training"
+          - "Nothing actionable: base rates fluctuate and only feature drift can affect model quality"
+        answer: "Label drift: the target base rate has moved, so calibration and thresholds need revisiting"
+        explanation: >-
+          A moving target prior breaks calibration even when the features and the mapping are untouched, so
+          thresholds tuned to the old base rate now trade precision and recall differently. Input drift is
+          ruled out by the stable distributions. Skew would show up as a mismatch between pipelines rather
+          than a trend. Dismissing it ignores that decisions are made on calibrated scores.
+        difficulty: advanced
+      - id: mlops-drift-sliced-evaluation
+        prompt: "Overall evaluation metrics are flat but one customer segment reports consistently bad predictions. What do you do?"
+        options:
+          - "Evaluate per slice, since an aggregate can easily hide a large regression in a small subgroup"
+          - "Trust the aggregate, since a metric computed over all the data supersedes anecdotal reports"
+          - "Retrain on the complaining segment only, so the model specialises exactly where it is failing"
+          - "Raise the decision threshold globally, which lifts precision for every segment at once"
+        answer: "Evaluate per slice, since an aggregate can easily hide a large regression in a small subgroup"
+        explanation: >-
+          A segment that is two percent of traffic can collapse without moving the headline metric, so
+          slicing the evaluation is how you confirm or refute the report. Preferring the aggregate is how
+          such failures stay invisible for months. Retraining on one segment alone sacrifices everyone else.
+          A global threshold change trades recall away everywhere to address a local problem.
+        difficulty: intermediate
+      - id: mlops-drift-gate-placement
+        prompt: "Where should a data quality gate sit so that a bad upstream change cannot silently poison predictions?"
+        options:
+          - "Between feature production and scoring, failing the batch loudly instead of serving on bad input"
+          - "After scoring, so predictions are produced first and only then compared against the expectations"
+          - "Inside the training job only, since serving reuses features the training run has already validated"
+          - "In the monitoring dashboard, which flags the problem once enough affected predictions accumulate"
+        answer: "Between feature production and scoring, failing the batch loudly instead of serving on bad input"
+        explanation: >-
+          A gate is only preventive if it runs before inference and can stop the batch, which is why it
+          belongs on the boundary into scoring. Checking afterwards means the bad predictions already
+          shipped. Training-time validation says nothing about today's serving data. A dashboard notices
+          the damage after it is done, which is monitoring rather than a gate.
+        difficulty: intermediate

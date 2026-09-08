@@ -106,9 +106,130 @@ python -m app.content.import_curriculum content/curriculum/v1-index.yaml
 
 `origin: demo` is the development fixture. Official V1 (Domains 0–2) is structure-only: resource URLs are not mapped yet.
 
+### Keeping the resources honest
+
+The curriculum promises *open exactly this page and study it*, so it is only as
+good as its URLs. `audit_resource_links` fetches every one of them and reports
+the four ways a mapping goes quietly wrong: the page is gone, it loads as
+source text rather than a rendered page, it has moved, or the recorded
+publisher is not the host serving it.
+
+```
+cd backend
+python -m app.content.audit_resource_links      # -> reports/resource_link_audit.{json,md}
+python -m app.content.repair_resource_links --dry-run
+python -m app.content.repair_resource_links
+```
+
+The first live run found 57 links pointing at `raw.githubusercontent.com`,
+which a browser renders as unreadable markdown source, concentrated in the AI
+modules (29 of 32 deep-learning topics), plus 261 dead rows and 58 whose
+recorded publisher was not the host serving the page. **158 rows were repaired**
+against replacements that were each fetched and title-checked first. A full
+re-audit now reports zero dead links, zero plain-text pages and zero provider
+mismatches. See [docs/resource-link-integrity.md](docs/resource-link-integrity.md).
+
+`--record` stamps `last_verified_at` and the observed status, landing URL and
+page title onto every row, so the freshness of a mapping is visible. That is
+kept separate from `verification_status`: a fetch proves a link works, not that
+the page covers the topic's concepts.
+
+Worth re-running periodically: publishers reorganise. That audit caught
+GeeksforGeeks having moved its entire operating-systems and DSA sections behind
+new path prefixes, the Hugging Face NLP course becoming the LLM course, and
+LangChain funnelling every retrieval URL into its agent docs.
+
+### Question banks
+
+Self-check questions live in `backend/content/questions/`, one YAML file per
+module, and are validated on import. The gates exist because generated
+questions had failed twice: 94 read `Core idea of {TOPIC}?` with "A vague
+buzzword" as a distractor, and one set of eleven dynamic-programming questions
+was attached to all twelve DP topics, so the Knapsack page quizzed you on
+memoisation. A prompt may no longer appear on two topics at all.
+
+25 banks now cover **239 topics with 1,121 authored questions**. Together with
+the hand-written Domain 0, Java and DSA questions that were already sound, the
+database holds questions on every one of the 506 topics. `content_health`
+reports the state, and every check that should read zero does:
+
+```
+cd backend
+python -m app.content.content_health
+```
+
+| Check | Before | After |
+| --- | --- | --- |
+| Topics with no questions | 133 | 0 |
+| Topics with fewer than 4 questions | 227 | 0 |
+| Template-filler questions | 94 | 0 |
+| Prompts used on more than one topic | 22 | 0 |
+
+### Repairs have to be pushed back to source
+
+Manifests under `backend/content/curriculum/` are the source of truth for the
+topics they define, so a fix applied only to `dev.db` does not survive the next
+`import_curriculum` — the first attempt at this silently restored all 94 filler
+questions. Two rules follow:
+
+- A topic with a bank in `content/questions/` has no `questions:` block in its
+  manifest. Questions live in exactly one place.
+- End a repair session with `python -m app.content.sync_manifests`, which
+  copies the repaired resource fields and question text back into the
+  manifests.
+
+The check that it worked is that `content_health` reads the same before and
+after a full index re-import.
+
+### Curriculum coverage
+
+The curriculum is now **506 topics**, up from 449. Ten subjects that were
+missing were added with verified resources: Python tooling including `uv`,
+reinforcement learning, cloud for AI workloads, AI/ML security, inference
+performance, retrieval quality, data quality, gradient boosting, time series,
+and CI/CD for ML. Four honest gaps are recorded in the topic descriptions
+rather than filled with a weak link — see
+[docs/resource-link-integrity.md](docs/resource-link-integrity.md).
+
+```
+cd backend
+python -m app.content.question_briefs mod-cv     # topics + exact resource URLs to write against
+python -m app.content.import_questions --dry-run
+python -m app.content.import_questions
+```
+
+See [backend/content/questions/README.md](backend/content/questions/README.md).
+
+## The day runner
+
+Two rules that are easy to get backwards, so they are stated here as well as in
+the code.
+
+**The stopwatch stops only when you stop it.** Leaving the page, opening the
+recall queue, following the resource link, refreshing, reopening the tab
+later — none of those pause it. This is a reversal: the earlier rule discarded
+any running window older than 15 seconds on the theory that the tab must have
+died, which meant opening the recall queue from the Recall block silently threw
+the time away. The trade is that a stopwatch left on overnight keeps counting,
+so a window longer than four hours is flagged on the page with Reset next to
+it. Told, not silently trimmed.
+
+```
+cd ai-engine
+npm run check:timer     # behaviour checks for the stopwatch rules
+```
+
+**The day has no Reflect block.** It used to end with "Close the day", eight
+planned minutes, instructing you to answer three prompts — and the finish
+screen that appears when the last block is done *is* those three prompts. One
+step charged twice, and a block you had to mark Done before the form it pointed
+at would appear. The reflection is unchanged and still saves as you type; it
+just lives only on the finish screen now. `ACTIVITY_REFLECT` stays defined so
+days generated before the change still render.
+
 ## Backups
 
-`dev.db` holds everything: the 449-topic curriculum and every completion, streak
+`dev.db` holds everything: the 506-topic curriculum and every completion, streak
 and review date. It is gitignored, and so is `backups/`, so **pushing this repo
 does not back up any of it.** Two mechanisms cover that, and they fail
 differently.

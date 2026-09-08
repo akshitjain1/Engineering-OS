@@ -382,25 +382,32 @@ def build_blocks(
         kept, _ = _fit_to_budget(blocks, budget_minutes, revision=revision)
         return kept
 
-    reflect = BlockSpec(
-        activity_type=ACTIVITY_REFLECT,
-        title="Close the day",
-        subtitle="Two minutes of writing",
-        why="A short written recap is the cheapest way to find out what you did not actually understand.",
-        how="Answer three prompts: what I learned, where I got stuck, what I do first tomorrow.",
-        floor_minutes=5,
-        target_minutes=8,
-    )
-    blocks.append(reflect)
+    # No REFLECT block. There used to be one -- "Close the day", eight planned
+    # minutes, telling you to "answer three prompts: what I learned, where I
+    # got stuck, what I do first tomorrow". Those three prompts are literally
+    # the three boxes on the finish screen that appears the moment the last
+    # block is done. So the block asked for the writing and the screen after it
+    # provided the writing, which is the same step charged twice: eight minutes
+    # of the budget spent on a signpost, and a block you had to mark Done
+    # before the form it pointed at would appear.
+    #
+    # The reflection itself is not gone. It is on the finish screen, where the
+    # boxes are, and it still saves as you type. The day now simply ends when
+    # the studying ends.
+    #
+    # ACTIVITY_REFLECT is deliberately left defined: days generated before this
+    # change still have their block stored, and the ordering and publishing
+    # code below keeps rendering and excluding it correctly.
     kept, leftover = _fit_to_budget(blocks, budget_minutes, revision=revision)
 
     # Unspent minutes buy the next topics rather than a note telling you to
-    # find your own. Inserted before REFLECT, which always closes the day.
+    # find your own.
     if leftover >= MIN_EXTRA_BLOCK:
         extra, leftover = _spend_leftover(
             db, kept, leftover, user_id=user_id, mode=mode
         )
         if extra:
+            # Any REFLECT here came from an older stored day; keep it last.
             tail = [b for b in kept if b.activity_type == ACTIVITY_REFLECT]
             head = [b for b in kept if b.activity_type != ACTIVITY_REFLECT]
             kept = head + extra + tail

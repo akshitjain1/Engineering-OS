@@ -1,0 +1,132 @@
+# Generative AI awareness shell: orientation questions only.
+#
+# Both topics map to the OpenAI text generation guide. genai-awareness asks what
+# a generative text model is, the vocabulary of a request, and where it does not
+# belong; genai-path asks which techniques you learn in which order and why.
+schema_version: 1
+kind: question_bank
+module: mod-genai-shell
+topics:
+  - topic: genai-awareness
+    # Source: OpenAI docs - text generation guide (messages, roles, tokens, prompting)
+    questions:
+      - id: genai-aware-roles
+        prompt: "A text generation call carries developer instructions and a user message. What separates the two?"
+        options:
+          - "Developer instructions set the rules to follow; the user message carries the request"
+          - "Developer instructions are recorded for auditing and are never shown to the model"
+          - "The user message sets the rules, and the developer instructions carry the request"
+          - "Both are treated identically, so only the order they appear in the call matters"
+        answer: "Developer instructions set the rules to follow; the user message carries the request"
+        explanation: >-
+          The guide gives instructions from the application higher standing than the end user's text, which
+          is what lets you constrain behaviour. Instructions are very much sent to the model, swapping the
+          roles inverts that hierarchy, and the roles are not interchangeable labels distinguished only
+          by position.
+        difficulty: beginner
+      - id: genai-aware-wrong-tool
+        prompt: "For which of these would you not reach for a text generation model in the first place?"
+        options:
+          - "Computing the exact closing balance of an account from a ledger of transactions"
+          - "Drafting a considerate reply to a customer complaint for a human to review"
+          - "Turning a long meeting transcript into a short summary of decisions taken"
+          - "Rewriting a technical paragraph so a non-specialist reader can follow it"
+        answer: "Computing the exact closing balance of an account from a ledger of transactions"
+        explanation: >-
+          Arithmetic over authoritative records demands an exact, repeatable answer, which ordinary code
+          gives you and a sampled generation does not guarantee. Drafting, summarising and rewriting are
+          open-ended language tasks where several good answers exist, which is precisely where
+          generation fits.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-aware-token-vocabulary
+        prompt: "The guide measures both cost and context limits in tokens. What is a token?"
+        options:
+          - "A piece of text, often a fragment of a word, that the model reads and emits one at a time"
+          - "A single character, so a token count and a character count always agree exactly"
+          - "One complete request, so the token count equals the number of calls you have made"
+          - "A whole word, so the token count of a text equals its count of space-separated words"
+        answer: "A piece of text, often a fragment of a word, that the model reads and emits one at a time"
+        explanation: >-
+          Tokens are subword fragments, which is why token counts sit between character and word counts and
+          why billing and window limits are expressed in them. Characters and words are the two
+          approximations people wrongly substitute, and a request is made of many tokens rather than
+          being one.
+        difficulty: beginner
+      - id: genai-aware-plausible-not-looked-up
+        prompt: "The model returns fluent prose describing a product feature you have never shipped. What does that reveal about generation?"
+        options:
+          - "It produces a plausible continuation of the prompt rather than looking facts up"
+          - "The call reached the wrong model, since a correct route returns only known facts"
+          - "The prompt was too short, and any sufficiently long prompt removes such mistakes"
+          - "The model fetched a competitor page from the web, which is where the feature came from"
+        answer: "It produces a plausible continuation of the prompt rather than looking facts up"
+        explanation: >-
+          Generation samples likely text, so a confident invention is the mechanism working normally rather
+          than misrouting. No routing choice turns a generator into a database, prompt length does not
+          eliminate invention, and a plain text call performs no web retrieval unless you wired one
+          in yourself.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: genai-path
+    # Source: OpenAI docs text generation guide, read as the entry point of a learning path
+    questions:
+      - id: genai-path-stage-order
+        prompt: "In what order do the main techniques come on a generative AI path, and what justifies that order?"
+        options:
+          - "Prompting, then retrieval, then fine-tuning: each step costs more to set up than the last"
+          - "Fine-tuning, then retrieval, then prompting: a tuned model makes prompt wording irrelevant"
+          - "Retrieval, then fine-tuning, then prompting: wording matters only once data is wired in"
+          - "Any order at all, since the three techniques address exactly the same class of problem"
+        answer: "Prompting, then retrieval, then fine-tuning: each step costs more to set up than the last"
+        explanation: >-
+          You start with the cheapest intervention and escalate only when it fails, which is why prompting
+          comes first and fine-tuning last. Tuning does not remove the need for good instructions,
+          retrieval presupposes you know what the model gets wrong, and the three solve different
+          problems.
+        difficulty: intermediate
+        mastery: true
+      - id: genai-path-retrieval-prereq
+        prompt: "What has to exist before retrieval-augmented generation is worth attempting on this path?"
+        options:
+          - "A corpus you can split and embed, and a way to judge whether a retrieved passage helped"
+          - "A fine-tuned base model, since retrieval only works with weights adapted to a domain"
+          - "A multi-agent framework, because retrieval needs one agent per document collection"
+          - "A model with a very small context window, so retrieved passages cannot overflow it"
+        answer: "A corpus you can split and embed, and a way to judge whether a retrieved passage helped"
+        explanation: >-
+          Retrieval is only as good as the corpus behind it and your ability to tell whether it improved the
+          answer. Fine-tuning is an independent later technique, agent frameworks are unrelated
+          machinery, and a small window makes retrieval harder to use rather than being a prerequisite
+          for it.
+        difficulty: intermediate
+      - id: genai-path-safe-to-skip
+        prompt: "Which stage can a backend engineer entering this field safely leave out?"
+        options:
+          - "Pretraining a base model yourself, which needs data and compute you will not have"
+          - "Learning how sampling settings change output, which shapes every result you see"
+          - "Writing prompts that state the task explicitly, the first tool you reach for"
+          - "Measuring output on a fixed set of cases, which is how you know a change helped"
+        answer: "Pretraining a base model yourself, which needs data and compute you will not have"
+        explanation: >-
+          Base model pretraining is the one stage an application engineer inherits rather than performs.
+          Sampling behaviour, explicit task instructions and a repeatable set of test cases are all daily
+          working tools on this path, and skipping any of them leaves you unable to explain your
+          own results.
+        difficulty: beginner
+      - id: genai-path-framework-too-early
+        prompt: "A learner opens an agent framework before writing one reliable single-call prompt. What goes wrong?"
+        options:
+          - "Failures compound across steps, and with no working single call there is nothing to debug from"
+          - "The framework refuses to run, because agents require a fine-tuned model at each step"
+          - "Nothing, since a framework supplies the prompts the learner would have written anyway"
+          - "Cost falls sharply, so the learner never learns how expensive a single call really is"
+        answer: "Failures compound across steps, and with no working single call there is nothing to debug from"
+        explanation: >-
+          A multi-step system multiplies the failure modes of the single call underneath it, so the
+          foundation has to be reliable first. Frameworks run happily on base models, the prompts they ship
+          are generic starting points rather than a substitute for yours, and multi-step runs cost
+          more, not less.
+        difficulty: advanced
+        mastery: true

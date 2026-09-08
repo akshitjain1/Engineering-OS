@@ -1,0 +1,516 @@
+# Full-stack web foundations self-check questions.
+#
+# Every question here is answerable from the resource its topic maps to, and is
+# about that topic only. Gates in app/content/question_bank.py enforce both: a
+# prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-web-core
+topics:
+  - topic: web-html-basics
+    # Source: MDN - Structuring content with HTML
+    questions:
+      - id: web-html-semantic-landmark
+        prompt: "You wrap a page's main navigation in a styled div instead of a nav element. What is actually lost?"
+        options:
+          - "The landmark, so assistive technology can no longer announce or jump to that region"
+          - "Nothing functional at all; the two elements differ only in the default margins applied"
+          - "Keyboard focus on the links, until a tabindex attribute is added to every one of them"
+          - "Indexing of those links, because crawlers only follow links found inside a nav element"
+        answer: "The landmark, so assistive technology can no longer announce or jump to that region"
+        explanation: >-
+          Semantic elements carry meaning that tooling reads; a div carries none, so the region
+          stops being a navigable landmark. Links inside a div stay focusable and crawlable, so
+          neither of those options describes a real loss, and the defaults nav applies are
+          negligible, which is why styling is not the reason to choose it.
+        difficulty: intermediate
+        mastery: true
+      - id: web-html-heading-order
+        prompt: "Why should heading levels run in order rather than being picked for the text size you happen to want?"
+        options:
+          - "They form the document outline that screen reader users navigate by; size is CSS work"
+          - "Browsers refuse to render an h3 when no h2 appears above it anywhere in the document"
+          - "Only the first two levels are indexed, so anything deeper is wasted markup on a page"
+          - "Heading order sets the tab sequence, so a skipped level breaks keyboard navigation"
+        answer: "They form the document outline that screen reader users navigate by; size is CSS work"
+        explanation: >-
+          Headings are structure, and skipping levels breaks the outline people use to skim a page,
+          while appearance belongs entirely to CSS. Browsers render any heading regardless of what
+          precedes it, deeper levels are indexed normally, and headings are not focusable, so they
+          play no part in the tab order.
+        difficulty: beginner
+      - id: web-html-ordered-list
+        prompt: "You are marking up three steps that have to be followed in a fixed order. Which markup expresses that?"
+        options:
+          - "An ol, because the sequence is part of the meaning of this content"
+          - "A ul, with the step numbers typed manually into each list item"
+          - "Three p elements with line breaks, styled to look like a list"
+          - "A table of one column, so that each step occupies its own row"
+        answer: "An ol, because the sequence is part of the meaning of this content"
+        explanation: >-
+          The element you choose states what the content is, and ordered means the order matters.
+          Hand-typed numbers in a ul convey nothing to a machine and drift when steps are edited,
+          paragraphs express no list relationship at all, and a table claims tabular data that has
+          rows and columns, which a list of steps does not.
+        difficulty: beginner
+      - id: web-html-emphasis-semantics
+        prompt: "A word in a sentence must be read with vocal stress by a screen reader, not merely look different. Which markup does that?"
+        options:
+          - "em, which carries stress emphasis that assistive technology can convey aloud"
+          - "i, which italicises the run of text and marks it only as a different voice"
+          - "b, which thickens the text without attaching any meaning to those words"
+          - "span with a CSS font-style rule, which changes the rendering and nothing else"
+        answer: "em, which carries stress emphasis that assistive technology can convey aloud"
+        explanation: >-
+          em means emphasis and can change how a sentence is spoken; the others are presentational
+          or differently semantic. The i element marks an alternate voice or term rather than
+          stress, b is bold with no meaning attached, and a styled span is pure appearance that
+          conveys nothing to a listener.
+        difficulty: intermediate
+
+  - topic: web-css-basics
+    # Source: MDN - CSS styling basics
+    questions:
+      - id: web-css-box-model-width
+        prompt: "A div declares width 300px, padding 20px and a 2px border, with box-sizing left at its default. How wide does it render?"
+        options:
+          - "344px, because padding and border are added outside the declared content width"
+          - "300px, because the browser fits the padding and border inside that declared width"
+          - "340px, because padding counts on both sides but a border is never painted wide"
+          - "304px, because only the border adds width while the padding sits inside the box"
+        answer: "344px, because padding and border are added outside the declared content width"
+        explanation: >-
+          Under the default content-box model, width sizes the content only, so 300 plus 40 of
+          padding plus 4 of border gives 344. The 300px answer describes border-box, which you
+          have to opt into; the other two arithmetic answers ignore either the border or the
+          second side of the padding, which is the classic layout-off-by-a-bit bug.
+        difficulty: intermediate
+        mastery: true
+      - id: web-css-specificity-conflict
+        prompt: "Two rules target the same element and set different colours, one via a class selector and one via an id. Which wins?"
+        options:
+          - "The id rule, because an id selector carries higher specificity than a class does"
+          - "The class rule, because classes are treated as more specific than a unique id is"
+          - "Whichever is written later in the stylesheet, since source order is checked first"
+          - "Neither of them, because the browser blends the two colours and paints the average"
+        answer: "The id rule, because an id selector carries higher specificity than a class does"
+        explanation: >-
+          The cascade compares specificity before source order, and ids outrank classes, which
+          outrank plain element selectors. Source order only settles ties between equally specific
+          rules, classes never beat ids, and CSS resolves conflicts by choosing one declaration
+          rather than mixing values together.
+        difficulty: intermediate
+      - id: web-css-flex-main-axis
+        prompt: "You set display flex and justify-content with space-between on a container. Along which axis do the children spread out?"
+        options:
+          - "The main axis, horizontal by default, so the gaps open up from left to right"
+          - "The cross axis, so the children spread vertically inside the container height"
+          - "Both axes at once, which is why flexbox replaces grid for two-dimensional layout"
+          - "The block axis of the document, whatever value flex-direction has been given"
+        answer: "The main axis, horizontal by default, so the gaps open up from left to right"
+        explanation: >-
+          justify-content works on the main axis, which flex-direction defines and which is a row
+          by default; align-items is the cross-axis counterpart. Flexbox lays out in one dimension
+          at a time, so it does not spread both axes and does not replace grid, and the axis
+          follows flex-direction rather than ignoring it.
+        difficulty: intermediate
+      - id: web-css-inheritance-limits
+        prompt: "Setting font-family on body reaches a deeply nested paragraph, but setting a border on body does not. Why the difference?"
+        options:
+          - "Some properties inherit down the tree by design, and border is simply not one of them"
+          - "A paragraph resets every property it does not declare itself, with fonts as the exception"
+          - "Borders are painted before inheritance is resolved, so children never see that value"
+          - "Inheritance follows specificity, and a body selector is too weak to reach a descendant"
+        answer: "Some properties inherit down the tree by design, and border is simply not one of them"
+        explanation: >-
+          Inheritance is a per-property rule: typography-style properties inherit, box properties
+          such as border, margin and padding do not, because inheriting them would be nonsense.
+          Elements do not blanket-reset properties, paint order is unrelated to inheritance, and
+          specificity decides between competing rules rather than how far a value travels.
+        difficulty: advanced
+
+  - topic: web-responsive
+    # Source: MDN - Responsive design
+    questions:
+      - id: web-responsive-viewport-meta
+        prompt: "A site looks right on a desktop but appears zoomed out and tiny on a phone, and the media queries seem never to fire. What is missing?"
+        options:
+          - "The viewport meta tag, so the phone lays the page out wide and then scales it down"
+          - "A separate mobile stylesheet, which phones load in place of the desktop one"
+          - "A max-width media query, because phones only ever respond to max-width and not min"
+          - "Percentage widths on the body, because phones ignore any layout measured in pixels"
+        answer: "The viewport meta tag, so the phone lays the page out wide and then scales it down"
+        explanation: >-
+          Without the viewport meta tag a mobile browser pretends to be around 980px wide, so your
+          breakpoints never match and everything is shrunk to fit. There is no separate mobile
+          stylesheet mechanism, phones honour min-width and max-width equally, and pixel layout
+          works fine once the virtual viewport is set correctly.
+        difficulty: intermediate
+        mastery: true
+      - id: web-responsive-mobile-first
+        prompt: "Why does mobile-first CSS reach for min-width media queries rather than max-width ones?"
+        options:
+          - "The base rules describe the small layout, and each query adds to it as space appears"
+          - "Only min-width queries work on phones, because max-width applies to printed output"
+          - "min-width queries parse faster, since the browser can skip the rules for large screens"
+          - "max-width queries cannot be combined, so a layout could only ever have one breakpoint"
+        answer: "The base rules describe the small layout, and each query adds to it as space appears"
+        explanation: >-
+          Mobile-first means the unconditional CSS is the narrow case and wider screens layer on
+          enhancements, which keeps overrides additive. Both query directions are supported
+          everywhere and neither is tied to print, parsing cost is irrelevant here, and max-width
+          queries can be combined freely, so the objection to them is not a technical limit.
+        difficulty: intermediate
+      - id: web-responsive-breakpoint-choice
+        prompt: "What should decide where a responsive layout puts its breakpoints?"
+        options:
+          - "The width at which the content itself starts to look wrong, not a list of devices"
+          - "The screen widths of this year's most popular phones, tablets and laptop models"
+          - "The fixed values of 480, 768 and 1024 pixels, which the CSS specification defines"
+          - "The pixel density of the target device, since layout scales with device pixel ratio"
+        answer: "The width at which the content itself starts to look wrong, not a list of devices"
+        explanation: >-
+          Breakpoints belong to the content: you widen the window until a line of text or a card
+          grid breaks down, and put one there. Chasing device widths ages badly as hardware
+          changes, no breakpoint values are standardised in the specification, and pixel density
+          affects image choice rather than where a layout should change shape.
+        difficulty: intermediate
+      - id: web-responsive-flexible-units
+        prompt: "Why prefer relative units and flexible layouts over a fixed pixel width for each breakpoint?"
+        options:
+          - "The layout keeps working between breakpoints, at sizes you never explicitly tested"
+          - "Pixel values are rounded differently per browser, which shifts layouts unpredictably"
+          - "Media queries cannot be written against pixel widths, only against rem and percentages"
+          - "Relative units switch off page zoom, which keeps the layout identical on any viewport"
+        answer: "The layout keeps working between breakpoints, at sizes you never explicitly tested"
+        explanation: >-
+          Flexible units let the design flow through the infinite range of real viewport sizes, so
+          breakpoints handle only genuine shape changes. Browsers agree closely on pixel rounding,
+          media queries accept pixel values perfectly well, and relative units respect zoom rather
+          than disabling it, which is part of why they help accessibility.
+        difficulty: intermediate
+
+  - topic: web-js-basics
+    # Source: MDN - Dynamic scripting with JavaScript
+    questions:
+      - id: web-js-blocking-main-thread
+        prompt: "A click handler runs a three-second synchronous loop. What does the user experience while it runs?"
+        options:
+          - "A frozen page: the one main thread cannot paint or handle events until the loop ends"
+          - "A responsive page, because each event handler is given a worker thread of its own"
+          - "A partially updated page, since the browser repaints between iterations of the loop"
+          - "An error dialog, because browsers abort any handler that runs for more than a second"
+        answer: "A frozen page: the one main thread cannot paint or handle events until the loop ends"
+        explanation: >-
+          JavaScript in a page runs on a single thread shared with rendering and event handling, so
+          long synchronous work blocks everything until it returns. Handlers do not get their own
+          threads, no repaint happens mid-loop, and browsers do not abort slow code, they merely go
+          unresponsive. The same single-threaded logic is why blocking a server handler stalls
+          other requests waiting on that loop.
+        difficulty: intermediate
+        mastery: true
+      - id: web-js-addeventlistener-vs-onclick
+        prompt: "Two separate scripts each need to react to the same button click. Why does addEventListener handle that where assigning onclick does not?"
+        options:
+          - "addEventListener registers many handlers, while assigning onclick overwrites the last one"
+          - "onclick handlers run before the page has loaded, so the second script never sees a click"
+          - "onclick only works on links and form controls, so a button click never reaches a handler"
+          - "addEventListener runs its handlers in parallel, so both scripts respond at the same moment"
+        answer: "addEventListener registers many handlers, while assigning onclick overwrites the last one"
+        explanation: >-
+          The onclick property holds a single function, so the second assignment silently replaces
+          the first, whereas listeners accumulate. Timing is not the issue since both are attached
+          the same way, onclick works on any element, and listeners run one after another on the
+          same thread rather than in parallel.
+        difficulty: intermediate
+      - id: web-js-fetch-returns-promise
+        prompt: "You call fetch, then log the variable on the next line, and the console shows a pending promise. Why?"
+        options:
+          - "fetch returns straight away with a promise; the response only arrives later over the network"
+          - "The response is present, but console.log cannot render a large object until it is awaited"
+          - "The variable was declared with const, which defers its assignment until the block ends"
+          - "The call failed silently, and a pending promise is how fetch reports a network-level error"
+        answer: "fetch returns straight away with a promise; the response only arrives later over the network"
+        explanation: >-
+          Network work is asynchronous, so fetch hands back a promise immediately and you read the
+          result in then or after awaiting it. The console has no rendering limit that would explain
+          this, const affects scope and reassignment rather than timing, and a failed fetch gives a
+          rejected promise or an error status, not a permanently pending one.
+        difficulty: intermediate
+      - id: web-js-block-scope-let
+        prompt: "A variable declared with let inside an if block cannot be read after the block, though the same code with var could. What changed?"
+        options:
+          - "let is scoped to the block it sits in, whereas var is scoped to the whole function"
+          - "let is hoisted to the top of the file, so the outer read picks up a different variable"
+          - "let creates a constant, so any read outside its own assignment raises a type error"
+          - "let variables are freed as soon as they have been read once, which releases the memory"
+        answer: "let is scoped to the block it sits in, whereas var is scoped to the whole function"
+        explanation: >-
+          Block scoping is the point of let, which is why declarations inside braces stay there and
+          why loop variables no longer leak. let is not hoisted into an accessible outer binding,
+          const rather than let is the constant declaration, and JavaScript does not discard
+          variables after a single read.
+        difficulty: beginner
+      - id: web-js-preflight-options
+        prompt: "You add an Authorization header to a fetch call and the network panel now shows an OPTIONS request that you never wrote. What is it?"
+        options:
+          - "A CORS preflight the browser sends to ask whether that header is allowed cross-origin"
+          - "A retry of the failed request, sent with a different method to probe what the server allows"
+          - "A cache validation request the browser sends before it reuses a stored response body"
+          - "A handshake the browser uses to keep the underlying connection alive between two calls"
+        answer: "A CORS preflight the browser sends to ask whether that header is allowed cross-origin"
+        explanation: >-
+          Adding a non-simple header makes the request preflighted, so the browser asks permission
+          with OPTIONS before sending the real call, and the server must answer with matching
+          allow-headers. It is not a retry, cache validation uses a conditional GET rather than
+          OPTIONS, and connection reuse needs no extra request at all.
+        difficulty: advanced
+        mastery: true
+
+  - topic: web-ts-intro
+    # Source: TypeScript handbook - TypeScript from scratch
+    questions:
+      - id: web-ts-types-erased
+        prompt: "A response is typed as a User in your code, a field is missing at runtime, and nothing complained. Why not?"
+        options:
+          - "Types are erased when TypeScript compiles, so nothing checks the actual shape at runtime"
+          - "The compiler validates JSON at runtime, but only when strict mode is switched on explicitly"
+          - "Interfaces do validate at runtime, though only for the fields marked required in them"
+          - "fetch strips fields that are unknown to the declared type, which is what removed this one"
+        answer: "Types are erased when TypeScript compiles, so nothing checks the actual shape at runtime"
+        explanation: >-
+          TypeScript checks only at compile time and emits plain JavaScript with the annotations
+          gone, so data crossing a boundary needs a runtime validator such as Zod. Strict mode
+          tightens compile-time rules rather than adding runtime checks, interfaces have no runtime
+          existence at all, and fetch neither knows nor touches your declared types.
+        difficulty: intermediate
+        mastery: true
+      - id: web-ts-any-spreads
+        prompt: "A value is annotated as any and then passed through several functions. What happens to type checking along that path?"
+        options:
+          - "Checking stops at that value, and every downstream use of it is accepted unchecked"
+          - "Checking continues, because the compiler infers a narrower type from how it gets used"
+          - "The compiler errors on the annotation itself, unless strict mode has been turned off"
+          - "Only the first function loses checking; later ones re-infer the type from the argument"
+        answer: "Checking stops at that value, and every downstream use of it is accepted unchecked"
+        explanation: >-
+          any is an explicit opt-out that propagates wherever the value goes, which is why unknown
+          is preferable when a type is genuinely not known yet. The compiler does not narrow any
+          from usage, the annotation itself is legal in every mode, and nothing re-establishes
+          checking further down the call chain.
+        difficulty: intermediate
+      - id: web-ts-structural-typing
+        prompt: "A plain object literal is accepted where an interface is expected, without declaring that it implements the interface. Why is that allowed?"
+        options:
+          - "TypeScript compares types by structure, so having members of the right shape is enough"
+          - "The compiler infers a subclass relationship and inserts the missing declaration for you"
+          - "Object literals skip type checking entirely, which is why this assignment goes through"
+          - "Interfaces are advisory only, so any object at all may be assigned to any interface type"
+        answer: "TypeScript compares types by structure, so having members of the right shape is enough"
+        explanation: >-
+          Structural typing means compatibility is judged on members rather than on declared
+          inheritance, unlike the nominal typing in Java or C#. No subclass is invented, object
+          literals are in fact checked more strictly through excess property checks, and interfaces
+          are enforced at compile time rather than being mere suggestions.
+        difficulty: advanced
+        mastery: true
+      - id: web-ts-compiler-output
+        prompt: "What does the TypeScript compiler actually produce, and what does a type error do to that output?"
+        options:
+          - "Plain JavaScript, and by default a type error still leaves the emitted file in place"
+          - "A typed bundle that Node executes directly, refusing to start if any error is present"
+          - "Nothing at all until every error is fixed, which is why a failed build emits no files"
+          - "The source rewritten in place with types stripped and errors left behind as comments"
+        answer: "Plain JavaScript, and by default a type error still leaves the emitted file in place"
+        explanation: >-
+          tsc downlevels to ordinary JavaScript and, unless noEmitOnError is set, still writes it
+          when checks fail, which is why CI must treat compiler errors as failures. Node runs no
+          types, files are emitted rather than withheld by default, and sources are not modified in
+          place or annotated with error comments.
+        difficulty: intermediate
+
+  - topic: web-react-intro
+    # Source: React - Learn React
+    questions:
+      - id: web-react-state-mutation
+        prompt: "You push an item onto an array held in state and the rendered list does not update. What went wrong?"
+        options:
+          - "The array was changed in place, so React sees the same reference and skips re-rendering"
+          - "Arrays cannot be held in state at all, so the value was quietly dropped by the hook"
+          - "A component needs an explicit refresh call after every mutation of a state value"
+          - "The push is asynchronous, so rendering happened before the new item had been appended"
+        answer: "The array was changed in place, so React sees the same reference and skips re-rendering"
+        explanation: >-
+          React decides what changed by comparing values, so state must be replaced rather than
+          mutated, which is why you set a new array built with a spread. Arrays are perfectly
+          valid state, there is no manual refresh in the React model, and push is synchronous, so
+          timing does not explain the missing render.
+        difficulty: intermediate
+        mastery: true
+      - id: web-react-child-updates-parent
+        prompt: "A child component needs to change a value that its parent owns. What does React expect you to do?"
+        options:
+          - "Pass a callback down, so the parent updates its own state and the new value flows back"
+          - "Assign to the prop inside the child, which React then propagates back up to the parent"
+          - "Copy the value into child state and let React reconcile the two copies of it for you"
+          - "Reach the parent component instance directly and set the field on it from the child"
+        answer: "Pass a callback down, so the parent updates its own state and the new value flows back"
+        explanation: >-
+          Data flows down and events flow up, so the owner of the state does the updating and the
+          child only reports intent. Props are read-only and writing to one changes nothing,
+          duplicating state into the child creates two sources of truth that drift, and function
+          components expose no instance to reach into.
+        difficulty: intermediate
+      - id: web-react-list-keys
+        prompt: "Why does React want a stable key on each item when you render a list from an array?"
+        options:
+          - "It matches items across renders, so state and DOM nodes stay with the right element"
+          - "It sorts the list during render, using the key to decide the order items appear in"
+          - "It gives each item a unique id attribute in the DOM, useful for styling and tests"
+          - "It caches items by key so that their render functions never have to run a second time"
+        answer: "It matches items across renders, so state and DOM nodes stay with the right element"
+        explanation: >-
+          Keys are identity for reconciliation, which is why array indexes cause inputs and
+          selection to follow the wrong row once the list is reordered. React does not sort by key,
+          the key is not written to the DOM as an attribute, and it does not memoise renders, which
+          is what React.memo is for.
+        difficulty: intermediate
+        mastery: true
+      - id: web-react-rerender-trigger
+        prompt: "What actually causes the body of a function component to run again after the first render?"
+        options:
+          - "A change to its own state or to the props it receives, which schedules a re-render"
+          - "Any DOM event on the page, since React re-runs components after each event fires"
+          - "A timer inside React, which re-renders every mounted component at a fixed interval"
+          - "Mutating a plain variable that was declared inside the component body last render"
+        answer: "A change to its own state or to the props it receives, which schedules a re-render"
+        explanation: >-
+          Rendering is driven by state and prop changes, not by the clock or by events in general,
+          which is why a component looks stuck when you update something React is not tracking.
+          There is no periodic re-render loop, unrelated events cause no render, and local
+          variables are discarded each render and observed by nothing.
+        difficulty: beginner
+
+  - topic: web-nextjs-intro
+    # Source: Next.js - Getting started with the App Router
+    questions:
+      - id: web-next-file-routing
+        prompt: "Using the App Router, what makes a URL such as /dashboard/settings reachable?"
+        options:
+          - "A page file at app/dashboard/settings/page.tsx, since folders map to URL segments"
+          - "An entry in next.config.js that lists this path alongside the component to render"
+          - "Any component file placed in app/dashboard/settings, whatever its filename may be"
+          - "A call to a route registration function inside the surrounding dashboard layout"
+        answer: "A page file at app/dashboard/settings/page.tsx, since folders map to URL segments"
+        explanation: >-
+          Routing is filesystem-based: folders create segments and the reserved page file makes a
+          segment publicly routable. There is no route table in the config file, arbitrary
+          filenames in a route folder are not routable, which is how colocated components stay
+          private, and nothing is registered imperatively at runtime.
+        difficulty: intermediate
+      - id: web-next-server-components-default
+        prompt: "In the App Router, where does a component's code run when the file carries no directive at all?"
+        options:
+          - "On the server, because components are server components until a file opts in to client"
+          - "In the browser, exactly as in a plain React app, until you mark a file as server-only"
+          - "In both places on every request, so the same code executes twice for each page view"
+          - "On the server during the build only, after which the page becomes permanently static"
+        answer: "On the server, because components are server components until a file opts in to client"
+        explanation: >-
+          The default is server rendering, which is what lets a component await a database or model
+          call without shipping that code or its secrets to the browser. Client-by-default is the
+          old model, only client components run in both places through hydration, and server
+          rendering happens per request unless you deliberately make a route static.
+        difficulty: intermediate
+        mastery: true
+      - id: web-next-use-client-boundary
+        prompt: "Why does introducing useState into a server component force you to add the use client directive?"
+        options:
+          - "State and event handlers need the browser, so that file has to be shipped to the client"
+          - "The directive is what imports the React hooks, which are otherwise missing in that file"
+          - "It tells the bundler to skip type checking on hooks, which the server cannot verify"
+          - "State works server-side, but the directive is required to keep it separate per user"
+        answer: "State and event handlers need the browser, so that file has to be shipped to the client"
+        explanation: >-
+          Interactivity lives where the user is, so hooks and handlers require a client component,
+          and the directive marks that boundary for the bundler. The directive imports nothing,
+          it has no effect on type checking, and server components hold no per-user state between
+          renders, so the last option misdescribes the model.
+        difficulty: intermediate
+      - id: web-next-ssr-vs-csr
+        prompt: "You can render a dashboard's data on the server or fetch it from the browser after the page loads. What is the real trade-off?"
+        options:
+          - "Server rendering sends useful HTML sooner, while client fetching ships a shell and then waits"
+          - "Client fetching is always faster, because the server never has to touch the data at all"
+          - "Server rendering removes the need for JavaScript, so such a page can never be interactive"
+          - "The two produce identical output, and only the directory layout of the project differs"
+        answer: "Server rendering sends useful HTML sooner, while client fetching ships a shell and then waits"
+        explanation: >-
+          Server rendering pays a server round trip to send content-complete HTML, which helps first
+          paint and crawlers; client fetching gets a shell out fast and then adds a second round
+          trip from the user's device. Client fetching is not free, server-rendered pages hydrate
+          and become interactive, and the two clearly differ in what the first response contains.
+        difficulty: advanced
+        mastery: true
+
+  - topic: web-forms-a11y
+    # Source: MDN - Web forms
+    questions:
+      - id: web-forms-label-association
+        prompt: "An input has visible text sitting beside it, but clicking that text does not put the cursor in the field. What is wrong?"
+        options:
+          - "The text is not a label bound to the input, so no for and id pair connects the two"
+          - "The input has no name attribute, and that is the attribute labels are matched against"
+          - "The label has to appear after the input in the markup for the click target to work"
+          - "The field needs a tabindex value before any click is able to move focus into it"
+        answer: "The text is not a label bound to the input, so no for and id pair connects the two"
+        explanation: >-
+          A label is associated by for matching the input id, or by wrapping the input, and that
+          association is what gives the bigger click target and the announced field name. The name
+          attribute is for form submission, label order in the markup is irrelevant, and inputs are
+          focusable already without any tabindex.
+        difficulty: beginner
+        mastery: true
+      - id: web-forms-button-vs-div
+        prompt: "A clickable div styled to look like a button works with a mouse but not from the keyboard. Why does a real button element fix it?"
+        options:
+          - "A button is focusable and activates on Enter and Space, which a plain div never does"
+          - "A button carries default styling that keyboard users rely on to see where focus is"
+          - "A button submits the form, and only submitting elements can receive keyboard input"
+          - "A button is announced as a link, so screen reader users can reach it from a link list"
+        answer: "A button is focusable and activates on Enter and Space, which a plain div never does"
+        explanation: >-
+          Native controls come with focusability, keyboard activation and the right role, all of
+          which you would otherwise have to rebuild with tabindex, key handlers and ARIA. Default
+          styling is not the point and is usually overridden, plenty of focusable elements never
+          submit anything, and a button is announced as a button rather than as a link.
+        difficulty: intermediate
+        mastery: true
+      - id: web-forms-hint-text-not-label
+        prompt: "A field's only description is the grey hint text sitting inside the empty input. Why does that not replace a label?"
+        options:
+          - "It vanishes as soon as typing starts and is not reliably announced as the field's name"
+          - "It renders in a colour that fails contrast requirements in every browser's default style"
+          - "It has a length limit, so a longer field name would be truncated in a narrow layout"
+          - "It cannot be translated, so anyone using a localised page would see the wrong wording"
+        answer: "It vanishes as soon as typing starts and is not reliably announced as the field's name"
+        explanation: >-
+          Hint text is a hint, not a name: the moment the user types, the only description of the
+          field disappears, and screen reader support for announcing it varies. Contrast is a real
+          but separate styling issue, there is no length cap that would truncate a field name, and
+          the hint is translated like any other markup on the page.
+        difficulty: intermediate
+      - id: web-forms-error-not-colour-only
+        prompt: "A form rejects an entry and signals it by turning the field border red. Why is that not enough?"
+        options:
+          - "Colour alone excludes anyone who cannot perceive it; the error needs text tied to the field"
+          - "Red borders are overridden in high contrast modes, where nothing at all would be shown"
+          - "Validation has to run on submit rather than on blur, or the border will not be repainted"
+          - "Changing a border forces a reflow, which moves focus away and discards the entered value"
+        answer: "Colour alone excludes anyone who cannot perceive it; the error needs text tied to the field"
+        explanation: >-
+          An error has to be perceivable without colour and programmatically connected to its
+          input, typically with a message referenced by aria-describedby. High contrast behaviour is
+          a symptom rather than the underlying rule, validation timing does not change whether the
+          border repaints, and a border change neither steals focus nor clears a value.
+        difficulty: intermediate

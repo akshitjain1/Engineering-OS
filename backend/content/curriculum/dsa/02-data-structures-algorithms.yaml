@@ -70,6 +70,7 @@ track:
               description: Official Abdul Bari video (author verified via YouTube oEmbed).
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: dsa-algorithmic-thinking-mit
               title: MIT 6.006 Lecture 1 — Algorithms and Computation
               type: documentation
@@ -207,6 +208,7 @@ track:
                 lecture: Time Complexity / Asymptotic Notation.'
               official: true
               order: 0
+              section: Time Complexity / Asymptotic Notation
             - slug: dsa-big-o-mit
               title: MIT 6.006 Lecture 1 — Algorithms and Computation
               type: documentation
@@ -354,6 +356,7 @@ track:
                 lecture: Frequency Count / case analysis.'
               official: true
               order: 0
+              section: Frequency Count / case analysis
             - slug: dsa-best-worst-average-mit
               title: MIT 6.006 Lecture 19 — Complexity
               type: documentation
@@ -493,6 +496,7 @@ track:
                 lecture: Arrays / array analysis.'
               official: true
               order: 0
+              section: Arrays / array analysis
             - slug: dsa-array-traversal-mit
               title: MIT 6.006 Lecture 2 — Data Structures and Dynamic Arrays
               type: documentation
@@ -643,6 +647,7 @@ track:
                 lecture: Arrays / insertion analysis.'
               official: true
               order: 0
+              section: Arrays / insertion analysis
             - slug: dsa-array-insert-delete-mit
               title: MIT 6.006 Lecture 2 — Data Structures and Dynamic Arrays
               type: documentation
@@ -790,6 +795,7 @@ track:
                 lecture: Arrays / prefix analysis.'
               official: true
               order: 0
+              section: Arrays / prefix analysis
             - slug: dsa-prefix-sums-mit
               title: MIT 6.006 Lecture 2 — Data Structures and Dynamic Arrays
               type: documentation
@@ -926,6 +932,7 @@ track:
                 lecture: Frequency count.'
               official: true
               order: 0
+              section: Frequency count
             - slug: dsa-array-frequency-mit
               title: MIT 6.006 Lecture 2 — Data Structures and Dynamic Arrays
               type: documentation
@@ -1061,6 +1068,7 @@ track:
                 lecture: Array techniques.'
               official: true
               order: 0
+              section: Array techniques
             - slug: dsa-array-patterns-mit
               title: MIT 6.006 Lecture 2 — Data Structures and Dynamic Arrays
               type: documentation
@@ -1203,6 +1211,7 @@ track:
                 lecture: treat strings as sequences (analysis/arrays lectures; exact string video unresolved).'
               official: true
               order: 0
+              section: treat strings as sequences (analysis/arrays lectures; exact string video unresolved)
             - slug: dsa-string-manipulation-nc150
               title: NeetCode 150 — Arrays & Hashing (representative subset)
               type: coding_problem
@@ -1330,6 +1339,7 @@ track:
                 lecture: counting / frequency (exact string video unresolved).'
               official: true
               order: 0
+              section: counting / frequency (exact string video unresolved)
             - slug: dsa-string-frequency-nc150
               title: NeetCode 150 — Arrays & Hashing (representative subset)
               type: coding_problem
@@ -1457,6 +1467,7 @@ track:
                 lecture: arrays as sequences of codes (exact video unresolved).'
               official: true
               order: 0
+              section: arrays as sequences of codes (exact video unresolved)
             - slug: dsa-character-processing-nc150
               title: NeetCode 150 — Arrays & Hashing (representative subset)
               type: coding_problem
@@ -1582,6 +1593,7 @@ track:
                 lecture: pattern problems as array+hash reasoning (exact video unresolved).'
               official: true
               order: 0
+              section: pattern problems as array+hash reasoning (exact video unresolved)
             - slug: dsa-string-patterns-nc150
               title: NeetCode 150 — Arrays & Hashing (representative subset)
               type: coding_problem
@@ -1717,6 +1729,7 @@ track:
                 lecture: hashing / hash tables.'
               official: true
               order: 0
+              section: hashing / hash tables
             - slug: dsa-hash-map-mit
               title: MIT 6.006 Lecture 4 — Hashing
               type: documentation
@@ -1875,6 +1888,7 @@ track:
                 lecture: hashing / hash tables / uniqueness.'
               official: true
               order: 0
+              section: hashing / hash tables / uniqueness
             - slug: dsa-hash-set-mit
               title: MIT 6.006 Lecture 4 — Hashing
               type: documentation
@@ -2011,6 +2025,7 @@ track:
                 lecture: hashing / counting.'
               official: true
               order: 0
+              section: hashing / counting
             - slug: dsa-frequency-maps-mit
               title: MIT 6.006 Lecture 4 — Hashing
               type: documentation
@@ -2147,6 +2162,7 @@ track:
                 lecture: hashing / lookup.'
               official: true
               order: 0
+              section: hashing / lookup
             - slug: dsa-lookup-patterns-mit
               title: MIT 6.006 Lecture 4 — Hashing
               type: documentation
@@ -2311,6 +2327,7 @@ track:
                 lecture: two-pointer / array scanning.'
               official: true
               order: 0
+              section: two-pointer / array scanning
             - slug: dsa-two-pointers-opposite-nc150
               title: NeetCode 150 — Two Pointers (representative subset)
               type: coding_problem
@@ -2437,6 +2454,7 @@ track:
                 lecture: two-pointer / in-place array scans.'
               official: true
               order: 0
+              section: two-pointer / in-place array scans
             - slug: dsa-two-pointers-same-nc150
               title: NeetCode 150 — Two Pointers (representative subset)
               type: coding_problem
@@ -2564,6 +2582,7 @@ track:
                 lecture: partition / quicksort intuition.'
               official: true
               order: 0
+              section: partition / quicksort intuition
             - slug: dsa-two-pointers-partition-nc150
               title: NeetCode 150 — Two Pointers (representative subset)
               type: coding_problem
@@ -2696,6 +2715,7 @@ track:
                 lecture: sliding window / two pointers.'
               official: true
               order: 0
+              section: sliding window / two pointers
             - slug: dsa-window-fixed-nc150
               title: NeetCode 150 — Sliding Window (representative subset)
               type: coding_problem
@@ -2845,6 +2865,7 @@ track:
                 lecture: sliding window / two pointers.'
               official: true
               order: 0
+              section: sliding window / two pointers
             - slug: dsa-window-variable-nc150
               title: NeetCode 150 — Sliding Window (representative subset)
               type: coding_problem
@@ -2994,6 +3015,7 @@ track:
                 lecture: sliding window + hashing.'
               official: true
               order: 0
+              section: sliding window + hashing
             - slug: dsa-window-frequency-nc150
               title: NeetCode 150 — Sliding Window (representative subset)
               type: coding_problem
@@ -3151,6 +3173,7 @@ track:
                 lecture: linked lists / nodes.'
               official: true
               order: 0
+              section: linked lists / nodes
             - slug: dsa-singly-linked-list-nccore
               title: NeetCode Core Skills — Design Singly Linked List
               type: coding_problem
@@ -3308,6 +3331,7 @@ track:
                 lecture: linked list insert/delete.'
               official: true
               order: 0
+              section: linked list insert/delete
             - slug: dsa-list-operations-nc150
               title: NeetCode 150 — Linked List (representative subset)
               type: coding_problem
@@ -3454,6 +3478,7 @@ track:
                 lecture: linked list reverse.'
               official: true
               order: 0
+              section: linked list reverse
             - slug: dsa-list-reversal-nc150
               title: NeetCode 150 — Linked List (representative subset)
               type: coding_problem
@@ -3600,6 +3625,7 @@ track:
                 lecture: linked list two pointers.'
               official: true
               order: 0
+              section: linked list two pointers
             - slug: dsa-fast-slow-nc150
               title: NeetCode 150 — Linked List (representative subset)
               type: coding_problem
@@ -3747,6 +3773,7 @@ track:
                 lecture: linked list cycle / Floyd.'
               official: true
               order: 0
+              section: linked list cycle / Floyd
             - slug: dsa-cycle-detection-nc150
               title: NeetCode 150 — Linked List (representative subset)
               type: coding_problem
@@ -3896,6 +3923,7 @@ track:
                 lecture: linked list merge.'
               official: true
               order: 0
+              section: linked list merge
             - slug: dsa-list-merge-nc150
               title: NeetCode 150 — Linked List (representative subset)
               type: coding_problem
@@ -4063,6 +4091,7 @@ track:
                 lecture: 2.4 Stack ADT / stack operations.'
               official: true
               order: 0
+              section: 2.4 Stack ADT / stack operations
             - slug: dsa-stack-fundamentals-nc150
               title: NeetCode 150 — Stack (representative subset)
               type: coding_problem
@@ -4199,6 +4228,7 @@ track:
                 lecture: 2.4 Stack — applications / monotonic pattern.'
               official: true
               order: 0
+              section: 2.4 Stack — applications / monotonic pattern
             - slug: dsa-monotonic-stack-nc150
               title: NeetCode 150 — Stack (representative subset)
               type: coding_problem
@@ -4267,15 +4297,19 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-monotonic-stack-q6
-              prompt: Common mistake?
+              prompt: After a monotonic stack scan reaches the end of the array, which step is most often
+                forgotten?
               options:
-              - Using ArrayDeque.
-              - Forgetting to pop remaining indices as 'no greater element'.
-              - Using O(n) time.
-              - Storing pairs.
-              answer: Forgetting to pop remaining indices as 'no greater element'.
-              explanation: After scan, leftover stack entries have no next greater.
-              difficulty: medium
+              - Draining the indices still on the stack, which have no next greater element at all
+              - Clearing the stack before the scan starts so that stale indices cannot leak in
+              - Reversing the answer array, because the scan produced the results in the wrong order
+              - Pushing the final element onto the stack once the main loop has already finished
+              answer: Draining the indices still on the stack, which have no next greater element at all
+              explanation: Anything left on the stack was never popped, which is exactly the evidence
+                that no greater element follows it, so those positions need their default answer written.
+                A fresh stack is already empty. The scan writes answers by index rather than in order,
+                so no reversal is needed, and pushing after the loop achieves nothing.
+              difficulty: intermediate
               mastery_requirement: false
             exercises:
             - slug: dsa-monotonic-stack-ex1
@@ -4344,6 +4378,7 @@ track:
                 lecture: 2.5 Queue ADT / circular queue.'
               official: true
               order: 0
+              section: 2.5 Queue ADT / circular queue
             - slug: dsa-queue-deque-nc150
               title: NeetCode 150 — Stack (representative subset)
               type: coding_problem
@@ -4480,6 +4515,7 @@ track:
                 lecture: 2.5 Queue — BFS preview / level order.'
               official: true
               order: 0
+              section: 2.5 Queue — BFS preview / level order
             - slug: dsa-queue-bfs-relationship-nc150
               title: NeetCode 150 — Stack (representative subset)
               type: coding_problem
@@ -4608,6 +4644,7 @@ track:
                 lecture: 3. Recursion — introduction / base case.'
               official: true
               order: 0
+              section: 3. Recursion — introduction / base case
             questions:
             - slug: dsa-recursion-model-q1
               prompt: Every correct recursion must have…
@@ -4731,6 +4768,7 @@ track:
                 lecture: 3. Recursion — tracing / stack overflow.'
               official: true
               order: 0
+              section: 3. Recursion — tracing / stack overflow
             questions:
             - slug: dsa-call-stack-q1
               prompt: What lives in one call frame?
@@ -4851,6 +4889,7 @@ track:
                 lecture: 3. Recursion — tree of calls / divide.'
               official: true
               order: 0
+              section: 3. Recursion — tree of calls / divide
             questions:
             - slug: dsa-recursive-trees-q1
               prompt: Recursion tree nodes represent…
@@ -4971,6 +5010,7 @@ track:
                 lecture: 3. Recursion — converting to iteration.'
               official: true
               order: 0
+              section: 3. Recursion — converting to iteration
             questions:
             - slug: dsa-recursion-to-iteration-q1
               prompt: Explicit stack replaces…
@@ -5096,6 +5136,7 @@ track:
                 lecture: 4. Backtracking — subsets / power set.'
               official: true
               order: 0
+              section: 4. Backtracking — subsets / power set
             - slug: dsa-subsets-nc150
               title: NeetCode 150 — Backtracking (representative subset)
               type: coding_problem
@@ -5163,15 +5204,19 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-subsets-q6
-              prompt: Common bug?
+              prompt: While collecting subsets during backtracking, what bug makes every stored subset
+                come out identical?
               options:
-              - Using List.
-              - Adding path reference without copy — all entries share same mutating list.
-              - Using recursion.
-              - O(2^n) output.
-              answer: Adding path reference without copy — all entries share same mutating list.
-              explanation: Use `new ArrayList<>(path)`.
-              difficulty: medium
+              - Storing the running path list itself, so all results alias one list that keeps mutating
+              - Storing a fresh copy of the path at each leaf, which duplicates memory unnecessarily
+              - Recursing before adding the current element rather than adding it before recursing
+              - Using an ArrayList for the path where a linked list would give cheaper appends
+              answer: Storing the running path list itself, so all results alias one list that keeps mutating
+              explanation: Every result holds a reference to the same list, so backtracking's later removals
+                show up in all of them; you need new ArrayList<>(path). Copying is the fix, not the bug.
+                Recursion order changes which subsets appear when, and the list implementation only affects
+                constant factors.
+              difficulty: intermediate
               mastery_requirement: false
             - slug: dsa-subsets-q7
               prompt: C++ unchoose equivalent?
@@ -5246,6 +5291,7 @@ track:
                 lecture: 4. Backtracking — permutations.'
               official: true
               order: 0
+              section: 4. Backtracking — permutations
             - slug: dsa-permutations-nc150
               title: NeetCode 150 — Backtracking (representative subset)
               type: coding_problem
@@ -5399,6 +5445,7 @@ track:
                 lecture: 4. Backtracking — combinations / n choose k.'
               official: true
               order: 0
+              section: 4. Backtracking — combinations / n choose k
             - slug: dsa-combinations-nc150
               title: NeetCode 150 — Backtracking (representative subset)
               type: coding_problem
@@ -5551,6 +5598,7 @@ track:
                 lecture: 4. Backtracking — N-Queens / pruning.'
               official: true
               order: 0
+              section: 4. Backtracking — N-Queens / pruning
             - slug: dsa-constraint-search-nc150
               title: NeetCode 150 — Backtracking (representative subset)
               type: coding_problem
@@ -5707,6 +5755,7 @@ track:
                 lecture: 2.7 Sorting — bubble sort.'
               official: true
               order: 0
+              section: 2.7 Sorting — bubble sort
             - slug: dsa-bubble-sort-mit
               title: MIT 6.006 — Sets and Sorting
               type: documentation
@@ -5824,6 +5873,7 @@ track:
                 lecture: 2.7 Sorting — selection sort.'
               official: true
               order: 0
+              section: 2.7 Sorting — selection sort
             - slug: dsa-selection-sort-mit
               title: MIT 6.006 — Sets and Sorting
               type: documentation
@@ -5880,15 +5930,18 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-selection-sort-q5
-              prompt: Stable?
+              prompt: Is selection sort a stable sort, and what property of the algorithm decides that?
               options:
-              - Always stable.
-              - Generally not stable (long-distance swaps).
-              - Stable if using queue.
-              - Stable if n<10.
-              answer: Generally not stable (long-distance swaps).
-              explanation: Swap can move equal elements past each other.
-              difficulty: medium
+              - No, because swapping the minimum into place can jump an equal key over another one
+              - Yes, because it always selects the leftmost of any two elements holding equal keys
+              - Yes when the implementation uses a queue rather than swapping array positions
+              - Yes for small inputs, where too few elements exist for equal keys to cross over
+              answer: No, because swapping the minimum into place can jump an equal key over another one
+              explanation: The swap exchanges two arbitrary positions, so an element can leap past an
+                equal key sitting between them. Selecting the leftmost minimum is not enough, because
+                the element it displaces travels backwards. Stability is a property of the algorithm,
+                not of the container or the input size.
+              difficulty: intermediate
               mastery_requirement: false
             exercises:
             - slug: dsa-selection-sort-ex1
@@ -5942,6 +5995,7 @@ track:
                 lecture: 2.7 Sorting — insertion sort.'
               official: true
               order: 0
+              section: 2.7 Sorting — insertion sort
             - slug: dsa-insertion-sort-nccore
               title: NeetCode Core Skills — Insertion Sort
               type: coding_problem
@@ -5986,15 +6040,19 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-insertion-sort-q3
-              prompt: Stable?
+              prompt: Is insertion sort a stable sort, and what property of the algorithm decides that?
               options:
-              - 'No'
-              - Yes — equal elements not crossed by insert.
-              - Only for ints
-              - Only stable sort
-              answer: Yes — equal elements not crossed by insert.
-              explanation: Insert stops at equal without shifting past.
-              difficulty: medium
+              - Yes, because the inserted element stops on reaching an equal key rather than passing it
+              - No, because shifting elements rightwards moves equal keys past one another every time
+              - Yes for primitive integers only, since equal values cannot be told apart in that case
+              - No, unless the input array happens to be nearly sorted before the algorithm starts
+              answer: Yes, because the inserted element stops on reaching an equal key rather than passing
+                it
+              explanation: The shift loop uses a strict comparison, so it halts at the first equal key
+                and the earlier one keeps its position. Shifting only moves strictly greater elements.
+                Stability holds for any payload, not just ints, and it is a property of the comparison
+                rather than of how sorted the input already was.
+              difficulty: intermediate
               mastery_requirement: false
             - slug: dsa-insertion-sort-q4
               prompt: Inner loop does…
@@ -6082,6 +6140,7 @@ track:
                 lecture: 2.8 Merge Sort / divide and conquer.'
               official: true
               order: 0
+              section: 2.8 Merge Sort / divide and conquer
             - slug: dsa-merge-sort-nccore
               title: NeetCode Core Skills — Merge Sort
               type: coding_problem
@@ -6137,15 +6196,18 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-merge-sort-q4
-              prompt: Stable?
+              prompt: Is merge sort a stable sort, and what property of the algorithm decides that?
               options:
-              - 'No'
-              - Yes — take left when equal in merge.
-              - Only on ints
-              - Never
-              answer: Yes — take left when equal in merge.
-              explanation: Left copy preserved before right equal.
-              difficulty: medium
+              - Yes, provided the merge step takes from the left run whenever the two keys are equal
+              - No, because the recursive split separates equal keys into different halves entirely
+              - Yes for primitive integers only, since equal values cannot be told apart in that case
+              - No, because the merge writes into a temporary buffer before copying results back
+              answer: Yes, provided the merge step takes from the left run whenever the two keys are equal
+              explanation: 'Stability rests entirely on that tie-break: the left run holds the earlier
+                elements, so preferring it preserves their order. Splitting does not reorder anything.
+                Stability holds for any payload, and using a temporary buffer is an implementation detail
+                with no bearing on tie order.'
+              difficulty: intermediate
               mastery_requirement: false
             - slug: dsa-merge-sort-q5
               prompt: Recursion tree depth?
@@ -6242,6 +6304,7 @@ track:
               description: Official Abdul Bari video (author verified via YouTube oEmbed).
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: dsa-quick-sort-nccore
               title: NeetCode Core Skills — Quick Sort
               type: coding_problem
@@ -6407,6 +6470,7 @@ track:
                 lecture: 2.6 Heap / HeapSort overview.'
               official: true
               order: 0
+              section: 2.6 Heap / HeapSort overview
             - slug: dsa-heap-sort-bari-heap
               title: Abdul Bari — Heap, HeapSort, Heapify, Priority Queue
               type: youtube_video
@@ -6462,15 +6526,19 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-heap-sort-q4
-              prompt: Stable?
+              prompt: Is heap sort a stable sort, and what property of the algorithm decides that?
               options:
-              - Yes always.
-              - No — swapping distant elements.
-              - Yes if ints.
-              - Yes with PriorityQueue.
-              answer: No — swapping distant elements.
-              explanation: Equal keys can reorder.
-              difficulty: medium
+              - No, because sift-down swaps elements across long distances and can reorder equal keys
+              - Yes, because the heap always removes the earliest of any two equal keys first
+              - Yes for primitive integers, where equal values are indistinguishable anyway
+              - Yes when built on a priority queue, which breaks ties by insertion order
+              answer: No, because sift-down swaps elements across long distances and can reorder equal
+                keys
+              explanation: Heapifying moves elements between distant positions, so two equal keys can
+                end up in the opposite order they started in. The heap has no notion of which equal key
+                arrived first. Stability is about equal keys with distinguishable payloads, so calling
+                it stable for ints dodges the question, and a plain priority queue is not tie-stable.
+              difficulty: intermediate
               mastery_requirement: false
             - slug: dsa-heap-sort-q5
               prompt: Relation to later heap module?
@@ -6550,6 +6618,7 @@ track:
                 lecture: 2.9 Counting / Radix sort.'
               official: true
               order: 0
+              section: 2.9 Counting / Radix sort
             - slug: dsa-counting-radix-l3-mit
               title: MIT 6.006 — Sets and Sorting
               type: documentation
@@ -6690,6 +6759,7 @@ track:
                 lecture: 2.7 Sorting — stability concept.'
               official: true
               order: 0
+              section: 2.7 Sorting — stability concept
             - slug: dsa-sort-stability-mit
               title: MIT 6.006 — Sets and Sorting
               type: documentation
@@ -6810,6 +6880,7 @@ track:
                 lecture: 2.7–2.8 Sorting complexity comparison.'
               official: true
               order: 0
+              section: 2.7–2.8 Sorting complexity comparison
             - slug: dsa-sort-complexity-mit
               title: MIT 6.006 — Sets and Sorting
               type: documentation
@@ -6946,6 +7017,7 @@ track:
                 lecture: 2.3 Binary Search.'
               official: true
               order: 0
+              section: 2.3 Binary Search
             - slug: dsa-binary-search-classic-nc150
               title: NeetCode 150 — Binary Search (representative subset)
               type: coding_problem
@@ -7035,15 +7107,20 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-binary-search-classic-q8
-              prompt: Common bug?
+              prompt: In a classic binary search over a sorted array, which mistake most often causes
+                an infinite loop?
               options:
-              - Using sorted array.
-              - Infinite loop when lo/hi update wrong on equal mid.
-              - O(log n).
-              - Using int mid.
-              answer: Infinite loop when lo/hi update wrong on equal mid.
-              explanation: Off-by-one in bounds breaks halving.
-              difficulty: medium
+              - Updating lo or hi to mid instead of mid plus or minus one when the window stops shrinking
+              - Computing mid as lo plus hi minus lo over two rather than their plain average
+              - Searching an array that was sorted ascending rather than descending order
+              - Declaring mid as an int rather than a long on a very large input array
+              answer: Updating lo or hi to mid instead of mid plus or minus one when the window stops
+                shrinking
+              explanation: If the bound moves to mid and mid is already the bound, the window never narrows
+                and the loop spins forever. The lo plus half-the-gap form is the overflow-safe idiom,
+                not a bug. Sort direction changes the comparison but still terminates, and int versus
+                long affects overflow rather than termination.
+              difficulty: intermediate
               mastery_requirement: false
             exercises:
             - slug: dsa-binary-search-classic-ex1
@@ -7098,6 +7175,7 @@ track:
                 lecture: 2.3 Binary Search — boundaries.'
               official: true
               order: 0
+              section: 2.3 Binary Search — boundaries
             - slug: dsa-binary-search-boundaries-nc150
               title: NeetCode 150 — Binary Search (representative subset)
               type: coding_problem
@@ -7251,6 +7329,7 @@ track:
                 lecture: 2.3 Binary Search — first/last occurrence.'
               official: true
               order: 0
+              section: 2.3 Binary Search — first/last occurrence
             - slug: dsa-first-last-occurrence-nc150
               title: NeetCode 150 — Binary Search (representative subset)
               type: coding_problem
@@ -7406,6 +7485,7 @@ track:
                 lecture: 2.3 Binary Search — search space / answer space.'
               official: true
               order: 0
+              section: 2.3 Binary Search — search space / answer space
             - slug: dsa-search-on-answer-nc150
               title: NeetCode 150 — Binary Search (representative subset)
               type: coding_problem
@@ -7559,6 +7639,7 @@ track:
                 lecture: 2.3 Binary Search — rotated array.'
               official: true
               order: 0
+              section: 2.3 Binary Search — rotated array
             - slug: dsa-rotated-arrays-nc150
               title: NeetCode 150 — Binary Search (representative subset)
               type: coding_problem
@@ -7637,15 +7718,20 @@ track:
               difficulty: medium
               mastery_requirement: false
             - slug: dsa-rotated-arrays-q7
-              prompt: Common mistake?
+              prompt: When binary-searching a rotated sorted array, which part of each iteration is most
+                often got wrong?
               options:
-              - Using lo/hi.
-              - Checking sorted half with wrong endpoint comparisons.
-              - O(log n).
-              - Binary search.
-              answer: Checking sorted half with wrong endpoint comparisons.
-              explanation: Must verify target in closed interval of sorted side.
-              difficulty: medium
+              - Deciding which half is sorted, then testing the target against that half's closed interval
+              - Finding the rotation pivot first, since the search cannot begin without knowing it
+              - Comparing the middle element against the target before comparing it to the endpoints
+              - Halving the window, because a rotated array requires a third of the range each step
+              answer: Deciding which half is sorted, then testing the target against that half's closed
+                interval
+              explanation: One half is always sorted, and you discard it only if the target provably lies
+                outside its inclusive bounds; a wrong endpoint comparison discards the half containing
+                the answer. Locating the pivot first is a valid but different algorithm. Comparing mid
+                to the target is fine, and the window still halves as normal.
+              difficulty: advanced
               mastery_requirement: false
             - slug: dsa-rotated-arrays-q8
               prompt: Search vs find-min relationship?
@@ -7720,6 +7806,7 @@ track:
                 lecture: Trees / Binary Trees.'
               official: true
               order: 0
+              section: Trees / Binary Trees
             - slug: dsa-tree-terminology-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -7863,6 +7950,7 @@ track:
                 lecture: Binary Trees / Tree representation.'
               official: true
               order: 0
+              section: Binary Trees / Tree representation
             - slug: dsa-binary-trees-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -8016,6 +8104,7 @@ track:
                 lecture: Tree traversals (pre/in/post order).'
               official: true
               order: 0
+              section: Tree traversals (pre/in/post order)
             - slug: dsa-tree-dfs-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -8169,6 +8258,7 @@ track:
                 lecture: Level-order / BFS on trees.'
               official: true
               order: 0
+              section: Level-order / BFS on trees
             - slug: dsa-tree-bfs-mit
               title: MIT 6.006 — Breadth-First Search
               type: documentation
@@ -8324,6 +8414,7 @@ track:
                 lecture: Tree height / balanced trees.'
               official: true
               order: 0
+              section: Tree height / balanced trees
             - slug: dsa-tree-height-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -8474,6 +8565,7 @@ track:
                 lecture: Tree path problems.'
               official: true
               order: 0
+              section: Tree path problems
             - slug: dsa-tree-paths-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -8614,6 +8706,7 @@ track:
                 lecture: Tree construction from traversals.'
               official: true
               order: 0
+              section: Tree construction from traversals
             - slug: dsa-tree-construction-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -8763,6 +8856,7 @@ track:
                 lecture: Binary Search Trees — search.'
               official: true
               order: 0
+              section: Binary Search Trees — search
             - slug: dsa-bst-search-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -8915,6 +9009,7 @@ track:
                 lecture: BST insertion.'
               official: true
               order: 0
+              section: BST insertion
             - slug: dsa-bst-insert-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -9054,6 +9149,7 @@ track:
                 lecture: BST deletion.'
               official: true
               order: 0
+              section: BST deletion
             - slug: dsa-bst-delete-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -9195,6 +9291,7 @@ track:
                 lecture: BST validation.'
               official: true
               order: 0
+              section: BST validation
             - slug: dsa-bst-validate-mit
               title: MIT 6.006 — Binary Trees (Part 1)
               type: documentation
@@ -9325,6 +9422,7 @@ track:
                 lecture: BST ordered traversal / kth element.'
               official: true
               order: 0
+              section: BST ordered traversal / kth element
             - slug: dsa-bst-ordered-properties-mit
               title: MIT 6.006 — AVL Trees (optional)
               type: documentation
@@ -9626,6 +9724,7 @@ track:
                 lecture: Priority Queue / Heap ADT.'
               official: true
               order: 0
+              section: Priority Queue / Heap ADT
             - slug: dsa-priority-queue-mit
               title: MIT 6.006 — Binary Heaps
               type: documentation
@@ -9917,6 +10016,7 @@ track:
                 lecture: Top K / Heap selection.'
               official: true
               order: 0
+              section: Top K / Heap selection
             - slug: dsa-top-k-mit
               title: MIT 6.006 — Binary Heaps
               type: documentation
@@ -10058,6 +10158,7 @@ track:
                 lecture: Heap applications / scheduling.'
               official: true
               order: 0
+              section: Heap applications / scheduling
             - slug: dsa-heap-scheduling-mit
               title: MIT 6.006 — Binary Heaps
               type: documentation
@@ -10209,6 +10310,7 @@ track:
                 lecture: Graph representation / adjacency list & matrix.'
               official: true
               order: 0
+              section: Graph representation / adjacency list & matrix
             - slug: dsa-graph-representations-mit
               title: MIT 6.006 — Breadth-First Search
               type: documentation
@@ -10361,6 +10463,7 @@ track:
                 lecture: Breadth-First Search on graphs.'
               official: true
               order: 0
+              section: Breadth-First Search on graphs
             - slug: dsa-graph-bfs-mit
               title: MIT 6.006 — Breadth-First Search
               type: documentation
@@ -10524,6 +10627,7 @@ track:
                 lecture: Depth-First Search on graphs.'
               official: true
               order: 0
+              section: Depth-First Search on graphs
             - slug: dsa-graph-dfs-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -10684,6 +10788,7 @@ track:
                 lecture: Connected components.'
               official: true
               order: 0
+              section: Connected components
             - slug: dsa-connected-components-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -10824,6 +10929,7 @@ track:
                 lecture: Cycle detection in graphs.'
               official: true
               order: 0
+              section: Cycle detection in graphs
             - slug: dsa-graph-cycle-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -10963,6 +11069,7 @@ track:
                 lecture: Bipartite graphs / graph coloring.'
               official: true
               order: 0
+              section: Bipartite graphs / graph coloring
             - slug: dsa-bipartite-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -11112,6 +11219,7 @@ track:
                 lecture: Topological sorting.'
               official: true
               order: 0
+              section: Topological sorting
             - slug: dsa-topological-sort-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -11283,6 +11391,7 @@ track:
                 lecture: Disjoint Set / Union-Find.'
               official: true
               order: 0
+              section: Disjoint Set / Union-Find
             - slug: dsa-union-find-mit
               title: MIT 6.006 — Depth-First Search
               type: documentation
@@ -11442,6 +11551,7 @@ track:
                 lecture: Shortest path — unweighted BFS.'
               official: true
               order: 0
+              section: Shortest path — unweighted BFS
             - slug: dsa-unweighted-shortest-mit
               title: MIT 6.006 — Weighted Shortest Paths
               type: documentation
@@ -11588,6 +11698,7 @@ track:
                 lecture: Dijkstra''s shortest path algorithm.'
               official: true
               order: 0
+              section: Dijkstra's shortest path algorithm
             - slug: dsa-dijkstra-mit
               title: MIT 6.006 — Dijkstra
               type: documentation
@@ -11794,6 +11905,7 @@ track:
                 lecture: Minimum Spanning Tree / Kruskal / Prim.'
               official: true
               order: 0
+              section: Minimum Spanning Tree / Kruskal / Prim
             - slug: dsa-mst-nccore
               title: NeetCode Core Skills — Kruskal's Algorithm
               type: coding_problem
@@ -11946,6 +12058,7 @@ track:
                 lecture: Greedy Method / Activity Selection.'
               official: true
               order: 0
+              section: Greedy Method / Activity Selection
             - slug: dsa-greedy-reasoning-nc150
               title: NeetCode 150 — Greedy (representative subset)
               type: coding_problem
@@ -12069,6 +12182,7 @@ track:
                 lecture: Greedy Method / Activity Selection.'
               official: true
               order: 0
+              section: Greedy Method / Activity Selection
             - slug: dsa-greedy-exchange-nc150
               title: NeetCode 150 — Greedy (representative subset)
               type: coding_problem
@@ -12198,6 +12312,7 @@ track:
                 lecture: Activity Selection / Interval Scheduling.'
               official: true
               order: 0
+              section: Activity Selection / Interval Scheduling
             - slug: dsa-interval-problems-nc150
               title: NeetCode 150 — Intervals (representative subset)
               type: coding_problem
@@ -12325,6 +12440,7 @@ track:
                 lecture: Job Sequencing with Deadlines / Activity Selection.'
               official: true
               order: 0
+              section: Job Sequencing with Deadlines / Activity Selection
             - slug: dsa-greedy-scheduling-nc150
               title: NeetCode 150 — Greedy (representative subset)
               type: coding_problem
@@ -12449,6 +12565,7 @@ track:
                 lecture: Huffman Coding / Greedy Method.'
               official: true
               order: 0
+              section: Huffman Coding / Greedy Method
             - slug: dsa-greedy-patterns-nc150
               title: NeetCode 150 — Greedy (representative subset)
               type: coding_problem
@@ -12581,6 +12698,7 @@ track:
                 lecture: Dynamic Programming / Fibonacci / Memoization.'
               official: true
               order: 0
+              section: Dynamic Programming / Fibonacci / Memoization
             - slug: dsa-dp-mindset-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -12601,117 +12719,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-mindset-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-mindset-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q8
-              prompt: 'For climbing stairs, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-mindset-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-mindset-ex1
               title: Fib → stairs template
@@ -12761,6 +12769,7 @@ track:
                 lecture: Dynamic Programming / Memoization.'
               official: true
               order: 0
+              section: Dynamic Programming / Memoization
             - slug: dsa-memoization-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -12781,128 +12790,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-memoization-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-memoization-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q8
-              prompt: 'For house robber, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-memoization-q11
-              prompt: 'Memoization in Java often uses:'
-              options:
-              - int[] or HashMap keyed by state parameters.
-              - Only global variables without keys.
-              - Synchronized blocks only.
-              - Stack pop only.
-              answer: int[] or HashMap keyed by state parameters.
-              explanation: Array when indices are dense.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-memoization-ex1
               title: Top-down robber
@@ -12950,6 +12838,7 @@ track:
                 lecture: Dynamic Programming / Tabulation.'
               official: true
               order: 0
+              section: Dynamic Programming / Tabulation
             - slug: dsa-tabulation-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -12970,128 +12859,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-tabulation-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-tabulation-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q8
-              prompt: 'For coin change, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-tabulation-q11
-              prompt: 'Iterating i from 0..n-1 for dp[i] depends on smaller indices means:'
-              options:
-              - Forward fill order is valid.
-              - Must fill backward only.
-              - Need recursion.
-              - Invalid tabulation.
-              answer: Forward fill order is valid.
-              explanation: Order follows dependency direction.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-tabulation-ex1
               title: Tabulate coin change
@@ -13139,6 +12907,7 @@ track:
                 lecture: Dynamic Programming / 0/1 Knapsack state.'
               official: true
               order: 0
+              section: Dynamic Programming / 0/1 Knapsack state
             - slug: dsa-dp-state-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -13159,139 +12928,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-state-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-state-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q8
-              prompt: 'For LCS, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q11
-              prompt: 'LCS state dp[i][j] means:'
-              options:
-              - LCS length of first i chars of A and first j chars of B.
-              - Longest substring only.
-              - Edit distance.
-              - Number of paths.
-              answer: LCS length of first i chars of A and first j chars of B.
-              explanation: 2D state from two sequences.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-state-q12
-              prompt: 'House Robber II (circle) state trick:'
-              options:
-              - Run linear robber on [0..n-2] and [1..n-1]; take max.
-              - Single dp on circle array.
-              - Greedy.
-              - BFS.
-              answer: Run linear robber on [0..n-2] and [1..n-1]; take max.
-              explanation: Break symmetry by fixing first/last exclusion.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-state-ex1
               title: State design drill
@@ -13339,6 +12976,7 @@ track:
                 lecture: Dynamic Programming / Knapsack recurrence.'
               official: true
               order: 0
+              section: Dynamic Programming / Knapsack recurrence
             - slug: dsa-dp-transition-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -13359,139 +12997,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-transition-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-transition-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q8
-              prompt: 'For knapsack, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q11
-              prompt: '0/1 knapsack transition (item i, cap w):'
-              options:
-              - dp[i][w] = max(skip, take) using row i-1.
-              - dp[i][w] = sum of all items.
-              - Always greedy take.
-              - BFS layer.
-              answer: dp[i][w] = max(skip, take) using row i-1.
-              explanation: Take uses dp[i-1][w-weight].
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-transition-q12
-              prompt: 'LCS transition when chars match:'
-              options:
-              - dp[i][j] = dp[i-1][j-1] + 1.
-              - dp[i][j] = 0.
-              - dp[i][j] = dp[i-1][j].
-              - dp[i][j] = i + j.
-              answer: dp[i][j] = dp[i-1][j-1] + 1.
-              explanation: Mismatch takes max of skip either side.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-transition-ex1
               title: Write transitions
@@ -13539,6 +13045,7 @@ track:
                 lecture: Dynamic Programming / 1D problems.'
               official: true
               order: 0
+              section: Dynamic Programming / 1D problems
             - slug: dsa-dp-1d-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -13559,139 +13066,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-1d-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-1d-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q8
-              prompt: 'For LIS, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q11
-              prompt: 'LIS O(n^2) transition:'
-              options:
-              - dp[i] = 1 + max dp[j] for j<i if nums[j]<nums[i].
-              - Sort and greedy.
-              - Only dp[i-1].
-              - BFS depth.
-              answer: dp[i] = 1 + max dp[j] for j<i if nums[j]<nums[i].
-              explanation: Patience sorting gives O(n log n) variant.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-1d-q12
-              prompt: 'Decode Ways: dp[i] uses:'
-              options:
-              - Valid single char and valid two-char slice ending at i.
-              - Only one char.
-              - Graph BFS.
-              - Trie.
-              answer: Valid single char and valid two-char slice ending at i.
-              explanation: Handle leading zero carefully.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-1d-ex1
               title: 1D trio
@@ -13738,6 +13113,7 @@ track:
                 lecture: Dynamic Programming / 2D tables.'
               official: true
               order: 0
+              section: Dynamic Programming / 2D tables
             - slug: dsa-dp-2d-nc150
               title: NeetCode 150 — 2-D DP (representative subset)
               type: coding_problem
@@ -13758,139 +13134,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-2d-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-2d-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q8
-              prompt: 'For unique paths, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q11
-              prompt: 'Unique Paths dp[i][j] on grid:'
-              options:
-              - Paths to cell = dp[i-1][j] + dp[i][j-1] (with bases on first row/col).
-              - Product of neighbors.
-              - BFS count.
-              - Greedy diagonal.
-              answer: Paths to cell = dp[i-1][j] + dp[i][j-1] (with bases on first row/col).
-              explanation: Classic grid DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-2d-q12
-              prompt: 'Space reduce unique paths to O(n):'
-              options:
-              - Single row updated left-to-right.
-              - Impossible.
-              - Need full 2D always.
-              - Use segment tree.
-              answer: Single row updated left-to-right.
-              explanation: Only previous row needed.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-2d-ex1
               title: 2D grid + strings
@@ -13938,6 +13182,7 @@ track:
                 lecture: Longest Common Subsequence.'
               official: true
               order: 0
+              section: Longest Common Subsequence
             - slug: dsa-subsequence-dp-nc150
               title: NeetCode 150 — 2-D DP (representative subset)
               type: coding_problem
@@ -13958,139 +13203,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-subsequence-dp-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-subsequence-dp-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q8
-              prompt: 'For LCS, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q11
-              prompt: 'Longest Palindromic Subsequence uses:'
-              options:
-              - Interval DP on i..j or 2D on reversed prefixes.
-              - Greedy two pointers only always.
-              - MST.
-              - Trie only.
-              answer: Interval DP on i..j or 2D on reversed prefixes.
-              explanation: Related to LCS with reversed string.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-subsequence-dp-q12
-              prompt: 'Subsequence vs substring DP difference:'
-              options:
-              - Subsequence allows skipping; substring is contiguous.
-              - No difference.
-              - Substring uses graph.
-              - Subsequence uses heap.
-              answer: Subsequence allows skipping; substring is contiguous.
-              explanation: State design changes accordingly.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-subsequence-dp-ex1
               title: LCS + palindrome subseq
@@ -14139,6 +13252,7 @@ track:
               description: Official Abdul Bari video (author verified via YouTube oEmbed).
               official: true
               order: 0
+              section: FULL_SINGLE_PAGE
             - slug: dsa-knapsack-nccore
               title: NeetCode Core Skills — 0/1 Knapsack
               type: coding_problem
@@ -14178,139 +13292,7 @@ track:
                 course.
               official: true
               order: 4
-            questions:
-            - slug: dsa-knapsack-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-knapsack-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q8
-              prompt: 'For 0/1 knapsack, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q11
-              prompt: '0/1 knapsack inner loop over capacity should be:'
-              options:
-              - Descending to avoid reusing item i.
-              - Ascending always.
-              - Random.
-              - Only capacity 0.
-              answer: Descending to avoid reusing item i.
-              explanation: Unbounded uses ascending.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-knapsack-q12
-              prompt: 'Unbounded knapsack differs by:'
-              options:
-              - Forward capacity loop allows reuse of item i.
-              - No DP needed.
-              - Greedy always.
-              - Uses MST.
-              answer: Forward capacity loop allows reuse of item i.
-              explanation: Same state shape, different order.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-knapsack-ex1
               title: Knapsack pair
@@ -14359,6 +13341,7 @@ track:
                 lecture: Dynamic Programming / grid problems.'
               official: true
               order: 0
+              section: Dynamic Programming / grid problems
             - slug: dsa-grid-dp-nc150
               title: NeetCode 150 — 2-D DP (representative subset)
               type: coding_problem
@@ -14379,139 +13362,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-grid-dp-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-grid-dp-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q8
-              prompt: 'For min path sum, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q11
-              prompt: 'Obstacle grid unique paths:'
-              options:
-              - dp[i][j]=0 if blocked else sum of top+left.
-              - Greedy diagonal.
-              - BFS only.
-              - DSU.
-              answer: dp[i][j]=0 if blocked else sum of top+left.
-              explanation: Base cells on first row/col need care.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-grid-dp-q12
-              prompt: 'Maximal square of 1s (dp as side length):'
-              options:
-              - dp[i][j] = 1 + min(top, left, top-left) if cell is 1.
-              - Sum top+left.
-              - LIS.
-              - Trie depth.
-              answer: dp[i][j] = 1 + min(top, left, top-left) if cell is 1.
-              explanation: Track max over dp.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-grid-dp-ex1
               title: Grid implementations
@@ -14561,6 +13412,7 @@ track:
                 lecture: Matrix Chain Multiplication / interval DP.'
               official: true
               order: 0
+              section: Matrix Chain Multiplication / interval DP
             - slug: dsa-interval-dp-nc150
               title: NeetCode 150 — 2-D DP (representative subset)
               type: coding_problem
@@ -14581,139 +13433,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-interval-dp-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-interval-dp-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q8
-              prompt: 'For burst balloons, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q11
-              prompt: 'Interval DP iteration order:'
-              options:
-              - Increasing interval length (j-i).
-              - Decreasing only i.
-              - Random.
-              - BFS queue.
-              answer: Increasing interval length (j-i).
-              explanation: Smaller intervals before larger.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-interval-dp-q12
-              prompt: 'Matrix chain multiplication state:'
-              options:
-              - dp[i][j] = min cost to multiply matrices i..j.
-              - Greedy always.
-              - LIS.
-              - Trie.
-              answer: dp[i][j] = min cost to multiply matrices i..j.
-              explanation: Try split k between i..j.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-interval-dp-ex1
               title: Interval recognition
@@ -14761,6 +13481,7 @@ track:
                 lecture: Dynamic Programming / space optimization.'
               official: true
               order: 0
+              section: Dynamic Programming / space optimization
             - slug: dsa-dp-optimization-nc150
               title: NeetCode 150 — 1-D DP (representative subset)
               type: coding_problem
@@ -14781,139 +13502,7 @@ track:
                 course.
               official: true
               order: 2
-            questions:
-            - slug: dsa-dp-optimization-q1
-              prompt: 'Overlapping subproblems mean:'
-              options:
-              - The same subproblem is solved many times in naive recursion.
-              - Subproblems never repeat.
-              - Only graphs overlap.
-              - Arrays cannot overlap.
-              answer: The same subproblem is solved many times in naive recursion.
-              explanation: Memo/tabulation exist to pay each subproblem once.
-              difficulty: medium
-              mastery_requirement: true
-            - slug: dsa-dp-optimization-q2
-              prompt: 'Optimal substructure means:'
-              options:
-              - An optimal solution uses optimal solutions to subproblems.
-              - Every subproblem is independent.
-              - Greedy always works.
-              - Only trees have it.
-              answer: An optimal solution uses optimal solutions to subproblems.
-              explanation: Verify before applying DP.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q3
-              prompt: 'Memoization vs tabulation:'
-              options:
-              - Top-down cache vs bottom-up fill; same recurrence often.
-              - Tabulation is always faster.
-              - Memoization cannot use arrays.
-              - They are unrelated.
-              answer: Top-down cache vs bottom-up fill; same recurrence often.
-              explanation: Pick based on state shape and iteration order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q4
-              prompt: 'A DP state should be:'
-              options:
-              - Minimal information to describe a subproblem uniquely.
-              - The entire input copied.
-              - Always one integer.
-              - Always a graph.
-              answer: Minimal information to describe a subproblem uniquely.
-              explanation: Most DP bugs are bad state definition.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q5
-              prompt: 'Fill ORDER matters when:'
-              options:
-              - A transition depends on not-yet-computed states in the same table.
-              - Never.
-              - Only in greedy.
-              - Only in BFS.
-              answer: A transition depends on not-yet-computed states in the same table.
-              explanation: 0/1 knapsack iterates capacity descending per item.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q6
-              prompt: 'Space optimization to O(1) or O(n) is valid when:'
-              options:
-              - Only recent prior rows/layers are needed for transitions.
-              - Always for 2D DP.
-              - Never.
-              - Only with segment trees.
-              answer: Only recent prior rows/layers are needed for transitions.
-              explanation: Rolling array technique.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q7
-              prompt: 'Naive recursion time without memo for fib(n):'
-              options:
-              - Exponential — repeated subcalls.
-              - O(n).
-              - O(log n).
-              - O(1).
-              answer: Exponential — repeated subcalls.
-              explanation: Memo drops to O(n).
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q8
-              prompt: 'For rolling array, first step in an interview:'
-              options:
-              - Define state in one sentence, then write BASE and TRANSITION.
-              - Code immediately.
-              - Sort the input.
-              - Use BFS.
-              answer: Define state in one sentence, then write BASE and TRANSITION.
-              explanation: SRTBOT-style discipline.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q9
-              prompt: 'Bottom-up BASE cases are:'
-              options:
-              - Smallest subproblems with known answers before loops.
-              - Always empty.
-              - Only for graphs.
-              - The final answer.
-              answer: Smallest subproblems with known answers before loops.
-              explanation: Initialize table corners carefully.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q10
-              prompt: 'DP time is usually:'
-              options:
-              - O(number of states × work per transition).
-              - Always O(n^2).
-              - Always exponential.
-              - O(1).
-              answer: O(number of states × work per transition).
-              explanation: Count states before coding.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q11
-              prompt: '0/1 knapsack space O(W) uses:'
-              options:
-              - One row updated descending per item.
-              - Two full 2D tables always.
-              - Greedy.
-              - Segment tree.
-              answer: One row updated descending per item.
-              explanation: Row reuse is safe with correct order.
-              difficulty: medium
-              mastery_requirement: false
-            - slug: dsa-dp-optimization-q12
-              prompt: 'Not required at V1:'
-              options:
-              - Convex hull trick, Knuth optimization, digit DP contests.
-              - Rolling array.
-              - O(n) fib.
-              - LIS n log n.
-              answer: Convex hull trick, Knuth optimization, digit DP contests.
-              explanation: Recognition only for advanced DP topic.
-              difficulty: medium
-              mastery_requirement: false
+            questions: []
             exercises:
             - slug: dsa-dp-optimization-ex1
               title: Roll the table
@@ -14964,6 +13553,7 @@ track:
                 lecture: Trie data structure.'
               official: true
               order: 0
+              section: Trie data structure
             - slug: dsa-tries-nc150
               title: NeetCode 150 — Tries (representative subset)
               type: coding_problem
@@ -15088,6 +13678,7 @@ track:
                 lecture: Bitwise operations.'
               official: true
               order: 0
+              section: Bitwise operations
             - slug: dsa-bit-manipulation-nc150
               title: NeetCode 150 — Bit Manipulation (representative subset)
               type: coding_problem
@@ -15212,6 +13803,7 @@ track:
                 lecture: Segment Tree.'
               official: true
               order: 0
+              section: Segment Tree
             - slug: dsa-segment-tree-concept-nccore
               title: NeetCode Core Skills — Design Segment Tree
               type: coding_problem
@@ -15334,6 +13926,7 @@ track:
                 lecture: Strongly Connected Components / Bridges.'
               official: true
               order: 0
+              section: Strongly Connected Components / Bridges
             - slug: dsa-advanced-graphs-nc150
               title: NeetCode 150 — Advanced Graphs (representative subset)
               type: coding_problem
@@ -15459,6 +14052,7 @@ track:
                 lecture: Dynamic Programming on subsets / advanced.'
               official: true
               order: 0
+              section: Dynamic Programming on subsets / advanced
             - slug: dsa-advanced-dp-nc150
               title: NeetCode 150 — 2-D DP (representative subset)
               type: coding_problem
@@ -15605,6 +14199,7 @@ track:
                 lecture: Problem solving strategies.'
               official: true
               order: 0
+              section: Problem solving strategies
             - slug: dsa-pattern-selection-nc150
               title: NeetCode 150 — NeetCode 150 (representative subset)
               type: coding_problem
@@ -15732,6 +14327,7 @@ track:
                 lecture: Interview problem solving.'
               official: true
               order: 0
+              section: Interview problem solving
             - slug: dsa-interview-hygiene-nc150
               title: NeetCode 150 — NeetCode 150 (representative subset)
               type: coding_problem

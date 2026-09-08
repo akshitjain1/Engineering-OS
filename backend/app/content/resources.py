@@ -211,6 +211,13 @@ def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, 
         # for a problem: the technique its topic teaches, and the concepts the
         # mapping verified it against.
         "notes": getattr(resource, "notes", None),
+        # When the URL was last fetched and confirmed to serve this page. A
+        # narrower fact than verification_status: it says the link works and
+        # points where it claims, not that the page covers the topic's
+        # concepts. The learner-facing surfaces show them separately, because
+        # conflating them is what let "NEEDS_REVIEW" read as "avoid this topic"
+        # across the whole computer-vision curriculum.
+        "link_checked_at": getattr(resource, "last_verified_at", None),
         "required_concepts_covered": getattr(resource, "required_concepts_covered", None) or [],
         "official_unofficial": resource.official_unofficial,
         "order_index": resource.order_index,

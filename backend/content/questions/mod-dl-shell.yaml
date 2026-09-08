@@ -1,0 +1,132 @@
+# Deep Learning awareness shell: orientation questions only.
+#
+# These two topics sit at AWARENESS depth before the deep Deep Learning module.
+# dl-awareness asks what the field is and is not; dl-path asks what you learn in
+# what order. Neither asks for a number, a hyperparameter or a derivation.
+schema_version: 1
+kind: question_bank
+module: mod-dl-shell
+topics:
+  - topic: dl-awareness
+    # Source: Deep Learning Book front matter - what deep learning is, representation learning
+    questions:
+      - id: dl-aware-learned-representations
+        prompt: "What does deep learning add over a system built on features an engineer designed by hand?"
+        options:
+          - "The representation itself is learned, as a hierarchy of simple concepts built in layers"
+          - "The features are still designed by hand, but the classifier on top of them is bigger"
+          - "It removes the need for training data, since the layers discover concepts unaided"
+          - "It replaces statistical learning with logical rules a person can read and edit"
+        answer: "The representation itself is learned, as a hierarchy of simple concepts built in layers"
+        explanation: >-
+          The book frames deep learning as representation learning: the difficult step of deciding what to
+          measure is moved inside the model. Hand-designed features are exactly what it displaces, it is
+          more data-hungry rather than data-free, and its learned parameters are famously hard for a human
+          to read as rules.
+        difficulty: beginner
+        mastery: true
+      - id: dl-aware-weak-fit
+        prompt: "Which of these jobs is the weakest fit for a deep neural network?"
+        options:
+          - "Deciding tax bands from 200 rows of tabular data where every rule must be auditable"
+          - "Labelling the objects that appear in millions of consumer photographs from the web"
+          - "Transcribing speech from several thousand hours of recorded support telephone calls"
+          - "Recommending products from years of click logs collected across a large retail site"
+        answer: "Deciding tax bands from 200 rows of tabular data where every rule must be auditable"
+        explanation: >-
+          Deep learning wants abundant data and tolerates opaque internals, so a tiny dataset with a legal
+          auditability requirement is the wrong place for it and a written rule table is better. The other
+          three have the raw scale and the perceptual or high-dimensional structure that learned
+          representations were built for.
+        difficulty: intermediate
+      - id: dl-aware-what-depth-means
+        prompt: "In this book's vocabulary, what is it that makes a model deep?"
+        options:
+          - "Concepts are composed in layers, each defined in terms of the simpler layer below"
+          - "The training set is large enough that shallower methods can no longer fit it well"
+          - "A single layer holds very many units, giving the model a large parameter count"
+          - "Training runs for many epochs, so the model has seen the dataset repeatedly"
+        answer: "Concepts are composed in layers, each defined in terms of the simpler layer below"
+        explanation: >-
+          Depth refers to the length of the chain of composed representations, not to any measure of size or
+          effort. Dataset size and units per layer describe scale, which is a different axis, and epoch
+          count describes how long you trained, which changes nothing about the depth of the graph you
+          trained.
+        difficulty: beginner
+      - id: dl-aware-field-nesting
+        prompt: "How do deep learning, machine learning and artificial intelligence relate to one another here?"
+        options:
+          - "Deep learning is a kind of machine learning, which is one approach to artificial intelligence"
+          - "Artificial intelligence is a kind of deep learning, reached once a network is deep enough"
+          - "Machine learning and deep learning are separate fields that both sit outside of that field"
+          - "Deep learning replaced machine learning, so the older term now means hand-coded rules"
+        answer: "Deep learning is a kind of machine learning, which is one approach to artificial intelligence"
+        explanation: >-
+          The book's nesting runs from the broad goal inwards: artificial intelligence contains machine
+          learning, which contains representation learning, which contains deep learning. Inverting the
+          nesting or separating the fields misstates that relation, and machine learning still covers many
+          non-deep methods in active use.
+        difficulty: beginner
+        mastery: true
+
+  - topic: dl-path
+    # Source: Deep Learning Book structure - Part I foundations, Part II practice, Part III research
+    questions:
+      - id: dl-path-maths-first
+        prompt: "The book opens with linear algebra, probability and numerical computation. Why is that placed at the start?"
+        options:
+          - "Gradients, matrices and numerical stability are the language every later chapter uses"
+          - "Those chapters are the applied part, so a reader who stops there can train models"
+          - "They are optional history, included so a reader can see where the field came from"
+          - "They cover the research frontier, which the practical chapters later simplify"
+        answer: "Gradients, matrices and numerical stability are the language every later chapter uses"
+        explanation: >-
+          Later chapters are written in that notation, so the foundations are a genuine dependency rather
+          than an aside. They are the mathematical part rather than the applied part, they describe current
+          tools rather than history, and the research frontier is the final part of the book, not the
+          opening one.
+        difficulty: beginner
+        mastery: true
+      - id: dl-path-defer-research
+        prompt: "You want to ship a working classifier rather than do research. Which stage of this path can you defer longest?"
+        options:
+          - "The research chapters on generative models and inference, once practical networks are solid"
+          - "The chapters on optimisation and regularisation, which matter only for original research"
+          - "The mathematical foundations, since your framework computes every gradient for you"
+          - "The chapters on convolutional networks, which only matter to research on vision"
+        answer: "The research chapters on generative models and inference, once practical networks are solid"
+        explanation: >-
+          The final part of the book is aimed at research directions, so a practitioner can postpone it
+          without cost. Optimisation and regularisation are what make a real training run converge and
+          generalise, the mathematics is needed to debug it, and convolutional networks are the workhorse
+          for any image task you would ship.
+        difficulty: intermediate
+      - id: dl-path-hard-dependency
+        prompt: "Which ordering on this path is a genuine dependency rather than a matter of taste?"
+        options:
+          - "The chain rule before backpropagation, since the algorithm is that rule on a graph"
+          - "Convolutional networks before plain feedforward networks, as convolution is simpler"
+          - "Generative modelling before optimisation, since sampling is what gradient descent does"
+          - "Regularisation before probability, since overfitting is defined without probability"
+        answer: "The chain rule before backpropagation, since the algorithm is that rule on a graph"
+        explanation: >-
+          Backpropagation is the chain rule applied along a computation graph, so the calculus has to come
+          first. Convolution is a constrained special case of a dense layer rather than the simpler
+          starting point, sampling and gradient descent are different operations, and regularisation is
+          explained in probabilistic terms.
+        difficulty: intermediate
+      - id: dl-path-tutorial-only-hazard
+        prompt: "A learner works only through framework tutorials and skips the foundations. What breaks first?"
+        options:
+          - "Debugging: a run that will not converge gives no clue without the underlying theory"
+          - "Installation: the tutorial frameworks refuse to run until the mathematics is learned"
+          - "Nothing, because a modern framework removes any reason to learn the foundations"
+          - "Reading code: framework tutorials are written in notation only researchers follow"
+        answer: "Debugging: a run that will not converge gives no clue without the underlying theory"
+        explanation: >-
+          Tutorials carry you while everything works; the foundations are what let you read a diverging loss
+          curve or a dead layer. Nothing about installation depends on theory, tutorials are written for
+          beginners rather than researchers, and the claim that foundations are unnecessary is the very
+          belief this failure disproves.
+        difficulty: intermediate
+        mastery: true

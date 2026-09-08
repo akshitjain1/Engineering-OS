@@ -1,0 +1,388 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ml
+    name: Machine Learning Foundations
+    description: Machine Learning Foundations
+    order: 6
+    subjects:
+    - slug: ml-foundations
+      name: Machine Learning Foundations
+      description: Machine Learning Foundations
+      order: 0
+      modules:
+      - slug: mod-ml-timeseries
+        name: Time Series
+        description: Why random splits are invalid on temporal data, rolling-origin validation, baselines,
+          forecast accuracy metrics, stationarity and ML-style lag and calendar features.
+        order: 3
+        topics:
+        - slug: ts-why-random-splits-fail
+          name: Why random splits fail on time series
+          description: Autocorrelation breaks the i.i.d. assumption, so a random K-fold split leaks the
+            future into the past and yields an optimistic error estimate - plus the drop-in fix and its
+            gap and max-train-size knobs.
+          order: 0
+          prerequisites:
+          - ml-train-test
+          - dq-data-leakage
+          learning_objective: Replace random splitting with a temporal split and explain what the random
+            split was actually measuring.
+          mastery_criteria:
+          - Explain in one sentence why K-fold on temporal data leaks, naming autocorrelation as the mechanism.
+          - Describe what a time-series split does differently, fold by fold.
+          - Say what the gap parameter is for, and set it from a stated forecast horizon.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: ml
+          lessons:
+          - slug: ts-why-random-splits-fail-core
+            title: Why random splits fail on time series
+            description: 'WHY NOW: Replace random splitting with a temporal split and explain what the
+              random split was actually measuring.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/modules/cross_validation.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: score one temporal dataset with random K-fold and again with a time-series
+              split, and report the gap between the two error estimates. HOW MANY: 2 scores. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two cross-validation runs side by side with the optimism quantified
+              as a number.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: ts-why-random-splits-fail-primary
+              title: 'Cross-validation: evaluating estimator performance'
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/cross_validation.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: §3.1.2.6 "Cross validation of time series data" and §3.1.2.6.1 "Time Series Split"
+                (headings verified)
+              description: States the reason plainly - autocorrelation breaks the i.i.d. assumption, so
+                KFold leaks the future into the past and yields an optimistic error estimate - and gives
+                the drop-in fix in the library you already use.
+            - slug: ts-why-random-splits-fail-reference
+              title: TimeSeriesSplit
+              type: documentation
+              url: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html
+              provider: scikit-learn
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The API, including gap and max_train_size, which are what you need for a real
+                forecast horizon.
+        - slug: ts-rolling-origin-validation
+          name: Rolling-origin validation
+          description: Evaluation on a rolling forecasting origin, with the diagram that makes the scheme
+            obvious, plus the multi-step-ahead variants.
+          order: 1
+          prerequisites:
+          - ts-why-random-splits-fail
+          learning_objective: Design a rolling-origin evaluation for a stated forecast horizon.
+          mastery_criteria:
+          - Draw the rolling-origin scheme for five origins and a horizon of three, marking the training
+            and test points of each fold.
+          - Explain why one held-out tail is a worse estimate of forecast error than many origins.
+          - Say what changes in the scheme when the horizon is twelve steps rather than one.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 20
+          domain_key: ml
+          lessons:
+          - slug: ts-rolling-origin-validation-core
+            title: Rolling-origin validation
+            description: 'WHY NOW: Design a rolling-origin evaluation for a stated forecast horizon.
+
+
+              LEARN: OTexts (Forecasting: Principles and Practice, 3rd ed.) — https://otexts.com/fpp3/tscv.html
+
+              TIME: ~20 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: draw the rolling-origin diagram for your own series with your real horizon,
+              then write the splitter parameters that implement it. HOW MANY: 1 scheme. WHERE: notes plus
+              notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: the splitter configured to match your diagram, with the fold boundaries
+              printed.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.33
+            resources:
+            - slug: ts-rolling-origin-validation-primary
+              title: 5.10 Time series cross-validation
+              type: book
+              url: https://otexts.com/fpp3/tscv.html
+              provider: 'OTexts (Forecasting: Principles and Practice, 3rd ed.)'
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Rolling-origin ("evaluation on a rolling forecasting origin") validation with
+                the diagram that makes the scheme obvious, plus multi-step-ahead variants - the correct
+                way to estimate forecast error.
+        - slug: ts-forecasting-baselines
+          name: Forecasting baselines
+          description: Naive, seasonal-naive, mean and drift forecasts - the baselines that beat most
+            first attempts at a neural forecaster, and the bar any model must clear.
+          order: 2
+          prerequisites:
+          - ml-linear-regression
+          - ds-pandas
+          learning_objective: Produce the four simple baselines and use them as the bar any model has
+            to beat.
+          mastery_criteria:
+          - Define the naive, seasonal-naive, mean and drift forecasts, each in one line.
+          - Say which baseline is the right one for a daily series with a weekly cycle, and why.
+          - 'State the rule you will hold yourself to: no model ships without beating a named baseline
+            on the same evaluation.'
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 20
+          domain_key: ml
+          lessons:
+          - slug: ts-forecasting-baselines-core
+            title: Forecasting baselines
+            description: 'WHY NOW: Produce the four simple baselines and use them as the bar any model
+              has to beat.
+
+
+              LEARN: OTexts (Forecasting: Principles and Practice, 3rd ed.) — https://otexts.com/fpp3/simple-methods.html
+
+              TIME: ~20 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: compute all four baselines on one series and record their test errors as
+              the bar to beat. HOW MANY: 4 baselines. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 4
+
+              BUILD: IMPLEMENT: a baseline table with the four errors and the seasonal period you chose
+              written next to it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.33
+            resources:
+            - slug: ts-forecasting-baselines-primary
+              title: 5.2 Some simple forecasting methods
+              type: book
+              url: https://otexts.com/fpp3/simple-methods.html
+              provider: 'OTexts (Forecasting: Principles and Practice, 3rd ed.)'
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Naive, seasonal-naive, mean and drift forecasts. Seasonal-naive is the baseline
+                that beats most first attempts at an LSTM, and knowing it is what keeps a forecasting
+                project honest.
+        - slug: ts-forecast-accuracy-metrics
+          name: Forecast accuracy metrics
+          description: Training versus test sets on time series, then scale-dependent (MAE, RMSE) versus
+            percentage (MAPE) versus scale-free (MASE) errors - including why MAPE breaks near zero.
+          order: 3
+          prerequisites:
+          - ts-forecasting-baselines
+          learning_objective: Choose a forecast error metric that survives comparison across series.
+          mastery_criteria:
+          - Say what MAPE does when an actual value is zero or near zero, and name a real series where
+            that happens.
+          - Explain what MASE divides by, and why that division is what makes it comparable across series.
+          - Given two series on different scales, pick the metric you would average across them and justify
+            the choice.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: ml
+          lessons:
+          - slug: ts-forecast-accuracy-metrics-core
+            title: Forecast accuracy metrics
+            description: 'WHY NOW: Choose a forecast error metric that survives comparison across series.
+
+
+              LEARN: OTexts (Forecasting: Principles and Practice, 3rd ed.) — https://otexts.com/fpp3/accuracy.html
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: compute MAE, RMSE, MAPE and MASE for one forecast, then explain why two
+              of the four disagree about which model is better. HOW MANY: 4 metrics. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 4
+
+              BUILD: IMPLEMENT: the four metrics computed against a seasonal-naive denominator for MASE.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: ts-forecast-accuracy-metrics-primary
+              title: 5.8 Evaluating point forecast accuracy
+              type: book
+              url: https://otexts.com/fpp3/accuracy.html
+              provider: 'OTexts (Forecasting: Principles and Practice, 3rd ed.)'
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Training vs test sets on time series, then scale-dependent (MAE, RMSE) vs percentage
+                (MAPE) vs scale-free (MASE) errors - including why MAPE breaks near zero and why MASE
+                is the right default for comparing across series.
+        - slug: ts-stationarity-differencing
+          name: Stationarity and differencing
+          description: What stationarity means, how differencing and seasonal differencing achieve it,
+            and the autocorrelation function as a diagnostic.
+          order: 4
+          prerequisites:
+          - math-stats-summary
+          - ds-eda
+          learning_objective: Diagnose non-stationarity and apply the right differencing.
+          mastery_criteria:
+          - State the properties a stationary series has, and name two ways a real series violates them.
+          - Read an ACF plot and say whether the series needs differencing, seasonal differencing, or
+            neither.
+          - Explain what a first difference does to a trend and what a seasonal difference does to a yearly
+            cycle.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: ml
+          lessons:
+          - slug: ts-stationarity-differencing-core
+            title: Stationarity and differencing
+            description: 'WHY NOW: Diagnose non-stationarity and apply the right differencing.
+
+
+              LEARN: OTexts (Forecasting: Principles and Practice, 3rd ed.) — https://otexts.com/fpp3/stationarity.html
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: plot the ACF of one series before and after differencing and state what
+              changed. HOW MANY: 2 ACF plots. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the before/after ACF plots with your differencing decision written underneath
+              them.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: ts-stationarity-differencing-primary
+              title: 9.1 Stationarity and differencing
+              type: book
+              url: https://otexts.com/fpp3/stationarity.html
+              provider: 'OTexts (Forecasting: Principles and Practice, 3rd ed.)'
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: What stationarity means, how differencing and seasonal differencing achieve
+                it, and the ACF as a diagnostic - the vocabulary you need to read any time-series codebase
+                or paper.
+        - slug: ts-lag-and-calendar-features
+          name: Lag and calendar features
+          description: Turning timestamps into lag, calendar, spline and cyclical (sine/cosine) features,
+            evaluated with a time-series split, comparing a gradient-boosted model against a linear one.
+          order: 5
+          prerequisites:
+          - ds-feature-eng
+          - ts-why-random-splits-fail
+          - gbm-boosted-trees-theory
+          - ml-sklearn-pipeline
+          learning_objective: Build a correctly-validated ML forecasting pipeline out of timestamp features.
+          mastery_criteria:
+          - Explain what a sine/cosine pair encodes about hour-of-day that an integer column does not.
+          - Say which of your engineered features would leak if it were computed before the temporal split.
+          - Report which model family won on your series and name the feature encoding that made the difference.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: ml
+          lessons:
+          - slug: ts-lag-and-calendar-features-core
+            title: Lag and calendar features
+            description: 'WHY NOW: Build a correctly-validated ML forecasting pipeline out of timestamp
+              features.
+
+
+              LEARN: scikit-learn — https://scikit-learn.org/stable/auto_examples/applications/plot_cyclical_feature_engineering.html
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: work through the scikit-learn cyclical-feature example on its own dataset,
+              then swap in one series of your own and re-run the time-series-split comparison. HOW MANY:
+              1 pipeline. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a feature pipeline with lag, calendar and cyclical features scored under
+              a time-series split against your seasonal-naive baseline.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: ts-lag-and-calendar-features-primary
+              title: Time-related feature engineering
+              type: documentation
+              url: https://scikit-learn.org/stable/auto_examples/applications/plot_cyclical_feature_engineering.html
+              provider: scikit-learn
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE — work through it as a notebook
+              description: 'The bridge from forecasting to your actual toolkit: turn timestamps into lag,
+                calendar, spline and cyclical (sin/cos) features, evaluate with TimeSeriesSplit, and compare
+                a gradient-boosted model against a linear one. The best worked example of ML-style forecasting
+                done correctly.'

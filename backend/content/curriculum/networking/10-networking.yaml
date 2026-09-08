@@ -45,15 +45,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram.
-              WHERE: notes.
+              PRACTICE: WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram. WHERE: notes.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -66,26 +64,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for Internet basics. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-internet-basics-q1
-              prompt: Core idea of Internet basics?
-              options:
-              - A vague buzzword
-              - Explain how clients reach servers over the internet.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Explain how clients reach servers over the internet.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for Internet basics. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-internet-basics-practice
               title: 'Practice: Internet basics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram.
-                WHERE: notes.'
+              instructions: 'WHAT: Diagram client→DNS→server path. HOW MANY: 1 diagram. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: net-dns
@@ -120,8 +107,7 @@ track:
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -134,26 +120,14 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for DNS. Content inspection pending
-                upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-dns-q1
-              prompt: Core idea of DNS?
-              options:
-              - A vague buzzword
-              - Resolve hostnames to IP addresses.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Resolve hostnames to IP addresses.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for DNS. Content inspection pending upgrade to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-dns-practice
               title: 'Practice: DNS'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Run dig/nslookup for 3 hosts. HOW MANY: 3. WHERE:
-                terminal.'
+              instructions: 'WHAT: Run dig/nslookup for 3 hosts. HOW MANY: 3. WHERE: terminal.'
               difficulty: beginner
               order: 0
         - slug: net-tcp-udp
@@ -182,15 +156,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE:
-              notes.
+              PRACTICE: WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE: notes.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -203,26 +175,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for TCP vs UDP. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-tcp-udp-q1
-              prompt: Core idea of TCP vs UDP?
-              options:
-              - A vague buzzword
-              - Contrast reliable streams vs datagrams.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Contrast reliable streams vs datagrams.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for TCP vs UDP. Content inspection pending upgrade to
+                VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-tcp-udp-practice
               title: 'Practice: TCP vs UDP'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE:
-                notes.'
+              instructions: 'WHAT: List 4 use-cases for TCP vs UDP. HOW MANY: 4. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: net-http
@@ -232,8 +193,7 @@ track:
           prerequisites:
           - net-internet-basics
           - be-http
-          learning_objective: Use methods, headers, status codes, and caching headers
-            correctly.
+          learning_objective: Use methods, headers, status codes, and caching headers correctly.
           mastery_criteria:
           - Explain HTTP deep dive.
           - Complete mapped practice with stated quantity.
@@ -246,23 +206,21 @@ track:
           lessons:
           - slug: net-http-core
             title: HTTP deep dive
-            description: 'WHY NOW: Use methods, headers, status codes, and caching
-              headers correctly.
+            description: 'WHY NOW: Use methods, headers, status codes, and caching headers correctly.
 
 
               LEARN: MDN — https://developer.mozilla.org/en-US/docs/Web/HTTP
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Capture 5 requests in DevTools and label method/status.
-              HOW MANY: 5. WHERE: browser.
+              PRACTICE: WHAT: Capture 5 requests in DevTools and label method/status. HOW MANY: 5. WHERE:
+              browser.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -275,26 +233,16 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for HTTP deep dive. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-http-q1
-              prompt: Core idea of HTTP deep dive?
-              options:
-              - A vague buzzword
-              - Use methods, headers, status codes, and caching headers correctly.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Use methods, headers, status codes, and caching headers correctly.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for HTTP deep dive. Content inspection pending upgrade
+                to VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-http-practice
               title: 'Practice: HTTP deep dive'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Capture 5 requests in DevTools and label method/status.
-                HOW MANY: 5. WHERE: browser.'
+              instructions: 'WHAT: Capture 5 requests in DevTools and label method/status. HOW MANY: 5.
+                WHERE: browser.'
               difficulty: beginner
               order: 0
         - slug: net-https-tls
@@ -323,15 +271,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE:
-              browser.
+              PRACTICE: WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE: browser.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -344,26 +290,15 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for HTTPS & TLS. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-https-tls-q1
-              prompt: Core idea of HTTPS & TLS?
-              options:
-              - A vague buzzword
-              - Explain certificates and encrypted transport.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Explain certificates and encrypted transport.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for HTTPS & TLS. Content inspection pending upgrade to
+                VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-https-tls-practice
               title: 'Practice: HTTPS & TLS'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE:
-                browser.'
+              instructions: 'WHAT: Inspect cert chain for 2 sites. HOW MANY: 2. WHERE: browser.'
               difficulty: beginner
               order: 0
         - slug: net-websockets
@@ -392,15 +327,13 @@ track:
 
               TIME: ~45 minutes (MEDIUM confidence until measured).
 
-              PRACTICE: WHAT: Sketch WS handshake vs HTTP polling. HOW MANY: 1. WHERE:
-              notes.
+              PRACTICE: WHAT: Sketch WS handshake vs HTTP polling. HOW MANY: 1. WHERE: notes.
 
               DESTINATION: LOCAL_IDE
 
               QUANTITY: 3
 
-              DONE WHEN: You can explain the focus concepts without notes and finish
-              the practice quantity.'
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
             order: 0
             hours_estimated: 0.75
             resources:
@@ -413,25 +346,14 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED primary docs for WebSockets. Content inspection
-                pending upgrade to VERIFIED_COVERAGE.
-            questions:
-            - slug: net-websockets-q1
-              prompt: Core idea of WebSockets?
-              options:
-              - A vague buzzword
-              - Use persistent bidirectional channels when needed.
-              - Irrelevant outside interviews
-              - Replaces prerequisites
-              answer: Use persistent bidirectional channels when needed.
-              explanation: Match the learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED primary docs for WebSockets. Content inspection pending upgrade to
+                VERIFIED_COVERAGE.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: net-websockets-practice
               title: 'Practice: WebSockets'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Sketch WS handshake vs HTTP polling. HOW MANY:
-                1. WHERE: notes.'
+              instructions: 'WHAT: Sketch WS handshake vs HTTP polling. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0

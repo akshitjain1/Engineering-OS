@@ -1,0 +1,129 @@
+# AI Engineering awareness shell: orientation questions only.
+#
+# ai-eng-awareness maps to the OpenAI evals guide and asks what the discipline
+# is and the vocabulary of an eval. ai-eng-path maps to the prompt engineering
+# guide and asks what you learn in which order, and what each stage depends on.
+schema_version: 1
+kind: question_bank
+module: mod-ai-eng-shell
+topics:
+  - topic: ai-eng-awareness
+    # Source: OpenAI docs - evals guide, read as an orientation to the discipline
+    questions:
+      - id: ai-eng-aware-discipline-scope
+        prompt: "What does the term AI engineering describe, on this orientation?"
+        options:
+          - "Building and running dependable features on existing models, with evals and monitoring"
+          - "Designing new model architectures and pretraining them on very large text corpora"
+          - "Labelling training data and maintaining the feature store a training pipeline reads"
+          - "Researching alignment methods so that published models refuse unsafe instructions"
+        answer: "Building and running dependable features on existing models, with evals and monitoring"
+        explanation: >-
+          The discipline sits above the model: you consume a trained model and take responsibility for
+          reliability, cost and measurement of the feature around it. Architecture research and pretraining
+          belong to model builders, data labelling to the training pipeline, and alignment research to
+          a separate community again.
+        difficulty: beginner
+        mastery: true
+      - id: ai-eng-aware-eval-parts
+        prompt: "In the vocabulary of this guide, which two pieces make up an eval?"
+        options:
+          - "A set of test cases to run, and a grader that scores what came back for each one"
+          - "A training split and a validation split, drawn from one labelled dataset of examples"
+          - "A prompt template and a sampling temperature, held fixed so runs can be compared"
+          - "A latency budget and a cost budget, checked against every response the model gives"
+        answer: "A set of test cases to run, and a grader that scores what came back for each one"
+        explanation: >-
+          An eval is data plus a scoring rule, which is what makes it repeatable and comparable across
+          changes. Train and validation splits belong to model training rather than to feature evaluation,
+          a fixed prompt and temperature are conditions of the run, and budgets measure operations
+          instead of quality.
+        difficulty: beginner
+      - id: ai-eng-aware-why-not-manual
+        prompt: "Why does this guide treat checking a few outputs by hand as insufficient before shipping?"
+        options:
+          - "Output shifts between runs and model versions, so one look proves very little"
+          - "Manual checking is slower, though it is every bit as reliable as a graded suite"
+          - "People cannot read model output objectively, so only a model grader can be trusted"
+          - "Manual checking needs production access, which the guide says developers should lack"
+        answer: "Output shifts between runs and model versions, so one look proves very little"
+        explanation: >-
+          Sampling and model updates make a single observation a weak signal, which is the argument for a
+          scored dataset. Speed is not the objection, human judgement remains the reference standard for
+          many criteria, and access control has nothing to do with why a spot check is unconvincing.
+        difficulty: intermediate
+        mastery: true
+      - id: ai-eng-aware-silent-quality-shift
+        prompt: "Which change can move the quality of your feature without anyone editing your code?"
+        options:
+          - "The provider beginning to serve a new version of the model your application calls"
+          - "A colleague renaming an internal module that your request-building code imports"
+          - "A dependency upgrade that changes how your HTTP client formats its retry headers"
+          - "A database migration adding an index to a table your feature never reads from"
+        answer: "The provider beginning to serve a new version of the model your application calls"
+        explanation: >-
+          The model is an external dependency whose behaviour can change under you, which is why evals are
+          rerun on a schedule and not only after your own edits. A module rename either compiles or
+          breaks loudly, retry headers do not alter generated text, and an index on an unread table
+          changes nothing.
+        difficulty: intermediate
+
+  - topic: ai-eng-path
+    # Source: OpenAI docs - prompt engineering guide as the foundation of the path
+    questions:
+      - id: ai-eng-path-prompting-first
+        prompt: "Why does this path put prompt engineering ahead of everything else?"
+        options:
+          - "It is the fastest loop: change the text, rerun, and see the effect without gathering data"
+          - "It is the hardest of the skills, so it is best attempted while the learner is fresh"
+          - "It removes the need for evals, because a good prompt behaves the same way each time"
+          - "The interface requires it, rejecting requests from callers who have not tuned a prompt"
+        answer: "It is the fastest loop: change the text, rerun, and see the effect without gathering data"
+        explanation: >-
+          Prompting has the shortest feedback cycle and no data collection cost, so it is where you learn
+          how the model responds at all. Difficulty is not the ordering criterion, prompts vary run to run
+          so evals are still needed, and no interface checks whether you tuned anything.
+        difficulty: beginner
+        mastery: true
+      - id: ai-eng-path-stage-dependency
+        prompt: "Which later stage of this path is fed by the failures you collected at an earlier stage?"
+        options:
+          - "Fine-tuning: the examples you train on come from cases your prompt could not handle"
+          - "Prompting: your opening wording is derived from a fine-tune you completed beforehand"
+          - "Retrieval: the corpus you index is written by the model during earlier prompt runs"
+          - "Monitoring: your dashboards can only be defined once a fine-tune has been shipped"
+        answer: "Fine-tuning: the examples you train on come from cases your prompt could not handle"
+        explanation: >-
+          Fine-tuning needs curated examples, and the natural source is the set of inputs your prompt got
+          wrong, so it depends on earlier measurement. Prompting is the starting point rather than a
+          consequence, a retrieval corpus is your own existing documents, and monitoring is defined by
+          the feature you serve.
+        difficulty: intermediate
+      - id: ai-eng-path-transferable-skill
+        prompt: "Which existing backend skill transfers most directly onto this path?"
+        options:
+          - "Treating an unreliable dependency with timeouts, retries and structured logging"
+          - "Tuning database indexes, the closest analogue to adjusting sampling settings"
+          - "Writing stylesheets, since generated output is rendered straight to the browser"
+          - "Designing a normalised relational schema, which is how prompt templates are stored"
+        answer: "Treating an unreliable dependency with timeouts, retries and structured logging"
+        explanation: >-
+          A model provider is a slow, rate-limited, occasionally failing remote service, so ordinary
+          resilience engineering applies unchanged. Index tuning and sampling settings have nothing in
+          common, presentation is a separate concern, and prompts live in version control as text rather
+          than in a relational schema.
+        difficulty: intermediate
+        mastery: true
+      - id: ai-eng-path-omit-safely
+        prompt: "What can you leave out of this path without weakening the result you ship?"
+        options:
+          - "Implementing your own vector index, when a managed one serves the same purpose"
+          - "Writing down what good output looks like, since quality is obvious once you see it"
+          - "Recording which prompt version produced each response, which matters only at scale"
+          - "Putting an upper bound on cost per request, which the provider enforces for you"
+        answer: "Implementing your own vector index, when a managed one serves the same purpose"
+        explanation: >-
+          Index internals are undifferentiated plumbing you can buy. Written quality criteria are what an
+          eval grades against, the prompt version behind a response is what makes a regression
+          diagnosable at any scale, and no provider caps your spend per request on your behalf.
+        difficulty: advanced

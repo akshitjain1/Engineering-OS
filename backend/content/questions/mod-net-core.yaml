@@ -1,0 +1,422 @@
+# Network fundamentals self-check questions.
+#
+# Every question here is answerable from the resource its topic maps to, and is
+# about that topic only. Gates in app/content/question_bank.py enforce both: a
+# prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-net-core
+topics:
+  - topic: net-internet-basics
+    # Source: MDN - How does the Internet work
+    questions:
+      - id: net-url-to-first-byte
+        prompt: "You type an API hostname into a browser and the first response byte comes back. Which sequence of steps actually happened?"
+        options:
+          - "The name resolved to an IP, a TCP connection opened, TLS was negotiated, then the request went out"
+          - "A TCP connection opened first, the hostname was resolved over that connection, then the request went out"
+          - "The request went out immediately and the network resolved the hostname while the packets travelled"
+          - "TLS was negotiated first, the hostname resolved inside that tunnel, then a TCP connection opened"
+        answer: "The name resolved to an IP, a TCP connection opened, TLS was negotiated, then the request went out"
+        explanation: >-
+          You cannot connect to a name, so resolution has to come first, and TLS runs inside an
+          already-open TCP connection rather than before it. Nothing on the path resolves names
+          on your behalf mid-flight, and no request can leave until there is a socket to write it
+          to. This ordering is what you reason about when a call is slow at only one stage.
+        difficulty: intermediate
+        mastery: true
+      - id: net-router-job
+        prompt: "Between your laptop and a server there are a dozen routers. What is each router actually doing with your packets?"
+        options:
+          - "Forwarding each packet one hop closer to its destination based on the address it carries"
+          - "Holding a copy of the site so that nearby clients can be answered without going further"
+          - "Encrypting every packet that passes through so the rest of the link stays private"
+          - "Reserving a dedicated wire for your connection until the conversation has finished"
+        answer: "Forwarding each packet one hop closer to its destination based on the address it carries"
+        explanation: >-
+          Routers make a per-packet forwarding decision; they are hops, not caches, not encryptors
+          and not circuit switches. Caching is done by proxies and CDNs, encryption is the
+          endpoints' job, and packet switching exists precisely so no wire is dedicated to one
+          conversation. Each hop is also a place where delay and loss can appear.
+        difficulty: beginner
+      - id: net-internet-vs-web
+        prompt: "A colleague uses the words internet and web as if they named the same thing. What distinction is worth keeping?"
+        options:
+          - "The internet is the connected network infrastructure; the web is one service running on top of it"
+          - "The web is the physical cabling between machines and the internet is the software running over it"
+          - "They are genuinely the same thing, and the two words are only regional naming preferences"
+          - "The internet carries mail and file transfer only, while the web carries anything a browser opens"
+        answer: "The internet is the connected network infrastructure; the web is one service running on top of it"
+        explanation: >-
+          The internet is the network of networks; HTTP and the web are one application on it,
+          alongside mail, SSH and your own service protocols. The cabling answer inverts the two
+          layers, treating them as identical hides that non-web traffic exists, and mail is not
+          separate from the internet but another service riding the same infrastructure.
+        difficulty: beginner
+      - id: net-latency-vs-bandwidth
+        prompt: "Your link is a gigabit, yet a tiny API call to a server on another continent still takes about 200 ms per round trip. What explains that?"
+        options:
+          - "Latency comes from distance and hops, and adding bandwidth does not shorten the round trip"
+          - "Bandwidth is throttled per connection, so one small request is never allowed to use the link"
+          - "The packet is too small to fill the pipe, so routers hold it back until more data arrives"
+          - "Encryption adds a fixed delay for every byte sent, and that cost dominates small calls"
+        answer: "Latency comes from distance and hops, and adding bandwidth does not shorten the round trip"
+        explanation: >-
+          Bandwidth is how much fits per second; latency is how long one trip takes, and physics
+          plus queueing at each hop set a floor that no upgrade removes. Routers forward small
+          packets immediately rather than waiting to batch them, per-connection throttling would
+          show as slow transfers rather than slow round trips, and TLS costs handshakes, not bytes.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: net-dns
+    # Source: MDN - What is a domain name
+    questions:
+      - id: net-dns-what-it-returns
+        prompt: "What does a successful DNS lookup for an API hostname hand back to the client?"
+        options:
+          - "An IP address, which the client then opens a connection to"
+          - "The HTML of that site's home page, cached by a nearby resolver"
+          - "A list of routers that the packets are then required to follow"
+          - "The server's TLS certificate, so the client can begin encrypting"
+        answer: "An IP address, which the client then opens a connection to"
+        explanation: >-
+          DNS is a lookup from name to address and nothing more. Content comes later over HTTP,
+          the path through the network is chosen hop by hop by routers rather than handed to the
+          client, and the certificate arrives during the TLS handshake after a connection exists.
+          Confusing these makes it hard to tell a resolution failure from a connection failure.
+        difficulty: beginner
+      - id: net-dns-ttl-deploy
+        prompt: "You repoint a domain at a new server and for hours some users land on the new box while others still hit the old one. What is going on?"
+        options:
+          - "Resolvers and clients cached the previous record and keep serving it until its TTL expires"
+          - "DNS updates spread region by region in alphabetical order, so some countries lag by hours"
+          - "The old server keeps answering because DNS allows two records for one name to be live"
+          - "Browsers pin the first address they ever saw for a hostname and never look it up again"
+        answer: "Resolvers and clients cached the previous record and keep serving it until its TTL expires"
+        explanation: >-
+          Caching at every layer, with the TTL you published, is what makes a DNS change look
+          half-applied; lowering the TTL before a move is the fix. There is no alphabetical
+          rollout, the old record is stale rather than legitimately co-active, and browsers do
+          re-resolve, they simply honour cached entries until those entries expire.
+        difficulty: intermediate
+        mastery: true
+      - id: net-dns-name-structure
+        prompt: "In a hostname such as api.staging.example.co.uk, which part is the piece a registrar actually sold to the owner?"
+        options:
+          - "example.co.uk, a label under a public suffix; everything to its left is theirs to invent"
+          - "api.staging.example.co.uk, the full hostname, registered exactly as it is written here"
+          - "co.uk, the suffix itself, to which any label can then be attached on the left"
+          - "api, the leftmost label, which the registry assigns to the buyer at purchase time"
+        answer: "example.co.uk, a label under a public suffix; everything to its left is theirs to invent"
+        explanation: >-
+          You register one label beneath a suffix, then create as many subdomains as you like
+          without involving the registrar. Nobody sells a public suffix such as co.uk, hostnames
+          with subdomains are not what is registered, and leftmost labels are yours to define
+          rather than allocated by a registry. This is why a staging host needs no purchase.
+        difficulty: intermediate
+      - id: net-dns-why-names
+        prompt: "Why do clients resolve your service by hostname on every call instead of hard-coding the server's IP address?"
+        options:
+          - "The operator can move the service to another address and clients follow with no code change"
+          - "Hostnames travel in fewer packets than addresses do, which makes each request measurably faster"
+          - "Addresses are meant to be secret, so publishing one in client code would expose the server"
+          - "The registrar verifies the hostname on each request, which authenticates the calling client"
+        answer: "The operator can move the service to another address and clients follow with no code change"
+        explanation: >-
+          Indirection is the point: names outlive addresses, which is what makes failover, scaling
+          and migration possible. A hostname costs an extra lookup rather than saving packets, IP
+          addresses are public by necessity since every packet carries them, and registrars are
+          not in the request path and authenticate nothing per call.
+        difficulty: beginner
+        mastery: true
+
+  - topic: net-tcp-udp
+    # Source: GeeksforGeeks - Differences between TCP and UDP
+    questions:
+      - id: net-tcp-why-for-api
+        prompt: "Your inference service exposes a JSON HTTP API. Why does that sit on TCP rather than on UDP?"
+        options:
+          - "TCP delivers the byte stream complete and in order, retransmitting losses, which a JSON body needs"
+          - "TCP segments are larger, so a JSON body of any size will fit inside a single one of them"
+          - "UDP is blocked by default on every public network, so no request would ever reach the service"
+          - "UDP can only carry fixed-size binary records, so it has no way to carry a text payload"
+        answer: "TCP delivers the byte stream complete and in order, retransmitting losses, which a JSON body needs"
+        explanation: >-
+          A half-arrived or reordered JSON body is unparseable, so the transport has to guarantee
+          the stream, and that is exactly what acknowledgements and retransmission buy. Segment
+          size is bounded by the path either way, UDP is widely routed and carries DNS and QUIC,
+          and UDP payloads are arbitrary bytes including text.
+        difficulty: beginner
+        mastery: true
+      - id: net-udp-where-wins
+        prompt: "For which kind of traffic does the refusal of UDP to retransmit or reorder become an advantage rather than a flaw?"
+        options:
+          - "Live audio and video, where a packet that arrives late is useless and waiting for it adds delay"
+          - "Bulk file transfer, where quietly dropping a few blocks shortens the total transfer time"
+          - "Database replication, where every write has to land exactly once and in the same order"
+          - "Payment authorisation, where losing a message silently costs less than retrying the request"
+        answer: "Live audio and video, where a packet that arrives late is useless and waiting for it adds delay"
+        explanation: >-
+          Real-time media would rather drop a frame than stall the stream, so head-of-line blocking
+          hurts more than loss does. The other three are the opposite case: file transfer,
+          replication and payments all need every byte exactly once, and losing data quietly is
+          the worst possible failure mode for them.
+        difficulty: intermediate
+      - id: net-handshake-purpose
+        prompt: "What has been established by the end of the TCP three-way handshake, before any application bytes move?"
+        options:
+          - "Both ends have confirmed they can reach each other and agreed starting sequence numbers"
+          - "Both ends have exchanged certificates and derived the keys that will encrypt the data"
+          - "The client has reserved a fixed share of bandwidth on every router along the path"
+          - "The server has compressed the connection so that later segments carry less overhead"
+        answer: "Both ends have confirmed they can reach each other and agreed starting sequence numbers"
+        explanation: >-
+          The handshake proves two-way reachability and synchronises sequence numbers so ordering
+          and retransmission can work. Certificates and keys belong to TLS, which runs afterwards;
+          no bandwidth is reserved because the network is packet switched; and compression is a
+          higher-layer option rather than part of connection setup.
+        difficulty: intermediate
+        mastery: true
+      - id: net-port-identifies
+        prompt: "One server address runs an API, a database and an SSH daemon at once. What does the port number in a connection pick out?"
+        options:
+          - "Which listening process on that host the segment belongs to, so one address serves many services"
+          - "Which physical network socket on the machine the network cable has been plugged into"
+          - "Which version of the protocol the two ends settled on while setting up the connection"
+          - "How much of the host's bandwidth the operating system will grant to that connection"
+        answer: "Which listening process on that host the segment belongs to, so one address serves many services"
+        explanation: >-
+          An address identifies the host and the port identifies the endpoint within it, which is
+          why a connection is really a tuple of two addresses and two ports. Ports are not
+          physical jacks, they carry no protocol version, and they impose no bandwidth policy.
+          It is also why two services cannot bind the same port on one interface.
+        difficulty: beginner
+      - id: net-udp-silent-loss
+        prompt: "A UDP metrics agent quietly loses data points under load and logs no error at all. Why is that behaviour consistent with the protocol?"
+        options:
+          - "UDP has no acknowledgements, so a dropped datagram is never noticed and never resent"
+          - "UDP retries a datagram three times and then discards it without writing any log entry"
+          - "UDP reorders datagrams under load, and the receiver discards any that arrive out of order"
+          - "UDP needs a handshake for each datagram, and those attempts time out silently when busy"
+        answer: "UDP has no acknowledgements, so a dropped datagram is never noticed and never resent"
+        explanation: >-
+          Because nothing acknowledges a datagram, neither end can tell that one vanished, so loss
+          is invisible unless the application adds its own sequencing. UDP performs no retries at
+          all, it does not itself discard out-of-order data, and it is connectionless, so there is
+          no per-datagram handshake that could time out.
+        difficulty: intermediate
+
+  - topic: net-http
+    # Source: MDN - HTTP
+    questions:
+      - id: net-http-method-safety
+        prompt: "An endpoint recomputes and stores a report each time it is called. Why is GET the wrong method for it?"
+        options:
+          - "GET is defined as safe and cacheable, so browsers and proxies may repeat or cache the call"
+          - "GET requests cannot carry query parameters, so the endpoint could not receive its inputs"
+          - "GET responses are capped at a few kilobytes, so a report body would arrive truncated"
+          - "GET is unencrypted by definition, so the stored results would travel in the clear"
+        answer: "GET is defined as safe and cacheable, so browsers and proxies may repeat or cache the call"
+        explanation: >-
+          Method semantics are a contract with every intermediary: something labelled safe may be
+          prefetched, retried or served from a cache, so side effects belong on POST. GET does
+          carry query parameters, there is no few-kilobyte cap on a response body, and encryption
+          comes from HTTPS at the transport layer, independent of which method you chose.
+        difficulty: intermediate
+      - id: net-http-4xx-vs-5xx
+        prompt: "A client sends a malformed JSON body, your handler throws, and the caller receives a 500. Why should that have been a 4xx?"
+        options:
+          - "A 4xx says the request itself was faulty so the caller can fix it; a 5xx tells them to retry"
+          - "The two classes look the same to clients, and only the response body decides what happens"
+          - "Proxies never log 5xx responses, so this failure would be invisible in traffic metrics"
+          - "A 5xx forces the client to reopen its connection, while a 4xx lets it reuse the open one"
+        answer: "A 4xx says the request itself was faulty so the caller can fix it; a 5xx tells them to retry"
+        explanation: >-
+          Status classes drive automatic behaviour: retry logic, alerting and error budgets all
+          read them, so a mislabelled client error triggers pointless retries and false alarms.
+          Clients and libraries very much distinguish the classes, proxies log both, and neither
+          class dictates connection reuse, which connection headers govern instead.
+        difficulty: intermediate
+      - id: net-http-cache-busting
+        prompt: "You served a JS bundle with a one-year max-age and users still get the old file after deploying. Which fix matches how HTTP caching works?"
+        options:
+          - "Serve the new bundle under a new filename, so the URL and therefore the cache key changes"
+          - "Add a Pragma header on the new response so browsers know to ignore the copy they hold"
+          - "Shorten max-age on the new response, which retroactively expires copies already stored"
+          - "Return a 304 for the old URL so the browser understands the file it holds is now stale"
+        answer: "Serve the new bundle under a new filename, so the URL and therefore the cache key changes"
+        explanation: >-
+          A stored response is keyed by URL and is reused without contacting you until it expires,
+          so the only reliable escape is a different URL, which is why bundlers hash filenames.
+          Headers on a new response cannot reach copies already cached, Pragma is a legacy request
+          directive, and a 304 means unchanged, which is the opposite of what you want here.
+        difficulty: advanced
+        mastery: true
+      - id: net-http-302-behaviour
+        prompt: "A browser gets back a 302 with a Location header. What does it do with that response?"
+        options:
+          - "Issues a fresh request to the Location URL, without treating the mapping as permanent"
+          - "Renders the body of the 302 while leaving the address bar pointed at the original URL"
+          - "Stores the redirect for good, so later visits skip the original URL entirely from cache"
+          - "Prompts the user to confirm first, because a redirect can lead away from this origin"
+        answer: "Issues a fresh request to the Location URL, without treating the mapping as permanent"
+        explanation: >-
+          A 302 is a found-elsewhere-for-now instruction: the client re-requests the new URL and
+          keeps asking the original one next time, which is what separates it from a 301. Redirect
+          bodies are not rendered, only 301 and 308 invite permanent caching of the mapping, and
+          browsers follow redirects without asking the user first.
+        difficulty: intermediate
+      - id: net-http-cors-browser-rule
+        prompt: "A plain GET from your page is refused with a CORS error, curl against the same URL succeeds, and your server logs show the browser request did arrive. What is CORS doing?"
+        options:
+          - "The browser is enforcing it: the call was made, but the response was withheld from your script"
+          - "The server rejected the browser request outright, which is why the handler never ran for it"
+          - "The browser refused to send anything, so this request never left the machine at all"
+          - "A firewall between the two dropped the response because the requesting origin differed"
+        answer: "The browser is enforcing it: the call was made, but the response was withheld from your script"
+        explanation: >-
+          CORS is a browser policy protecting one origin's data from another origin's JavaScript,
+          which is why the server log shows a normal request and why curl, having no origin to
+          protect, is unaffected. The handler did run, this simple request was sent, and no
+          firewall is involved; what is missing is an Access-Control-Allow-Origin header.
+        difficulty: advanced
+        mastery: true
+      - id: net-http-cookie-vs-localstorage
+        prompt: "How does keeping an access token in localStorage differ in risk from keeping the same token in an httpOnly cookie?"
+        options:
+          - "localStorage is readable by any script on the page, so one injection flaw exfiltrates the token"
+          - "Both are equally reachable from scripts, so the choice only changes how much code you write"
+          - "An httpOnly cookie is hidden from the server too, so the token could never be validated"
+          - "localStorage is encrypted by the browser, which makes it the safer place of the two"
+        answer: "localStorage is readable by any script on the page, so one injection flaw exfiltrates the token"
+        explanation: >-
+          httpOnly means the cookie is attached by the browser but invisible to JavaScript, which
+          removes script theft at the cost of being sent automatically, so cookies then need
+          SameSite or a CSRF token. localStorage holds plain readable text rather than encrypted
+          data, and httpOnly hides the value from page scripts, never from the server.
+        difficulty: advanced
+
+  - topic: net-https-tls
+    # Source: MDN Glossary - TLS
+    questions:
+      - id: net-tls-what-it-guarantees
+        prompt: "An endpoint is reachable over HTTPS. Which properties does TLS give you, and which does it leave untouched?"
+        options:
+          - "Confidentiality, integrity and server identity in transit, but nothing about the server's own code"
+          - "Confidentiality only, so a response modified on the path would still be accepted unnoticed"
+          - "Encryption of the stored data on the server as well, since the same keys protect it at rest"
+          - "Evidence that the operator can be trusted, because certificates are issued only after review"
+        answer: "Confidentiality, integrity and server identity in transit, but nothing about the server's own code"
+        explanation: >-
+          TLS protects the channel against eavesdropping, tampering and impersonation of the named
+          host. It says nothing about whether the application behind it is secure, it does include
+          integrity checks so silent modification fails, it ends at the server so data at rest is
+          unaffected, and a domain-validated certificate proves control of a name only.
+        difficulty: intermediate
+        mastery: true
+      - id: net-tls-certificate-role
+        prompt: "During the handshake the server presents a certificate. What does that let the client conclude?"
+        options:
+          - "That a certificate authority the client trusts vouched this public key belongs to this hostname"
+          - "That the server is currently free of known vulnerabilities in the software it is running"
+          - "That all traffic in this session will be encrypted using the key inside the certificate"
+          - "That the owner was identified by legal name and verified in person by the issuing authority"
+        answer: "That a certificate authority the client trusts vouched this public key belongs to this hostname"
+        explanation: >-
+          A certificate binds a key to a name, and it is only as meaningful as the authority that
+          signed it. It is not a security audit of the host, it does not encrypt the session itself
+          because bulk traffic uses negotiated symmetric keys, and ordinary certificates involve no
+          in-person identity check at all.
+        difficulty: intermediate
+      - id: net-tls-session-keys
+        prompt: "Why does TLS move to symmetric encryption after the handshake instead of using the certificate key for everything?"
+        options:
+          - "Public-key operations are far too slow for bulk data, so the handshake just agrees a shared key"
+          - "The certificate key stops being valid the moment the handshake ends, so it cannot be reused"
+          - "Symmetric encryption is the only kind able to protect data flowing in both directions"
+          - "The browser throws the certificate away once it is checked, leaving no key available to use"
+        answer: "Public-key operations are far too slow for bulk data, so the handshake just agrees a shared key"
+        explanation: >-
+          Asymmetric cryptography is used sparingly to authenticate the server and establish a
+          session key, then cheap symmetric ciphers carry the traffic. The certificate key does not
+          expire when the handshake ends, asymmetric schemes work in both directions perfectly
+          well, and the certificate is retained for the life of the connection.
+        difficulty: advanced
+        mastery: true
+      - id: net-tls-what-observer-sees
+        prompt: "With HTTPS in place, what can somebody watching the network path still learn about your traffic?"
+        options:
+          - "Which host you connected to and how much data moved, but not the paths or the bodies"
+          - "Nothing whatsoever, beyond the bare fact that some encrypted bytes crossed the wire"
+          - "The full URL with its path and query string, because only request bodies are encrypted"
+          - "The request headers in the clear, since encryption only begins after the first response"
+        answer: "Which host you connected to and how much data moved, but not the paths or the bodies"
+        explanation: >-
+          Destination address, timing and volume leak by construction, and the hostname is usually
+          visible too, while everything above the transport is encrypted. Claiming nothing is
+          visible ignores that metadata, and both the URL path and the headers sit inside the
+          encrypted record layer, which is established before any request is sent.
+        difficulty: advanced
+
+  - topic: net-websockets
+    # Source: MDN - The WebSocket API
+    questions:
+      - id: net-ws-when-to-use
+        prompt: "Your service streams model output token by token to a browser and also accepts occasional commands back. Why does a WebSocket suit that better than repeated polling?"
+        options:
+          - "One open connection pushes data the moment it exists, with no request per update in either direction"
+          - "WebSockets compress their payloads automatically, so streamed text costs far less bandwidth"
+          - "Polling has no way to carry structured JSON, so live updates need the WebSocket protocol"
+          - "WebSockets guarantee an ordering that responses to plain HTTP requests cannot provide"
+        answer: "One open connection pushes data the moment it exists, with no request per update in either direction"
+        explanation: >-
+          The win is server-initiated delivery over a channel that stays open, removing both the
+          latency and the request overhead of polling for something that may not be ready yet.
+          Compression is optional and not the reason, polling carries JSON perfectly well, and
+          ordering comes from the TCP connection underneath, which plain HTTP uses too.
+        difficulty: intermediate
+        mastery: true
+      - id: net-ws-handshake-upgrade
+        prompt: "How does a WebSocket connection get established between a browser and a server in the first place?"
+        options:
+          - "As an ordinary HTTP request asking to upgrade, which the server accepts with a 101 status"
+          - "As a UDP datagram exchange on a dedicated port, outside of HTTP and TCP entirely"
+          - "As a second TCP connection opened once the page's own HTTP session has been closed"
+          - "As a TLS handshake using a special certificate that marks the socket as bidirectional"
+        answer: "As an ordinary HTTP request asking to upgrade, which the server accepts with a 101 status"
+        explanation: >-
+          Starting life as an HTTP upgrade is what lets WebSockets reuse port 443, existing proxies
+          and cookie-based authentication. It is not UDP, it does not wait for the page's HTTP
+          traffic to finish, and no certificate type marks a socket bidirectional; wss is simply
+          the same upgrade performed inside a TLS connection.
+        difficulty: intermediate
+      - id: net-ws-wrong-tool
+        prompt: "A dashboard refreshes a handful of numbers once a minute. Why is a persistent socket usually the wrong tool there?"
+        options:
+          - "It makes the server hold per-client state for no gain, when one small request a minute is simpler"
+          - "Browsers will not keep a socket open longer than a few seconds without traffic on it"
+          - "Socket messages cannot be cached, so every number would have to be recomputed each minute"
+          - "A socket only carries data from client to server, so the dashboard could not be updated"
+        answer: "It makes the server hold per-client state for no gain, when one small request a minute is simpler"
+        explanation: >-
+          Persistent connections cost memory, connection limits and deployment complexity, which
+          only pays off when updates are frequent or server-initiated. Sockets can stay open for
+          hours with pings, caching is irrelevant at a one-minute interval, and WebSockets are
+          bidirectional by definition, so the last option contradicts the protocol.
+        difficulty: intermediate
+        mastery: true
+      - id: net-ws-scaling-broadcast
+        prompt: "You scale to a second instance behind a load balancer and socket clients begin missing broadcast messages. What is the cause?"
+        options:
+          - "Each connection lives on one instance, so a broadcast reaches only the clients attached there"
+          - "The load balancer rewrites frames as it forwards them, and the second instance drops those"
+          - "Sockets need sticky sessions to finish their handshake with whichever server answered"
+          - "Only one instance may hold open sockets at a time, so the newer one refuses upgrades"
+        answer: "Each connection lives on one instance, so a broadcast reaches only the clients attached there"
+        explanation: >-
+          A socket is state pinned to one process, so fanning a message out across instances needs
+          a shared bus such as Redis pub/sub. Load balancers forward frames without rewriting them,
+          sticky sessions matter for the upgrade rather than explaining lost broadcasts, and no
+          rule limits open sockets to a single instance.
+        difficulty: advanced

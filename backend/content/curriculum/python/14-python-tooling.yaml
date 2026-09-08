@@ -1,0 +1,461 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-python
+    name: Python
+    description: Python
+    order: 2
+    subjects:
+    - slug: python-programming
+      name: Python for AI/ML
+      order: 0
+      modules:
+      - slug: mod-py-tooling
+        name: Python environment and project tooling
+        description: Virtual environments, uv projects, pyproject.toml, dependency constraints,
+          lockfiles and interpreter pinning.
+        order: 1
+        topics:
+        - slug: pytool-virtual-environments
+          name: Virtual environments
+          description: How to create, activate and install into a per-project virtual environment,
+            and what a venv physically is on disk.
+          order: 0
+          prerequisites:
+          - py-syntax
+          - cf-package-management
+          - cf-command-line
+          learning_objective: Create and activate a per-project virtual environment and explain
+            why global installs break projects.
+          mastery_criteria:
+          - Create a venv, activate it, install one package, and show that package is absent
+            from the global interpreter.
+          - 'Name the three things a venv actually is on disk: a directory, a pyvenv.cfg,
+            and a rewritten sys.prefix.'
+          - Explain why two projects pinned to different versions of the same library cannot
+            share one global site-packages.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 25
+          domain_key: python
+          lessons:
+          - slug: pytool-virtual-environments-core
+            title: Virtual environments
+            description: 'WHY NOW: Create and activate a per-project virtual environment and
+              explain why global installs break projects.
+
+
+              LEARN: Python Packaging — https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+
+              TIME: ~25 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: create a venv in a scratch folder, install one package into
+              it, then show that pip list differs from the global interpreter. HOW MANY: 1
+              venv. WHERE: local terminal.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a scratch project folder with an activated .venv and a one-line
+              note of where its python executable lives.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.42
+            resources:
+            - slug: pytool-virtual-environments-primary
+              title: Install packages in a virtual environment using pip and venv
+              type: documentation
+              url: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+              provider: Python Packaging
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The create/activate/install cycle plus the reason global installs
+                break projects; this is the PyPA page every other venv tutorial is copied
+                from, so learn it from the source.
+            - slug: pytool-virtual-environments-reference
+              title: venv — Creation of virtual environments
+              type: documentation
+              url: https://docs.python.org/3/library/venv.html
+              provider: Python
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Explains what a venv physically is (a directory, a pyvenv.cfg,
+                a rewritten sys.prefix), which is what stops venvs feeling like magic.
+        - slug: pytool-uv-projects
+          name: uv projects
+          description: The uv project workflow from uv init to uv run, and what uv means by
+            project, workspace and environment.
+          order: 1
+          prerequisites:
+          - pytool-virtual-environments
+          - cf-command-line
+          - cf-dependency-management
+          learning_objective: Run a Python project end to end with uv, letting it manage the
+            virtual environment and the lockfile.
+          mastery_criteria:
+          - Initialise a project with uv init and run a script with uv run without activating
+            a venv by hand.
+          - Point at the files uv created and say which one is the declaration and which one
+            is the resolution.
+          - Distinguish uv's project from its workspace and from the environment it manages.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: python
+          lessons:
+          - slug: pytool-uv-projects-core
+            title: uv projects
+            description: 'WHY NOW: Run a Python project end to end with uv, letting it manage
+              the virtual environment and the lockfile.
+
+
+              LEARN: Astral — https://docs.astral.sh/uv/guides/projects/
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: uv init a throwaway project, add one dependency, and run a script
+              that imports it with uv run. HOW MANY: 1 project. WHERE: local terminal.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a minimal uv project holding its own pyproject.toml and uv.lock.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: pytool-uv-projects-primary
+              title: Working on projects
+              type: documentation
+              url: https://docs.astral.sh/uv/guides/projects/
+              provider: Astral
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The single page that takes you from uv init to uv run and shows
+                uv creating the venv and lockfile for you; this is the workflow to adopt as
+                the default, and it is short enough to actually finish.
+            - slug: pytool-uv-projects-reference
+              title: Projects
+              type: documentation
+              url: https://docs.astral.sh/uv/concepts/projects/
+              provider: Astral
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: 'The concept page behind the guide: what uv means by project, workspace
+                and environment.'
+        - slug: pytool-pyproject-toml
+          name: pyproject.toml
+          description: Field-by-field walkthrough of the [project] table - name, version,
+            dependencies, optional-dependencies, entry points - plus the PEP that defines
+            it normatively.
+          order: 2
+          prerequisites:
+          - pytool-uv-projects
+          - py-functions-modules
+          learning_objective: Read and write a pyproject.toml and know which fields are standard
+            rather than tool-specific.
+          mastery_criteria:
+          - Write a pyproject.toml declaring a name, version, dependencies and one console
+            entry point that installs cleanly.
+          - 'For any field you meet, say which table it belongs to: [project], [build-system],
+            or a [tool.*] table.'
+          - Cite PEP 621 as the tie-breaker when a tool's docs and a tutorial disagree about
+            a [project] field.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 45
+          domain_key: python
+          lessons:
+          - slug: pytool-pyproject-toml-core
+            title: pyproject.toml
+            description: 'WHY NOW: Read and write a pyproject.toml and know which fields are
+              standard rather than tool-specific.
+
+
+              LEARN: Python Packaging — https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+              TIME: ~45 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: read the pyproject.toml of a repo you have and label every top-level
+              table as standard or tool-specific. HOW MANY: 1 file. WHERE: local editor.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a pyproject.toml for your uv project that includes an optional-dependencies
+              dev group.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.75
+            resources:
+            - slug: pytool-pyproject-toml-primary
+              title: Writing your pyproject.toml
+              type: documentation
+              url: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+              provider: Python Packaging
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Field-by-field walkthrough of the one file that now declares a
+                Python project - name, version, dependencies, optional-dependencies, entry
+                points - so the learner can read any repo's pyproject.toml on sight.
+            - slug: pytool-pyproject-toml-reference
+              title: PEP 621 – Storing project metadata in pyproject.toml
+              type: specification
+              url: https://peps.python.org/pep-0621/
+              provider: Python
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: '"Specification"'
+              description: The normative definition of the [project] table, for when a tool
+                and a tutorial disagree.
+        - slug: pytool-dependency-pinning
+          name: Declaring and constraining dependencies
+          description: Version specifiers, dependency groups (dev versus runtime), and git,
+            path and editable sources - plus what each specifier operator actually promises.
+          order: 3
+          prerequisites:
+          - pytool-pyproject-toml
+          - se-versioning
+          learning_objective: Declare dependencies with the narrowest constraint that is still
+            honest, and separate dev from runtime.
+          mastery_criteria:
+          - State the difference in what ~=1.4, >=1.4 and ==1.4.2 each permit at install time.
+          - Move a test-only package out of runtime dependencies into a dev group and say
+            who that helps.
+          - Add one dependency from a git reference and explain why that is a reproducibility
+            hazard unless it is pinned to a commit.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: python
+          lessons:
+          - slug: pytool-dependency-pinning-core
+            title: Declaring and constraining dependencies
+            description: 'WHY NOW: Declare dependencies with the narrowest constraint that
+              is still honest, and separate dev from runtime.
+
+
+              LEARN: Astral — https://docs.astral.sh/uv/concepts/projects/dependencies/
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: take three dependencies in a project you have and rewrite each
+              constraint, writing one sentence on what you are promising. HOW MANY: 3 constraints.
+              WHERE: local editor.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 3
+
+              BUILD: IMPLEMENT: a rewritten dependency block with one sentence of justification
+              per constraint.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: pytool-dependency-pinning-primary
+              title: Managing dependencies
+              type: documentation
+              url: https://docs.astral.sh/uv/concepts/projects/dependencies/
+              provider: Astral
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Version specifiers, dependency groups (dev vs runtime), and git/path/editable
+                sources in one place - the exact three things real ML repos get wrong. Chosen
+                over the pip docs because it shows declaring dependencies, not just installing
+                them.
+            - slug: pytool-dependency-pinning-reference
+              title: Versioning
+              type: article
+              url: https://packaging.python.org/en/latest/discussions/versioning/
+              provider: Python Packaging
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: What ~=, >= and == actually promise, and why pinning a range is
+                a different decision from pinning an exact build.
+        - slug: pytool-lockfiles-reproducible
+          name: Lockfiles and reproducible installs
+          description: 'The distinction the whole module exists to teach: a declared dependency
+            range versus a locked resolution, and the requirements.txt path for repos that
+            are not uv projects.'
+          order: 4
+          prerequisites:
+          - pytool-dependency-pinning
+          learning_objective: Explain what a lockfile guarantees that a declared dependency
+            range does not, and produce one.
+          mastery_criteria:
+          - State what a lockfile guarantees that a pinned requirements file written by hand
+            does not.
+          - Say what changes in uv.lock when you add a dependency, and what does not change
+            in pyproject.toml.
+          - Produce a fully pinned requirements.txt from a loose dependency list with uv pip
+            compile, and say which artifact you would commit.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: python
+          lessons:
+          - slug: pytool-lockfiles-reproducible-core
+            title: Lockfiles and reproducible installs
+            description: 'WHY NOW: Explain what a lockfile guarantees that a declared dependency
+              range does not, and produce one.
+
+
+              LEARN: Astral — https://docs.astral.sh/uv/concepts/projects/sync/
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: lock one project, read the lockfile for one transitive dependency
+              you never declared, and name what pulled it in. HOW MANY: 1 lockfile. WHERE:
+              local terminal.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a locked project plus a compiled requirements.txt of the same
+              environment, with a note on which one you would commit and why.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: pytool-lockfiles-reproducible-primary
+              title: Locking and syncing
+              type: documentation
+              url: https://docs.astral.sh/uv/concepts/projects/sync/
+              provider: Astral
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: 'The distinction the whole area exists to teach: a declared dependency
+                range vs a locked resolution, and why uv.lock is what makes an install reproducible
+                on someone else''s machine.'
+            - slug: pytool-lockfiles-reproducible-reference
+              title: Locking environments
+              type: documentation
+              url: https://docs.astral.sh/uv/pip/compile/
+              provider: Astral
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The uv pip compile / requirements.txt path, for the many existing
+                repos that are not uv projects.
+        - slug: pytool-python-versions
+          name: Pinning the Python interpreter
+          description: Pinning a Python interpreter version per project with .python-version
+            and uv python install - the failure mode that pinning packages alone does not
+            fix.
+          order: 5
+          prerequisites:
+          - pytool-uv-projects
+          learning_objective: Pin the interpreter version a project runs on, not just the
+            packages it installs.
+          mastery_criteria:
+          - Pin a project to a specific Python minor version and show which interpreter uv
+            selects for uv run.
+          - Name one failure that a package lockfile cannot prevent but an interpreter pin
+            can.
+          - Say where .python-version sits relative to pyproject.toml's requires-python, and
+            which of the two is a request versus a constraint.
+          fast_trackable: true
+          learning_track: CORE
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 10
+          domain_key: python
+          lessons:
+          - slug: pytool-python-versions-core
+            title: Pinning the Python interpreter
+            description: 'WHY NOW: Pin the interpreter version a project runs on, not just
+              the packages it installs.
+
+
+              LEARN: Astral — https://docs.astral.sh/uv/guides/install-python/
+
+              TIME: ~10 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: pin one project to a Python version you do not currently have,
+              let uv install it, and print sys.version from uv run. HOW MANY: 1 interpreter
+              pin. WHERE: local terminal.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 1
+
+              BUILD: IMPLEMENT: a .python-version file plus the uv run output showing the
+              pinned interpreter.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice
+              quantity.'
+            order: 0
+            hours_estimated: 0.17
+            resources:
+            - slug: pytool-python-versions-primary
+              title: Installing and managing Python
+              type: documentation
+              url: https://docs.astral.sh/uv/guides/install-python/
+              provider: Astral
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: How to pin a Python interpreter version per project (.python-version,
+                uv python install) - the failure mode that pinning packages alone does not
+                fix.

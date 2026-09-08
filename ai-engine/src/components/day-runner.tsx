@@ -25,6 +25,7 @@ import {
   fold,
   isRunning,
   isUntouched,
+  looksLeftRunning,
   pause,
   readRecord,
   reset as resetRecord,
@@ -120,12 +121,16 @@ function useBlockTimer(item: DayItem | null) {
   // storage is only ever read from an effect.
   const [seconds, setSeconds] = useState(0);
   const [running, setRunningState] = useState(false);
+  // Held as state rather than derived at render time: the answer lives in the
+  // stopwatch record, and reading a ref while rendering is not allowed.
+  const [leftRunning, setLeftRunning] = useState(false);
 
   const commit = useCallback((itemId: number, rec: TimerRecord) => {
     recordRef.current = rec;
     writeRecord(itemId, rec);
     setSeconds(Math.floor(elapsedOf(rec)));
     setRunningState(isRunning(rec));
+    setLeftRunning(looksLeftRunning(rec));
   }, []);
 
   // Keyed on the id alone. The old effect also depended on the item object, so
@@ -139,12 +144,14 @@ function useBlockTimer(item: DayItem | null) {
       recordRef.current = EMPTY_RECORD;
       setSeconds(0);
       setRunningState(false);
+      setLeftRunning(false);
       return;
     }
     if (settled) {
       recordRef.current = EMPTY_RECORD;
       setSeconds(loggedMinutes * 60);
       setRunningState(false);
+      setLeftRunning(false);
       return;
     }
     const stored = readRecord(itemId);
@@ -158,7 +165,11 @@ function useBlockTimer(item: DayItem | null) {
   // throttled background tab still shows the right total on return.
   useEffect(() => {
     if (!running) return;
-    const id = window.setInterval(() => setSeconds(Math.floor(elapsedOf(recordRef.current))), 1000);
+    const id = window.setInterval(() => {
+      const rec = recordRef.current;
+      setSeconds(Math.floor(elapsedOf(rec)));
+      setLeftRunning(looksLeftRunning(rec));
+    }, 1000);
     return () => window.clearInterval(id);
   }, [running]);
 
@@ -193,7 +204,9 @@ function useBlockTimer(item: DayItem | null) {
   }, [itemId, commit]);
 
   const minutes = Math.max(1, Math.round(seconds / 60));
-  return { seconds, minutes, running, settled, setRunning, reset };
+  // Recomputed from the same record the display reads, so it appears as soon
+  // as the page is opened on a stopwatch that ran all night.
+  return { seconds, minutes, running, settled, setRunning, reset, leftRunning: running && leftRunning };
 }
 
 function clock(seconds: number) {
@@ -477,6 +490,16 @@ function FocusCard({
               ? `Past the ${item.planned_minutes} minute estimate. That is fine — the number logged is what you actually spent.`
               : `Planned ${item.planned_minutes} minutes`}
           </p>
+          {/* The stopwatch keeps running while you are on other pages, which is
+              the point of it. The one case that needs saying out loud is a
+              timer left on overnight: the number is real, so it is shown
+              rather than quietly trimmed, and Reset is right there. */}
+          {timer.leftRunning ? (
+            <p className="mt-2 text-xs leading-relaxed text-[var(--warn)]">
+              Still running after more than four hours without a pause. If you left it on, Reset
+              it before finishing the block — whatever the clock says is what gets logged.
+            </p>
+          ) : null}
 
           <div className="mt-4 flex flex-wrap gap-2">
             <button

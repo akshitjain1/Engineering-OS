@@ -1,0 +1,466 @@
+# Cloud for AI workloads self-check questions.
+#
+# Vendor-neutral first (NIST SP 800-145), then AWS as the one concrete
+# provider. Every question is answerable from the resource its topic maps to.
+# cloud-cost-control is deliberately about mechanisms rather than prices: GPU
+# rates move monthly, so no question here contains a price.
+schema_version: 1
+kind: question_bank
+module: mod-cloud
+topics:
+  - topic: cloud-service-models
+    # Source: NIST SP 800-145 - The NIST Definition of Cloud Computing
+    questions:
+      - id: cloud-nist-five-characteristics
+        prompt: "SP 800-145 lists five essential characteristics of cloud computing. Which set matches the document?"
+        options:
+          - "On-demand self-service, broad network access, resource pooling, rapid elasticity, measured service"
+          - "Virtualisation, containers, build automation, redundancy across regions, and pay-as-you-go billing"
+          - "High availability, disaster recovery, encryption at rest, audit logging, and identity federation"
+          - "Multi-tenancy, open standards, vendor independence, horizontal scaling, and an API-first interface"
+        answer: "On-demand self-service, broad network access, resource pooling, rapid elasticity, measured service"
+        explanation: >-
+          Those five are the definition's own list, and a service missing any of them is not cloud in
+          the NIST sense. The second set names implementation technologies that a cloud may or may not
+          use. The third is a security and reliability checklist, and the fourth mixes desirable
+          properties with marketing claims - none of the three appears in the document.
+        difficulty: beginner
+        mastery: true
+      - id: cloud-iaas-vs-paas-boundary
+        prompt: "Under the NIST definitions, what does the consumer control in IaaS that they do not control in PaaS?"
+        options:
+          - "The operating system and the software installed on the provisioned compute and storage"
+          - "The application code they deploy, which under PaaS is written and maintained by the provider"
+          - "The physical hardware and the data centre network, which PaaS providers hand over on request"
+          - "The billing model, since IaaS is always metered while PaaS is always a flat subscription"
+        answer: "The operating system and the software installed on the provisioned compute and storage"
+        explanation: >-
+          IaaS hands over fundamental compute, storage and network resources, so the consumer owns the
+          operating system upward; PaaS hides that layer and exposes a runtime instead. Application
+          code is the consumer's in both models. The underlying physical infrastructure is never
+          consumer-controlled in any of the three, and metering applies across all of them.
+        difficulty: intermediate
+      - id: cloud-classify-hosted-email
+        prompt: "You use a provider's hosted email and calendar through a browser, with no code or servers of your own. Which NIST service model is that?"
+        options:
+          - "SaaS - the consumer uses the provider's application and manages nothing but limited settings"
+          - "PaaS - the consumer deploys their own application onto a runtime the provider operates for it"
+          - "IaaS - the consumer rents virtual machines and installs whatever software the work requires"
+          - "A private cloud deployment, because the consumer's own mailboxes are isolated from other tenants"
+        answer: "SaaS - the consumer uses the provider's application and manages nothing but limited settings"
+        explanation: >-
+          The consumer runs no code and administers no infrastructure, which is exactly the SaaS
+          description. PaaS would require an application of their own to deploy, and IaaS would require
+          them to manage machines. The last option confuses a deployment model with a service model -
+          those are two separate axes in the document.
+        difficulty: beginner
+      - id: cloud-measured-service-meaning
+        prompt: "NIST names one of the five characteristics measured service. What does that characteristic require of a cloud?"
+        options:
+          - "Usage is monitored and reported automatically, so resources can be metered and charged for"
+          - "Every service publishes a latency and uptime figure the consumer can hold the provider to"
+          - "The provider measures how many tenants share each host and caps that number contractually"
+          - "Consumers measure their own consumption and submit those figures to the provider for invoicing"
+        answer: "Usage is monitored and reported automatically, so resources can be metered and charged for"
+        explanation: >-
+          Measured service is about automatic metering and transparency of consumption for both sides.
+          Published latency and uptime targets are service level agreements, which the definition does
+          not cover. Tenant density is an implementation detail of resource pooling, and self-reported
+          usage is the opposite of automatic measurement.
+        difficulty: intermediate
+      - id: cloud-elasticity-vs-pooling
+        prompt: "Capacity can be provisioned and released quickly and appears effectively unlimited to the consumer. Which NIST characteristic is that?"
+        options:
+          - "Rapid elasticity - capabilities are provisioned and released to scale with demand at any time"
+          - "Resource pooling - the provider's resources serve many consumers out of one shared physical pool"
+          - "On-demand self-service - a consumer can provision capability without any human interaction"
+          - "Broad network access - capabilities are reachable over the network from standard client platforms"
+        answer: "Rapid elasticity - capabilities are provisioned and released to scale with demand at any time"
+        explanation: >-
+          Elasticity is specifically about scaling outward and inward with demand and the appearance of
+          unlimited capacity. Resource pooling is what makes elasticity possible but describes sharing,
+          not scaling. Self-service describes who initiates provisioning rather than how fast it flexes,
+          and broad network access is about reachability from thin and thick clients.
+        difficulty: intermediate
+
+  - topic: cloud-object-storage
+    # Source: AWS - What is Amazon S3?
+    questions:
+      - id: cloud-s3-flat-namespace
+        prompt: "S3 stores objects under keys in a flat namespace. What follows for the folders you see in the console?"
+        options:
+          - "They are prefixes inside the key that tools display as a hierarchy; no directory object exists"
+          - "They are real directory entries, so renaming one rewrites its metadata and not the objects"
+          - "They are region markers deciding which data centre the objects inside them are stored in"
+          - "They are access-control boundaries, so permissions can only be granted per folder level"
+        answer: "They are prefixes inside the key that tools display as a hierarchy; no directory object exists"
+        explanation: >-
+          A key is one string, and the slashes in it are only a convention the console renders as
+          folders, which is why renaming a prefix means copying every object under it. There are no
+          directory entries to rewrite cheaply. Region is a property of the bucket rather than of a
+          prefix, and policies can target individual keys as well as prefixes.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-dataset-placement
+        prompt: "Your team keeps a 2 TB training dataset on a volume attached to one training instance. Why does the S3 model favour a bucket here?"
+        options:
+          - "The data outlives any single instance and can be read by many jobs at once from anywhere"
+          - "Object storage gives lower per-file read latency, which is what shortens each training epoch"
+          - "Attached volumes cannot exceed one terabyte, so the dataset physically will not fit on one"
+          - "Object storage lets the training loop memory-map the files, so nothing is loaded into RAM"
+        answer: "The data outlives any single instance and can be read by many jobs at once from anywhere"
+        explanation: >-
+          Decoupling durable data from ephemeral compute is the point: the bucket survives instance
+          termination and serves many readers. Object storage actually has higher per-request latency
+          than a local disk, so the second option has it backwards. Block volumes come far larger than
+          a terabyte, and objects are fetched over HTTP rather than memory-mapped.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-s3-object-address
+        prompt: "Which three things do you need in order to address one specific object in S3?"
+        options:
+          - "The bucket name, the object key, and the region the bucket was created in"
+          - "The instance id, the mount point, and the absolute file path underneath it"
+          - "The account number, the availability zone, and the object's sequential index"
+          - "The storage class, the object size, and the timestamp of its most recent write"
+        answer: "The bucket name, the object key, and the region the bucket was created in"
+        explanation: >-
+          Buckets are namespaced globally but live in a region, and the key identifies the object
+          within the bucket, which is the whole addressing scheme. Mount points and file paths are
+          filesystem concepts that object storage does not use. Objects have no sequential index and
+          are not scoped to an availability zone, and class, size and timestamp are metadata rather
+          than an address.
+        difficulty: beginner
+      - id: cloud-checkpoint-storage-class
+        prompt: "Checkpoints are written every ten minutes during a training run and deleted once it finishes. Which storage-class reasoning fits them?"
+        options:
+          - "Keep them in a standard class, since archival classes add retrieval fees and minimum durations"
+          - "Move them to an archival class at once, since they are written once and rarely ever read back"
+          - "Store them on the instance disk instead, since object storage cannot hold large binary files"
+          - "Split each checkpoint over several buckets, since a class limit applies per bucket per day"
+        answer: "Keep them in a standard class, since archival classes add retrieval fees and minimum durations"
+        explanation: >-
+          Short-lived, frequently rewritten objects are the case standard storage exists for; archival
+          tiers charge for early deletion and slow retrieval, so they lose money on data deleted the
+          same day. The instance disk is exactly what checkpointing is protecting against. Buckets have
+          no per-day class limit, so splitting objects across them buys nothing.
+        difficulty: intermediate
+      - id: cloud-object-append-cost
+        prompt: "You need to append one row to a 5 GB CSV that is stored as a single S3 object. What actually has to happen?"
+        options:
+          - "The whole object is replaced by a new version of the file, since objects are not edited in place"
+          - "Only the changed bytes travel, because object storage supports random writes at a byte offset"
+          - "The bucket is locked while the row is inserted, so concurrent readers briefly receive errors"
+          - "The object is mounted as a filesystem first, then edited, then converted back to an object"
+        answer: "The whole object is replaced by a new version of the file, since objects are not edited in place"
+        explanation: >-
+          Objects are immutable units: a write replaces the object wholesale, which is why append-heavy
+          data is stored as many smaller objects or in a partitioned format. There is no offset write
+          API for existing bytes. Buckets are not locked for writes, and mounting is a client-side
+          convenience layer that still rewrites the whole object underneath.
+        difficulty: advanced
+
+  - topic: cloud-gpu-instances
+    # Source: AWS - Specifications for Amazon EC2 accelerated computing instances
+    questions:
+      - id: cloud-p-versus-g-family
+        prompt: "On the AWS accelerated-computing specifications page, what distinguishes the P instance families from the G families?"
+        options:
+          - "P families target large-scale training with high-end GPUs; G families target inference and graphics"
+          - "P families are bare-metal only, while G families are always virtualised over a shared card"
+          - "P families carry no accelerator and simply pair fast CPUs with high memory bandwidth instead"
+          - "P families are restricted to United States regions, while G families are offered everywhere"
+        answer: "P families target large-scale training with high-end GPUs; G families target inference and graphics"
+        explanation: >-
+          The family letter is the fastest way to narrow the table: P for training-class accelerators,
+          G for the cheaper inference and graphics cards. Both families offer virtualised sizes as well
+          as metal ones. P instances are the ones defined by having GPUs, and neither family is
+          restricted to a single geography in the way described.
+        difficulty: beginner
+      - id: cloud-read-gpu-memory-row
+        prompt: "A table row shows 4 GPUs alongside a total GPU memory figure. How should you read that total against a model needing 24 GB on one device?"
+        options:
+          - "Divide the total by the GPU count to get memory per device, since one model copy sits on one GPU"
+          - "Use the total directly, because the four GPUs present themselves to a process as one memory pool"
+          - "Compare it with the instance memory column instead, since GPU memory is drawn from system RAM"
+          - "Halve the total, because roughly half of GPU memory is always reserved by the driver at boot"
+        answer: "Divide the total by the GPU count to get memory per device, since one model copy sits on one GPU"
+        explanation: >-
+          Unless you are explicitly sharding, a model has to fit in the memory of a single device, so
+          per-GPU memory is the number that matters. The devices are separate address spaces, so the
+          aggregate figure is misleading. Instance memory is host RAM and is billed separately, and the
+          driver's reservation is small rather than half the card.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-size-single-gpu-24gb
+        prompt: "You need one GPU with roughly 24 GB of GPU memory for a fine-tuning job. Which reading of the table gets you to a specific instance type?"
+        options:
+          - "Find the smallest G-family size whose row lists one GPU with at least 24 GB of GPU memory"
+          - "Pick any P-family size, since only P instances are ever offered with more than 16 GB per GPU"
+          - "Choose the size whose vCPU count is nearest 24, because vCPUs and GPU memory scale together"
+          - "Take the largest size in the family, because GPU memory is only guaranteed at the top size"
+        answer: "Find the smallest G-family size whose row lists one GPU with at least 24 GB of GPU memory"
+        explanation: >-
+          Two columns answer the requirement - GPU count and GPU memory - and the smallest matching
+          size is the cheapest way to meet it. Restricting yourself to P families overpays for
+          training-class hardware you do not need. vCPU count is unrelated to device memory, and GPU
+          memory per device is fixed across sizes within a family rather than only at the top.
+        difficulty: intermediate
+      - id: cloud-instance-memory-vs-gpu-memory
+        prompt: "A row lists 192 GiB of instance memory and 24 GiB of GPU memory, and your model fails with a CUDA out-of-memory error. Which number was binding?"
+        options:
+          - "The 24 GiB of GPU memory, since weights and activations must fit in the device's own memory"
+          - "The 192 GiB of instance memory, which the GPU pages into automatically when it runs short"
+          - "Neither, because a CUDA out-of-memory error always indicates a driver version mismatch"
+          - "The vCPU count, since every CUDA stream reserves a fixed slice of device memory per vCPU"
+        answer: "The 24 GiB of GPU memory, since weights and activations must fit in the device's own memory"
+        explanation: >-
+          A CUDA allocation failure is about the accelerator's own memory, which is the smaller of the
+          two numbers on that row. Host RAM is not transparently paged into the device during normal
+          training. Driver mismatches produce initialisation errors rather than allocation failures,
+          and CUDA streams do not reserve device memory per vCPU.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-family-size-scaling
+        prompt: "Within a single accelerated-computing family, what generally changes as you move up to a larger instance size?"
+        options:
+          - "The GPU count with the vCPUs and host memory that come alongside, while the GPU model stays fixed"
+          - "The GPU model upgrades to a newer generation, while the GPU count stays at one per size offered"
+          - "Only network bandwidth improves, since accelerator resources are identical across every size"
+          - "The GPU memory per device grows while the number of devices attached remains constant at one"
+        answer: "The GPU count with the vCPUs and host memory that come alongside, while the GPU model stays fixed"
+        explanation: >-
+          A family is defined by its accelerator, and the sizes within it scale the number of those
+          accelerators plus the host resources bundled with them. A newer GPU generation is a new
+          family or generation suffix, not a larger size. Accelerator resources are exactly what does
+          change, and per-device memory is a property of the card rather than the size.
+        difficulty: intermediate
+
+  - topic: cloud-gpu-memory-sizing
+    # Source: Hugging Face - GPU memory usage (model memory anatomy)
+    questions:
+      - id: cloud-memory-components
+        prompt: "The Hugging Face model memory anatomy breaks a training step's GPU memory into which components?"
+        options:
+          - "Model weights, optimiser state, gradients, forward activations and temporary buffers"
+          - "The whole dataset, which is copied onto the device before the first training step runs"
+          - "The CUDA driver, the kernel cache and the compiled graph, which dominate at any batch size"
+          - "Only the model weights, since gradients and activations are computed on the host instead"
+        answer: "Model weights, optimiser state, gradients, forward activations and temporary buffers"
+        explanation: >-
+          Those are the categories the page measures, and they are what you add up to answer whether a
+          run will fit. The dataset streams in batch by batch rather than living on the device. Driver
+          and kernel overhead is real but small and roughly constant, and gradients and activations are
+          computed and held on the accelerator, not the host.
+        difficulty: beginner
+      - id: cloud-adamw-fp32-footprint
+        prompt: "Training a one-billion-parameter model in fp32 with AdamW, roughly how much memory do weights, gradients and optimiser state need before any activations?"
+        options:
+          - "About 16 GB - four bytes for weights, four for gradients and eight for the two Adam moments"
+          - "About 4 GB - only weights sit on the device, since gradients are freed as soon as they are used"
+          - "About 8 GB - weights and gradients only, because AdamW keeps its moment estimates on the host"
+          - "About 32 GB - each of weights, gradients and both Adam moments needs eight bytes per parameter"
+        answer: "About 16 GB - four bytes for weights, four for gradients and eight for the two Adam moments"
+        explanation: >-
+          Four bytes per fp32 value times four tensors per parameter gives roughly sixteen bytes per
+          parameter, so a billion parameters is about 16 GB before activations. Gradients persist until
+          the optimiser step consumes them, so 4 GB is far too low. AdamW state lives on the device with
+          the weights, and fp32 is four bytes rather than eight, which is where the 32 GB figure goes wrong.
+        difficulty: advanced
+        mastery: true
+      - id: cloud-activations-scale-with-batch
+        prompt: "Your run fits at batch size 4 and fails at batch size 16 with the same model and optimiser. Which memory component grew?"
+        options:
+          - "The forward activations, which are held per example until the backward pass consumes them"
+          - "The optimiser state, which allocates one moment estimate per example in the batch as well"
+          - "The model weights, since a larger batch needs a separate copy of the weights per sample"
+          - "The gradients, which are stored separately for every example rather than summed together"
+        answer: "The forward activations, which are held per example until the backward pass consumes them"
+        explanation: >-
+          Activation memory scales with batch size and sequence length, which is why batch size is the
+          first knob to turn on an out-of-memory error. Optimiser state and gradients are sized by the
+          parameter count and are shared across the batch, and weights are stored once regardless of how
+          many examples are in flight.
+        difficulty: intermediate
+      - id: cloud-inference-versus-training-memory
+        prompt: "Why does serving a model for inference need far less accelerator memory than training the same model?"
+        options:
+          - "No gradients or optimiser state are kept, and activations can be discarded layer by layer"
+          - "Inference always runs in half precision whereas training has to be carried out in fp32"
+          - "Inference loads only the final layer, since the earlier layers are cached on the host instead"
+          - "Inference batches are always size one, so the weights themselves take a quarter of the memory"
+        answer: "No gradients or optimiser state are kept, and activations can be discarded layer by layer"
+        explanation: >-
+          Dropping gradients and the two optimiser moments removes three quarters of the per-parameter
+          cost, and with no backward pass the activations need not be retained. Precision is a separate
+          choice available to both. Every layer is needed for a forward pass, and weight storage does
+          not depend on batch size at all.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-gradient-checkpointing-tradeoff
+        prompt: "Gradient checkpointing lowers peak accelerator memory during training. What does it cost in exchange?"
+        options:
+          - "Extra compute, since activations that were discarded get recomputed in the backward pass"
+          - "Model accuracy, because the gradients it produces are approximations of the true gradients"
+          - "Disk space, since the activations are written out to local storage instead of being dropped"
+          - "Determinism, because the layers it checkpoints are chosen at random on each training step"
+        answer: "Extra compute, since activations that were discarded get recomputed in the backward pass"
+        explanation: >-
+          It is a straight memory-for-time trade: store fewer activations, redo the forward work for
+          the segments you dropped, typically for a modest slowdown. The gradients it computes are
+          exact, so accuracy is untouched. Nothing is spilled to disk, and the checkpoint boundaries
+          are fixed by the model definition rather than sampled per step.
+        difficulty: advanced
+
+  - topic: cloud-managed-inference
+    # Source: Amazon SageMaker AI - Real-time inference
+    questions:
+      - id: cloud-managed-endpoint-offer
+        prompt: "What does a managed real-time inference endpoint give you beyond a process serving your model on a box?"
+        options:
+          - "A persistent HTTPS invocation endpoint with managed autoscaling and unhealthy-instance replacement"
+          - "A guarantee that inference latency will never exceed a fixed millisecond budget under any load"
+          - "Automatic conversion of your model into a faster runtime format, chosen by the service for you"
+          - "A free tier of accelerator capacity that scales without charge until sustained traffic arrives"
+        answer: "A persistent HTTPS invocation endpoint with managed autoscaling and unhealthy-instance replacement"
+        explanation: >-
+          The managed pieces are the stable endpoint, scaling policies and instance health management -
+          exactly the plumbing you would otherwise write. No service promises a hard latency ceiling
+          independent of load. Runtime conversion is an explicit, separate optimisation step, and
+          instances behind an endpoint are charged from the moment they come into service.
+        difficulty: intermediate
+      - id: cloud-idle-endpoint-billing
+        prompt: "An endpoint is deployed on two instances and receives no traffic overnight. What are you paying for?"
+        options:
+          - "Both instances for every hour the endpoint stays in service, since real-time endpoints stay warm"
+          - "Nothing, because a real-time endpoint scales its instance count down to zero when requests stop"
+          - "Only storage of the model artifact, with instance charges resuming on the next request received"
+          - "A per-request fee averaged over the month, so an idle night costs the same as a busy one does"
+        answer: "Both instances for every hour the endpoint stays in service, since real-time endpoints stay warm"
+        explanation: >-
+          Real-time endpoints keep instances provisioned so latency stays low, and that provisioned
+          time is what is billed whether or not requests arrive. Scaling to zero is what serverless and
+          asynchronous options offer instead. Storage is a minor separate line, and real-time endpoints
+          are billed by instance hour rather than per request.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-traffic-variants-ab
+        prompt: "You want ten percent of live traffic on a new model version and the rest on the current one, behind one endpoint. Which mechanism does that?"
+        options:
+          - "Two production variants on a single endpoint, with weights setting the share of traffic each gets"
+          - "Two separate endpoints, with the split implemented in the calling application's own routing code"
+          - "One variant whose model artifact holds both versions and chooses between them per request itself"
+          - "An autoscaling policy on the endpoint, configured to prefer the newer version as load increases"
+        answer: "Two production variants on a single endpoint, with weights setting the share of traffic each gets"
+        explanation: >-
+          Production variants exist for exactly this: several models behind one endpoint with weighted
+          traffic, so an A/B test needs no client change. Client-side routing works but requires two
+          endpoints and code, which the question rules out. Bundling versions inside one artifact
+          reimplements the split by hand, and autoscaling responds to load rather than model version.
+        difficulty: intermediate
+      - id: cloud-managed-versus-self-hosted
+        prompt: "A model serves five internal requests a minute with no latency requirement. Why might a managed real-time endpoint be the wrong choice?"
+        options:
+          - "It bills for always-on instances, which is poor value for traffic a batch or async job could absorb"
+          - "It cannot serve custom container images, so any non-standard serving framework is ruled out"
+          - "It needs a floor of ten requests per second before autoscaling will keep the endpoint healthy"
+          - "It refuses requests originating inside a private network, so internal callers cannot reach it"
+        answer: "It bills for always-on instances, which is poor value for traffic a batch or async job could absorb"
+        explanation: >-
+          The trade the docs set up is convenience against provisioned cost, and very low traffic with
+          no latency need is the case where the cost wins the argument. Custom containers are explicitly
+          supported. There is no minimum request rate for health, and endpoints can be placed inside a
+          private network for internal callers.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-endpoint-update-behaviour
+        prompt: "You update the model behind a live real-time endpoint. What does the managed service handle that a hand-rolled server would need code for?"
+        options:
+          - "It brings up instances with the new model and shifts traffic across before retiring the old ones"
+          - "It rewrites the client SDK so callers automatically adopt the new model's input schema for you"
+          - "It replays the last hour of requests against the new model and blocks the update if scores drop"
+          - "It keeps every past model loaded indefinitely, so a caller can name the version it wants per call"
+        answer: "It brings up instances with the new model and shifts traffic across before retiring the old ones"
+        explanation: >-
+          The endpoint update is a managed blue-green style rollout, so the invocation URL keeps serving
+          throughout - that orchestration is the work you avoid writing. Nothing regenerates client code
+          or reconciles a changed input schema for you. Automatic evaluation gating is something you
+          build, and old variants are removed rather than kept forever.
+        difficulty: advanced
+
+  - topic: cloud-cost-control
+    # Source: AWS - Spot Instances (mechanisms, not prices: GPU rates move
+    # monthly and no vendor-neutral page states what an AI workload costs)
+    questions:
+      - id: cloud-spot-what-you-rent
+        prompt: "What are you actually renting when you launch a Spot Instance rather than an On-Demand one?"
+        options:
+          - "Spare capacity the provider may reclaim at any time, in exchange for a much lower hourly rate"
+          - "The identical instance under a contractual commitment to keep it running for a fixed term"
+          - "A reserved slice of a host that no other tenant can ever be scheduled onto while you hold it"
+          - "A lower-specification build of the same instance type, with fewer vCPUs and less host memory"
+        answer: "Spare capacity the provider may reclaim at any time, in exchange for a much lower hourly rate"
+        explanation: >-
+          Spot sells unused capacity with interruption as the explicit trade, which is why the discount
+          exists at all. A fixed-term commitment describes reserved instances or savings plans, which
+          discount differently and are not interruptible. Dedicated tenancy is a separate paid option,
+          and the hardware specification of a spot instance is identical to on-demand.
+        difficulty: beginner
+      - id: cloud-spot-interruption-loss
+        prompt: "A twelve-hour training job on spot capacity is interrupted after nine hours. What determines how much work you lose?"
+        options:
+          - "Whether checkpoints were written to durable storage outside the instance and can be resumed from"
+          - "Whether the interruption notice arrived, since the provider then replays the lost steps for you"
+          - "Whether the job used one GPU, because multi-GPU jobs are migrated to a fresh host on reclaim"
+          - "Whether a spot request or a fleet was used, since fleets preserve the instance's local disk"
+        answer: "Whether checkpoints were written to durable storage outside the instance and can be resumed from"
+        explanation: >-
+          Reclaim terminates the instance and takes its local disk with it, so recoverable progress is
+          exactly the progress you persisted elsewhere. The notice gives you time to react but the
+          provider never replays training steps. Nothing is live-migrated on reclaim regardless of GPU
+          count, and fleets manage capacity requests rather than preserving instance storage.
+        difficulty: intermediate
+        mastery: true
+      - id: cloud-spot-two-minute-notice
+        prompt: "What does the two-minute interruption notice for a Spot Instance let a training job actually do?"
+        options:
+          - "Write a final checkpoint and shut down cleanly, so the run resumes on the next instance it gets"
+          - "Bid a higher rate to retain the instance, which the provider then honours for the rest of the run"
+          - "Migrate the running process to another host with GPU memory intact and nothing restarted at all"
+          - "Extend its deadline two minutes at a time, indefinitely, for as long as the job is still working"
+        answer: "Write a final checkpoint and shut down cleanly, so the run resumes on the next instance it gets"
+        explanation: >-
+          The notice is a short warning whose only real use is flushing state and exiting gracefully,
+          which is why handling it is the standard spot pattern. Raising a bid does not cancel a reclaim.
+          There is no live migration of accelerator state, and the window cannot be extended by staying busy.
+        difficulty: intermediate
+      - id: cloud-spot-poor-fit-workload
+        prompt: "Which of these workloads is the poorest fit for spot capacity, on the mechanisms the spot documentation describes?"
+        options:
+          - "A customer-facing inference endpoint that must hold steady capacity throughout business hours"
+          - "A batch fine-tuning job that writes a checkpoint to object storage every few hundred steps"
+          - "A hyperparameter sweep of many short independent trials, each of which can be retried on failure"
+          - "An overnight preprocessing job whose output is written incrementally and can be restarted safely"
+        answer: "A customer-facing inference endpoint that must hold steady capacity throughout business hours"
+        explanation: >-
+          Spot suits interruptible, restartable and stateless work; a latency-sensitive endpoint that
+          must not lose capacity is the one case where reclaim is a user-visible outage. Checkpointed
+          training, retryable sweeps and restartable batch jobs all absorb interruption by design, which
+          is precisely why they are the canonical spot workloads.
+        difficulty: intermediate
+      - id: cloud-right-sizing-underutilised-gpu
+        prompt: "Your GPU instance sits at a small fraction of device utilisation for an entire job. Which cost mechanism does that point at?"
+        options:
+          - "Right-sizing - you are paying for accelerator capacity the job never manages to keep busy"
+          - "Spot interruption - low utilisation is the symptom of capacity being reclaimed underneath you"
+          - "Data transfer - utilisation is measured in bytes moved, so a low figure means egress charges"
+          - "Reserved capacity - an unused commitment always surfaces as a low device utilisation figure"
+        answer: "Right-sizing - you are paying for accelerator capacity the job never manages to keep busy"
+        explanation: >-
+          Matching instance size to what the workload actually consumes is the right-sizing lever, and
+          a persistently idle accelerator usually means a smaller instance or a fixed data pipeline is
+          the cheaper answer. Reclaim ends an instance rather than starving it. Utilisation is not a
+          measure of bytes transferred, and a reserved commitment changes the rate rather than the
+          utilisation you observe.
+        difficulty: intermediate
+        mastery: true

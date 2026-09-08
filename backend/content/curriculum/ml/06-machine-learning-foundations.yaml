@@ -27,8 +27,7 @@ track:
           order: 0
           prerequisites:
           - math-probability
-          learning_objective: Distinguish supervised/unsupervised learning and typical
-            tasks.
+          learning_objective: Distinguish supervised/unsupervised learning and typical tasks.
           mastery_criteria:
           - Explain What is machine learning in your own words.
           - Complete the mapped practice checklist.
@@ -41,8 +40,7 @@ track:
           lessons:
           - slug: ml-what-is-ml-core
             title: What is machine learning
-            description: Distinguish supervised/unsupervised learning and typical
-              tasks.
+            description: Distinguish supervised/unsupervised learning and typical tasks.
             order: 0
             hours_estimated: 0.75
             resources:
@@ -56,24 +54,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for What is machine learning.
-            questions:
-            - slug: ml-what-is-ml-q1
-              prompt: What is the core idea of What is machine learning?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Distinguish supervised/unsupervised learning and typical tasks.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Distinguish supervised/unsupervised learning and typical tasks.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-what-is-ml-practice
               title: 'Practice: What is machine learning'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Label 6 problems as supervised/unsupervised. HOW
-                MANY: 6. WHERE: notes.'
+              instructions: 'WHAT: Label 6 problems as supervised/unsupervised. HOW MANY: 6. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: ml-features-labels
@@ -109,24 +96,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Features & labels.
-            questions:
-            - slug: ml-features-labels-q1
-              prompt: What is the core idea of Features & labels?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Frame tabular problems with features X and label y.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Frame tabular problems with features X and label y.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-features-labels-practice
               title: 'Practice: Features & labels'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Define features/labels for 2 datasets. HOW MANY:
-                2. WHERE: notes.'
+              instructions: 'WHAT: Define features/labels for 2 datasets. HOW MANY: 2. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: ml-train-test
@@ -162,24 +138,12 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Train/test split.
-            questions:
-            - slug: ml-train-test-q1
-              prompt: What is the core idea of Train/test split?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Split data to estimate generalization, avoid leakage.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Split data to estimate generalization, avoid leakage.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: ml-train-test-practice
               title: 'Practice: Train/test split'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Split a toy dataset 80/20. HOW MANY: 1. WHERE:
-                notebook.'
+              instructions: 'WHAT: Split a toy dataset 80/20. HOW MANY: 1. WHERE: notebook.'
               difficulty: beginner
               order: 0
         - slug: ml-linear-regression
@@ -216,24 +180,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Linear regression.
-            questions:
-            - slug: ml-linear-regression-q1
-              prompt: What is the core idea of Linear regression?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Fit and interpret a linear regressor.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Fit and interpret a linear regressor.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-linear-regression-practice
               title: 'Practice: Linear regression'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Fit LinearRegression on a toy set. HOW MANY: 1.
-                WHERE: notebook.'
+              instructions: 'WHAT: Fit LinearRegression on a toy set. HOW MANY: 1. WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ml-linear-regression-build
@@ -266,33 +219,23 @@ track:
             hours_estimated: 0.75
             resources:
             - slug: ml-classification-primary
-              title: 'scikit-learn: Classification basics'
+              title: Classification - thresholds, confusion matrix, and metrics
               type: documentation
-              url: https://scikit-learn.org/stable/supervised_learning.html
-              provider: scikit-learn
+              url: https://developers.google.com/machine-learning/crash-course/classification
+              provider: Google
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
               description: TRUSTED official/docs source for Classification basics.
-            questions:
-            - slug: ml-classification-q1
-              prompt: What is the core idea of Classification basics?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Train a classifier and read a confusion matrix.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Train a classifier and read a confusion matrix.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-classification-practice
               title: 'Practice: Classification basics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Train LogisticRegression; print confusion matrix.
-                HOW MANY: 1. WHERE: notebook.'
+              instructions: 'WHAT: Train LogisticRegression; print confusion matrix. HOW MANY: 1. WHERE:
+                notebook.'
               difficulty: beginner
               order: 0
             - slug: ml-classification-build
@@ -334,24 +277,14 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for ML metrics.
-            questions:
-            - slug: ml-metrics-q1
-              prompt: What is the core idea of ML metrics?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Choose accuracy/precision/recall/F1 appropriately.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Choose accuracy/precision/recall/F1 appropriately.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-metrics-practice
               title: 'Practice: ML metrics'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Compute precision/recall on a toy prediction set.
-                HOW MANY: 1. WHERE: notebook.'
+              instructions: 'WHAT: Compute precision/recall on a toy prediction set. HOW MANY: 1. WHERE:
+                notebook.'
               difficulty: beginner
               order: 0
             - slug: ml-metrics-build
@@ -393,24 +326,14 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Overfitting & regularization.
-            questions:
-            - slug: ml-overfitting-q1
-              prompt: What is the core idea of Overfitting & regularization?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Detect overfitting and apply simple regularization.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Detect overfitting and apply simple regularization.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-overfitting-practice
               title: 'Practice: Overfitting & regularization'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Compare train vs test error under complexity. HOW
-                MANY: 1 experiment. WHERE: notebook.'
+              instructions: 'WHAT: Compare train vs test error under complexity. HOW MANY: 1 experiment.
+                WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ml-overfitting-build
@@ -452,24 +375,13 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for sklearn Pipeline.
-            questions:
-            - slug: ml-sklearn-pipeline-q1
-              prompt: What is the core idea of sklearn Pipeline?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Compose preprocessing + model in a Pipeline.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Compose preprocessing + model in a Pipeline.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ml-sklearn-pipeline-practice
               title: 'Practice: sklearn Pipeline'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Build Pipeline with scaler + model. HOW MANY: 1.
-                WHERE: notebook.'
+              instructions: 'WHAT: Build Pipeline with scaler + model. HOW MANY: 1. WHERE: notebook.'
               difficulty: beginner
               order: 0
             - slug: ml-sklearn-pipeline-build

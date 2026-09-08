@@ -1,0 +1,452 @@
+schema_version: 1
+kind: curriculum_manifest
+origin: official
+track:
+  slug: engineering-os-v1
+  name: Engineering OS
+  description: Complete engineering learning map.
+  order: 0
+  levels:
+  - slug: domain-ai-systems
+    name: AI Systems & Design
+    description: AI Systems & Design
+    order: 12
+    subjects:
+    - slug: ai-systems-design
+      name: Deep Learning, GenAI, MLOps, System Design
+      order: 0
+      modules:
+      - slug: mod-inference-perf
+        name: Inference Performance
+        description: Quantization, post-training quantization methods, the KV cache, continuous batching,
+          latency/throughput SLOs and memory-bound decoding.
+        order: 107
+        topics:
+        - slug: infra-quantization-concepts
+          name: Quantization concepts
+          description: What int8 and int4 actually store - scale, zero-point, per-channel versus per-tensor
+            - where the accuracy goes, and the 4-bit path most people actually run.
+          order: 0
+          prerequisites:
+          - cf-bits-and-bytes
+          - cloud-gpu-memory-sizing
+          learning_objective: Explain what a quantized weight stores and evaluate a new quantization method
+            on its own terms.
+          mastery_criteria:
+          - Explain what scale and zero-point do, and why per-channel quantization beats per-tensor for
+            weights.
+          - Say where accuracy is lost when a distribution has outliers, and what that implies for activations
+            versus weights.
+          - Name what NF4 and double quantization each add over plain 4-bit.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: mlops
+          lessons:
+          - slug: infra-quantization-concepts-core
+            title: Quantization concepts
+            description: 'WHY NOW: Explain what a quantized weight stores and evaluate a new quantization
+              method on its own terms.
+
+
+              LEARN: Hugging Face — https://huggingface.co/docs/transformers/en/quantization/concept_guide
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: load one small model in fp16 and again in 4-bit, recording both the memory
+              footprint and one generated output. HOW MANY: 2 loads. WHERE: notebook.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a before/after memory measurement with the quantization config printed
+              alongside it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: infra-quantization-concepts-primary
+              title: Quantization concepts
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/quantization/concept_guide
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: What int8/int4 actually store (scale, zero-point, per-channel vs per-tensor)
+                and where the accuracy goes. The concept page rather than a method page, so you can evaluate
+                any new method on its own terms.
+            - slug: infra-quantization-concepts-reference
+              title: Bitsandbytes
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/quantization/bitsandbytes
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The one-line load_in_4bit=True path, plus NF4 and double quantization - the
+                version of quantization most people actually run.
+        - slug: infra-ptq-gptq-awq
+          name: 'Post-training quantization: GPTQ and AWQ'
+          description: Calibration-based post-training quantization and the salient-weight alternative
+            - enough to pick the right pre-quantized checkpoint off the Hub, which is the realistic job.
+          order: 1
+          prerequisites:
+          - infra-quantization-concepts
+          learning_objective: Choose between a GPTQ and an AWQ checkpoint and say what the calibration
+            knobs mean.
+          mastery_criteria:
+          - Explain why GPTQ needs a calibration dataset, and what a badly chosen calibration set does
+            to the result.
+          - State AWQ's core claim about which weights matter, and how that differs from GPTQ's objective.
+          - Given two pre-quantized checkpoints of the same base model, name the three things you would
+            compare before choosing.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: WORKING_KNOWLEDGE
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: mlops
+          lessons:
+          - slug: infra-ptq-gptq-awq-core
+            title: 'Post-training quantization: GPTQ and AWQ'
+            description: 'WHY NOW: Choose between a GPTQ and an AWQ checkpoint and say what the calibration
+              knobs mean.
+
+
+              LEARN: Hugging Face — https://huggingface.co/docs/transformers/en/quantization/gptq
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: find a GPTQ and an AWQ checkpoint of the same base model and record group
+              size, bit width and any stated accuracy for each. HOW MANY: 2 checkpoints. WHERE: browser
+              plus notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a two-row comparison table with your choice and the reason for it.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: infra-ptq-gptq-awq-primary
+              title: GPTQ
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/quantization/gptq
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Post-training quantization with a calibration dataset - why a model needs to
+                see data to be quantized well, and what the calibration knobs mean.
+            - slug: infra-ptq-gptq-awq-reference
+              title: AWQ
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/quantization/awq
+              provider: Hugging Face
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The salient-weight alternative; reading both is enough to pick the right pre-quantized
+                checkpoint off the Hub, which is the realistic job.
+        - slug: infra-kv-cache
+          name: The KV cache
+          description: Why generation is linear rather than quadratic per token, what the cache costs
+            in memory, the strategies for when it does not fit, and the fragmentation problem that leads
+            to paged attention.
+          order: 2
+          prerequisites: []
+          learning_objective: Explain what the KV cache stores, estimate its size, and name a strategy
+            for when it exceeds memory.
+          mastery_criteria:
+          - Say what is cached and what is recomputed at each decode step.
+          - Estimate KV cache bytes from layers, heads, head dimension, dtype and sequence length.
+          - Name two cache strategies among static, offloaded, quantized and sliding-window, and the case
+            each one is for.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: mlops
+          lessons:
+          - slug: infra-kv-cache-core
+            title: The KV cache
+            description: 'WHY NOW: Explain what the KV cache stores, estimate its size, and name a strategy
+              for when it exceeds memory.
+
+
+              LEARN: Hugging Face — https://huggingface.co/docs/transformers/en/kv_cache
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: compute the KV cache size for one model at 4k and at 32k context and compare
+              both figures to a 24 GB GPU. HOW MANY: 2 estimates. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: a small function returning KV cache bytes given layers, heads, head dimension,
+              dtype and sequence length.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: infra-kv-cache-primary
+              title: Cache strategies
+              type: documentation
+              url: https://huggingface.co/docs/transformers/en/kv_cache
+              provider: Hugging Face
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: Why generation is linear rather than quadratic per token, what the cache costs
+                in memory, and the strategies (static, offloaded, quantized, sliding-window) for when
+                it does not fit. The single most important mechanism in LLM serving.
+            - slug: infra-kv-cache-reference
+              title: PagedAttention
+              type: documentation
+              url: https://huggingface.co/docs/text-generation-inference/en/conceptual/paged_attention
+              provider: Hugging Face (Text Generation Inference)
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: Short statement of the KV-cache memory fragmentation problem, which is the
+                bridge to the batching topic.
+        - slug: infra-continuous-batching
+          name: Continuous batching
+          description: Static versus dynamic versus continuous (iteration-level) batching, with measured
+            throughput, and the paged memory manager that makes it practical.
+          order: 3
+          prerequisites:
+          - infra-kv-cache
+          learning_objective: Explain iteration-level batching and why it beats request-level batching
+            for generation.
+          mastery_criteria:
+          - Explain what a static batch wastes when requests finish at different output lengths.
+          - State what iteration-level scheduling changes about when a new request can join a running
+            batch.
+          - Say what paged attention does about KV cache fragmentation, and why that raises the achievable
+            batch size.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 35
+          domain_key: mlops
+          lessons:
+          - slug: infra-continuous-batching-core
+            title: Continuous batching
+            description: 'WHY NOW: Explain iteration-level batching and why it beats request-level batching
+              for generation.
+
+
+              LEARN: Anyscale — https://www.anyscale.com/blog/continuous-batching-llm-inference
+
+              TIME: ~35 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: sketch the timeline of four requests with different output lengths under
+              static batching and again under continuous batching, shading the idle slots. HOW MANY: 2
+              timelines. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two timelines with the wasted slots shaded on the static one.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.58
+            resources:
+            - slug: infra-continuous-batching-primary
+              title: Achieve 23x LLM Inference Throughput & Reduce p50 Latency
+              type: article
+              url: https://www.anyscale.com/blog/continuous-batching-llm-inference
+              provider: Anyscale
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE
+              description: The clearest explanation anywhere of static vs dynamic vs continuous (iteration-level)
+                batching, with the animations that make it click and measured throughput numbers. No vendor
+                doc explains the mechanism this well.
+            - slug: infra-continuous-batching-reference
+              title: 'vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention'
+              type: article
+              url: https://vllm.ai/blog/2023-06-20-vllm
+              provider: vLLM
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: FULL_SINGLE_PAGE
+              description: The primary announcement of PagedAttention - the memory manager that makes
+                continuous batching practical. Note blog.vllm.ai/2023/06/20/vllm.html 301s here, so this
+                is the stored URL.
+        - slug: infra-latency-vs-throughput
+          name: Latency versus throughput
+          description: Time to first token, inter-token latency, tokens per second and requests per second
+            defined precisely, and the trade-off batch size forces between latency and throughput.
+          order: 4
+          prerequisites:
+          - infra-continuous-batching
+          - ops-observability
+          - sys-scalability
+          learning_objective: State an inference SLO in the right metrics instead of saying "make it faster".
+          mastery_criteria:
+          - Define time to first token, inter-token latency, end-to-end request latency, tokens per second
+            and requests per second, and say which of them a user actually feels.
+          - Explain what raising batch size does to throughput and to inter-token latency, in opposite
+            directions.
+          - Write one SLO for an interactive chat feature and one for a batch summarisation job, and say
+            why they use different metrics.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: STRONG
+          parallel_eligible: false
+          estimated_minutes: 30
+          domain_key: mlops
+          lessons:
+          - slug: infra-latency-vs-throughput-core
+            title: Latency versus throughput
+            description: 'WHY NOW: State an inference SLO in the right metrics instead of saying "make
+              it faster".
+
+
+              LEARN: NVIDIA — https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/
+
+              TIME: ~30 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: write two SLOs - one interactive, one batch - each naming a metric, a percentile
+              and a target, plus the benchmarking parameters you would fix to measure them. HOW MANY:
+              2 SLOs. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two SLOs written out with their fixed benchmarking parameters listed
+              underneath.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 0.5
+            resources:
+            - slug: infra-latency-vs-throughput-primary
+              title: 'LLM Inference Benchmarking: Fundamental Concepts'
+              type: article
+              url: https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/
+              provider: NVIDIA
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: 'FULL_SINGLE_PAGE — headings verified: "How LLM inference works" → "LLM inference
+                metrics" → time to first token / end-to-end request latency / intertoken latency / tokens
+                per second / requests per second → "Benchmarking parameters and best practices"'
+              description: Defines TTFT, ITL, TPS and RPS precisely and shows that latency and throughput
+                trade against each other via batch size - so you can state an SLO instead of saying "make
+                it faster".
+        - slug: infra-memory-bound-decoding
+          name: Memory-bound decoding
+          description: 'The arithmetic showing that decoding is memory-bandwidth bound rather than compute
+            bound - the honest answer to "CPU versus GPU inference" - plus the concrete CPU-side quantization
+            story. Honest gap from the research: the best treatment of this mechanism is a personal blog,
+            because no vendor page does the arithmetic.'
+          order: 5
+          prerequisites:
+          - infra-kv-cache
+          - infra-latency-vs-throughput
+          - cf-ram
+          - cf-cache
+          learning_objective: Argue from arithmetic why decoding is memory-bandwidth bound, and what that
+            predicts about batching, quantization and CPU inference.
+          mastery_criteria:
+          - Compute the arithmetic intensity of a single-token decode step and compare it to a GPU's FLOP-to-bandwidth
+            ratio.
+          - Use that result to predict why larger batches raise throughput at almost no cost in per-token
+            latency.
+          - Explain why CPU decoding is slow in bandwidth terms, and state what dynamic int8 quantization
+            recovers and what it does not.
+          fast_trackable: true
+          learning_track: SPECIALIZATION
+          depth_target: DEEP
+          parallel_eligible: false
+          estimated_minutes: 65
+          domain_key: mlops
+          lessons:
+          - slug: infra-memory-bound-decoding-core
+            title: Memory-bound decoding
+            description: 'WHY NOW: Argue from arithmetic why decoding is memory-bandwidth bound, and what
+              that predicts about batching, quantization and CPU inference.
+
+
+              LEARN: kipp.ly — https://kipp.ly/p/transformer-inference-arithmetic
+
+              TIME: ~65 minutes (MEDIUM confidence until measured).
+
+              PRACTICE: WHAT: work the bytes-moved versus FLOPs-performed arithmetic for one decode step
+              of one model, at batch 1 and at batch 32. HOW MANY: 2 calculations. WHERE: notes.
+
+              DESTINATION: LOCAL_IDE
+
+              QUANTITY: 2
+
+              BUILD: IMPLEMENT: the two calculations with a memory-bound or compute-bound verdict stated
+              for each.
+
+              DONE WHEN: You can explain the focus concepts without notes and finish the practice quantity.'
+            order: 0
+            hours_estimated: 1.08
+            resources:
+            - slug: infra-memory-bound-decoding-primary
+              title: Transformer Inference Arithmetic
+              type: article
+              url: https://kipp.ly/p/transformer-inference-arithmetic
+              provider: kipp.ly
+              role: PRIMARY
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 0
+              section: FULL_SINGLE_PAGE — the "kv cache" and "capacity" sections carry the argument
+              description: Works out from first principles that decoding is memory-bandwidth bound, not
+                compute bound. This is the insight that explains why batching helps, why quantization
+                helps, and why CPU inference is slow - the honest answer to "CPU vs GPU". A personal blog,
+                chosen because no vendor page does the arithmetic. Note kipp.ly/transformer-inference-arithmetic/
+                301s here.
+            - slug: infra-memory-bound-decoding-reference
+              title: Quantize ONNX models
+              type: documentation
+              url: https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html
+              provider: ONNX Runtime
+              role: REFERENCE
+              verification_status: NEEDS_REVIEW
+              official: true
+              order: 1
+              section: Sections "Quantization Overview", "Dynamic Quantization", "Data type selection",
+                "Quantization on GPU" (headings verified)
+              description: 'The concrete CPU story: dynamic int8 quantization is the standard way to make
+                CPU inference viable, and this page states plainly which int8 formats CPU vs GPU support.'

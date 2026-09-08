@@ -1,4 +1,7 @@
+from pathlib import Path
 from urllib.parse import urlparse
+
+import yaml
 
 from app.content.import_curriculum import import_path, validate_manifest_group
 from app.content.validate import validate_manifest
@@ -6,6 +9,31 @@ from app.db.models import CurriculumResource, CurriculumTopic, LessonExercise, L
 from app.db.session import SessionLocal
 
 from test_curriculum_v1 import ADVANCED_JAVA, D0, D1, D2, _load, _topic_slugs, _walk_topics
+
+QUESTION_BANKS = Path(__file__).resolve().parents[1] / "content" / "questions"
+
+
+def _banked_questions() -> dict[str, list[dict]]:
+    """Topic slug -> its questions, for topics owned by an authored bank.
+
+    Questions used to live in the curriculum manifests. For topics that now
+    have a bank under ``content/questions/`` they live only there, because two
+    files claiming the same field meant whichever import ran last won -- and
+    that is how 94 template-filler questions came back after being replaced.
+    A Domain 2 topic must still have questions; this looks where they are.
+    """
+    banked: dict[str, list[dict]] = {}
+    if not QUESTION_BANKS.exists():
+        return banked
+    for path in sorted(QUESTION_BANKS.glob("*.yaml")):
+        if path.name.startswith("_"):
+            continue
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        for entry in data.get("topics") or []:
+            slug = (entry or {}).get("topic")
+            if slug:
+                banked[slug] = entry.get("questions") or []
+    return banked
 
 
 def test_domain2_validates_with_prior_domains():
@@ -17,16 +45,26 @@ def test_domain2_validates_with_prior_domains():
 
 
 def test_domain2_every_topic_has_questions_and_exercises():
+    banked = _banked_questions()
     for topic in _walk_topics(_load(D2)):
         lesson = topic["lessons"][0]
-        assert 4 <= len(lesson["questions"]) <= 12, topic["slug"]
-        assert lesson["exercises"], topic["slug"]
+        slug = topic["slug"]
+
+        # Questions come from the manifest, or from the bank that now owns them.
+        # Exactly one source should hold them, never both.
+        in_manifest = lesson["questions"]
+        in_bank = banked.get(slug, [])
+        assert not (in_manifest and in_bank), f"{slug} has questions in two places"
+        questions = in_manifest or in_bank
+        assert 4 <= len(questions) <= 12, slug
+
+        assert lesson["exercises"], slug
         assert 0.3 <= lesson["hours_estimated"] <= 2.5
         assert topic["mastery_criteria"]
         primaries = [r for r in lesson["resources"] if r.get("role") == "PRIMARY"]
-        assert len(primaries) == 1, topic["slug"]
+        assert len(primaries) == 1, slug
         assert primaries[0].get("url", "").startswith("https://")
-        for question in lesson["questions"]:
+        for question in questions:
             assert len(question["options"]) == 4
             assert question["answer"] in question["options"]
             assert question.get("explanation")

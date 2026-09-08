@@ -53,35 +53,21 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for Deep Learning awareness.
-            questions:
-            - slug: dl-awareness-q1
-              prompt: What is the core idea of Deep Learning awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Neural nets stack differentiable layers to learn representations.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Neural nets stack differentiable layers to learn representations.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: dl-awareness-practice
               title: 'Practice: Deep Learning awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of Deep Learning. HOW
-                MANY: 1. WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of Deep Learning. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: dl-path
           name: Deep Learning learning path
-          description: Sketch a personal learning path into Deep Learning after core
-            ML/backend.
+          description: Sketch a personal learning path into Deep Learning after core ML/backend.
           order: 1
           prerequisites:
           - dl-awareness
-          learning_objective: Sketch a personal learning path into Deep Learning after
-            core ML/backend.
+          learning_objective: Sketch a personal learning path into Deep Learning after core ML/backend.
           mastery_criteria:
           - Explain Deep Learning learning path in your own words.
           - Complete the mapped practice checklist.
@@ -94,8 +80,7 @@ track:
           lessons:
           - slug: dl-path-core
             title: Deep Learning learning path
-            description: Sketch a personal learning path into Deep Learning after
-              core ML/backend.
+            description: Sketch a personal learning path into Deep Learning after core ML/backend.
             order: 0
             hours_estimated: 0.33
             resources:
@@ -108,27 +93,13 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED official/docs source for Deep Learning learning
-                path.
-            questions:
-            - slug: dl-path-q1
-              prompt: What is the core idea of Deep Learning learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into Deep Learning after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into Deep Learning after core
-                ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED official/docs source for Deep Learning learning path.
+            questions: []
             exercises:
             - slug: dl-path-practice
               title: 'Practice: Deep Learning learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for Deep Learning. HOW MANY:
-                5. WHERE: notes.'
+              instructions: 'WHAT: List 5 next resources for Deep Learning. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-nlp-shell
@@ -160,31 +131,19 @@ track:
             - slug: nlp-awareness-primary
               title: 'Hugging Face: NLP awareness'
               type: documentation
-              url: https://huggingface.co/learn/nlp-course/chapter1/1
+              url: https://huggingface.co/learn/llm-course/chapter1/1
               provider: Hugging Face
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
               description: TRUSTED official/docs source for NLP awareness.
-            questions:
-            - slug: nlp-awareness-q1
-              prompt: What is the core idea of NLP awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - NLP turns text into tokens and models meaning.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: NLP turns text into tokens and models meaning.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: nlp-awareness-practice
               title: 'Practice: NLP awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of NLP. HOW MANY: 1.
-                WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of NLP. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: nlp-path
@@ -193,8 +152,7 @@ track:
           order: 1
           prerequisites:
           - nlp-awareness
-          learning_objective: Sketch a personal learning path into NLP after core
-            ML/backend.
+          learning_objective: Sketch a personal learning path into NLP after core ML/backend.
           mastery_criteria:
           - Explain NLP learning path in your own words.
           - Complete the mapped practice checklist.
@@ -214,31 +172,19 @@ track:
             - slug: nlp-path-primary
               title: 'Hugging Face: NLP learning path'
               type: documentation
-              url: https://huggingface.co/learn/nlp-course/chapter1/1
+              url: https://huggingface.co/learn/llm-course/chapter1/1
               provider: Hugging Face
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
               description: TRUSTED official/docs source for NLP learning path.
-            questions:
-            - slug: nlp-path-q1
-              prompt: What is the core idea of NLP learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into NLP after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into NLP after core ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: nlp-path-practice
               title: 'Practice: NLP learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for NLP. HOW MANY: 5. WHERE:
-                notes.'
+              instructions: 'WHAT: List 5 next resources for NLP. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-genai-shell
@@ -247,12 +193,10 @@ track:
         topics:
         - slug: genai-awareness
           name: Generative AI awareness
-          description: Generative models produce text/images from prompts and training
-            data.
+          description: Generative models produce text/images from prompts and training data.
           order: 0
           prerequisites: []
-          learning_objective: Generative models produce text/images from prompts and
-            training data.
+          learning_objective: Generative models produce text/images from prompts and training data.
           mastery_criteria:
           - Explain Generative AI awareness in your own words.
           - Complete the mapped practice checklist.
@@ -265,51 +209,35 @@ track:
           lessons:
           - slug: genai-awareness-core
             title: Generative AI awareness
-            description: Generative models produce text/images from prompts and training
-              data.
+            description: Generative models produce text/images from prompts and training data.
             order: 0
             hours_estimated: 0.33
             resources:
             - slug: genai-awareness-primary
               title: 'OpenAI Docs: Generative AI awareness'
               type: documentation
-              url: https://platform.openai.com/docs/guides/text
+              url: https://developers.openai.com/api/docs/guides/text
               provider: OpenAI Docs
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
               description: TRUSTED official/docs source for Generative AI awareness.
-            questions:
-            - slug: genai-awareness-q1
-              prompt: What is the core idea of Generative AI awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Generative models produce text/images from prompts and training data.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Generative models produce text/images from prompts and training
-                data.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: genai-awareness-practice
               title: 'Practice: Generative AI awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of Generative AI. HOW
-                MANY: 1. WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of Generative AI. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: genai-path
           name: Generative AI learning path
-          description: Sketch a personal learning path into Generative AI after core
-            ML/backend.
+          description: Sketch a personal learning path into Generative AI after core ML/backend.
           order: 1
           prerequisites:
           - genai-awareness
-          learning_objective: Sketch a personal learning path into Generative AI after
-            core ML/backend.
+          learning_objective: Sketch a personal learning path into Generative AI after core ML/backend.
           mastery_criteria:
           - Explain Generative AI learning path in your own words.
           - Complete the mapped practice checklist.
@@ -322,41 +250,26 @@ track:
           lessons:
           - slug: genai-path-core
             title: Generative AI learning path
-            description: Sketch a personal learning path into Generative AI after
-              core ML/backend.
+            description: Sketch a personal learning path into Generative AI after core ML/backend.
             order: 0
             hours_estimated: 0.33
             resources:
             - slug: genai-path-primary
               title: 'OpenAI Docs: Generative AI learning path'
               type: documentation
-              url: https://platform.openai.com/docs/guides/text
+              url: https://developers.openai.com/api/docs/guides/text
               provider: OpenAI Docs
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED official/docs source for Generative AI learning
-                path.
-            questions:
-            - slug: genai-path-q1
-              prompt: What is the core idea of Generative AI learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into Generative AI after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into Generative AI after core
-                ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED official/docs source for Generative AI learning path.
+            questions: []
             exercises:
             - slug: genai-path-practice
               title: 'Practice: Generative AI learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for Generative AI. HOW MANY:
-                5. WHERE: notes.'
+              instructions: 'WHAT: List 5 next resources for Generative AI. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-ai-eng-shell
@@ -368,8 +281,7 @@ track:
           description: AI engineering ships reliable LLM features with evals and ops.
           order: 0
           prerequisites: []
-          learning_objective: AI engineering ships reliable LLM features with evals
-            and ops.
+          learning_objective: AI engineering ships reliable LLM features with evals and ops.
           mastery_criteria:
           - Explain AI Engineering awareness in your own words.
           - Complete the mapped practice checklist.
@@ -382,50 +294,35 @@ track:
           lessons:
           - slug: ai-eng-awareness-core
             title: AI Engineering awareness
-            description: AI engineering ships reliable LLM features with evals and
-              ops.
+            description: AI engineering ships reliable LLM features with evals and ops.
             order: 0
             hours_estimated: 0.33
             resources:
             - slug: ai-eng-awareness-primary
-              title: 'DeepLearning.AI: AI Engineering awareness'
+              title: Evaluating model output - what AI engineering measures
               type: documentation
-              url: https://www.deeplearning.ai/short-courses/
-              provider: DeepLearning.AI
+              url: https://developers.openai.com/api/docs/guides/evals
+              provider: OpenAI
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
               description: TRUSTED official/docs source for AI Engineering awareness.
-            questions:
-            - slug: ai-eng-awareness-q1
-              prompt: What is the core idea of AI Engineering awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - AI engineering ships reliable LLM features with evals and ops.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: AI engineering ships reliable LLM features with evals and ops.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: ai-eng-awareness-practice
               title: 'Practice: AI Engineering awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of AI Engineering. HOW
-                MANY: 1. WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of AI Engineering. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: ai-eng-path
           name: AI Engineering learning path
-          description: Sketch a personal learning path into AI Engineering after core
-            ML/backend.
+          description: Sketch a personal learning path into AI Engineering after core ML/backend.
           order: 1
           prerequisites:
           - ai-eng-awareness
-          learning_objective: Sketch a personal learning path into AI Engineering
-            after core ML/backend.
+          learning_objective: Sketch a personal learning path into AI Engineering after core ML/backend.
           mastery_criteria:
           - Explain AI Engineering learning path in your own words.
           - Complete the mapped practice checklist.
@@ -438,41 +335,27 @@ track:
           lessons:
           - slug: ai-eng-path-core
             title: AI Engineering learning path
-            description: Sketch a personal learning path into AI Engineering after
-              core ML/backend.
+            description: Sketch a personal learning path into AI Engineering after core ML/backend.
             order: 0
             hours_estimated: 0.33
             resources:
             - slug: ai-eng-path-primary
-              title: 'DeepLearning.AI: AI Engineering learning path'
+              title: Prompt engineering - the first rung of the AI engineering ladder
               type: documentation
-              url: https://www.deeplearning.ai/short-courses/
-              provider: DeepLearning.AI
+              url: https://developers.openai.com/api/docs/guides/prompt-engineering
+              provider: OpenAI
               role: PRIMARY
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED official/docs source for AI Engineering learning
-                path.
-            questions:
-            - slug: ai-eng-path-q1
-              prompt: What is the core idea of AI Engineering learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into AI Engineering after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into AI Engineering after core
-                ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED official/docs source for AI Engineering learning path.
+              section: FULL_SINGLE_PAGE
+            questions: []
             exercises:
             - slug: ai-eng-path-practice
               title: 'Practice: AI Engineering learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for AI Engineering. HOW MANY:
-                5. WHERE: notes.'
+              instructions: 'WHAT: List 5 next resources for AI Engineering. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-devops-shell
@@ -484,8 +367,7 @@ track:
           description: DevOps connects build, release, run with automation and observability.
           order: 0
           prerequisites: []
-          learning_objective: DevOps connects build, release, run with automation
-            and observability.
+          learning_objective: DevOps connects build, release, run with automation and observability.
           mastery_criteria:
           - Explain DevOps awareness in your own words.
           - Complete the mapped practice checklist.
@@ -503,7 +385,7 @@ track:
             hours_estimated: 0.33
             resources:
             - slug: devops-awareness-primary
-              title: 'Microsoft Learn — Discover DevOps'
+              title: Microsoft Learn — Discover DevOps
               type: documentation
               url: https://learn.microsoft.com/en-us/training/modules/discover-devops/
               provider: Microsoft Learn
@@ -511,9 +393,11 @@ track:
               verification_status: NEEDS_REVIEW
               official: true
               order: 0
-              description: Beginner 26-minute DevOps overview covering approach, culture, goals/benefits, and application lifecycle.
+              description: Beginner 26-minute DevOps overview covering approach, culture, goals/benefits,
+                and application lifecycle.
+              section: FULL_SINGLE_PAGE
             - slug: devops-awareness-reference-12factor
-              title: 'The Twelve-Factor App — methodology reference'
+              title: The Twelve-Factor App — methodology reference
               type: documentation
               url: https://12factor.net/
               provider: 12-Factor
@@ -521,25 +405,14 @@ track:
               verification_status: TRUSTED
               official: true
               order: 1
-              description: 'Reference after the DevOps overview: SaaS methodology and build/release/run practices.'
-            questions:
-            - slug: devops-awareness-q1
-              prompt: What is the core idea of DevOps awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - DevOps connects build, release, run with automation and observability.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: DevOps connects build, release, run with automation and observability.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: 'Reference after the DevOps overview: SaaS methodology and build/release/run
+                practices.'
+            questions: []
             exercises:
             - slug: devops-awareness-practice
               title: 'Practice: DevOps awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of DevOps. HOW MANY:
-                1. WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of DevOps. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: devops-path
@@ -548,8 +421,7 @@ track:
           order: 1
           prerequisites:
           - devops-awareness
-          learning_objective: Sketch a personal learning path into DevOps after core
-            ML/backend.
+          learning_objective: Sketch a personal learning path into DevOps after core ML/backend.
           mastery_criteria:
           - Explain DevOps learning path in your own words.
           - Complete the mapped practice checklist.
@@ -575,9 +447,11 @@ track:
               verification_status: NEEDS_REVIEW
               official: true
               order: 0
-              description: Learning-path orientation showing the DevOps modules that follow the introductory awareness unit.
+              description: Learning-path orientation showing the DevOps modules that follow the introductory
+                awareness unit.
+              section: FULL_SINGLE_PAGE
             - slug: devops-path-reference-12factor
-              title: 'The Twelve-Factor App — methodology reference'
+              title: The Twelve-Factor App — methodology reference
               type: documentation
               url: https://12factor.net/
               provider: 12-Factor
@@ -586,24 +460,12 @@ track:
               official: true
               order: 1
               description: Optional methodology reference for cloud/SaaS application practices.
-            questions:
-            - slug: devops-path-q1
-              prompt: What is the core idea of DevOps learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into DevOps after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into DevOps after core ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: devops-path-practice
               title: 'Practice: DevOps learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for DevOps. HOW MANY: 5.
-                WHERE: notes.'
+              instructions: 'WHAT: List 5 next resources for DevOps. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0
       - slug: mod-sysdesign-shell
@@ -615,8 +477,7 @@ track:
           description: System design trades latency, consistency, and cost at scale.
           order: 0
           prerequisites: []
-          learning_objective: System design trades latency, consistency, and cost
-            at scale.
+          learning_objective: System design trades latency, consistency, and cost at scale.
           mastery_criteria:
           - Explain System Design awareness in your own words.
           - Complete the mapped practice checklist.
@@ -643,35 +504,21 @@ track:
               official: true
               order: 0
               description: TRUSTED official/docs source for System Design awareness.
-            questions:
-            - slug: sysdesign-awareness-q1
-              prompt: What is the core idea of System Design awareness?
-              options:
-              - A vague buzzword with no engineering meaning
-              - System design trades latency, consistency, and cost at scale.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: System design trades latency, consistency, and cost at scale.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+            questions: []
             exercises:
             - slug: sysdesign-awareness-practice
               title: 'Practice: System Design awareness'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: Write a 5-bullet overview of System Design. HOW
-                MANY: 1. WHERE: notes.'
+              instructions: 'WHAT: Write a 5-bullet overview of System Design. HOW MANY: 1. WHERE: notes.'
               difficulty: beginner
               order: 0
         - slug: sysdesign-path
           name: System Design learning path
-          description: Sketch a personal learning path into System Design after core
-            ML/backend.
+          description: Sketch a personal learning path into System Design after core ML/backend.
           order: 1
           prerequisites:
           - sysdesign-awareness
-          learning_objective: Sketch a personal learning path into System Design after
-            core ML/backend.
+          learning_objective: Sketch a personal learning path into System Design after core ML/backend.
           mastery_criteria:
           - Explain System Design learning path in your own words.
           - Complete the mapped practice checklist.
@@ -684,8 +531,7 @@ track:
           lessons:
           - slug: sysdesign-path-core
             title: System Design learning path
-            description: Sketch a personal learning path into System Design after
-              core ML/backend.
+            description: Sketch a personal learning path into System Design after core ML/backend.
             order: 0
             hours_estimated: 0.33
             resources:
@@ -698,26 +544,12 @@ track:
               verification_status: TRUSTED
               official: true
               order: 0
-              description: TRUSTED official/docs source for System Design learning
-                path.
-            questions:
-            - slug: sysdesign-path-q1
-              prompt: What is the core idea of System Design learning path?
-              options:
-              - A vague buzzword with no engineering meaning
-              - Sketch a personal learning path into System Design after core ML/backend.
-              - Only relevant for interviews, not real systems
-              - Replaces the need for prerequisites
-              answer: Sketch a personal learning path into System Design after core
-                ML/backend.
-              explanation: Focus on the stated learning objective.
-              difficulty: easy
-              mastery_requirement: true
+              description: TRUSTED official/docs source for System Design learning path.
+            questions: []
             exercises:
             - slug: sysdesign-path-practice
               title: 'Practice: System Design learning path'
               type: ACTION_CHECKLIST
-              instructions: 'WHAT: List 5 next resources for System Design. HOW MANY:
-                5. WHERE: notes.'
+              instructions: 'WHAT: List 5 next resources for System Design. HOW MANY: 5. WHERE: notes.'
               difficulty: beginner
               order: 0

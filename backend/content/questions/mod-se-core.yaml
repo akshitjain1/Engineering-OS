@@ -1,0 +1,742 @@
+# Engineering practice self-check questions.
+#
+# Every question here is answerable from the PRIMARY resource its topic maps to,
+# and stays inside that topic only. Gates in app/content/question_bank.py enforce
+# both: a prompt already used by another topic is refused at import.
+schema_version: 1
+kind: question_bank
+module: mod-se-core
+topics:
+  - topic: se-sdlc
+    # Source: IBM - Software Development Life Cycle (SDLC) phases
+    questions:
+      - id: se-sdlc-design-skip
+        prompt: >-
+          A six-month project went from a signed-off requirements document straight into coding,
+          skipping design entirely. What does the SDLC design phase exist to prevent?
+        options:
+          - "Structural decisions get made ad hoc mid-build, so rework grows as code piles up"
+          - "Coding cannot legally begin until a design document has been formally signed off"
+          - "Testers have nothing to test against, so no test can be written for the project"
+          - "The requirements themselves stay unwritten, leaving the team guessing at scope"
+        answer: "Structural decisions get made ad hoc mid-build, so rework grows as code piles up"
+        explanation: >-
+          Design turns agreed requirements into architecture, interfaces and data shape before code
+          hardens around accidental choices, and the later you reverse such a choice the more code
+          moves with it. Nothing legal forbids coding, tests can be written from requirements alone,
+          and in this scenario the requirements were already written and signed off.
+        difficulty: beginner
+      - id: se-sdlc-analysis-vs-design
+        prompt: >-
+          Two documents land on your desk: one lists what the system must do, the other how its
+          modules will talk to each other. Which SDLC phases produced them?
+        options:
+          - "Analysis produced the first and design the second, because what precedes how"
+          - "Design produced the first and analysis the second, because how precedes what"
+          - "Planning produced both, since scope and structure are always decided together"
+          - "Development produced both, because each is written alongside the code itself"
+        answer: "Analysis produced the first and design the second, because what precedes how"
+        explanation: >-
+          Analysis captures required behaviour and constraints; design decides the structure that
+          will deliver them. Reversing the order means committing to a shape before knowing the job.
+          Planning handles feasibility, cost and schedule rather than either document, and writing
+          both during development is exactly how a team ends up with no agreed target.
+        difficulty: beginner
+      - id: se-sdlc-maintenance-share
+        prompt: >-
+          Your service ships and the team is reassigned to the next project. Why does the SDLC
+          still treat maintenance as a full phase rather than an afterthought?
+        options:
+          - "Most of a long-lived system's total cost and change arrives after first release"
+          - "Maintenance only covers hosting invoices, which finance already tracks separately"
+          - "Maintenance is where the original requirements are finally written down properly"
+          - "It exists so the deployment phase can be declared closed on the planned date"
+        answer: "Most of a long-lived system's total cost and change arrives after first release"
+        explanation: >-
+          Bug fixes, dependency upgrades, changed regulation and small new features accumulate for
+          years, which is why the phase is named and staffed. Hosting cost is a fraction of that
+          work, requirements belong to analysis long before release, and closing deployment on
+          schedule is an administrative act rather than the reason the phase exists.
+        difficulty: intermediate
+      - id: se-sdlc-late-defect-cost
+        prompt: >-
+          A misunderstood requirement surfaces during acceptance testing rather than during
+          analysis. Beyond the code fix itself, what has that delay already cost you?
+        options:
+          - "Every design, code and test artefact built on that misunderstanding has to change too"
+          - "Nothing further, since the defect was caught before any real user ever saw it"
+          - "Only the test suite, because acceptance tests are the artefact that has to change"
+          - "Only the schedule, since the fix itself costs the same in any phase of a project"
+        answer: "Every design, code and test artefact built on that misunderstanding has to change too"
+        explanation: >-
+          Each phase builds on the one before, so a wrong requirement propagates into design
+          decisions, code and the tests that assert the wrong behaviour. Catching it before users is
+          better than after, but not free. The test suite is only one affected artefact, and the whole
+          reason phases are ordered is that a fix does not cost the same at every point.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: se-requirements
+    # Source: GeeksforGeeks - Requirements engineering process
+    questions:
+      - id: se-req-testable-rewrite
+        prompt: 'A stakeholder asks for a search that "feels fast". Which rewrite turns that into a testable requirement?'
+        options:
+          - "Search returns results for a three-word query in under 500 ms at the 95th percentile"
+          - "Search is optimised using the fastest indexing library currently on the market"
+          - "Search feels responsive to a typical user on a typical office network connection"
+          - "Search performance is a priority for this release and will be reviewed later on"
+        answer: "Search returns results for a three-word query in under 500 ms at the 95th percentile"
+        explanation: >-
+          A requirement is testable when someone can build a check that passes or fails without
+          arguing, which needs a measurable target and the conditions it holds under. Naming a
+          library specifies a solution rather than a need, responsive and typical restate the
+          vagueness in new words, and calling it a priority commits to nothing you can verify.
+        difficulty: beginner
+        mastery: true
+      - id: se-req-conflict-negotiation
+        prompt: >-
+          Elicitation yields two requirements that cannot both hold: support wants every field
+          editable, compliance wants audit fields frozen. Which step of the process owns this?
+        options:
+          - "Analysis and negotiation, where conflicts are surfaced and settled with stakeholders"
+          - "Specification, by writing both requirements down verbatim and issuing the document"
+          - "Validation, which checks the finished build against whatever was written earlier"
+          - "Elicitation again, on the assumption that more interviews dissolve the conflict"
+        answer: "Analysis and negotiation, where conflicts are surfaced and settled with stakeholders"
+        explanation: >-
+          Analysis exists precisely to detect conflicts, overlaps and gaps, and negotiation resolves
+          them with the people who asked. Specifying both leaves the contradiction for a developer to
+          decide silently, validation happens too late to renegotiate cheaply, and more elicitation
+          gathers more of the same disagreement rather than resolving it.
+        difficulty: intermediate
+      - id: se-req-out-of-scope
+        prompt: >-
+          Why does a requirements document carry an explicit out-of-scope list instead of staying
+          silent about the things it excludes?
+        options:
+          - "Silence reads as agreement, so unstated exclusions return later as expected features"
+          - "An exclusion list is a contractual formality with no effect on what gets delivered"
+          - "It lets you drop any requirement mid-project by moving it into that list quietly"
+          - "It removes the need to prioritise, since everything unlisted is equally required"
+        answer: "Silence reads as agreement, so unstated exclusions return later as expected features"
+        explanation: >-
+          Stakeholders fill gaps with their own assumptions, and the bill arrives at acceptance when
+          a missing feature is called a defect. Writing the exclusion down makes the assumption
+          visible while it is still cheap to argue about. It is not a formality, it is not licence to
+          quietly cut agreed work, and it sits alongside prioritisation rather than replacing it.
+        difficulty: intermediate
+      - id: se-req-nonfunctional
+        prompt: >-
+          Which of these statements belongs in the non-functional section of a requirements
+          specification rather than the functional one?
+        options:
+          - "The service sustains 200 concurrent prediction requests with no rise in error rate"
+          - "An analyst can export the filtered results table to a CSV file from the report page"
+          - "A locked account can be reopened by an administrator from the user detail screen"
+          - "The system emails a receipt to the customer once a payment has been confirmed"
+        answer: "The service sustains 200 concurrent prediction requests with no rise in error rate"
+        explanation: >-
+          Non-functional requirements constrain how well the system behaves, covering performance,
+          capacity, availability and security. The other three each describe a behaviour a user can
+          invoke, which makes them functional. Getting the split wrong tends to leave load and
+          latency targets unwritten until the first production incident makes them urgent.
+        difficulty: intermediate
+      - id: se-req-traceability
+        prompt: >-
+          Halfway through the build a stakeholder changes one requirement. What does requirements
+          management give you at that moment?
+        options:
+          - "A traceable link from that requirement to the design, code and tests it affects"
+          - "Grounds to refuse the change, since the specification was already signed off once"
+          - "An automatic schedule re-estimate produced from the text of the change alone"
+          - "A guarantee the change is cheap, because requirements are only text documents"
+        answer: "A traceable link from that requirement to the design, code and tests it affects"
+        explanation: >-
+          Traceability turns one changed line into a concrete list of what must be revisited, which
+          is what makes an impact estimate honest. A sign-off does not freeze the world, no process
+          derives a schedule from a change description on its own, and the cost of a change lives in
+          the artefacts downstream of it rather than in the sentence itself.
+        difficulty: advanced
+
+  - topic: se-versioning
+    # Source: semver.org - Semantic Versioning specification
+    questions:
+      - id: se-semver-remove-function
+        prompt: >-
+          Your library sits at 2.4.1 and you delete a public function that consumers call. Which
+          version comes next under SemVer, and what does that oblige you to do?
+        options:
+          - "3.0.0, and you owe consumers a documented migration path for the removed call"
+          - "2.5.0, because a removal adds no feature and so counts only as a minor change"
+          - "2.4.2, since the list of public signatures is unchanged for anyone still on 2.4.x"
+          - "3.0.0, after which consumers must upgrade at once because 2.x becomes invalid"
+        answer: "3.0.0, and you owe consumers a documented migration path for the removed call"
+        explanation: >-
+          Removing part of the public API is a backward-incompatible change, which is the definition
+          of a major bump, and the number is only useful alongside release notes saying what to use
+          instead. Minor is for compatible additions and patch for compatible fixes, and a major
+          release does not invalidate the 2.x line, which can still receive fixes.
+        difficulty: intermediate
+        mastery: true
+      - id: se-semver-optional-param
+        prompt: >-
+          You add a new optional keyword argument with a default to an existing public function.
+          What does SemVer say the next release number should be?
+        options:
+          - "A minor bump, since every existing call keeps working while capability is added"
+          - "A major bump, because the function signature differs from the published one"
+          - "A patch bump, as adding a default argument corrects an omission in the old design"
+          - "No bump at all, because the change is source-compatible for every caller today"
+        answer: "A minor bump, since every existing call keeps working while capability is added"
+        explanation: >-
+          Minor covers functionality added in a backward-compatible way, which a defaulted argument
+          is. A changed signature alone is not breaking when old calls still compile and behave the
+          same. Patch is reserved for compatible bug fixes, and shipping new public capability with
+          no version change leaves consumers unable to express that they need it.
+        difficulty: intermediate
+      - id: se-semver-bugfix-relied-on
+        prompt: >-
+          A release fixes a bug, but some consumers wrote code that relied on the buggy behaviour.
+          How does SemVer classify that release?
+        options:
+          - "Still a patch, since the fix restores documented behaviour rather than changing it"
+          - "A major release, because any consumer code that stops working makes it breaking"
+          - "A minor release, as restoring intended behaviour effectively delivers new function"
+          - "Unversioned, because bug fixes sit outside the numbering scheme altogether"
+        answer: "Still a patch, since the fix restores documented behaviour rather than changing it"
+        explanation: >-
+          SemVer keys off the declared public API, so consumers depending on undocumented broken
+          behaviour were outside the contract, though the fix still belongs in the release notes.
+          Treating every such fix as major makes major bumps meaningless, restoring intended
+          behaviour is not new functionality, and patch exists specifically to carry bug fixes.
+        difficulty: advanced
+      - id: se-semver-zero-major
+        prompt: >-
+          A dependency you want to use for a production service sits at 0.7.3. What does SemVer
+          let you assume about its stability?
+        options:
+          - "Very little: while the major version is zero, anything may change in any release"
+          - "Nothing may break before 1.0.0, because 0.x is a long stabilisation period"
+          - "Minor bumps in the 0.x line are as backward compatible as they are after 1.0.0"
+          - "It is unusable in production, because SemVer forbids depending on any 0.x release"
+        answer: "Very little: while the major version is zero, anything may change in any release"
+        explanation: >-
+          The specification treats 0.y.z as initial development where the public API is unstable, so
+          your only real protection is pinning exactly and reading changelogs. The 0.x line carries
+          no compatibility promise at either the minor or the patch level, and SemVer describes what
+          a number means rather than forbidding you from depending on anything.
+        difficulty: intermediate
+      - id: se-semver-consumer-pinning
+        prompt: >-
+          You depend on a library that follows SemVer strictly. Which constraint takes bug fixes
+          automatically without risking a breaking change?
+        options:
+          - "Pin the major version and allow minor and patch updates within that major"
+          - "Pin the exact patch version and upgrade only by hand once every quarter"
+          - "Allow any version above the current one, since SemVer promises compatibility"
+          - "Pin the patch number only, letting the major and minor numbers float freely"
+        answer: "Pin the major version and allow minor and patch updates within that major"
+        explanation: >-
+          Compatibility is promised within a major version, so allowing minor and patch inside it is
+          exactly the range that picks up fixes safely. An exact pin is defensible but takes no fix
+          until somebody acts, an open upper bound crosses major bumps where breakage is expected,
+          and floating the major while fixing the patch is the one constraint with no meaning.
+        difficulty: advanced
+
+  - topic: se-solid-srp
+    # Source: Robert C. Martin - The Single Responsibility Principle
+    questions:
+      - id: se-srp-reason-to-change
+        prompt: >-
+          Single Responsibility is stated as one reason to change rather than doing one thing. Why
+          does that distinction matter when you apply it?
+        options:
+          - "Reasons to change trace back to the people who request them, and those people differ"
+          - "Doing one thing cannot be defined precisely, so the principle would be untestable"
+          - "A class that does one thing is always small, and size is what the principle measures"
+          - "Reasons to change are counted from the number of public methods a class exposes"
+        answer: "Reasons to change trace back to the people who request them, and those people differ"
+        explanation: >-
+          The principle is about actors: finance, operations and compliance each ask for changes, and
+          a class serving two of them will be pulled in two directions. Whether it does one thing
+          depends entirely on how you describe it, size is a symptom rather than the criterion, and
+          method count says nothing about who requests a change.
+        difficulty: intermediate
+        mastery: true
+      - id: se-srp-two-actors
+        prompt: >-
+          An Employee class holds calculatePay, used by finance, and reportHours, used by
+          operations. What exactly is the Single Responsibility problem here?
+        options:
+          - "One class answers to two actors, so a finance change can break an operations report"
+          - "The class exposes two public methods, and the principle allows only one per class"
+          - "The methods have different return types, which the principle forbids in one class"
+          - "Both methods read the same fields, and shared internal state is what it bans"
+        answer: "One class answers to two actors, so a finance change can break an operations report"
+        explanation: >-
+          Two stakeholders sharing one module means an edit requested by one lands in code the other
+          depends on, which is how unrelated departments start breaking each other's numbers. The
+          principle counts reasons to change, not methods or return types, and sharing fields inside
+          a module serving a single actor is perfectly ordinary.
+        difficulty: intermediate
+      - id: se-srp-not-tiny-classes
+        prompt: >-
+          A colleague splits every class until each holds a single method and calls the result
+          Single Responsibility. What has gone wrong?
+        options:
+          - "Splitting by size rather than by reason to change scatters one change across many files"
+          - "Nothing has gone wrong, because a one-method class is the ideal end state to aim for"
+          - "The classes are now too small to unit test, which is the property the principle protects"
+          - "Method count is the metric the principle uses, so the split should be by field instead"
+        answer: "Splitting by size rather than by reason to change scatters one change across many files"
+        explanation: >-
+          Cohesion is the other half of the principle: things that change together belong together,
+          so shredding a module by size makes a single request touch a dozen files. One-method
+          classes are not a goal, small classes are if anything easier to test, and neither method
+          nor field count is the criterion the principle uses.
+        difficulty: advanced
+      - id: se-srp-symptom
+        prompt: >-
+          Which symptom in a codebase most directly suggests that Single Responsibility has been
+          violated in a particular module?
+        options:
+          - "Two unrelated feature requests keep forcing edits to the very same module"
+          - "The module is longer than the two hundred lines your style guide recommends"
+          - "The module is imported by many others spread across several different packages"
+          - "The module has no unit tests despite being changed several times this quarter"
+        answer: "Two unrelated feature requests keep forcing edits to the very same module"
+        explanation: >-
+          Repeated edits arriving from unrelated directions is the observable form of multiple
+          reasons to change, and it is the signal worth acting on. Length is a weak proxy that flags
+          cohesive modules too, wide reuse is often a sign of a good abstraction, and missing tests
+          is a real problem of an entirely different kind.
+        difficulty: intermediate
+
+  - topic: se-solid-ocp
+    # Source: Robert C. Martin - The Open Closed Principle
+    questions:
+      - id: se-ocp-switch-extension
+        prompt: >-
+          Adding a third payment provider means editing the same switch statement for the fourth
+          time this year. What does Open/Closed prescribe instead?
+        options:
+          - "Depend on a provider abstraction so a new provider arrives as new code, not an edit"
+          - "Copy the switch into each caller so a change touches only the caller that needs it"
+          - "Freeze the switch permanently and decline any further payment provider requests"
+          - "Replace the switch with a chain of if statements, which is open to extension"
+        answer: "Depend on a provider abstraction so a new provider arrives as new code, not an edit"
+        explanation: >-
+          The principle wants new behaviour added as a new implementation of an existing abstraction,
+          leaving tested dispatch code untouched. Copying the switch multiplies the places you must
+          edit, refusing the request is not a design decision, and a chain of if statements is the
+          same conditional dispatch written with different syntax.
+        difficulty: intermediate
+        mastery: true
+      - id: se-ocp-what-closed-means
+        prompt: >-
+          Open/Closed says a module should be closed for modification. What is that half of the
+          principle actually claiming?
+        options:
+          - "Adding behaviour should not require reopening code that already works and is tested"
+          - "Source files become read-only once merged, so all later work must land in new files"
+          - "The module can never be edited again, including for bug fixes found in production"
+          - "Its public interface may change freely as long as the internals stay untouched"
+        answer: "Adding behaviour should not require reopening code that already works and is tested"
+        explanation: >-
+          Closed for modification is about not disturbing proven code to accommodate a new case, and
+          the risk it targets is regression in behaviour nobody asked you to change. It is a design
+          aim rather than a file permission, bug fixes obviously still happen, and a freely changing
+          public interface is the opposite of what consumers can build against.
+        difficulty: intermediate
+      - id: se-ocp-speculative
+        prompt: >-
+          You add an interface and a factory for a component that has exactly one implementation
+          and no second one planned. What is the risk you have taken on?
+        options:
+          - "Abstraction added for a variation that never arrives is cost with no payoff"
+          - "The single implementation can no longer be unit tested through the interface"
+          - "The principle forbids interfaces until at least three implementations exist"
+          - "Factories break polymorphism, so the abstraction cannot be extended later"
+        answer: "Abstraction added for a variation that never arrives is cost with no payoff"
+        explanation: >-
+          Every layer of indirection costs reading time and debugging hops, so it should be paid for
+          by a variation you have or can clearly see coming. Testing through an interface is easier
+          rather than impossible, no rule sets a threshold of three implementations, and factories
+          are a normal way of supplying polymorphic instances.
+        difficulty: advanced
+      - id: se-ocp-abstraction-mechanism
+        prompt: >-
+          What actually lets calling code stay untouched when a new variant of some behaviour is
+          introduced into the system?
+        options:
+          - "Callers depend on an abstract type, and the concrete variant is supplied at runtime"
+          - "Callers import every concrete variant and select one with a conditional branch"
+          - "Callers are recompiled against the new variant whenever the whole codebase builds"
+          - "Callers copy the shared behaviour so each variant carries its own private version"
+        answer: "Callers depend on an abstract type, and the concrete variant is supplied at runtime"
+        explanation: >-
+          Extension without modification comes from inverting the dependency, so the caller knows
+          only the abstraction while construction happens elsewhere. Importing every variant puts
+          the caller back in the business of knowing them all, recompiling does not remove the edit,
+          and copying behaviour into each variant guarantees the copies drift apart.
+        difficulty: intermediate
+
+  - topic: se-testing-pyramid
+    # Source: Martin Fowler - The Practical Test Pyramid
+    questions:
+      - id: se-pyramid-unit-vs-integration
+        prompt: >-
+          What does a unit test buy you that an integration test cannot, and what does the
+          integration test buy back?
+        options:
+          - "Fast pinpointed failure from the unit test, proof the pieces agree from the integration test"
+          - "Full behavioural coverage from the unit test, faster feedback from the integration test"
+          - "Freedom from test doubles in the unit test, freedom from assertions in the integration test"
+          - "Confidence in the wiring from the unit test, confidence in the logic from the integration test"
+        answer: "Fast pinpointed failure from the unit test, proof the pieces agree from the integration test"
+        explanation: >-
+          A unit test runs in milliseconds and names the one function at fault, while an integration
+          test is slower but exercises the real seam between your code and a collaborator. The second
+          option swaps their strengths, integration tests assert as much as any other test, and it is
+          the integration test that checks wiring while the unit test checks logic.
+        difficulty: intermediate
+        mastery: true
+      - id: se-pyramid-network-flake
+        prompt: >-
+          A test in your fast suite calls a live HTTP endpoint and fails roughly once a week. Why
+          is that failure worse than an ordinary bug?
+        options:
+          - "It fails for reasons outside your code, so the suite stops being trusted as a signal"
+          - "It runs slower than the other tests, and suite duration is the only cost that counts"
+          - "It reports the wrong assertion message, which hides the real line that is failing"
+          - "It cannot be rerun, because an HTTP call may be made only once per test session"
+        answer: "It fails for reasons outside your code, so the suite stops being trusted as a signal"
+        explanation: >-
+          DNS, latency, rate limits and someone else's deploy all fail the test without any defect in
+          your code, and once a team learns to rerun red builds it also learns to ignore real
+          failures. The extra runtime is a genuine but secondary cost, the assertion message is not
+          the issue, and nothing prevents the call being repeated.
+        difficulty: intermediate
+      - id: se-pyramid-e2e-heavy
+        prompt: >-
+          A team has 400 end-to-end browser tests and 30 unit tests. Which consequence does the
+          pyramid predict for them?
+        options:
+          - "Slow feedback and failures that say a flow broke without saying which unit broke it"
+          - "Excellent feedback speed, since browser tests exercise many code paths in one run"
+          - "Perfectly reliable results, because a real browser removes every source of flakiness"
+          - "Lower maintenance cost, as one broad test permanently replaces many small ones"
+        answer: "Slow feedback and failures that say a flow broke without saying which unit broke it"
+        explanation: >-
+          Broad tests are slow to run and vague when they fail, so debugging starts from a whole user
+          journey rather than a function. Covering many paths at once is exactly what makes diagnosis
+          expensive, real browsers add flakiness through timing and rendering, and broad tests cost
+          more to maintain because any interface change breaks many at once.
+        difficulty: intermediate
+      - id: se-pyramid-mock-drift
+        prompt: >-
+          Every collaborator in your unit tests is mocked, all tests pass, and the deployed service
+          still breaks at the seam. What did the mocks let through?
+        options:
+          - "A wrong assumption about the collaborator's real contract, which no mock can detect"
+          - "A logic error inside the unit itself, which mocked collaborators always conceal"
+          - "A performance regression, since mocks return instantly and real calls do not"
+          - "A compile error in the collaborator, which mocking replaces at build time"
+        answer: "A wrong assumption about the collaborator's real contract, which no mock can detect"
+        explanation: >-
+          A mock encodes your belief about the collaborator, so a wrong belief produces a wrong mock
+          that agrees with your code all the way to production; integration or contract tests are
+          what catch it. Mocks do not hide logic errors in the unit under test, timing is a separate
+          concern, and a collaborator that does not compile fails the build anyway.
+        difficulty: advanced
+      - id: se-pyramid-shape-cost
+        prompt: >-
+          Why does the pyramid put many cheap tests at the bottom rather than spreading test count
+          evenly across the layers?
+        options:
+          - "Cost and runtime rise with scope, so most checks belong where they are cheapest"
+          - "Lower layers find more defects in absolute terms than any higher layer can find"
+          - "Higher layers are less accurate, so their assertions cannot be trusted at all"
+          - "An even spread is forbidden, because the pyramid requires exactly three layers"
+        answer: "Cost and runtime rise with scope, so most checks belong where they are cheapest"
+        explanation: >-
+          The shape is an economic argument: push each check down to the cheapest layer that can make
+          it, and keep the expensive layers for the few journeys only they can verify. Lower layers
+          are not inherently better at finding defects, high-level tests are accurate about what they
+          assert, and the number of layers is a guideline rather than a rule.
+        difficulty: intermediate
+
+  - topic: se-unit-tests
+    # Source: pytest documentation - getting started and core features
+    questions:
+      - id: se-pytest-raises
+        prompt: >-
+          You need a test asserting that parse_config raises ValueError on empty input. What is
+          the pytest way to write it?
+        options:
+          - "Wrap the call in a with pytest.raises(ValueError) block and assert on the message"
+          - "Call it inside try and except, passing silently when any exception at all is raised"
+          - "Assert that the return value equals ValueError, which pytest compares by its type"
+          - "Mark the test with pytest.mark.xfail so that a raised exception counts as a pass"
+        answer: "Wrap the call in a with pytest.raises(ValueError) block and assert on the message"
+        explanation: >-
+          The context manager fails the test when the exception is absent or of the wrong type, and
+          the captured value lets you check the message. A bare except passes on any exception,
+          including a typo raising NameError. The function raises rather than returning the class,
+          and xfail marks a test expected to fail rather than asserting that a raise happened.
+        difficulty: beginner
+      - id: se-pytest-parametrize
+        prompt: >-
+          You have eight edge-case inputs for one pure function. Why prefer parametrize over a for
+          loop inside a single test function?
+        options:
+          - "Each case is reported and rerun separately, so a failure names the exact input"
+          - "A loop body cannot call assert, so the eight cases would never really be checked"
+          - "Parametrize runs the cases in parallel, which is the only speed-up available here"
+          - "A loop shares fixtures across cases, and a fixture may only be used once each"
+        answer: "Each case is reported and rerun separately, so a failure names the exact input"
+        explanation: >-
+          Parametrize generates one test per case, so the report tells you which input broke and you
+          can rerun only that one, whereas a loop stops at the first failure and hides the rest.
+          Assert works fine inside a loop, parametrize introduces no parallelism by itself, and
+          fixtures are set up per test according to their declared scope.
+        difficulty: intermediate
+      - id: se-pytest-shared-state
+        prompt: >-
+          Your suite passes when the whole thing runs, but one test fails when you run that test
+          alone. What is the most likely cause?
+        options:
+          - "That test depends on state another test left behind, so it is not really isolated"
+          - "Running one test skips collection, so its fixtures are never created at all"
+          - "Single-test runs use a different assertion rewriter with stricter comparisons"
+          - "Pytest caches results, so a lone run replays a stale outcome from an earlier run"
+        answer: "That test depends on state another test left behind, so it is not really isolated"
+        explanation: >-
+          Order dependence usually means a module-level object, database row or patched global
+          survives between tests, so the passing result was borrowed from a neighbour. Collection and
+          fixture setup still happen for a single selected test, assertion rewriting does not change
+          comparison semantics, and pytest caches metadata rather than replaying outcomes.
+        difficulty: intermediate
+        mastery: true
+      - id: se-pytest-tmp-path
+        prompt: >-
+          A unit test needs to write a file and read it back. Why use the tmp_path fixture instead
+          of a path inside the repository?
+        options:
+          - "The fixture gives each test a fresh directory, so runs cannot contaminate each other"
+          - "Writing inside the repository is blocked by pytest, which runs every test read-only"
+          - "The fixture compresses whatever is written, keeping the test workspace small on disk"
+          - "Repository paths are unavailable during collection, so the write would fail there"
+        answer: "The fixture gives each test a fresh directory, so runs cannot contaminate each other"
+        explanation: >-
+          A per-test temporary directory removes the leftover-file class of order dependence and
+          keeps generated junk out of version control. Pytest does not prevent writing into the
+          working tree, which is exactly why the discipline matters; the fixture stores files plainly
+          rather than compressing them, and the write happens at run time, not during collection.
+        difficulty: beginner
+
+  - topic: se-api-design
+    # Source: Microsoft Azure Architecture - RESTful web API design
+    questions:
+      - id: se-api-resource-naming
+        prompt: >-
+          A reviewer objects to POST /createOrder in your new HTTP API. What should the endpoint
+          be instead, and on what reasoning?
+        options:
+          - "POST /orders, because the URI names the resource and the method names the action"
+          - "GET /createOrder, because creation should be safe to retry from a browser address bar"
+          - "POST /orders/create, which keeps the verb but nests it underneath the resource path"
+          - "PUT /createOrder, since creating a new record is the definition of an idempotent write"
+        answer: "POST /orders, because the URI names the resource and the method names the action"
+        explanation: >-
+          Resource-oriented design puts nouns in the path and lets the HTTP verb carry intent, which
+          keeps one URI usable for listing, creating and fetching. GET must stay safe and must never
+          create anything, nesting a verb under the noun is the same verb-in-URI habit, and PUT to a
+          server-named creation endpoint is neither idempotent nor resource-shaped.
+        difficulty: beginner
+      - id: se-api-put-vs-post
+        prompt: >-
+          A client retries a request after a timeout and you must not end up with a duplicate
+          record. Which method and design choice help you here?
+        options:
+          - "PUT to a client-chosen resource URI, since repeating the same PUT changes nothing more"
+          - "POST to the collection, because the server assigns the id and so cannot duplicate it"
+          - "GET with the payload in query parameters, as GET responses are cached and deduplicated"
+          - "DELETE followed by POST, which clears any partial record before writing it again"
+        answer: "PUT to a client-chosen resource URI, since repeating the same PUT changes nothing more"
+        explanation: >-
+          PUT is defined as idempotent, so a retry to the same URI lands on the same resource and the
+          second call is effectively a no-op. A retried POST to a collection creates a second record
+          with a second server-assigned id, GET is the wrong verb for a write and caching does not
+          deduplicate writes, and delete-then-create adds a window where the record is missing.
+        difficulty: advanced
+      - id: se-api-error-status
+        prompt: 'Your API returns HTTP 200 with a body of {"error": "invalid email"} when validation fails. What does that break?'
+        options:
+          - "Clients, proxies and monitoring all read 200 as success, so failures go uncounted"
+          - "Nothing, provided the body documents the error, because status codes are advisory"
+          - "Only browsers, which alone among clients inspect the status line of a response"
+          - "Serialisation, because an error body is not valid JSON under the HTTP standard"
+        answer: "Clients, proxies and monitoring all read 200 as success, so failures go uncounted"
+        explanation: >-
+          The status code is the machine-readable part everything downstream keys on, so a validation
+          failure belongs at 400 with a structured body naming the offending field. Status codes are
+          part of the protocol rather than advice, every HTTP client reads them, and the JSON body is
+          perfectly well formed, which is precisely why the problem stays invisible.
+        difficulty: intermediate
+        mastery: true
+      - id: se-api-large-collection
+        prompt: >-
+          GET /predictions would return two million rows for an internal reporting client. What
+          does sound API design do about that?
+        options:
+          - "Page the collection and support filtering, so a client asks for a bounded slice"
+          - "Stream every row in one response and let the client stop reading when satisfied"
+          - "Return the count only, and require clients to fetch each row by id afterwards"
+          - "Raise the server timeout and response size limits until the full payload fits"
+        answer: "Page the collection and support filtering, so a client asks for a bounded slice"
+        explanation: >-
+          Pagination with filter parameters bounds memory and latency on both sides and keeps the
+          endpoint usable as the dataset grows. An unbounded stream ties up server resources and
+          breaks retries, forcing a request per row turns one call into two million, and raising
+          limits only moves the same failure to a larger dataset next quarter.
+        difficulty: intermediate
+
+  - topic: se-code-review
+    # Source: Google engineering practices - How to do a code review
+    questions:
+      - id: se-review-standard
+        prompt: >-
+          A change under review improves the code overall but is not written the way you would
+          have written it. What does Google's review standard say to do?
+        options:
+          - "Approve it, because the bar is definite improvement to code health, not perfection"
+          - "Block it until it matches your preferred structure, since reviewers own the design"
+          - "Approve it only once the author files a follow-up ticket for every preference raised"
+          - "Block it, because a reviewer who would write it differently has found a real defect"
+        answer: "Approve it, because the bar is definite improvement to code health, not perfection"
+        explanation: >-
+          Holding changes for personal taste stalls the codebase and teaches authors that review is
+          arbitrary, so the standard is whether the change leaves the code better than it was.
+          Reviewers advise on design rather than owning it, follow-up tickets for preferences turn
+          taste into tracked debt, and disagreement about style is not evidence of a defect.
+        difficulty: intermediate
+      - id: se-review-small-pr
+        prompt: >-
+          Why does a 60-line pull request get a better review than a 1500-line one delivering the
+          same feature in one go?
+        options:
+          - "A reviewer can hold the whole change in mind, so real defects surface instead of nits"
+          - "Small changes are assigned to more senior engineers under most team review policies"
+          - "Large changes take longer to merge, and merge latency is the only real cost here"
+          - "Small changes need no tests, which is what makes them quicker to read and approve"
+        answer: "A reviewer can hold the whole change in mind, so real defects surface instead of nits"
+        explanation: >-
+          Attention runs out well before 1500 lines, and a reviewer who cannot follow the whole
+          change retreats to commenting on names and formatting. Reviewer seniority is not a function
+          of diff size, merge latency is a cost but not the main one, and a small change needs tests
+          exactly as much as a large one does.
+        difficulty: intermediate
+        mastery: true
+      - id: se-review-nit-vs-blocker
+        prompt: >-
+          You spot a naming preference and a missing null check in the same diff. How should those
+          two comments differ from each other?
+        options:
+          - "Mark the naming as a non-blocking nit and raise the missing check as a blocking issue"
+          - "Raise both as blocking, since a reviewer who separates them is applying two bars"
+          - "Raise both as nits, leaving the merge decision entirely to the author's judgement"
+          - "Raise only the naming, because correctness is what the test suite exists to cover"
+        answer: "Mark the naming as a non-blocking nit and raise the missing check as a blocking issue"
+        explanation: >-
+          Labelling severity tells the author what must change before merge and what is optional,
+          which is how review stays fast without losing the correctness bar. Blocking on taste burns
+          goodwill, filing a real defect as a nit invites it to ship, and a missing null check is
+          exactly the sort of gap the test suite has already failed to cover.
+        difficulty: intermediate
+      - id: se-review-knowledge-spread
+        prompt: >-
+          Your team's linters and static analysis already catch most mechanical defects. What
+          value does human code review still add?
+        options:
+          - "It spreads context about the change and the codebase to a second engineer who reads it"
+          - "It duplicates the analyser as a safety net, which is its remaining purpose entirely"
+          - "It enforces formatting rules that automated tools are unable to check reliably"
+          - "It records an approval for audit purposes and has no effect on the code itself"
+        answer: "It spreads context about the change and the codebase to a second engineer who reads it"
+        explanation: >-
+          Review is how design intent, conventions and system history reach more than one head, which
+          is why it survives good tooling, and it still catches defects tools cannot see such as
+          wrong business logic. It is not a duplicate analyser, formatting is the thing tools do
+          best, and treating it as an audit signature wastes the whole exercise.
+        difficulty: advanced
+
+  - topic: se-ci-basics
+    # Source: GitHub Docs - Understanding GitHub Actions
+    questions:
+      - id: se-ci-trigger-event
+        prompt: >-
+          You want the test suite to run automatically whenever anyone pushes to any branch. Which
+          part of a GitHub Actions workflow expresses that?
+        options:
+          - "The on key, which lists the events that cause this workflow to run at all"
+          - "The jobs key, since each job declares which branch pushes it responds to"
+          - "The runs-on key, which picks both the runner and the events it listens for"
+          - "The steps list, whose first step polls the repository for new commits"
+        answer: "The on key, which lists the events that cause this workflow to run at all"
+        explanation: >-
+          A workflow is triggered by events declared under the on key, such as push or pull_request,
+          with optional branch filters. Jobs describe what runs once triggered rather than when,
+          runs-on selects the runner machine only, and nothing polls the repository because the
+          platform delivers the event to the workflow.
+        difficulty: beginner
+      - id: se-ci-jobs-isolation
+        prompt: >-
+          A build job compiles artefacts and a later test job cannot find them anywhere on disk.
+          Why not?
+        options:
+          - "Each job runs on a fresh runner, so files must be handed over as uploaded artefacts"
+          - "Jobs share a runner but clean the workspace, so the paths must be absolute instead"
+          - "The test job ran first, because jobs execute in whatever order the runner picks"
+          - "Compiled output is excluded by the checkout action and never written to disk"
+        answer: "Each job runs on a fresh runner, so files must be handed over as uploaded artefacts"
+        explanation: >-
+          Jobs are independent by default and each gets its own runner and filesystem, so anything
+          crossing a job boundary travels through the artefact or cache mechanism. They do not share
+          a workspace regardless of path style, ordering is controlled with needs rather than being
+          arbitrary, and checkout has nothing to do with build output.
+        difficulty: intermediate
+        mastery: true
+      - id: se-ci-steps-share
+        prompt: >-
+          Two steps inside the same job both need the dependencies your first step installed. What
+          can you rely on?
+        options:
+          - "Steps in one job share the runner and its filesystem, so the install persists"
+          - "Each step gets a clean container, so the install has to be repeated in both steps"
+          - "Steps share only environment variables, and installed files vanish between them"
+          - "Dependencies are restored at every step automatically from the workflow cache"
+        answer: "Steps in one job share the runner and its filesystem, so the install persists"
+        explanation: >-
+          Steps execute sequentially on the same machine and workspace, which is why a setup step
+          followed by a test step works at all. Steps are not individually isolated, files as well as
+          environment variables survive between them, and caching is something you configure
+          explicitly rather than a restore that happens on its own.
+        difficulty: beginner
+      - id: se-ci-every-push-value
+        prompt: >-
+          Your team runs the suite nightly instead of on every push. What specifically do you give
+          up by doing that?
+        options:
+          - "The breaking commit stops being obvious, since a night of pushes are mixed together"
+          - "Nothing measurable, because the same tests run against the same code either way"
+          - "The ability to run tests in parallel, which only push-triggered workflows support"
+          - "Coverage reporting, as a nightly run cannot publish results back to a pull request"
+        answer: "The breaking commit stops being obvious, since a night of pushes are mixed together"
+        explanation: >-
+          Per-push runs tie a failure to one small change while its author still remembers writing
+          it, whereas a nightly red build starts with a bisect across everything merged that day. The
+          code under test is not the same because later changes have already been layered on top,
+          parallelism is unrelated to the trigger, and a nightly run can still publish reports.
+        difficulty: intermediate

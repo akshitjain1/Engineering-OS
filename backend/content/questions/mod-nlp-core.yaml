@@ -1,0 +1,1226 @@
+# NLP Core self-check questions.
+#
+# Every question here is answerable from the PRIMARY resource its topic maps to,
+# and is about that topic only. The adjacent topics in this module (tokenization
+# vs vocabulary, bag of words vs TF-IDF vs embeddings vs Word2Vec) are kept
+# strictly apart: gates in app/content/question_bank.py refuse a prompt that is
+# already used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-nlp-core
+topics:
+  - topic: nlp-what-is-nlp
+    # Source: Hugging Face - Introduction to the LLM/NLP course, chapter 1
+    questions:
+      - id: nlp-task-family-ner
+        prompt: "A ticket triage tool must highlight every product name and version number inside the ticket text. Which NLP task family is that?"
+        options:
+          - "Token classification, which attaches a label to each individual token in the text"
+          - "Text classification, which attaches one label to the whole ticket at once"
+          - "Extractive question answering, which returns the span that answers a supplied question"
+          - "Summarisation, which rewrites the ticket into a shorter version of the same content"
+        answer: "Token classification, which attaches a label to each individual token in the text"
+        explanation: >-
+          Marking names in place is a per-token decision, which is what token classification does.
+          Text classification emits a single document label and so cannot mark positions at all.
+          Question answering needs a question supplied alongside the text, and summarisation
+          produces new shorter text instead of annotating the original.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-ambiguity-attachment
+        prompt: "The sentence 'She watched the bird with the binoculars' has two valid readings. Which difficulty of natural language does that illustrate?"
+        options:
+          - "Ambiguity: the prepositional phrase legitimately attaches to two different words"
+          - "Noise: the sentence contains a typing error that changes which word was intended"
+          - "Sparsity: the words involved are too rare for a model to have learned them well"
+          - "Encoding: the characters used cannot be represented in the tokeniser's vocabulary"
+        answer: "Ambiguity: the prepositional phrase legitimately attaches to two different words"
+        explanation: >-
+          Both readings are grammatical, so the sentence itself underdetermines the meaning; that is
+          ambiguity, the difficulty the course puts at the centre of NLP. Nothing is mistyped, the
+          words are all common rather than sparse, and every character here is ordinary ASCII, so
+          neither noise nor encoding explains the two readings.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-why-keyword-rules-fail
+        prompt: "A reviewer writes 'this was not bad at all'. Why do keyword-matching sentiment rules routinely mishandle text like this?"
+        options:
+          - "Meaning comes from how words combine, and negation flips what a word contributes"
+          - "The phrase contains rare words that a keyword list is unlikely to have stored"
+          - "Keyword lists cannot process lowercase text until it has been normalised first"
+          - "The review is too short for a keyword list to gather any usable signal from it"
+        answer: "Meaning comes from how words combine, and negation flips what a word contributes"
+        explanation: >-
+          A list that sees the token 'bad' scores the review negatively, but 'not bad at all' is
+          praise, which is exactly the compositional problem NLP has to solve. Every word here is
+          extremely common rather than rare, keyword lists work fine on lowercase text, and length
+          is not the issue since the sentiment is stated plainly.
+        difficulty: intermediate
+      - id: nlp-word-sense-context
+        prompt: "The word 'bank' means different things in 'river bank' and 'bank loan'. What does a system need in order to tell those apart?"
+        options:
+          - "Surrounding context, since one identical string carries different senses per sentence"
+          - "A larger vocabulary, so each of the two spellings can be stored as its own entry"
+          - "Case normalisation, because the sense distinction here is carried by capitalisation"
+          - "A longer training run, since the ambiguity resolves once the loss stops decreasing"
+        answer: "Surrounding context, since one identical string carries different senses per sentence"
+        explanation: >-
+          The string is the same in both phrases, so only the neighbouring words disambiguate it.
+          A bigger vocabulary cannot help because there is a single spelling to store, capitalisation
+          is identical in both phrases, and no amount of extra training removes an ambiguity that
+          lives in the input rather than in the model's fit.
+        difficulty: intermediate
+      - id: nlp-lm-one-model-many-tasks
+        prompt: "In the course's framing, what most distinguishes a modern large language model from a classic task-specific NLP model?"
+        options:
+          - "One pretrained model is adapted to many tasks rather than training one model per task"
+          - "It needs no data at all, since the architecture alone determines how it behaves"
+          - "It works on a single language only, whereas older models handled many at once"
+          - "It removes the need for evaluation, since a large model no longer makes mistakes"
+        answer: "One pretrained model is adapted to many tasks rather than training one model per task"
+        explanation: >-
+          The course's opening argument is that pretraining on raw text yields a general model that
+          transfers to classification, extraction and generation alike. Large models are trained on
+          enormous datasets rather than none, they are typically more multilingual than older
+          per-task systems, and they still hallucinate and inherit bias, so evaluation matters more.
+        difficulty: beginner
+
+  - topic: nlp-text-preprocessing
+    # Source: NLTK book chapter 3 - Processing raw text
+    questions:
+      - id: nlp-prep-stem-vs-lemma
+        prompt: "A Porter stemmer turns 'was' into 'wa' and 'university' into 'univers'. Why is that acceptable output for a stemmer?"
+        options:
+          - "A stemmer applies suffix-stripping rules, so its output need not be a real word"
+          - "A stemmer looks each word up in a lexicon, and those are the lexicon's entries"
+          - "A stemmer uses the sentence grammar, so results depend on the part of speech"
+          - "A stemmer keeps only the first six characters of each word it is handed"
+        answer: "A stemmer applies suffix-stripping rules, so its output need not be a real word"
+        explanation: >-
+          Stemming is a crude rule cascade whose only goal is collapsing related forms to a shared
+          string. Dictionary lookup and part-of-speech awareness describe a lemmatiser, which is why
+          a lemmatiser returns 'be' and 'university'. Fixed-length truncation is not the rule either,
+          since Porter leaves many short words untouched.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-prep-aggressive-cleaning-hurts
+        prompt: "Your team lowercases everything and strips all punctuation before fine-tuning a pretrained transformer, and scores drop. What is the likeliest reason?"
+        options:
+          - "The model learned from cased, punctuated text, so the input no longer resembles it"
+          - "Lowercasing enlarges the vocabulary, which pushes the run past its time budget"
+          - "Removing punctuation lengthens each sequence, so more examples exceed the limit"
+          - "Stripping punctuation corrupts the encoding, so characters decode to wrong symbols"
+        answer: "The model learned from cased, punctuated text, so the input no longer resembles it"
+        explanation: >-
+          Deep models were pretrained on text with case and punctuation intact, and those carry real
+          signal for entities and clause boundaries, so scrubbing them creates a train-test mismatch.
+          Lowercasing shrinks a vocabulary rather than growing it, dropping characters shortens rather
+          than lengthens sequences, and removing punctuation does not touch the file encoding.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-prep-stopwords-risk
+        prompt: "For which of these tasks is removing stop words most likely to destroy the signal you actually need?"
+        options:
+          - "Detecting negation in reviews, where words such as 'not' and 'no' carry the meaning"
+          - "Ranking documents by their rare content words for a keyword-style search index"
+          - "Counting how many distinct nouns a long document mentions across all its sections"
+          - "Grouping documents into broad themes using only the frequent content words present"
+        answer: "Detecting negation in reviews, where words such as 'not' and 'no' carry the meaning"
+        explanation: >-
+          Standard stop word lists contain the negation particles, so removing them makes 'not
+          recommended' and 'recommended' identical. Keyword ranking deliberately relies on rare
+          content words that no stop list touches, noun counting is unaffected because stop words
+          are not nouns, and theme grouping already works from content words only.
+        difficulty: intermediate
+      - id: nlp-prep-sentence-segmentation
+        prompt: "Splitting on every period turns 'Dr. Smith arrived late' into two sentences. What does a trained sentence segmenter do differently?"
+        options:
+          - "It models abbreviations and sentence starts instead of applying one punctuation rule"
+          - "It splits on newline characters only, which sidesteps the abbreviation problem"
+          - "It deletes every abbreviation from the text first, so no period stays ambiguous"
+          - "It requires word tokenisation first, then rejoins those tokens into sentences"
+        answer: "It models abbreviations and sentence starts instead of applying one punctuation rule"
+        explanation: >-
+          Segmenters such as NLTK's Punkt learn which period-bearing tokens are abbreviations and
+          which begin a new sentence, so 'Dr.' stays inside its sentence. Splitting on newlines
+          misses sentences that share a line, deleting abbreviations would destroy content the task
+          needs, and segmentation is applied to raw text rather than to a token list.
+        difficulty: intermediate
+      - id: nlp-prep-light-normalisation-default
+        prompt: "You normalise whitespace, curly quotes and HTML entities but leave case and punctuation alone. Why is that a sensible default before a deep model?"
+        options:
+          - "It clears markup artefacts the model never saw while keeping signal it did learn from"
+          - "It shrinks the vocabulary enough that a count-based model becomes unnecessary later"
+          - "It guarantees that every document ends up the same length, which the model requires"
+          - "It converts the text into numbers, which is the representation the model consumes"
+        answer: "It clears markup artefacts the model never saw while keeping signal it did learn from"
+        explanation: >-
+          Stray entities and inconsistent quote characters are scraping noise absent from clean
+          pretraining text, while case and punctuation are signal the model was trained on, so this
+          split is the useful one. Vocabulary size is not what makes count models obsolete, this
+          step does not equalise lengths, and turning text into ids is the tokeniser's job.
+        difficulty: beginner
+
+  - topic: nlp-tokenization-nlp
+    # Source: Hugging Face LLM course chapter 2.4 - Tokenizers
+    questions:
+      - id: nlp-tok-oov-subword
+        prompt: "A word-level tokeniser maps 'hyperparameterisation' to an unknown token. What does a subword tokeniser do with the very same word?"
+        options:
+          - "Splits it into known pieces, so nothing is replaced by an uninformative unknown token"
+          - "Adds it to the vocabulary at inference time, growing the embedding matrix as needed"
+          - "Maps it to the closest word already in the vocabulary by string edit distance"
+          - "Drops the word from the sequence entirely, since it cannot be represented at all"
+        answer: "Splits it into known pieces, so nothing is replaced by an uninformative unknown token"
+        explanation: >-
+          Subword schemes such as BPE and WordPiece keep frequent fragments, so a long rare word
+          decomposes into pieces the model has embeddings for and its morphology survives. The
+          vocabulary is fixed after training, so it cannot grow at inference; nearest-word matching
+          is a spell-checker trick nobody uses here; and silently dropping tokens would lose content.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-tok-char-tradeoff
+        prompt: "Character-level tokenisation almost never emits an unknown token. What do you give up in exchange for that?"
+        options:
+          - "Sequences become far longer and each token on its own carries very little meaning"
+          - "The vocabulary grows into the hundreds of thousands, so embeddings dominate memory"
+          - "Unknown tokens get replaced by random vectors, which injects noise into every batch"
+          - "Words split differently at training and inference, so the mapping becomes unstable"
+        answer: "Sequences become far longer and each token on its own carries very little meaning"
+        explanation: >-
+          One token per character means a sentence costs several times more positions, and a single
+          letter is nearly meaningless, so the model must work harder to build words up. A character
+          vocabulary is tiny rather than huge, unknown tokens are the thing this scheme avoids, and
+          character splitting is completely deterministic across training and inference.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-tok-word-vocab-blowup
+        prompt: "Why does a purely word-based tokeniser need a very large vocabulary and still fail to cover real text?"
+        options:
+          - "Every inflected or compound form is its own entry, and new forms keep on appearing"
+          - "Each word is stored once per document it occurs in, so the table grows with the corpus"
+          - "Words must be padded to a fixed character length, multiplying the entries required"
+          - "The vocabulary must also hold every character, which doubles its size in practice"
+        answer: "Every inflected or compound form is its own entry, and new forms keep on appearing"
+        explanation: >-
+          Word-level vocabularies pay separately for run, runs, running and runner, and names,
+          typos and coinages arrive endlessly, so coverage is never complete at any size. Entries
+          are unique rather than per-document, words are not padded to a character length, and
+          adding the small character set would not meaningfully change the vocabulary size.
+        difficulty: beginner
+      - id: nlp-tok-decode-roundtrip
+        prompt: "Instead of joining predicted tokens with spaces you call the tokeniser's decode on the output ids. Why does that matter?"
+        options:
+          - "Decoding reverses the subword splits and the spacing rules, so text reads as words again"
+          - "Decoding sorts the ids back into their original order, which the model output has lost"
+          - "Decoding strips special tokens by translating them into the words they stand for"
+          - "Decoding turns the ids into embeddings, which is the form a person can read directly"
+        answer: "Decoding reverses the subword splits and the spacing rules, so text reads as words again"
+        explanation: >-
+          Subword pieces carry continuation markers, and decode knows how to stitch them and restore
+          whitespace, so 'hyper' plus 'parameter' rejoins rather than becoming two words. Model
+          output is already in order, special tokens are removed rather than spelled out, and
+          embeddings are vectors of floats that no person reads as text.
+        difficulty: intermediate
+      - id: nlp-tok-match-checkpoint
+        prompt: "Why must the tokeniser you load come from the same checkpoint as the model weights you are running?"
+        options:
+          - "Token ids only mean something against the vocabulary the model's embeddings were fitted to"
+          - "The tokeniser file stores the model weights, so a mismatch loads the wrong parameters"
+          - "Each tokeniser handles one language, and the checkpoint records which language that is"
+          - "The tokeniser fixes the learning rate schedule the checkpoint was originally trained with"
+        answer: "Token ids only mean something against the vocabulary the model's embeddings were fitted to"
+        explanation: >-
+          An id is just a row index into the embedding matrix, so a different vocabulary sends every
+          word to the wrong row and the output becomes noise without ever raising an error. The
+          tokeniser holds vocabulary and merge rules rather than weights, is not one per language,
+          and has nothing to do with optimiser settings.
+        difficulty: intermediate
+
+  - topic: nlp-vocabulary-bow
+    # Source: scikit-learn feature extraction - CountVectorizer and bag of words
+    questions:
+      - id: nlp-bow-order-lost
+        prompt: "CountVectorizer gives 'the dog bit the man' and 'the man bit the dog' identical feature vectors. Why does that happen?"
+        options:
+          - "A bag of words records how often each vocabulary term occurs, never where it occurs"
+          - "The vectoriser removes stop words, and these two sentences differ only in stop words"
+          - "Both sentences have the same character count, so they land on the same vector"
+          - "The vectoriser sorts its vocabulary alphabetically, which discards word identity"
+        answer: "A bag of words records how often each vocabulary term occurs, never where it occurs"
+        explanation: >-
+          The representation is a multiset of counts, so any permutation of the same words maps to
+          the same row, which is exactly the information the model throws away. The two sentences
+          differ in content words rather than stop words, character count plays no part in the
+          encoding, and alphabetical column ordering keeps each term's identity intact.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-bow-ngram-fix
+        prompt: "You need a count-based representation that can still separate 'not good' from 'good'. What is the standard adjustment inside CountVectorizer?"
+        options:
+          - "Widen ngram_range so adjacent word pairs become features alongside single words"
+          - "Set binary to true so each term is recorded as present or absent instead of counted"
+          - "Lower min_df so that rarer individual words survive into the vocabulary as features"
+          - "Set lowercase to false so that capitalisation differences separate the two phrases"
+        answer: "Widen ngram_range so adjacent word pairs become features alongside single words"
+        explanation: >-
+          Bigrams give the model a 'not good' column, which recovers a little local order without
+          leaving the counting framework. Binary counts still ignore order, a lower document
+          frequency floor only admits more rare unigrams, and case has nothing to do with the
+          distinction between a negated and an unnegated phrase.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-bow-sparse-matrix
+        prompt: "Vectorising 50,000 documents over a 100,000-term vocabulary returns a scipy sparse matrix rather than a dense array. Why is that necessary?"
+        options:
+          - "Nearly every entry is zero, and storing them all densely would need tens of gigabytes"
+          - "Sparse matrices store counts as integers, whereas a dense array would need floats"
+          - "Sparse storage preserves the original document order, which dense arrays would lose"
+          - "Sparse storage is required because the vocabulary is unknown until fitting completes"
+        answer: "Nearly every entry is zero, and storing them all densely would need tens of gigabytes"
+        explanation: >-
+          A document uses a few hundred of the hundred thousand terms, so well over 99% of the
+          matrix is zero and only the non-zeros are worth keeping. Both storage forms can hold
+          integers, row order is preserved either way, and the vocabulary is known by the time the
+          matrix is built, so neither dtype nor ordering nor timing is the reason.
+        difficulty: intermediate
+      - id: nlp-bow-fit-on-test
+        prompt: "Someone calls fit_transform on the test documents instead of transform. What specifically goes wrong with the resulting matrix?"
+        options:
+          - "A fresh vocabulary is learned, so the columns no longer mean what the trained model expects"
+          - "The counts get normalised to sum to one, so the scale no longer matches the training data"
+          - "The test rows are appended to the training matrix, which doubles the number of rows"
+          - "The vocabulary is discarded, so the matrix that comes back contains only zero entries"
+        answer: "A fresh vocabulary is learned, so the columns no longer mean what the trained model expects"
+        explanation: >-
+          Refitting rebuilds the term-to-column mapping from the test text, so column 42 now means a
+          different word than the classifier's coefficient for column 42 assumes, and predictions
+          become nonsense. CountVectorizer does not normalise rows, does not concatenate datasets,
+          and does produce non-zero counts, so the failure is purely the remapped columns.
+        difficulty: intermediate
+      - id: nlp-bow-baseline-strength
+        prompt: "Why does a bag-of-words matrix with a linear classifier remain a baseline worth beating on topic labelling?"
+        options:
+          - "Topic is signalled largely by which words appear, which is precisely what counts capture"
+          - "Counting words models word order well enough for most classification work in practice"
+          - "The representation is dense and low dimensional, so linear models fit it with little data"
+          - "Counts already encode word similarity, so related terms share most of their feature values"
+        answer: "Topic is signalled largely by which words appear, which is precisely what counts capture"
+        explanation: >-
+          Documents about finance and documents about sport use different vocabulary, so presence
+          alone carries most of the signal and a linear model on counts is genuinely strong. Counts
+          model no order whatsoever, the matrix is extremely sparse and high dimensional rather than
+          dense, and every term is an independent column so synonyms share nothing.
+        difficulty: intermediate
+
+  - topic: nlp-tf-idf
+    # Source: scikit-learn feature extraction - TF-IDF term weighting
+    questions:
+      - id: nlp-tfidf-idf-downweights
+        prompt: "In a corpus of legal filings the word 'court' appears in nearly every document. What does the inverse document frequency factor do to it?"
+        options:
+          - "Downweights it, because a term in almost every document cannot distinguish between them"
+          - "Upweights it, because a term appearing that often is clearly central to this corpus"
+          - "Leaves it unchanged, because the factor only alters terms seen fewer than ten times"
+          - "Deletes it outright, because the factor drops terms above a document frequency cutoff"
+        answer: "Downweights it, because a term in almost every document cannot distinguish between them"
+        explanation: >-
+          Inverse document frequency divides by how many documents contain the term, so ubiquitous
+          words shrink towards zero weight and discriminative words dominate the vector. Upweighting
+          is the raw-count behaviour TF-IDF exists to fix, the factor applies to every term rather
+          than only rare ones, and removal by frequency cutoff is max_df, a separate option.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-tfidf-smoothing
+        prompt: "Why does scikit-learn add one to the document frequency inside the logarithm when smooth_idf is left on?"
+        options:
+          - "It avoids a division by zero for a term that appears in none of the fitted documents"
+          - "It makes the weights sum to one across the vocabulary, which the classifier requires"
+          - "It cancels the term frequency factor for terms occurring exactly once in a document"
+          - "It converts a natural logarithm into a base ten logarithm without extra arithmetic"
+        answer: "It avoids a division by zero for a term that appears in none of the fitted documents"
+        explanation: >-
+          Smoothing behaves as though one extra document contained every term, which keeps the
+          denominator non-zero for terms unseen during fitting. Weights are made comparable by the
+          later normalisation step rather than by this constant, term frequency is a separate
+          multiplier that smoothing never cancels, and the logarithm base is unaffected.
+        difficulty: advanced
+      - id: nlp-tfidf-l2-normalisation
+        prompt: "TfidfVectorizer applies L2 normalisation to each document row by default. Which problem does that solve for similarity search?"
+        options:
+          - "Long documents would otherwise score higher purely because their raw counts are bigger"
+          - "Rare terms would otherwise be weighted at zero once the logarithm has been applied"
+          - "Sparse rows would otherwise have to be stored densely, which exhausts the memory"
+          - "Vocabulary terms would otherwise appear in an order that varies between documents"
+        answer: "Long documents would otherwise score higher purely because their raw counts are bigger"
+        explanation: >-
+          Scaling each row to unit length makes similarity depend on the mix of terms rather than on
+          document length, so a short precise match can outrank a long rambling one. Rare terms get
+          the largest weights rather than zero, normalisation does not change sparse storage, and
+          column order is fixed by the fitted vocabulary for all rows alike.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-tfidf-query-transform
+        prompt: "Building a TF-IDF search baseline, why must the query be pushed through the vectoriser that was already fitted on the corpus?"
+        options:
+          - "The query has to land in the same weighted term space, with the corpus weights applied"
+          - "Fitting on the query would make its vector dense, which cosine similarity cannot use"
+          - "A vectoriser can only be fitted once per process, so a second call raises an error"
+          - "Refitting would sort the query's terms differently, which reverses the ranking order"
+        answer: "The query has to land in the same weighted term space, with the corpus weights applied"
+        explanation: >-
+          Similarity is only meaningful when both vectors use the same columns and the same document
+          frequency statistics, and only the corpus can supply those. Cosine similarity works fine on
+          dense vectors, a vectoriser can legally be refitted as often as you like, and the failure is
+          a mismatched space rather than a reordering of one row.
+        difficulty: intermediate
+      - id: nlp-tfidf-synonym-blindspot
+        prompt: "A document all about automobiles scores near zero against a query for cars under TF-IDF. Which limitation does that expose?"
+        options:
+          - "Weighting is applied to surface strings, so synonyms occupy completely separate dimensions"
+          - "The weighting has pushed both terms to zero, since each is common in general English"
+          - "Cosine similarity ignores the term weights, so it ends up comparing document lengths"
+          - "Normalisation has collapsed both vectors onto the same point, erasing the difference"
+        answer: "Weighting is applied to surface strings, so synonyms occupy completely separate dimensions"
+        explanation: >-
+          TF-IDF is still a bag of exact terms, so 'car' and 'automobile' are orthogonal columns and
+          their dot product is zero however related the meanings are; this is the gap embeddings
+          later close. Neither term is corpus-ubiquitous, cosine over these vectors uses the weights
+          directly, and normalisation rescales rows without merging them.
+        difficulty: intermediate
+
+  - topic: nlp-word-embeddings
+    # Source: D2L.ai - Word embeddings (word2vec chapter, motivation sections)
+    questions:
+      - id: nlp-emb-onehot-orthogonal
+        prompt: "Any two one-hot word vectors have a cosine similarity of exactly zero. Why does that fact motivate dense embeddings?"
+        options:
+          - "One-hot vectors are mutually orthogonal, so no pair of words can be more alike than another"
+          - "One-hot vectors are too short to hold a similarity value, so the cosine is undefined"
+          - "One-hot vectors store counts rather than identity, so similarity just reflects frequency"
+          - "One-hot vectors differ between training runs, so similarity is unstable across models"
+        answer: "One-hot vectors are mutually orthogonal, so no pair of words can be more alike than another"
+        explanation: >-
+          With a single one in a distinct position, every pair of words is equidistant, so the
+          representation cannot express that 'cat' is closer to 'dog' than to 'algebra'. The vectors
+          are extremely long rather than short, they encode identity rather than counts, and they are
+          deterministic given a vocabulary, so instability is not the objection.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-emb-distributional-hypothesis
+        prompt: "Trained embeddings place 'physician' close to 'doctor' although nobody labelled them as synonyms. Which assumption makes that possible?"
+        options:
+          - "Words used in similar contexts tend to mean similar things, so context acts as supervision"
+          - "Words sharing a large number of characters are placed near one another in the space"
+          - "Words are pre-grouped by a synonym lexicon before any of the vectors are trained"
+          - "Words with similar corpus frequencies end up nearby, since frequency drives the geometry"
+        answer: "Words used in similar contexts tend to mean similar things, so context acts as supervision"
+        explanation: >-
+          The distributional hypothesis is what turns raw text into a self-supervised training signal:
+          both words appear near patient, hospital and prescribed, so gradient descent pulls them
+          together. Spelling overlap is irrelevant here since the two words share few letters, no
+          lexicon is consulted, and frequency alone would group unrelated words of equal rarity.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-emb-dimension-count
+        prompt: "How can 300 dimensions be a workable representation for a vocabulary that holds 400,000 different words?"
+        options:
+          - "Meaning is distributed across dimensions, so many words share each one instead of owning it"
+          - "Only 300 of those words are ever needed, and every other word maps to a shared vector"
+          - "Each dimension holds about 1,300 words in sequence, indexed by vocabulary position"
+          - "The vectors are sparse, so 300 dimensions can still express 400,000 distinct entries"
+        answer: "Meaning is distributed across dimensions, so many words share each one instead of owning it"
+        explanation: >-
+          A dense code identifies a word by a pattern across all 300 axes rather than by one axis,
+          which is why the space can be far smaller than the vocabulary. No word is dropped or
+          pooled, dimensions are continuous values rather than slots holding lists of words, and
+          embedding vectors are dense with every component populated.
+        difficulty: intermediate
+      - id: nlp-emb-static-vector-limit
+        prompt: "A static embedding table stores one fixed vector for 'bank' whatever sentence it appears in. Which downstream failure follows?"
+        options:
+          - "Both senses are averaged into one point, so context-dependent meaning cannot be recovered"
+          - "The vector cannot be fed to a neural network, which needs one input for each sentence"
+          - "The word is treated as unknown whenever it appears in a sense the corpus never showed"
+          - "The vector's length grows every time the word is seen in a new kind of sentence"
+        answer: "Both senses are averaged into one point, so context-dependent meaning cannot be recovered"
+        explanation: >-
+          Training blends every usage into a single location, so the financial and geographic senses
+          sit on top of each other and no reader of the vector can separate them; contextual
+          embeddings exist to fix this. The vector feeds a network perfectly well, no sense triggers
+          an unknown token, and dimensionality is fixed once the table is trained.
+        difficulty: intermediate
+      - id: nlp-emb-cosine-choice
+        prompt: "When you look up a word's nearest neighbours in an embedding space, why is cosine similarity the usual measure?"
+        options:
+          - "It compares direction and ignores magnitude, which tracks frequency more than it tracks meaning"
+          - "It is the only similarity measure that is defined for vectors holding negative components"
+          - "It returns whole numbers, which makes the resulting neighbour ranking easier to interpret"
+          - "It normalises the vocabulary so that rare and frequent words receive identical weight"
+        answer: "It compares direction and ignores magnitude, which tracks frequency more than it tracks meaning"
+        explanation: >-
+          Embedding norms correlate with how often a word was seen, so dividing it out leaves the
+          semantic direction, which is what you want in a neighbour list. Euclidean distance is
+          perfectly well defined on negative components, cosine returns a real number between minus
+          one and one, and it is a per-pair measure that reweights nothing in the vocabulary.
+        difficulty: intermediate
+
+  - topic: nlp-word2vec
+    # Source: D2L.ai - Word2Vec pretraining (skip-gram, CBOW, negative sampling)
+    questions:
+      - id: nlp-w2v-skipgram-vs-cbow
+        prompt: "What does the skip-gram objective ask the model to predict, and how does continuous bag of words differ from it?"
+        options:
+          - "Skip-gram predicts context words from the centre word; CBOW predicts the centre from context"
+          - "Skip-gram predicts the centre word from its context; CBOW predicts context from the centre"
+          - "Skip-gram predicts the next sentence; CBOW predicts whether two words are synonymous"
+          - "Skip-gram predicts a word's frequency rank; CBOW predicts its part of speech instead"
+        answer: "Skip-gram predicts context words from the centre word; CBOW predicts the centre from context"
+        explanation: >-
+          Skip-gram runs outward from one centre token to each neighbour, which gives many training
+          pairs per occurrence and works well for rare words; CBOW averages the neighbours to guess
+          the missing middle word. The second option is exactly these two swapped, and neither method
+          involves sentence order, synonym labels, frequency ranks or grammatical tags.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-w2v-negative-sampling
+        prompt: "A softmax over a 400,000-word vocabulary makes each Word2Vec update far too slow. What does negative sampling substitute for it?"
+        options:
+          - "A few binary decisions per example: one true context word against a handful of sampled non-contexts"
+          - "A smaller vocabulary, built by discarding every word below a minimum count threshold"
+          - "A single regression that predicts the context word's vocabulary index as a number"
+          - "A hierarchy of embeddings in which each word is stored at reduced numerical precision"
+        answer: "A few binary decisions per example: one true context word against a handful of sampled non-contexts"
+        explanation: >-
+          Instead of normalising over the whole vocabulary, the model learns to separate genuine
+          pairs from a small sample of noise pairs, so cost per update depends on the sample size
+          rather than on vocabulary size. Pruning rare words loses coverage without fixing the
+          softmax, index regression treats ids as magnitudes, and lower precision is unrelated.
+        difficulty: advanced
+        mastery: true
+      - id: nlp-w2v-analogy-arithmetic
+        prompt: "The expression king minus man plus woman lands close to queen in a trained Word2Vec space. What does that reveal about the space?"
+        options:
+          - "Some relations show up as consistent directions, so differences between related pairs align"
+          - "The four words occurred in the same sentences, so their vectors were averaged together"
+          - "The model keeps an explicit table of analogies, which the arithmetic looks up by key"
+          - "The vectors are ordered by meaning, so adding them walks along a single meaning axis"
+        answer: "Some relations show up as consistent directions, so differences between related pairs align"
+        explanation: >-
+          Because the gender contrast recurs in similar contexts across many pairs, the offset
+          between them becomes roughly the same vector, which is why subtraction and addition
+          navigate it. Nothing is averaged from co-occurrence in one sentence, no analogy table is
+          stored anywhere, and the space has many directions rather than one ordered meaning axis.
+        difficulty: intermediate
+      - id: nlp-w2v-window-size-effect
+        prompt: "You enlarge the context window used while training Word2Vec. What tends to change about the neighbours the vectors give you?"
+        options:
+          - "Neighbours become more topically related and less about interchangeable grammatical roles"
+          - "Neighbours become rarer words, since a wide window skips over the frequent ones entirely"
+          - "Neighbours stop changing at all, because the window only affects the training speed"
+          - "Neighbours become words sharing prefixes, since wide windows favour string overlap"
+        answer: "Neighbours become more topically related and less about interchangeable grammatical roles"
+        explanation: >-
+          A narrow window captures words that can substitute for each other syntactically, while a
+          wide one captures words from the same subject matter, so the window is a knob on what
+          similarity means. The window does not filter by frequency, it genuinely changes the learned
+          vectors rather than only the runtime, and character overlap plays no part in training.
+        difficulty: advanced
+      - id: nlp-w2v-two-matrices
+        prompt: "Skip-gram training learns both a centre-word matrix and a context-word matrix. What is normally done with them afterwards?"
+        options:
+          - "The centre-word vectors are kept as the embeddings and the context matrix is thrown away"
+          - "The two matrices are concatenated, so every word ends up with twice as many dimensions"
+          - "The context matrix is kept instead, since it saw more updates over the course of training"
+          - "The two are multiplied together to rebuild the co-occurrence counts used for lookup"
+        answer: "The centre-word vectors are kept as the embeddings and the context matrix is thrown away"
+        explanation: >-
+          The centre-word table is the conventional output and the context table is scaffolding for
+          the training objective, so it is discarded once training ends. Concatenation is not the
+          standard recipe, the context matrix is not preferentially kept, and multiplying them back
+          out would recover prediction scores rather than a usable embedding table.
+        difficulty: advanced
+
+  - topic: nlp-sequence-modeling
+    # Source: D2L.ai - Working with sequences (autoregressive framing, Markov models)
+    questions:
+      - id: nlp-seq-autoregressive-factorisation
+        prompt: "Sequence modelling is usually written as predicting each token given the tokens that came before it. What does that framing buy you?"
+        options:
+          - "A hard joint distribution over sequences becomes a chain of simpler conditional predictions"
+          - "The sequence length stops mattering, since every token is then predicted independently"
+          - "Training data is no longer needed, because the chain rule itself supplies probabilities"
+          - "The vocabulary shrinks, since only tokens that can follow the current one need modelling"
+        answer: "A hard joint distribution over sequences becomes a chain of simpler conditional predictions"
+        explanation: >-
+          The chain rule lets one next-token model, applied repeatedly, define a distribution over
+          sequences of any length, which is why this factorisation is the standard framing. The
+          conditionals are explicitly dependent rather than independent, the chain rule only
+          rearranges the problem and still needs estimated probabilities, and the vocabulary is fixed.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-seq-markov-assumption
+        prompt: "A model conditions each token on only the previous four tokens rather than the entire history. What is the trade being made?"
+        options:
+          - "It becomes tractable with fixed-size inputs but cannot use dependencies reaching further back"
+          - "It becomes exact rather than approximate, since a short history removes estimation error"
+          - "It becomes slower per step, because a shorter context needs more passes over the data"
+          - "It becomes order-independent, since only four tokens remain to be arranged in the input"
+        answer: "It becomes tractable with fixed-size inputs but cannot use dependencies reaching further back"
+        explanation: >-
+          A Markov assumption of fixed order gives every example the same shape and keeps the
+          parameter count finite, at the cost of losing agreement or reference that spans more than
+          four tokens. Truncating history introduces approximation rather than removing it, shorter
+          contexts are cheaper per step, and the four retained tokens are still order-sensitive.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-seq-shuffled-split-leak
+        prompt: "You evaluate a next-token model by shuffling all positions in the corpus and holding out a random tenth of them. Why is that score optimistic?"
+        options:
+          - "Held-out positions sit inside contexts the model trained on, so future information leaks in"
+          - "Shuffling destroys the vocabulary counts, which inflates the probability of frequent words"
+          - "A tenth is too small a split for text, so the estimate is noisy rather than biased upward"
+          - "Shuffling reorders tokens inside each context window, which makes the task strictly harder"
+        answer: "Held-out positions sit inside contexts the model trained on, so future information leaks in"
+        explanation: >-
+          Neighbouring positions share almost all of their context, so a random split lets the model
+          train on text surrounding its own test targets, which is why sequence data is split by
+          time instead. Vocabulary counts are unchanged by shuffling, a tenth is ample for a large
+          corpus, and the bias here is systematic optimism rather than noise or added difficulty.
+        difficulty: advanced
+      - id: nlp-seq-order-required
+        prompt: "Why can a model that ignores token order never serve as a language model, even with perfectly estimated word statistics?"
+        options:
+          - "A sequence's probability depends on arrangement, so every permutation would score alike"
+          - "Word statistics cannot be estimated without order, so the counts themselves are unavailable"
+          - "Ignoring order forces a fixed sequence length, which real sentences rarely happen to share"
+          - "Order is needed to build the vocabulary, so the model would have no tokens left to score"
+        answer: "A sequence's probability depends on arrangement, so every permutation would score alike"
+        explanation: >-
+          A language model must say that 'the cat sat' is likely and its scrambled permutations are
+          not, and an order-blind model assigns them the same probability, so it cannot do the job.
+          Unigram counts are perfectly estimable without order, order-blind models handle variable
+          lengths fine, and the vocabulary is built from token identities alone.
+        difficulty: beginner
+      - id: nlp-seq-error-accumulation
+        prompt: "Rolling a trained sequence model forward many steps on top of its own predictions degrades output quickly. What explains that?"
+        options:
+          - "Each predicted step becomes the input to the next, so small mistakes compound as it runs"
+          - "The parameters drift during inference, since generation keeps updating them as it goes"
+          - "Long outputs exhaust the vocabulary, so later steps have no valid token left to emit"
+          - "The conditionals are renormalised at every step, which flattens them towards uniform"
+        answer: "Each predicted step becomes the input to the next, so small mistakes compound as it runs"
+        explanation: >-
+          Multi-step forecasting feeds imperfect predictions back in, so the model is soon
+          conditioning on a context unlike anything in its training data and errors amplify. Weights
+          are frozen at inference, vocabulary entries are reusable without limit, and the per-step
+          distribution is already normalised rather than being repeatedly flattened.
+        difficulty: advanced
+
+  - topic: nlp-rnn-lstm
+    # Source: D2L.ai - Recurrent neural networks for text
+    questions:
+      - id: nlp-rnn-hidden-state-role
+        prompt: "What does a recurrent network's hidden state give you that a feed-forward network over a fixed window cannot?"
+        options:
+          - "A running summary of everything read so far, carried forward with no fixed context size"
+          - "A separate set of weights for every time step, letting each position learn its own rule"
+          - "A guarantee that gradients keep the same magnitude however long the sequence becomes"
+          - "A representation of the full vocabulary, so unseen words can be embedded on the fly"
+        answer: "A running summary of everything read so far, carried forward with no fixed context size"
+        explanation: >-
+          The hidden state is a learned memory updated at each token, so in principle any earlier
+          token can influence the current prediction without fixing a window width. Recurrent
+          weights are shared rather than per-step, gradients are notoriously unstable over long
+          sequences, and unseen words are handled by the tokeniser and embedding layer instead.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-rnn-shared-weights
+        prompt: "A recurrent layer reuses the same weight matrices at every time step. Why does that matter so much for text?"
+        options:
+          - "Sentences vary in length, and shared parameters let one model run for any number of steps"
+          - "Sharing weights removes the need for an embedding layer, since each step reuses the last"
+          - "Sharing weights makes the gradient identical at every step, which stabilises training"
+          - "Sharing weights lets the network process all time steps at once instead of in order"
+        answer: "Sentences vary in length, and shared parameters let one model run for any number of steps"
+        explanation: >-
+          One update rule applied repeatedly means the parameter count is independent of sequence
+          length and what is learned at position three transfers to position thirty. Embeddings are
+          still required to turn ids into vectors, per-step gradients differ and are what cause
+          vanishing behaviour, and sharing does nothing to remove the sequential dependency.
+        difficulty: intermediate
+      - id: nlp-lstm-gating-long-range
+        prompt: "A plain recurrent model trained on long documents cannot link a pronoun to a name sixty tokens earlier. How does LSTM gating address that?"
+        options:
+          - "A gated cell state can carry information forward almost unchanged, so gradients survive longer"
+          - "It reads the sequence backwards, so distant tokens become nearby tokens in practice"
+          - "It widens the hidden state until sixty tokens fit inside it as separately stored slots"
+          - "It clips the gradient at every step, which stops the signal from shrinking towards zero"
+        answer: "A gated cell state can carry information forward almost unchanged, so gradients survive longer"
+        explanation: >-
+          The forget and input gates let the cell state pass through with multiplicative factors near
+          one, which avoids the repeated shrinking that erases long-range signal in a plain recurrent
+          unit. Reversing the sequence just moves the problem to the other end, hidden units are
+          distributed rather than per-token slots, and clipping treats exploding, not vanishing.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-rnn-parallelism-limit
+        prompt: "Why does a recurrent language model take longer per epoch than a similarly sized transformer on the same corpus?"
+        options:
+          - "Step t needs the hidden state from step t minus one, so time steps cannot run in parallel"
+          - "Recurrent layers hold far more parameters, so each update requires much more arithmetic"
+          - "Recurrent models run once per vocabulary entry, so cost grows with the vocabulary size"
+          - "Recurrent models cannot use mini-batches, so every example must be processed on its own"
+        answer: "Step t needs the hidden state from step t minus one, so time steps cannot run in parallel"
+        explanation: >-
+          The recurrence is inherently sequential in the length dimension, so a GPU sits idle waiting
+          for each step while a transformer computes all positions in one matrix multiply. Recurrent
+          models are typically smaller in parameter count, cost per step does not scale with the
+          vocabulary except at the output layer, and batching across examples works normally.
+        difficulty: intermediate
+      - id: nlp-rnn-exploding-gradient
+        prompt: "Training loss on your character-level recurrent model suddenly jumps to an enormous value mid-epoch. Which remedy fits that symptom?"
+        options:
+          - "Clip the gradient norm, since backpropagating through many steps can blow an update up"
+          - "Enlarge the hidden size, since the spike shows the state is too small for the sequence"
+          - "Remove the recurrence, since a stable loss curve requires a feed-forward network instead"
+          - "Reduce the vocabulary, since character models spike when their vocabulary grows too large"
+        answer: "Clip the gradient norm, since backpropagating through many steps can blow an update up"
+        explanation: >-
+          Repeated multiplication through time can produce an enormous gradient that throws the
+          weights far from any good region, and rescaling the norm is the standard fix. A larger
+          hidden state does not bound gradient magnitude, recurrence itself trains stably once
+          clipped, and a character vocabulary is only tens of symbols so its size is not the cause.
+        difficulty: advanced
+
+  - topic: nlp-attention-nlp
+    # Source: D2L.ai - Bahdanau attention
+    questions:
+      - id: nlp-attn-fixed-vector-bottleneck
+        prompt: "An encoder-decoder recurrent translator degrades sharply as source sentences get longer. Which design flaw does Bahdanau attention remove?"
+        options:
+          - "Every source sentence had to be squeezed into one fixed-length vector, whatever its length"
+          - "The decoder shared weights with the encoder, so long inputs overwrote the parameters"
+          - "The encoder read the source backwards, so its final words dominated short sentences"
+          - "The decoder emitted one token per source token, so the two lengths had to match exactly"
+        answer: "Every source sentence had to be squeezed into one fixed-length vector, whatever its length"
+        explanation: >-
+          A single context vector is a hard information bottleneck that gets relatively worse as the
+          sentence grows, and attention replaces it with access to all encoder states. Encoder and
+          decoder have separate parameters, reading direction is a design choice unrelated to the
+          length effect, and the decoder always generated a length independent of the source.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-attn-query-key-value-roles
+        prompt: "In Bahdanau attention, which component acts as the query and which components act as the keys and values?"
+        options:
+          - "The decoder's current state is the query; the encoder's hidden states are keys and values"
+          - "The source embedding is the query; the decoder's previous output is both key and value"
+          - "The target token is the query; the vocabulary embedding matrix holds the keys and values"
+          - "The encoder's final state is the query; the decoder's own states are keys and values"
+        answer: "The decoder's current state is the query; the encoder's hidden states are keys and values"
+        explanation: >-
+          The decoder asks, from where it currently stands, which source positions are relevant, so
+          its state is the query and the encoder's per-token states are scored and then mixed. The
+          other options invert the roles or point at the vocabulary table, none of which lets the
+          decoder select among source positions at each output step.
+        difficulty: advanced
+        mastery: true
+      - id: nlp-attn-weights-alignment-plot
+        prompt: "Plotting the attention weight matrix for one translation shows a rough diagonal with a few off-diagonal jumps. What are you looking at?"
+        options:
+          - "Which source positions the decoder drew on for each output word, that is, a soft alignment"
+          - "The gradient magnitude at each source position, showing where training was most active"
+          - "The similarity of every source word to every other source word within the sentence"
+          - "The probability assigned to each vocabulary entry at each step of the decoding run"
+        answer: "Which source positions the decoder drew on for each output word, that is, a soft alignment"
+        explanation: >-
+          Each row is a distribution over source positions for one output step, so the diagonal shows
+          monotone translation and the jumps show reordering, which is why these plots are read as
+          alignments. Gradients are not what the weights store, source-to-source comparison is
+          self-attention rather than this cross attention, and vocabulary scores come from the output layer.
+        difficulty: intermediate
+      - id: nlp-attn-soft-differentiable
+        prompt: "Attention weights come from a softmax across all source positions. What does that soft choice give you over hard-selecting one position?"
+        options:
+          - "A weighted blend of all positions that stays differentiable, so alignment is learned by gradients"
+          - "A guarantee that exactly one source position is used, which keeps the context vector small"
+          - "A fixed alignment computed before training, which removes the need to learn any weights"
+          - "An integer index into the source, which the decoder can then consume more directly"
+        answer: "A weighted blend of all positions that stays differentiable, so alignment is learned by gradients"
+        explanation: >-
+          Because the mix is a smooth function of the scores, backpropagation can adjust which
+          positions get weight, and no alignment supervision is needed. Hard selection is exactly
+          what softmax avoids and would block gradient flow, alignment is learned rather than fixed
+          in advance, and an integer index is not differentiable at all.
+        difficulty: advanced
+      - id: nlp-attn-context-recomputed
+        prompt: "Once attention is added, how often is the context vector that the decoder consumes recomputed?"
+        options:
+          - "Once per decoding step, so each output word is free to attend to different source words"
+          - "Once per sentence, before decoding begins, and then reused for every output word"
+          - "Once per epoch, since the alignment is a learned parameter rather than an activation"
+          - "Once per source token, in order, so the decoder consumes them one after another"
+        answer: "Once per decoding step, so each output word is free to attend to different source words"
+        explanation: >-
+          Recomputing per step is the whole point: the decoder can look at the subject while emitting
+          the verb and elsewhere later. A per-sentence context is the old bottleneck design, weights
+          are activations computed from the current state rather than stored parameters, and the
+          decoder is not driven token by token through the source.
+        difficulty: intermediate
+
+  - topic: nlp-transformers-nlp
+    # Source: Vizuara - Transformers explained overview; D2L transformer chapter as reference
+    questions:
+      - id: nlp-tfm-positional-encoding
+        prompt: "Self-attention treats its inputs as an unordered set. What breaks if positional encodings are left out, and how does adding them fix it?"
+        options:
+          - "Word order carries no signal, so position information is injected into the embeddings"
+          - "Sequences must all be one length, so positions are added to pad the shorter inputs"
+          - "Attention weights turn negative, so positions rescale them back into a valid range"
+          - "The vocabulary loses its order, so positions supply the index of each token's entry"
+        answer: "Word order carries no signal, so position information is injected into the embeddings"
+        explanation: >-
+          Attention scores depend only on content, so without position signals a shuffled sentence
+          produces the same representations, and encodings restore where each token sat. Padding is
+          handled by masks rather than positional encodings, softmax already keeps weights
+          non-negative, and vocabulary indices are supplied by the tokeniser.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-tfm-parallel-over-tokens
+        prompt: "Why can one transformer layer process every token of a sequence at the same time when a recurrent layer cannot?"
+        options:
+          - "Self-attention mixes every token with every other in one matrix product, with no state to pass along"
+          - "Self-attention discards the sequence, so there is nothing left that would need ordering"
+          - "Self-attention runs one head per token, so tokens are spread across separate heads"
+          - "Self-attention truncates the input to a fixed length, which removes the sequential loop"
+        answer: "Self-attention mixes every token with every other in one matrix product, with no state to pass along"
+        explanation: >-
+          All positions are computed from the same layer input, so there is no dependency chain
+          forcing them into sequence and the work maps onto dense matrix multiplication. The sequence
+          is retained via positional encodings, heads are subspaces rather than per-token slots, and
+          truncation is a memory limit rather than the reason parallelism is possible.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-tfm-multi-head-benefit
+        prompt: "What do several attention heads per layer provide that one single wider head would not?"
+        options:
+          - "Separate subspaces, so one head can follow syntax while another follows distant reference"
+          - "A larger context window, since each head reads a different segment of the same input"
+          - "Guaranteed interpretability, because each head is assigned a linguistic role in advance"
+          - "A reduced parameter count, since heads take the place of the block's feed-forward sublayer"
+        answer: "Separate subspaces, so one head can follow syntax while another follows distant reference"
+        explanation: >-
+          Splitting the representation lets the layer hold several different attention patterns at
+          once instead of averaging them into one distribution. Every head sees the whole sequence
+          rather than a segment, head roles are emergent and often not cleanly interpretable, and the
+          feed-forward sublayer remains and holds most of the block's parameters.
+        difficulty: advanced
+      - id: nlp-tfm-attention-mask-padding
+        prompt: "You batch sentences of unequal length together with padding tokens. What is the attention mask there for?"
+        options:
+          - "It stops attention from placing weight on padding positions, which carry no real content"
+          - "It hides future tokens so the model cannot look ahead while it classifies a sentence"
+          - "It records which tokens belong to which sentence when two are packed into one input"
+          - "It selects which of the attention heads stay active for each example in the batch"
+        answer: "It stops attention from placing weight on padding positions, which carry no real content"
+        explanation: >-
+          Padding exists only to square off the batch tensor, so its scores are set to minus infinity
+          before softmax and it contributes nothing to any token's representation. Hiding the future
+          is the separate causal mask used by decoders, sentence membership is carried by token type
+          ids, and heads are never switched off per example.
+        difficulty: intermediate
+      - id: nlp-tfm-quadratic-attention-cost
+        prompt: "Doubling the input length roughly quadruples the cost of self-attention. Where does that growth come from?"
+        options:
+          - "Every token attends to every token, so the score matrix grows with the square of length"
+          - "Positional encodings are recomputed for each pair of tokens in the longer sequence"
+          - "The number of layers scales with sequence length, so a longer input adds more blocks"
+          - "The vocabulary projection is applied once per token pair instead of once per token"
+        answer: "Every token attends to every token, so the score matrix grows with the square of length"
+        explanation: >-
+          Attention builds an n by n matrix of query-key scores, so both compute and memory scale
+          quadratically, which is what bounds context length. Positional encodings are per token
+          rather than per pair, depth is a fixed architectural choice, and the output projection over
+          the vocabulary runs once per position.
+        difficulty: advanced
+
+  - topic: nlp-bert
+    # Source: D2L.ai - BERT, bidirectional encoder representations from transformers
+    questions:
+      - id: nlp-bert-masked-lm-why
+        prompt: "BERT is pretrained by masking roughly 15% of tokens and predicting them. Why is that preferred to left-to-right prediction for its purposes?"
+        options:
+          - "Masking lets each prediction use left and right context, which suits understanding tasks"
+          - "Masking is faster, because only the masked positions pass through the encoder stack"
+          - "Left-to-right training needs labelled data, whereas masking works on raw unlabelled text"
+          - "Left-to-right training cannot use self-attention, so the architecture would have to change"
+        answer: "Masking lets each prediction use left and right context, which suits understanding tasks"
+        explanation: >-
+          Filling a gap can draw on the whole sentence in both directions, which is what makes the
+          resulting representations strong for classification, tagging and span extraction. The full
+          sequence still passes through every layer, next-token training is equally unsupervised on
+          raw text, and causal models use self-attention with a mask, so the architecture is fine.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-bert-not-a-generator
+        prompt: "Why is BERT a poor choice for free-form text generation despite giving strong language understanding?"
+        options:
+          - "Its attention sees the entire input at once, so it was never trained to continue a sequence"
+          - "Its vocabulary holds only whole words, so it cannot assemble new text out of pieces"
+          - "It has no embedding layer, so it cannot turn predicted ids back into readable text"
+          - "It emits one label per input, so it has no mechanism for attending to any context"
+        answer: "Its attention sees the entire input at once, so it was never trained to continue a sequence"
+        explanation: >-
+          Bidirectional pretraining fills gaps inside known text rather than extending it, so there is
+          no next-token distribution to sample from step after step. BERT uses WordPiece subwords
+          rather than whole words, it certainly has embeddings, and it produces a vector per position
+          using attention over the whole input.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-bert-cls-pooling
+        prompt: "For sentence-pair classification the vector above the [CLS] position feeds the classifier head. Why is that position used?"
+        options:
+          - "It attends over every token of both segments, so it can pool the pair into one vector"
+          - "It sits before the text, so it is the only position the masking objective never touches"
+          - "It holds the mean of all token embeddings, which the tokeniser computes on the way in"
+          - "It stores the segment ids, which is the only information a pair classifier requires"
+        answer: "It attends over every token of both segments, so it can pool the pair into one vector"
+        explanation: >-
+          [CLS] carries no word meaning of its own, so through the layers it becomes a place for the
+          model to accumulate whole-sequence information, which fine-tuning then shapes for the task.
+          Its position relative to the text is not the reason, no averaging happens in the tokeniser,
+          and segment ids are separate inputs rather than the content of this vector.
+        difficulty: advanced
+      - id: nlp-bert-mask-mismatch
+        prompt: "The [MASK] token appears constantly in pretraining but never in your fine-tuning data. Which issue does that create?"
+        options:
+          - "A pretrain and fine-tune mismatch, which is why some chosen positions are kept or swapped instead"
+          - "A vocabulary error, since the fine-tuning tokeniser has to drop the unused entry entirely"
+          - "A length mismatch, since removing the mask shortens sequences below the trained length"
+          - "A labelling gap, since fine-tuning supplies no target for the positions that were masked"
+        answer: "A pretrain and fine-tune mismatch, which is why some chosen positions are kept or swapped instead"
+        explanation: >-
+          If every masked position always showed the mask symbol, the encoder would specialise on an
+          input it will never see downstream, so the recipe leaves some selected tokens unchanged and
+          replaces others with random words. The token stays in the vocabulary harmlessly, sequence
+          lengths are unaffected, and fine-tuning uses task labels rather than masked-token targets.
+        difficulty: advanced
+      - id: nlp-bert-segment-embeddings
+        prompt: "Two sentences are packed into a single BERT input divided by [SEP]. What do the segment embeddings add on top of that separator?"
+        options:
+          - "A learned marker on every token saying which of the two sentences that token came from"
+          - "A count of how many tokens each sentence contributed, used to rescale the attention"
+          - "A positional offset that restarts the position numbering at the second sentence"
+          - "A similarity score between the sentences, computed before the encoder layers run"
+        answer: "A learned marker on every token saying which of the two sentences that token came from"
+        explanation: >-
+          Segment embeddings are added to every token's input vector so membership is available at
+          each position rather than only at the separator, which pair tasks rely on. They carry no
+          counts, positions continue running across the whole packed sequence, and any similarity
+          judgement is produced by the model's layers rather than supplied as an input.
+        difficulty: intermediate
+
+  - topic: nlp-encoder-vs-decoder
+    # Source: D2L.ai - Encoder-decoder architecture
+    questions:
+      - id: nlp-encdec-two-roles
+        prompt: "In the encoder-decoder design, what is each of the two halves responsible for?"
+        options:
+          - "The encoder turns variable-length input into a state; the decoder emits output from that state"
+          - "The encoder compresses the vocabulary; the decoder expands it back into readable words"
+          - "The encoder trains on the labels; the decoder runs only at inference to make predictions"
+          - "The encoder handles the source language; the decoder handles tokenising the target text"
+        answer: "The encoder turns variable-length input into a state; the decoder emits output from that state"
+        explanation: >-
+          The split exists so that reading and writing are separate jobs: one half builds a
+          representation of whatever came in, the other produces a sequence conditioned on it. The
+          vocabulary is not what gets compressed, both halves are trained together on the same
+          examples, and tokenisation happens outside the model entirely.
+        difficulty: beginner
+        mastery: true
+      - id: nlp-encdec-length-independence
+        prompt: "A translation is rarely the same length as its source sentence. How does the encoder-decoder split accommodate that?"
+        options:
+          - "The decoder keeps generating until it emits an end-of-sequence token, whatever the input length"
+          - "The input is padded or trimmed to the target length before the encoder is ever run"
+          - "The encoder emits one state per output token, which locks the two lengths together"
+          - "The decoder repeats its final token until the output matches the length of the input"
+        answer: "The decoder keeps generating until it emits an end-of-sequence token, whatever the input length"
+        explanation: >-
+          Decoupling generation from reading is precisely what lets output length differ, with a
+          special end token deciding when to stop. Forcing the input to the output length would need
+          the answer in advance, tying encoder states to output tokens would reimpose equal lengths,
+          and padding the output with repeats would produce nonsense text.
+        difficulty: intermediate
+      - id: nlp-encdec-choose-encoder-only
+        prompt: "You must score whether two support tickets describe the same underlying problem. Which model shape fits, and why?"
+        options:
+          - "Encoder-only, since the task needs a representation of given text rather than new text"
+          - "Decoder-only, since the model has to produce its judgement one token at a time"
+          - "Encoder-decoder, since scoring requires translating one ticket into the other's wording"
+          - "Decoder-only, since bidirectional context is unavailable when two inputs are compared"
+        answer: "Encoder-only, since the task needs a representation of given text rather than new text"
+        explanation: >-
+          The output is a score over text you already have, so bidirectional encoding plus a small
+          head is the efficient and accurate choice. A decoder would generate tokens you do not
+          need, no translation step is involved so the full sequence-to-sequence shape is wasted,
+          and bidirectional context is perfectly available when both inputs are given.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-encdec-choose-seq2seq
+        prompt: "For turning a long report into a one-paragraph summary, why is a full encoder-decoder a natural fit?"
+        options:
+          - "The whole report can be encoded bidirectionally while the summary is generated left to right"
+          - "The report and summary share a length, so one state per token maps cleanly across the two"
+          - "Only an encoder-decoder can be fine-tuned, so any generation task requires that shape"
+          - "Encoding the report removes the need to decode, since the state already is the summary"
+        answer: "The whole report can be encoded bidirectionally while the summary is generated left to right"
+        explanation: >-
+          Summarisation reads a long fixed input and writes a shorter new one, which matches exactly
+          what the two halves do best. The lengths differ dramatically rather than matching,
+          encoder-only and decoder-only models are both routinely fine-tuned, and a state vector is
+          not itself readable text.
+        difficulty: intermediate
+      - id: nlp-encdec-decoder-conditioning
+        prompt: "What distinguishes the decoder inside an encoder-decoder model from a standalone language model?"
+        options:
+          - "It is conditioned on the encoder's output as well as on the tokens it has already emitted"
+          - "It is trained with no loss on its own outputs, since the encoder supplies all the labels"
+          - "It reads the entire target sequence at once, so it needs no left-to-right restriction"
+          - "It shares parameters with the encoder, so the two halves are really one set of weights"
+        answer: "It is conditioned on the encoder's output as well as on the tokens it has already emitted"
+        explanation: >-
+          Cross attention over the encoder states is the extra input that makes the decoder's
+          generation about a specific source rather than free continuation. The loss is still
+          next-token cross entropy on the decoder's outputs, generation remains left to right at
+          inference, and the two halves normally keep separate parameters.
+        difficulty: advanced
+
+  - topic: nlp-generative-models
+    # Source: Hugging Face LLM course - causal language modelling and generative models
+    questions:
+      - id: nlp-gen-causal-labels
+        prompt: "How does the training target for causal language modelling differ from the target used in masked language modelling?"
+        options:
+          - "The labels are the inputs shifted by one, so each position predicts the token that follows"
+          - "The labels come from human annotators, since raw text supplies no next-token labels"
+          - "The labels mark which 15% of positions were hidden, and the rest are ignored in the loss"
+          - "The labels are a single class per document, so the loss is computed once per example"
+        answer: "The labels are the inputs shifted by one, so each position predicts the token that follows"
+        explanation: >-
+          Causal training reuses the input as its own label with a one-position shift, so every token
+          contributes a prediction. Human annotation is unnecessary for either objective, scoring
+          only a masked subset is what masked language modelling does, and a per-document class label
+          belongs to classification rather than language modelling.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-gen-causal-mask-training
+        prompt: "During causal language model training the whole sequence goes in at once, yet the model cannot cheat. What prevents it?"
+        options:
+          - "A causal mask stops each position from attending to any token that comes after it"
+          - "Each position is trained in its own forward pass, so later tokens are simply absent"
+          - "Later tokens are replaced by a special unknown token before the batch is assembled"
+          - "The loss is computed only on the final token, which has no following tokens to see"
+        answer: "A causal mask stops each position from attending to any token that comes after it"
+        explanation: >-
+          Masking the upper triangle of the attention scores makes each position's prediction depend
+          only on its prefix, which is what allows the whole sequence to be trained in parallel
+          without leakage. Separate passes per position would be needlessly slow, replacing future
+          tokens would corrupt their own labels, and the loss covers every position.
+        difficulty: advanced
+        mastery: true
+      - id: nlp-gen-decoding-repetition
+        prompt: "Your generated product blurbs are grammatical but keep recycling the same phrases. Which change addresses that most directly?"
+        options:
+          - "Sample with temperature or top-p rather than always taking the highest-probability token"
+          - "Increase the number of layers so the model has more capacity for varied phrasing"
+          - "Lengthen the training sequences so that repetition is penalised by the training loss"
+          - "Switch to a character tokeniser so repeated phrases break up into different pieces"
+        answer: "Sample with temperature or top-p rather than always taking the highest-probability token"
+        explanation: >-
+          Greedy and beam decoding follow high-probability loops, so introducing controlled
+          randomness at each step is the standard cure and needs no retraining. More layers, longer
+          training sequences and a different tokeniser all change the model rather than the decoding
+          rule, which is where this specific failure originates.
+        difficulty: intermediate
+      - id: nlp-gen-gpt-scaling-behaviour
+        prompt: "The GPT family kept the same decoder-only recipe while scaling it up. What was the headline behavioural change as scale grew?"
+        options:
+          - "Tasks could be requested in the prompt with few or no examples, without any weight updates"
+          - "Generation became deterministic, so the decoding strategy stopped affecting the output"
+          - "The models stopped needing a tokeniser, since larger vocabularies had become feasible"
+          - "Fine-tuning became impossible, so prompting replaced it as the only way to adapt them"
+        answer: "Tasks could be requested in the prompt with few or no examples, without any weight updates"
+        explanation: >-
+          In-context learning is the capability that emerged with scale and changed how these models
+          are used, since one checkpoint serves many tasks through instructions. Sampling still makes
+          generation stochastic, tokenisers remain essential at any size, and fine-tuning large
+          decoders is common practice rather than impossible.
+        difficulty: beginner
+      - id: nlp-gen-self-supervision
+        prompt: "Why can a causal language model be trained on a raw web crawl without any annotation effort at all?"
+        options:
+          - "The next token in the text is itself the target, so the corpus supervises the model"
+          - "The loss needs no target whatsoever, only the input distribution over the documents"
+          - "Web text arrives pre-labelled with its topic, which the model then uses as its target"
+          - "The model learns by comparing pairs of documents, so no per-token target is needed"
+        answer: "The next token in the text is itself the target, so the corpus supervises the model"
+        explanation: >-
+          Self-supervision means the labels are already inside the data, which is why trillions of
+          tokens of ordinary text are usable. Cross entropy does require a target at each position,
+          web pages carry no reliable topic labels, and document comparison describes contrastive
+          training rather than causal language modelling.
+        difficulty: beginner
+
+  - topic: nlp-fine-tuning-nlp
+    # Source: Hugging Face LLM course chapter 3.3 - Fine-tuning a pretrained model
+    questions:
+      - id: nlp-ft-new-head-warning
+        prompt: "Loading a checkpoint with AutoModelForSequenceClassification warns that some weights are newly initialised. Should that worry you?"
+        options:
+          - "No: the pretraining head is dropped and a fresh classification head is added for you to train"
+          - "Yes: it means the checkpoint failed to load, so the encoder weights are random as well"
+          - "Yes: it means the tokeniser and the model came from different checkpoints and must be matched"
+          - "No: it only reports that the optimiser state was not saved alongside the published weights"
+        answer: "No: the pretraining head is dropped and a fresh classification head is added for you to train"
+        explanation: >-
+          The warning names the classifier layer, whose shape depends on your label count and so
+          cannot be inherited; the encoder body loaded normally. A genuine load failure would report
+          the encoder layers, tokeniser mismatch produces a different error entirely, and optimiser
+          state is not what this message is about.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-ft-learning-rate-scale
+        prompt: "Fine-tuning BERT at the learning rate you would use to train a model from scratch wrecks its accuracy. Why does that happen?"
+        options:
+          - "Large updates overwrite the pretrained representations, so fine-tuning needs a much smaller rate"
+          - "The pretrained weights are frozen, so a large rate only moves the randomly started head"
+          - "A large rate exceeds the batch size limit, so gradients end up accumulated incorrectly"
+          - "The pretrained model stores its own rate, and supplying a different value raises a conflict"
+        answer: "Large updates overwrite the pretrained representations, so fine-tuning needs a much smaller rate"
+        explanation: >-
+          You are starting near a good solution, so steps sized for random initialisation destroy
+          what pretraining learned, which is why rates around a few times ten to the minus five are
+          standard. Nothing is frozen by default in this recipe, learning rate and batch size are
+          independent settings, and checkpoints do not carry a mandatory learning rate.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-ft-overfit-small-data
+        prompt: "On a 3,000-example dataset your fine-tune hits 99% training accuracy by epoch eight while validation accuracy falls. What is the fix?"
+        options:
+          - "Train for far fewer epochs, since fine-tuning on small data overfits after two or three passes"
+          - "Raise the learning rate so the model escapes the region where validation is declining"
+          - "Discard the pretrained weights and train from scratch so it cannot memorise the examples"
+          - "Increase the maximum sequence length so that each example carries more usable signal"
+        answer: "Train for far fewer epochs, since fine-tuning on small data overfits after two or three passes"
+        explanation: >-
+          The pattern of rising training and falling validation accuracy is textbook overfitting, and
+          with a small dataset the standard recipe of two to three epochs is the answer. A higher
+          learning rate would damage the pretrained weights, training from scratch overfits worse
+          with this little data, and longer sequences do not add examples to learn from.
+        difficulty: intermediate
+      - id: nlp-ft-num-labels-argument
+        prompt: "Your task has five classes but the checkpoint is loaded without setting num_labels. What goes wrong?"
+        options:
+          - "The head is built with the default label count, so the output layer has the wrong width"
+          - "The tokeniser truncates the labels, so all classes beyond the second are silently merged"
+          - "The encoder is rebuilt from scratch, so the pretrained knowledge is discarded on load"
+          - "Training runs but the loss is computed over tokens instead of over the class labels"
+        answer: "The head is built with the default label count, so the output layer has the wrong width"
+        explanation: >-
+          The classification head's output dimension comes from num_labels, so leaving it at the
+          default of two produces logits that cannot represent five classes and the loss errors or
+          silently misbehaves. Tokenisers never touch labels, the encoder body still loads its
+          pretrained weights, and the loss is a classification loss over whatever width the head has.
+        difficulty: intermediate
+      - id: nlp-ft-dynamic-padding
+        prompt: "Why does the recommended recipe pad with a data collator per batch instead of padding the whole dataset to one length?"
+        options:
+          - "Each batch is padded only to its own longest example, which avoids a lot of wasted computation"
+          - "The collator removes padding altogether, so the model only ever sees real tokens in a batch"
+          - "Padding the dataset changes the labels, since padded positions shift each class index along"
+          - "Only the collator is able to add the special tokens the model needs around each sequence"
+        answer: "Each batch is padded only to its own longest example, which avoids a lot of wasted computation"
+        explanation: >-
+          Dynamic padding means short batches stay short instead of every example being stretched to
+          the longest document in the corpus, which saves substantial time and memory. Padding cannot
+          be removed since tensors must be rectangular, dataset-level padding does not touch label
+          indices, and special tokens are added by the tokeniser.
+        difficulty: advanced
+
+  - topic: nlp-evaluation-nlp
+    # Source: Hugging Face Evaluate documentation
+    questions:
+      - id: nlp-eval-imbalanced-metric
+        prompt: "Only 2% of your tickets belong to the urgent class and your classifier reports 98% accuracy. Which measurement should you report instead?"
+        options:
+          - "Precision and recall on the urgent class, since accuracy is satisfied by predicting the majority"
+          - "Perplexity over the ticket text, since that shows how well the model fits the data"
+          - "BLEU against the ticket titles, since it compares the output with a reference string"
+          - "Accuracy on a larger test set, since the only problem is that this estimate is noisy"
+        answer: "Precision and recall on the urgent class, since accuracy is satisfied by predicting the majority"
+        explanation: >-
+          A model that always answers 'not urgent' already scores 98%, so only per-class precision and
+          recall reveal whether the rare class is ever found. Perplexity evaluates language models
+          rather than classifiers, BLEU compares generated text against references and there is no
+          generation here, and more test data cannot fix a metric that is blind by construction.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-eval-perplexity-reading
+        prompt: "Held-out perplexity for your language model falls from 40 to 25. What has improved, and what has not yet been shown?"
+        options:
+          - "It gives real text higher probability; nothing yet shows its own generations are useful"
+          - "It repeats fewer phrases; nothing yet shows that it fits the held-out distribution better"
+          - "It matches reference summaries more closely; nothing yet shows its probabilities improved"
+          - "It classifies held-out sentences better; nothing yet shows it can score longer documents"
+        answer: "It gives real text higher probability; nothing yet shows its own generations are useful"
+        explanation: >-
+          Perplexity is the exponentiated average next-token loss, so it measures fit to held-out
+          text and nothing about helpfulness, factuality or decoding behaviour. Repetition is a
+          decoding property, reference overlap is what BLEU and ROUGE measure, and perplexity is not
+          a classification score, so those three descriptions attach to other metrics.
+        difficulty: intermediate
+        mastery: true
+      - id: nlp-eval-bleu-limits
+        prompt: "A translation that is fluent and entirely correct scores badly on BLEU against a single reference. What explains that?"
+        options:
+          - "BLEU counts n-grams shared with the reference, so a valid different wording is punished"
+          - "BLEU judges fluency with a language model, which penalises unusual sentence lengths"
+          - "BLEU needs output and reference to hold the same token count, and otherwise fails"
+          - "BLEU is defined per sentence and cannot be aggregated, so single scores are unreliable"
+        answer: "BLEU counts n-grams shared with the reference, so a valid different wording is punished"
+        explanation: >-
+          Overlap metrics assume the reference is the only acceptable phrasing, so paraphrase and
+          legitimate synonym choices lose credit, which is why several references or human judgement
+          are needed. BLEU uses no language model, tolerates differing lengths through its brevity
+          penalty, and is normally reported as a corpus-level aggregate.
+        difficulty: intermediate
+      - id: nlp-eval-rouge-copying
+        prompt: "Your summariser earns a high ROUGE score by copying long passages straight out of the source. What has ROUGE failed to capture?"
+        options:
+          - "Whether the summary is concise and abstractive, since n-gram overlap rewards copied text"
+          - "Whether the summary is grammatical, since overlap counts characters rather than words"
+          - "Whether the source was tokenised correctly, since ROUGE assumes one fixed tokenisation"
+          - "Whether reference summaries exist at all, since ROUGE can be computed without references"
+        answer: "Whether the summary is concise and abstractive, since n-gram overlap rewards copied text"
+        explanation: >-
+          ROUGE rewards recall of reference n-grams, and extractive copying is an easy way to hit
+          them, so a high score can coexist with a summary that compresses and abstracts nothing.
+          ROUGE does operate on word n-grams, tokenisation is a minor configuration detail, and it
+          cannot be computed at all without references.
+        difficulty: intermediate
+      - id: nlp-eval-human-judgement
+        prompt: "For open-ended assistant replies, why must the automatic metrics in an evaluation library be supplemented with human judgement?"
+        options:
+          - "Many different replies are equally good, so no single reference can define correctness"
+          - "Automatic metrics cannot be computed without labels, and open-ended data supplies none"
+          - "Automatic metrics run too slowly over long outputs to be usable during development"
+          - "Automatic metrics report one number, whereas human raters can report several numbers"
+        answer: "Many different replies are equally good, so no single reference can define correctness"
+        explanation: >-
+          Open-ended tasks have an enormous space of acceptable answers, so reference-based overlap
+          scores penalise good replies and reward bland ones, and only people or model judges can
+          assess helpfulness. Reference-free metrics do exist, automatic scoring is fast, and the
+          count of numbers reported is not what makes these metrics inadequate.
+        difficulty: advanced

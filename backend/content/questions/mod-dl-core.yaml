@@ -1,0 +1,2433 @@
+# Deep Learning Core self-check questions.
+#
+# Every question here is answerable from the PRIMARY resource its topic maps to,
+# and is about that topic only. This module has many adjacent topics
+# (activations / initialisation / normalisation / dropout / SGD / Adam), so each
+# block below stays strictly inside its own scope: a question that would also
+# make sense on a sibling topic belongs on neither. Gates in
+# app/content/question_bank.py refuse a prompt already used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-dl-core
+topics:
+  - topic: dl-why-deep-learning
+    # Source: D2L.ai - Introduction
+    questions:
+      - id: dl-handcrafted-feature-limit
+        prompt: "Before deep learning, most vision systems spent their effort on hand-designed feature extractors. What was the fundamental limitation of that approach?"
+        options:
+          - "The features had to be guessed in advance by humans, so they transferred badly to new tasks"
+          - "The extractors ran too slowly to be practical, although the features themselves were the right ones"
+          - "The features were mathematically ill-defined, so no classifier stacked on top could ever converge"
+          - "The features needed too much storage, forcing engineers to discard most of the training data"
+        answer: "The features had to be guessed in advance by humans, so they transferred badly to new tasks"
+        explanation: >-
+          The bottleneck was human insight, not compute or storage: a SIFT-style descriptor encodes one
+          designer guess about what matters and has to be redesigned for each new domain. Speed was not
+          the blocker, the features were perfectly well defined mathematically, and storing descriptors
+          was never what limited dataset size.
+        difficulty: beginner
+        mastery: true
+      - id: dl-representation-learning-meaning
+        prompt: "What does it mean to say deep learning replaces feature engineering with representation learning?"
+        options:
+          - "The intermediate representations are learned from data jointly with the classifier that consumes them"
+          - "The features are still designed by hand, and the network only compresses them into fewer dimensions"
+          - "The raw inputs are used directly, with no transformation applied anywhere inside the model at all"
+          - "A separate stage discovers features once at the start, and they are then frozen for good"
+        answer: "The intermediate representations are learned from data jointly with the classifier that consumes them"
+        explanation: >-
+          The point is joint optimisation: the same loss that trains the classifier also shapes the layers
+          that feed it. Hand-designed features followed by a learned compressor is exactly the old pipeline.
+          A model with no transformation is a linear model. Discovering features once and freezing them is
+          pretraining, which is useful but not what makes the representation learned end to end.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-why-2012-not-1989
+        prompt: "Deep networks were described decades before they became dominant. Which pair of changes does the introduction credit for the shift?"
+        options:
+          - "Large labelled datasets became available and parallel compute became cheap enough to use them"
+          - "New loss functions were discovered and the chain rule was replaced by a more stable alternative"
+          - "Gradient descent was abandoned in favour of closed-form solutions for the weight matrices"
+          - "Formal proofs appeared showing deep networks cannot overfit, which removed the risk of using them"
+        answer: "Large labelled datasets became available and parallel compute became cheap enough to use them"
+        explanation: >-
+          Backpropagation and the architectures were already known; data at internet scale plus GPUs are
+          what made them pay off. No replacement for the chain rule was needed or found, closed-form
+          solutions do not exist for these models, and deep networks overfit readily, which is why
+          regularisation remains a live concern.
+        difficulty: beginner
+      - id: dl-end-to-end-training
+        prompt: "What distinguishes an end-to-end trained system from a pipeline of separately built stages?"
+        options:
+          - "One loss sends gradients through every stage, so all the components co-adapt to each other"
+          - "Each stage is fitted to its own intermediate target first and the stages are then bolted together"
+          - "The whole model is trained once on all the data and is then never updated again afterwards"
+          - "The stages are replaced by a rules engine that domain experts write and maintain by hand"
+        answer: "One loss sends gradients through every stage, so all the components co-adapt to each other"
+        explanation: >-
+          End-to-end means a single objective is differentiated through the entire stack, so earlier stages
+          learn what later stages actually need. Fitting stages to separate intermediate targets is the
+          pipeline being replaced. Training once and freezing describes a deployment habit, and a rules
+          engine is not trained at all.
+        difficulty: intermediate
+      - id: dl-when-not-deep-learning
+        prompt: "You have 400 labelled tabular rows with 12 features. Why does the introduction framing argue against reaching for a deep network first?"
+        options:
+          - "Learned representations need substantial data to beat good hand-chosen features on so few rows"
+          - "Deep networks cannot process tabular inputs at all, whatever encoding the columns are given"
+          - "Gradient descent is undefined when the number of features falls below roughly one hundred"
+          - "Deep learning requires continuous targets, so categorical labels rule the approach out here"
+        answer: "Learned representations need substantial data to beat good hand-chosen features on so few rows"
+        explanation: >-
+          Representation learning trades human prior knowledge for data, and with 400 rows there is not
+          enough data to make that trade profitably. Networks handle tabular data fine, gradient descent
+          has no minimum feature count, and classification with categorical labels is the most common deep
+          learning task there is.
+        difficulty: intermediate
+
+  - topic: dl-neuron-intuition
+    # Source: Vizuara - Neural Network from Scratch, coding neurons and layers
+    questions:
+      - id: dl-neuron-preactivation
+        prompt: "A single artificial neuron receives inputs x with weights w and bias b. What does it compute before the activation is applied?"
+        options:
+          - "The dot product of w and x plus the bias b, producing one scalar pre-activation"
+          - "The element-wise product of w and x, kept as a vector with the same length as x"
+          - "The Euclidean distance between w and x, which the activation function then squashes"
+          - "The plain sum of the inputs, with the weights applied only during the backward pass"
+        answer: "The dot product of w and x plus the bias b, producing one scalar pre-activation"
+        explanation: >-
+          A neuron collapses its whole input vector to one number via a dot product, then adds a bias.
+          The element-wise product is the intermediate step before summing, not the output. Distance-based
+          units exist but are not what this neuron computes, and weights act in the forward pass, not only
+          in backpropagation.
+        difficulty: beginner
+      - id: dl-neuron-bias-role
+        prompt: "What can a neuron do with a bias term that it cannot do with weights alone?"
+        options:
+          - "Shift its threshold away from the origin, so the boundary need not pass through zero"
+          - "Scale each input by its own learned factor, which is where the unit capacity comes from"
+          - "Introduce the nonlinearity, since an affine map with no bias could not bend the boundary"
+          - "Increase its effective input count, letting one unit read more features than it has weights"
+        answer: "Shift its threshold away from the origin, so the boundary need not pass through zero"
+        explanation: >-
+          Without a bias, the set where w dot x equals zero always passes through the origin, which is a
+          real restriction on what the unit can separate. Per-input scaling is what the weights already do.
+          The nonlinearity comes from the activation function, not the bias, and a bias adds one parameter
+          rather than any extra inputs.
+        difficulty: beginner
+      - id: dl-neuron-without-activation
+        prompt: "Strip the activation function off a single neuron. Which familiar model is left behind?"
+        options:
+          - "A linear model, since what remains is an affine function of the input features"
+          - "A decision stump, since what remains thresholds one feature at a learned cut point"
+          - "A nearest-neighbour rule, since what remains compares the input against a stored vector"
+          - "A naive Bayes classifier, since what remains multiplies per-feature likelihood terms"
+        answer: "A linear model, since what remains is an affine function of the input features"
+        explanation: >-
+          The expression w dot x plus b is exactly the score function of linear or logistic regression,
+          which is the bridge back to linear models. A stump thresholds a single feature rather than a
+          weighted sum, nearest neighbours compares distances rather than taking a dot product, and naive
+          Bayes multiplies probabilities rather than summing weighted inputs.
+        difficulty: beginner
+      - id: dl-layer-matrix-shapes
+        prompt: "A layer of 5 neurons, each seeing 3 inputs, is coded as one matrix operation. Which shapes are involved for a single sample?"
+        options:
+          - "Weights (5, 3) times input (3,) gives output (5,), with a bias vector of shape (5,)"
+          - "Weights (3, 5) times input (5,) gives output (3,), with a bias vector of shape (3,)"
+          - "Weights (5, 3) times input (5,) gives output (3,), with a bias vector of shape (3,)"
+          - "Weights (3, 3) times input (3,) gives output (3,), with a bias vector of shape (5,)"
+        answer: "Weights (5, 3) times input (3,) gives output (5,), with a bias vector of shape (5,)"
+        explanation: >-
+          One row of the weight matrix per neuron and one column per input gives (5, 3); multiplying by a
+          length-3 input yields one number per neuron, so the output and the bias are both length 5. The
+          other options either transpose the matrix, contract along the wrong axis, or size the bias by
+          the input count instead of the unit count.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-neuron-numeric-trace
+        prompt: "A neuron has weights [0.5, -1.0] and bias 0.5 and receives the input [2.0, 1.0]. What is its pre-activation value?"
+        options:
+          - "0.5, since 0.5*2.0 plus -1.0*1.0 gives 0.0 and the bias of 0.5 is then added on"
+          - "0.0, since 0.5*2.0 plus -1.0*1.0 gives 0.0 and the bias applies only at the output layer"
+          - "1.5, since the bias of 0.5 is added to each of the two weighted terms before they are summed"
+          - "3.5, since the inputs are summed to 3.0 first and the bias added, with weights applied later"
+        answer: "0.5, since 0.5*2.0 plus -1.0*1.0 gives 0.0 and the bias of 0.5 is then added on"
+        explanation: >-
+          The two weighted terms cancel to zero, leaving the bias as the whole pre-activation. Dropping
+          the bias gives 0.0 and is the most common slip, since every layer including hidden ones carries
+          one. Adding the bias once per term double counts it, and summing raw inputs before weighting
+          ignores the weights entirely.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: dl-perceptron
+    # Source: Vizuara - dot products for neurons; D2L - The Perceptron
+    questions:
+      - id: dl-perceptron-when-updates
+        prompt: "The classic perceptron learning rule changes the weights only in one circumstance. Which one?"
+        options:
+          - "Only when the current prediction is wrong, in which case it adds the label times the input"
+          - "After every sample it sees, whether that sample was classified correctly or incorrectly"
+          - "Only at the end of each epoch, using the average of the errors accumulated during it"
+          - "Only when the classification is correct but the margin to the boundary is uncomfortably small"
+        answer: "Only when the current prediction is wrong, in which case it adds the label times the input"
+        explanation: >-
+          The rule is error-driven: a correctly classified point produces no update at all, which is why
+          the algorithm halts on separable data. Updating on every sample describes gradient descent on a
+          smooth loss, epoch-level averaging describes batch training, and margin-based updates describe a
+          support vector machine rather than a perceptron.
+        difficulty: beginner
+      - id: dl-perceptron-hand-trace
+        prompt: "A perceptron with w = [1, -1] and b = 0 sees the sample x = [1, 2] with label +1 and a learning rate of 1. What are w and b afterwards?"
+        options:
+          - "w = [2, 1] and b = 1, because a miss adds the label times x to w and the label itself to b"
+          - "w = [0, -3] and b = -1, because the update subtracts the label times x from the current weights"
+          - "w = [1, -1] and b = 0, because the pre-activation is positive so this sample is already correct"
+          - "w = [1, 2] and b = 1, because the weight vector is replaced outright by the input vector seen"
+        answer: "w = [2, 1] and b = 1, because a miss adds the label times x to w and the label itself to b"
+        explanation: >-
+          The pre-activation is 1 minus 2, which is -1, so the prediction is -1 against a label of +1: a
+          miss. Adding y times x gives [2, 1] and adding y gives b = 1, and the new pre-activation is +5,
+          now correct. Subtracting moves the boundary the wrong way, the sample was not already correct,
+          and the rule increments the weights rather than overwriting them.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-perceptron-xor-limit
+        prompt: "Why can one perceptron never learn the XOR function of two binary inputs?"
+        options:
+          - "XOR is not linearly separable, and a single perceptron can only realise one hyperplane"
+          - "XOR needs three inputs to be represented, and a perceptron accepts at most two of them"
+          - "XOR has continuous targets, and the perceptron rule handles only regression-style targets"
+          - "XOR requires a decaying learning rate, and the perceptron rule uses a single fixed rate"
+        answer: "XOR is not linearly separable, and a single perceptron can only realise one hyperplane"
+        explanation: >-
+          The four XOR points cannot be split by any straight line, and one perceptron is exactly one
+          linear boundary, so no weights exist that work. Two inputs are all XOR needs, its targets are
+          binary rather than continuous, and no learning rate schedule can create a boundary the model
+          cannot represent in the first place.
+        difficulty: beginner
+        mastery: true
+      - id: dl-perceptron-convergence-claim
+        prompt: "What does the perceptron convergence result actually promise about the training process?"
+        options:
+          - "On linearly separable data it reaches a separating hyperplane after finitely many updates"
+          - "It converges on any dataset at all, though it may need unboundedly many passes to do so"
+          - "It converges to the maximum-margin separator, which is why it matches a support vector machine"
+          - "It converges only when the learning rate is annealed towards zero across successive epochs"
+        answer: "On linearly separable data it reaches a separating hyperplane after finitely many updates"
+        explanation: >-
+          Separability is the precondition, and the guarantee is finite termination rather than any
+          statement about quality. On non-separable data the rule cycles forever. It finds some separator,
+          not the widest one, which is precisely the gap a support vector machine closes, and the classic
+          proof holds for a fixed learning rate.
+        difficulty: advanced
+      - id: dl-perceptron-step-derivative
+        prompt: "The perceptron uses a hard step activation. What does that imply if you try to train it by gradient descent?"
+        options:
+          - "The step derivative is zero almost everywhere, so gradient descent gets no usable signal"
+          - "The step derivative is undefined everywhere, so only a closed-form solution could fit it"
+          - "The step saturates for large inputs, so gradients shrink but stay usable with a small rate"
+          - "The step makes the loss non-convex, which is the only reason gradient descent fails here"
+        answer: "The step derivative is zero almost everywhere, so gradient descent gets no usable signal"
+        explanation: >-
+          A step function is flat on both sides of its jump, so the gradient is exactly zero except at one
+          undefined point, which is why the perceptron needs its own error-driven rule. It is undefined at
+          just that one point, not everywhere. Saturation with small non-zero gradients describes sigmoid,
+          and non-convexity is a separate issue that gradient descent often survives.
+        difficulty: advanced
+
+  - topic: dl-activation-functions
+    # Source: Vizuara - coding activation functions from scratch; D2L - Activation Functions
+    questions:
+      - id: dl-activation-identity-collapse
+        prompt: "You build a four-layer network but leave every activation as the identity function. What is the resulting model actually capable of?"
+        options:
+          - "Only what a single linear layer can do, because composing affine maps yields one affine map"
+          - "Four times what a single linear layer can do, because each layer adds its own parameters"
+          - "The same functions but trained four times faster, since nonlinearities are what cost time"
+          - "What a two-layer network can do, because only alternate layers collapse into each other"
+        answer: "Only what a single linear layer can do, because composing affine maps yields one affine map"
+        explanation: >-
+          W3(W2(W1x)) is just (W3W2W1)x, so depth without nonlinearity buys nothing expressively. Extra
+          parameters do not add expressive power once they collapse into one matrix. Removing activations
+          does save a little compute but that is not what the question asks, and the collapse applies to
+          every consecutive pair, not alternate ones.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-activation-sigmoid-saturation
+        prompt: "For a large positive pre-activation such as 10, what happens to a sigmoid unit output and to its derivative?"
+        options:
+          - "The output approaches 1 and the derivative sigma times (1 minus sigma) approaches 0"
+          - "The output approaches 1 and the derivative also approaches 1, so the gradient passes intact"
+          - "The output approaches 10 and the derivative stays at 0.25, its value at the origin"
+          - "The output approaches 0 and the derivative grows, so large inputs destabilise the training"
+        answer: "The output approaches 1 and the derivative sigma times (1 minus sigma) approaches 0"
+        explanation: >-
+          Sigmoid of 10 is about 0.99995, so its derivative is roughly 0.99995 times 0.00005, effectively
+          zero: that is saturation. The derivative peaks at 0.25 at the origin and only shrinks from
+          there, so it never approaches 1 nor stays fixed. Sigmoid is bounded in (0, 1) so it cannot output
+          10, and large positive inputs drive it towards 1 rather than 0.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-activation-tanh-vs-sigmoid
+        prompt: "What is the practical advantage of tanh over the logistic sigmoid as a hidden-layer activation?"
+        options:
+          - "It is zero-centred over -1 to 1, so activations do not carry a constant positive offset"
+          - "It never saturates, so its gradient stays large however big the pre-activation grows"
+          - "It is cheaper to evaluate because its definition involves no exponential function at all"
+          - "Its outputs are valid probabilities, which makes it the natural pick for the output layer"
+        answer: "It is zero-centred over -1 to 1, so activations do not carry a constant positive offset"
+        explanation: >-
+          Sigmoid outputs are all positive, which biases the next layer inputs in one direction and slows
+          learning; tanh removes that offset. tanh does saturate, with derivative 1 minus tanh squared
+          heading to zero at both ends. Both use exponentials, and it is sigmoid, not tanh, that maps into
+          the (0, 1) probability range.
+        difficulty: intermediate
+      - id: dl-activation-dying-relu
+        prompt: "One ReLU unit outputs exactly zero for every sample in your training set and never recovers. What has happened, and what addresses it?"
+        options:
+          - "Its pre-activation is negative everywhere so its gradient is zero; a leaky variant keeps a small slope"
+          - "Its weights have grown far too large, so clipping them back into range restores its output"
+          - "It has saturated at its upper bound, so switching the unit to tanh restores the missing signal"
+          - "It has become stuck at a saddle point, so only a much larger learning rate can dislodge it from there"
+        answer: "Its pre-activation is negative everywhere so its gradient is zero; a leaky variant keeps a small slope"
+        explanation: >-
+          A dead ReLU sits on the flat side for all inputs, so it receives no gradient and cannot climb
+          back; leaky ReLU or ELU keep a small negative-side slope precisely to avoid that trap. ReLU has
+          no upper bound to saturate against, so tanh is not the fix, and clipping or a bigger rate cannot
+          help a unit whose gradient is exactly zero.
+        difficulty: advanced
+      - id: dl-activation-relu-derivative
+        prompt: "What is the derivative of ReLU, and why does that particular shape help deep networks?"
+        options:
+          - "1 for positive inputs and 0 for negative, so gradients pass unshrunk along the active path"
+          - "Always exactly 1, so gradients pass through completely unchanged whatever the input sign"
+          - "Bounded between 0 and 0.25, which is smaller than sigmoid and therefore more stable"
+          - "Proportional to the input, so gradients grow with activation size and speed learning up"
+        answer: "1 for positive inputs and 0 for negative, so gradients pass unshrunk along the active path"
+        explanation: >-
+          Because the active-side derivative is exactly 1, a product of many such factors neither shrinks
+          nor grows, which is what keeps deep stacks trainable. It is not 1 everywhere, since negative
+          inputs give exactly 0. The 0 to 0.25 range is sigmoid own derivative, and a derivative
+          proportional to the input describes a quadratic, not ReLU.
+        difficulty: intermediate
+
+  - topic: dl-forward-propagation
+    # Source: D2L.ai - Forward Propagation
+    questions:
+      - id: dl-forward-order-of-ops
+        prompt: "Inside one hidden layer of a forward pass, in what order are the operations applied to the incoming activations?"
+        options:
+          - "The affine transform first, then the activation, and that result feeds the next layer"
+          - "The activation first, then the affine transform, so the nonlinearity precedes the weights"
+          - "The transform and the activation run in parallel and their two outputs are added together"
+          - "The activation is applied only once, at the output, after every affine transform is done"
+        answer: "The affine transform first, then the activation, and that result feeds the next layer"
+        explanation: >-
+          Each layer computes z = Wh + b and then h_next = phi(z); reversing that order would leave the
+          weight matrix acting on an already-squashed signal and change the model. The two steps are
+          sequential rather than parallel branches, and applying the nonlinearity only at the end would
+          collapse all the hidden layers into one affine map.
+        difficulty: beginner
+      - id: dl-forward-batch-shapes
+        prompt: "A batch of 32 samples with 100 features enters a layer whose weight matrix is (100, 64). What comes out, and what gets broadcast?"
+        options:
+          - "Shape (32, 64), with a bias of shape (64,) broadcast across all 32 rows of the batch"
+          - "Shape (64, 32), with a bias of shape (32,) broadcast across each of the 64 output units"
+          - "Shape (32, 100), because the layer preserves the feature dimension it was handed as input"
+          - "Shape (100, 64), because the output simply takes the shape of the weight matrix used"
+        answer: "Shape (32, 64), with a bias of shape (64,) broadcast across all 32 rows of the batch"
+        explanation: >-
+          A row-per-sample layout contracts the 100-feature axis against the matrix first axis, leaving
+          32 by 64, and the bias has one entry per output unit so it broadcasts down the batch axis.
+          Transposing the result confuses the batch axis with the feature axis, the feature count changes
+          because that is the layer job, and the weight shape is not the activation shape.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-forward-cache-activations
+        prompt: "Why does the forward pass keep intermediate activations around instead of discarding each one once the next layer is computed?"
+        options:
+          - "The backward pass needs them to evaluate local gradients, so memory grows with depth"
+          - "They are kept only for logging and can be dropped with no effect on the backward pass"
+          - "They seed the next mini-batch initial values, saving one matrix multiply per training step"
+          - "They already hold the gradients, so the backward pass only has to sum what is stored"
+        answer: "The backward pass needs them to evaluate local gradients, so memory grows with depth"
+        explanation: >-
+          Local derivatives such as the ReLU mask or the input to a matrix multiply are functions of the
+          forward values, so those values must survive until backpropagation consumes them; this is why
+          activation memory, not parameter memory, usually limits batch size. They are not logging
+          artefacts, they are not reused across batches, and they are activations rather than gradients.
+        difficulty: intermediate
+      - id: dl-forward-mac-count
+        prompt: "A network runs 1000 inputs into a 512-unit hidden layer and then into 10 outputs. How many weight multiplications does one sample require in a forward pass, ignoring biases?"
+        options:
+          - "517,120, from 1000 times 512 in the first layer plus 512 times 10 in the second"
+          - "512,000, counting only the first layer because the output layer carries no learned weights"
+          - "5,120, counting only the output layer because the hidden layer is shared across samples"
+          - "1,522, from adding the layer widths 1000, 512 and 10 rather than multiplying the pairs"
+        answer: "517,120, from 1000 times 512 in the first layer plus 512 times 10 in the second"
+        explanation: >-
+          Each layer costs fan-in times fan-out multiplications per sample, so 512,000 plus 5,120 gives
+          517,120 and the hidden layer dominates. The output layer has weights of its own, hidden weights
+          are shared across samples but still multiplied once per sample, and adding widths instead of
+          multiplying them mistakes the parameter layout entirely.
+        difficulty: intermediate
+      - id: dl-forward-relu-shape-effect
+        prompt: "Applying ReLU to a hidden layer output during the forward pass changes which of the following?"
+        options:
+          - "The values only, element by element, leaving the tensor shape completely unchanged"
+          - "Both the values and the shape, since the negative entries are dropped from the tensor"
+          - "The shape only, collapsing the batch dimension into a single averaged row of features"
+          - "Neither, because activations are applied during the backward pass rather than forwards"
+        answer: "The values only, element by element, leaving the tensor shape completely unchanged"
+        explanation: >-
+          Activations are element-wise maps, so a (32, 64) tensor stays (32, 64) with negatives replaced
+          by zeros; this is why shape reasoning through a network only needs the affine layers. Negative
+          entries become zero rather than being removed, nothing collapses the batch axis, and the
+          activation is very much part of the forward pass.
+        difficulty: beginner
+
+  - topic: dl-loss-functions-nn
+    # Source: D2L.ai - Multilayer Perceptrons, loss and activation choices
+    questions:
+      - id: dl-loss-mse-on-softmax
+        prompt: "You train a ten-class classifier with a softmax output and mean squared error, and early learning crawls. Which change addresses the cause?"
+        options:
+          - "Switch to cross-entropy, whose gradient with softmax is simply prediction minus true label"
+          - "Keep MSE but raise the learning rate, since the surface is right and only badly scaled"
+          - "Keep MSE and drop the softmax, regressing the raw logits onto the one-hot target vector"
+          - "Switch to mean absolute error, the standard companion loss for a softmax output layer"
+        answer: "Switch to cross-entropy, whose gradient with softmax is simply prediction minus true label"
+        explanation: >-
+          MSE behind a softmax multiplies the error by the softmax derivative, which is tiny for confident
+          wrong predictions, so the gradient vanishes exactly when it is most needed; cross-entropy cancels
+          that factor. A larger rate cannot manufacture a gradient that is near zero, regressing logits
+          discards the probability structure, and MAE has the same saturation problem as MSE here.
+        difficulty: advanced
+        mastery: true
+      - id: dl-loss-multilabel-pairing
+        prompt: "Which output activation and loss pairing is correct for multi-label classification, where several labels can be true at once?"
+        options:
+          - "A sigmoid on each output unit with binary cross-entropy summed over all the labels"
+          - "A softmax over all outputs with categorical cross-entropy, as in single-label problems"
+          - "Linear outputs with mean squared error, treating each label as its own regression target"
+          - "A softmax over all outputs with mean squared error against the multi-hot target vector"
+        answer: "A sigmoid on each output unit with binary cross-entropy summed over all the labels"
+        explanation: >-
+          Each label is an independent yes or no, so each unit needs its own sigmoid and its own binary
+          cross-entropy term. A softmax forces the outputs to sum to one, which actively fights the
+          possibility of two true labels. Squared error on linear outputs ignores the probabilistic
+          structure, and softmax with MSE combines both mistakes at once.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-loss-softmax-ce-gradient
+        prompt: "For softmax outputs under cross-entropy loss, what does the gradient of the loss with respect to the logits equal?"
+        options:
+          - "The predicted probability vector minus the one-hot label vector, one entry per class"
+          - "The negative log of the predicted probability, broadcast equally across all the logits"
+          - "The prediction times one minus itself, the same expression as the sigmoid derivative"
+          - "The one-hot label vector alone, since the prediction term cancels out of the derivative"
+        answer: "The predicted probability vector minus the one-hot label vector, one entry per class"
+        explanation: >-
+          The softmax Jacobian and the cross-entropy derivative cancel into y_hat minus y, which is why
+          the pairing is so numerically well behaved and why libraries fuse them into one op. The negative
+          log is the loss value, not its gradient; p(1-p) is the sigmoid derivative, one of the factors
+          that cancels; and the prediction plainly does not cancel out.
+        difficulty: advanced
+      - id: dl-loss-why-not-accuracy
+        prompt: "Why is classification accuracy unsuitable as the quantity you differentiate during training?"
+        options:
+          - "It is piecewise constant, so its gradient is zero almost everywhere and gives no direction"
+          - "It is unbounded above, so an optimiser can inflate it without the model improving at all"
+          - "It is defined only for two classes, so it cannot extend to a multi-class problem at all"
+          - "It is computed on held-out data, and validation samples must never enter the loss term"
+        answer: "It is piecewise constant, so its gradient is zero almost everywhere and gives no direction"
+        explanation: >-
+          Accuracy only moves when a prediction crosses the argmax boundary, so it is a staircase with no
+          useful slope; a surrogate loss like cross-entropy is smooth in the same direction. Accuracy is
+          bounded in [0, 1], it generalises to many classes without trouble, and it can be computed on
+          training data too, so none of the other objections is the real problem.
+        difficulty: intermediate
+      - id: dl-loss-regression-head-choice
+        prompt: "You are predicting house prices ranging from 50,000 to 2,000,000. Which output layer and loss combination is the deliberate choice?"
+        options:
+          - "One linear output unit with squared error, or a robust variant if outliers dominate"
+          - "One sigmoid output unit with squared error, since house prices are always strictly positive"
+          - "A softmax over price bands with cross-entropy, because prices must be normalised to sum to one"
+          - "One linear output unit with cross-entropy, which copes with unbounded targets directly"
+        answer: "One linear output unit with squared error, or a robust variant if outliers dominate"
+        explanation: >-
+          A regression head must be able to emit any real value, so it is left linear, and squared error
+          is the matching likelihood under Gaussian noise, with Huber as the robust fallback. A sigmoid
+          caps the output at 1, softmax is for mutually exclusive classes and nothing here has to sum to
+          one, and cross-entropy expects probabilities rather than unbounded values.
+        difficulty: intermediate
+
+  - topic: dl-backprop-intuition
+    # Source: CS231n - Intuitive understanding of backpropagation
+    questions:
+      - id: dl-backprop-gate-local-rule
+        prompt: "CS231n describes every gate in the graph as doing one simple thing during the backward pass. What is it?"
+        options:
+          - "Multiply the incoming upstream gradient by its own local gradient and pass that to its inputs"
+          - "Recompute its forward output and subtract that value from the upstream gradient it received"
+          - "Add its own local gradient to the upstream gradient and hand the sum backwards unchanged"
+          - "Send the upstream gradient untouched to whichever input had the largest forward value"
+        answer: "Multiply the incoming upstream gradient by its own local gradient and pass that to its inputs"
+        explanation: >-
+          That single multiply-and-pass rule is the whole of backpropagation: a gate needs to know nothing
+          about the rest of the graph. Recomputing and subtracting confuses the loss with its derivative,
+          adding local gradients would apply the sum rule where the chain rule belongs, and routing to the
+          largest input is specifically the max gate behaviour, not every gate.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-backprop-multiply-gate
+        prompt: "A multiplication gate had inputs x = -4 and y = 3 and receives an upstream gradient of 2. What gradients flow back to x and to y?"
+        options:
+          - "6 for x and -8 for y, since each input local gradient is the other input, scaled by 2"
+          - "-8 for x and 6 for y, since each input local gradient is its own value, scaled by 2"
+          - "2 for both x and y, since a multiply gate routes the upstream gradient through unchanged"
+          - "-24 for both x and y, since each takes the product of the two inputs, scaled by 2"
+        answer: "6 for x and -8 for y, since each input local gradient is the other input, scaled by 2"
+        explanation: >-
+          For z = xy the local gradients are y and x respectively, so x gets 3 times 2 and y gets -4 times
+          2: the multiply gate swaps the values, which is why a tiny input makes its partner gradient
+          tiny. Assigning each input its own value gets the swap backwards, unchanged routing describes the
+          add gate, and using the product applies the wrong derivative to both.
+        difficulty: intermediate
+      - id: dl-backprop-add-distributor
+        prompt: "Why is the addition gate called a gradient distributor when the backward pass reaches it?"
+        options:
+          - "Its local gradient is 1 for every input, so it copies the upstream value to each of them"
+          - "It splits the upstream gradient evenly, handing each input half of what arrived from above"
+          - "It sums the gradients of its inputs and sends that single total further back down the graph"
+          - "It scales the upstream gradient by how many inputs it has, amplifying the signal it passes"
+        answer: "Its local gradient is 1 for every input, so it copies the upstream value to each of them"
+        explanation: >-
+          d(x+y)/dx and d(x+y)/dy are both exactly 1, so each branch receives the full upstream gradient,
+          not a share of it. Splitting in half or scaling by the input count would both violate the chain
+          rule. Summing input gradients describes what happens at a branch point in the forward graph,
+          which is the opposite situation.
+        difficulty: beginner
+      - id: dl-backprop-max-gate-router
+        prompt: "A max gate saw the values 5 and 2 in the forward pass. How does it route an upstream gradient of 4 backwards?"
+        options:
+          - "All 4 to the input that was 5 and 0 to the input that was 2, since only the max mattered"
+          - "2 to each input, splitting the upstream gradient evenly between the two incoming branches"
+          - "All 4 to both inputs, because max behaves like addition once the forward pass has finished"
+          - "All 4 to the input that was 2, compensating the branch that did not contribute forwards"
+        answer: "All 4 to the input that was 5 and 0 to the input that was 2, since only the max mattered"
+        explanation: >-
+          The output depended only on the winner, so its local gradient is 1 and the loser gradient is 0:
+          max is a router. Splitting evenly would imply both inputs affected the output, treating max like
+          addition gives every input a gradient it did not earn, and compensating the loser inverts the
+          derivative outright.
+        difficulty: intermediate
+      - id: dl-backprop-branch-accumulate
+        prompt: "One variable feeds forward into two different downstream gates. What must the backward pass do with the two gradients that arrive back at it?"
+        options:
+          - "Add them, because the total derivative accumulates contributions along every path taken"
+          - "Take the larger of the two, since the dominant path decides how the variable should move"
+          - "Average them, so a variable used twice is not updated twice as hard as one used once"
+          - "Keep them apart, applying one update per path in sequence within the same training step"
+        answer: "Add them, because the total derivative accumulates contributions along every path taken"
+        explanation: >-
+          The multivariate chain rule sums over paths, which is exactly why frameworks accumulate into
+          .grad rather than overwrite it. Taking the maximum or the average silently rescales the true
+          derivative, and applying separate sequential updates would make the result depend on the
+          arbitrary order in which the paths were traversed.
+        difficulty: advanced
+        mastery: true
+
+  - topic: dl-computational-graphs
+    # Source: CS231n - compound expressions, staged computation, patterns in backward flow
+    questions:
+      - id: dl-graph-staged-computation
+        prompt: "CS231n recommends breaking a compound expression into named intermediate variables before differentiating it. What does that buy you?"
+        options:
+          - "Every stage gets a simple local derivative, turning the chain rule into a mechanical product"
+          - "It cuts the number of arithmetic operations the forward evaluation has to perform overall"
+          - "It removes the need for the chain rule, since each stage is then differentiated in isolation"
+          - "It makes the expression convex, so gradient descent on it can no longer become stuck"
+        answer: "Every stage gets a simple local derivative, turning the chain rule into a mechanical product"
+        explanation: >-
+          Staging replaces one intimidating derivative with a chain of one-line derivatives you can write
+          without algebra. It does not reduce the arithmetic, it does not remove the chain rule but rather
+          makes applying it routine, and naming intermediates has no effect whatsoever on the convexity of
+          the underlying function.
+        difficulty: intermediate
+      - id: dl-graph-needs-forward-values
+        prompt: "Why does a backward sweep through a computational graph reuse values that were produced during the forward sweep?"
+        options:
+          - "Local derivatives are functions of the forward inputs, so those values must still be around"
+          - "The backward sweep double-checks the forward result by recomputing it from stored variables"
+          - "The forward values are themselves the gradients, so the backward sweep just reverses order"
+          - "The graph is traversed forwards twice, so the second traversal reads the first one cache"
+        answer: "Local derivatives are functions of the forward inputs, so those values must still be around"
+        explanation: >-
+          A multiply gate local gradient is the other input value, and a sigmoid gate local gradient uses
+          its own output, so the forward numbers are ingredients of the backward computation. No
+          verification pass happens, forward activations are not gradients, and reverse mode traverses the
+          graph forwards once and then backwards once, not forwards twice.
+        difficulty: intermediate
+      - id: dl-graph-visit-order
+        prompt: "In what order must a reverse-mode automatic differentiation engine visit the nodes of the graph?"
+        options:
+          - "Reverse topological order, so a node is processed only after all of its consumers are done"
+          - "Creation order, which is the same order the forward evaluation visited the nodes in"
+          - "Any order at all, because each node local gradient does not depend on the other nodes"
+          - "Breadth-first outwards from the inputs, so shallow nodes are handled before deeper ones"
+        answer: "Reverse topological order, so a node is processed only after all of its consumers are done"
+        explanation: >-
+          A node upstream gradient is only complete once every consumer has contributed, which is exactly
+          what reverse topological order guarantees. Creation order is the forward direction and would use
+          gradients before they exist. Local gradients are independent but the upstream factors are not,
+          and breadth-first from the inputs is again the wrong direction.
+        difficulty: advanced
+        mastery: true
+      - id: dl-graph-numeric-partial
+        prompt: "For f = (x + y) * z with x = 2, y = -3 and z = 4, what is the partial derivative of f with respect to y?"
+        options:
+          - "4, because the add gate passes the upstream gradient z straight through to y unchanged"
+          - "-3, because the derivative with respect to y equals the value that y itself is holding"
+          - "-1, because the sum x plus y equals -1 and that is what the gate contributes backwards"
+          - "2, because the derivative with respect to y equals the value of the other addend, x"
+        answer: "4, because the add gate passes the upstream gradient z straight through to y unchanged"
+        explanation: >-
+          The multiply gate gives the sum node an upstream gradient of z = 4, and the add gate local
+          gradient is 1, so y receives 4. Reading off y own value or the sum confuses a forward quantity
+          with a derivative, and using the other addend applies the multiply-gate swap rule to a gate that
+          is doing addition.
+        difficulty: intermediate
+      - id: dl-graph-node-granularity
+        prompt: "CS231n collapses several operations into a single sigmoid node with local derivative sigma times (1 minus sigma). What is the trade-off in doing that?"
+        options:
+          - "A cheaper simpler backward pass, paid for by deriving that local gradient by hand first"
+          - "A faster forward pass, but a backward pass that can no longer apply the chain rule at all"
+          - "Better numerical precision, because grouping avoids storing any intermediate values at all"
+          - "Nothing at all changes in cost, because grouping only affects how the code happens to read"
+        answer: "A cheaper simpler backward pass, paid for by deriving that local gradient by hand first"
+        explanation: >-
+          One fused node stores one value and does one multiply instead of walking four primitive gates,
+          but somebody has to do the calculus once. The chain rule still applies across nodes at any
+          granularity, precision is not the motivation, and the cost genuinely differs because the number
+          of stored intermediates and backward steps changes.
+        difficulty: advanced
+
+  - topic: dl-gradient-descent-nn
+    # Source: D2L.ai - Optimization intro, gradient descent
+    questions:
+      - id: dl-gd-rate-too-large-symptom
+        prompt: "Training loss climbs and then oscillates violently within the first few dozen gradient descent steps. What is the standard first suspect?"
+        options:
+          - "The learning rate overshoots the minimum, so each step lands further up the opposite slope"
+          - "The learning rate is far too small, so parameters barely move and the loss looks like noise"
+          - "The training set is too small, which makes the loss surface itself change between steps"
+          - "The gradient is being taken on the validation split rather than on the training batch"
+        answer: "The learning rate overshoots the minimum, so each step lands further up the opposite slope"
+        explanation: >-
+          A step longer than the local curvature allows jumps past the minimum to a point with a larger
+          gradient, and the next step overshoots further, so the loss diverges in a zig-zag. A too-small
+          rate produces a flat, slowly falling curve rather than growth. Dataset size does not change the
+          fixed loss surface, and using the wrong split shifts the value without causing divergence.
+        difficulty: beginner
+        mastery: true
+      - id: dl-gd-one-step-by-hand
+        prompt: "Minimising f(x) = x squared starting from x = 3 with a learning rate of 0.1, what is x after exactly one gradient descent step?"
+        options:
+          - "2.4, since the gradient is 2x = 6 and the step gives 3 minus 0.1 times 6"
+          - "3.6, since the gradient is 2x = 6 and the step adds 0.1 times 6 onto x instead"
+          - "2.1, since the step uses the loss value 9 and gives 3 minus 0.1 times 9"
+          - "0.3, since the step multiplies x by the rate rather than subtracting a scaled gradient"
+        answer: "2.4, since the gradient is 2x = 6 and the step gives 3 minus 0.1 times 6"
+        explanation: >-
+          The update is x minus eta times the derivative, and the derivative of x squared is 2x, so
+          3 minus 0.6 is 2.4. Adding the gradient climbs the parabola instead of descending it. Using the
+          loss value rather than its derivative is the most common confusion, and multiplying by the rate
+          is not an update rule at all.
+        difficulty: beginner
+      - id: dl-gd-divergence-threshold
+        prompt: "On a quadratic loss whose second derivative is 2, gradient descent starts to diverge once the learning rate passes which value?"
+        options:
+          - "1, because the per-step factor 1 minus 2 eta leaves the range -1 to 1 beyond that point"
+          - "2, because the learning rate may never be set larger than the curvature of the loss"
+          - "0.5, because the step must always stay below half of the reciprocal of the curvature"
+          - "No such threshold exists, since descent on a convex loss converges for any positive rate"
+        answer: "1, because the per-step factor 1 minus 2 eta leaves the range -1 to 1 beyond that point"
+        explanation: >-
+          Each step multiplies the distance to the minimum by (1 minus eta times f''), here 1 minus 2 eta,
+          which has magnitude below one only while eta is under 1. Quoting the curvature itself or half its
+          reciprocal misplaces the algebra, and convexity alone does not save you: too large a rate
+          diverges even on a perfect parabola.
+        difficulty: advanced
+      - id: dl-gd-saddle-stall
+        prompt: "On a non-convex loss, gradient descent stalls at a point where the gradient is near zero but the point is not a minimum. What is that point, and why does it stall?"
+        options:
+          - "A saddle point, where the gradient vanishes but curvature is positive in some directions and negative in others"
+          - "A global minimum, which the optimiser can never leave again once it has been reached from any start point"
+          - "A discontinuity, where the loss has no derivative at all so the parameter update becomes undefined"
+          - "A pause in the learning rate schedule, which holds the parameters fixed until the rate is raised again"
+        answer: "A saddle point, where the gradient vanishes but curvature is positive in some directions and negative in others"
+        explanation: >-
+          Descent only reads the gradient, so any stationary point looks identical to it, and in high
+          dimensions saddles vastly outnumber true minima. A global minimum is where you want to stop, not
+          a failure. The gradient existing but being small is different from the derivative not existing,
+          and no schedule is involved in this stall.
+        difficulty: intermediate
+      - id: dl-gd-why-subtract
+        prompt: "Why does the gradient descent update subtract the gradient from the parameters rather than adding it?"
+        options:
+          - "The gradient points along steepest increase, so descending means moving against it"
+          - "The gradient is always negative, so subtracting it is what makes the parameters grow"
+          - "Subtracting keeps parameters small, which works as a mild form of weight regularisation"
+          - "The sign is arbitrary and both directions converge, though subtracting happens to be faster"
+        answer: "The gradient points along steepest increase, so descending means moving against it"
+        explanation: >-
+          By definition the gradient is the direction of fastest increase of the loss, so the negative
+          gradient is the descent direction. Gradients take either sign depending on the point,
+          subtracting has nothing to do with keeping weights small, and adding the gradient performs
+          gradient ascent, which maximises the loss instead of minimising it.
+        difficulty: beginner
+
+  - topic: dl-mlp
+    # Source: D2L.ai - Implementing an MLP from scratch
+    questions:
+      - id: dl-mlp-parameter-count
+        prompt: "An MLP maps 784 inputs to a 256-unit hidden layer and then to 10 outputs. How many learnable parameters does it hold in total, biases included?"
+        options:
+          - "203,530, from 784 times 256 plus 256, then 256 times 10 plus 10 for the second layer"
+          - "203,264, which counts both weight matrices correctly but leaves out both bias vectors"
+          - "200,960, which counts the hidden layer with its bias and ignores the output layer entirely"
+          - "1,050, from summing the three layer widths without ever multiplying the adjacent pairs"
+        answer: "203,530, from 784 times 256 plus 256, then 256 times 10 plus 10 for the second layer"
+        explanation: >-
+          Each layer contributes fan_in times fan_out weights plus fan_out biases, giving 200,960 and
+          2,570 for a total of 203,530. Forgetting the biases loses 266 parameters, forgetting the output
+          layer loses 2,570, and adding widths rather than multiplying them ignores that every input
+          connects to every unit.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-mlp-why-depth-over-width
+        prompt: "One hidden layer already makes an MLP a universal approximator. So why do practitioners still stack several hidden layers?"
+        options:
+          - "The width required can be impractically huge, while depth reaches the same functions compactly"
+          - "A single hidden layer cannot represent nonlinear functions at all, whatever width you give it"
+          - "Extra layers remove the need for an activation function between the remaining layers"
+          - "Universal approximation only covers regression, so classification needs more than one layer"
+        answer: "The width required can be impractically huge, while depth reaches the same functions compactly"
+        explanation: >-
+          The theorem is about existence, not about a size or a training procedure you would accept: many
+          functions need exponentially fewer units when composed in depth. A single hidden layer with a
+          nonlinearity is already nonlinear, activations are needed at every layer regardless of depth,
+          and the result is not restricted to regression targets.
+        difficulty: intermediate
+      - id: dl-mlp-train-test-gap
+        prompt: "Your MLP reaches 99 percent training accuracy and 78 percent test accuracy on Fashion-MNIST. Which adjustment targets that specific gap?"
+        options:
+          - "Cut capacity or add regularisation, since the gap is a generalisation not an optimisation problem"
+          - "Widen the hidden layer much further, so the model can then also fit the test distribution properly"
+          - "Raise the learning rate, since the optimiser has clearly settled into the wrong training minimum"
+          - "Train for many more epochs, because test accuracy will eventually catch up with training"
+        answer: "Cut capacity or add regularisation, since the gap is a generalisation not an optimisation problem"
+        explanation: >-
+          Near-perfect training accuracy proves optimisation succeeded, so the remaining 21-point gap is
+          overfitting and the fix lives on the capacity or regularisation side. Widening adds capacity and
+          widens the gap, the learning rate is not implicated when training loss is already tiny, and more
+          epochs on a fitted training set drive the two curves further apart.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-mlp-output-left-linear
+        prompt: "In the from-scratch MLP the hidden layer gets a ReLU but the final layer is left emitting raw scores. Why is that deliberate?"
+        options:
+          - "The cross-entropy implementation applies the log-softmax itself for numerical stability"
+          - "The final layer is linear because ReLU cannot be differentiated at the very last layer"
+          - "Raw scores already are probabilities once the hidden layer has passed through a ReLU"
+          - "The final activation is applied by the optimiser during the parameter update instead"
+        answer: "The cross-entropy implementation applies the log-softmax itself for numerical stability"
+        explanation: >-
+          Fusing softmax into the loss avoids exponentiating large logits and then taking a log of a tiny
+          number, so the model hands over unnormalised scores. ReLU is differentiable in the last layer as
+          much as any other, raw scores are not normalised and can be negative, and optimisers only touch
+          parameters, never the forward computation.
+        difficulty: advanced
+      - id: dl-mlp-flatten-input
+        prompt: "Why must a 28-by-28 image be reshaped into a length-784 vector before it enters this MLP?"
+        options:
+          - "A dense layer weight matrix expects one flat feature axis, so the spatial grid is unrolled"
+          - "Reshaping compresses the image, which cuts the parameter count of the first dense layer"
+          - "Dense layers cannot accept integer pixel values, and reshaping is what converts them to floats"
+          - "Left as a grid it would be read as a batch of 28 samples that each carry 28 features"
+        answer: "A dense layer weight matrix expects one flat feature axis, so the spatial grid is unrolled"
+        explanation: >-
+          A dense layer contracts exactly one feature axis, so the 2-D layout has to become a single axis
+          of 784 features; note this is what throws away the spatial structure a CNN would keep. Reshaping
+          preserves every value so it compresses nothing, dtype conversion is a separate step, and PyTorch
+          would not silently reinterpret rows as batch entries.
+        difficulty: beginner
+
+  - topic: dl-vanishing-gradients
+    # Source: D2L.ai - Numerical Stability and Initialization, vanishing gradients
+    questions:
+      - id: dl-vanish-sigmoid-depth-product
+        prompt: "A twenty-layer network uses sigmoid activations and each layer local derivative is around 0.2. What reaches the first layer?"
+        options:
+          - "Roughly 0.2 to the twentieth power, about 1e-14, so the earliest layers stop learning"
+          - "Roughly one twentieth of the original gradient, which is small but still perfectly trainable"
+          - "Roughly twenty times the original gradient, so the earliest layers take enormous steps"
+          - "The same gradient, because the chain rule adds the local derivatives rather than multiplying"
+        answer: "Roughly 0.2 to the twentieth power, about 1e-14, so the earliest layers stop learning"
+        explanation: >-
+          The chain rule multiplies local derivatives, so a factor below one compounds geometrically and
+          1e-14 is indistinguishable from zero in float32 updates. Linear decay would assume addition
+          rather than multiplication, growth requires factors above one, and the gradient is emphatically
+          not preserved through depth.
+        difficulty: advanced
+        mastery: true
+      - id: dl-vanish-exploding-nan
+        prompt: "A few hundred steps into training a deep recurrent model the loss becomes NaN. Which mechanism and remedy fit that symptom?"
+        options:
+          - "Exploding gradients from repeated multiplication by large factors; clip the gradient norm each step"
+          - "Vanishing gradients from saturated units; raise the learning rate so tiny updates still register"
+          - "A learning rate that is too small; parameters barely move and the loss eventually overflows"
+          - "Too little training data; the loss becomes undefined once every sample has been seen once"
+        answer: "Exploding gradients from repeated multiplication by large factors; clip the gradient norm each step"
+        explanation: >-
+          Repeated multiplication by factors above one overflows float range, the update destroys the
+          weights and the loss becomes NaN; norm clipping caps the step while keeping its direction.
+          Vanishing gradients cause stagnation rather than NaN, a small rate cannot overflow anything, and
+          a finite dataset does not make a loss undefined.
+        difficulty: intermediate
+      - id: dl-vanish-relu-mitigation
+        prompt: "Why does swapping sigmoid hidden activations for ReLU reduce the vanishing gradient problem?"
+        options:
+          - "ReLU derivative is exactly 1 on its active side, so products across layers do not shrink"
+          - "ReLU derivative is capped at 0.25, which is smaller and therefore more stable with depth"
+          - "ReLU is zero-centred, so gradients from adjacent layers cancel rather than compounding"
+          - "ReLU normalises each layer output variance, which pins the gradient magnitude in place"
+        answer: "ReLU derivative is exactly 1 on its active side, so products across layers do not shrink"
+        explanation: >-
+          Multiplying by 1 many times leaves the gradient intact, which is the whole reason ReLU replaced
+          sigmoid in deep stacks. A cap of 0.25 is sigmoid own maximum derivative and is the problem, not
+          the cure. ReLU is not zero-centred since its outputs are non-negative, and it performs no
+          normalisation of variance at all.
+        difficulty: intermediate
+      - id: dl-vanish-residual-path
+        prompt: "How does adding a residual connection around a block change the gradient that arrives at an early layer?"
+        options:
+          - "It adds an identity path with derivative 1, giving the gradient a route that does not shrink"
+          - "It multiplies the gradient by the network depth, cancelling the shrinkage factor exactly"
+          - "It strips the activation functions off the main path, so nothing is left that can saturate"
+          - "It reverses the direction of gradient flow, so early layers are updated before later ones"
+        answer: "It adds an identity path with derivative 1, giving the gradient a route that does not shrink"
+        explanation: >-
+          Because the block computes x plus F(x), the derivative is 1 plus dF/dx, so even a badly
+          attenuating F leaves a clean path of gradient 1 back to the input. No depth-dependent scaling is
+          applied, the activations inside the block remain, and gradient flow direction is fixed by the
+          chain rule and cannot be reversed.
+        difficulty: advanced
+      - id: dl-vanish-which-layers-suffer
+        prompt: "When gradients vanish in a deep network, which layers train most slowly and for what reason?"
+        options:
+          - "The earliest layers, because their gradient is the product of the most local derivative factors"
+          - "The last layers, because they sit furthest from the input data that carries the real signal"
+          - "The middle layers, because gradients cancel symmetrically arriving from both ends at once"
+          - "Every layer equally, since the very same loss scalar is backpropagated through all of them"
+        answer: "The earliest layers, because their gradient is the product of the most local derivative factors"
+        explanation: >-
+          Attenuation compounds with the number of layers the gradient has already crossed, so layer one
+          suffers most and the layer next to the loss is nearly unaffected. That is the opposite of the
+          second option. No cancellation from two ends occurs in a feedforward stack, and the shared loss
+          scalar does not imply a shared gradient magnitude.
+        difficulty: intermediate
+
+  - topic: dl-initialization
+    # Source: D2L.ai - Parameter Initialization
+    questions:
+      - id: dl-init-all-zeros
+        prompt: "What specifically goes wrong if every weight in a hidden layer is initialised to zero?"
+        options:
+          - "All units compute the same thing and get the same gradient, so they never differentiate"
+          - "The forward pass yields NaN at once, because dividing by a zero-valued weight is undefined"
+          - "Only the biases can learn, so the network converges to the best available linear model"
+          - "The first update repairs it, since gradients are random and break the tie after one step"
+        answer: "All units compute the same thing and get the same gradient, so they never differentiate"
+        explanation: >-
+          Identical weights make identical activations and identical gradients, so the units stay identical
+          forever: the layer has the capacity of one unit. Nothing divides by a weight, so no NaN appears.
+          The biases also share the symmetry, and gradients are a deterministic function of the weights,
+          so no update breaks the tie.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-init-xavier-variance
+        prompt: "Xavier initialisation scales the weight variance by which quantity, and what is it trying to hold steady?"
+        options:
+          - "2 over the sum of fan-in and fan-out, to keep activation and gradient variance stable"
+          - "The square of the fan-in, to make the weights in each layer sum to exactly one"
+          - "The batch size, to keep the magnitude of each mini-batch update independent of it"
+          - "The learning rate, so the first update has the same size as every later update does"
+        answer: "2 over the sum of fan-in and fan-out, to keep activation and gradient variance stable"
+        explanation: >-
+          The forward pass wants variance scaled by 1/fan_in and the backward pass wants 1/fan_out, so
+          Xavier compromises with 2/(fan_in + fan_out) and stabilises both directions. Weights are not
+          constrained to sum to anything, the scheme is independent of batch size, and it says nothing
+          about learning rates.
+        difficulty: advanced
+      - id: dl-init-he-factor-two
+        prompt: "Why does He initialisation use a variance of 2 over fan-in for ReLU layers instead of Xavier scaling?"
+        options:
+          - "ReLU zeroes about half its inputs, halving the output variance, so a factor 2 restores it"
+          - "ReLU doubles the variance of whatever it receives, and the factor 2 cancels that growth"
+          - "He initialisation is simply the older rule, superseded once Xavier scaling was published"
+          - "ReLU needs bigger weights because its derivative is smaller than the sigmoid derivative"
+        answer: "ReLU zeroes about half its inputs, halving the output variance, so a factor 2 restores it"
+        explanation: >-
+          Clipping the negative half of a zero-mean distribution removes roughly half the variance, so
+          doubling the weight variance keeps signal magnitude constant with depth. ReLU reduces variance
+          rather than doubling it, He came after Xavier rather than before, and ReLU derivative of 1 is
+          larger than sigmoid maximum of 0.25.
+        difficulty: advanced
+        mastery: true
+      - id: dl-init-too-small-scale
+        prompt: "On the very first forward pass of a thirty-layer network, activation magnitudes shrink towards zero layer after layer. What does that indicate?"
+        options:
+          - "The weights were drawn at too small a scale, so each layer contracts the signal it receives"
+          - "The learning rate is too small, which shrinks the activations before any update happens"
+          - "The loss function is misconfigured, since only the loss can influence forward activations"
+          - "The batch size is too small, so averaging over few samples pushes the activations to zero"
+        answer: "The weights were drawn at too small a scale, so each layer contracts the signal it receives"
+        explanation: >-
+          Before any update has occurred, only the initialisation can explain a systematic per-layer
+          contraction, and a variance below the Xavier or He value does exactly that. The learning rate
+          has not acted yet on step zero, the loss is computed after the forward pass and cannot alter it,
+          and activations are per-sample rather than averaged over the batch.
+        difficulty: intermediate
+      - id: dl-init-unit-normal-blowup
+        prompt: "You draw every weight from a normal distribution with standard deviation 1 in a wide layer. What happens on the forward pass?"
+        options:
+          - "Pre-activation variance grows with fan-in, so units saturate or overflow before training starts"
+          - "Pre-activation variance stays at 1 whatever the fan-in, which is exactly what is wanted"
+          - "Pre-activations become identical across units, the same failure mode as zero initialisation"
+          - "Pre-activations are unaffected, because only the bias initialisation sets the forward scale"
+        answer: "Pre-activation variance grows with fan-in, so units saturate or overflow before training starts"
+        explanation: >-
+          Summing n independent terms each of variance 1 gives variance n, so with fan-in 1000 the
+          pre-activations have standard deviation around 32 and every sigmoid is pinned at 0 or 1. Variance
+          does not stay at 1, random draws are not identical so this is not the symmetry problem, and
+          weights dominate the forward scale far more than biases.
+        difficulty: advanced
+
+  - topic: dl-normalization
+    # Source: D2L.ai - Batch Normalization
+    questions:
+      - id: dl-norm-train-vs-eval-stats
+        prompt: "Which statistics does a batch normalisation layer use while training, and which does it use at evaluation time?"
+        options:
+          - "The current mini-batch mean and variance while training; running estimates at evaluation"
+          - "The running estimates in both modes, so the layer behaves identically whichever mode it is in"
+          - "The mini-batch statistics in both modes, which is why evaluation needs a large batch to work"
+          - "Whole-training-set statistics while training; the current batch statistics at evaluation"
+        answer: "The current mini-batch mean and variance while training; running estimates at evaluation"
+        explanation: >-
+          Training normalises with the batch it actually has, which injects useful noise, while inference
+          must be deterministic and independent of who else is in the batch, so stored running averages
+          take over. Using running estimates during training would remove the noise and the gradient path,
+          and using batch statistics at inference makes a prediction depend on unrelated samples.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-norm-batch-size-one
+        prompt: "Why does batch normalisation break down when the batch size is 1?"
+        options:
+          - "The per-batch variance is zero, so the normalised output is degenerate and carries no signal"
+          - "The running averages stop updating, so the layer quietly falls back to doing nothing at all"
+          - "The mean gradient becomes undefined, so backpropagation through the layer fails outright"
+          - "The learnable scale and shift are skipped, leaving the activations completely unnormalised"
+        answer: "The per-batch variance is zero, so the normalised output is degenerate and carries no signal"
+        explanation: >-
+          With one sample the mean is that sample and the variance is zero, so subtracting the mean gives
+          exactly zero for every unit and the layer destroys the activation. This is the reason LayerNorm
+          or GroupNorm is preferred for tiny batches. The averages still update, the gradient is defined,
+          and gamma and beta are applied as usual, just to zeros.
+        difficulty: advanced
+      - id: dl-norm-gamma-beta-purpose
+        prompt: "After subtracting the mean and dividing by the standard deviation, batch norm applies a learned scale and shift. Why not stop at the normalised values?"
+        options:
+          - "Forcing zero mean and unit variance restricts the layer, so gamma and beta can undo it if useful"
+          - "The scale and shift convert the values back into the original integer pixel range for display"
+          - "Without them the layer would own no parameters, so the optimiser would raise an error at step time"
+          - "They implement the running averages, which is how the layer works at evaluation time instead"
+        answer: "Forcing zero mean and unit variance restricts the layer, so gamma and beta can undo it if useful"
+        explanation: >-
+          The affine pair restores the layer freedom to pick any output mean and scale, including the
+          identity, so normalisation constrains the optimisation without constraining the function class.
+          Nothing needs converting to pixel ranges mid-network, parameterless layers are perfectly legal,
+          and the running averages are buffers rather than these learned parameters.
+        difficulty: intermediate
+      - id: dl-norm-layernorm-axis
+        prompt: "Transformers use layer normalisation rather than batch normalisation. Over which axis does it normalise, and why does that choice matter?"
+        options:
+          - "Over each sample own features, so it needs no batch statistics and copes with variable lengths"
+          - "Over the batch for each feature, exactly as batch norm does, but with the scale term dropped"
+          - "Over the sequence positions of the whole batch, which is what makes attention scores comparable"
+          - "Over the layer weight matrix rather than its activations, which keeps the parameters bounded"
+        answer: "Over each sample own features, so it needs no batch statistics and copes with variable lengths"
+        explanation: >-
+          LayerNorm computes statistics within one token feature vector, so it is independent of batch
+          size and of padded sequence length and behaves identically at train and inference. Normalising
+          across the batch is precisely what batch norm does and what sequence models want to avoid, and
+          the operation acts on activations rather than on weights.
+        difficulty: advanced
+        mastery: true
+      - id: dl-norm-practical-benefit
+        prompt: "What practical training benefit does D2L attribute to inserting batch normalisation into a deep network?"
+        options:
+          - "It steadies the distribution entering each layer, permitting larger learning rates and faster convergence"
+          - "It removes the need to initialise weights at all, since the layer rescales whatever it is given"
+          - "It guarantees the loss surface becomes convex, so the optimiser cannot land in a poor minimum"
+          - "It cuts the parameter count of the layer it follows, which is where the reported speed-up comes from"
+        answer: "It steadies the distribution entering each layer, permitting larger learning rates and faster convergence"
+        explanation: >-
+          By fixing the scale of each layer input, batch norm makes the loss less sensitive to the exact
+          weight magnitudes, so bigger steps stay stable. Initialisation still matters, deep networks stay
+          firmly non-convex whatever you normalise, and the layer adds two parameters per channel rather
+          than removing any.
+        difficulty: intermediate
+
+  - topic: dl-dropout
+    # Source: D2L.ai - Dropout
+    questions:
+      - id: dl-dropout-inference-behaviour
+        prompt: "How does a dropout layer behave at inference time compared with during training?"
+        options:
+          - "It stops dropping anything and passes every activation through, so predictions are deterministic"
+          - "It drops at the same rate but freezes which units are dropped, so predictions stay consistent"
+          - "It drops twice as many units, compensating for the absence of gradient noise at test time"
+          - "It behaves exactly the same, which is why two predictions on one input can disagree"
+        answer: "It stops dropping anything and passes every activation through, so predictions are deterministic"
+        explanation: >-
+          Dropout is a training-time regulariser only; at inference the full network is used so a given
+          input always yields the same output. Freezing a fixed mask would still cripple part of the
+          network permanently, dropping more units at test time has no rationale, and identical behaviour
+          in both modes is exactly the bug that forgetting eval mode produces.
+        difficulty: beginner
+        mastery: true
+      - id: dl-dropout-inverted-scaling
+        prompt: "With a drop probability of 0.5 during training, what rescaling keeps the expected activation unchanged between the two phases?"
+        options:
+          - "Divide the surviving activations by 0.5 during training, so test time needs no rescaling"
+          - "Multiply every activation by 0.5 during training as well, halving the signal in both phases"
+          - "Multiply activations by 2 at test time, since training only ever saw half the units firing"
+          - "No rescaling is needed anywhere, because the dropped units contribute zero to the mean anyway"
+        answer: "Divide the surviving activations by 0.5 during training, so test time needs no rescaling"
+        explanation: >-
+          Inverted dropout divides survivors by the keep probability so their expectation matches the full
+          layer, which leaves the inference path completely untouched. Halving in both phases shrinks the
+          signal instead of preserving it, scaling up at test time doubles an already correct value, and
+          without any correction the test-time activations are systematically too large.
+        difficulty: advanced
+        mastery: true
+      - id: dl-dropout-rate-too-high
+        prompt: "You set the drop probability to 0.9 on every hidden layer and the training loss stops falling. What is happening?"
+        options:
+          - "Too little signal survives each pass, so the network underfits and cannot even fit the training set"
+          - "The network is overfitting so hard that the training loss no longer reflects what it has learned"
+          - "The dropped units accumulate gradient which exactly cancels the updates of the surviving units"
+          - "Dropout at that rate disables the bias terms, leaving each layer unable to shift its own output"
+        answer: "Too little signal survives each pass, so the network underfits and cannot even fit the training set"
+        explanation: >-
+          Regularisation that strong destroys the information the layer needs, so the model sits in the
+          underfitting regime where both training and validation loss stay high. Overfitting would show as
+          a very low training loss, dropped units receive no gradient at all rather than a cancelling one,
+          and dropout masks activations rather than switching off biases.
+        difficulty: intermediate
+      - id: dl-dropout-as-ensemble
+        prompt: "In what sense does dropout approximate training an ensemble of many networks?"
+        options:
+          - "Each pass trains a different random sub-network, and they share weights and combine at test time"
+          - "It trains several complete networks in parallel and averages their predictions after each epoch"
+          - "It splits the training data into random subsets with one model per subset, exactly as bagging does"
+          - "It averages the gradients produced by several learning rates, which acts like several models"
+        answer: "Each pass trains a different random sub-network, and they share weights and combine at test time"
+        explanation: >-
+          Every mask defines a distinct thinned network, and because all of them share one weight tensor
+          you get an exponentially large implicit ensemble for the price of a single model. Separate
+          parallel networks would be a real ensemble rather than an approximation, resampling data is
+          bagging, and multiple learning rates train no extra models.
+        difficulty: intermediate
+      - id: dl-dropout-forgot-eval-mode
+        prompt: "Your validation numbers are noisy and worse than expected, and the evaluation code never switches the model out of training mode. How does dropout explain that?"
+        options:
+          - "It keeps zeroing random units during validation, so each pass scores a randomly crippled model"
+          - "It is skipped during training instead, so the model never actually received any regularisation"
+          - "It keeps stepping the optimiser during validation, so the weights drift while the metric is computed"
+          - "It averages the loss over the wrong number of batches, which distorts only the reported figure"
+        answer: "It keeps zeroing random units during validation, so each pass scores a randomly crippled model"
+        explanation: >-
+          Leaving the module in training mode means the mask is still sampled, so validation measures a
+          random sub-network and varies run to run. Training mode is when dropout is meant to be active,
+          the optimiser only steps where the code calls it, and a batch-count error would bias the number
+          without adding this run-to-run randomness.
+        difficulty: intermediate
+
+  - topic: dl-optimizers-sgd
+    # Source: D2L.ai - SGD and Momentum
+    questions:
+      - id: dl-sgd-momentum-update-form
+        prompt: "Momentum keeps a velocity vector v alongside the parameters. Which pair of updates does it actually apply each step?"
+        options:
+          - "v becomes beta v plus g, then w becomes w minus eta v, so old gradients keep contributing"
+          - "v becomes beta v plus g, then w becomes w minus eta g, so the velocity is tracked but unused"
+          - "v becomes g minus beta v, then w becomes w minus eta v, subtracting the previous velocity"
+          - "v becomes beta g, then w becomes w minus eta v, applying only the current gradient scaled"
+        answer: "v becomes beta v plus g, then w becomes w minus eta v, so old gradients keep contributing"
+        explanation: >-
+          The velocity is a leaky running sum of gradients and the step follows the velocity, which is
+          what carries motion through flat regions. Updating along g alone makes the velocity decorative,
+          subtracting the old velocity fights the accumulation the method exists to build, and scaling
+          only the current gradient discards all history.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-sgd-ravine-zigzag
+        prompt: "Plain stochastic gradient descent zig-zags across a narrow ravine and creeps along its floor. How does momentum improve that?"
+        options:
+          - "The oscillating components cancel across steps while the consistent direction accumulates"
+          - "It shrinks the learning rate along the steep direction only, which flattens the ravine walls"
+          - "It divides each parameter step by its own gradient history, equalising the two directions"
+          - "It randomises the step direction, letting the optimiser escape the ravine by pure chance"
+        answer: "The oscillating components cancel across steps while the consistent direction accumulates"
+        explanation: >-
+          Across the ravine the gradient flips sign each step so the velocity averages towards zero, while
+          along the floor it points the same way and builds up: the ratio of useful to wasted motion
+          improves. Per-parameter rescaling by gradient history is what RMSProp and Adam do, not momentum,
+          and momentum adds no randomness of its own.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-sgd-momentum-effective-step
+        prompt: "With a momentum coefficient of 0.9 and a constant gradient, roughly how large does the steady-state step become relative to a plain step?"
+        options:
+          - "About ten times as large, since a constant gradient accumulates towards g over 1 minus 0.9"
+          - "About 0.9 times as large, since each step is damped by the coefficient before being applied"
+          - "About 1.9 times as large, since the previous step and the current gradient are simply added"
+          - "Exactly the same size, since momentum alters only the direction of the step and not its length"
+        answer: "About ten times as large, since a constant gradient accumulates towards g over 1 minus 0.9"
+        explanation: >-
+          The geometric series 1 plus 0.9 plus 0.81 and so on sums to 1/(1-0.9) = 10, which is why raising
+          momentum without lowering the learning rate can blow a run up. The coefficient damps old
+          contributions rather than the total, only two terms are counted by the 1.9 answer, and the step
+          length genuinely changes rather than only its direction.
+        difficulty: advanced
+      - id: dl-sgd-minibatch-noise-tradeoff
+        prompt: "Why does D2L present mini-batch stochastic gradient descent as a sound trade rather than a regrettable compromise?"
+        options:
+          - "Each step uses a noisy but unbiased gradient estimate at a small fraction of a full-batch cost"
+          - "Each step uses a biased estimate that happens to point downhill more often than the true one"
+          - "The noise disappears entirely once the batch size passes roughly one hundred samples per step"
+          - "Full-batch descent cannot be computed for any model with more than a few thousand parameters"
+        answer: "Each step uses a noisy but unbiased gradient estimate at a small fraction of a full-batch cost"
+        explanation: >-
+          A mini-batch gradient is an unbiased estimator of the full gradient, so many cheap approximate
+          steps beat one expensive exact step in wall-clock progress. The estimate is unbiased rather than
+          biased, sampling noise shrinks with batch size but never vanishes, and full-batch gradients are
+          computable, just costly per step.
+        difficulty: intermediate
+      - id: dl-sgd-high-momentum-diverges
+        prompt: "You raise the momentum coefficient from 0.5 to 0.99, leave the learning rate alone, and training diverges. Why?"
+        options:
+          - "The accumulated velocity multiplies the effective step, so the rate has to come down with it"
+          - "A high coefficient discards the current gradient, so steps follow only stale stored directions"
+          - "Momentum above 0.9 makes the velocity negative, so the parameters climb the loss surface"
+          - "The velocity vector overflows numerically as the coefficient approaches one, producing NaN"
+        answer: "The accumulated velocity multiplies the effective step, so the rate has to come down with it"
+        explanation: >-
+          Going from 0.5 to 0.99 raises the steady-state amplification from about 2 to about 100, so the
+          same learning rate now takes steps fifty times longer. The current gradient is still added in
+          full each step, the sign of the velocity is unchanged by beta, and divergence here is an
+          overshoot in the loss rather than a floating-point overflow in v.
+        difficulty: advanced
+
+  - topic: dl-optimizers-adam
+    # Source: D2L.ai - Adam optimizer family
+    questions:
+      - id: dl-adam-two-moments
+        prompt: "Adam maintains two exponential moving averages per parameter. What does each hold and what is each used for?"
+        options:
+          - "The first averages the gradient for direction; the second averages its square to scale the step"
+          - "The first averages the gradient; the second averages the parameter values to keep them bounded"
+          - "The first stores the learning rate history; the second stores the loss history to spot plateaus"
+          - "Both average the gradient at different decay rates and the optimiser uses whichever is smaller"
+        answer: "The first averages the gradient for direction; the second averages its square to scale the step"
+        explanation: >-
+          The first moment is momentum, giving a smoothed direction; the second moment estimates
+          per-parameter gradient magnitude so the step is divided by its root, giving each parameter its
+          own effective rate. Neither buffer tracks parameter values, learning rates or losses, and the
+          two are combined rather than one being selected.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-adam-bias-correction
+        prompt: "Why does Adam divide its moment estimates by 1 minus beta to the power t during the opening steps of a run?"
+        options:
+          - "The averages start at zero and so read too low early on; dividing rescales them to the right size"
+          - "It anneals the learning rate over time, which is what makes the default rate work so widely"
+          - "It stops the second moment reaching zero, which would otherwise make the division undefined"
+          - "It compensates for batch size so the estimates do not depend on how many samples were used"
+        answer: "The averages start at zero and so read too low early on; dividing rescales them to the right size"
+        explanation: >-
+          After one step the first moment is only (1-beta1) times g, a large underestimate, and dividing by
+          1 minus beta1 to the t undoes exactly that initialisation bias, which is why Adam does not need a
+          long warmup to start moving. The epsilon term handles division by near-zero, and neither
+          annealing nor batch size is what this factor corrects.
+        difficulty: advanced
+        mastery: true
+      - id: dl-adam-rmsprop-vs-adagrad
+        prompt: "RMSProp replaced Adagrad accumulated sum of squared gradients with an exponentially decaying average. What problem did that fix?"
+        options:
+          - "Adagrad denominator only ever grows, so the effective rate decays to zero and learning halts"
+          - "Adagrad denominator can turn negative, which flips the sign of the update unpredictably"
+          - "Adagrad used one shared rate for every parameter, and decay is what makes the rate per-parameter"
+          - "Adagrad ignored the sign of the gradient, so the decaying average restores the descent direction"
+        answer: "Adagrad denominator only ever grows, so the effective rate decays to zero and learning halts"
+        explanation: >-
+          A sum of squares is monotonically increasing, so in a long run every effective step shrinks
+          towards nothing regardless of whether the loss has converged; a decaying average forgets the
+          distant past and stays responsive. A sum of squares can never be negative, Adagrad was already
+          per-parameter, and squaring loses the sign in both methods equally.
+        difficulty: advanced
+      - id: dl-adam-epsilon-role
+        prompt: "What is the epsilon in Adam denominator for, and what goes wrong if it is set far too large?"
+        options:
+          - "It guards against a near-zero second moment; too large and the per-parameter scaling disappears"
+          - "It sets a floor on the learning rate; too large and the optimiser refuses to take any step"
+          - "It is the decay rate for the first moment; too large and the update direction becomes stale"
+          - "It clips the gradient norm; too large and the gradients are truncated before being averaged"
+        answer: "It guards against a near-zero second moment; too large and the per-parameter scaling disappears"
+        explanation: >-
+          Epsilon keeps the division numerically safe when a parameter has seen almost no gradient. If it
+          dominates the square-root term then every parameter divides by roughly the same number and Adam
+          degrades towards plain momentum SGD. It is not a rate floor, not a decay coefficient, and has
+          nothing to do with gradient clipping.
+        difficulty: advanced
+      - id: dl-adam-vs-sgd-generalisation
+        prompt: "Adam drives your training loss down faster, yet SGD with momentum finishes with better test accuracy. What is the usual reading of that result?"
+        options:
+          - "Adam adaptive scaling can settle into sharper minima, so tuned SGD often generalises better on vision"
+          - "Adam must be buggy, since an adaptive method cannot be worse than a fixed-rate method anywhere"
+          - "The comparison is meaningless unless both optimisers are run with exactly the same learning rate"
+          - "SGD overfits less because it consumes more data per step than Adam consumes per step"
+        answer: "Adam adaptive scaling can settle into sharper minima, so tuned SGD often generalises better on vision"
+        explanation: >-
+          Faster training convergence and better generalisation are different objectives, and the
+          well-documented pattern on image benchmarks is that a carefully tuned SGD schedule wins on test
+          error. Nothing here implies a bug, the optimisers have different natural rate scales so matching
+          them is wrong, and both consume identical batches per step.
+        difficulty: advanced
+
+  - topic: dl-batch-epoch-lr
+    # Source: D2L.ai - Learning rate schedules
+    questions:
+      - id: dl-lr-why-decay
+        prompt: "Why does a schedule reduce the learning rate as training proceeds rather than holding it fixed throughout?"
+        options:
+          - "Big steps explore early, but near a minimum they overshoot, so smaller steps are needed to settle"
+          - "Gradients grow over time, so the rate must shrink to keep the product of the two constant"
+          - "Decay reduces the memory each step needs, which is what lets a long training run finish"
+          - "A fixed rate makes the loss non-convex, and decaying it restores convexity near the optimum"
+        answer: "Big steps explore early, but near a minimum they overshoot, so smaller steps are needed to settle"
+        explanation: >-
+          The useful step length depends on where you are: far away a large rate covers ground, close in it
+          bounces around the basin instead of descending into it. Gradients typically shrink rather than
+          grow near a minimum, the learning rate has no bearing on memory use, and convexity is a property
+          of the loss, not of the optimiser settings.
+        difficulty: beginner
+        mastery: true
+      - id: dl-lr-warmup-purpose
+        prompt: "What problem does a short learning rate warmup at the very start of training address?"
+        options:
+          - "Early gradients and adaptive statistics are unreliable, so a big rate immediately can destabilise things"
+          - "The model has not yet seen all of the data, so a small rate lets it complete one full epoch first"
+          - "Warmup fills the momentum buffers, which must all be non-zero before the optimiser can take a step"
+          - "Warmup raises the batch size gradually, which is the real source of early training instability"
+        answer: "Early gradients and adaptive statistics are unreliable, so a big rate immediately can destabilise things"
+        explanation: >-
+          At step zero the weights are random and any adaptive second-moment estimates are nearly empty,
+          so a full-size step can throw the model somewhere it cannot recover from; ramping up buys a few
+          hundred steps of stability. Epoch boundaries are irrelevant, an optimiser steps fine with zero
+          velocity, and warmup changes the rate rather than the batch size.
+        difficulty: intermediate
+      - id: dl-lr-cosine-shape
+        prompt: "How does cosine annealing shape the learning rate over a run compared with step decay?"
+        options:
+          - "It falls smoothly from the initial rate towards nearly zero, avoiding the abrupt drops of step decay"
+          - "It rises and falls repeatedly around the initial rate, so the average rate stays where it began"
+          - "It holds the rate flat and then divides it by ten at fixed epoch boundaries, which step decay does not"
+          - "It scales the rate by the cosine of the current loss, so a large loss produces a large step"
+        answer: "It falls smoothly from the initial rate towards nearly zero, avoiding the abrupt drops of step decay"
+        explanation: >-
+          Cosine annealing follows the first half-period of a cosine, spending a while near the top and
+          then decaying gently to near zero, which is why it needs no hand-picked drop epochs. Repeated
+          rises describe cyclical schedules or warm restarts, dividing by ten at boundaries is step decay
+          itself, and the schedule depends on the step count, never on the loss value.
+        difficulty: intermediate
+      - id: dl-lr-scale-with-batch
+        prompt: "You raise the batch size from 64 to 256 and the model now underfits within the same epoch budget. What is the standard adjustment?"
+        options:
+          - "Raise the learning rate roughly in proportion, since the steps are fewer and much less noisy"
+          - "Lower the learning rate in proportion, because each step now aggregates far more gradients"
+          - "Leave the rate alone and cut the epoch count, since each epoch is now cheaper in wall-clock time"
+          - "Leave the rate alone and shuffle less often, so each larger batch stays representative of the data"
+        answer: "Raise the learning rate roughly in proportion, since the steps are fewer and much less noisy"
+        explanation: >-
+          Four times the batch means a quarter as many updates per epoch and a gradient estimate with half
+          the standard error, so the classic linear scaling rule raises the rate to keep total progress
+          comparable. Lowering it compounds the shortfall, cutting epochs removes still more updates, and
+          shuffle frequency does not affect how far the parameters travel.
+        difficulty: advanced
+        mastery: true
+      - id: dl-lr-updates-per-epoch
+        prompt: "Doubling the batch size while keeping the number of epochs fixed has what effect on the count of parameter updates?"
+        options:
+          - "It halves them, because an epoch holds half as many batches once each batch is twice as big"
+          - "It doubles them, because each batch produces one update for every sample that it contains"
+          - "It leaves them unchanged, because the number of updates is fixed by the epoch count alone"
+          - "It quadruples them, because the batch count and the samples per batch both contribute"
+        answer: "It halves them, because an epoch holds half as many batches once each batch is twice as big"
+        explanation: >-
+          One update happens per batch, and an epoch of N samples with batch size B contains N over B
+          batches, so doubling B halves the updates: this is why large-batch runs need rate or epoch
+          adjustments. A batch yields one update rather than one per sample, and the update count depends
+          on both the epoch count and the batch size.
+        difficulty: intermediate
+
+  - topic: dl-cnn-foundations
+    # Source: D2L.ai - From Fully-Connected Layers to Convolutions
+    questions:
+      - id: dl-cnn-dense-parameter-blowup
+        prompt: "A dense layer joining a one-megapixel RGB image to 1000 hidden units needs roughly how many weights, and what does that motivate?"
+        options:
+          - "About three billion, which is why locality and weight sharing are introduced to cut the count"
+          - "About three million, large but manageable, so convolution is really about speed not size"
+          - "About three thousand, since a dense layer wires each hidden unit to one input channel only"
+          - "About three trillion, since every weight is also duplicated once per output map position"
+        answer: "About three billion, which is why locality and weight sharing are introduced to cut the count"
+        explanation: >-
+          Three million input values times 1000 units is 3e9 weights for one layer, which is unlearnable
+          from any realistic dataset and is exactly the pressure that produces convolution. Three million
+          is the input size rather than the weight count, a dense layer connects to every input not one
+          channel, and no per-position duplication occurs in a dense layer.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-cnn-translation-invariance-principle
+        prompt: "What does the translation invariance principle in this chapter require of a good image model?"
+        options:
+          - "Respond the same way to the same local pattern wherever in the image it happens to appear"
+          - "Produce an identical output vector however the pixels inside the image are permuted"
+          - "Give the same prediction for an image and for a colour-inverted version of the same scene"
+          - "Ignore location entirely by pooling globally before any convolution has been applied"
+        answer: "Respond the same way to the same local pattern wherever in the image it happens to appear"
+        explanation: >-
+          The prior is that the detector should not care about absolute position, which is what forces the
+          weights to be shared across locations. Invariance to arbitrary pixel permutation would throw away
+          spatial structure altogether, colour inversion is a different and unwanted invariance, and
+          global pooling is an architecture choice rather than the principle itself.
+        difficulty: intermediate
+      - id: dl-cnn-locality-principle
+        prompt: "The locality principle restricts each hidden unit to a small neighbourhood of the input. What justification does the chapter give?"
+        options:
+          - "The earliest useful evidence such as edges is local, and distant pixels can be combined at depth"
+          - "Distant pixels are statistically independent, so combining them is mathematically invalid"
+          - "Memory limits forbid wiring distant pixels, so locality is a hardware constraint not a prior"
+          - "Local windows keep the layer linear, which is what keeps the optimisation problem convex"
+        answer: "The earliest useful evidence such as edges is local, and distant pixels can be combined at depth"
+        explanation: >-
+          Locality is a modelling prior about images, and depth restores long-range interaction because
+          stacked local windows grow the receptive field. Distant pixels are correlated rather than
+          independent, hardware makes the dense version expensive but the argument is statistical, and
+          window size has no effect on linearity or convexity.
+        difficulty: intermediate
+      - id: dl-cnn-invariance-forces-sharing
+        prompt: "Applying the translation invariance constraint to a fully connected layer weight tensor has what specific consequence?"
+        options:
+          - "The weights stop depending on absolute position, collapsing the tensor into one shared kernel"
+          - "The weights become symmetric about the image centre, halving how many must be learned"
+          - "The weights become diagonal, so each output pixel then depends on exactly one input pixel"
+          - "The weights must all be positive, so shifting the input cannot flip the sign of the output"
+        answer: "The weights stop depending on absolute position, collapsing the tensor into one shared kernel"
+        explanation: >-
+          If the response must be the same at every location then the weight indexed by absolute position
+          must reduce to a weight indexed by offset only, and that offset-indexed array is the kernel.
+          Centre symmetry, a diagonal structure and a positivity constraint are all extra restrictions
+          that translation invariance does not imply.
+        difficulty: advanced
+        mastery: true
+      - id: dl-cnn-sharing-cost
+        prompt: "What capability does weight sharing in a convolutional layer give up relative to a dense layer on the same input?"
+        options:
+          - "Position-specific behaviour, since every location is processed by the very same kernel"
+          - "Nonlinear behaviour, because sharing weights forces the layer to remain purely affine"
+          - "Multiple channels, so colour information has to be discarded before reaching the layer"
+          - "Trainability by backpropagation, since one weight would receive gradients from many places"
+        answer: "Position-specific behaviour, since every location is processed by the very same kernel"
+        explanation: >-
+          A shared kernel cannot learn that the top of the image behaves differently from the bottom,
+          which is why some tasks add positional inputs. Nonlinearity comes from the activation and is
+          unaffected, convolutions handle many channels by design, and a weight receiving gradients from
+          many positions simply sums them, which is standard.
+        difficulty: intermediate
+
+  - topic: dl-convolution-op
+    # Source: D2L.ai - Convolutions for Images, the convolution operation
+    questions:
+      - id: dl-conv-output-size-basic
+        prompt: "A 6 by 8 input is cross-correlated with a 3 by 3 kernel with no padding and unit stride. What size is the output?"
+        options:
+          - "4 by 6, since each dimension loses the kernel extent minus one along that dimension"
+          - "6 by 8, since this operation preserves the spatial extent of the input it was handed"
+          - "3 by 3, since the output simply takes the shape of the kernel that was slid across it"
+          - "8 by 10, since the kernel extends the input by one pixel on each of its four sides"
+        answer: "4 by 6, since each dimension loses the kernel extent minus one along that dimension"
+        explanation: >-
+          A window of size k fits n minus k plus 1 times along an axis of length n, so 6 becomes 4 and 8
+          becomes 6. Size is only preserved when padding is added, the output shape is governed by input
+          and kernel together rather than the kernel alone, and unpadded convolution shrinks rather than
+          grows the map.
+        difficulty: beginner
+        mastery: true
+      - id: dl-conv-cross-correlation-naming
+        prompt: "Frameworks implement cross-correlation but call it convolution. Why does the distinction not matter in practice here?"
+        options:
+          - "True convolution flips the kernel, and since the kernel is learned it just learns the flipped weights"
+          - "The two operations give identical outputs for every kernel, so the naming is purely historical"
+          - "Cross-correlation is an approximation that becomes exact once the kernel is larger than 3 by 3"
+          - "The flip is applied by the optimiser in the backward pass, so the forward result is unaffected"
+        answer: "True convolution flips the kernel, and since the kernel is learned it just learns the flipped weights"
+        explanation: >-
+          The only difference is a 180-degree flip of the weights, and gradient descent is free to learn
+          whichever orientation the data prefers, so the learned function class is the same. The outputs
+          differ for any non-symmetric kernel, the difference is exact rather than approximate, and
+          nothing in the optimiser performs a flip.
+        difficulty: advanced
+      - id: dl-conv-manual-window
+        prompt: "With input rows [[0, 1, 2], [3, 4, 5], [6, 7, 8]] and kernel [[0, 1], [2, 3]], what is the top-left output value?"
+        options:
+          - "19, from 0*0 plus 1*1 plus 3*2 plus 4*3 over the top-left 2 by 2 window"
+          - "5, from the same 2 by 2 window with the kernel flipped in both directions first"
+          - "8, from summing the four window entries and ignoring the kernel weights entirely"
+          - "12, from taking the largest of the four element-wise products instead of their sum"
+        answer: "19, from 0*0 plus 1*1 plus 3*2 plus 4*3 over the top-left 2 by 2 window"
+        explanation: >-
+          Cross-correlation multiplies aligned entries and sums them, giving 0 plus 1 plus 6 plus 12 which
+          is 19. Flipping the kernel gives 5 and is the true-convolution answer. Summing the window alone
+          gives 8 and discards the kernel, and taking the largest product describes a max operation rather
+          than a weighted sum.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-conv-single-output-dependence
+        prompt: "For a 3 by 3 kernel on a single-channel input, how much of the input does one output element depend on?"
+        options:
+          - "A 3 by 3 window, positioned at the matching location in the input plane"
+          - "The entire input, weighted so that nearby pixels contribute more than distant ones"
+          - "A single input pixel, with the kernel choosing which of nine neighbours to read"
+          - "A 9 by 9 window, since the kernel is applied nine separate times per position"
+        answer: "A 3 by 3 window, positioned at the matching location in the input plane"
+        explanation: >-
+          Each output element is one dot product between the kernel and the nine input values under it, so
+          its receptive field in that layer is exactly 3 by 3. Depending on the whole input is what a
+          dense layer does, a single pixel would need a 1 by 1 kernel, and the nine multiplications happen
+          inside one window rather than across nine of them.
+        difficulty: beginner
+      - id: dl-conv-edge-kernel-effect
+        prompt: "A 1 by 2 kernel of [1, -1] applied to an image gives zero in flat regions and non-zero at vertical boundaries. Why?"
+        options:
+          - "It computes a difference between horizontal neighbours, which cancels where they are equal"
+          - "It computes a local average, which is zero only where the pixel values themselves are zero"
+          - "It computes a product of neighbours, which vanishes wherever either of the two is zero"
+          - "It computes a maximum over neighbours, which stays constant across any uniform region"
+        answer: "It computes a difference between horizontal neighbours, which cancels where they are equal"
+        explanation: >-
+          Weights of plus one and minus one form a finite difference along the row, so identical neighbours
+          give exactly zero and a brightness step gives a large response, which is edge detection. An
+          average would need positive weights summing to one, and neither a product nor a maximum can be
+          expressed by this weighted sum.
+        difficulty: intermediate
+
+  - topic: dl-padding-stride
+    # Source: D2L.ai - Padding and Stride
+    questions:
+      - id: dl-pad-same-amount
+        prompt: "You want a 5 by 5 kernel at unit stride to leave the spatial size unchanged. How much padding goes on each side?"
+        options:
+          - "2 on every side, because a kernel of size k needs k minus 1 over 2 padding to preserve size"
+          - "5 on every side, because the padding has to match the kernel extent along each dimension"
+          - "1 on every side, because a single ring of zeros suffices for any odd-sized kernel at all"
+          - "4 on every side, because the kernel removes k minus 1 pixels and each side must replace them"
+        answer: "2 on every side, because a kernel of size k needs k minus 1 over 2 padding to preserve size"
+        explanation: >-
+          Unpadded convolution loses k minus 1 = 4 pixels per axis, and padding both sides adds 2p, so
+          p = 2 restores the size. Padding by the kernel size grows the map, one ring only works for a 3
+          by 3 kernel, and 4 per side double counts because both sides contribute to the same axis.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pad-output-size-formula
+        prompt: "An input of length 224 with a 7 by 7 kernel, padding 3 and stride 2 yields what output length?"
+        options:
+          - "112, from the floor of 224 plus 6 minus 7 all over 2, plus one"
+          - "108, from dividing 224 minus 7 by 2 and dropping the padding term completely"
+          - "224, since padding 3 with a 7 by 7 kernel preserves size and stride does not alter it"
+          - "56, from dividing the input by the stride squared rather than by the stride itself"
+        answer: "112, from the floor of 224 plus 6 minus 7 all over 2, plus one"
+        explanation: >-
+          The formula is floor((n + 2p - k)/s) + 1, so floor(223/2) + 1 = 112, which is the familiar
+          ResNet stem output. Dropping the padding term understates the count, padding compensates the
+          kernel but stride still halves the axis, and dividing by the stride squared confuses one axis
+          with the total element count.
+        difficulty: advanced
+      - id: dl-pad-same-vs-valid-depth
+        prompt: "What is the practical difference between VALID and SAME convolution once you stack many layers?"
+        options:
+          - "VALID shrinks the map at every layer and so limits depth, while SAME holds the size steady"
+          - "VALID keeps the size fixed and SAME shrinks it, so SAME is what constrains achievable depth"
+          - "Both keep the size fixed, and they differ only in how the border pixels get weighted"
+          - "VALID pads using edge pixel values while SAME pads with zeros, changing only the border"
+        answer: "VALID shrinks the map at every layer and so limits depth, while SAME holds the size steady"
+        explanation: >-
+          With no padding a 3 by 3 kernel costs two pixels per axis per layer, so a 32-pixel map is gone
+          after sixteen layers; SAME padding is what makes very deep stacks possible. The second option
+          swaps the two, VALID does not preserve size, and both names describe how much padding is added
+          rather than what value is used for it.
+        difficulty: intermediate
+      - id: dl-pad-stride-two-effects
+        prompt: "Choosing stride 2 rather than stride 1 in a convolution layer has which pair of effects?"
+        options:
+          - "It roughly quarters the output positions and skips locations, so fine detail can be missed"
+          - "It roughly doubles the output positions while leaving the computation cost completely unchanged"
+          - "It quarters the number of learned kernel weights, which is where the real speed-up comes from"
+          - "It leaves the output size alone and only changes the order in which positions are visited"
+        answer: "It roughly quarters the output positions and skips locations, so fine detail can be missed"
+        explanation: >-
+          Halving each of two spatial axes leaves about a quarter of the output elements, which is the
+          cheap downsampling stride buys, and the skipped window positions are information you never
+          compute. Stride reduces rather than increases positions, the kernel size and hence the weight
+          count is untouched, and the output genuinely shrinks.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pad-border-information-loss
+        prompt: "With no padding at all, what happens to the influence of pixels at the very edge of an image after several convolution layers?"
+        options:
+          - "Edge pixels enter fewer windows and their region is cropped away, so border information is lost"
+          - "Edge pixels enter more windows than central ones, so the border dominates the learned features"
+          - "Edge pixels are duplicated automatically by the kernel, so their influence is exactly preserved"
+          - "Edge pixels are weighted more heavily by the optimiser to make up for the absent padding"
+        answer: "Edge pixels enter fewer windows and their region is cropped away, so border information is lost"
+        explanation: >-
+          A corner pixel appears in only one window while a central pixel appears in nine, and each
+          unpadded layer trims the frame further, so the outer ring is progressively discarded. Edge
+          pixels appear in fewer rather than more windows, no duplication happens without explicit
+          padding, and the optimiser does not reweight inputs by position.
+        difficulty: intermediate
+
+  - topic: dl-pooling
+    # Source: D2L.ai - Pooling
+    questions:
+      - id: dl-pool-invariance-tradeoff
+        prompt: "A 2 by 2 max pooling layer with stride 2 buys your network what benefit, and at what cost?"
+        options:
+          - "Tolerance to small shifts of a feature inside the window, paid for in exact spatial precision"
+          - "Complete invariance to any translation of the input, paid for with a higher parameter count"
+          - "A larger output map holding finer detail, paid for in memory during the backward pass"
+          - "Less overfitting through extra learned weights, paid for by a slower forward pass per batch"
+        answer: "Tolerance to small shifts of a feature inside the window, paid for in exact spatial precision"
+        explanation: >-
+          Because only the strongest response in each window survives, a one-pixel shift usually leaves the
+          pooled value unchanged, but you can no longer tell where inside the window it occurred. The
+          invariance is local rather than complete, pooling shrinks the map rather than enlarging it, and
+          it adds no parameters at all.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pool-parameter-count
+        prompt: "How many learnable parameters does a max pooling layer contribute to a model?"
+        options:
+          - "None, because the window size and the stride are fixed choices rather than trained values"
+          - "One per window position, holding the value that was selected during the forward pass"
+          - "One per channel, used to scale the pooled output before the next layer consumes it"
+          - "The same count as a convolution with an identical window, since both slide a kernel"
+        answer: "None, because the window size and the stride are fixed choices rather than trained values"
+        explanation: >-
+          Pooling is a fixed reduction with hyperparameters but no weights, which is why it appears with
+          zero parameters in a model summary. The selected values are activations rather than parameters,
+          a per-channel scale would be a normalisation layer, and a convolution differs precisely by
+          having learned kernel weights.
+        difficulty: beginner
+      - id: dl-pool-max-vs-average
+        prompt: "When is average pooling the more deliberate choice over max pooling?"
+        options:
+          - "When the summary should reflect the whole window rather than only its strongest response"
+          - "When stronger shift invariance is wanted, since averaging discards position more aggressively"
+          - "When activations can be negative, because max pooling is undefined for negative inputs"
+          - "When the network is deep, because only average pooling can propagate gradients backwards"
+        answer: "When the summary should reflect the whole window rather than only its strongest response"
+        explanation: >-
+          Averaging keeps information about overall intensity across the window, which is why global
+          average pooling is used to summarise a whole feature map. Max is generally the more
+          shift-invariant of the two, max is perfectly well defined on negative numbers, and both
+          operations pass gradients back without difficulty.
+        difficulty: intermediate
+      - id: dl-pool-output-shape
+        prompt: "A feature map of shape (1, 64, 28, 28) passes through 2 by 2 max pooling at stride 2. What shape comes out?"
+        options:
+          - "(1, 64, 14, 14), since pooling halves both spatial axes and leaves the channels untouched"
+          - "(1, 16, 28, 28), since pooling reduces the channel count while preserving the spatial size"
+          - "(1, 64, 27, 27), since a 2 by 2 window removes exactly one pixel from each spatial axis"
+          - "(1, 64, 7, 7), since a 2 by 2 window at stride 2 divides each spatial axis by four"
+        answer: "(1, 64, 14, 14), since pooling halves both spatial axes and leaves the channels untouched"
+        explanation: >-
+          Pooling is applied independently per channel, so the channel axis is unchanged and each spatial
+          axis is divided by the stride. Reducing channels would require a convolution, losing one pixel
+          per axis is what stride 1 does, and dividing by four confuses the stride with the window area.
+        difficulty: intermediate
+      - id: dl-pool-backward-routing
+        prompt: "How does the gradient travel backwards through a max pooling layer?"
+        options:
+          - "Only to the element that was the window maximum; the other elements receive exactly zero"
+          - "Evenly to every element of each window, since pooling holds no weights to differentiate"
+          - "To no elements at all, because a pooling layer sits outside the differentiable graph"
+          - "To the element nearest the window mean, since that is the most representative value"
+        answer: "Only to the element that was the window maximum; the other elements receive exactly zero"
+        explanation: >-
+          The output depended solely on the winner, so the layer stores the argmax and routes the whole
+          gradient there. Even distribution is what average pooling does, pooling is differentiable
+          almost everywhere and is very much part of the graph, and the mean plays no role in max pooling
+          at all.
+        difficulty: advanced
+        mastery: true
+
+  - topic: dl-feature-maps
+    # Source: D2L.ai - LeNet, feature maps and channels
+    questions:
+      - id: dl-fmap-kernel-shape-and-count
+        prompt: "A convolution takes 3 input channels and produces 16 output channels with 5 by 5 kernels. What is the weight shape and total parameter count including biases?"
+        options:
+          - "(16, 3, 5, 5) with 1,216 parameters, since each output channel sums over all three inputs"
+          - "(3, 16, 5, 5) with 1,216 parameters, since the input channels index the very first axis"
+          - "(16, 5, 5) with 416 parameters, since one kernel is shared across all of the input channels"
+          - "(16, 3, 5, 5) with 400 parameters, since a 5 by 5 kernel is counted only once per layer"
+        answer: "(16, 3, 5, 5) with 1,216 parameters, since each output channel sums over all three inputs"
+        explanation: >-
+          Every output channel owns a 3 by 5 by 5 filter volume, giving 16 times 75 = 1,200 weights plus
+          16 biases. PyTorch orders the axes out-channels first, so the second option has them reversed.
+          A single shared kernel would ignore the channel dimension, and counting the kernel once ignores
+          both the channel and the output-channel multiplicity.
+        difficulty: advanced
+        mastery: true
+      - id: dl-fmap-what-a-channel-is
+        prompt: "What does one channel of a convolutional layer output actually represent?"
+        options:
+          - "The response of one learned kernel measured at every spatial position of that layer input"
+          - "The response of every learned kernel measured at one single spatial position of the input"
+          - "One colour component of the original image, carried through unchanged to the next layer"
+          - "One training sample from the batch, with the channel axis indexing which sample it is"
+        answer: "The response of one learned kernel measured at every spatial position of that layer input"
+        explanation: >-
+          A feature map is one filter answer sheet laid out over space, which is why channel count equals
+          filter count. Collecting all kernels at one location is a slice across channels, not a channel.
+          Colour channels only describe the input image itself, and the batch lives on its own separate
+          leading axis.
+        difficulty: intermediate
+      - id: dl-fmap-lenet-shape-trace
+        prompt: "In LeNet a padded first convolution turns a 28 by 28 input into six 28 by 28 maps, then 2 by 2 pooling follows. What shape reaches the second convolution?"
+        options:
+          - "Six channels of 14 by 14, since pooling halves both spatial axes and keeps every channel"
+          - "Six channels of 28 by 28, since the pooling layer alters the channel count and not the size"
+          - "Sixteen channels of 14 by 14, since the second convolution channel count applies before it runs"
+          - "One channel of 14 by 14, since pooling collapses the six maps into a single summary map"
+        answer: "Six channels of 14 by 14, since pooling halves both spatial axes and keeps every channel"
+        explanation: >-
+          Pooling acts per channel, so the six maps survive as six and each 28 by 28 becomes 14 by 14. The
+          second option has pooling doing a convolution job, sixteen channels only exist after the second
+          convolution has run, and pooling never merges channels together.
+        difficulty: intermediate
+      - id: dl-fmap-spatial-down-channels-up
+        prompt: "Through a CNN the spatial dimensions shrink while the channel count grows. What is the reasoning behind that trade?"
+        options:
+          - "Detail is traded for abstraction, so more kernels describe larger regions at fewer positions"
+          - "It holds the total tensor size exactly constant, which the layers require in order to compose"
+          - "Channels have to grow because pooling adds one channel for each spatial pixel it removes"
+          - "Deeper layers need more channels because gradients shrink as they travel back through depth"
+        answer: "Detail is traded for abstraction, so more kernels describe larger regions at fewer positions"
+        explanation: >-
+          Early layers need many positions and few pattern types; late layers need many pattern types and
+          few positions, so the budget is shifted from space to channels. The tensor size is not held
+          constant, pooling never creates channels, and gradient attenuation is handled by architecture
+          choices rather than by widening channels.
+        difficulty: intermediate
+      - id: dl-fmap-flatten-feature-count
+        prompt: "LeNet flattens sixteen channels of 5 by 5 before its first dense layer. How many features does that dense layer receive?"
+        options:
+          - "400, because flattening multiplies the channel count by both of the spatial dimensions"
+          - "80, because flattening adds the two spatial dimensions together for each of the channels"
+          - "16, because flattening keeps one value per channel and discards the spatial layout entirely"
+          - "25, because flattening keeps a single 5 by 5 map and drops the other fifteen channels"
+        answer: "400, because flattening multiplies the channel count by both of the spatial dimensions"
+        explanation: >-
+          Flattening preserves every value, so 16 times 5 times 5 gives 400 inputs to the dense layer.
+          Adding the spatial axes rather than multiplying them gives 80 and misreads the layout, and the
+          last two options describe global pooling and channel selection, both of which would throw away
+          most of the tensor.
+        difficulty: intermediate
+
+  - topic: dl-rnn-awareness
+    # Source: D2L.ai - Sequence Models
+    questions:
+      - id: dl-rnn-weight-sharing-time
+        prompt: "A recurrent network unrolls over a fifty-step sequence. How many distinct recurrent weight matrices does it use?"
+        options:
+          - "One, reused at every step, which is what lets it accept sequences of any length at all"
+          - "Fifty, one per step, which is why longer sequences need proportionally more parameters"
+          - "Two, one applied over the first half of the sequence and one over the second half"
+          - "Fifty-one, one per step plus a final one that turns the last state into the output"
+        answer: "One, reused at every step, which is what lets it accept sequences of any length at all"
+        explanation: >-
+          Sharing one matrix across time is the recurrent prior: the same transition rule applies whenever
+          it is applied, so parameter count is independent of sequence length. Per-step matrices would fix
+          the length at training time and multiply the parameters, and splitting the sequence in halves is
+          not what recurrence means.
+        difficulty: beginner
+        mastery: true
+      - id: dl-rnn-markov-order
+        prompt: "A sequence model predicts the next value using only the previous tau observations. What is that assumption called and what does it buy?"
+        options:
+          - "A Markov assumption of order tau, which gives the fixed-length input an ordinary model can eat"
+          - "A stationarity assumption, which guarantees the mean of the series does not drift over time"
+          - "An independence assumption, which lets the observations be shuffled without changing anything"
+          - "A causality assumption, which makes the model forward predictions provably correct in advance"
+        answer: "A Markov assumption of order tau, which gives the fixed-length input an ordinary model can eat"
+        explanation: >-
+          Truncating the conditioning history to tau steps is exactly a tau-order Markov assumption, and
+          its practical payoff is that every training example becomes a fixed-width feature vector.
+          Stationarity is a separate assumption about the distribution, independence would destroy the
+          dependence being modelled, and no assumption makes forecasts provably correct.
+        difficulty: intermediate
+      - id: dl-rnn-hidden-state-content
+        prompt: "What does the hidden state of a recurrent model carry from one time step to the next?"
+        options:
+          - "A summary of everything seen so far, compressed into a fixed-size vector of activations"
+          - "The full history of past inputs, stored verbatim so nothing seen so far is ever lost"
+          - "The gradient from the previous step, which is what allows the weights to be shared"
+          - "The next prediction, computed in advance so the output layer only has to read it out"
+        answer: "A summary of everything seen so far, compressed into a fixed-size vector of activations"
+        explanation: >-
+          The state has a fixed width whatever the sequence length, so it must be a lossy summary, and that
+          compression is the source of the model long-range weakness. Verbatim storage would need unbounded
+          memory, gradients flow in the backward pass rather than the state, and the prediction is computed
+          from the state rather than stored in it.
+        difficulty: intermediate
+      - id: dl-rnn-long-range-failure
+        prompt: "Why does a plain recurrent network struggle to use information from a hundred steps earlier?"
+        options:
+          - "The gradient is multiplied by the recurrent weights at every step, so it shrinks or blows up over distance"
+          - "The hidden state is overwritten each step, so it only ever holds the single most recent input value"
+          - "The weights are shared, so one matrix simply cannot represent more than a few steps of context"
+          - "Backpropagation is applied only at the final step, so earlier steps never receive any gradient"
+        answer: "The gradient is multiplied by the recurrent weights at every step, so it shrinks or blows up over distance"
+        explanation: >-
+          Backpropagation through time multiplies by the same Jacobian repeatedly, so the influence of
+          distant steps decays or explodes geometrically; this is what gating was invented to fix. The
+          state blends new input with old rather than overwriting it, weight sharing is not itself the
+          limit, and unrolled backpropagation does reach every step.
+        difficulty: advanced
+        mastery: true
+      - id: dl-rnn-no-random-shuffle
+        prompt: "Why can you not shuffle a time series randomly into train and test sets the way you would with tabular rows?"
+        options:
+          - "Future values would leak into training, so the measured forecasting skill becomes optimistic"
+          - "Shuffling changes the values themselves, since each observation is defined by its neighbours"
+          - "Sequence models need sorted data so that the loss function stays differentiable in training"
+          - "Shuffling would give the batches unequal sizes, which recurrent layers cannot process at all"
+        answer: "Future values would leak into training, so the measured forecasting skill becomes optimistic"
+        explanation: >-
+          Random splits let the model learn from times after the ones it is tested on, which no deployed
+          forecaster ever gets, so the evaluation is not the task. Shuffling reorders rather than alters
+          values, differentiability has nothing to do with sample order, and batch sizes are set by the
+          loader rather than by shuffling.
+        difficulty: intermediate
+
+  - topic: dl-lstm-gru
+    # Source: D2L.ai - Long Short-Term Memory
+    questions:
+      - id: dl-lstm-three-gates
+        prompt: "An LSTM cell carries input, forget and output gates. Which description matches what each of them controls?"
+        options:
+          - "Forget scales the old cell state, input admits new candidate content, output exposes the cell as hidden state"
+          - "Forget clears the hidden state, input sets the learning rate, and output selects which loss term applies"
+          - "Forget drops training samples, input adds noise for regularisation, and output picks the activation used"
+          - "All three scale the very same cell state by the same factor and differ only in when they are applied"
+        answer: "Forget scales the old cell state, input admits new candidate content, output exposes the cell as hidden state"
+        explanation: >-
+          The three gates split one job into three learnable decisions: how much of the past to keep, how
+          much of the present to write, and how much of the resulting memory to reveal. Gates operate on
+          activations, not on learning rates, loss terms, samples or activation choices, and they are
+          independent rather than identical.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-lstm-cell-state-gradient-path
+        prompt: "How does the LSTM cell state pathway keep gradients alive across many time steps?"
+        options:
+          - "It updates additively with a gate close to one, so the gradient travels back nearly unattenuated"
+          - "It multiplies by the recurrent weight matrix at each step, which normalises the gradient size"
+          - "It resets to zero at each step, which stops any gradient from growing large enough to explode"
+          - "It stores the gradient itself alongside the activations, so it never needs to be recomputed"
+        answer: "It updates additively with a gate close to one, so the gradient travels back nearly unattenuated"
+        explanation: >-
+          The cell state is a running sum gated by the forget gate, so with that gate near one the
+          derivative along the memory path is near one, the same trick a residual connection uses.
+          Repeated matrix multiplication is exactly the plain recurrent failure mode, resetting would
+          destroy memory, and no gradients are cached in the state.
+        difficulty: advanced
+        mastery: true
+      - id: dl-lstm-sigmoid-vs-tanh-roles
+        prompt: "Why do LSTM gates use a sigmoid while the candidate cell content uses a tanh?"
+        options:
+          - "Gates need a 0-to-1 multiplier to act as valves; the candidate needs a signed value to add or subtract"
+          - "Gates need signed values to reverse the state; the candidate needs a 0-to-1 value to stay positive"
+          - "The choice is arbitrary and either activation would work equally well in both of the two roles"
+          - "Sigmoid is cheaper for the gates and tanh is more accurate, so the split is purely about speed"
+        answer: "Gates need a 0-to-1 multiplier to act as valves; the candidate needs a signed value to add or subtract"
+        explanation: >-
+          A gate multiplies, so its range must be a fraction between fully closed and fully open, whereas
+          the content being written must be able to push the memory in either direction. Swapping the two
+          would let gates invert the state and force content to be non-negative, and both choices are
+          functional rather than a matter of speed.
+        difficulty: advanced
+      - id: dl-gru-simplification
+        prompt: "How does a GRU simplify the LSTM while retaining most of its behaviour?"
+        options:
+          - "It merges the cell and hidden state and uses two gates, reset and update, in place of three"
+          - "It drops gating altogether and relies on a longer hidden state to carry information further"
+          - "It keeps three gates but shares one weight matrix among them to cut the parameter count"
+          - "It replaces the gates with pooling across time steps, which needs no extra parameters at all"
+        answer: "It merges the cell and hidden state and uses two gates, reset and update, in place of three"
+        explanation: >-
+          A GRU keeps one state vector and lets a single update gate handle both forgetting and writing,
+          which means fewer parameters and often comparable accuracy. Dropping gating returns you to a
+          plain recurrent unit and its vanishing memory, weight sharing among three gates is not the GRU
+          design, and pooling over time is not a recurrent mechanism.
+        difficulty: intermediate
+      - id: dl-lstm-forget-gate-saturated-low
+        prompt: "An LSTM forget gate saturates near zero for almost every input. What behaviour would you observe?"
+        options:
+          - "The cell state is wiped at each step, so the model behaves as though it has almost no memory"
+          - "The cell state grows without bound, so the activations overflow and the loss becomes undefined"
+          - "The output gate compensates automatically, so the behaviour of the model would not change"
+          - "The input gate stops receiving gradient, so only the final output layer continues to learn"
+        answer: "The cell state is wiped at each step, so the model behaves as though it has almost no memory"
+        explanation: >-
+          Multiplying the old state by nearly zero deletes it, leaving only the current candidate, which is
+          why forget-gate biases are often initialised positive to start out remembering. Unbounded growth
+          is the opposite case with the gate near one, the output gate cannot restore deleted content, and
+          the input gate keeps receiving gradient normally.
+        difficulty: advanced
+
+  - topic: dl-attention-intuition
+    # Source: Vizuara - Transformers Explained, Attention Simplified
+    questions:
+      - id: dl-attn-qkv-roles
+        prompt: "In an attention layer, what roles do the query, the keys and the values each play?"
+        options:
+          - "The query is compared with each key to produce weights, which then average the values"
+          - "The query is averaged with each key, and the values decide how many keys get compared"
+          - "The keys are compared with the values, and the query rescales the resulting average"
+          - "All three are the same vector, and attention reweights it by its own magnitude alone"
+        answer: "The query is compared with each key to produce weights, which then average the values"
+        explanation: >-
+          Attention is a soft dictionary lookup: the query asks a question, keys advertise what each
+          position offers, and the values are the content retrieved in proportion to the match. Keys are
+          never compared against values, and in self-attention the three are computed from the same input
+          by different projections rather than being identical vectors.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-attn-removes-bottleneck
+        prompt: "Which limitation of an encoder-decoder that passes one fixed-size vector does attention remove?"
+        options:
+          - "The whole source has to be squeezed into one vector; attention lets the decoder revisit every position"
+          - "The encoder has to be recurrent; attention lets the encoder be an ordinary dense feedforward network"
+          - "The decoder can only emit one token; attention lets it emit an entire sequence in a single pass"
+          - "The vocabulary has to stay small; attention removes the need for a softmax over output tokens"
+        answer: "The whole source has to be squeezed into one vector; attention lets the decoder revisit every position"
+        explanation: >-
+          A single context vector loses detail as the input grows, and attention replaces it with a
+          query-dependent read over all encoder states. Recurrence in the encoder is orthogonal, the
+          decoder still emits one token at a time when generating, and the output softmax over the
+          vocabulary remains exactly as it was.
+        difficulty: intermediate
+      - id: dl-attn-softmax-purpose
+        prompt: "Why are attention scores pushed through a softmax before they are used to combine the values?"
+        options:
+          - "It turns arbitrary scores into non-negative weights summing to one, making the output an average"
+          - "It removes negative scores by clipping them, which keeps the output inside the range of values"
+          - "It sorts the scores so the single highest-scoring value can be selected and the rest discarded"
+          - "It normalises the values rather than the scores, keeping every value on a comparable scale"
+        answer: "It turns arbitrary scores into non-negative weights summing to one, making the output an average"
+        explanation: >-
+          Weights that are non-negative and sum to one make the result a convex combination of the values,
+          so the output stays in the same space and the weights are interpretable. Softmax reshapes rather
+          than clips, it is soft rather than an argmax selection, and it is applied to the scores, not to
+          the values.
+        difficulty: intermediate
+      - id: dl-attn-scaling-sqrt-dk
+        prompt: "Dot-product attention divides its scores by the square root of the key dimension. What goes wrong if you omit that?"
+        options:
+          - "Scores grow with dimension, so the softmax saturates into a near one-hot with tiny gradients"
+          - "Scores shrink with dimension, so the softmax becomes uniform and attends everywhere equally"
+          - "Scores can turn negative, which the softmax function is unable to accept as an input at all"
+          - "Scores stop summing to one, so the weighted average over the values is no longer valid"
+        answer: "Scores grow with dimension, so the softmax saturates into a near one-hot with tiny gradients"
+        explanation: >-
+          A dot product of two random d-dimensional vectors has standard deviation proportional to the
+          square root of d, so large d produces extreme logits, a peaked softmax and vanishing gradients.
+          The effect is growth rather than shrinkage, softmax handles negative inputs fine, and the
+          softmax output always sums to one regardless of scale.
+        difficulty: advanced
+        mastery: true
+      - id: dl-attn-dynamic-alignment
+        prompt: "What does it mean to say that attention makes alignment dynamic rather than fixed?"
+        options:
+          - "The weights are recomputed from the current query, so which positions matter changes per input"
+          - "The alignment is learned once during training and then frozen for every input at test time"
+          - "Positions are aligned by index, so token five always attends to source token five exactly"
+          - "The model aligns whole sequences instead of positions, so length differences stop mattering"
+        answer: "The weights are recomputed from the current query, so which positions matter changes per input"
+        explanation: >-
+          Alignment is computed on the fly from content, so the same model attends differently to different
+          sentences and to different decoding steps within one sentence. Frozen alignments and index-based
+          alignment are exactly the rigid schemes attention replaces, and alignment operates at the level
+          of positions rather than whole sequences.
+        difficulty: intermediate
+
+  - topic: dl-transformers-foundations
+    # Source: Vizuara - Build a Transformer End-to-End; D2L - Transformer architecture
+    questions:
+      - id: dl-tf-multi-head-benefit
+        prompt: "What do several parallel attention heads give a transformer block that one large head does not?"
+        options:
+          - "Several independent comparison subspaces, so different heads can track different relations at once"
+          - "A larger model dimension per head, because the heads concatenate into a much wider hidden state"
+          - "Sequential refinement, because each head attends over the output produced by the head before it"
+          - "A guarantee that every position attends to itself, which a single head is unable to provide"
+        answer: "Several independent comparison subspaces, so different heads can track different relations at once"
+        explanation: >-
+          Splitting the dimension into heads lets one head follow syntax while another follows coreference,
+          because each has its own projections and its own softmax. The total dimension is split rather
+          than enlarged, heads run in parallel rather than in sequence, and self-attention already allows
+          a position to attend to itself with one head.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-tf-positional-encoding-need
+        prompt: "Self-attention on its own treats its input as a set. What does a transformer add to fix that, and why is it required?"
+        options:
+          - "Positional encodings, because otherwise permuting the input would leave every output unchanged"
+          - "A recurrent layer, because only recurrence can tell one position apart from another at all"
+          - "Causal masking, because ordering is enforced by stopping each token from seeing the next one"
+          - "Layer normalisation, because normalising per position is what encodes where each token sits"
+        answer: "Positional encodings, because otherwise permuting the input would leave every output unchanged"
+        explanation: >-
+          Attention weights depend only on content, so without position information the layer is
+          permutation equivariant and word order is invisible. Recurrence would reintroduce the sequential
+          bottleneck being removed, causal masking controls what may be seen rather than where it sits, and
+          normalisation carries no positional information whatsoever.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-tf-residual-norm-pairing
+        prompt: "Each transformer sub-layer is wrapped as a residual connection followed by normalisation. What does that pairing achieve?"
+        options:
+          - "The identity path keeps gradients healthy at depth while normalisation holds activation scales in range"
+          - "The residual adds capacity while the normalisation reduces the parameter count of the sub-layer"
+          - "The residual chooses between the sub-layer and its input while normalisation picks the better one"
+          - "The residual replaces the attention weights and the normalisation replaces the softmax over them"
+        answer: "The identity path keeps gradients healthy at depth while normalisation holds activation scales in range"
+        explanation: >-
+          The two do different jobs: the skip guarantees a gradient route of derivative one back through
+          dozens of blocks, and LayerNorm stops the repeated additions from drifting in scale. A residual
+          adds no parameters and normalisation removes none, the sum is not a selection between branches,
+          and neither replaces attention or its softmax.
+        difficulty: advanced
+      - id: dl-tf-ffn-contribution
+        prompt: "What does the position-wise feedforward network inside a transformer block contribute that attention does not?"
+        options:
+          - "A nonlinear transform applied at each position separately, mixing features rather than positions"
+          - "A mixing of information across positions, which attention deliberately leaves to later layers"
+          - "A reduction in sequence length, which is what keeps the block cost independent of that length"
+          - "A normalisation of each position vector, which is why no separate norm layer is required"
+        answer: "A nonlinear transform applied at each position separately, mixing features rather than positions"
+        explanation: >-
+          Attention mixes across positions but is essentially a weighted average, so the block needs the
+          wide two-layer feedforward network to add per-token nonlinear capacity. Cross-position mixing is
+          attention own job, the feedforward network preserves sequence length, and normalisation is a
+          separate sub-layer wrapper.
+        difficulty: advanced
+      - id: dl-tf-attention-cost-scaling
+        prompt: "How does the cost of self-attention scale with sequence length n, and what does that imply in practice?"
+        options:
+          - "Quadratically, since every position attends to every other, so long contexts get expensive fast"
+          - "Linearly, since each position is processed exactly once, so context length is essentially free"
+          - "Logarithmically, since attention builds a tree over the positions before combining them pairwise"
+          - "Cubically, since the query, key and value projections each contribute one factor of the length"
+        answer: "Quadratically, since every position attends to every other, so long contexts get expensive fast"
+        explanation: >-
+          The score matrix has n by n entries, so both compute and memory grow with n squared, which is
+          why long-context work chases sparse or linear approximations. Linear scaling is what those
+          approximations aim for rather than what standard attention does, no tree structure is involved,
+          and the projections are linear in n rather than cubic.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-tensors
+    # Source: PyTorch - Tensors
+    questions:
+      - id: dl-pt-view-shares-storage
+        prompt: "You write b = a.view(-1) and then modify b in place. What happens to the tensor a?"
+        options:
+          - "It changes as well, because view returns a tensor sharing the same underlying storage"
+          - "It is untouched, because view always allocates and hands back a fresh copy of the data"
+          - "It becomes invalid, so any later use of it raises an error about stale storage buffers"
+          - "It changes only if it lives on the GPU, since CPU tensors are always copied by default"
+        answer: "It changes as well, because view returns a tensor sharing the same underlying storage"
+        explanation: >-
+          A view is a reinterpretation of the same memory with new shape metadata, so in-place edits are
+          visible through every view; use .clone() when you need independence. Nothing is copied, the
+          original stays perfectly valid, and sharing behaviour is identical on CPU and GPU.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-dtype-promotion
+        prompt: "Adding a torch.float32 tensor to a torch.float64 tensor produces what, and why should you care in a training loop?"
+        options:
+          - "A float64 result by promotion, which silently doubles memory and can slow the whole loop"
+          - "A float32 result, because PyTorch always narrows to the lower precision of the two operands"
+          - "A runtime error, because PyTorch refuses to combine two different floating point dtypes"
+          - "An integer result, because mixing precisions falls back to the default integer dtype"
+        answer: "A float64 result by promotion, which silently doubles memory and can slow the whole loop"
+        explanation: >-
+          Type promotion picks the wider dtype, so one stray float64 tensor, often created from a NumPy
+          array, can upcast an entire pipeline and halve throughput on a GPU. PyTorch promotes rather than
+          narrowing, mixed float dtypes are legal, and integer dtypes are never the fallback for float
+          arithmetic.
+        difficulty: advanced
+      - id: dl-pt-device-mismatch
+        prompt: "An operation fails with an error saying it expected all tensors to be on the same device. What is the fix?"
+        options:
+          - "Move one operand with .to(device) so both live on the same GPU or both live on the CPU"
+          - "Convert one operand dtype, since device errors are what PyTorch reports when dtypes clash"
+          - "Call .detach() on one operand, which releases it from whichever device it was placed on"
+          - "Wrap the operation in torch.no_grad(), which permits tensors from two devices to combine"
+        answer: "Move one operand with .to(device) so both live on the same GPU or both live on the CPU"
+        explanation: >-
+          Kernels run on one device, so every operand must already be there; the usual culprit is a model
+          moved to CUDA while a batch stayed on the CPU. A dtype mismatch reports a different error,
+          detach only affects gradient tracking, and no_grad changes autograd behaviour rather than
+          memory placement.
+        difficulty: beginner
+        mastery: true
+      - id: dl-pt-view-infer-dim
+        prompt: "A tensor of shape (2, 3, 4) is reshaped with .view(6, -1). What shape results?"
+        options:
+          - "(6, 4), because the 24 elements are preserved and -1 infers the one remaining size"
+          - "(6, 24), because -1 keeps the original element count next to the dimension you named"
+          - "(6, 12), because -1 takes the product of the two axes that have just been merged"
+          - "It raises an error, because 24 elements cannot be arranged with 6 as the first axis"
+        answer: "(6, 4), because the 24 elements are preserved and -1 infers the one remaining size"
+        explanation: >-
+          Reshaping never changes the element count, so 24 divided by 6 fixes the inferred axis at 4. The
+          -1 means solve for this axis rather than repeat a size, 6 by 12 would need 72 elements, and 24
+          is divisible by 6 so there is nothing to error on.
+        difficulty: intermediate
+      - id: dl-pt-cat-vs-stack
+        prompt: "For two tensors each of shape (3, 4), what is the difference between torch.cat and torch.stack along the default axis?"
+        options:
+          - "cat joins along an existing axis to give (6, 4); stack adds a new axis to give (2, 3, 4)"
+          - "cat adds a new axis to give (2, 3, 4); stack joins along an existing axis to give (6, 4)"
+          - "Both give (6, 4) and differ only in whether the result shares storage with the inputs"
+          - "Both give (2, 3, 4) and differ only in whether the new axis is placed first or last"
+        answer: "cat joins along an existing axis to give (6, 4); stack adds a new axis to give (2, 3, 4)"
+        explanation: >-
+          Concatenation extends a dimension that already exists, while stacking introduces a fresh
+          dimension indexing the inputs, which is how a list of samples becomes a batch. The second option
+          swaps the two, and both functions allocate new storage rather than viewing the inputs, so
+          neither shares memory.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-data
+    # Source: PyTorch - Datasets and DataLoaders
+    questions:
+      - id: dl-pt-dataset-required-methods
+        prompt: "Which methods must a custom torch.utils.data.Dataset implement, and what does each return?"
+        options:
+          - "A length method returning the sample count and a getitem method returning one sample with its label"
+          - "An iter method returning a generator and a next method returning the following batch and its labels"
+          - "A forward method returning a batch of samples and a backward method returning gradients for it"
+          - "A collate method returning the stacked batch and a transform method returning the augmented copy"
+        answer: "A length method returning the sample count and a getitem method returning one sample with its label"
+        explanation: >-
+          A map-style dataset answers how many samples exist and how to fetch the i-th one; the DataLoader
+          handles batching on top of that. Iterator methods belong to IterableDataset, forward and
+          backward are module concepts, and collate and transform are optional hooks rather than the
+          required interface.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-shuffle-train-only
+        prompt: "Why does the training DataLoader use shuffle=True while the evaluation one leaves it off?"
+        options:
+          - "Shuffling decorrelates consecutive batches while training; evaluation just needs each sample once"
+          - "Shuffling is required for the loss to stay differentiable, which only matters while training"
+          - "Shuffling saves memory during training, while evaluation needs samples kept in a fixed order"
+          - "Shuffling augments the training set with new samples, which would corrupt an evaluation metric"
+        answer: "Shuffling decorrelates consecutive batches while training; evaluation just needs each sample once"
+        explanation: >-
+          If the data is sorted by class, unshuffled batches give wildly biased gradients, so training
+          shuffles every epoch; evaluation aggregates over the whole set so order cannot change the
+          result. Shuffling has no bearing on differentiability or memory, and it reorders samples rather
+          than creating new ones.
+        difficulty: intermediate
+      - id: dl-pt-num-workers-bottleneck
+        prompt: "Your GPU sits mostly idle while the data pipeline does heavy image decoding. Which DataLoader setting attacks that directly?"
+        options:
+          - "Raise num_workers, so decoding happens in parallel subprocesses ahead of each training step"
+          - "Raise batch_size, so each step consumes more data and the decoding cost stops mattering"
+          - "Set shuffle to False, so the loader can read samples sequentially and skip the decode step"
+          - "Set drop_last to True, so a partial batch never stalls the GPU while it waits for more data"
+        answer: "Raise num_workers, so decoding happens in parallel subprocesses ahead of each training step"
+        explanation: >-
+          Worker processes prefetch and decode while the GPU computes, which is the standard cure for an
+          input-bound loop. A larger batch decodes proportionally more images so the bottleneck stays,
+          sequential reading still has to decode every file, and dropping the final partial batch changes
+          nothing about throughput.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-totensor-effects
+        prompt: "What does transforms.ToTensor() do to a PIL image beyond changing its type?"
+        options:
+          - "It reorders the axes to channels-first and rescales pixel values from 0-255 into 0.0-1.0"
+          - "It keeps the axes channels-last and leaves the 0-255 integer values exactly as they were"
+          - "It normalises to zero mean and unit variance using statistics taken from the whole dataset"
+          - "It resizes the image to a fixed square shape so that batching can stack the samples up"
+        answer: "It reorders the axes to channels-first and rescales pixel values from 0-255 into 0.0-1.0"
+        explanation: >-
+          ToTensor does two silent conversions, HWC to CHW and integer to float divided by 255, which is
+          why an extra manual division is a common double-scaling bug. Keeping the original layout and
+          range would break the first conv layer, mean-variance standardisation is Normalize, and resizing
+          is Resize.
+        difficulty: intermediate
+      - id: dl-pt-batch-shape-from-loader
+        prompt: "A DataLoader with batch_size=64 wraps a dataset of 28 by 28 grayscale images converted to tensors. What shape does one feature batch have?"
+        options:
+          - "(64, 1, 28, 28), with the batch axis leading and a single channel axis right after it"
+          - "(64, 28, 28), because a grayscale image carries no channel axis that needs including"
+          - "(1, 64, 28, 28), because in PyTorch the channel axis always precedes the batch axis"
+          - "(28, 28, 64), because the batch axis is appended last when the samples are stacked up"
+        answer: "(64, 1, 28, 28), with the batch axis leading and a single channel axis right after it"
+        explanation: >-
+          ToTensor gives each sample a channel axis of size one and the loader stacks samples on a new
+          leading axis, producing NCHW. Grayscale keeps an explicit channel of one so conv layers work
+          unchanged, and the batch axis is always first in PyTorch rather than second or last.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-build-model
+    # Source: PyTorch - Build the Neural Network
+    questions:
+      - id: dl-pt-call-vs-forward
+        prompt: "The tutorial calls model(x) rather than model.forward(x). Why does that distinction matter?"
+        options:
+          - "Calling the module runs registered hooks and bookkeeping around forward that a direct call skips"
+          - "Calling the module is merely shorter, and the two are identical in every respect at runtime"
+          - "Calling forward directly moves the tensor to the CPU, so the GPU path has to be used instead"
+          - "Calling forward directly skips the backward graph, so gradients would never be recorded at all"
+        answer: "Calling the module runs registered hooks and bookkeeping around forward that a direct call skips"
+        explanation: >-
+          The dunder-call wrapper is where forward and backward hooks fire and where module-level
+          machinery runs, so bypassing it quietly disables features that other code may rely on. The two
+          are not identical, no device transfer happens either way, and autograd still records operations
+          because it tracks tensor ops rather than the call route.
+        difficulty: advanced
+        mastery: true
+      - id: dl-pt-sequential-limitation
+        prompt: "You need a network whose forward pass branches on a condition. Why is nn.Sequential the wrong container for it?"
+        options:
+          - "Sequential runs its modules in a fixed order and leaves no room for custom control flow"
+          - "Sequential cannot hold more than a handful of modules before the graph becomes too deep"
+          - "Sequential does not register its children, so the optimiser would find no parameters at all"
+          - "Sequential requires every module to share the same input and output shape as its neighbours"
+        answer: "Sequential runs its modules in a fixed order and leaves no room for custom control flow"
+        explanation: >-
+          Sequential hard-codes forward as a straight chain, so branching, skip connections and multiple
+          inputs all need a subclass with your own forward. It has no module count limit, it does register
+          children as submodules, and consecutive modules only need compatible shapes rather than
+          identical ones.
+        difficulty: intermediate
+      - id: dl-pt-plain-list-not-registered
+        prompt: "You keep your layers in a plain Python list inside a Module and the optimiser reports that it received no parameters. Why?"
+        options:
+          - "A plain list is not tracked by the module, so nn.ModuleList is needed for children to register"
+          - "A plain list stores copies of the layers, so the originals hold the parameters being optimised"
+          - "The optimiser only accepts a generator, so turning model.parameters() into a list loses entries"
+          - "The layers have to be created inside forward rather than in the constructor to be registered"
+        answer: "A plain list is not tracked by the module, so nn.ModuleList is needed for children to register"
+        explanation: >-
+          Module registration happens in attribute assignment, and a list is an opaque object, so its
+          contents never appear in .parameters() and stay on the CPU when you call .to(device). Python
+          lists hold references rather than copies, the optimiser happily accepts a list of parameters,
+          and constructing layers in forward would recreate them every step.
+        difficulty: advanced
+        mastery: true
+      - id: dl-pt-linear-weight-shapes
+        prompt: "For nn.Linear(in_features=512, out_features=10), what shapes do the weight and bias tensors have?"
+        options:
+          - "weight is (10, 512) and bias is (10,), since the output features index the first axis"
+          - "weight is (512, 10) and bias is (512,), since the input features index the first axis"
+          - "weight is (512, 10) and bias is (10,), matching the argument order in the constructor"
+          - "weight is (10, 512) and bias is (512,), since the bias is added before the transform"
+        answer: "weight is (10, 512) and bias is (10,), since the output features index the first axis"
+        explanation: >-
+          nn.Linear stores weight as (out_features, in_features) and computes x times weight transposed,
+          so the bias has one entry per output. Options built on the constructor argument order get the
+          storage layout backwards, and a bias sized by the input count could not be added to the output
+          at all.
+        difficulty: intermediate
+      - id: dl-pt-flatten-in-model
+        prompt: "In the tutorial model nn.Flatten sits before the first nn.Linear. What does it do to a (64, 1, 28, 28) batch?"
+        options:
+          - "Turns it into (64, 784), collapsing the channel and spatial axes but keeping the batch axis"
+          - "Turns it into (50176,), collapsing every axis including the batch into one long vector"
+          - "Turns it into (64, 1, 784), collapsing only the two spatial axes and keeping the channel"
+          - "Leaves it unchanged, since Linear layers accept four-dimensional inputs without any help"
+        answer: "Turns it into (64, 784), collapsing the channel and spatial axes but keeping the batch axis"
+        explanation: >-
+          nn.Flatten defaults to start_dim=1, so it preserves the batch axis and folds everything after it
+          into one feature axis of 784. Collapsing the batch too would merge samples together, keeping the
+          channel axis would leave three dimensions, and Linear only contracts the last axis so it needs
+          this flatten.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-autograd
+    # Source: PyTorch - Automatic Differentiation with torch.autograd
+    questions:
+      - id: dl-pt-grad-accumulates
+        prompt: "You call backward() on two different losses in a row without clearing gradients in between. What does .grad hold afterwards?"
+        options:
+          - "The sum of both gradients, because PyTorch accumulates into .grad rather than overwriting it"
+          - "Only the second gradient, because each backward call replaces whatever .grad held before"
+          - "The average of both gradients, since PyTorch divides by the number of backward calls made"
+          - "Nothing at all, because .grad is cleared automatically at the start of every backward call"
+        answer: "The sum of both gradients, because PyTorch accumulates into .grad rather than overwriting it"
+        explanation: >-
+          Accumulation is deliberate, since it lets one parameter collect contributions from several paths
+          or several micro-batches, and it is exactly why zero_grad exists in every training loop.
+          Overwriting would break multi-path graphs, no averaging is applied, and nothing clears .grad
+          without an explicit call.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-graph-freed-error
+        prompt: "Calling backward() a second time on the same graph raises an error about buffers having already been freed. Why?"
+        options:
+          - "The intermediate values were released after the first pass; retain_graph=True keeps them for a second"
+          - "The gradients were already applied to the parameters, so there is nothing left to differentiate"
+          - "The tensors were moved off the GPU by the first call, so the graph device no longer matches"
+          - "The loss became a leaf tensor after the first call, and leaf tensors cannot be differentiated"
+        answer: "The intermediate values were released after the first pass; retain_graph=True keeps them for a second"
+        explanation: >-
+          By default autograd frees the saved forward tensors as soon as they have been used, because
+          holding them is the main memory cost of training. Applying an update does not consume the graph,
+          no device migration happens, and leaf status is decided when a tensor is created rather than by
+          a backward call.
+        difficulty: advanced
+      - id: dl-pt-no-grad-context
+        prompt: "You want to compute validation loss without building a graph. Which construct does that, and what does it save?"
+        options:
+          - "torch.no_grad(), which stops operations being recorded and so avoids storing activations"
+          - "loss.detach(), which has to be called on every intermediate tensor to stop the graph growing"
+          - "model.eval(), which disables gradient tracking as well as switching dropout and norm layers"
+          - "optimizer.zero_grad(), which stops the forward pass from extending the graph any further"
+        answer: "torch.no_grad(), which stops operations being recorded and so avoids storing activations"
+        explanation: >-
+          Inside no_grad nothing is added to the graph, so the saved-tensor memory that dominates training
+          is never allocated and inference runs both leaner and faster. model.eval() is the classic
+          confusion: it changes layer behaviour but leaves gradient tracking fully on. detach after the
+          fact is clumsy, and zero_grad only clears existing gradients.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-leaf-tensor-grad
+        prompt: "A tensor created by torch.randn(3, requires_grad=True) is a leaf of the graph. What does that mean for its .grad?"
+        options:
+          - "It will hold a gradient after backward, whereas non-leaf intermediates have theirs discarded"
+          - "It will never hold a gradient, since only the loss tensor at the end of the graph does"
+          - "It holds the derivative of the loss with respect to itself, which is always exactly one"
+          - "It holds a gradient only if it was itself produced by an operation on another tracked tensor"
+        answer: "It will hold a gradient after backward, whereas non-leaf intermediates have theirs discarded"
+        explanation: >-
+          Leaves are the tensors you optimise, so autograd populates their .grad and throws away the
+          intermediate gradients unless you ask for them with retain_grad or a hook. The loss is the
+          starting point rather than the only recipient, the derivative of the loss with respect to itself
+          is a seed value not stored here, and being produced by an operation is what makes a tensor
+          non-leaf.
+        difficulty: advanced
+      - id: dl-pt-grad-shape-matches-param
+        prompt: "For a scalar loss and a weight tensor of shape (10, 512), what shape does w.grad have after backward()?"
+        options:
+          - "(10, 512), the same shape as w, since each entry receives one partial derivative"
+          - "(1,), a single scalar, since the loss it was differentiated from is itself a scalar"
+          - "(512, 10), the transpose of w, because the backward pass reverses the orientation"
+          - "(10, 512, 10, 512), a full Jacobian relating every weight entry to every other one"
+        answer: "(10, 512), the same shape as w, since each entry receives one partial derivative"
+        explanation: >-
+          The gradient of a scalar with respect to a tensor has exactly that tensor shape, which is what
+          lets the optimiser subtract it elementwise. A single scalar would lose per-weight information,
+          the transpose would not align with w for the update, and a full Jacobian only appears for
+          non-scalar outputs.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-training-loop
+    # Source: PyTorch - Optimizing Model Parameters
+    questions:
+      - id: dl-pt-loop-call-order
+        prompt: "What is the correct order of the three optimiser-related calls in a training step, and what breaks if the clearing call is skipped?"
+        options:
+          - "zero_grad, then backward, then step; skipping the first makes gradients pile up across batches"
+          - "backward, then zero_grad, then step; skipping the first leaves parameters updated with stale values"
+          - "step, then backward, then zero_grad; skipping the first means no gradient is ever computed"
+          - "backward, then step, then zero_grad; skipping the last is harmless because step clears them itself"
+        answer: "zero_grad, then backward, then step; skipping the first makes gradients pile up across batches"
+        explanation: >-
+          Because .grad accumulates, it must be emptied before the new backward pass, and the update comes
+          last. Clearing between backward and step would delete the gradients you just computed, stepping
+          before backward applies a stale or empty gradient, and step never clears gradients, so relying
+          on that leaves every batch contaminated by its predecessors.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-test-loop-differences
+        prompt: "In the tutorial test loop, which two things are done differently from the train loop?"
+        options:
+          - "The model is put in eval mode and the loop runs under no_grad, with no backward or step calls"
+          - "The model stays in train mode but the learning rate is set to zero so the weights cannot move"
+          - "The batches are made larger and the loss is summed instead of averaged, which is the only change"
+          - "The optimiser is rebuilt each epoch and the gradients are cleared twice per batch, not once"
+        answer: "The model is put in eval mode and the loop runs under no_grad, with no backward or step calls"
+        explanation: >-
+          Evaluation needs deterministic layer behaviour and no graph construction, so eval mode plus
+          no_grad is the standard pairing. A zero learning rate would still build graphs and still leave
+          dropout active, batch size and loss reduction are reporting details, and nothing about
+          evaluation requires rebuilding the optimiser.
+        difficulty: intermediate
+      - id: dl-pt-loss-item-memory
+        prompt: "Accumulating a running total with loss instead of loss.item() slowly exhausts memory over an epoch. Why?"
+        options:
+          - "Adding the tensor keeps its graph alive, so every batch activations are retained until the end"
+          - "Adding the tensor copies the whole batch into the accumulator, which grows with each batch"
+          - "The tensor stays on the GPU while the accumulator is on the CPU, so both copies are kept"
+          - "The accumulator becomes a leaf tensor, and leaf tensors are never released by the allocator"
+        answer: "Adding the tensor keeps its graph alive, so every batch activations are retained until the end"
+        explanation: >-
+          A loss tensor still references its graph, so summing them chains every batch graph together and
+          nothing can be freed; .item() extracts a plain Python float and drops the reference. The batch
+          data is not copied, cross-device copies are not what grows here, and leaf tensors are freed
+          normally when unreferenced.
+        difficulty: advanced
+        mastery: true
+      - id: dl-pt-which-call-updates-weights
+        prompt: "Which call in the loop actually changes the model weights, and what would happen if you omitted it?"
+        options:
+          - "optimizer.step(), and without it gradients would be computed every batch but never applied"
+          - "loss.backward(), and without it the weights would keep their random initial values for good"
+          - "optimizer.zero_grad(), and without it the weights would be updated with the wrong sign"
+          - "model.train(), and without it the forward pass would run but produce no gradient to apply"
+        answer: "optimizer.step(), and without it gradients would be computed every batch but never applied"
+        explanation: >-
+          backward fills .grad and step consumes it to move the parameters, so a loop missing step trains
+          nothing while looking perfectly healthy. Omitting backward leaves no gradient for step to use,
+          skipping zero_grad inflates gradients rather than flipping their sign, and train mode toggles
+          dropout and normalisation rather than gradient computation.
+        difficulty: beginner
+      - id: dl-pt-steps-per-epoch
+        prompt: "How many times is optimizer.step() called in one epoch over 60,000 samples with a batch size of 64?"
+        options:
+          - "About 938 times, once per mini-batch, since the loader yields batches rather than samples"
+          - "Once, at the end of the epoch, after gradients from all of the batches have accumulated"
+          - "60,000 times, once per training sample, since each sample earns its own weight update"
+          - "Twice, once for the training pass and once for the test pass that follows it in the loop"
+        answer: "About 938 times, once per mini-batch, since the loader yields batches rather than samples"
+        explanation: >-
+          60,000 divided by 64 gives 937.5, so 938 batches including a smaller final one, and each batch
+          gets exactly one update. A single end-of-epoch update would be full-batch gradient descent,
+          per-sample updates would be batch size one, and the test pass performs no optimiser steps at
+          all.
+        difficulty: intermediate
+
+  - topic: dl-pytorch-save-load
+    # Source: PyTorch - Save and Load the Model
+    questions:
+      - id: dl-pt-why-state-dict
+        prompt: "Why does the tutorial recommend saving model.state_dict() rather than pickling the whole model object?"
+        options:
+          - "A state_dict holds only tensors, so loading does not depend on the original class being importable"
+          - "A state_dict is smaller because it stores the weights in half precision rather than full precision"
+          - "A state_dict also contains the optimiser state, which pickling the model object would leave out"
+          - "A state_dict can be loaded without a GPU present, whereas a pickled model always requires one"
+        answer: "A state_dict holds only tensors, so loading does not depend on the original class being importable"
+        explanation: >-
+          Pickling a module embeds the class path, so a refactor or a different directory layout breaks the
+          checkpoint; a plain dictionary of tensors survives that. The dtype is unchanged by saving, the
+          optimiser state is a separate state_dict, and either format can be loaded onto a CPU with the
+          right mapping.
+        difficulty: intermediate
+        mastery: true
+      - id: dl-pt-forgot-load-state-dict
+        prompt: "You call torch.load on a checkpoint but never pass the result to load_state_dict, and the model predicts nonsense. What was skipped?"
+        options:
+          - "Copying the loaded tensors into the model, so it is still using its freshly initialised weights"
+          - "Moving the loaded tensors to the right device, so the model reads uninitialised GPU memory"
+          - "Converting the loaded tensors to float32, so the model interprets integer values as weights"
+          - "Rebuilding the optimiser, so the model weights are overwritten again on the very first step"
+        answer: "Copying the loaded tensors into the model, so it is still using its freshly initialised weights"
+        explanation: >-
+          torch.load only deserialises a dictionary; load_state_dict is what installs those tensors into
+          the module, so without it the random initialisation is what runs. Device placement and dtype
+          would raise explicit errors rather than silently degrading, and a fresh optimiser never
+          overwrites weights by itself.
+        difficulty: intermediate
+      - id: dl-pt-resume-missing-optimizer
+        prompt: "You resume training from a checkpoint that stored only the model weights and the loss jumps upward. What was missing?"
+        options:
+          - "The optimiser state, so momentum and adaptive moment estimates all restarted from zero"
+          - "The model architecture, so the reloaded network has a different number of layers than before"
+          - "The data ordering, so the resumed run revisits batches it had already learned from earlier"
+          - "The loss function parameters, which accumulate across epochs and must be restored as well"
+        answer: "The optimiser state, so momentum and adaptive moment estimates all restarted from zero"
+        explanation: >-
+          Adam and momentum carry per-parameter buffers, and losing them means the first steps after
+          resuming are badly scaled, producing exactly this jump; a resumable checkpoint stores model,
+          optimiser, scheduler and epoch. A wrong architecture would fail to load at all, batch order does
+          not damage the loss, and standard losses hold no state.
+        difficulty: advanced
+        mastery: true
+      - id: dl-pt-eval-after-loading
+        prompt: "After loading weights for inference, which call must you make before predicting, and what does it change?"
+        options:
+          - "model.eval(), which turns dropout off and makes norm layers use their stored running statistics"
+          - "model.train(), which finalises the loaded parameters so that the forward pass can read them"
+          - "model.zero_grad(), which clears the gradient buffers restored alongside the saved weights"
+          - "model.to('cpu'), which is required because a state_dict is always written from CPU memory"
+        answer: "model.eval(), which turns dropout off and makes norm layers use their stored running statistics"
+        explanation: >-
+          A freshly constructed module defaults to training mode, so without eval() dropout keeps firing
+          and batch norm keeps using batch statistics, making predictions random and batch-dependent.
+          train() is the opposite switch, no gradients are stored in a weights checkpoint, and tensors can
+          be loaded straight onto any device.
+        difficulty: intermediate
+      - id: dl-pt-map-location
+        prompt: "A checkpoint saved on a GPU machine fails to load on a CPU-only machine. Which argument resolves that?"
+        options:
+          - "map_location, which tells torch.load where to place the tensors as they are read back"
+          - "strict=False, which lets the loader skip any tensor it cannot place on the current device"
+          - "weights_only=True, which strips device information out of the file before it is parsed"
+          - "pickle_module, which selects a loader that ignores the device each tensor was saved from"
+        answer: "map_location, which tells torch.load where to place the tensors as they are read back"
+        explanation: >-
+          Saved tensors remember their device, so a CUDA checkpoint on a CPU-only box needs
+          map_location to redirect them. strict=False concerns mismatched key names rather than devices,
+          weights_only restricts what the unpickler will execute, and pickle_module swaps the
+          serialisation library without touching placement.
+        difficulty: intermediate

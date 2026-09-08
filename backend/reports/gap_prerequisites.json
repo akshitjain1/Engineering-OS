@@ -1,0 +1,551 @@
+{
+  "planned": [
+    {
+      "id": 456,
+      "topic_slug": "rl-mdp-fundamentals",
+      "added": [
+        "math-expectation-variance",
+        "ml-types-of-ml"
+      ],
+      "prerequisites": [
+        "math-probability",
+        {
+          "slug": "math-expectation-variance",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-types-of-ml",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 459,
+      "topic_slug": "rl-policy-gradients",
+      "added": [
+        "dl-gradient-descent-nn",
+        "math-partial-derivatives"
+      ],
+      "prerequisites": [
+        "rl-mdp-fundamentals",
+        "math-gradient-intuition",
+        {
+          "slug": "dl-gradient-descent-nn",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "math-partial-derivatives",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 460,
+      "topic_slug": "rl-rlhf-mechanics",
+      "added": [
+        "genai-instruction-tuning-rlhf",
+        "genai-pretraining-finetuning"
+      ],
+      "prerequisites": [
+        "rl-policy-gradients",
+        {
+          "slug": "genai-instruction-tuning-rlhf",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "genai-pretraining-finetuning",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 468,
+      "topic_slug": "aisec-owasp-llm-top-10",
+      "added": [
+        "genai-prompt-engineering",
+        "ai-eng-tool-calling",
+        "ai-eng-observability-security"
+      ],
+      "prerequisites": [
+        {
+          "slug": "genai-prompt-engineering",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ai-eng-tool-calling",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ai-eng-observability-security",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 469,
+      "topic_slug": "aisec-prompt-injection",
+      "added": [
+        "genai-prompt-engineering",
+        "ai-eng-function-calling"
+      ],
+      "prerequisites": [
+        "aisec-owasp-llm-top-10",
+        {
+          "slug": "genai-prompt-engineering",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ai-eng-function-calling",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 470,
+      "topic_slug": "aisec-data-exfiltration-tools",
+      "added": [
+        "ai-eng-tool-calling",
+        "ai-eng-agent-loops"
+      ],
+      "prerequisites": [
+        "aisec-prompt-injection",
+        {
+          "slug": "ai-eng-tool-calling",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ai-eng-agent-loops",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 471,
+      "topic_slug": "aisec-improper-output-handling",
+      "added": [
+        "ai-eng-structured-output"
+      ],
+      "prerequisites": [
+        "aisec-owasp-llm-top-10",
+        "be-rest",
+        {
+          "slug": "ai-eng-structured-output",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 472,
+      "topic_slug": "aisec-model-supply-chain",
+      "added": [
+        "dl-pytorch-save-load"
+      ],
+      "prerequisites": [
+        "aisec-owasp-llm-top-10",
+        "cf-dependency-management",
+        {
+          "slug": "dl-pytorch-save-load",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 474,
+      "topic_slug": "infra-quantization-concepts",
+      "added": [
+        "dl-pytorch-tensors"
+      ],
+      "prerequisites": [
+        "cf-bits-and-bytes",
+        "cloud-gpu-memory-sizing",
+        {
+          "slug": "dl-pytorch-tensors",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 476,
+      "topic_slug": "infra-kv-cache",
+      "added": [
+        "dl-transformers-foundations",
+        "dl-attention-intuition",
+        "genai-context-windows"
+      ],
+      "prerequisites": [
+        {
+          "slug": "dl-transformers-foundations",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "dl-attention-intuition",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "genai-context-windows",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 477,
+      "topic_slug": "infra-continuous-batching",
+      "added": [
+        "genai-production-serving"
+      ],
+      "prerequisites": [
+        "infra-kv-cache",
+        {
+          "slug": "genai-production-serving",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 480,
+      "topic_slug": "rag-reranking-cross-encoders",
+      "added": [
+        "nlp-bert"
+      ],
+      "prerequisites": [
+        "genai-rag",
+        "genai-embeddings",
+        {
+          "slug": "nlp-bert",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 481,
+      "topic_slug": "rag-hybrid-search",
+      "added": [
+        "nlp-tf-idf"
+      ],
+      "prerequisites": [
+        "genai-rag",
+        "genai-embeddings",
+        {
+          "slug": "nlp-tf-idf",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 482,
+      "topic_slug": "rag-chunking-evaluation",
+      "added": [
+        "genai-chunking-retrieval"
+      ],
+      "prerequisites": [
+        "rag-retrieval-metrics",
+        "genai-eval",
+        {
+          "slug": "genai-chunking-retrieval",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 484,
+      "topic_slug": "rag-ann-index-choice",
+      "added": [
+        "genai-vector-databases"
+      ],
+      "prerequisites": [
+        "dsa-big-o",
+        "db-indexes",
+        {
+          "slug": "genai-vector-databases",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 464,
+      "topic_slug": "cloud-gpu-instances",
+      "added": [
+        "dl-pytorch-tensors"
+      ],
+      "prerequisites": [
+        "cloud-service-models",
+        "cf-ram",
+        {
+          "slug": "dl-pytorch-tensors",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 465,
+      "topic_slug": "cloud-gpu-memory-sizing",
+      "added": [
+        "dl-pytorch-tensors",
+        "dl-batch-epoch-lr"
+      ],
+      "prerequisites": [
+        "cloud-gpu-instances",
+        "cf-bits-and-bytes",
+        {
+          "slug": "dl-pytorch-tensors",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "dl-batch-epoch-lr",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 466,
+      "topic_slug": "cloud-managed-inference",
+      "added": [
+        "genai-production-serving"
+      ],
+      "prerequisites": [
+        "mlops-serving",
+        "be-rest",
+        {
+          "slug": "genai-production-serving",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 502,
+      "topic_slug": "mlcicd-cd4ml",
+      "added": [
+        "mlops-experiment-lifecycle"
+      ],
+      "prerequisites": [
+        "se-ci-basics",
+        "ops-ci-github-actions",
+        "mlops-model-packaging",
+        {
+          "slug": "mlops-experiment-lifecycle",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 503,
+      "topic_slug": "mlcicd-testing-ml-systems",
+      "added": [
+        "ml-end-to-end-workflow"
+      ],
+      "prerequisites": [
+        "se-unit-tests",
+        "se-testing-pyramid",
+        "py-testing",
+        "dq-data-leakage",
+        {
+          "slug": "ml-end-to-end-workflow",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 504,
+      "topic_slug": "mlcicd-production-readiness",
+      "added": [
+        "mlops-drift-quality"
+      ],
+      "prerequisites": [
+        "mlcicd-testing-ml-systems",
+        "mlops-monitoring",
+        {
+          "slug": "mlops-drift-quality",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 486,
+      "topic_slug": "dq-data-leakage",
+      "added": [
+        "ml-cross-validation",
+        "ml-feature-scaling"
+      ],
+      "prerequisites": [
+        "ml-train-test",
+        "ml-sklearn-pipeline",
+        {
+          "slug": "ml-cross-validation",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-feature-scaling",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 489,
+      "topic_slug": "dq-outliers",
+      "added": [
+        "ml-anomaly-awareness"
+      ],
+      "prerequisites": [
+        "ds-eda",
+        "math-stats-summary",
+        {
+          "slug": "ml-anomaly-awareness",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 490,
+      "topic_slug": "dq-class-imbalance",
+      "added": [
+        "ml-confusion-matrix",
+        "ml-roc-auc"
+      ],
+      "prerequisites": [
+        "ml-classification",
+        "ml-metrics",
+        {
+          "slug": "ml-confusion-matrix",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-roc-auc",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 491,
+      "topic_slug": "gbm-boosted-trees-theory",
+      "added": [
+        "ml-gradient-boosting",
+        "ml-decision-trees",
+        "math-derivatives",
+        "math-partial-derivatives"
+      ],
+      "prerequisites": [
+        "ml-overfitting",
+        {
+          "slug": "ml-gradient-boosting",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-decision-trees",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "math-derivatives",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "math-partial-derivatives",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 492,
+      "topic_slug": "gbm-xgboost-tuning",
+      "added": [
+        "ml-grid-search",
+        "ml-bias-variance"
+      ],
+      "prerequisites": [
+        "gbm-boosted-trees-theory",
+        {
+          "slug": "ml-grid-search",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-bias-variance",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 494,
+      "topic_slug": "gbm-categorical-features",
+      "added": [
+        "ml-encoding-categorical"
+      ],
+      "prerequisites": [
+        "gbm-lightgbm-mechanics",
+        "dq-data-leakage",
+        {
+          "slug": "ml-encoding-categorical",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 495,
+      "topic_slug": "gbm-tabular-vs-deep-learning",
+      "added": [
+        "dl-why-deep-learning",
+        "ml-bias-variance"
+      ],
+      "prerequisites": [
+        "gbm-boosted-trees-theory",
+        {
+          "slug": "dl-why-deep-learning",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-bias-variance",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 496,
+      "topic_slug": "ts-why-random-splits-fail",
+      "added": [
+        "ml-cross-validation",
+        "ml-validation-split"
+      ],
+      "prerequisites": [
+        "ml-train-test",
+        "dq-data-leakage",
+        {
+          "slug": "ml-cross-validation",
+          "type": "REQUIRED"
+        },
+        {
+          "slug": "ml-validation-split",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 498,
+      "topic_slug": "ts-forecasting-baselines",
+      "added": [
+        "ml-regression-metrics"
+      ],
+      "prerequisites": [
+        "ml-linear-regression",
+        "ds-pandas",
+        {
+          "slug": "ml-regression-metrics",
+          "type": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "id": 499,
+      "topic_slug": "ts-forecast-accuracy-metrics",
+      "added": [
+        "ml-regression-metrics"
+      ],
+      "prerequisites": [
+        "ts-forecasting-baselines",
+        {
+          "slug": "ml-regression-metrics",
+          "type": "REQUIRED"
+        }
+      ]
+    }
+  ],
+  "problems": [],
+  "dry_run": false
+}

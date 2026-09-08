@@ -1,0 +1,488 @@
+# Inference performance self-check questions.
+#
+# Each question is answerable from the PRIMARY resource its topic maps to and
+# stays inside that topic's scope. mod-genai already covers production serving
+# at working level (what the KV cache holds, prefill versus decode, the idea of
+# continuous batching), so nothing here restates it: the quantization block
+# asks what is stored and where granularity matters, the KV block asks for the
+# size arithmetic and the strategy trade-offs, the batching block asks about
+# iteration-level scheduling and its memory prerequisite, the metrics block
+# about stating an SLO, and the memory-bound block argues from the flops and
+# bytes per parameter. Gates in app/content/question_bank.py refuse a prompt
+# already used by another topic.
+schema_version: 1
+kind: question_bank
+module: mod-inference-perf
+topics:
+  - topic: infra-quantization-concepts
+    # Source: Hugging Face - Quantization concepts, plus Bitsandbytes
+    questions:
+      - id: infra-q-what-int8-stores
+        prompt: "What does an int8 quantized weight tensor actually store, and how is a float value recovered from it?"
+        options:
+          - "Small integers plus a scale and a zero-point, so dequantising is one multiply and one shift of the integer"
+          - "Each float rounded to the nearest 8-bit floating point value, keeping a sign, exponent and mantissa field"
+          - "The most significant eight bits of each original float, with the discarded mantissa bits assumed to be zero"
+          - "A learned codebook of 256 float centroids, with every weight replaced by the index of its own centroid"
+        answer: "Small integers plus a scale and a zero-point, so dequantising is one multiply and one shift of the integer"
+        explanation: >-
+          Affine integer quantization keeps 8-bit integers together with quantization parameters: a scale
+          mapping the integer range onto the float range and a zero-point aligning integer zero with real
+          zero. Truncating the mantissa keeps no range mapping and loses far more accuracy, an 8-bit float
+          is a different data type with its own exponent field, and a learned codebook of centroids
+          describes clustering methods rather than integer quantization.
+        difficulty: intermediate
+        mastery: true
+      - id: infra-q-per-tensor-outlier
+        prompt: "After int8 per-tensor quantization your classifier loses accuracy on exactly one class while the rest hold. What is the likely mechanism and the fix?"
+        options:
+          - "One tensor-wide scale set by outlier channels leaves that class's small weights under-resolved, so use per-channel scales"
+          - "The zero-point drifted for that class alone, so recalibrating the zero-point on its own examples restores the accuracy"
+          - "That class had fewer training examples, so quantization noise dominates it and the class needs to be oversampled"
+          - "Integer overflow in the accumulator affects that one logit, so the accumulator has to be widened to 32 bits"
+        answer: "One tensor-wide scale set by outlier channels leaves that class's small weights under-resolved, so use per-channel scales"
+        explanation: >-
+          A single scale for a whole tensor is dictated by its largest magnitude, so channels whose weights
+          are much smaller receive very few distinct integer levels and their logits turn noisy, which shows
+          up class by class. Per-channel granularity gives each output channel its own scale. The zero-point
+          is a property of the tensor rather than of a class, class imbalance is a training concern, and
+          accumulators are already wider than eight bits.
+        difficulty: advanced
+        mastery: true
+      - id: infra-q-weights-vs-activations
+        prompt: "Why are weights straightforward to quantize offline while activations need either calibration data or a dynamic scheme?"
+        options:
+          - "Weights are fixed once training ends, but activation ranges depend on the input and are unknown until runtime"
+          - "Weights are stored in fewer bits already, so their range is bounded, whereas activations remain in float32"
+          - "Weights are read once per forward pass and activations many times, so activation error compounds much faster"
+          - "Weights are per-layer while activations are per-token, so activations need a separate scale for every position"
+        answer: "Weights are fixed once training ends, but activation ranges depend on the input and are unknown until runtime"
+        explanation: >-
+          A weight tensor's minimum and maximum are known the moment training stops, so its scale is
+          computed once; activations change with every input, so you either observe representative data to
+          fix a range or compute the scale on the fly at some runtime cost. Weights are not already narrower
+          than activations, the number of reads does not change how a range is chosen, and per-token scaling
+          is one implementation choice rather than the underlying reason.
+        difficulty: intermediate
+      - id: infra-q-nf4-double-quant
+        prompt: "In the 4-bit path most people actually run, what do NF4 and double quantization each contribute?"
+        options:
+          - "NF4 spaces its levels for normally distributed weights, and double quantization compresses the scales themselves"
+          - "NF4 stores four bits per activation, and double quantization applies the same scheme twice to reach two bits"
+          - "NF4 clusters weights into sixteen learned centroids, and double quantization retrains those centroids per layer"
+          - "NF4 keeps outlier weights in float16, and double quantization halves the block size to bound the error further"
+        answer: "NF4 spaces its levels for normally distributed weights, and double quantization compresses the scales themselves"
+        explanation: >-
+          NF4 is a fixed non-uniform grid chosen to suit zero-centred normally distributed weights, and
+          double quantization quantizes the per-block quantization constants to reclaim a fraction of a bit
+          per parameter. It applies to weights rather than activations and never becomes a 2-bit scheme, its
+          levels are fixed rather than learned per layer, and keeping outliers in higher precision is a
+          different technique altogether.
+        difficulty: advanced
+      - id: infra-q-symmetric-vs-asymmetric
+        prompt: "When is symmetric quantization the right mapping for a tensor, and when do you need the zero-point that an asymmetric scheme carries?"
+        options:
+          - "Symmetric suits ranges centred on zero and removes cross terms, while asymmetric suits skewed ranges such as post-ReLU"
+          - "Symmetric suits activations because they are unsigned, while asymmetric suits weights because those include negatives"
+          - "Symmetric suits int4 where levels are scarce, while asymmetric suits int8 where the extra parameter is affordable"
+          - "Symmetric suits per-tensor granularity, while asymmetric is required whenever the scales are computed per channel"
+        answer: "Symmetric suits ranges centred on zero and removes cross terms, while asymmetric suits skewed ranges such as post-ReLU"
+        explanation: >-
+          Weight distributions sit roughly symmetrically about zero, so a zero-point of zero wastes little
+          range and keeps extra terms out of the integer matrix multiply, whereas a one-sided distribution
+          such as a ReLU output would waste half the integer range without a zero-point. The choice follows
+          the shape of the distribution, not the signedness convention, the bit width, or the granularity at
+          which scales are stored.
+        difficulty: advanced
+
+  - topic: infra-ptq-gptq-awq
+    # Source: Hugging Face - GPTQ, plus AWQ
+    questions:
+      - id: infra-ptq-calibration-purpose
+        prompt: "GPTQ requires a calibration dataset. What is that data used for, given that no gradient descent takes place?"
+        options:
+          - "To supply real layer inputs, so weights are adjusted to keep each layer's output close to the unquantized one"
+          - "To fine-tune the model briefly at low precision, so that it adapts to the quantized weight values it now holds"
+          - "To measure task accuracy at several bit widths, so that the method can select the best width automatically"
+          - "To build a vocabulary of frequent activations that the runtime kernel then keeps in higher precision per layer"
+        answer: "To supply real layer inputs, so weights are adjusted to keep each layer's output close to the unquantized one"
+        explanation: >-
+          GPTQ pushes real activations through the network and solves, column by column, for the rounding
+          that minimises each layer's output error, using second-order information derived from those
+          inputs. That is a closed-form correction rather than training, so no gradients or labels are
+          involved, bit width is a knob the operator sets, and no runtime table of activations is produced.
+        difficulty: intermediate
+      - id: infra-ptq-calibration-mismatch
+        prompt: "A checkpoint calibrated on English prose is serving Python code completion and quality is visibly worse. What went wrong and what do you change?"
+        options:
+          - "Rounding was optimised for activations the model no longer sees, so recalibrate on samples from the serving traffic"
+          - "The tokenizer differs between the two domains, so the checkpoint has to be requantized with a code tokenizer"
+          - "Code needs more bits than prose, so the checkpoint must be rebuilt at eight bits rather than at four bits"
+          - "Calibration text leaks into the weights, so the model now completes prose passages instead of the code given"
+        answer: "Rounding was optimised for activations the model no longer sees, so recalibrate on samples from the serving traffic"
+        explanation: >-
+          Post-training quantization minimises error on the activation statistics it was shown, so a domain
+          shift moves layer inputs away from the distribution the rounding was tuned for and error grows
+          where it matters. A few hundred representative production samples fix it. Quantization leaves the
+          tokenizer untouched, bit width is a separate lever that may not be needed, and calibration does
+          not implant its text as content.
+        difficulty: advanced
+        mastery: true
+      - id: infra-ptq-awq-salience
+        prompt: "AWQ protects salient weights. Which weights count as salient under its criterion, and why is the intuitive alternative wrong?"
+        options:
+          - "Those in channels with large activation magnitudes, because weight magnitude alone does not predict output error"
+          - "Those with the largest absolute values, because the biggest weights are what dominate the layer's output"
+          - "Those in the first and last layers, because errors introduced there propagate through the whole network"
+          - "Those with the largest gradients from a short backward pass over the calibration data it has collected"
+        answer: "Those in channels with large activation magnitudes, because weight magnitude alone does not predict output error"
+        explanation: >-
+          AWQ inspects activation statistics, because a small weight multiplied by a consistently large
+          activation contributes more to the output than a large weight that is rarely excited, and it
+          protects those channels by scaling before rounding. Picking the largest weights is the intuitive
+          but measurably worse criterion, layer position is not the rule, and AWQ needs no backward pass at all.
+        difficulty: advanced
+      - id: infra-ptq-group-size-tradeoff
+        prompt: "Two 4-bit checkpoints of the same model differ only in group size, 32 against 128. What is that number trading?"
+        options:
+          - "Smaller groups store more scales, so accuracy improves while stored metadata and per-step overhead both rise"
+          - "Smaller groups quantize fewer layers, so accuracy improves because more of the layers stay at full precision"
+          - "Smaller groups use fewer bits per weight, so memory use falls and accuracy falls along with it as a result"
+          - "Smaller groups shorten the calibration sequence, so the quantization run finishes faster at equal accuracy"
+        answer: "Smaller groups store more scales, so accuracy improves while stored metadata and per-step overhead both rise"
+        explanation: >-
+          Group size is how many consecutive weights share one scale and zero-point, so 32 gives four times
+          as many quantization parameters as 128: each group covers a narrower range and rounds with less
+          error, at the cost of extra metadata and slightly more dequantisation work per matrix multiply. It
+          changes neither which layers are quantized, nor the bit width, nor the calibration run.
+        difficulty: intermediate
+      - id: infra-ptq-choose-checkpoint
+        prompt: "You must pick a pre-quantized checkpoint off the Hub for a specific serving stack. Which consideration settles it first?"
+        options:
+          - "Whether your runtime has kernels for that format and bit width on your hardware, since otherwise it will not run fast"
+          - "Whether the checkpoint came from the model's original authors, since third-party quantizations are unsupported"
+          - "Whether the file is smaller than the float16 original, since that is what proves the quantization succeeded"
+          - "Whether the calibration dataset is published, since a checkpoint without it cannot be loaded by the library"
+        answer: "Whether your runtime has kernels for that format and bit width on your hardware, since otherwise it will not run fast"
+        explanation: >-
+          The binding practical constraint is kernel support: a format your runtime cannot execute either
+          falls back to slow dequantisation or refuses to load, so hardware and library compatibility comes
+          before any accuracy comparison. Authorship is weak evidence of quality, every quantized checkpoint
+          is smaller so size proves nothing, and the calibration set is useful documentation rather than a
+          load-time requirement.
+        difficulty: intermediate
+
+  - topic: infra-kv-cache
+    # Source: Hugging Face - Cache strategies, plus TGI PagedAttention
+    questions:
+      - id: infra-kv-what-is-cached
+        prompt: "During autoregressive decoding, which tensors are kept between steps and which have to be recomputed at every step?"
+        options:
+          - "Keys and values for all previous positions are kept, while the new token's query and attention output are computed"
+          - "The attention weight matrix is kept and extended by one row, while keys and values are re-derived from hidden states"
+          - "The hidden states of every layer are kept, and keys and values are re-projected from them at each single step"
+          - "The logits over the vocabulary are kept for reuse, while keys, queries and values are all recomputed each step"
+        answer: "Keys and values for all previous positions are kept, while the new token's query and attention output are computed"
+        explanation: >-
+          Each past token's key and value projections never change, so caching them turns a step into
+          attending one fresh query against a growing cache. The new query is position-specific and cannot
+          be reused, and the attention output depends on it. Caching hidden states would leave the
+          projections to redo, and cached logits are the output of a step rather than an input to the next.
+        difficulty: intermediate
+        mastery: true
+      - id: infra-kv-size-arithmetic
+        prompt: "For a 32-layer model with 32 heads of dimension 128 in float16, roughly how much cache does one 4096-token sequence need?"
+        options:
+          - "About 2 GiB, from two tensors per layer times 32 layers times 4096 positions times 4096 values at two bytes"
+          - "About 512 MiB, because only the keys are stored and each layer holds a single vector for each position"
+          - "About 8 GiB, because each of the 32 heads keeps its own copy of the entire hidden state per position"
+          - "About 128 MiB, because the cache holds one key and one value vector per layer rather than per position"
+        answer: "About 2 GiB, from two tensors per layer times 32 layers times 4096 positions times 4096 values at two bytes"
+        explanation: >-
+          The count is two tensors, times layers, times positions, times heads multiplied by head dimension,
+          times bytes per element, and 2 times 32 times 4096 times 4096 times 2 bytes is 2 GiB. Dropping the
+          values is not how attention works, heads partition the hidden size instead of each holding all of
+          it, and retaining every position is the entire point of the cache.
+        difficulty: advanced
+      - id: infra-kv-linear-not-quadratic
+        prompt: "What does caching change about the cost of generating the thousandth token of a reply, and what does it leave unchanged?"
+        options:
+          - "Per-step compute stops growing quadratically and becomes linear in context, but bytes read per step still grow"
+          - "Both compute and memory traffic per step become constant, since only the newest key and value are needed"
+          - "Per-step compute is unchanged and only memory improves, since the same attention matrix is rebuilt anyway"
+          - "Per-step compute falls to constant time while total memory stays flat, because entries are overwritten in place"
+        answer: "Per-step compute stops growing quadratically and becomes linear in context, but bytes read per step still grow"
+        explanation: >-
+          Without a cache every step re-projects the whole prefix, making n tokens quadratic work; with it
+          each step projects one token and attends over n cached positions, which is linear per step. Since
+          attention still needs every past key and value, neither compute nor bytes read per step is
+          constant, and nothing is overwritten because old entries remain in use until the sequence ends.
+        difficulty: advanced
+      - id: infra-kv-strategy-choice
+        prompt: "Your cache no longer fits in device memory. Which statement about the available cache strategies is correct?"
+        options:
+          - "A sliding window bounds memory by discarding old entries, which costs recall of anything outside the window"
+          - "A static preallocated cache lowers peak memory, since the allocation is sized once instead of being grown"
+          - "Offloading to host memory keeps quality and costs nothing, since transfers fully overlap the forward pass"
+          - "Quantizing the cache to eight bits leaves outputs identical, since only the stored copy changes precision"
+        answer: "A sliding window bounds memory by discarding old entries, which costs recall of anything outside the window"
+        explanation: >-
+          A sliding window is a genuine memory bound with a genuine cost: evicted tokens can no longer be
+          attended to, so long-range dependencies disappear. A static cache is preallocated for
+          compile-friendly shapes and does not lower peak usage, offloading trades interconnect bandwidth
+          and per-step latency, and quantizing keys and values changes the numbers attention consumes, so
+          outputs shift.
+        difficulty: intermediate
+      - id: infra-kv-fragmentation-paging
+        prompt: "Where does the wasted memory come from when a server reserves one contiguous cache slot per request sized for the maximum sequence length?"
+        options:
+          - "Reserved but unwritten positions in each slot, since real replies are far shorter than the maximum allowed"
+          - "Duplicate keys and values across slots, since concurrent requests sharing a prompt each store their own copy"
+          - "Alignment padding between slots, since every allocation is rounded up to the device page size by the driver"
+          - "Gradient buffers held beside each slot, since the attention kernel allocates workspace that it never frees"
+        answer: "Reserved but unwritten positions in each slot, since real replies are far shorter than the maximum allowed"
+        explanation: >-
+          Sizing every slot for the worst case means most of each reservation is never written, and that
+          internal fragmentation is what block-based paging removes by handing out small blocks on demand.
+          Prefix duplication is a further saving paging enables rather than the main waste here, driver
+          alignment is negligible at this scale, and inference runs with no gradient buffers at all.
+        difficulty: advanced
+
+  - topic: infra-continuous-batching
+    # Source: Anyscale - continuous batching for LLM inference, plus the vLLM post
+    questions:
+      - id: infra-cb-iteration-level
+        prompt: "What does the scheduler do at each decoding iteration under continuous batching that request-level batching cannot do?"
+        options:
+          - "Evict finished sequences and admit waiting ones between steps, so no slot idles until the longest reply ends"
+          - "Split one long request across several devices, so its remaining tokens finish alongside the new arrivals"
+          - "Reorder the tokens of queued prompts so that similar prompts are prefilled within the same forward pass"
+          - "Grow the batch dimension inside a single forward pass, so late arrivals join the step that is already running"
+        answer: "Evict finished sequences and admit waiting ones between steps, so no slot idles until the longest reply ends"
+        explanation: >-
+          The unit of scheduling becomes the iteration rather than the request: after every step completed
+          sequences leave the batch and queued ones take their place. Static batching holds all slots until
+          its slowest member finishes, wasting the rest. Splitting a request across devices is model
+          parallelism, prompt reordering is unrelated, and a forward pass in flight has a fixed shape.
+        difficulty: intermediate
+        mastery: true
+      - id: infra-cb-variance-dependence
+        prompt: "The measured results show enormous gains from continuous batching on some workloads and modest ones on others. Which workload property predicts the size of the gain?"
+        options:
+          - "Spread in generated output lengths, because idle locked slots under static batching are created by early finishers"
+          - "Average prompt length, because prefill dominates each step's time and long prompts stall the whole batch"
+          - "Request arrival rate alone, because a busier queue always fills the batch regardless of how long replies are"
+          - "Model size, because a larger model spends proportionally longer per token and so benefits more per slot"
+        answer: "Spread in generated output lengths, because idle locked slots under static batching are created by early finishers"
+        explanation: >-
+          When every sequence emits a similar number of tokens a static batch finishes together and wastes
+          little, so there is not much for iteration-level scheduling to reclaim; when lengths vary by an
+          order of magnitude most slots sit finished but locked, which is exactly the waste it removes.
+          Prompt length, arrival rate and model size shift the absolute numbers without creating that idleness.
+        difficulty: advanced
+      - id: infra-cb-p50-latency
+        prompt: "Continuous batching improved median latency even though each decoding step became no faster. Which component of latency actually fell?"
+        options:
+          - "Queueing delay before admission, because a new request no longer waits for the current batch to drain"
+          - "Time spent in prefill, because prompts from several requests are now fused into one longer sequence"
+          - "Interconnect time between layers, because the scheduler keeps the whole batch resident on one device"
+          - "Detokenisation at the end, because finished sequences are released as soon as they emit a stop token"
+        answer: "Queueing delay before admission, because a new request no longer waits for the current batch to drain"
+        explanation: >-
+          End-to-end latency includes the wait before work starts, and under static batching that wait can
+          be the entire duration of an in-flight batch, so admitting requests at the next iteration boundary
+          removes most of it. Prompts are not concatenated into one sequence, layer-to-layer transfers do not
+          depend on scheduling policy, and detokenisation is negligible in a multi-second request.
+        difficulty: intermediate
+      - id: infra-cb-paged-memory-dependency
+        prompt: "Why does iteration-level batching depend on a block-based KV memory manager to be practical at all?"
+        options:
+          - "Admitting a sequence mid-flight needs cache allocated incrementally, which contiguous max-length slots cannot do"
+          - "Blocks let the scheduler move a sequence's cache to another device whenever the batch composition changes"
+          - "Blocks store keys and values at lower precision, and that is what frees the memory new arrivals need"
+          - "Blocks remove the need for cache during prefill, so an arriving prompt occupies no memory until it decodes"
+        answer: "Admitting a sequence mid-flight needs cache allocated incrementally, which contiguous max-length slots cannot do"
+        explanation: >-
+          With fixed contiguous reservations the number of slots is decided by the maximum length and cannot
+          grow, so a new arrival has nowhere to go even while other sequences barely use their own
+          allocation; blocks let each sequence take memory as it grows and return it on completion. Blocks
+          do not change precision, are not a migration mechanism, and prefill still writes cache entries.
+        difficulty: advanced
+        mastery: true
+      - id: infra-cb-same-forward-pass
+        prompt: "Two requests with completely different prompts are decoded in the same forward pass. How are they actually combined?"
+        options:
+          - "As separate rows of the batch with their own cache blocks and positions, never concatenated into one context"
+          - "As one sequence separated by a delimiter token, with attention masked so that neither one can read the other"
+          - "As two passes fused by the kernel, so the weights are read once but the arithmetic still runs twice per step"
+          - "As a single averaged hidden state per layer, with the results split apart again before the output projection"
+        answer: "As separate rows of the batch with their own cache blocks and positions, never concatenated into one context"
+        explanation: >-
+          Batching stacks independent sequences along the batch dimension, each keeping its own cache blocks
+          and position indices, and the shared work is reading the weights once for the whole batch.
+          Concatenating with a delimiter would waste attention over the other request and corrupt positions,
+          nothing runs the arithmetic twice in sequence, and hidden states are never averaged across requests.
+        difficulty: advanced
+
+  - topic: infra-latency-vs-throughput
+    # Source: NVIDIA - LLM Inference Benchmarking: Fundamental Concepts
+    questions:
+      - id: infra-lt-slo-metrics
+        prompt: "Users call a streaming chat endpoint slow. Which pair of metrics belongs in the SLO, and why not end-to-end request latency?"
+        options:
+          - "Time to first token and intertoken latency, because end-to-end time varies with how long the answer happens to be"
+          - "End-to-end latency and requests per second, because those are the only two numbers a client can observe directly"
+          - "Tokens per second and requests per second, because a streaming client consumes tokens rather than whole requests"
+          - "Time to first token and total output tokens, because a slow reply is almost always an unusually long reply"
+        answer: "Time to first token and intertoken latency, because end-to-end time varies with how long the answer happens to be"
+        explanation: >-
+          In a streaming interface the experience is how long until text appears and how steadily it
+          arrives, and both are independent of answer length, whereas an end-to-end target is violated by a
+          legitimately long answer and met by a truncated one. Requests and tokens per second are capacity
+          measures, and output length is a property of the workload rather than a service commitment.
+        difficulty: intermediate
+        mastery: true
+      - id: infra-lt-batch-tradeoff
+        prompt: "Raising the server's maximum batch size lifted total tokens per second substantially while each user's text still arrived just as slowly. Why is that expected?"
+        options:
+          - "Extra sequences ride along on the same weight reads, so system throughput rises while one sequence's step time does not fall"
+          - "Larger batches are scheduled at lower priority, so the server deliberately slows individual streams in order to protect capacity"
+          - "Throughput counts prefill tokens while intertoken latency counts only decode, so the two metrics are measuring different phases"
+          - "Tokens per second is measured at the load generator and intertoken latency inside the server, so the gap is an instrumentation artefact"
+        answer: "Extra sequences ride along on the same weight reads, so system throughput rises while one sequence's step time does not fall"
+        explanation: >-
+          A decoding step reads the whole model once however many sequences are in the batch, so adding
+          sequences produces more tokens for the same memory traffic, which is throughput; the step still
+          takes at least as long, and bigger batches lengthen it slightly, so per-stream latency does not
+          improve. Priority scheduling, phase accounting and instrumentation placement are not what creates
+          the divergence.
+        difficulty: advanced
+        mastery: true
+      - id: infra-lt-tps-ambiguity
+        prompt: "A benchmark reports three thousand tokens per second. What must the report state before that number means anything?"
+        options:
+          - "Whether it is per stream or aggregate, at what concurrency, and with which input and output token lengths"
+          - "Whether the tokenizer counted words or subwords, since that alone changes the number by roughly a third"
+          - "Whether the figure includes queueing time, since only steady-state numbers can be compared across systems"
+          - "Whether the run used sampling or greedy decoding, since sampling adds a measurable cost to every token"
+        answer: "Whether it is per stream or aggregate, at what concurrency, and with which input and output token lengths"
+        explanation: >-
+          Aggregate tokens per second scales with concurrency, so one system can report wildly different
+          figures depending on load and on how long each prompt and completion was, and without those
+          parameters the number is not comparable to anything. Tokenizer choice, queue accounting and the
+          sampling method all have small effects next to concurrency and sequence lengths.
+        difficulty: intermediate
+      - id: infra-lt-benchmark-parameters
+        prompt: "You are asked to reproduce a competitor's throughput claim. Which controls have to be fixed for the comparison to be fair?"
+        options:
+          - "Fixed input and output lengths, a defined load pattern, identical hardware, and the same stopping behaviour"
+          - "The same model weights and a warmed cache, since everything else is determined once the model has loaded"
+          - "The same client library and network path, since remote measurement dominates any server-side difference"
+          - "The same random seed, since sampling variation is the main source of disagreement between two runs"
+        answer: "Fixed input and output lengths, a defined load pattern, identical hardware, and the same stopping behaviour"
+        explanation: >-
+          Benchmarks are comparable only when the workload is pinned: sequence lengths decide how much
+          prefill and decode happens, the load pattern decides queueing, hardware decides bandwidth, and
+          whether end-of-sequence tokens are honoured decides whether every request generates the same
+          number of tokens. Client library, network path and seed cause noise rather than order-of-magnitude
+          differences.
+        difficulty: advanced
+      - id: infra-lt-goodput
+        prompt: "Peak throughput occurs at a batch size that breaks your latency targets. How should the operating point be chosen?"
+        options:
+          - "Take the largest throughput that still meets the time to first token and intertoken latency targets"
+          - "Take the peak throughput point and then add replicas until the measured latency comes back in range"
+          - "Take the smallest batch size that saturates the device, since latency is then bounded by the hardware"
+          - "Take the batch size where the throughput and latency curves cross, since that point balances both"
+        answer: "Take the largest throughput that still meets the time to first token and intertoken latency targets"
+        explanation: >-
+          Useful serving capacity is throughput subject to a latency commitment, so you sweep batch size and
+          keep the largest one whose latency percentiles still pass. Adding replicas cannot repair a
+          per-request latency the batch size itself causes, saturating the device is a hardware milestone
+          rather than an objective, and two curves plotted in different units have no meaningful crossing point.
+        difficulty: intermediate
+
+  - topic: infra-memory-bound-decoding
+    # Source: kipp.ly - Transformer Inference Arithmetic (the kv cache and capacity
+    # sections carry the argument), plus the ONNX Runtime quantization page. The best
+    # treatment of this mechanism is a personal blog, so the questions lean on its
+    # arithmetic rather than on any vendor claim.
+    questions:
+      - id: infra-mb-flops-per-byte
+        prompt: "Which piece of arithmetic shows that single-stream decoding is limited by memory bandwidth rather than by arithmetic units?"
+        options:
+          - "Each parameter costs two flops and two bytes read, near one flop per byte, while the accelerator offers over a hundred"
+          - "Each token costs two flops per parameter and the device retires two flops per clock, so the clock rate is the ceiling"
+          - "Attention is quadratic in context while the feed-forward layers are linear, so a long context becomes compute bound"
+          - "Each parameter is read once per token and the caches are far smaller than the model, so cache misses set the limit"
+        answer: "Each parameter costs two flops and two bytes read, near one flop per byte, while the accelerator offers over a hundred"
+        explanation: >-
+          At batch one a decoding step does a multiply and an add per weight, two flops, while fetching that
+          weight costs two bytes in float16, so arithmetic intensity is about one flop per byte against
+          hardware whose flops-to-bandwidth ratio is two orders of magnitude higher, leaving the units idle.
+          Clock rate is not the binding constraint, attention is small next to weight reads at typical
+          contexts, and calling it a cache-miss problem misses that the traffic is unavoidable rather than
+          badly ordered.
+        difficulty: advanced
+        mastery: true
+      - id: infra-mb-latency-floor
+        prompt: "A 13-billion-parameter model in float16 runs on a device with roughly 1.5 TB per second of memory bandwidth. What per-token floor does the arithmetic predict at batch one?"
+        options:
+          - "Around 17 milliseconds, because 26 GB of weights has to be read once for every token generated"
+          - "Around 4 milliseconds, because only the layers involved in the current token need to be read per step"
+          - "Around 170 milliseconds, because the weights and an activation buffer of equal size are both read per token"
+          - "Around 1 millisecond, because dividing the flop count by the device's peak throughput gives the step time"
+        answer: "Around 17 milliseconds, because 26 GB of weights has to be read once for every token generated"
+        explanation: >-
+          Thirteen billion parameters at two bytes each is about 26 GB, and 26 divided by 1500 is roughly 17
+          milliseconds, a floor no kernel can beat because every weight is needed for every token. Dense
+          transformers activate all layers per token so no subset read applies, activations are tiny next to
+          weights, and dividing flops by peak compute gives the figure that would hold if decoding were
+          compute bound, which is precisely what it is not.
+        difficulty: advanced
+      - id: infra-mb-batching-intensity
+        prompt: "Why does raising batch size improve tokens per second so dramatically during decoding, and what eventually limits the trick?"
+        options:
+          - "Weight bytes are amortised across sequences, raising intensity until compute saturates or cache traffic dominates"
+          - "Larger batches let the kernel skip reading weights for any sequence that has produced its stop token already"
+          - "Larger batches shorten each sequence's context, so fewer cached keys and values have to be read per step"
+          - "Larger batches move the model into faster memory, since the scheduler pins hot layers once utilisation rises"
+        answer: "Weight bytes are amortised across sequences, raising intensity until compute saturates or cache traffic dominates"
+        explanation: >-
+          One weight read serves every sequence in the step, so flops per byte scale with batch size and the
+          device stops idling; the ceiling arrives when either the arithmetic units become the bottleneck or
+          the per-sequence cache reads, which do grow with batch, consume the bandwidth budget. Finished
+          sequences do not reduce weight reads for the rest, contexts are unaffected by batch size, and
+          nothing promotes weights into faster memory.
+        difficulty: advanced
+      - id: infra-mb-cpu-inference
+        prompt: "Given that decoding is bandwidth bound, what does the arithmetic predict about running the same model on a many-core CPU?"
+        options:
+          - "It stays slow, because host memory bandwidth is tens of gigabytes per second and extra cores cannot help"
+          - "It runs at similar speed, because the flop requirement per token is modest and cores are plentiful"
+          - "It runs faster for short replies, because the CPU avoids transferring the prompt across the device bus"
+          - "It becomes compute bound instead, so the bottleneck moves to vector unit width rather than memory"
+        answer: "It stays slow, because host memory bandwidth is tens of gigabytes per second and extra cores cannot help"
+        explanation: >-
+          The bound is bytes moved per token, and a server CPU has one to two orders of magnitude less
+          memory bandwidth than an accelerator, so token rate falls in proportion no matter how many cores
+          wait for data. Plentiful cores address a compute limit that does not exist here, prompt transfer
+          is negligible, and a CPU has less compute as well as less bandwidth, so it does not become compute
+          bound.
+        difficulty: intermediate
+      - id: infra-mb-quantization-speedup
+        prompt: "Switching to int8 weight-only quantization nearly doubled tokens per second on the same device even though the arithmetic is unchanged. Why?"
+        options:
+          - "Halving bytes per weight halves the traffic that sets the step time, so the bandwidth-bound floor halves too"
+          - "Integer units on the device are faster than the float units, so the same operation count completes sooner"
+          - "The smaller model fits entirely in on-chip cache, so weights are read from memory only for the first token"
+          - "Quantization removes the near-zero weights from the matrices, so fewer multiply-accumulate operations run"
+        answer: "Halving bytes per weight halves the traffic that sets the step time, so the bandwidth-bound floor halves too"
+        explanation: >-
+          When a phase is limited by how many bytes cross the memory bus, shrinking each weight is a direct
+          speedup, which is why weight-only quantization helps decoding far more than it helps
+          compute-bound prefill. The kernels typically dequantise and multiply in float, so integer
+          arithmetic speed is not the mechanism, even a quantized multi-billion-parameter model dwarfs
+          on-chip memory, and quantization rounds weights rather than pruning them away.
+        difficulty: advanced
+        mastery: true

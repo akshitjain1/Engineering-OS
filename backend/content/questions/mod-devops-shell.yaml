@@ -1,0 +1,132 @@
+# DevOps awareness shell: orientation questions only.
+#
+# devops-awareness maps to the Microsoft Learn Discover DevOps module: what the
+# practice is, its culture, its lifecycle and its claimed benefits. devops-path
+# maps to the foundations learning path and asks about module ordering.
+schema_version: 1
+kind: question_bank
+module: mod-devops-shell
+topics:
+  - topic: devops-awareness
+    # Source: Microsoft Learn - Discover DevOps (definition, culture, goals, lifecycle)
+    questions:
+      - id: devops-aware-definition-consequence
+        prompt: "The module defines this practice as the union of people, process and products. What follows from that definition?"
+        options:
+          - "Buying a pipeline tool alone cannot deliver it, because how people work must change too"
+          - "It is a role a company hires for, so the definition is met once that role is filled"
+          - "It is purely a process framework, leaving tools and team structure out of its scope"
+          - "It concerns operations staff only, since developers carry on working exactly as before"
+        answer: "Buying a pipeline tool alone cannot deliver it, because how people work must change too"
+        explanation: >-
+          Naming all three elements is the module's way of saying tooling is necessary but not sufficient.
+          A single hire cannot change how two groups collaborate, the definition explicitly includes
+          products, and the whole point is shared ownership across development and operations rather
+          than one side of it.
+        difficulty: beginner
+        mastery: true
+      - id: devops-aware-culture-not-tooling
+        prompt: "Which of these is the cultural change this module describes, rather than a tooling choice?"
+        options:
+          - "Developers and operators sharing responsibility for how the service behaves live"
+          - "Running every build inside a container image based on a pinned base layer"
+          - "Keeping deployment scripts in the same repository as the application code"
+          - "Publishing an internal dashboard charting build duration for each project"
+        answer: "Developers and operators sharing responsibility for how the service behaves live"
+        explanation: >-
+          Shared ownership of production is the cultural shift the module puts at the centre, and it changes
+          incentives rather than infrastructure. Containerised builds, co-located scripts and build
+          dashboards are all worthwhile technical practices, but each can be adopted without anyone's
+          responsibilities changing.
+        difficulty: intermediate
+      - id: devops-aware-lifecycle-phases
+        prompt: "This module divides the application lifecycle into four phases. Which set does it name?"
+        options:
+          - "Plan, develop, deliver and operate, with each phase feeding continuously into the next"
+          - "Design, code, test and archive, with the loop ending once a release has shipped"
+          - "Analyse, budget, procure and install, matching how infrastructure gets purchased"
+          - "Gather, label, train and serve, which is how a model reaches its production users"
+        answer: "Plan, develop, deliver and operate, with each phase feeding continuously into the next"
+        explanation: >-
+          The four named phases form a continuous loop, and operate feeds back into plan, which is what
+          makes it continuous rather than a one-way pipeline. A lifecycle that ends at release contradicts
+          that loop, procurement describes buying hardware, and the fourth option is a machine
+          learning workflow.
+        difficulty: beginner
+      - id: devops-aware-claimed-benefits
+        prompt: "Which pair of outcomes does this module offer as the benefit of adopting the practice?"
+        options:
+          - "Shorter lead time into production, and faster recovery when a release goes wrong"
+          - "The elimination of production failures, and an end to any need for on-call cover"
+          - "Fewer engineers needed, and a smaller cloud bill within the first month of adoption"
+          - "Longer release cycles, giving quality assurance far more time to test each change"
+        answer: "Shorter lead time into production, and faster recovery when a release goes wrong"
+        explanation: >-
+          The module's benefits are about speed and resilience: changes reach users sooner and failures are
+          recovered from quickly. Failures are expected rather than eliminated, headcount and cost savings
+          are not the claim, and lengthening the release cycle is the opposite of what the practice
+          sets out to do.
+        difficulty: intermediate
+        mastery: true
+
+  - topic: devops-path
+    # Source: Microsoft Learn - DevOps foundations: core principles and practices (module order)
+    questions:
+      - id: devops-path-source-control-first
+        prompt: "Why does this learning path teach source control before continuous integration?"
+        options:
+          - "Integration means merging and verifying committed changes, so a shared repository comes first"
+          - "Source control is the harder subject, so it is placed first while attention is highest"
+          - "Continuous integration replaces source control once every build has been automated"
+          - "The two are unrelated, so the order in the path is only an alphabetical convenience"
+        answer: "Integration means merging and verifying committed changes, so a shared repository comes first"
+        explanation: >-
+          There is nothing for an integration server to build until changes are committed somewhere shared,
+          so the dependency is real. Difficulty does not set the order, integration is built on top of
+          version control rather than replacing it, and the modules are sequenced by dependency
+          rather than by name.
+        difficulty: beginner
+        mastery: true
+      - id: devops-path-ci-before-cd
+        prompt: "What must continuous integration already provide before continuous delivery becomes safe?"
+        options:
+          - "An automated build and test on each change, so a candidate is known to be sound"
+          - "A manual sign-off from a release manager, recorded before a candidate is promoted"
+          - "A container registry, since delivery cannot promote an artefact that is not an image"
+          - "An incident process, since delivery is only ever exercised during an outage"
+        answer: "An automated build and test on each change, so a candidate is known to be sound"
+        explanation: >-
+          Delivery automates the promotion of a build, so the build has to be verified automatically or you
+          are shipping unknown quality faster. A manual gate is what delivery reduces, registries are one
+          packaging option among several, and delivery runs on ordinary changes rather than
+          during incidents.
+        difficulty: intermediate
+      - id: devops-path-reliability-last
+        prompt: "Continuous reliability comes after delivery on this path. What does it add that delivery does not?"
+        options:
+          - "Measuring how the released service behaves for real users, and acting on what it shows"
+          - "Automating the build step, which delivery leaves for an engineer to trigger by hand"
+          - "Merging feature branches automatically, which is the part delivery does not cover"
+          - "Writing the unit tests, which the delivery stage assumes someone has already written"
+        answer: "Measuring how the released service behaves for real users, and acting on what it shows"
+        explanation: >-
+          Shipping quickly is worth little without knowing what happened next, so the reliability stage
+          closes the loop with monitoring and response. Build automation belongs to integration, automatic
+          merging is a branching policy, and test authoring sits earlier in the path than any of these
+          stages.
+        difficulty: intermediate
+      - id: devops-path-order-what-waits
+        prompt: "On this path, which piece cannot wait and which one comfortably can?"
+        options:
+          - "Version control and automated builds cannot wait; a service mesh comfortably can"
+          - "A service mesh cannot wait; version control can be added once a pipeline exists"
+          - "Neither can wait, because every module in the path depends on all of the others"
+          - "Both can wait, since this is a culture change that requires no tooling at all"
+        answer: "Version control and automated builds cannot wait; a service mesh comfortably can"
+        explanation: >-
+          The foundations are the ones every later practice is built on, while advanced runtime
+          infrastructure is an optimisation for a system already delivering. Reversing that puts networking
+          machinery ahead of the ability to build, the modules are ordered rather than mutually
+          dependent, and the culture claim ignores the automation half of the definition.
+        difficulty: advanced
+        mastery: true

@@ -1,0 +1,655 @@
+{
+  "topics": 506,
+  "questions": 2527,
+  "no_questions": [],
+  "thin_questions": [],
+  "no_primary": [],
+  "filler": [],
+  "shared_prompts": [],
+  "shared_primary_resources": [
+    {
+      "url": "https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O",
+      "topics": 101,
+      "slugs": "dsa-big-o,dsa-best-worst-average,dsa-array-traversal,dsa-array-insert-delete,dsa-prefix-sums,dsa-array-frequency,dsa-array-patterns,dsa-string-manipulation,dsa-string-frequency,dsa-character-processing,dsa-string-patterns,dsa-hash-map,dsa-hash-set,dsa-frequency-maps,dsa-lookup-patterns,dsa-two-pointers-opposite,dsa-two-pointers-same,dsa-two-pointers-partition,dsa-window-fixed,dsa-window-variable,dsa-window-frequency,dsa-singly-linked-list,dsa-list-operations,dsa-list-reversal,dsa-fast-slow,dsa-cycle-detection,dsa-list-merge,dsa-stack-fundamentals,dsa-monotonic-stack,dsa-queue-deque,dsa-queue-bfs-relationship,dsa-recursion-model,dsa-call-stack,dsa-recursive-trees,dsa-recursion-to-iteration,dsa-subsets,dsa-permutations,dsa-combinations,dsa-constraint-search,dsa-bubble-sort,dsa-selection-sort,dsa-insertion-sort,dsa-merge-sort,dsa-heap-sort,dsa-counting-radix,dsa-sort-stability,dsa-sort-complexity,dsa-binary-search-classic,dsa-binary-search-boundaries,dsa-first-last-occurrence,dsa-search-on-answer,dsa-rotated-arrays,dsa-tree-terminology,dsa-binary-trees,dsa-tree-dfs,dsa-tree-bfs,dsa-tree-height,dsa-tree-paths,dsa-tree-construction,dsa-bst-search,dsa-bst-insert,dsa-bst-delete,dsa-bst-validate,dsa-bst-ordered-properties,dsa-priority-queue,dsa-top-k,dsa-heap-scheduling,dsa-graph-representations,dsa-graph-bfs,dsa-graph-dfs,dsa-connected-components,dsa-graph-cycle,dsa-bipartite,dsa-topological-sort,dsa-union-find,dsa-unweighted-shortest,dsa-dijkstra,dsa-mst,dsa-greedy-reasoning,dsa-greedy-exchange,dsa-interval-problems,dsa-greedy-scheduling,dsa-greedy-patterns,dsa-dp-mindset,dsa-memoization,dsa-tabulation,dsa-dp-state,dsa-dp-transition,dsa-dp-1d,dsa-dp-2d,dsa-subsequence-dp,dsa-grid-dp,dsa-interval-dp,dsa-dp-optimization,dsa-tries,dsa-bit-manipulation,dsa-segment-tree-concept,dsa-advanced-graphs,dsa-advanced-dp,dsa-pattern-selection,dsa-interview-hygiene"
+    },
+    {
+      "url": "https://missing.csail.mit.edu/2026/course-shell/",
+      "topics": 14,
+      "slugs": "cf-process,cf-os-processes,cf-filesystems,cf-os-permissions,cf-command-line,cf-filesystem-navigation,cf-linux-files,cf-pipes,cf-redirection,cf-grep,cf-find,cf-linux-permissions,cf-linux-processes,cf-shell"
+    },
+    {
+      "url": "https://cs50.harvard.edu/x/weeks/0/",
+      "topics": 7,
+      "slugs": "cf-bits-and-bytes,cf-binary,cf-hexadecimal,cf-problem-decomposition,cf-pseudocode,cf-algorithms,cf-time-complexity-intro"
+    },
+    {
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1",
+      "topics": 4,
+      "slugs": "nlp-awareness,nlp-path,nlp-what-is-nlp,genai-what-is-lm"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "topics": 4,
+      "slugs": "ml-train-test,ml-validation-split,ml-cross-validation,ts-why-random-splits-fail"
+    },
+    {
+      "url": "https://cs50.harvard.edu/x/weeks/1/",
+      "topics": 3,
+      "slugs": "cf-machine-code,cf-compiler,cf-program"
+    },
+    {
+      "url": "https://missing.csail.mit.edu/2026/command-line-environment/",
+      "topics": 3,
+      "slugs": "cf-os-environment-variables,cf-package-management,cf-linux-environment-variables"
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "topics": 3,
+      "slugs": "ai-eng-agent-loops,ai-eng-planning-memory,ai-eng-multi-agent-awareness"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/two-pointers-technique/",
+      "topics": 3,
+      "slugs": "dsa-array-patterns,dsa-two-pointers-opposite,dsa-two-pointers-partition"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UuIEbpQms8o",
+      "topics": 3,
+      "slugs": "cf-bits-and-bytes,cf-binary,cf-hexadecimal"
+    },
+    {
+      "url": "https://cs231n.github.io/optimization-2/",
+      "topics": 2,
+      "slugs": "dl-backprop-intuition,dl-computational-graphs"
+    },
+    {
+      "url": "https://d2l.ai/chapter_computer-vision/bounding-box.html",
+      "topics": 2,
+      "slugs": "cv-object-detection-overview,cv-bounding-boxes-iou"
+    },
+    {
+      "url": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+      "topics": 2,
+      "slugs": "dl-convolution-op,dl-padding-stride"
+    },
+    {
+      "url": "https://d2l.ai/chapter_introduction/index.html",
+      "topics": 2,
+      "slugs": "ml-types-of-ml,dl-why-deep-learning"
+    },
+    {
+      "url": "https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html",
+      "topics": 2,
+      "slugs": "dl-vanishing-gradients,dl-initialization"
+    },
+    {
+      "url": "https://d2l.ai/chapter_recurrent-neural-networks/rnn.html",
+      "topics": 2,
+      "slugs": "dl-rnn-awareness,nlp-rnn-lstm"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/evals",
+      "topics": 2,
+      "slugs": "ai-eng-awareness,genai-eval"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/text",
+      "topics": 2,
+      "slugs": "genai-awareness,genai-path"
+    },
+    {
+      "url": "https://docs.oracle.com/javase/tutorial/essential/concurrency/",
+      "topics": 2,
+      "slugs": "java-threads,java-synchronization-basics"
+    },
+    {
+      "url": "https://docs.pytest.org/en/stable/",
+      "topics": 2,
+      "slugs": "se-unit-tests,py-testing"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Program_counter",
+      "topics": 2,
+      "slugs": "cf-cpu,cf-instruction-execution"
+    },
+    {
+      "url": "https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes",
+      "topics": 2,
+      "slugs": "cf-remote,cf-pull-push"
+    },
+    {
+      "url": "https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging",
+      "topics": 2,
+      "slugs": "cf-merge,cf-conflicts"
+    },
+    {
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "topics": 2,
+      "slugs": "sysdesign-awareness,sysdesign-path"
+    },
+    {
+      "url": "https://missing.csail.mit.edu/2026/code-quality/",
+      "topics": 2,
+      "slugs": "cf-formatter,cf-linter"
+    },
+    {
+      "url": "https://missing.csail.mit.edu/2026/debugging-profiling/",
+      "topics": 2,
+      "slugs": "cf-debugging-thinking,cf-system-calls"
+    },
+    {
+      "url": "https://scikit-image.org/docs/stable/user_guide/numpy_images.html",
+      "topics": 2,
+      "slugs": "cv-what-is-an-image,cv-pixels-channels"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "topics": 2,
+      "slugs": "dq-data-leakage,dq-inconsistent-preprocessing"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+      "topics": 2,
+      "slugs": "nlp-vocabulary-bow,nlp-tf-idf"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/outlier_detection.html",
+      "topics": 2,
+      "slugs": "ml-anomaly-awareness,dq-outliers"
+    },
+    {
+      "url": "https://www.deeplearningbook.org/",
+      "topics": 2,
+      "slugs": "dl-awareness,dl-path"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/",
+      "topics": 2,
+      "slugs": "dsa-queue-bfs-relationship,dsa-graph-bfs"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/counting-frequencies-of-array-elements/",
+      "topics": 2,
+      "slugs": "dsa-array-frequency,dsa-string-frequency"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/dp-on-grids/",
+      "topics": 2,
+      "slugs": "dsa-dp-2d,dsa-grid-dp"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/heap-sort/",
+      "topics": 2,
+      "slugs": "dsa-heap-sort,dsa-heapify"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/introduction-to-backtracking-2/",
+      "topics": 2,
+      "slugs": "dsa-permutations,dsa-constraint-search"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/introduction-to-binary-tree/",
+      "topics": 2,
+      "slugs": "dsa-tree-terminology,dsa-binary-trees"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/k-largestor-smallest-elements-in-an-array/",
+      "topics": 2,
+      "slugs": "dsa-top-k,dsa-heap-scheduling"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/solve-dynamic-programming-problem/",
+      "topics": 2,
+      "slugs": "dsa-dp-state,dsa-dp-transition"
+    },
+    {
+      "url": "https://www.sqlite.org/lang_select.html",
+      "topics": 2,
+      "slugs": "db-sql-select,db-sql-joins"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FVcUKMu_M5Q",
+      "topics": 2,
+      "slugs": "nlp-transformers-nlp,genai-what-is-lm"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HqPJF2L5h9U",
+      "topics": 2,
+      "slugs": "dsa-heap-structure,dsa-heapify"
+    }
+  ],
+  "anchored_urls": 14,
+  "raw_source_urls": [],
+  "by_module": {
+    "mod-ai-eng-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-ai-security": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-be-http": {
+      "topics": 7,
+      "questions": 35,
+      "gaps": 0
+    },
+    "mod-cf-computer-fundamentals": {
+      "topics": 15,
+      "questions": 60,
+      "gaps": 0
+    },
+    "mod-cf-dev-environment": {
+      "topics": 8,
+      "questions": 32,
+      "gaps": 0
+    },
+    "mod-cf-git": {
+      "topics": 12,
+      "questions": 49,
+      "gaps": 0
+    },
+    "mod-cf-operating-systems": {
+      "topics": 9,
+      "questions": 36,
+      "gaps": 0
+    },
+    "mod-cf-programming-thinking": {
+      "topics": 8,
+      "questions": 32,
+      "gaps": 0
+    },
+    "mod-cf-terminal-linux": {
+      "topics": 12,
+      "questions": 48,
+      "gaps": 0
+    },
+    "mod-cloud": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-cv": {
+      "topics": 26,
+      "questions": 121,
+      "gaps": 0
+    },
+    "mod-db-sql": {
+      "topics": 5,
+      "questions": 25,
+      "gaps": 0
+    },
+    "mod-devops-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-dl": {
+      "topics": 4,
+      "questions": 20,
+      "gaps": 0
+    },
+    "mod-dl-core": {
+      "topics": 32,
+      "questions": 160,
+      "gaps": 0
+    },
+    "mod-dl-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-ds-core": {
+      "topics": 5,
+      "questions": 26,
+      "gaps": 0
+    },
+    "mod-dsa-advanced-patterns": {
+      "topics": 7,
+      "questions": 44,
+      "gaps": 0
+    },
+    "mod-dsa-algorithmic-thinking": {
+      "topics": 1,
+      "questions": 6,
+      "gaps": 0
+    },
+    "mod-dsa-arrays": {
+      "topics": 5,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-dsa-backtracking": {
+      "topics": 4,
+      "questions": 32,
+      "gaps": 0
+    },
+    "mod-dsa-binary-search": {
+      "topics": 5,
+      "questions": 40,
+      "gaps": 0
+    },
+    "mod-dsa-bst": {
+      "topics": 5,
+      "questions": 27,
+      "gaps": 0
+    },
+    "mod-dsa-complexity": {
+      "topics": 2,
+      "questions": 12,
+      "gaps": 0
+    },
+    "mod-dsa-dp": {
+      "topics": 12,
+      "questions": 60,
+      "gaps": 0
+    },
+    "mod-dsa-graphs": {
+      "topics": 6,
+      "questions": 38,
+      "gaps": 0
+    },
+    "mod-dsa-greedy": {
+      "topics": 5,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-dsa-hashing": {
+      "topics": 4,
+      "questions": 27,
+      "gaps": 0
+    },
+    "mod-dsa-heaps": {
+      "topics": 5,
+      "questions": 31,
+      "gaps": 0
+    },
+    "mod-dsa-linked-lists": {
+      "topics": 6,
+      "questions": 48,
+      "gaps": 0
+    },
+    "mod-dsa-mst": {
+      "topics": 1,
+      "questions": 6,
+      "gaps": 0
+    },
+    "mod-dsa-queue": {
+      "topics": 2,
+      "questions": 11,
+      "gaps": 0
+    },
+    "mod-dsa-recursion": {
+      "topics": 4,
+      "questions": 24,
+      "gaps": 0
+    },
+    "mod-dsa-shortest-paths": {
+      "topics": 2,
+      "questions": 14,
+      "gaps": 0
+    },
+    "mod-dsa-sliding-window": {
+      "topics": 3,
+      "questions": 24,
+      "gaps": 0
+    },
+    "mod-dsa-sorting": {
+      "topics": 9,
+      "questions": 55,
+      "gaps": 0
+    },
+    "mod-dsa-stack": {
+      "topics": 2,
+      "questions": 12,
+      "gaps": 0
+    },
+    "mod-dsa-strings": {
+      "topics": 4,
+      "questions": 24,
+      "gaps": 0
+    },
+    "mod-dsa-topo": {
+      "topics": 1,
+      "questions": 7,
+      "gaps": 0
+    },
+    "mod-dsa-trees": {
+      "topics": 7,
+      "questions": 44,
+      "gaps": 0
+    },
+    "mod-dsa-two-pointers": {
+      "topics": 3,
+      "questions": 18,
+      "gaps": 0
+    },
+    "mod-dsa-union-find": {
+      "topics": 1,
+      "questions": 6,
+      "gaps": 0
+    },
+    "mod-genai": {
+      "topics": 17,
+      "questions": 83,
+      "gaps": 0
+    },
+    "mod-genai-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-inference-perf": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-java-arrays": {
+      "topics": 1,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-java-collections": {
+      "topics": 5,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-java-comparable-comparator": {
+      "topics": 1,
+      "questions": 6,
+      "gaps": 0
+    },
+    "mod-java-concurrency": {
+      "topics": 2,
+      "questions": 10,
+      "gaps": 0
+    },
+    "mod-java-control-flow": {
+      "topics": 4,
+      "questions": 17,
+      "gaps": 0
+    },
+    "mod-java-exceptions": {
+      "topics": 3,
+      "questions": 14,
+      "gaps": 0
+    },
+    "mod-java-file-io": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-java-generics": {
+      "topics": 2,
+      "questions": 9,
+      "gaps": 0
+    },
+    "mod-java-getting-started": {
+      "topics": 3,
+      "questions": 13,
+      "gaps": 0
+    },
+    "mod-java-input-output": {
+      "topics": 1,
+      "questions": 4,
+      "gaps": 0
+    },
+    "mod-java-interfaces-abstraction": {
+      "topics": 3,
+      "questions": 14,
+      "gaps": 0
+    },
+    "mod-java-jvm": {
+      "topics": 3,
+      "questions": 12,
+      "gaps": 0
+    },
+    "mod-java-lambdas": {
+      "topics": 2,
+      "questions": 9,
+      "gaps": 0
+    },
+    "mod-java-methods": {
+      "topics": 3,
+      "questions": 15,
+      "gaps": 0
+    },
+    "mod-java-oop": {
+      "topics": 6,
+      "questions": 32,
+      "gaps": 0
+    },
+    "mod-java-operators": {
+      "topics": 1,
+      "questions": 5,
+      "gaps": 0
+    },
+    "mod-java-practices": {
+      "topics": 2,
+      "questions": 10,
+      "gaps": 0
+    },
+    "mod-java-streams": {
+      "topics": 2,
+      "questions": 11,
+      "gaps": 0
+    },
+    "mod-java-strings": {
+      "topics": 2,
+      "questions": 10,
+      "gaps": 0
+    },
+    "mod-java-testing": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-java-variables-types": {
+      "topics": 2,
+      "questions": 9,
+      "gaps": 0
+    },
+    "mod-math-jit": {
+      "topics": 9,
+      "questions": 45,
+      "gaps": 0
+    },
+    "mod-math-ml": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-ml-boosting": {
+      "topics": 5,
+      "questions": 25,
+      "gaps": 0
+    },
+    "mod-ml-core": {
+      "topics": 35,
+      "questions": 140,
+      "gaps": 0
+    },
+    "mod-ml-data-quality": {
+      "topics": 5,
+      "questions": 25,
+      "gaps": 0
+    },
+    "mod-ml-timeseries": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-mlops": {
+      "topics": 14,
+      "questions": 70,
+      "gaps": 0
+    },
+    "mod-mlops-cicd": {
+      "topics": 5,
+      "questions": 25,
+      "gaps": 0
+    },
+    "mod-net-core": {
+      "topics": 6,
+      "questions": 27,
+      "gaps": 0
+    },
+    "mod-nlp-core": {
+      "topics": 16,
+      "questions": 80,
+      "gaps": 0
+    },
+    "mod-nlp-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-ops-core": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-py-core": {
+      "topics": 5,
+      "questions": 25,
+      "gaps": 0
+    },
+    "mod-py-tooling": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-retrieval-quality": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-rl": {
+      "topics": 6,
+      "questions": 30,
+      "gaps": 0
+    },
+    "mod-se-core": {
+      "topics": 10,
+      "questions": 43,
+      "gaps": 0
+    },
+    "mod-sysdesign": {
+      "topics": 4,
+      "questions": 20,
+      "gaps": 0
+    },
+    "mod-sysdesign-shell": {
+      "topics": 2,
+      "questions": 8,
+      "gaps": 0
+    },
+    "mod-web-core": {
+      "topics": 8,
+      "questions": 33,
+      "gaps": 0
+    }
+  }
+}
