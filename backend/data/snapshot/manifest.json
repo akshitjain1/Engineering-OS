@@ -9,7 +9,7 @@
  },
  "curriculum_lessons": {
   "dir": "curriculum",
-  "rows": 449
+  "rows": 506
  },
  "curriculum_levels": {
   "dir": "curriculum",
@@ -17,11 +17,11 @@
  },
  "curriculum_modules": {
   "dir": "curriculum",
-  "rows": 76
+  "rows": 86
  },
  "curriculum_resources": {
   "dir": "curriculum",
-  "rows": 1246
+  "rows": 1347
  },
  "curriculum_subjects": {
   "dir": "curriculum",
@@ -29,7 +29,7 @@
  },
  "curriculum_topics": {
   "dir": "curriculum",
-  "rows": 449
+  "rows": 506
  },
  "curriculum_tracks": {
   "dir": "curriculum",
@@ -37,7 +37,7 @@
  },
  "daily_plan_items": {
   "dir": "progress",
-  "rows": 44
+  "rows": 49
  },
  "daily_plans": {
   "dir": "progress",
@@ -45,7 +45,7 @@
  },
  "day_journals": {
   "dir": "progress",
-  "rows": 6
+  "rows": 7
  },
  "diagnostic_answers": {
   "dir": "progress",
@@ -65,15 +65,15 @@
  },
  "learning_activities": {
   "dir": "progress",
-  "rows": 453
+  "rows": 468
  },
  "lesson_exercises": {
   "dir": "curriculum",
-  "rows": 461
+  "rows": 492
  },
  "lesson_questions": {
   "dir": "curriculum",
-  "rows": 1355
+  "rows": 2527
  },
  "mastery_evidence": {
   "dir": "progress",
@@ -81,7 +81,7 @@
  },
  "revision_schedules": {
   "dir": "progress",
-  "rows": 19
+  "rows": 21
  },
  "topic_mastery": {
   "dir": "progress",
@@ -89,7 +89,7 @@
  },
  "user_progress": {
   "dir": "progress",
-  "rows": 29
+  "rows": 31
  },
  "user_project_progress": {
   "dir": "progress",

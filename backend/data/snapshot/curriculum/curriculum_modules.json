@@ -606,5 +606,85 @@
   "order_index": 104,
   "slug": "mod-nlp-core",
   "subject_id": 14
+ },
+ {
+  "description": "Virtual environments, uv projects, pyproject.toml, dependency constraints, lockfiles and interpreter pinning.",
+  "id": 77,
+  "name": "Python environment and project tooling",
+  "order_index": 1,
+  "slug": "mod-py-tooling",
+  "subject_id": 9
+ },
+ {
+  "description": "MDPs, value functions, Q-learning, policy gradients, RLHF mechanics and contextual bandits.",
+  "id": 78,
+  "name": "Reinforcement Learning",
+  "order_index": 105,
+  "slug": "mod-rl",
+  "subject_id": 14
+ },
+ {
+  "description": "Service models, object storage, GPU instances, memory sizing, managed inference and cost control.",
+  "id": 79,
+  "name": "Cloud for AI workloads",
+  "order_index": 1,
+  "slug": "mod-cloud",
+  "subject_id": 12
+ },
+ {
+  "description": "OWASP LLM risks, prompt injection, tool-mediated exfiltration, output handling, model supply chain and PII disclosure.",
+  "id": 80,
+  "name": "AI/ML Security",
+  "order_index": 106,
+  "slug": "mod-ai-security",
+  "subject_id": 14
+ },
+ {
+  "description": "Quantization, post-training quantization methods, the KV cache, continuous batching, latency/throughput SLOs and memory-bound decoding.",
+  "id": 81,
+  "name": "Inference Performance",
+  "order_index": 107,
+  "slug": "mod-inference-perf",
+  "subject_id": 14
+ },
+ {
+  "description": "Reranking, hybrid search, chunking evaluation, ranked retrieval metrics, ANN index choice and when Postgres is enough.",
+  "id": 82,
+  "name": "Retrieval Quality",
+  "order_index": 108,
+  "slug": "mod-retrieval-quality",
+  "subject_id": 14
+ },
+ {
+  "description": "Leakage, train/serve skew, missing values, outlier versus novelty detection and class imbalance. Deliberately five topics: outside the scikit-learn user guide there is no authoritative single page on data quality as a discipline, so the module is not padded to six.",
+  "id": 83,
+  "name": "Data Quality for ML",
+  "order_index": 1,
+  "slug": "mod-ml-data-quality",
+  "subject_id": 7
+ },
+ {
+  "description": "Library-specific depth on boosted trees: the regularised objective, XGBoost tuning, LightGBM mechanics, categorical features, and why trees still beat deep nets on tabular data.",
+  "id": 84,
+  "name": "Gradient Boosting in Practice",
+  "order_index": 2,
+  "slug": "mod-ml-boosting",
+  "subject_id": 7
+ },
+ {
+  "description": "Why random splits are invalid on temporal data, rolling-origin validation, baselines, forecast accuracy metrics, stationarity and ML-style lag and calendar features.",
+  "id": 85,
+  "name": "Time Series",
+  "order_index": 3,
+  "slug": "mod-ml-timeseries",
+  "subject_id": 7
+ },
+ {
+  "description": "Continuous delivery for ML, testing ML systems, production-readiness scoring, training in CI and model registries.",
+  "id": 86,
+  "name": "CI/CD for ML",
+  "order_index": 2,
+  "slug": "mod-mlops-cicd",
+  "subject_id": 12
  }
 ]

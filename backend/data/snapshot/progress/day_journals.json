@@ -64,5 +64,16 @@
   "tomorrow": "Continue with the flow.",
   "updated_at": "2026-09-07 16:30:54.799663",
   "user_id": "akshit"
+ },
+ {
+  "built": "Update the overall Mapped resources on Engineering OS : there were many topic which contains wrong resources link mapped fixed that and also check whether the OS is Ready to trust Blidnly. ",
+  "entry_date": "2026-09-08",
+  "id": 7,
+  "learned": "Learned about the Process Managment\nStrings in Array\nString Manipulation ",
+  "minutes_logged": 0,
+  "struggled": "Leetcode 151 : https://leetcode.com/problems/reverse-words-in-a-string/description/\n\ngood Question took me few more minutes to figure out (how to deal with multiple spaces in between or starting)",
+  "tomorrow": "Learn Industry Practices",
+  "updated_at": "2026-09-08 15:23:23.282955",
+  "user_id": "akshit"
  }
 ]
