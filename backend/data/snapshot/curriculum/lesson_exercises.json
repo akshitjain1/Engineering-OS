@@ -425,8 +425,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-09 14:11:23.033072",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Write two short paragraphs: (1) when you would use threads vs processes; (2) one risk of shared memory. No code required.",
@@ -3050,8 +3050,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-09 16:40:28.383585",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "IMPLEMENT: groupAnagrams(List<String>) using freq signature or sorted key. TRACE: ['eat','tea','tan','ate','nat','bat'] buckets. SOLVE: NeetCode 150 — Group Anagrams, Valid Anagram, Ransom Note. TRANSFER (internal): Two strings — min deletions to make anagram.",

@@ -4210,5 +4210,131 @@
   "minutes": 1,
   "source": "day_session",
   "user_id": "akshit"
+ },
+ {
+  "activity_type": "review",
+  "created_at": "2026-09-09 13:44:17.357000",
+  "id": 469,
+  "local_date": "2026-09-09",
+  "minutes": 1,
+  "source": "day_session",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "learn",
+  "created_at": "2026-09-09 14:11:23.145122",
+  "id": 470,
+  "local_date": "2026-09-09",
+  "minutes": 27,
+  "source": "day_session",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 14:11:27.311849",
+  "id": 471,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:69",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 14:11:30.427768",
+  "id": 472,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:70",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 14:11:33.085001",
+  "id": 473,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:71",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 14:11:36.132602",
+  "id": 474,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:72",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "practice",
+  "created_at": "2026-09-09 14:25:11.188935",
+  "id": 475,
+  "local_date": "2026-09-09",
+  "minutes": 14,
+  "source": "day_session",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:00.392514",
+  "id": 476,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:566",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:07.486310",
+  "id": 477,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:567",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:16.677716",
+  "id": 478,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:568",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:26.234828",
+  "id": 479,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:569",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:28.162791",
+  "id": 480,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:570",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "assessment",
+  "created_at": "2026-09-09 16:15:29.722403",
+  "id": 481,
+  "local_date": "2026-09-09",
+  "minutes": 3,
+  "source": "question:571",
+  "user_id": "akshit"
+ },
+ {
+  "activity_type": "dsa",
+  "created_at": "2026-09-09 16:40:28.566272",
+  "id": 482,
+  "local_date": "2026-09-09",
+  "minutes": 87,
+  "source": "day_session",
+  "user_id": "akshit"
  }
 ]

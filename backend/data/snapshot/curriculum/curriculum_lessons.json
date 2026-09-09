@@ -204,7 +204,7 @@
   "topic_id": 17
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "Threads are multiple execution paths inside one process and share that process's memory. CS50 Week 0 mentions threads in Scratch as a light analogy only.",
   "hours_estimated": 0.5,
@@ -1500,7 +1500,7 @@
   "topic_id": 125
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. Character frequency drives anagrams, permutations-in-window, and multiset comparisons. int[26] or HashMap depending on alphabet — same counting logic as C++.",
   "hours_estimated": 0.75,
