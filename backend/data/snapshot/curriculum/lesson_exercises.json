@@ -3075,8 +3075,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-10 15:01:50.491985",
+  "completion_status": "completed",
   "concepts_required": "[]",
   "correct_answer": null,
   "description": "IMPLEMENT: atoi-style parseInts from char[] until non-digit. TRACE: \"-123abc\" → -123. SOLVE: NeetCode 150 — Valid Palindrome (skip/judge chars). TRANSFER (internal): Sum numbers separated by '+' in a string.",

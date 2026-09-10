@@ -84,9 +84,9 @@
   "lesson_id": null,
   "mastery_status": "not_started",
   "progress_state": "not_started",
-  "streak_days": 8,
+  "streak_days": 9,
   "topic_id": null,
-  "total_streak_days": 8,
+  "total_streak_days": 9,
   "user_id": "akshit",
   "xp_earned": 0
  },
@@ -437,6 +437,19 @@
   "progress_state": "completed",
   "streak_days": 0,
   "topic_id": 19,
+  "total_streak_days": 0,
+  "user_id": "akshit",
+  "xp_earned": 0
+ },
+ {
+  "dsa_topic_id": null,
+  "id": 35,
+  "last_activity_at": "2026-09-10 15:01:50.491985",
+  "lesson_id": null,
+  "mastery_status": "not_started",
+  "progress_state": "completed",
+  "streak_days": 0,
+  "topic_id": 127,
   "total_streak_days": 0,
   "user_id": "akshit",
   "xp_earned": 0

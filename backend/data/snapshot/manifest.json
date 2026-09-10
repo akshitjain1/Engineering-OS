@@ -45,7 +45,7 @@
  },
  "day_journals": {
   "dir": "progress",
-  "rows": 8
+  "rows": 9
  },
  "diagnostic_answers": {
   "dir": "progress",
@@ -65,7 +65,7 @@
  },
  "learning_activities": {
   "dir": "progress",
-  "rows": 489
+  "rows": 497
  },
  "lesson_exercises": {
   "dir": "curriculum",
@@ -81,7 +81,7 @@
  },
  "revision_schedules": {
   "dir": "progress",
-  "rows": 24
+  "rows": 25
  },
  "topic_mastery": {
   "dir": "progress",
@@ -89,7 +89,7 @@
  },
  "user_progress": {
   "dir": "progress",
-  "rows": 34
+  "rows": 35
  },
  "user_project_progress": {
   "dir": "progress",

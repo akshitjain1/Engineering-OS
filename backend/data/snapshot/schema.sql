@@ -77,7 +77,7 @@ CREATE TABLE curriculum_resources (
 	estimated_minutes INTEGER, 
 	required_concepts_covered JSON, 
 	exactness VARCHAR(20), 
-	notes TEXT, estimate_confidence VARCHAR(10), estimate_method VARCHAR(40), verification_evidence TEXT, last_verified_at VARCHAR(40), learner_visible BOOLEAN DEFAULT 1, visibility_class VARCHAR(40), boundary_type VARCHAR(40), start_boundary VARCHAR(200), end_boundary VARCHAR(200), start_timestamp VARCHAR(20), end_timestamp VARCHAR(20), item_count INTEGER, difficulty_mix JSON, 
+	notes TEXT, estimate_confidence VARCHAR(10), estimate_method VARCHAR(40), verification_evidence TEXT, last_verified_at VARCHAR(40), learner_visible BOOLEAN DEFAULT 1, visibility_class VARCHAR(40), boundary_type VARCHAR(40), start_boundary VARCHAR(200), end_boundary VARCHAR(200), start_timestamp VARCHAR(20), end_timestamp VARCHAR(20), item_count INTEGER, difficulty_mix JSON, collection_items JSON, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(lesson_id) REFERENCES curriculum_lessons (id)
 );

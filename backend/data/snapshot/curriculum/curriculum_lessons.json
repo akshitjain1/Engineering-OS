@@ -1512,7 +1512,7 @@
   "topic_id": 126
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "You already know DSA in C++. This is a rebuild of fundamentals for Java interviews and deeper reasoning, not a first course in programming. char arithmetic: '0'..'9', 'a'..'z', Character.isLetterOrDigit. Map digits to ints with c-'0'. Same char classification as C++.",
   "hours_estimated": 0.75,
