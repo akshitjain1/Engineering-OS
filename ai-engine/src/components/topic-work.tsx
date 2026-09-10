@@ -200,6 +200,7 @@ export function ProblemRow({
   };
 
   const shared = resource.also_in_topics ?? [];
+  const items = resource.collection_items ?? [];
 
   return (
     <li className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4">
@@ -262,6 +263,48 @@ export function ProblemRow({
         </p>
       ) : null}
 
+      {/* The problems, each linking to its own page.
+          The card used to offer one button to the whole 150-problem index and
+          a sentence telling you to find the right section inside it. NeetCode
+          publishes per-problem URLs -- with its own slugs, so "Contains
+          Duplicate" is /problems/duplicate-integer/ -- and every one of these
+          was fetched and checked against the title the page serves before it
+          was written. The label is that served title, because sending you
+          looking for "Rotting Oranges" on a page headed "Rotting Fruit" is its
+          own small lie. */}
+      {items.length > 0 ? (
+        <ol className="mt-3 space-y-1">
+          {items.map((item, i) => (
+            <li key={item.url} className="flex items-baseline gap-2 text-sm">
+              <span className="w-5 shrink-0 text-right text-xs text-[var(--muted)]">
+                {i + 1}.
+              </span>
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noreferrer"
+                className="min-w-0 flex-1 truncate text-[var(--accent)] hover:underline"
+              >
+                {item.title}
+              </a>
+              {item.difficulty ? (
+                <span
+                  className={`shrink-0 rounded border px-1.5 py-0.5 text-[11px] font-medium ${
+                    DIFFICULTY_TONE[item.difficulty.toLowerCase()] ??
+                    "text-[var(--muted)] border-[var(--border)]"
+                  }`}
+                >
+                  {item.difficulty}
+                </span>
+              ) : null}
+              {item.minutes ? (
+                <span className="shrink-0 text-xs text-[var(--muted)]">~{item.minutes}m</span>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+      ) : null}
+
       {/* The mapping pins 57 problems to more than one topic, and solving one
           counts everywhere it appears. Without saying so, a problem arriving
           already ticked just looks wrong -- and worse, you would skip the
@@ -285,7 +328,8 @@ export function ProblemRow({
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]"
           >
-            Solve it <ExternalLink className="h-3.5 w-3.5" />
+            {items.length > 0 ? "Open the list" : "Solve it"}{" "}
+            <ExternalLink className="h-3.5 w-3.5" />
           </a>
         ) : null}
         <button

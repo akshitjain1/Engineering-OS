@@ -196,6 +196,8 @@ export type ResourcePublic = {
   item_count?: number | null;
   /** For a set: how those problems break down by difficulty. */
   difficulty_mix?: { easy?: number; medium?: number; hard?: number } | null;
+  /** For a set: the problems in it, each with its own page. */
+  collection_items?: CollectionItem[] | null;
   /** How estimated_minutes was arrived at, so a default can be shown as one. */
   estimate_method?: string | null;
   difficulty: string | null;
@@ -203,6 +205,18 @@ export type ResourcePublic = {
   official_unofficial: string;
   completion_status: string;
   completed: boolean;
+};
+
+/** One problem inside a problem set. */
+export type CollectionItem = {
+  /** The name the destination page uses -- confirmed by fetching it. */
+  title: string;
+  /** The LeetCode name, which is sometimes different. */
+  problem?: string;
+  difficulty?: string | null;
+  minutes?: number | null;
+  url: string;
+  leetcode_url?: string | null;
 };
 
 export type MasteryPublic = {

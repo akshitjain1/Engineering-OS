@@ -102,17 +102,30 @@ def test_problems_are_listed_easiest_first(found):
         assert ranks == sorted(ranks), name
 
 
-def test_the_description_names_the_problems(found):
+def test_the_description_states_the_size_of_the_set(found):
     """The old description said "solve the small representative subset listed
     in the exercise" and the lesson had no exercise, so the subset was never
-    named anywhere. Nine problems and no way to know which."""
+    named anywhere: nine problems and no way to know which.
+
+    It no longer recites the names either -- the card lists each problem as its
+    own link now, and printing them twice made the card unreadable. What the
+    description still has to carry is the size, the spread and the fact that
+    this is not one sitting.
+    """
     text = nc.describe("Arrays & Hashing", found["Arrays & Hashing"])
     assert "9 problems" in text
     assert "3 easy, 6 medium" in text
     assert "195 minutes" in text
-    for problem in ("Contains Duplicate", "Two Sum", "Valid Sudoku"):
-        assert problem in text
     assert "across sessions" in text
+
+
+def test_the_problems_are_reachable_even_though_the_prose_stopped_listing_them(found):
+    """The pair to the test above: dropping the names from the prose is only
+    acceptable because every problem is in `problems` with its own URL."""
+    section = found["Arrays & Hashing"]
+    names = {p["problem"] for p in section["problems"]}
+    assert {"Contains Duplicate", "Two Sum", "Valid Sudoku"} <= names
+    assert len(section["problems"]) == section["count"] == 9
 
 
 def test_the_description_does_not_point_at_a_missing_exercise(found):
@@ -120,11 +133,76 @@ def test_the_description_does_not_point_at_a_missing_exercise(found):
     assert "listed in the exercise" not in text
 
 
-def test_every_problem_carries_a_leetcode_url(found):
+# ---------------------------------------------------------------------------
+# per-problem links
+# ---------------------------------------------------------------------------
+
+def test_every_problem_links_to_its_own_neetcode_page(found):
+    """The card used to offer one button to the whole 150-problem index.
+
+    NeetCode does publish per-problem URLs, and they keep the list context:
+    https://neetcode.io/problems/duplicate-integer/question?list=neetcode150
+    """
     for section in found.values():
         for problem in section["problems"]:
-            assert problem["url"].startswith("https://leetcode.com/problems/")
-            assert not problem["url"].endswith("problems//")
+            assert problem["url"].startswith("https://neetcode.io/problems/")
+            assert problem["url"].endswith("/question?list=neetcode150")
+            slug = problem["url"].removeprefix("https://neetcode.io/problems/").split("/")[0]
+            assert slug, f"empty slug for {problem['problem']}"
+
+
+def test_the_slug_is_neetcodes_own_not_leetcodes(found):
+    """"Contains Duplicate" is /problems/duplicate-integer/ on NeetCode.
+
+    Building these URLs from the LeetCode slug -- which is the only one in
+    NeetCode's published JSON -- would have produced 150 dead links that all
+    looked plausible.
+    """
+    by_name = {
+        p["problem"]: p for section in found.values() for p in section["problems"]
+    }
+    assert "duplicate-integer" in by_name["Contains Duplicate"]["url"]
+    assert "contains-duplicate" not in by_name["Contains Duplicate"]["url"]
+    assert "is-anagram" in by_name["Valid Anagram"]["url"]
+
+
+def test_the_leetcode_url_is_kept_alongside(found):
+    for section in found.values():
+        for problem in section["problems"]:
+            assert problem["leetcode_url"].startswith("https://leetcode.com/problems/")
+            assert not problem["leetcode_url"].endswith("problems//")
+
+
+def test_each_problem_carries_its_own_minutes(found):
+    """A set that lists nine problems and one number is still hiding the
+    timing. Each line has to say what it costs."""
+    for section in found.values():
+        for problem in section["problems"]:
+            assert problem["minutes"] == MINUTES_BY_DIFFICULTY[problem["difficulty"].title()]
+        assert sum(p["minutes"] for p in section["problems"]) == section["minutes"]
+
+
+def test_the_label_is_the_title_the_page_serves(found):
+    """NeetCode renames: "Rotting Oranges" is "Rotting Fruit" there.
+
+    Every title in the cache was read off the live page. Labelling a link with
+    the LeetCode name would send the reader looking for a heading that is not
+    on the screen they land on.
+    """
+    by_name = {
+        p["problem"]: p for section in found.values() for p in section["problems"]
+    }
+    assert by_name["Rotting Oranges"]["title"] == "Rotting Fruit"
+    assert by_name["Walls And Gates"]["title"] == "Islands and Treasure"
+    assert by_name["Contains Duplicate"]["title"] == "Contains Duplicate"
+
+
+def test_every_problem_has_a_verified_title(found):
+    """A missing title would silently fall back to the LeetCode name, which is
+    the failure this is meant to make loud."""
+    rows = nc.fetch()
+    missing = [r["problem"] for r in rows if not r.get("nc_title")]
+    assert not missing, f"{len(missing)} problem(s) never had their page read: {missing[:5]}"
 
 
 # ---------------------------------------------------------------------------

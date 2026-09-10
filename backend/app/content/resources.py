@@ -221,6 +221,9 @@ def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, 
             or (getattr(resource, "item_count", None) or 0) > 1
         ),
         "difficulty_mix": getattr(resource, "difficulty_mix", None),
+        # The problems inside a set, each with its own link, difficulty and
+        # minutes, so the card can list them instead of pointing at an index.
+        "collection_items": getattr(resource, "collection_items", None),
         # How the minute figure was arrived at, so a default can be shown as a
         # default. Every NeetCode row carried a flat 20 with this field empty.
         "estimate_method": getattr(resource, "estimate_method", None),

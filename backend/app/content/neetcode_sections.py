@@ -21,6 +21,7 @@ comes from. The totals check out against it: 28 easy, 101 medium, 21 hard.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -38,6 +39,24 @@ DATA_URL = (
 #: A local copy, so an estimate can be recomputed without the network and so
 #: the numbers in the database can be traced to something committed.
 CACHE = Path(__file__).parent / "data" / "neetcode_150.json"
+
+#: Where the site's own problem pages live. The slug is NeetCode's, not
+#: LeetCode's -- "Contains Duplicate" is /problems/duplicate-integer/ -- and
+#: the list parameter is what keeps the page in NeetCode 150 context.
+PROBLEM_URL = "https://neetcode.io/problems/{slug}/question?list=neetcode150"
+
+#: The practice page, read only to discover the current bundle filename.
+PRACTICE_URL = "https://neetcode.io/practice"
+
+#: NeetCode's own slugs are not in the published JSON -- only in the compiled
+#: site bundle, as `ncLink`. Scraping a minified bundle is fragile, so two
+#: things guard it: the bundle name is discovered from the page rather than
+#: hardcoded (it carries a content hash and changes on every deploy), and every
+#: URL built from it is fetched and checked against the problem's title before
+#: anything is written. A bad parse fails loudly instead of writing 150 dead
+#: links.
+_BUNDLE = re.compile(r'src="(main\.[0-9a-f]+\.js)"')
+_NC_LINK = re.compile(r'problem:"([^"]+)"[^{}]*?ncLink:"([^"]+)"')
 
 #: Reused, not redefined. These are the per-difficulty costs already written
 #: against 316 LeetCode problems in this curriculum; a collection estimated on
@@ -59,14 +78,45 @@ def fetch(refresh: bool = False) -> list[dict[str, Any]]:
         return json.loads(CACHE.read_text(encoding="utf-8"))
     resp = httpx.get(DATA_URL, headers=_HEADERS, timeout=30, follow_redirects=True)
     resp.raise_for_status()
-    rows = [
-        {k: row.get(k) for k in ("problem", "pattern", "difficulty", "link", "neetcode150")}
-        for row in resp.json()
-        if row.get("neetcode150")
-    ]
+    slugs = nc_links()
+    rows = []
+    for row in resp.json():
+        if not row.get("neetcode150"):
+            continue
+        record = {
+            k: row.get(k) for k in ("problem", "pattern", "difficulty", "link", "neetcode150")
+        }
+        record["nc_link"] = (slugs.get(row["problem"]) or "").strip("/") or None
+        rows.append(record)
+    unmatched = [r["problem"] for r in rows if not r["nc_link"]]
+    if unmatched:
+        raise RuntimeError(
+            f"{len(unmatched)} problem(s) have no NeetCode slug, starting with "
+            f"{unmatched[:3]} -- refusing to cache a half-mapped list"
+        )
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(rows, indent=1, sort_keys=True), encoding="utf-8")
     return rows
+
+
+def nc_links() -> dict[str, str]:
+    """problem name -> NeetCode's own slug, read off the live site bundle."""
+    with httpx.Client(headers=_HEADERS, timeout=90, follow_redirects=True) as client:
+        page = client.get(PRACTICE_URL).text
+        names = _BUNDLE.findall(page)
+        if not names:
+            raise RuntimeError(
+                f"no main.<hash>.js found on {PRACTICE_URL}; the site's build "
+                "layout changed and this parser needs revisiting"
+            )
+        bundle = client.get(f"https://neetcode.io/{names[0]}").text
+    links = dict(_NC_LINK.findall(bundle))
+    if len(links) < 300:
+        raise RuntimeError(
+            f"only {len(links)} problem->ncLink pairs parsed out of the bundle, "
+            "which is too few to be right"
+        )
+    return links
 
 
 def sections(rows: list[dict[str, Any]] | None = None) -> dict[str, dict[str, Any]]:
@@ -82,8 +132,23 @@ def sections(rows: list[dict[str, Any]] | None = None) -> dict[str, dict[str, An
         mix = Counter(str(i["difficulty"]).lower() for i in items)
         out[name] = {
             "problems": [
-                {"problem": i["problem"], "difficulty": i["difficulty"],
-                 "url": f"https://leetcode.com/problems/{(i['link'] or '').strip('/')}/"}
+                {
+                    "problem": i["problem"],
+                    # The name the destination page actually uses, confirmed by
+                    # fetching it. NeetCode renames: "Rotting Oranges" is
+                    # "Rotting Fruit" there, "Walls And Gates" is "Islands and
+                    # Treasure". Labelling the link with the LeetCode name
+                    # would send you looking for a title that is not on screen.
+                    "title": i.get("nc_title") or i["problem"],
+                    "difficulty": i["difficulty"],
+                    "minutes": MINUTES_BY_DIFFICULTY.get(str(i["difficulty"]).title(), 25),
+                    # NeetCode's own page for the problem: the editorial, the
+                    # video and the editor, in list context. The card used to
+                    # link at the whole 150 and tell you to find the section.
+                    "url": PROBLEM_URL.format(slug=i["nc_link"]),
+                    "leetcode_url":
+                        f"https://leetcode.com/problems/{(i['link'] or '').strip('/')}/",
+                }
                 for i in items
             ],
             "count": len(items),
@@ -114,13 +179,10 @@ def describe(name: str, section: dict[str, Any]) -> str:
     mix = section["mix"]
     parts = [f"{n} {label}" for label, n in
              (("easy", mix["easy"]), ("medium", mix["medium"]), ("hard", mix["hard"])) if n]
-    listing = ", ".join(
-        f"{p['problem']} ({p['difficulty'].lower()})" for p in section["problems"]
-    )
     return (
         f"The {name} section of NeetCode 150: {section['count']} problems "
         f"({', '.join(parts)}), about {section['minutes']} minutes in total. "
-        f"Easiest first: {listing}. "
+        "Listed below easiest first, each linking straight to its own page. "
         "A set to work through across sessions, not a single sitting."
     )
 

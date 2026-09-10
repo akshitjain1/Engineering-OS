@@ -183,6 +183,10 @@ class CurriculumResource(Base):
     #: problems (three easy, six medium) and takes about 195 minutes.
     item_count: Mapped[Optional[int]] = Column(Integer, nullable=True)
     difficulty_mix: Mapped[Optional[dict]] = Column(JSON, nullable=True)
+    #: For a COLLECTION: the problems in it, each with its own URL, difficulty
+    #: and minutes. Without this the card could only link at the whole list --
+    #: "Open the Arrays & Hashing section" and find the nine yourself.
+    collection_items: Mapped[Optional[list]] = Column(JSON, nullable=True)
     notes: Mapped[Optional[str]] = Column(Text, nullable=True)
     estimate_confidence: Mapped[Optional[str]] = Column(String(10), nullable=True)  # HIGH | MEDIUM | LOW
     estimate_method: Mapped[Optional[str]] = Column(String(40), nullable=True)

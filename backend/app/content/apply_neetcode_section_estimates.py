@@ -149,6 +149,11 @@ def main(argv: list[str] | None = None) -> int:
             row.estimated_minutes = section["minutes"]
             row.item_count = section["count"]
             row.difficulty_mix = section["mix"]
+            # The problems themselves, each with its own page. Before this the
+            # card could only link at the whole 150 and say "open the Arrays &
+            # Hashing section" -- NeetCode does have per-problem URLs, and the
+            # slug is its own rather than LeetCode's.
+            row.collection_items = section["problems"]
             row.estimate_method = METHOD
             row.estimate_confidence = "HIGH"
             row.description = (

@@ -2,6 +2,8 @@
  {
   "difficulty": "Easy",
   "link": "contains-duplicate/",
+  "nc_link": "duplicate-integer",
+  "nc_title": "Contains Duplicate",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Contains Duplicate"
@@ -9,6 +11,8 @@
  {
   "difficulty": "Easy",
   "link": "valid-anagram/",
+  "nc_link": "is-anagram",
+  "nc_title": "Valid Anagram",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Valid Anagram"
@@ -16,6 +20,8 @@
  {
   "difficulty": "Easy",
   "link": "two-sum/",
+  "nc_link": "two-integer-sum",
+  "nc_title": "Two Sum",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Two Sum"
@@ -23,6 +29,8 @@
  {
   "difficulty": "Medium",
   "link": "group-anagrams/",
+  "nc_link": "anagram-groups",
+  "nc_title": "Group Anagrams",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Group Anagrams"
@@ -30,6 +38,8 @@
  {
   "difficulty": "Medium",
   "link": "top-k-frequent-elements/",
+  "nc_link": "top-k-elements-in-list",
+  "nc_title": "Top K Frequent Elements",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Top K Frequent Elements"
@@ -37,6 +47,8 @@
  {
   "difficulty": "Medium",
   "link": "product-of-array-except-self/",
+  "nc_link": "products-of-array-discluding-self",
+  "nc_title": "Products of Array Except Self",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Product of Array Except Self"
@@ -44,6 +56,8 @@
  {
   "difficulty": "Medium",
   "link": "valid-sudoku/",
+  "nc_link": "valid-sudoku",
+  "nc_title": "Valid Sudoku",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Valid Sudoku"
@@ -51,6 +65,8 @@
  {
   "difficulty": "Medium",
   "link": "encode-and-decode-strings/",
+  "nc_link": "string-encode-and-decode",
+  "nc_title": "Encode and Decode Strings",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Encode and Decode Strings"
@@ -58,6 +74,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-consecutive-sequence/",
+  "nc_link": "longest-consecutive-sequence",
+  "nc_title": "Longest Consecutive Sequence",
   "neetcode150": true,
   "pattern": "Arrays & Hashing",
   "problem": "Longest Consecutive Sequence"
@@ -65,6 +83,8 @@
  {
   "difficulty": "Easy",
   "link": "valid-palindrome/",
+  "nc_link": "is-palindrome",
+  "nc_title": "Valid Palindrome",
   "neetcode150": true,
   "pattern": "Two Pointers",
   "problem": "Valid Palindrome"
@@ -72,6 +92,8 @@
  {
   "difficulty": "Medium",
   "link": "two-sum-ii-input-array-is-sorted/",
+  "nc_link": "two-integer-sum-ii",
+  "nc_title": "Two Integer Sum II",
   "neetcode150": true,
   "pattern": "Two Pointers",
   "problem": "Two Sum II Input Array Is Sorted"
@@ -79,6 +101,8 @@
  {
   "difficulty": "Medium",
   "link": "3sum/",
+  "nc_link": "three-integer-sum",
+  "nc_title": "3Sum",
   "neetcode150": true,
   "pattern": "Two Pointers",
   "problem": "3Sum"
@@ -86,6 +110,8 @@
  {
   "difficulty": "Medium",
   "link": "container-with-most-water/",
+  "nc_link": "max-water-container",
+  "nc_title": "Container With Most Water",
   "neetcode150": true,
   "pattern": "Two Pointers",
   "problem": "Container With Most Water"
@@ -93,6 +119,8 @@
  {
   "difficulty": "Hard",
   "link": "trapping-rain-water/",
+  "nc_link": "trapping-rain-water",
+  "nc_title": "Trapping Rain Water",
   "neetcode150": true,
   "pattern": "Two Pointers",
   "problem": "Trapping Rain Water"
@@ -100,6 +128,8 @@
  {
   "difficulty": "Easy",
   "link": "best-time-to-buy-and-sell-stock/",
+  "nc_link": "buy-and-sell-crypto",
+  "nc_title": "Best Time to Buy and Sell Stock",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Best Time to Buy And Sell Stock"
@@ -107,6 +137,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-substring-without-repeating-characters/",
+  "nc_link": "longest-substring-without-duplicates",
+  "nc_title": "Longest Substring Without Repeating Characters",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Longest Substring Without Repeating Characters"
@@ -114,6 +146,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-repeating-character-replacement/",
+  "nc_link": "longest-repeating-substring-with-replacement",
+  "nc_title": "Longest Repeating Character Replacement",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Longest Repeating Character Replacement"
@@ -121,6 +155,8 @@
  {
   "difficulty": "Medium",
   "link": "permutation-in-string/",
+  "nc_link": "permutation-string",
+  "nc_title": "Permutation in String",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Permutation In String"
@@ -128,6 +164,8 @@
  {
   "difficulty": "Hard",
   "link": "minimum-window-substring/",
+  "nc_link": "minimum-window-with-characters",
+  "nc_title": "Minimum Window Substring",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Minimum Window Substring"
@@ -135,6 +173,8 @@
  {
   "difficulty": "Hard",
   "link": "sliding-window-maximum/",
+  "nc_link": "sliding-window-maximum",
+  "nc_title": "Sliding Window Maximum",
   "neetcode150": true,
   "pattern": "Sliding Window",
   "problem": "Sliding Window Maximum"
@@ -142,6 +182,8 @@
  {
   "difficulty": "Easy",
   "link": "valid-parentheses/",
+  "nc_link": "validate-parentheses",
+  "nc_title": "Valid Parentheses",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Valid Parentheses"
@@ -149,6 +191,8 @@
  {
   "difficulty": "Medium",
   "link": "min-stack/",
+  "nc_link": "minimum-stack",
+  "nc_title": "Min Stack",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Min Stack"
@@ -156,6 +200,8 @@
  {
   "difficulty": "Medium",
   "link": "evaluate-reverse-polish-notation/",
+  "nc_link": "evaluate-reverse-polish-notation",
+  "nc_title": "Evaluate Reverse Polish Notation",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Evaluate Reverse Polish Notation"
@@ -163,6 +209,8 @@
  {
   "difficulty": "Medium",
   "link": "generate-parentheses/",
+  "nc_link": "generate-parentheses",
+  "nc_title": "Generate Parentheses",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Generate Parentheses"
@@ -170,6 +218,8 @@
  {
   "difficulty": "Medium",
   "link": "daily-temperatures/",
+  "nc_link": "daily-temperatures",
+  "nc_title": "Daily Temperatures",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Daily Temperatures"
@@ -177,6 +227,8 @@
  {
   "difficulty": "Medium",
   "link": "car-fleet/",
+  "nc_link": "car-fleet",
+  "nc_title": "Car Fleet",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Car Fleet"
@@ -184,6 +236,8 @@
  {
   "difficulty": "Hard",
   "link": "largest-rectangle-in-histogram/",
+  "nc_link": "largest-rectangle-in-histogram",
+  "nc_title": "Largest Rectangle In Histogram",
   "neetcode150": true,
   "pattern": "Stack",
   "problem": "Largest Rectangle In Histogram"
@@ -191,6 +245,8 @@
  {
   "difficulty": "Easy",
   "link": "binary-search/",
+  "nc_link": "binary-search",
+  "nc_title": "Binary Search",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Binary Search"
@@ -198,6 +254,8 @@
  {
   "difficulty": "Medium",
   "link": "search-a-2d-matrix/",
+  "nc_link": "search-2d-matrix",
+  "nc_title": "Search a 2D Matrix",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Search a 2D Matrix"
@@ -205,6 +263,8 @@
  {
   "difficulty": "Medium",
   "link": "koko-eating-bananas/",
+  "nc_link": "eating-bananas",
+  "nc_title": "Koko Eating Bananas",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Koko Eating Bananas"
@@ -212,6 +272,8 @@
  {
   "difficulty": "Medium",
   "link": "find-minimum-in-rotated-sorted-array/",
+  "nc_link": "find-minimum-in-rotated-sorted-array",
+  "nc_title": "Find Minimum in Rotated Sorted Array",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Find Minimum In Rotated Sorted Array"
@@ -219,6 +281,8 @@
  {
   "difficulty": "Medium",
   "link": "search-in-rotated-sorted-array/",
+  "nc_link": "find-target-in-rotated-sorted-array",
+  "nc_title": "Search in Rotated Sorted Array",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Search In Rotated Sorted Array"
@@ -226,6 +290,8 @@
  {
   "difficulty": "Medium",
   "link": "time-based-key-value-store/",
+  "nc_link": "time-based-key-value-store",
+  "nc_title": "Time Based Key-Value Store",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Time Based Key Value Store"
@@ -233,6 +299,8 @@
  {
   "difficulty": "Hard",
   "link": "median-of-two-sorted-arrays/",
+  "nc_link": "median-of-two-sorted-arrays",
+  "nc_title": "Median of Two Sorted Arrays",
   "neetcode150": true,
   "pattern": "Binary Search",
   "problem": "Median of Two Sorted Arrays"
@@ -240,6 +308,8 @@
  {
   "difficulty": "Easy",
   "link": "reverse-linked-list/",
+  "nc_link": "reverse-a-linked-list",
+  "nc_title": "Reverse Linked List",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Reverse Linked List"
@@ -247,6 +317,8 @@
  {
   "difficulty": "Easy",
   "link": "merge-two-sorted-lists/",
+  "nc_link": "merge-two-sorted-linked-lists",
+  "nc_title": "Merge Two Sorted Linked Lists",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Merge Two Sorted Lists"
@@ -254,6 +326,8 @@
  {
   "difficulty": "Medium",
   "link": "reorder-list/",
+  "nc_link": "reorder-linked-list",
+  "nc_title": "Reorder Linked List",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Reorder List"
@@ -261,6 +335,8 @@
  {
   "difficulty": "Medium",
   "link": "remove-nth-node-from-end-of-list/",
+  "nc_link": "remove-node-from-end-of-linked-list",
+  "nc_title": "Remove Nth Node From End of List",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Remove Nth Node From End of List"
@@ -268,6 +344,8 @@
  {
   "difficulty": "Medium",
   "link": "copy-list-with-random-pointer/",
+  "nc_link": "copy-linked-list-with-random-pointer",
+  "nc_title": "Copy Linked List with Random Pointer",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Copy List With Random Pointer"
@@ -275,6 +353,8 @@
  {
   "difficulty": "Medium",
   "link": "add-two-numbers/",
+  "nc_link": "add-two-numbers",
+  "nc_title": "Add Two Numbers",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Add Two Numbers"
@@ -282,6 +362,8 @@
  {
   "difficulty": "Easy",
   "link": "linked-list-cycle/",
+  "nc_link": "linked-list-cycle-detection",
+  "nc_title": "Linked List Cycle Detection",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Linked List Cycle"
@@ -289,6 +371,8 @@
  {
   "difficulty": "Medium",
   "link": "find-the-duplicate-number/",
+  "nc_link": "find-duplicate-integer",
+  "nc_title": "Find the Duplicate Number",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Find The Duplicate Number"
@@ -296,6 +380,8 @@
  {
   "difficulty": "Medium",
   "link": "lru-cache/",
+  "nc_link": "lru-cache",
+  "nc_title": "LRU Cache",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "LRU Cache"
@@ -303,6 +389,8 @@
  {
   "difficulty": "Hard",
   "link": "merge-k-sorted-lists/",
+  "nc_link": "merge-k-sorted-linked-lists",
+  "nc_title": "Merge K Sorted Linked Lists",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Merge K Sorted Lists"
@@ -310,6 +398,8 @@
  {
   "difficulty": "Hard",
   "link": "reverse-nodes-in-k-group/",
+  "nc_link": "reverse-nodes-in-k-group",
+  "nc_title": "Reverse Nodes in K-Group",
   "neetcode150": true,
   "pattern": "Linked List",
   "problem": "Reverse Nodes In K Group"
@@ -317,6 +407,8 @@
  {
   "difficulty": "Easy",
   "link": "invert-binary-tree/",
+  "nc_link": "invert-a-binary-tree",
+  "nc_title": "Invert Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Invert Binary Tree"
@@ -324,6 +416,8 @@
  {
   "difficulty": "Easy",
   "link": "maximum-depth-of-binary-tree/",
+  "nc_link": "depth-of-binary-tree",
+  "nc_title": "Maximum Depth of Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Maximum Depth of Binary Tree"
@@ -331,6 +425,8 @@
  {
   "difficulty": "Easy",
   "link": "diameter-of-binary-tree/",
+  "nc_link": "binary-tree-diameter",
+  "nc_title": "Diameter of Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Diameter of Binary Tree"
@@ -338,6 +434,8 @@
  {
   "difficulty": "Easy",
   "link": "balanced-binary-tree/",
+  "nc_link": "balanced-binary-tree",
+  "nc_title": "Balanced Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Balanced Binary Tree"
@@ -345,6 +443,8 @@
  {
   "difficulty": "Easy",
   "link": "same-tree/",
+  "nc_link": "same-binary-tree",
+  "nc_title": "Same Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Same Tree"
@@ -352,6 +452,8 @@
  {
   "difficulty": "Easy",
   "link": "subtree-of-another-tree/",
+  "nc_link": "subtree-of-a-binary-tree",
+  "nc_title": "Subtree of Another Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Subtree of Another Tree"
@@ -359,6 +461,8 @@
  {
   "difficulty": "Medium",
   "link": "lowest-common-ancestor-of-a-binary-search-tree/",
+  "nc_link": "lowest-common-ancestor-in-binary-search-tree",
+  "nc_title": "Lowest Common Ancestor in Binary Search Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Lowest Common Ancestor of a Binary Search Tree"
@@ -366,6 +470,8 @@
  {
   "difficulty": "Medium",
   "link": "binary-tree-level-order-traversal/",
+  "nc_link": "level-order-traversal-of-binary-tree",
+  "nc_title": "Binary Tree Level Order Traversal",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Binary Tree Level Order Traversal"
@@ -373,6 +479,8 @@
  {
   "difficulty": "Medium",
   "link": "binary-tree-right-side-view/",
+  "nc_link": "binary-tree-right-side-view",
+  "nc_title": "Binary Tree Right Side View",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Binary Tree Right Side View"
@@ -380,6 +488,8 @@
  {
   "difficulty": "Medium",
   "link": "count-good-nodes-in-binary-tree/",
+  "nc_link": "count-good-nodes-in-binary-tree",
+  "nc_title": "Count Good Nodes in Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Count Good Nodes In Binary Tree"
@@ -387,6 +497,8 @@
  {
   "difficulty": "Medium",
   "link": "validate-binary-search-tree/",
+  "nc_link": "valid-binary-search-tree",
+  "nc_title": "Valid Binary Search Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Validate Binary Search Tree"
@@ -394,6 +506,8 @@
  {
   "difficulty": "Medium",
   "link": "kth-smallest-element-in-a-bst/",
+  "nc_link": "kth-smallest-integer-in-bst",
+  "nc_title": "Kth Smallest Integer in BST",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Kth Smallest Element In a Bst"
@@ -401,6 +515,8 @@
  {
   "difficulty": "Medium",
   "link": "construct-binary-tree-from-preorder-and-inorder-traversal/",
+  "nc_link": "binary-tree-from-preorder-and-inorder-traversal",
+  "nc_title": "Construct Binary Tree from Preorder and Inorder Traversal",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Construct Binary Tree From Preorder And Inorder Traversal"
@@ -408,6 +524,8 @@
  {
   "difficulty": "Hard",
   "link": "binary-tree-maximum-path-sum/",
+  "nc_link": "binary-tree-maximum-path-sum",
+  "nc_title": "Binary Tree Maximum Path Sum",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Binary Tree Maximum Path Sum"
@@ -415,6 +533,8 @@
  {
   "difficulty": "Hard",
   "link": "serialize-and-deserialize-binary-tree/",
+  "nc_link": "serialize-and-deserialize-binary-tree",
+  "nc_title": "Serialize and Deserialize Binary Tree",
   "neetcode150": true,
   "pattern": "Trees",
   "problem": "Serialize And Deserialize Binary Tree"
@@ -422,6 +542,8 @@
  {
   "difficulty": "Medium",
   "link": "implement-trie-prefix-tree/",
+  "nc_link": "implement-prefix-tree",
+  "nc_title": "Implement Trie (Prefix Tree)",
   "neetcode150": true,
   "pattern": "Tries",
   "problem": "Implement Trie Prefix Tree"
@@ -429,6 +551,8 @@
  {
   "difficulty": "Medium",
   "link": "design-add-and-search-words-data-structure/",
+  "nc_link": "design-word-search-data-structure",
+  "nc_title": "Design Add and Search Word Data Structure",
   "neetcode150": true,
   "pattern": "Tries",
   "problem": "Design Add And Search Words Data Structure"
@@ -436,6 +560,8 @@
  {
   "difficulty": "Hard",
   "link": "word-search-ii/",
+  "nc_link": "search-for-word-ii",
+  "nc_title": "Word Search II",
   "neetcode150": true,
   "pattern": "Tries",
   "problem": "Word Search II"
@@ -443,6 +569,8 @@
  {
   "difficulty": "Easy",
   "link": "kth-largest-element-in-a-stream/",
+  "nc_link": "kth-largest-integer-in-a-stream",
+  "nc_title": "Kth Largest Element in a Stream",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Kth Largest Element In a Stream"
@@ -450,6 +578,8 @@
  {
   "difficulty": "Easy",
   "link": "last-stone-weight/",
+  "nc_link": "last-stone-weight",
+  "nc_title": "Last Stone Weight",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Last Stone Weight"
@@ -457,6 +587,8 @@
  {
   "difficulty": "Medium",
   "link": "k-closest-points-to-origin/",
+  "nc_link": "k-closest-points-to-origin",
+  "nc_title": "K Closest Points to Origin",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "K Closest Points to Origin"
@@ -464,6 +596,8 @@
  {
   "difficulty": "Medium",
   "link": "kth-largest-element-in-an-array/",
+  "nc_link": "kth-largest-element-in-an-array",
+  "nc_title": "Kth Largest Element in an Array",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Kth Largest Element In An Array"
@@ -471,6 +605,8 @@
  {
   "difficulty": "Medium",
   "link": "task-scheduler/",
+  "nc_link": "task-scheduling",
+  "nc_title": "Task Scheduler",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Task Scheduler"
@@ -478,6 +614,8 @@
  {
   "difficulty": "Medium",
   "link": "design-twitter/",
+  "nc_link": "design-twitter-feed",
+  "nc_title": "Design Twitter",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Design Twitter"
@@ -485,6 +623,8 @@
  {
   "difficulty": "Hard",
   "link": "find-median-from-data-stream/",
+  "nc_link": "find-median-in-a-data-stream",
+  "nc_title": "Find Median From Data Stream",
   "neetcode150": true,
   "pattern": "Heap / Priority Queue",
   "problem": "Find Median From Data Stream"
@@ -492,6 +632,8 @@
  {
   "difficulty": "Medium",
   "link": "subsets/",
+  "nc_link": "subsets",
+  "nc_title": "Subsets",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Subsets"
@@ -499,6 +641,8 @@
  {
   "difficulty": "Medium",
   "link": "combination-sum/",
+  "nc_link": "combination-target-sum",
+  "nc_title": "Combination Sum",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Combination Sum"
@@ -506,6 +650,8 @@
  {
   "difficulty": "Medium",
   "link": "permutations/",
+  "nc_link": "permutations",
+  "nc_title": "Permutations",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Permutations"
@@ -513,6 +659,8 @@
  {
   "difficulty": "Medium",
   "link": "subsets-ii/",
+  "nc_link": "subsets-ii",
+  "nc_title": "Subsets II",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Subsets II"
@@ -520,6 +668,8 @@
  {
   "difficulty": "Medium",
   "link": "combination-sum-ii/",
+  "nc_link": "combination-target-sum-ii",
+  "nc_title": "Combination Sum II",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Combination Sum II"
@@ -527,6 +677,8 @@
  {
   "difficulty": "Medium",
   "link": "word-search/",
+  "nc_link": "search-for-word",
+  "nc_title": "Word Search",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Word Search"
@@ -534,6 +686,8 @@
  {
   "difficulty": "Medium",
   "link": "palindrome-partitioning/",
+  "nc_link": "palindrome-partitioning",
+  "nc_title": "Palindrome Partitioning",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Palindrome Partitioning"
@@ -541,6 +695,8 @@
  {
   "difficulty": "Medium",
   "link": "letter-combinations-of-a-phone-number/",
+  "nc_link": "combinations-of-a-phone-number",
+  "nc_title": "Letter Combinations of a Phone Number",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "Letter Combinations of a Phone Number"
@@ -548,6 +704,8 @@
  {
   "difficulty": "Hard",
   "link": "n-queens/",
+  "nc_link": "n-queens",
+  "nc_title": "N-Queens",
   "neetcode150": true,
   "pattern": "Backtracking",
   "problem": "N Queens"
@@ -555,6 +713,8 @@
  {
   "difficulty": "Medium",
   "link": "number-of-islands/",
+  "nc_link": "count-number-of-islands",
+  "nc_title": "Number of Islands",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Number of Islands"
@@ -562,6 +722,8 @@
  {
   "difficulty": "Medium",
   "link": "clone-graph/",
+  "nc_link": "clone-graph",
+  "nc_title": "Clone Graph",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Clone Graph"
@@ -569,6 +731,8 @@
  {
   "difficulty": "Medium",
   "link": "max-area-of-island/",
+  "nc_link": "max-area-of-island",
+  "nc_title": "Max Area of Island",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Max Area of Island"
@@ -576,6 +740,8 @@
  {
   "difficulty": "Medium",
   "link": "pacific-atlantic-water-flow/",
+  "nc_link": "pacific-atlantic-water-flow",
+  "nc_title": "Pacific Atlantic Water Flow",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Pacific Atlantic Water Flow"
@@ -583,6 +749,8 @@
  {
   "difficulty": "Medium",
   "link": "surrounded-regions/",
+  "nc_link": "surrounded-regions",
+  "nc_title": "Surrounded Regions",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Surrounded Regions"
@@ -590,6 +758,8 @@
  {
   "difficulty": "Medium",
   "link": "rotting-oranges/",
+  "nc_link": "rotting-fruit",
+  "nc_title": "Rotting Fruit",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Rotting Oranges"
@@ -597,6 +767,8 @@
  {
   "difficulty": "Medium",
   "link": "walls-and-gates/",
+  "nc_link": "islands-and-treasure",
+  "nc_title": "Islands and Treasure",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Walls And Gates"
@@ -604,6 +776,8 @@
  {
   "difficulty": "Medium",
   "link": "course-schedule/",
+  "nc_link": "course-schedule",
+  "nc_title": "Course Schedule",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Course Schedule"
@@ -611,6 +785,8 @@
  {
   "difficulty": "Medium",
   "link": "course-schedule-ii/",
+  "nc_link": "course-schedule-ii",
+  "nc_title": "Course Schedule II",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Course Schedule II"
@@ -618,6 +794,8 @@
  {
   "difficulty": "Medium",
   "link": "redundant-connection/",
+  "nc_link": "redundant-connection",
+  "nc_title": "Redundant Connection",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Redundant Connection"
@@ -625,6 +803,8 @@
  {
   "difficulty": "Medium",
   "link": "number-of-connected-components-in-an-undirected-graph/",
+  "nc_link": "count-connected-components",
+  "nc_title": "Number of Connected Components in an Undirected Graph",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Number of Connected Components In An Undirected Graph"
@@ -632,6 +812,8 @@
  {
   "difficulty": "Medium",
   "link": "graph-valid-tree/",
+  "nc_link": "valid-tree",
+  "nc_title": "Graph Valid Tree",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Graph Valid Tree"
@@ -639,6 +821,8 @@
  {
   "difficulty": "Hard",
   "link": "word-ladder/",
+  "nc_link": "word-ladder",
+  "nc_title": "Word Ladder",
   "neetcode150": true,
   "pattern": "Graphs",
   "problem": "Word Ladder"
@@ -646,6 +830,8 @@
  {
   "difficulty": "Hard",
   "link": "reconstruct-itinerary/",
+  "nc_link": "reconstruct-flight-path",
+  "nc_title": "Reconstruct Flight Path",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Reconstruct Itinerary"
@@ -653,6 +839,8 @@
  {
   "difficulty": "Medium",
   "link": "min-cost-to-connect-all-points/",
+  "nc_link": "min-cost-to-connect-points",
+  "nc_title": "Min Cost to Connect Points",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Min Cost to Connect All Points"
@@ -660,6 +848,8 @@
  {
   "difficulty": "Medium",
   "link": "network-delay-time/",
+  "nc_link": "network-delay-time",
+  "nc_title": "Network Delay Time",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Network Delay Time"
@@ -667,6 +857,8 @@
  {
   "difficulty": "Hard",
   "link": "swim-in-rising-water/",
+  "nc_link": "swim-in-rising-water",
+  "nc_title": "Swim in Rising Water",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Swim In Rising Water"
@@ -674,6 +866,8 @@
  {
   "difficulty": "Hard",
   "link": "alien-dictionary/",
+  "nc_link": "foreign-dictionary",
+  "nc_title": "Alien Dictionary",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Alien Dictionary"
@@ -681,6 +875,8 @@
  {
   "difficulty": "Medium",
   "link": "cheapest-flights-within-k-stops/",
+  "nc_link": "cheapest-flight-path",
+  "nc_title": "Cheapest Flights Within K Stops",
   "neetcode150": true,
   "pattern": "Advanced Graphs",
   "problem": "Cheapest Flights Within K Stops"
@@ -688,6 +884,8 @@
  {
   "difficulty": "Easy",
   "link": "climbing-stairs/",
+  "nc_link": "climbing-stairs",
+  "nc_title": "Climbing Stairs",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Climbing Stairs"
@@ -695,6 +893,8 @@
  {
   "difficulty": "Easy",
   "link": "min-cost-climbing-stairs/",
+  "nc_link": "min-cost-climbing-stairs",
+  "nc_title": "Min Cost Climbing Stairs",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Min Cost Climbing Stairs"
@@ -702,6 +902,8 @@
  {
   "difficulty": "Medium",
   "link": "house-robber/",
+  "nc_link": "house-robber",
+  "nc_title": "House Robber",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "House Robber"
@@ -709,6 +911,8 @@
  {
   "difficulty": "Medium",
   "link": "house-robber-ii/",
+  "nc_link": "house-robber-ii",
+  "nc_title": "House Robber II",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "House Robber II"
@@ -716,6 +920,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-palindromic-substring/",
+  "nc_link": "longest-palindromic-substring",
+  "nc_title": "Longest Palindromic Substring",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Longest Palindromic Substring"
@@ -723,6 +929,8 @@
  {
   "difficulty": "Medium",
   "link": "palindromic-substrings/",
+  "nc_link": "palindromic-substrings",
+  "nc_title": "Palindromic Substrings",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Palindromic Substrings"
@@ -730,6 +938,8 @@
  {
   "difficulty": "Medium",
   "link": "decode-ways/",
+  "nc_link": "decode-ways",
+  "nc_title": "Decode Ways",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Decode Ways"
@@ -737,6 +947,8 @@
  {
   "difficulty": "Medium",
   "link": "coin-change/",
+  "nc_link": "coin-change",
+  "nc_title": "Coin Change",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Coin Change"
@@ -744,6 +956,8 @@
  {
   "difficulty": "Medium",
   "link": "maximum-product-subarray/",
+  "nc_link": "maximum-product-subarray",
+  "nc_title": "Maximum Product Subarray",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Maximum Product Subarray"
@@ -751,6 +965,8 @@
  {
   "difficulty": "Medium",
   "link": "word-break/",
+  "nc_link": "word-break",
+  "nc_title": "Word Break",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Word Break"
@@ -758,6 +974,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-increasing-subsequence/",
+  "nc_link": "longest-increasing-subsequence",
+  "nc_title": "Longest Increasing Subsequence",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Longest Increasing Subsequence"
@@ -765,6 +983,8 @@
  {
   "difficulty": "Medium",
   "link": "partition-equal-subset-sum/",
+  "nc_link": "partition-equal-subset-sum",
+  "nc_title": "Partition Equal Subset Sum",
   "neetcode150": true,
   "pattern": "1-D Dynamic Programming",
   "problem": "Partition Equal Subset Sum"
@@ -772,6 +992,8 @@
  {
   "difficulty": "Medium",
   "link": "unique-paths/",
+  "nc_link": "count-paths",
+  "nc_title": "Unique Paths",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Unique Paths"
@@ -779,6 +1001,8 @@
  {
   "difficulty": "Medium",
   "link": "longest-common-subsequence/",
+  "nc_link": "longest-common-subsequence",
+  "nc_title": "Longest Common Subsequence",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Longest Common Subsequence"
@@ -786,6 +1010,8 @@
  {
   "difficulty": "Medium",
   "link": "best-time-to-buy-and-sell-stock-with-cooldown/",
+  "nc_link": "buy-and-sell-crypto-with-cooldown",
+  "nc_title": "Best Time to Buy and Sell Stock with Cooldown",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Best Time to Buy And Sell Stock With Cooldown"
@@ -793,6 +1019,8 @@
  {
   "difficulty": "Medium",
   "link": "coin-change-ii/",
+  "nc_link": "coin-change-ii",
+  "nc_title": "Coin Change II",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Coin Change II"
@@ -800,6 +1028,8 @@
  {
   "difficulty": "Medium",
   "link": "target-sum/",
+  "nc_link": "target-sum",
+  "nc_title": "Target Sum",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Target Sum"
@@ -807,6 +1037,8 @@
  {
   "difficulty": "Medium",
   "link": "interleaving-string/",
+  "nc_link": "interleaving-string",
+  "nc_title": "Interleaving String",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Interleaving String"
@@ -814,6 +1046,8 @@
  {
   "difficulty": "Hard",
   "link": "longest-increasing-path-in-a-matrix/",
+  "nc_link": "longest-increasing-path-in-matrix",
+  "nc_title": "Longest Increasing Path in Matrix",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Longest Increasing Path In a Matrix"
@@ -821,6 +1055,8 @@
  {
   "difficulty": "Hard",
   "link": "distinct-subsequences/",
+  "nc_link": "count-subsequences",
+  "nc_title": "Distinct Subsequences",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Distinct Subsequences"
@@ -828,6 +1064,8 @@
  {
   "difficulty": "Medium",
   "link": "edit-distance/",
+  "nc_link": "edit-distance",
+  "nc_title": "Edit Distance",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Edit Distance"
@@ -835,6 +1073,8 @@
  {
   "difficulty": "Hard",
   "link": "burst-balloons/",
+  "nc_link": "burst-balloons",
+  "nc_title": "Burst Balloons",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Burst Balloons"
@@ -842,6 +1082,8 @@
  {
   "difficulty": "Hard",
   "link": "regular-expression-matching/",
+  "nc_link": "regular-expression-matching",
+  "nc_title": "Regular Expression Matching",
   "neetcode150": true,
   "pattern": "2-D Dynamic Programming",
   "problem": "Regular Expression Matching"
@@ -849,6 +1091,8 @@
  {
   "difficulty": "Medium",
   "link": "maximum-subarray/",
+  "nc_link": "maximum-subarray",
+  "nc_title": "Maximum Subarray",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Maximum Subarray"
@@ -856,6 +1100,8 @@
  {
   "difficulty": "Medium",
   "link": "jump-game/",
+  "nc_link": "jump-game",
+  "nc_title": "Jump Game",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Jump Game"
@@ -863,6 +1109,8 @@
  {
   "difficulty": "Medium",
   "link": "jump-game-ii/",
+  "nc_link": "jump-game-ii",
+  "nc_title": "Jump Game II",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Jump Game II"
@@ -870,6 +1118,8 @@
  {
   "difficulty": "Medium",
   "link": "gas-station/",
+  "nc_link": "gas-station",
+  "nc_title": "Gas Station",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Gas Station"
@@ -877,6 +1127,8 @@
  {
   "difficulty": "Medium",
   "link": "hand-of-straights/",
+  "nc_link": "hand-of-straights",
+  "nc_title": "Hand of Straights",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Hand of Straights"
@@ -884,6 +1136,8 @@
  {
   "difficulty": "Medium",
   "link": "merge-triplets-to-form-target-triplet/",
+  "nc_link": "merge-triplets-to-form-target",
+  "nc_title": "Merge Triplets to Form Target",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Merge Triplets to Form Target Triplet"
@@ -891,6 +1145,8 @@
  {
   "difficulty": "Medium",
   "link": "partition-labels/",
+  "nc_link": "partition-labels",
+  "nc_title": "Partition Labels",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Partition Labels"
@@ -898,6 +1154,8 @@
  {
   "difficulty": "Medium",
   "link": "valid-parenthesis-string/",
+  "nc_link": "valid-parenthesis-string",
+  "nc_title": "Valid Parenthesis String",
   "neetcode150": true,
   "pattern": "Greedy",
   "problem": "Valid Parenthesis String"
@@ -905,6 +1163,8 @@
  {
   "difficulty": "Medium",
   "link": "insert-interval/",
+  "nc_link": "insert-new-interval",
+  "nc_title": "Insert Interval",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Insert Interval"
@@ -912,6 +1172,8 @@
  {
   "difficulty": "Medium",
   "link": "merge-intervals/",
+  "nc_link": "merge-intervals",
+  "nc_title": "Merge Intervals",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Merge Intervals"
@@ -919,6 +1181,8 @@
  {
   "difficulty": "Medium",
   "link": "non-overlapping-intervals/",
+  "nc_link": "non-overlapping-intervals",
+  "nc_title": "Non-overlapping Intervals",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Non Overlapping Intervals"
@@ -926,6 +1190,8 @@
  {
   "difficulty": "Easy",
   "link": "meeting-rooms/",
+  "nc_link": "meeting-schedule",
+  "nc_title": "Meeting Rooms",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Meeting Rooms"
@@ -933,6 +1199,8 @@
  {
   "difficulty": "Medium",
   "link": "meeting-rooms-ii/",
+  "nc_link": "meeting-schedule-ii",
+  "nc_title": "Meeting Rooms II",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Meeting Rooms II"
@@ -940,6 +1208,8 @@
  {
   "difficulty": "Hard",
   "link": "minimum-interval-to-include-each-query/",
+  "nc_link": "minimum-interval-including-query",
+  "nc_title": "Minimum Interval to Include Each Query",
   "neetcode150": true,
   "pattern": "Intervals",
   "problem": "Minimum Interval to Include Each Query"
@@ -947,6 +1217,8 @@
  {
   "difficulty": "Medium",
   "link": "rotate-image/",
+  "nc_link": "rotate-matrix",
+  "nc_title": "Rotate Image",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Rotate Image"
@@ -954,6 +1226,8 @@
  {
   "difficulty": "Medium",
   "link": "spiral-matrix/",
+  "nc_link": "spiral-matrix",
+  "nc_title": "Spiral Matrix",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Spiral Matrix"
@@ -961,6 +1235,8 @@
  {
   "difficulty": "Medium",
   "link": "set-matrix-zeroes/",
+  "nc_link": "set-zeroes-in-matrix",
+  "nc_title": "Set Matrix Zeroes",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Set Matrix Zeroes"
@@ -968,6 +1244,8 @@
  {
   "difficulty": "Easy",
   "link": "happy-number/",
+  "nc_link": "non-cyclical-number",
+  "nc_title": "Non-Cyclical Number",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Happy Number"
@@ -975,6 +1253,8 @@
  {
   "difficulty": "Easy",
   "link": "plus-one/",
+  "nc_link": "plus-one",
+  "nc_title": "Plus One",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Plus One"
@@ -982,6 +1262,8 @@
  {
   "difficulty": "Medium",
   "link": "powx-n/",
+  "nc_link": "pow-x-n",
+  "nc_title": "Pow(x, n)",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Pow(x, n)"
@@ -989,6 +1271,8 @@
  {
   "difficulty": "Medium",
   "link": "multiply-strings/",
+  "nc_link": "multiply-strings",
+  "nc_title": "Multiply Strings",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Multiply Strings"
@@ -996,6 +1280,8 @@
  {
   "difficulty": "Medium",
   "link": "detect-squares/",
+  "nc_link": "count-squares",
+  "nc_title": "Detect Squares",
   "neetcode150": true,
   "pattern": "Math & Geometry",
   "problem": "Detect Squares"
@@ -1003,6 +1289,8 @@
  {
   "difficulty": "Easy",
   "link": "single-number/",
+  "nc_link": "single-number",
+  "nc_title": "Single Number",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Single Number"
@@ -1010,6 +1298,8 @@
  {
   "difficulty": "Easy",
   "link": "number-of-1-bits/",
+  "nc_link": "number-of-one-bits",
+  "nc_title": "Number of 1 Bits",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Number of 1 Bits"
@@ -1017,6 +1307,8 @@
  {
   "difficulty": "Easy",
   "link": "counting-bits/",
+  "nc_link": "counting-bits",
+  "nc_title": "Counting Bits",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Counting Bits"
@@ -1024,6 +1316,8 @@
  {
   "difficulty": "Easy",
   "link": "reverse-bits/",
+  "nc_link": "reverse-bits",
+  "nc_title": "Reverse Bits",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Reverse Bits"
@@ -1031,6 +1325,8 @@
  {
   "difficulty": "Easy",
   "link": "missing-number/",
+  "nc_link": "missing-number",
+  "nc_title": "Missing Number",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Missing Number"
@@ -1038,6 +1334,8 @@
  {
   "difficulty": "Medium",
   "link": "sum-of-two-integers/",
+  "nc_link": "sum-of-two-integers",
+  "nc_title": "Sum of Two Integers",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Sum of Two Integers"
@@ -1045,6 +1343,8 @@
  {
   "difficulty": "Medium",
   "link": "reverse-integer/",
+  "nc_link": "reverse-integer",
+  "nc_title": "Reverse Integer",
   "neetcode150": true,
   "pattern": "Bit Manipulation",
   "problem": "Reverse Integer"

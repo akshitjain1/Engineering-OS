@@ -48,6 +48,7 @@ RESOURCE_EXTRA_COLUMNS = {
     "visibility_class": "VARCHAR(40)",
     "item_count": "INTEGER",
     "difficulty_mix": "JSON",
+    "collection_items": "JSON",
 }
 
 TABLE_SLUGS = [

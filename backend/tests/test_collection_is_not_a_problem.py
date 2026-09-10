@@ -60,6 +60,18 @@ def two_topics(client):
             estimated_minutes=195, item_count=9,
             difficulty_mix={"easy": 3, "medium": 6, "hard": 0},
             estimate_method="neetcode_section_sum",
+            collection_items=[
+                {"problem": "Contains Duplicate", "title": "Contains Duplicate",
+                 "difficulty": "Easy", "minutes": 15,
+                 "url": "https://neetcode.io/problems/duplicate-integer/"
+                        "question?list=neetcode150",
+                 "leetcode_url": "https://leetcode.com/problems/contains-duplicate/"},
+                {"problem": "Rotting Oranges", "title": "Rotting Fruit",
+                 "difficulty": "Medium", "minutes": 25,
+                 "url": "https://neetcode.io/problems/rotting-fruit/"
+                        "question?list=neetcode150",
+                 "leetcode_url": "https://leetcode.com/problems/rotting-oranges/"},
+            ],
         ))
         db.add(models.CurriculumResource(
             slug=f"ts{n}", title="1. Two Sum", url=TWO_SUM,
@@ -153,3 +165,25 @@ def test_an_unverified_single_problem_is_not_mistaken_for_a_set(client):
     row = _practice(client, topic_id)["unver"]
     assert row["exactness"] == "Collection", "fixture no longer reproduces the trap"
     assert row["is_collection"] is False
+
+
+def test_a_set_hands_over_its_problems_with_their_own_links(client, two_topics):
+    """The set used to offer one button to the whole 150-problem index and a
+    sentence telling you to find the section yourself. NeetCode has per-problem
+    URLs; the card can only use them if the API sends them."""
+    row = _practice(client, two_topics[0])["nc0"]
+    items = row["collection_items"]
+    assert len(items) == 2
+    assert all(i["url"].startswith("https://neetcode.io/problems/") for i in items)
+    assert all(i["minutes"] for i in items)
+
+
+def test_the_link_label_is_the_title_the_destination_uses(client, two_topics):
+    """NeetCode renames problems on its own pages."""
+    items = _practice(client, two_topics[0])["nc0"]["collection_items"]
+    renamed = next(i for i in items if i["problem"] == "Rotting Oranges")
+    assert renamed["title"] == "Rotting Fruit"
+
+
+def test_a_single_problem_has_no_item_list(client, two_topics):
+    assert _practice(client, two_topics[0])["ts0"]["collection_items"] is None
