@@ -190,6 +190,14 @@ export type ResourcePublic = {
   required_concepts_covered?: string[] | null;
   /** Other topics that pin this same problem. Solving it counts for all of them. */
   also_in_topics?: string[] | null;
+  /** True when the row is a set of problems rather than one problem. */
+  is_collection?: boolean;
+  /** For a set: how many problems are in it. */
+  item_count?: number | null;
+  /** For a set: how those problems break down by difficulty. */
+  difficulty_mix?: { easy?: number; medium?: number; hard?: number } | null;
+  /** How estimated_minutes was arrived at, so a default can be shown as one. */
+  estimate_method?: string | null;
   difficulty: string | null;
   description: string | null;
   official_unofficial: string;

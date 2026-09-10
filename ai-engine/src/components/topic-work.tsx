@@ -49,6 +49,44 @@ function minutesFor(resource: ResourcePublic, fallback = 15): number {
   return resource.estimated_minutes ?? resource.duration ?? fallback;
 }
 
+/** A set of problems rather than one problem.
+ *
+ *  These need different arithmetic and different words. "NeetCode 150 -
+ *  Arrays & Hashing" is nine problems and about 195 minutes; it cannot be
+ *  finished inside a 65-minute block, and showing it as a single line item
+ *  worth "~20 min" was the app quietly understating it by ten times. */
+const isSet = (resource: ResourcePublic) => resource.is_collection === true;
+
+/** "3 easy, 6 medium" -- only the difficulties that are actually present. */
+function mixLabel(resource: ResourcePublic): string | null {
+  const mix = resource.difficulty_mix;
+  if (!mix) return null;
+  const parts = (["easy", "medium", "hard"] as const)
+    .map((key) => ({ key, n: mix[key] ?? 0 }))
+    .filter(({ n }) => n > 0)
+    .map(({ key, n }) => `${n} ${key}`);
+  return parts.length > 0 ? parts.join(", ") : null;
+}
+
+function hoursAndMinutes(total: number): string {
+  if (total < 90) return `${total} min`;
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  return minutes === 0 ? `${hours} h` : `${hours} h ${minutes} min`;
+}
+
+/** Roughly how many of a set's problems fit in the minutes left.
+ *
+ *  The average is crude on purpose: a set mixes easy and medium problems, and
+ *  claiming to know which two you will pick would be a worse kind of guess
+ *  than saying "about two". */
+function howManyFit(resource: ResourcePublic, roomMinutes: number): number {
+  const count = resource.item_count ?? 0;
+  if (count <= 0 || roomMinutes <= 0) return 0;
+  const average = Math.max(1, Math.round(minutesFor(resource) / count));
+  return Math.min(count, Math.floor(roomMinutes / average));
+}
+
 const DIFFICULTY_TONE: Record<string, string> = {
   easy: "text-[var(--ok)] border-[var(--ok)]",
   medium: "text-[var(--warn)] border-[var(--warn)]",
@@ -116,6 +154,7 @@ export function ProblemRow({
   locked,
   busy,
   onToggle,
+  roomMinutes,
 }: {
   resource: ResourcePublic;
   index: number;
@@ -123,6 +162,9 @@ export function ProblemRow({
   locked?: boolean;
   busy: boolean;
   onToggle: (id: number, completed: boolean) => void;
+  /** Minutes left in this block once reading and the named problems are paid
+   *  for. Used to say how much of a multi-problem set fits today. */
+  roomMinutes?: number | null;
 }) {
   const [stuck, setStuck] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -175,13 +217,49 @@ export function ProblemRow({
             </span>
           ) : null}
           <span className="rounded border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--muted)]">
-            ~{minutesFor(resource)} min
+            {isSet(resource) && (resource.item_count ?? 0) > 1
+              ? `${resource.item_count} problems · ~${hoursAndMinutes(minutesFor(resource))} total`
+              : `~${minutesFor(resource)} min`}
           </span>
         </div>
       </div>
 
       {resource.description ? (
         <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{resource.description}</p>
+      ) : null}
+
+      {/* A set is not a task you finish in this block, and the card used to
+          imply it was: "NeetCode 150 - Arrays & Hashing" showed "~20 min" over
+          nine problems that are three easy and six medium -- about 195
+          minutes. Nothing is removed from the set; it is described honestly
+          and sliced. */}
+      {isSet(resource) && (resource.item_count ?? 0) > 1 ? (
+        <p className="mt-2 text-xs text-[var(--muted)]">
+          {/* The size and the difficulty spread are already in the
+              description, which the server writes from the section's real
+              contents. The only thing this line can add is how much of it
+              today's block has room for -- and if the answer is none, say so
+              rather than leaving the reader to divide 195 by 65. */}
+          {roomMinutes == null ? (
+            <>
+              {mixLabel(resource) ? <>{mixLabel(resource)}. </> : null}A set, not a
+              single sitting.
+            </>
+          ) : howManyFit(resource, roomMinutes) > 0 ? (
+            <>
+              About {howManyFit(resource, roomMinutes)} of these fit in the {roomMinutes} min
+              left in this block — the rest carries over.
+            </>
+          ) : (
+            <>
+              Today&apos;s block has no room left for this one; it carries over to the next
+              session.
+            </>
+          )}
+          {resource.estimate_method === "unverified_default" ? (
+            <> The minute figure is a default, not a measured one.</>
+          ) : null}
+        </p>
       ) : null}
 
       {/* The mapping pins 57 problems to more than one topic, and solving one
@@ -337,9 +415,33 @@ export function TopicWorkPanel({
 
   const plan = useMemo(() => {
     const readMinutes = learn.reduce((sum, r) => sum + minutesFor(r, 20), 0);
-    const solveMinutes = practice.reduce((sum, r) => sum + minutesFor(r), 0);
-    return { readMinutes, solveMinutes, total: readMinutes + solveMinutes };
-  }, [learn, practice]);
+    const singles = practice.filter((r) => !isSet(r));
+    const sets = practice.filter(isSet);
+    const singleMinutes = singles.reduce((sum, r) => sum + minutesFor(r), 0);
+    const setMinutes = sets.reduce((sum, r) => sum + minutesFor(r), 0);
+
+    // A set is open-ended work you take a slice of, so it is charged at what
+    // is left of the block rather than at its full size. Summing the full size
+    // put every DSA day hours over budget: Arrays & Hashing alone is 195
+    // minutes against a 65-minute block, and Trees is 345.
+    //
+    // With no block to fit into -- browsing a topic rather than working a day
+    // -- there is no room to compute, so the honest number is the whole set.
+    const room =
+      blockMinutes != null ? Math.max(0, blockMinutes - readMinutes - singleMinutes) : null;
+    const setSlice = room != null ? Math.min(room, setMinutes) : setMinutes;
+
+    return {
+      readMinutes,
+      singles,
+      sets,
+      singleMinutes,
+      setMinutes,
+      room,
+      solveMinutes: singleMinutes + setSlice,
+      total: readMinutes + singleMinutes + setSlice,
+    };
+  }, [learn, practice, blockMinutes]);
 
   if (error && !topic) {
     return (
@@ -470,6 +572,7 @@ export function TopicWorkPanel({
                     locked={topic.locked}
                     busy={busy === `resource-${resource.id}`}
                     onToggle={toggleResource}
+                    roomMinutes={plan.room}
                   />
                 ) : (
                   <li key={resource.id}>
@@ -564,9 +667,29 @@ export function TopicWorkPanel({
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
             Plan for this block
           </p>
+          {/* "solve 2 problems" counted a nine-problem set as one problem and
+              charged it twenty minutes. Named problems and open-ended sets are
+              now counted separately, because they are different promises: a
+              problem you finish today, a set you make progress in. */}
           <p className="mt-1 text-sm">
-            Read ~{plan.readMinutes} min, then solve {practice.length}{" "}
-            {practice.length === 1 ? "problem" : "problems"} ~{plan.solveMinutes} min
+            Read ~{plan.readMinutes} min
+            {plan.singles.length > 0 ? (
+              <>
+                , then solve {plan.singles.length}{" "}
+                {plan.singles.length === 1 ? "problem" : "problems"} ~{plan.singleMinutes} min
+              </>
+            ) : null}
+            {plan.sets.length > 0 ? (
+              <>
+                . {plan.sets.length === 1 ? "There is also a problem set" : "There are also problem sets"}{" "}
+                ({hoursAndMinutes(plan.setMinutes)} of work in all)
+                {plan.room == null ? null : plan.room > 0 ? (
+                  <> — about {plan.room} min of it fits after that</>
+                ) : (
+                  <> — the named problems already fill this block, so they carry over</>
+                )}
+              </>
+            ) : null}
             <span className="text-[var(--muted)]"> · {plan.total} min total</span>
           </p>
           {overBudget ? (

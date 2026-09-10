@@ -786,10 +786,18 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
     # Which other topics pin the same problem. Solving it counts for all of
     # them (service.set_problem_solved), so a problem can arrive already ticked
     # and the page has to be able to say why rather than just look wrong.
+    # A collection is excluded. "Solving it counts everywhere" is true of one
+    # problem and meaningless for a section index: all 128 NeetCode rows share
+    # the single URL https://neetcode.io/practice/practice/neetcode150, so this
+    # query returned every topic that maps any part of NeetCode 150 and the
+    # card printed ninety topic names under a nine-problem set, headed "Solved
+    # already - this problem also belongs to".
     practice_urls = [
         r["url"]
         for r in (payload["resources_by_role"].get("PRACTICE") or [])
-        if r.get("url") and r.get("resource_type") == "problem"
+        if r.get("url")
+        and r.get("resource_type") == "problem"
+        and not r.get("is_collection")
     ]
     if practice_urls:
         shared: dict[str, list[str]] = {}
@@ -807,6 +815,9 @@ def get_topic(topic_id: int, db: Session = Depends(get_db)):
             if name and name not in shared.setdefault(url, []):
                 shared[url].append(name)
         for r in payload["resources_by_role"].get("PRACTICE") or []:
+            if r.get("is_collection"):
+                r["also_in_topics"] = []
+                continue
             r["also_in_topics"] = sorted(shared.get(r.get("url") or "", []))
 
     primaries = payload["resources_by_role"].get("PRIMARY") or []

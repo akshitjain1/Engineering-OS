@@ -46,6 +46,8 @@ RESOURCE_EXTRA_COLUMNS = {
     "last_verified_at": "VARCHAR(40)",
     "learner_visible": "BOOLEAN DEFAULT 1",
     "visibility_class": "VARCHAR(40)",
+    "item_count": "INTEGER",
+    "difficulty_mix": "JSON",
 }
 
 TABLE_SLUGS = [

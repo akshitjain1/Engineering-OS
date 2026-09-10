@@ -177,6 +177,12 @@ class CurriculumResource(Base):
     estimated_minutes: Mapped[Optional[int]] = Column(Integer, nullable=True)
     required_concepts_covered: Mapped[Optional[list[Any]]] = Column(JSON, nullable=True, default=list)
     exactness: Mapped[Optional[str]] = Column(String(20), nullable=True)  # EXACT | MULTI_TOPIC | COLLECTION
+    #: For a COLLECTION: how many problems are in it, and how they break down
+    #: by difficulty. Both were missing, which is why every collection carried
+    #: a flat 20-minute estimate -- NeetCode 150's "Arrays & Hashing" is nine
+    #: problems (three easy, six medium) and takes about 195 minutes.
+    item_count: Mapped[Optional[int]] = Column(Integer, nullable=True)
+    difficulty_mix: Mapped[Optional[dict]] = Column(JSON, nullable=True)
     notes: Mapped[Optional[str]] = Column(Text, nullable=True)
     estimate_confidence: Mapped[Optional[str]] = Column(String(10), nullable=True)  # HIGH | MEDIUM | LOW
     estimate_method: Mapped[Optional[str]] = Column(String(40), nullable=True)

@@ -205,6 +205,25 @@ def serialize_resource(resource: Any, *, for_learner: bool = True) -> dict[str, 
         # surfaces budget a block's minutes across its sources with this, so it
         # has to travel with the resource rather than being re-derived.
         "estimated_minutes": getattr(resource, "estimated_minutes", None),
+        # For a collection: how many problems, and the difficulty spread. A
+        # single number cannot say "nine problems, three easy and six medium",
+        # and without it the card showed "~20 min" over a set that is nine
+        # problems and about three and a quarter hours.
+        "item_count": getattr(resource, "item_count", None),
+        # Whether this row is a set of problems rather than one problem. Taken
+        # from the stored exactness and the URL shape, not from the display
+        # label -- `exactness_label` returns "Collection" as its fallback for
+        # anything unverified, so a single problem awaiting review reads the
+        # same as a 150-problem index there.
+        "is_collection": (
+            (getattr(resource, "exactness", None) or "").upper() == "COLLECTION"
+            or collection
+            or (getattr(resource, "item_count", None) or 0) > 1
+        ),
+        "difficulty_mix": getattr(resource, "difficulty_mix", None),
+        # How the minute figure was arrived at, so a default can be shown as a
+        # default. Every NeetCode row carried a flat 20 with this field empty.
+        "estimate_method": getattr(resource, "estimate_method", None),
         "difficulty": resource.difficulty,
         "description": resource.description,
         # Context the learner-facing surfaces need to build a tutoring prompt
