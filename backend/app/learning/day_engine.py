@@ -553,7 +553,35 @@ def _topic_names(db: Session) -> dict[str, str]:
 # ---------------------------------------------------------------------------
 
 
-def _serialize(item: DailyPlanItem) -> dict[str, Any]:
+def _live_resource(db: Session, item: DailyPlanItem) -> Optional[dict[str, Any]]:
+    """The resource as it stands now, not as it stood when the day was built.
+
+    A plan item keeps its own copy of the title, provider and URL, frozen at
+    generation time. That froze mistakes too: "System calls" was corrected from
+    MIT's debugging lecture to a page about system calls, the curriculum row
+    changed, and today's screen went on offering the old link because it was
+    reading its own snapshot.
+
+    So the copy becomes a fallback and the row becomes the answer. Fixing a
+    resource now fixes every day that points at it, including today's, rather
+    than only the days generated afterwards.
+    """
+    if item.resource_id is None:
+        return None
+    row = db.get(CurriculumResource, item.resource_id)
+    if row is None or not row.url:
+        return None
+    return {
+        "id": row.id,
+        "title": row.title,
+        "provider": getattr(row, "provider", None) or item.resource_provider,
+        "url": row.url,
+        "kind": item.resource_kind,
+    }
+
+
+def _serialize(item: DailyPlanItem, db: Optional[Session] = None) -> dict[str, Any]:
+    live = _live_resource(db, item) if db is not None else None
     return {
         "id": item.id,
         "position": item.position,
@@ -565,7 +593,7 @@ def _serialize(item: DailyPlanItem) -> dict[str, Any]:
         "topic_id": item.topic_id,
         "topic_slug": item.topic_slug,
         "domain": item.domain,
-        "resource": (
+        "resource": live or (
             {
                 "id": item.resource_id,
                 "title": item.resource_title,
@@ -750,7 +778,7 @@ def get_day(
         .order_by(DailyPlanItem.position)
         .all()
     )
-    serialized = [_serialize(item) for item in items]
+    serialized = [_serialize(item, db) for item in items]
     current = next(
         (i for i in serialized if i["status"] == STATUS_ACTIVE),
         next((i for i in serialized if i["status"] == STATUS_PENDING), None),
@@ -806,7 +834,7 @@ def start_item(db: Session, item_id: int, user_id: str = DEFAULT_USER) -> dict[s
         item.status = STATUS_ACTIVE
         item.started_at = _now()
     db.flush()
-    return _serialize(item)
+    return _serialize(item, db)
 
 
 #: Activities that represent learning a topic, and so feed the revision queue.
@@ -877,7 +905,7 @@ def complete_item(
         # Idempotent. record_activity appends a row every call, so a
         # double-click, a retried request or a replayed one used to log the
         # same block's minutes twice and move the streak on work done once.
-        return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
+        return {"item": _serialize(item, db), "next": _next_open(db, item, user_id)}
     item.status = STATUS_DONE
     item.completed_at = _now()
     item.actual_minutes = int(minutes if minutes is not None else item.planned_minutes)
@@ -905,7 +933,7 @@ def complete_item(
         user_id=user_id,
     )
 
-    return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
+    return {"item": _serialize(item, db), "next": _next_open(db, item, user_id)}
 
 
 def skip_item(
@@ -916,12 +944,12 @@ def skip_item(
         # Finishing outranks skipping. Downgrading a done block stripped its
         # credit from the day totals while the LearningActivity row it already
         # wrote stayed behind, so the two disagreed permanently.
-        return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
+        return {"item": _serialize(item, db), "next": _next_open(db, item, user_id)}
     item.status = STATUS_SKIPPED
     item.completed_at = _now()
     item.note = reason
     db.flush()
-    return {"item": _serialize(item), "next": _next_open(db, item, user_id)}
+    return {"item": _serialize(item, db), "next": _next_open(db, item, user_id)}
 
 
 def _next_open(
@@ -949,7 +977,7 @@ def _next_open(
             .order_by(DailyPlanItem.position)
             .first()
         )
-    return _serialize(nxt) if nxt else None
+    return _serialize(nxt, db) if nxt else None
 
 
 def save_journal(

@@ -299,15 +299,39 @@ def test_skipped_item_is_not_re_added_on_regenerate(client):
 
 
 @pytest.mark.parametrize("budget", BUDGETS)
-def test_revision_mode_still_yields_exactly_one_dsa_block(client, budget):
+def test_revision_mode_leads_with_the_cursor_dsa_topic(client, budget):
+    """Revision mode still opens on the DSA topic the cursor is pointing at.
+
+    This used to assert *exactly one* DSA block at every budget. That stopped
+    being the contract when the planner was told to fill the budget with real
+    work instead of a block called "Extra reps": a 240-minute day now buys the
+    next DSA topics rather than handing the planning back. What must not change
+    is which topic comes first, and that it gets real minutes.
+    """
     seed = _seed_curriculum()
     _set_revision_weighted(True)
     day = _generate(budget, force=True)
 
     dsa = _dsa_items(day)
-    assert len(dsa) == 1, f"revision budget {budget} produced {len(dsa)} DSA blocks"
+    assert dsa, f"revision budget {budget} produced no DSA block at all"
     assert dsa[0]["topic_id"] == seed["dsa_ids"][0]
     assert dsa[0]["planned_minutes"] > 0
+
+
+def test_a_small_revision_budget_buys_exactly_one_dsa_block(client):
+    """The other side of it: extra blocks are what spare minutes buy, so a
+    budget with no spare minutes must not sprout them."""
+    _seed_curriculum()
+    _set_revision_weighted(True)
+    assert len(_dsa_items(_generate(90, force=True))) == 1
+
+
+def test_every_extra_revision_dsa_block_is_a_different_topic(client):
+    """Filling the budget must reach new topics, not re-serve the first one."""
+    _seed_curriculum()
+    _set_revision_weighted(True)
+    ids = [i["topic_id"] for i in _dsa_items(_generate(240, force=True))]
+    assert len(ids) == len(set(ids)), f"a DSA topic was scheduled twice: {ids}"
 
 
 @pytest.mark.parametrize("budget", BUDGETS)

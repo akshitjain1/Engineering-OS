@@ -450,8 +450,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-10 13:53:19.530872",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Conceptually trace `echo hi`: shell, bytes, kernel write to the terminal. Five to eight sentences. Optional: `Windows: complete this in WSL (Ubuntu) or a Linux VM. Do not use PowerShell or cmd.exe as a substitute for the Unix-shell curriculum.` `strace -e write echo hi`.",

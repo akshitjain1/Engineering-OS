@@ -21,7 +21,7 @@
  },
  "curriculum_resources": {
   "dir": "curriculum",
-  "rows": 1347
+  "rows": 1382
  },
  "curriculum_subjects": {
   "dir": "curriculum",
@@ -37,7 +37,7 @@
  },
  "daily_plan_items": {
   "dir": "progress",
-  "rows": 53
+  "rows": 57
  },
  "daily_plans": {
   "dir": "progress",
@@ -65,7 +65,7 @@
  },
  "learning_activities": {
   "dir": "progress",
-  "rows": 482
+  "rows": 489
  },
  "lesson_exercises": {
   "dir": "curriculum",
@@ -81,7 +81,7 @@
  },
  "revision_schedules": {
   "dir": "progress",
-  "rows": 23
+  "rows": 24
  },
  "topic_mastery": {
   "dir": "progress",
@@ -89,7 +89,7 @@
  },
  "user_progress": {
   "dir": "progress",
-  "rows": 33
+  "rows": 34
  },
  "user_project_progress": {
   "dir": "progress",

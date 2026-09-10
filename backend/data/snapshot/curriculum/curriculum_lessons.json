@@ -216,7 +216,7 @@
   "topic_id": 18
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "A system call is how a user program asks the kernel to do privileged work such as reading a file or creating a process.",
   "hours_estimated": 0.5,
