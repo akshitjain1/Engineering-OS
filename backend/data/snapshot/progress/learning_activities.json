@@ -4471,5 +4471,14 @@
   "minutes": 51,
   "source": "day_session",
   "user_id": "akshit"
+ },
+ {
+  "activity_type": "review",
+  "created_at": "2026-09-11 13:39:17.080797",
+  "id": 498,
+  "local_date": "2026-09-11",
+  "minutes": 26,
+  "source": "day_session",
+  "user_id": "akshit"
  }
 ]

@@ -37,7 +37,7 @@
  },
  "daily_plan_items": {
   "dir": "progress",
-  "rows": 57
+  "rows": 61
  },
  "daily_plans": {
   "dir": "progress",
@@ -65,7 +65,7 @@
  },
  "learning_activities": {
   "dir": "progress",
-  "rows": 497
+  "rows": 498
  },
  "lesson_exercises": {
   "dir": "curriculum",
