@@ -4,7 +4,7 @@
   "revision_weighted": 0,
   "timezone": "Asia/Kolkata",
   "user_id": "akshit",
-  "weekday_capacity_minutes": 150,
-  "weekend_capacity_minutes": 250
+  "weekday_capacity_minutes": 180,
+  "weekend_capacity_minutes": 300
  }
 ]
