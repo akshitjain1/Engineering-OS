@@ -228,7 +228,7 @@
   "topic_id": 19
  },
  {
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "confidence": 0.0,
   "description": "Each process has an address space. The OS allocates pages and protects regions.",
   "hours_estimated": 0.45,

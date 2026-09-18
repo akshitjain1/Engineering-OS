@@ -475,8 +475,8 @@
   "user_explanation": null
  },
  {
-  "attempted_at": null,
-  "completion_status": "not_started",
+  "attempted_at": "2026-09-16 08:51:48.128470",
+  "completion_status": "completed",
   "concepts_required": null,
   "correct_answer": null,
   "description": "Sketch a process: code, stack, heap. Label which grows with function calls vs dynamic allocation. One figure plus four sentences.",

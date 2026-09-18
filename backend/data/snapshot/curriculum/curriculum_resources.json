@@ -20789,7 +20789,7 @@
  {
   "boundary_type": "ARTICLE_SECTION",
   "collection_items": null,
-  "completion_status": "not_started",
+  "completion_status": "completed",
   "description": "PRIMARY: OS memory management, allocation, and protection.",
   "difficulty": null,
   "difficulty_mix": null,
